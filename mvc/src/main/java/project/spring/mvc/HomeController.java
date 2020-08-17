@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@RestController
+@Controller
 public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -39,6 +39,8 @@ public class HomeController {
 			HttpServletRequest request,HttpServletResponse response) {
 		request.setAttribute("restApikey",restApikey );
 		request.setAttribute("callback_URL", callback_URL);
+		System.out.println("r="+restApikey);
+		System.out.println("c="+callback_URL);
 		return "kakao_auth_form";
 	}
 	
@@ -63,8 +65,8 @@ public class HomeController {
 	@RequestMapping(value = "/authResult", method = RequestMethod.GET)
 	public String callBack_getAuthCode(
 			HttpServletRequest request,
-			@RequestParam String code,
-			@RequestBody Map<String, Object> auth
+			@RequestParam String code
+			//@RequestBody Map<String, Object> auth
 		) {
 
 		System.out.println("auth Code=" + code);
