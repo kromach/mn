@@ -13,11 +13,12 @@
 		<input type="hidden" id="code" name="code" value="${code}">
 		<input type="hidden" id="client_secret" name="client_secret" value="secret">
 	</form>
-	<script type="text/javascript">
+	<input type="submit" value="요청">
+	<!-- <script type="text/javascript">
 		$(document).ready(function() {
 			console.log("TEST");
 			$("#frm").submit();
 		});
-	</script>
+	</script> -->
 </body>
 </html>

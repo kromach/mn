@@ -60,8 +60,6 @@ public class HomeController {
 		request.setAttribute("code",code);
 		request.setAttribute("callback_URL",callback_URL);
 		request.setAttribute("restApikey",restApikey);
-		
-		
 		return "kakao_auth_submit";
 	}
 	
