@@ -6,6 +6,7 @@
 <title>Kakao_auto_form</title>
 </head>
 <body>
+	<hr>
 	<h1>Kakao_auto_form</h1>
 	<hr>
 	<a href="https://kauth.kakao.com/oauth/authorize?response_type=code

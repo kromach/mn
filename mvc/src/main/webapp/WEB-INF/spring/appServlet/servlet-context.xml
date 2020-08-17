@@ -39,5 +39,4 @@
 	<context:component-scan base-package="project.spring.mvc" />
 	
 	
-	
 </beans:beans>
