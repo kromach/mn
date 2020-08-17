@@ -41,6 +41,7 @@ public class HomeController {
 		return "kakao_auth_form";
 	}
 	
+	//testing
 	@RequestMapping(value = "/auth", method = RequestMethod.GET)
 	public String callBack_getToken(
 			HttpServletRequest request,
@@ -56,6 +57,7 @@ public class HomeController {
 		
 		return "kakao_auth_submit";
 	}
+	
 	@RequestMapping(value = "/authResult", method = RequestMethod.GET)
 	public String callBack_getAuthCode(
 			HttpServletRequest request,
