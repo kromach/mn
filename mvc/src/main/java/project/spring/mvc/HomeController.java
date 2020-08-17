@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
@@ -46,13 +47,13 @@ public class HomeController {
 		
 		request.setAttribute("restApikey",restApikey );
 		request.setAttribute("callback_URL", callback_URL);
-		
 		return "kakao_auth_form";
 	}
-	@RequestMapping(value = "/auth/gettoken", method = RequestMethod.GET)
-	public String gettoken(Locale locale, Model model) {
-		System.out.println("getAuth=");
-		return "redirect:/kauth.kakao.com/oauth/authorize?client_id=ccd42c0f6ac58e519759c5baf3c7ceb4&redirect_uri=http://localhost:8080/mvc/auth";
+	
+	@RequestMapping(value = "/auth", method = RequestMethod.GET)
+	public String callBack(Locale locale, Model model,@RequestParam String code) {
+		System.out.println("auth Code="+code);
+		return "kakao_auth_result";
 	}
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)	
