@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.omg.CORBA.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class HomeController {
@@ -51,8 +53,21 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/auth", method = RequestMethod.GET)
-	public String callBack(Locale locale, Model model,@RequestParam String code) {
+	public String callBack_getAuthCode(HttpServletRequest request,
+			@RequestParam String code) {
 		System.out.println("auth Code="+code);
+		System.out.println("url=");
+		request.setAttribute("code",code);
+		request.setAttribute("callback_URL",callback_URL);
+		request.setAttribute("restApikey",restApikey);
+		
+		
+		return "kakao_auth_submit";
+	}
+	
+	@RequestMapping(value = "/auth", method = RequestMethod.POST)
+	public String callBack_getToken(Locale locale, Model model,@RequestParam String code) {
+		
 		return "kakao_auth_result";
 	}
 	
