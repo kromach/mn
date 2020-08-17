@@ -36,30 +36,39 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model,
 			HttpServletRequest request,HttpServletResponse response) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		String formattedDate = dateFormat.format(date);
-		model.addAttribute("serverTime", formattedDate );
-		System.out.println("nativeAppkey="+nativeAppkey);
-		System.out.println("restApikey="+restApikey);
-		System.out.println("javaScriptkey="+javaScriptkey);
-		System.out.println("adminkey="+adminkey);
-		System.out.println("callback_URL="+callback_URL);
-		
 		request.setAttribute("restApikey",restApikey );
 		request.setAttribute("callback_URL", callback_URL);
 		return "kakao_auth_form";
 	}
 	
 	@RequestMapping(value = "/auth", method = RequestMethod.GET)
-	public String callBack_getAuthCode(HttpServletRequest request,
+	public String callBack_getToken(
+			HttpServletRequest request,
 			@RequestParam String code) {
-		System.out.println("auth Code="+code);
+		
+		System.out.println("auth Code=" + code);
 		System.out.println("url=");
-		request.setAttribute("code",code);
-		request.setAttribute("callback_URL",callback_URL);
-		request.setAttribute("restApikey",restApikey);
+		request.setAttribute("code", code);
+		request.setAttribute("callback_URL",
+				callback_URL);
+		request.setAttribute("restApikey",
+				restApikey);
+		
+		return "kakao_auth_submit";
+	}
+	@RequestMapping(value = "/authResult", method = RequestMethod.GET)
+	public String callBack_getAuthCode(
+			HttpServletRequest request,
+			@RequestParam String code) {
+
+		System.out.println("auth Code=" + code);
+		System.out.println("url=");
+		request.setAttribute("code", code);
+		request.setAttribute("callback_URL",
+				callback_URL);
+		request.setAttribute("restApikey",
+				restApikey);
+
 		return "kakao_auth_submit";
 	}
 	

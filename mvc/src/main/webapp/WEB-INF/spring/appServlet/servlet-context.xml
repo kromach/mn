@@ -33,7 +33,7 @@
 		<beans:constructor-arg value="e454a8dba20ab15cac38b5db0ec0c22a" />
 	</beans:bean>
 	<beans:bean id="callback_URL" class="java.lang.String">
-		<beans:constructor-arg value="http://localhost:8080/mvc/auth" />
+		<beans:constructor-arg value="http://localhost:8080/mvc/authResult" />
 	</beans:bean>
 	
 	<context:component-scan base-package="project.spring.mvc" />
