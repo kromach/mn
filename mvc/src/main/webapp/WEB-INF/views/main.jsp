@@ -1,0 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Kakao_auto_main</title>
+</head>
+<body>
+Kakao_auto_main
+</body>
+</html>
