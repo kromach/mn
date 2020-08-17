@@ -8,8 +8,10 @@
 <body>
 	<h1>Kakao_auto_form</h1>
 	<hr>
-	<a href="">
-	<img src="/mvc/resources/kakao_login_button.png" />
+	<a href="https://kauth.kakao.com/oauth/authorize?response_type=code
+		&client_id=${restApikey }
+		&redirect_uri=${callback_URL}">
+		<img src="/mvc/resources/kakao_login_button.png" />
 	</a>
 </body>
 </html>
