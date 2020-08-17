@@ -19,7 +19,7 @@
 <script src="/mvc/resources/jquery.pjax.js" ></script>
 <script>
    function moveDetail() {
-     $.pjax({url: '/mvc/detail.jsp', container: '#pjax-container'})
+     $.pjax({url: '/mvc/detail', container: '#pjax-container'})
    }
    function more() {
     var html = "";
