@@ -21,7 +21,8 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate );
-		return "home";
+		
+		return "Kakao_auto_main";
 	}
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
