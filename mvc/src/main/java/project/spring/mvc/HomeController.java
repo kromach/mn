@@ -22,7 +22,7 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "Kakao_auto_main";
+		return "kakao_auto_form";
 	}
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)

@@ -2,10 +2,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Kakao_auto_main</title>
+<meta charset="UTF-8">
+<title>Kakao_auto_result</title>
 </head>
 <body>
-Kakao_auto_main
+	<h1>Kakao_auto_result</h1>
+	<hr>
 </body>
 </html>
