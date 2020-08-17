@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 <body>
 <head>
 <meta charset="utf-8">
@@ -22,8 +18,7 @@
 <script type="text/javascript"></script>
 </head>
 <body>
-	<div id="pjax-container">
+	<div id="posts-container">
 		<div id="detail">상세</div>
 	</div>
 </body>
-</html>

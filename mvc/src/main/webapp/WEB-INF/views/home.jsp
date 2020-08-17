@@ -10,22 +10,27 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no">
 <meta name="description" content="">
-<meta name="author" content=""> 
+<meta name="author" content="">
 <meta http-equiv="Expires" CONTENT="-1">
 <meta http-equiv="Cache-Control" CONTENT="no-cache">
 <meta http-equiv="Pragma" CONTENT="no-cache">
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script src="/mvc/resources/jquery.pjax.js" ></script>
+<script src="/mvc/resources/jquery.pjax.js"></script>
 <script>
    function moveDetail() {
-     $.pjax({url: '/mvc/detail', container: '#pjax-container'})
+    /*  $.pjax({url: '/mvc/detail', container: '#result'}) */
+	   $.pjax({
+	        url: '/mvc/detail', // 앵커태그가 이동할 주소 추출
+	        fragment: '#posts-container', // 위 주소를 받아와서 추출할 DOM
+	        container: '#posts-container', // 위에서 추출한 DOM 내용을 넣을 대상
+	        push : false
+	    });
    }
    function more() {
     var html = "";
     for(var i = 0;i<50;i++)
      html += "<div onclick='moveDetail()'>append"+i+"</div>";
-    
      $("#list").append(html);
    }
 </script>
@@ -46,9 +51,9 @@
 		</div>
 		<div onclick="more()">더보기</div>
 	</div>
-	<!-- <div>
-		<img src="/mvc/resources/1.jpg">
-	</div> -->
+	<div id="posts-container">
+		<img src="/mvc/resources/1.jpg" width="100" height="100">
+	</div>
 </body>
 </html>
 
