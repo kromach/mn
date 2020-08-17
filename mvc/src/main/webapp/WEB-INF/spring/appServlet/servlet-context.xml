@@ -20,6 +20,18 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+	<beans:bean id="nativeAppkey" class="java.lang.String">
+		<beans:constructor-arg value="fe713bcce73d60a32659b9522e8191d1" />
+	</beans:bean>
+	<beans:bean id="restApikey" class="java.lang.String">
+		<beans:constructor-arg value="ccd42c0f6ac58e519759c5baf3c7ceb4" />
+	</beans:bean>
+	<beans:bean id="javaScriptkey" class="java.lang.String">
+		<beans:constructor-arg value="8c697078e1a9799bd1ad3c27ecacaa18" />
+	</beans:bean>
+	<beans:bean id="adminkey" class="java.lang.String">
+		<beans:constructor-arg value="e454a8dba20ab15cac38b5db0ec0c22a" />
+	</beans:bean>
 	
 	<context:component-scan base-package="project.spring.mvc" />
 	
