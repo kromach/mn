@@ -10,13 +10,13 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no">
 <meta name="description" content="">
-<meta name="author" content="">
+<meta name="author" content=""> 
 <meta http-equiv="Expires" CONTENT="-1">
 <meta http-equiv="Cache-Control" CONTENT="no-cache">
 <meta http-equiv="Pragma" CONTENT="no-cache">
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script src="//code.jquery.com/jquery.pjax.js"></script>
+<script src="/mvc/resources/jquery.pjax.js" ></script>
 <script>
    function moveDetail() {
      $.pjax({url: '/detail.html', container: '#pjax-container'})
@@ -28,7 +28,7 @@
     
      $("#list").append(html);
    }
-  </script>
+</script>
 </head>
 <h1>PJAX TEST</h1>
 <hr>
@@ -46,6 +46,9 @@
 		</div>
 		<div onclick="more()">더보기</div>
 	</div>
+	<!-- <div>
+		<img src="/mvc/resources/1.jpg">
+	</div> -->
 </body>
 </html>
 
