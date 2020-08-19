@@ -29,7 +29,7 @@ public class HomeController {
 	private String restApikey;
 	@Autowired
 	private String javaScriptkey;
-	@Autowired
+	@Autowired 
 	private String adminkey;
 	@Autowired
 	private String callback_URL;
