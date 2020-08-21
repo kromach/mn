@@ -5,6 +5,7 @@
 3. Git push는 하나의 로직처리시 마다 단톡에 이야기 하고 push
 4. pull은 매일 오전9:00 12:00 6:00 에 정기적으로, 상시pull은 단톡에 push가 올라오면 pull
 5. 조장은 매일 20:00에 master와 branch를 merge하여 master에 Push
+6. DAO는 DAO/DAOImpl 구조로 명명및 작성
 
 ## Url 정리
 Default localhost:8080/mvc/
