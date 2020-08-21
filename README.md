@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# SpringMVC
-SpringMVC
-=======
 # Spring Project Git hub Page
 ## Coding Rule
 0. 회의시간 9:30~10:00
@@ -24,4 +20,3 @@ java/.../sql=mybatis mapper xml
 WEB-INF/spring =servlet-context.xml을 제외한 모든 xml설정파일 
 
 ## Git을 다루면서 일어나는 문제들에 대한 Tip
->>>>>>> branch 'master' of https://github.com/ysk0951/SpringMVC.git
