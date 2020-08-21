@@ -9,10 +9,10 @@
 ## Url 정리
 Default localhost:8080/mvc/
 ## 디렉토리 구조
-java/.../bean=모든 기능구현 클래스
-java/.../dao=DAO interface/class
-java/.../vo=DTO
-java/.../mvc=Controller
-java/.../sql=mybatis mapper xml
+java/.../bean=모든 기능구현 클래스  
+java/.../dao=DAO interface/class  
+java/.../vo=DTO  
+java/.../mvc=Controller  
+java/.../sql=mybatis mapper xml  
 
 ## Git을 다루면서 일어나는 문제들에 대한 Tip
