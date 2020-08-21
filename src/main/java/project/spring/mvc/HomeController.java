@@ -71,11 +71,9 @@ public class HomeController {
 		String token = tokenJson.path("access_token").toString();
 		System.out.println("tokenJson="+tokenJson);
 		System.out.println("==================================");
-		
 		//useToken getuserInfo
 		JsonNode userInfo = KakaoLogin.getKakaoUserInfo(token);
 		System.out.println("userInfo="+userInfo);
-		
 		//String id = userInfo.get("id").toString();
 		String id = userInfo.path("id").asText();
 		JsonNode properties = userInfo.path("properties");
@@ -92,7 +90,6 @@ public class HomeController {
 		//add Db Loginc
 		return "redirect:main";
 	}
-	
 	@RequestMapping(value = "/auth/logout", 
 			produces = "application/json",
 			method = {
@@ -102,7 +99,6 @@ public class HomeController {
 			HttpServletRequest request,
 			HttpServletResponse response)
 			throws Exception {
-		
 		HttpSession session = request.getSession();
 		String token = session.getAttribute("token").toString();
 		System.out.println("token="+token);
@@ -111,10 +107,14 @@ public class HomeController {
 		System.out.println("=======API_token_out==========================");
 		return "main";
 	}
-	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Locale locale,
 			Model model) {
 		return "kakao_auth_result";
+	}
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String home(Locale locale,
+			Model model) {
+		return "homeCss";
 	}
 }
