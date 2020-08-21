@@ -7,6 +7,7 @@
 4. pull은 매일 오전10:00 13:00 18:00 에 정기적으로, 상시pull은 단톡에 push가 올라오면 pull
 5. 조장은 매일 20:00에 master와 branch를 merge하여 master에 Push
 6. DAO는 DAO/DAOImpl 구조로 명명및 작성
+7. UrlMapping과 Method이름을 일치시킨다
 
 ## Url 정리
 Default localhost:8080/mvc/
