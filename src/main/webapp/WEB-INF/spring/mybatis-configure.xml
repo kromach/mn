@@ -4,13 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="test.spring.model.TestDTO" alias="TestDTO"/>
-		<typeAlias type="test.spring.mybatis.TestMybatisDTO" alias="TestMybatisDTO"/>
-		<typeAlias type="member.model.dto.MemberDTO" alias="MemberDTO"/>
 	</typeAliases>
 	<mappers>
-		<mapper resource="/sql/testSql.xml" />
-		<mapper resource="/sql/mybatisSQL.xml" />
-		<mapper resource="/sql/memberSQL.xml" />
 	</mappers>
 </configuration>
