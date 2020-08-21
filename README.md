@@ -7,3 +7,5 @@
 5. 조장은 매일 20:00에 master와 branch를 merge하여 master에 Push
 
 ## 디렉토리 구조
+
+## Git을 다루면서 일어나는 문제들에 대한 Tip
