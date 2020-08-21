@@ -16,5 +16,6 @@ java/.../dao=DAO interface/class
 java/.../vo=DTO  
 java/.../mvc=Controller  
 java/.../sql=mybatis mapper xml  
+WEB-INF/spring =servlet-context.xml을 제외한 모든 xml설정파일 
 
 ## Git을 다루면서 일어나는 문제들에 대한 Tip
