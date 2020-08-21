@@ -15,4 +15,8 @@ public interface MemberDAO {
 	public List selectAll() throws SQLException;
 	//회원 데이터 수정
 	public void UpdateMember(MemberDTO dto) throws SQLException;
+	//회원 데이터 삭제
+	public void deleteMember(String id) throws SQLException;
+	//아이디 사용가능여부 확인
+	public int inAvailCheck(String id) throws SQLException;
 }
