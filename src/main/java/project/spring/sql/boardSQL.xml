@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+	<select id="countAll" resultType="int">
+		select count(*) from springBoard
+	</select>
+	<select id="selectAll" parameterType="hashMap" resultType="BoardDTO">
+		<![CDATA[
+		select * from (select num,writer,subject,email,content,pw,reg,readcount,ref,re_step,re_level,rownum r
+		from (select * from springBoard order by ref desc, re_step asc) order by ref desc, re_step asc) where r >= #{start} and r <= #{end}
+		]]>
+	</select>
+	<select id="maxNum" resultType="string">
+		select max(num) from springBoard
+	</select>
+	<select id="insertArticle" parameterType="BoardDTO">
+		insert into springBoard(num,writer,subject,email,content,pw,reg,readcount,ref,re_step,re_level)
+		values(springBoard_seq.nextVal,#{writer},#{subject},#{email},#{content},#{pw},sysdate,#{readcount},#{ref},#{re_step},#{re_level})
+	</select>
+	<update id="updateReStep" parameterType="hashMap">
+		<![CDATA[
+		update springBoard set re_step=re_step+1 where ref=#{ref} and re_step>#{re_step}
+		]]>
+	</update>
+	<select id="selectOne" resultType="BoardDTO" parameterType="int">
+		select * from springBoard where num = #{num}
+	</select>
+	<select id="selectPw" parameterType="int" resultType="String">
+		select pw from springBoard where num =#{num}
+	</select>
+	<update id="updateOne" parameterType="BoardDTO">
+		update springBoard set writer=#{writer},subject=#{subject},email=#{email},content=#{content} where num=#{num}
+	</update>
+	<update id="updateReadcount" parameterType="int">
+		update springBoard set readcount=readcount+1 where num = #{value}
+	</update>
+	<delete id="deleteArticle" parameterType="int">
+		delete from springBoard where num = #{value}
+	</delete>
+</mapper>
