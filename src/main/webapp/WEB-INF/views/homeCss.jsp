@@ -8,7 +8,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 </head>
 <body>
-	<div class="container-fluid" style="border: 2px;">
+	<div class="container-fluid" style="border: 2px solid black;">
 	123123
 	</div>
 </body>
