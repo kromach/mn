@@ -11,7 +11,6 @@ public class Pager {
 	private int number;//게시판 상의 글번호 뿌려줄 변수
 	public Pager(){
 	}
-	
 	public PageVO Pager(String pageNum) {
 		currPage = Integer.parseInt(pageNum);
 		this.currPage = currPage;
