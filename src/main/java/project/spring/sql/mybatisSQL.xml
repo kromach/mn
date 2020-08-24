@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="my">
+	<select id="selectIf" resultType="int" parameterType="string">
+		select count(*) from test 
+		<if test="value !=null">
+		where id = #{value}
+		</if>
+	</select>
+	<select id="selectIf2" resultType="int" parameterType="TestMybatisDTO">
+		select count(*) from test 
+		<if test="id !=null">
+		where id=#{id}
+		</if>
+		<if test="pw !=null">
+		and pw=#{pw}
+		</if>
+	</select>
+	<!--#1-->
+	<select id="selectIf3" resultType="int" parameterType="TestMybatisDTO">
+		select count(*) from test where id=#{id}
+		<if test="pw !=null">
+		and pw=#{pw}
+		</if>
+	</select>
+	<select id="choose" resultType="int" parameterType="TestMybatisDTO">
+		select count(*) from test where id=#{id}
+		<choose>
+			<when test="pw!=null">
+				and pw=#{pw}	
+			</when>
+			<when test="age!=0">
+				and age=#{age}	
+			</when>
+			<otherwise>
+				and reg=#{reg}
+			</otherwise>
+		</choose>
+	</select>
+	<select id="selectTrim" parameterType="TestMybatisDTO" resultType="int">
+		select count(*) from test
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="id !=null">
+				id=#{id}
+			</if>
+			<if test="pw !=null">
+				and pw=#{pw}
+			</if>
+		</trim>
+	</select>
+	<select id="updateTest" parameterType="TestMybatisDTO">
+		update test 
+		<trim prefix="set" suffixOverrides=",">
+			<if test = "pw !=null" >pw=#{pw},</if>
+			<if test = "age !=0" >age=#{age},</if>
+			<if test = "add !=null" >add=#{add},</if>
+		</trim>
+		where id=#{id}
+	</select>
+	<select id="selectIn" parameterType="list" resultType="int">
+	select count(*) from test where id in
+		<foreach collection="list" item="item" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+	</select>
+	<select id="selectLike" parameterType="hashMap" resultType="int">
+		select count(*) from test where ${column} like '%'||#{keyword}||'%'
+	</select>
+	<update id="updateKey" parameterType="TestMybatisDTO">
+		<selectKey keyProperty="age" resultType="int" order="BEFORE">
+		select count(*) from test
+		</selectKey>
+		update test set pw=#{pw}, age=#{age} where id=#{id}
+	</update>
+	<insert id="insertKey" parameterType="TestMybatisDTO">
+		insert into test values(test_seq.val,#{pw},#{age},sysdate)
+		<selectKey>
+			select test_seq.currval from dual
+		</selectKey>
+	</insert>
+</mapper>
