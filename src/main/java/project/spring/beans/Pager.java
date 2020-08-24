@@ -1,6 +1,4 @@
 package project.spring.beans;
-import java.text.SimpleDateFormat;
-
 import project.spring.vo.PageVO;
 public class Pager {
 	private int pageSize = 10;//보여줄 페이지 셋팅
