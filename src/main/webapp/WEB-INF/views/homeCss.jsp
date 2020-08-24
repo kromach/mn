@@ -10,10 +10,8 @@
 <body>
 	<div class="container-fluid" >
 		<div class="row">
-			<div class="col-xs-12 col-md-8" style="border: 2px solid black;">.col-xs-12
-				.col-md-8</div>
-			<div class="col-xs-6 col-md-4" style="border: 2px solid black;">.col-xs-6
-				.col-md-4</div>
+			<div class="col-xs-12" style="border: 2px solid black;">.col-xs-12
+				.col-md-12</div>
 		</div> 
 	</div>
 </body>
