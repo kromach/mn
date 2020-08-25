@@ -20,3 +20,10 @@ java/.../sql=mybatis mapper xml
 WEB-INF/spring =servlet-context.xml을 제외한 모든 xml설정파일 
 
 ## Git을 다루면서 일어나는 문제들에 대한 Tip
+
+## Util 정리
+### Pager
+Pager AutoWired 이후, Pager Class의 pager(int PageNum,int count)를 사용할것  
+이후 게시물 리스트를 사용할때 controller에선 articleList=boardDAO.getArticle(pageVO.getStartRow(),pageVO.getEndRow()) 다음과같이 사용,View에선 <c:if test="${pageVO.startPage > pageVO.pageBlock}">
+					<a href="/Spring/board/list.git?pageNum=${pageVO.startPage-pageVO.pageBlock}">&lt;</a>
+				</c:if>과 같이 사용

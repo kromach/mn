@@ -1,7 +1,5 @@
 package project.spring.beans;
 
-import project.spring.vo.PageVO;
-
 public class Pager {
 	//dao.getArticle에서 사용되는 값
 	private int startRow;//현재 페이지 시작

@@ -1,4 +1,4 @@
-package project.spring.vo;
+package project.spring.beans;
 public class PageVO {
 	//dao.getArticle에서 사용되는 값
 	private int startRow;//현재 페이지 시작
