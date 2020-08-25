@@ -53,7 +53,7 @@ public class HomeController {
 				restApikey);
 		request.setAttribute("callback_URL",
 				callback_URL);
-		return "kakao_auth_form";
+		return "/util/kakao_auth_form";
 	}
 
 	@RequestMapping(value = "/authResult", produces = "application/json", method = {
@@ -110,7 +110,7 @@ public class HomeController {
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Locale locale,
 			Model model) {
-		return "kakao_auth_result";
+		return "/util/kakao_auth_result";
 	}
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale,
