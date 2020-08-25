@@ -18,16 +18,15 @@ public class Pager {
 	private int endPage = 0;
 	public Pager(){
 	}
-	public PageVO pager(String pageNum,int Count) {
+	public PageVO pager(String pageNum,int count) {
 		
 		//기본셋팅 로직
 		currPage = Integer.parseInt(pageNum);
 		startRow = (currPage-1)*pageSize +1;
 		endRow = currPage*pageSize;
-		count = 0;
-		number = 0;
 		//계산되는 로직
 		number = count -(currPage-1)*pageSize;
+		System.out.println("VOCOUNTCHECK="+count);
 		if(count>0) {
 			pageCount = (count/pageSize) +(count%pageSize == 0 ?0 :1);
 		}
@@ -40,6 +39,7 @@ public class Pager {
 				endRow, pageSize, currPage, count,
 				number, pageCount, pageBlock,
 				startPage, endPage);
+		System.out.println("VOCHECK="+pager.getNumber());
 		return pager;
 	}
 }
