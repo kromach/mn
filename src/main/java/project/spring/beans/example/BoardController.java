@@ -1,4 +1,4 @@
-package project.spring.mvc;
+package project.spring.beans.example;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
