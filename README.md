@@ -22,7 +22,7 @@ WEB-INF/spring =servlet-context.xml을 제외한 모든 xml설정파일
 ## Git을 다루면서 일어나는 문제들에 대한 Tip
 
 ## Util 정리
-### Pager
+### Pager(예제파일 : Project.spring.beans.example)
 1. Pager AutoWired 이후, Pager Class의 pager(int PageNum,int count)를 사용할것  
 2. controller에서 게시물 리스트 가져올때 사용법  articleList=boardDAO.getArticle(pageVO.getStartRow(),pageVO.getEndRow()) 
 3. View에서 사용법 <c:if test="${pageVO.startPage > pageVO.pageBlock}"></c:if>
