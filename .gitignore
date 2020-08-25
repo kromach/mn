@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+/.project
+/.gitignore
+=======
 # Created by https://www.toptal.com/developers/gitignore/api/java,eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,eclipse
 
@@ -100,3 +104,4 @@ local.properties
 hs_err_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse
+>>>>>>> branch 'master' of https://github.com/ysk0951/SpringMVC.git
