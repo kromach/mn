@@ -10,7 +10,6 @@
 		http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
-	<bean id="memberAspect" class="project.spring.aop.MemberAspect" />
 	<aop:aspectj-autoproxy />
 	<!-- memberAOP session/cookie검사예정  -->
 </beans>
