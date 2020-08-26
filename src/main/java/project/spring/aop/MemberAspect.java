@@ -13,7 +13,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Aspect
 public class MemberAspect {
 
-	@Around("execution(* home*(..))")
+	@Around("execution(* *(..))")
 	public Object around(ProceedingJoinPoint j)
 			throws Throwable {
 		// 타겟메서드로 넘어가는 매개변수 꺼내줌 꺼낸후 검사해서 경로 return/viewResolver경로 우회
@@ -41,8 +41,9 @@ public class MemberAspect {
 //			return "aopMember/loginForm";
 //		}
 		// 로그인 체크 : 로그인된 상태로 접근해야되는 페이지
+		System.out.println("AOP_ON=before");
 		Object result = j.proceed();
-		System.out.println("AOP_ON=");
+		System.out.println("AOP_ON=after");
 		return result;
 	}
 }

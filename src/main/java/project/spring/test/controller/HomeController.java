@@ -52,7 +52,6 @@ public class HomeController {
 				restApikey);
 		request.setAttribute("callback_URL",
 				callback_URL);
-		System.out.println("projectMain=");
 		return "/util/kakao_auth_form";
 	}
 
