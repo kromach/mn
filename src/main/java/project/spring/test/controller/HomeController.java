@@ -52,10 +52,11 @@ public class HomeController {
 				restApikey);
 		request.setAttribute("callback_URL",
 				callback_URL);
+		System.out.println("projectMain=");
 		return "/util/kakao_auth_form";
 	}
 
-	@RequestMapping(value = "/authResult", produces = "application/json", method = {
+	@RequestMapping(value = "/mvc/authResult", produces = "application/json", method = {
 			RequestMethod.GET,
 			RequestMethod.POST })
 	public String kakaoLogin(
@@ -87,7 +88,7 @@ public class HomeController {
 		System.out.println("==================================");
 		
 		//add Db Loginc
-		return "redirect:main";
+		return "redirect:/main";
 	}
 	@RequestMapping(value = "/auth/logout", 
 			produces = "application/json",

@@ -4,6 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<mappers>
-		<mapper resource="project/spring/sql/testSql.xml" />
+		<mapper resource="project/spring/test/sql/testSql.xml" />
 	</mappers>
 </configuration>
