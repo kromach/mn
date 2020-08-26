@@ -35,18 +35,24 @@ public class MemberAspect {
 //				}
 //			}
 //		}
-//		ServletRequestAttributes rs = (ServletRequestAttributes) RequestContextHolder
-//				.currentRequestAttributes();
-//		HttpServletRequest request = rs.getRequest();
-//		HttpSession session = request.getSession();
-//		if(session.getAttribute("memId")==null) {
-//			System.out.println("memberAspect.로그인 필요=2");
-//			return "aopMember/loginForm";
-//		}
+		
+		ServletRequestAttributes rs = (ServletRequestAttributes) RequestContextHolder
+				.currentRequestAttributes();
+		HttpServletRequest request = rs.getRequest();
+		HttpSession session = request.getSession();
+		if(session.getAttribute("memId")==null) {
+			System.out.println("memberAspect.로그인 필요=2");
+		}
+		
 		// 로그인 체크 : 로그인된 상태로 접근해야되는 페이지
 		logger.info("beforeMethod()==");
-		Object result = j.proceed();
+		System.out.println(
+				"memberAspect.beforeMethod");
+		//Object result = j.proceed();
 		logger.info("afterMethod()==");
-		return result;
+		System.out.println(
+				"memberAspect.afterMethod");
+		return "/util/kakao_auth_form";
+		//return result;
 	}
 }
