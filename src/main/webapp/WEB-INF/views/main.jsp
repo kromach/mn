@@ -6,13 +6,6 @@
 	<title>Insert title here</title>
 </head>
 <body>
-	<h1>Kakao_auto_result</h1>
-	<h2>${sessionScope.nickname}님 환영합니다</h2>
-	<hr>
-	<a href="/mvc/auth/logout">
-		<c:if test="${!empty sessionScope.nickname}">
-			<img src="/mvc/resources/logout.png" />
-		</c:if>
-	</a>
+	<h1>MAIN</h1>
 </body>
 </html>
