@@ -7,14 +7,18 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Aspect
 public class MemberAspect {
+	private static final Logger logger = LoggerFactory.getLogger(MemberAspect.class);
 	@Around("execution(* project.spring.test.controller.*Controller.*(..))")
 	public Object around(ProceedingJoinPoint j)
 			throws Throwable {
+
 		// 타겟메서드로 넘어가는 매개변수 꺼내줌 꺼낸후 검사해서 경로 return/viewResolver경로 우회
 //		Object[] obj = j.getArgs();
 //		for (Object o : obj) {
@@ -40,9 +44,9 @@ public class MemberAspect {
 //			return "aopMember/loginForm";
 //		}
 		// 로그인 체크 : 로그인된 상태로 접근해야되는 페이지
-		System.out.println("AOP_ON=before");
+		logger.info("beforeMethod()==");
 		Object result = j.proceed();
-		System.out.println("AOP_ON=after");
+		logger.info("afterMethod()==");
 		return result;
 	}
 }
