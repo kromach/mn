@@ -11,8 +11,6 @@
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 	<!-- <bean id="MemberAspect" class="project.spring.aop.MemberAspect" /> -->
-	<!-- <context:component-scan base-package="spring.aop.advice" /> -->
-	<bean id="memberAspect" class="project.spring.test.advice.MemberAspect" />
+	<context:component-scan base-package="project.spring" />
 	<aop:aspectj-autoproxy />
-	<!-- memberAOP session/cookie검사예정  -->
 </beans>
