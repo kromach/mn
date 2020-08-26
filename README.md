@@ -18,6 +18,8 @@ java/.../vo=DTO
 java/.../mvc=Controller  
 java/.../sql=mybatis mapper xml  
 WEB-INF/spring =servlet-context.xml을 제외한 모든 xml설정파일 
+## AOP 구상
+memberAspect 쿠키/세션/관리자 검사   
 
 ## Git을 다루면서 일어나는 문제들에 대한 Tip
 
