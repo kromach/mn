@@ -22,18 +22,14 @@ public class MemberAspect {
     private void pointcutMethod(){ 
         
     }
-	 
 	@Around("pointcutMethod()") // a
 	public Object measure(
 			ProceedingJoinPoint joinpoint)
 			throws Throwable {
 		String signatureStr = joinpoint.getSignature().toShortString();
-		System.out.println(signatureStr + "시작"); // 메서드 실행
-		try {
-			//Object obj = joinpoint.proceed(); // 핵심 기능 실행
-			return null;
-		} finally {
-			System.out.println(signatureStr + "끝");
-		}
+		System.out.println(signatureStr + "시작");
+		//Object obj = joinpoint.proceed(); // 핵심 기능 실행
+		System.out.println(signatureStr + "끝");
+		return null;
 	}
 }
