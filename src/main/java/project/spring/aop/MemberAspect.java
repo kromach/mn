@@ -12,8 +12,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Aspect
 public class MemberAspect {
-
-	@Around("execution(* *(..))")
+	@Around("execution(* project.spring.test.controller.*Controller.*(..))")
 	public Object around(ProceedingJoinPoint j)
 			throws Throwable {
 		// 타겟메서드로 넘어가는 매개변수 꺼내줌 꺼낸후 검사해서 경로 return/viewResolver경로 우회
