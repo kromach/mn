@@ -10,13 +10,13 @@
 7. UrlMapping과 Method이름을 일치시킨다
 
 ## Url 정리
-Default localhost:8080/mvc/
+Default localhost:8080/
 ## 디렉토리 구조
 java/.../bean=모든 기능구현 클래스  
-java/.../dao=DAO interface/class  
-java/.../vo=DTO  
-java/.../mvc=Controller  
-java/.../sql=mybatis mapper xml  
+java/.../module*/dao=DAO interface/class  
+java/.../module*/vo=DTO  
+java/.../module*/mvc=Controller  
+java/.../module*/sql=mybatis mapper xml  
 WEB-INF/spring =servlet-context.xml을 제외한 모든 xml설정파일 
 ## AOP 구상
 memberAspect 쿠키/세션/관리자 검사   
