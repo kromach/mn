@@ -13,15 +13,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Aspect
 public class MemberAspect {
 
-//	@Pointcut("execution(* test*(..))")
-//	private void testPC() {}
-//	
-//	@Around("testPC()")
-//	public Object around(ProceedingJoinPoint j) throws Throwable {
-//		
-//		
-//		return j.proceed();
-//	}
 	@Around("execution(* test*(..))")
 	public Object around(ProceedingJoinPoint j)
 			throws Throwable {
