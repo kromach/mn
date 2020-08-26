@@ -17,21 +17,23 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Aspect
 public class MemberAspect {
-	@Before("execution(* project.spring.test.controller.*Controller.*(..))")
-	public void before() {
-		System.out.println("before:");
+	
+	@Pointcut("execution(* project.spring.test.controller.*Controller.*(..))")
+    private void pointcutMethod(){ 
+        
+    }
+	 
+	@Around("pointcutMethod()") // a
+	public Object measure(
+			ProceedingJoinPoint joinpoint)
+			throws Throwable {
+		String signatureStr = joinpoint.getSignature().toShortString();
+		System.out.println(signatureStr + "시작"); // 메서드 실행
+		try {
+			//Object obj = joinpoint.proceed(); // 핵심 기능 실행
+			return null;
+		} finally {
+			System.out.println(signatureStr + "끝");
+		}
 	}
-	
-//	@After("execution(* project.spring.test.controller.*Controller.*(..))")
-//	public void after() {
-//		System.out.println("after:");
-//	}
-	
-//	@Around("execution(* project.spring.test.controller.*Controller.*(..))")
-//	public Object around(ProceedingJoinPoint j)
-//			throws Throwable {
-//		return 404;
-//		// Object result = j.proceed();
-//	}
-	
 }
