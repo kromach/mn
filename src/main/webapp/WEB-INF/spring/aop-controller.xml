@@ -10,8 +10,9 @@
 		http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
-	<context:component-scan base-package="project.spring.aop" />
-	<bean id="MemberAspect" class="project.spring.aop.MemberAspect" />
+	<!-- <bean id="MemberAspect" class="project.spring.aop.MemberAspect" /> -->
+	<!-- <context:component-scan base-package="spring.aop.advice" /> -->
+	<bean id="memberAspect" class="project.spring.test.advice.MemberAspect" />
 	<aop:aspectj-autoproxy />
 	<!-- memberAOP session/cookie검사예정  -->
 </beans>
