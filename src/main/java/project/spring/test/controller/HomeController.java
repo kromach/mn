@@ -1,4 +1,4 @@
-package project.spring.mvc;
+package project.spring.test.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -27,7 +27,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import project.spring.beans.KakaoLogin;
 import project.spring.beans.KakaoLogout;
-import project.spring.vo.UserVO;
 
 @Controller
 public class HomeController {

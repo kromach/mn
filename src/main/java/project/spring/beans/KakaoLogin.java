@@ -18,9 +18,10 @@ import org.apache.http.message.BasicNameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import project.spring.vo.UserVO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import project.spring.test.vo.UserVO;
 
 public class KakaoLogin {
 	
@@ -95,7 +96,6 @@ public class KakaoLogin {
 		}
 		return returnJsonNode;
 	}
-	
 	public static UserVO changeData(JsonNode userInfo) {
 		UserVO vo = new UserVO();
 		//vo.setUser_snsId(userInfo.path("id").asText()); // id -> vo 넣기
