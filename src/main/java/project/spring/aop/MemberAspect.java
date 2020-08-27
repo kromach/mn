@@ -18,7 +18,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Aspect
 public class MemberAspect {
 	
-	@Pointcut("execution(* project.spring.test.controller.*Controller.*(..))")
+	@Pointcut("execution(* project.spring.test.controller.HomeController.*(..))")
+	//@Pointcut("within(project.spring.test.controller.HomeController)")
     private void pointcutMethod(){ 
         
     }
@@ -28,8 +29,8 @@ public class MemberAspect {
 			throws Throwable {
 		String signatureStr = joinpoint.getSignature().toShortString();
 		System.out.println(signatureStr + "시작");
-		//Object obj = joinpoint.proceed(); // 핵심 기능 실행
+		Object obj = joinpoint.proceed(); // 핵심 기능 실행
 		System.out.println(signatureStr + "끝");
-		return null;
+		return obj;
 	}
 }
