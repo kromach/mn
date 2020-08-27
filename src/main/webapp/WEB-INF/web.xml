@@ -11,7 +11,6 @@
 					/WEB-INF/spring/root-context.xml
 					/WEB-INF/spring/appServlet/servlet-context.xml
 					/WEB-INF/spring/mybatis-configure.xml	
-					/WEB-INF/spring/aop-controller_origin.xml
 		</param-value>
 	</context-param>
 	
