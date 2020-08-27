@@ -52,7 +52,7 @@ public class HomeController {
 				restApikey);
 		request.setAttribute("callback_URL",
 				callback_URL);
-		return "/util/kakao_auth_form";
+		return "/util/kakao_auth_form.page";
 	}
 
 	@RequestMapping(value = "/mvc/authResult", produces = "application/json", method = {
@@ -87,7 +87,7 @@ public class HomeController {
 		System.out.println("==================================");
 		
 		//add Db Loginc
-		return "redirect:/main";
+		return "redirect:/main.page";
 	}
 	@RequestMapping(value = "/auth/logout", 
 			produces = "application/json",
@@ -109,7 +109,7 @@ public class HomeController {
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Locale locale,
 			Model model) {
-		return "/util/kakao_auth_result";
+		return "/util/kakao_auth_result.page";
 	}
 	
 	@RequestMapping(value = "/home1", method = RequestMethod.GET)
@@ -117,15 +117,9 @@ public class HomeController {
 			Model model) {
 		return "homeCss";
 	}
-	
 	@RequestMapping(value = "/home2", method = RequestMethod.GET)
 	public String home_(Locale locale,
 			Model model) {
 		return "homeCss.page";
-	}
-	@RequestMapping(value = "/home3", method = RequestMethod.GET)
-	public String home__(Locale locale,
-			Model model) {
-		return "homeCss.part";
 	}
 }
