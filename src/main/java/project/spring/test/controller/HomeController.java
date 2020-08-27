@@ -104,7 +104,7 @@ public class HomeController {
 		JsonNode logoutInfo = KakaoLogout.doLogout(token);
 		System.out.println("logoutInfo="+logoutInfo);
 		System.out.println("=======API_token_out==========================");
-		return "main";
+		return "main.page";
 	}
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Locale locale,
