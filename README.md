@@ -16,8 +16,8 @@ java/.../bean=모든 기능구현 클래스
 java/.../module*/dao=DAO interface/class  
 java/.../module*/vo=DTO  
 java/.../module*/mvc=Controller  
-java/.../module*/service=service
-java/.../module*/sql=mybatis mapper xml  
+java/.../module*/service=service  	
+java/.../module*/sql=mybatis mapper xml    
 WEB-INF/spring =servlet-context.xml을 제외한 모든 xml설정파일 
 ## AOP 구상
 memberAspect 쿠키/세션/관리자 검사   
