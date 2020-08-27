@@ -29,8 +29,8 @@ public class MemberAspect {
 			throws Throwable {
 		String signatureStr = joinpoint.getSignature().toShortString();
 		System.out.println(signatureStr + "시작");
-		//Object obj = joinpoint.proceed(); // 핵심 기능 실행
+		Object obj = joinpoint.proceed(); // 핵심 기능 실행
 		System.out.println(signatureStr + "끝");
-		return null;
+		return obj;
 	}
 }

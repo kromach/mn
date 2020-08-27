@@ -10,7 +10,4 @@
 		http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
-	<context:component-scan base-package="project.spring" /> 
-	<bean id="MemberAspect" class="project.spring.aop.MemberAspect" />
-	<aop:aspectj-autoproxy/> 
 </beans>
