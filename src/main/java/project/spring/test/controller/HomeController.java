@@ -43,7 +43,6 @@ public class HomeController {
 	private String adminkey;
 	@Autowired
 	private String callback_URL;
-	
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model,
@@ -112,9 +111,21 @@ public class HomeController {
 			Model model) {
 		return "/util/kakao_auth_result";
 	}
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/home1", method = RequestMethod.GET)
 	public String home(Locale locale,
 			Model model) {
 		return "homeCss";
+	}
+	
+	@RequestMapping(value = "/home2", method = RequestMethod.GET)
+	public String home_(Locale locale,
+			Model model) {
+		return "homeCss.page";
+	}
+	@RequestMapping(value = "/home3", method = RequestMethod.GET)
+	public String home__(Locale locale,
+			Model model) {
+		return "homeCss.part";
 	}
 }
