@@ -20,12 +20,12 @@ java/.../module*/service=service
 java/.../module*/sql=mybatis mapper xml    
 WEB-INF/spring =servlet-context.xml을 제외한 모든 xml설정파일 
 WEB-INF/views/tiles/*=layout관련 tileSetting파일  
-Referrence=https://its-easy.tistory.com/13  
 ## AOP
 memberAspect 쿠키/세션/관리자 검사   
 Project.spring.aop.MemberAspect proceed를 기준으로 Session, Cookie검사및 Mapping method log 작성예정  
 ## tiles
 Spring tiles 작성중
+Referrence=https://its-easy.tistory.com/13  
 
 ## Git을 다루면서 일어나는 문제들에 대한 Tip
 
