@@ -20,7 +20,6 @@
         #main{
             float:left;
              width:85%;
-            background-color: lime;
         }
         #footer{
             width: 100%;
