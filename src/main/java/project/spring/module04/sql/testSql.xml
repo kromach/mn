@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="test">
+  		<!-- <select id="userCount" resultType="int">
+  			select count(*) from test
+  		</select>
+  		<select id="maxAge" resultType="int">
+			select max(age) from test  		
+  		</select>
+  		<select id="selectAll" resultType="TestMybatisDTO">
+  			select * from test
+  		</select>
+  		<select id="getOneUser" resultType="TestMybatisDTO" parameterType="String" >
+  			select * from test where id = #{v}
+  		</select>
+  		<select id="getReg" parameterType="string" resultType="java.sql.Timestamp">
+  			select reg from test where id = #{v}
+  		</select>
+  		<select id="insertUser" parameterType="TestMybatisDTO">
+  			insert into test(id,pw,age,reg) values(#{id},#{pw},#{age},sysdate)
+  		</select>
+  		<update id="updateUser" parameterType="hashMap">
+  			update test set age=#{age},pw=#{pw} where id=#{id}
+  		</update>
+  		<delete id="deleteUser" parameterType="string">
+  			delete from test where id = #{id}
+  		</delete> -->
+  </mapper>
