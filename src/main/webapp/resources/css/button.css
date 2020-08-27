@@ -1,0 +1,140 @@
+@charset "utf-8";
+
+/*button*/
+
+/*btn common 버튼: 기본적인 스타일*/
+.btn{
+	display:inline-block;
+	padding:2px 10px;
+	margin-bottom:0;
+	font-size:14px;
+	font-weight:600; 
+	line-height:1.42857143;
+	text-align:center;
+	white-space:nowrap;
+	vertical-align:middle;
+	cursor:pointer;
+	border:1px solid transparent;
+	border-radius:4px;
+	color:#fff!important
+}
+
+/*btn size*/
+.btn-xl,.btn-group-xl>.btn{
+	padding:6px 28px 8px 28px;
+	font-size:18px;
+	line-height:1.5;
+	border-radius:6px;
+	font-weight:800;
+}
+
+.btn-lg,.btn-group-lg>.btn{
+	padding:4px 17px 6px 17px;
+	font-size:14px;
+	line-height:1.6;
+	border-radius:4px;
+	font-weight:800;
+}
+
+.btn-md,.btn-group-md>.btn{
+	padding:3px 17px 5px 17px;
+	font-size:13px;
+	line-height:1.5;
+	border-radius:3px;
+	font-weight:800;
+}
+
+.btn-sm,.btn-group-sm>.btn{
+	padding:2px 12px 4px 12px;
+	font-size:12px;
+	line-height:1.4;
+	border-radius:3px
+}
+
+.btn-xs,.btn-group-xs>.btn{
+	padding:2px 8px 2px 8px;
+	font-size:11px;
+	line-height:1.2;
+	border-radius:3px
+}
+
+/*SEA GREEN BUTTON STYLES*/		
+.btn.btn-mint{background-color: #08bc9a; border-color: #08bc9a;}
+.btn.btn-mint:hover{background-color:#01a183;}
+.btn.btn-mint:active{ top: 3px; outline: none; }
+
+/*DARK BLUE BUTTON STYLES*/		
+.btn.btn-blue{background-color: #237fbc; border-color: #237fbc;}
+.btn.btn-blue:hover{background-color:#166ea8;}
+.btn.btn-blue:active{ top: 3px; outline: none; -webkit-box-shadow: none;}
+
+/*RED/ROUGE BUTTON STYLES*/		
+.btn.btn-rouge{background-color: #c0392b; border-color: #c0392b;}
+.btn.btn-rouge:hover{background-color:#ac3420;}
+.btn.btn-rouge:active{top: 3px; outline: none;}
+
+/*DARK BUTTON STYLES*/		
+.btn.btn-dark{background-color: #2c3d51; border-color: #2c3d51;}
+.btn.btn-dark:hover{background-color:#202d3d;}
+.btn.btn-dark:active{top: 3px; outline: none;}
+
+/*DARK BUTTON STYLES*/		
+.btn.btn-orange{background-color: #f59e00; border-color: #f59e00;}
+.btn.btn-orange:hover{background-color:#dd9003;}
+.btn.btn-orange:active{top: 3px; outline: none;}
+
+/*SUNFLOWER BUTTON STYLES*/		
+.btn.btn-yellow{background-color: #f2c500; border-color: #f2c500;}
+.btn.btn-yellow:hover{background-color:#e3ba02;}
+.btn.btn-yellow:active{top: 3px; outline: none;}
+
+/*RED BUTTON STYLES*/		
+.btn.btn-red{background-color: #ea4f37; border-color: #ea4f37;}
+.btn.btn-red:hover{background-color:#d44630; border-color: #de7161;}
+.btn.btn-red:active{top: 3px; outline: none;}
+
+/*CONCRETE BUTTON STYLES*/		
+.btn.btn-grey{background-color: #7e8c8d; border-color: #7e8c8d;}
+.btn.btn-grey:hover{background-color:#6a7879;}
+.btn.btn-grey:active{top: 3px; outline: none;}
+		
+/********************
+SOCIAL BUTTON STYLES
+********************/
+
+/*FACEBOOK*/
+.btn.btn-facebook{background-color: #2479b6; border-color: #2479b6;}
+.btn.btn-facebook:active{top: 3px; outline: none;}
+/*TWITTER*/
+.btn.btn-twitter{background-color: #2a91db; border-color: #2a91db;}
+.btn.btn-twitter:active{top: 3px; outline: none;}
+/*GOOGLE PLUS*/
+.btn.btn-google-plus{background-color: #be3b26; border-color: #be3b26;}
+.btn.btn-google-plus:active{top: 3px; outline: none;}
+/*DRIBBBLE*/
+.btn.btn-dribbble{background-color: #f62d7e; border-color: #f62d7e;}
+.btn.btn-dribbble:active{top: 3px; outline: none;}
+/*YOU TUBE*/
+.btn.btn-you-tube{background-color: #cf3728; border-color: #cf3728;}
+.btn.btn-you-tube:active{top: 3px; outline: none;}
+/*LinkedIn*/
+.btn.btn-linkedin{background-color: #0074ba; border-color: #0074ba;}
+.btn.btn-linkedin:active{top: 3px; outline: none;}
+/*Dropbox*/
+.btn.btn-dropbox{background-color: #0083e4; border-color: #0083e4;}
+.btn.btn-dropbox:active{top: 3px; outline: none;}
+/*Wordpress*/
+.btn.btn-wordpress{background-color: #1d7794; border-color: #1d7794;}
+.btn.btn-wordpress:active{top: 3px; outline: none;}
+/*Pinterest*/
+.btn.btn-pinterest{background-color: #c8232a; border-color: #c8232a;}
+.btn.btn-pinterest:active{ top: 3px; outline: none;}
+/*Skype*/
+.btn.btn-skype{background-color: #2eabde; border-color: #2eabde;}
+.btn.btn-skype:active{top: 3px; outline: none;}
+/*Instagram*/
+.btn.btn-instagram{background-color: #5182aa; border-color: #5182aa;}
+.btn.btn-instagram:active{top: 3px; outline: none;}
+/*RSS*/
+.btn.btn-rss{background-color: #f8a933; border-color: #f8a933;}
+.btn.btn-rss:active{top: 3px; outline: none;}
