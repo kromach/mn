@@ -23,8 +23,8 @@ WEB-INF/views/tiles/*=layout관련 tileSetting파일
 ## AOP
 memberAspect 쿠키/세션/관리자 검사   
 Project.spring.aop.MemberAspect proceed를 기준으로 Session, Cookie검사및 Mapping method log 작성예정  
-## tiles
-Spring tiles 작성중
+## Spring tiles 
+ViewResolver String Return시에 "*.p1" 로 리턴하면 template에 끼워지게됩니다.
 Referrence=https://its-easy.tistory.com/13  
 
 ## Git을 다루면서 일어나는 문제들에 대한 Tip
