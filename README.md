@@ -29,6 +29,9 @@ Referrence=https://its-easy.tistory.com/13
 
 ## Git을 다루면서 일어나는 문제들에 대한 Tip
 
+## log4j
+log4j.xml의 위치==src/main/resource/log4j.xml 
+
 ## Util 정리
 ### Pager(예제파일 : Project.spring.beans.example)
 1. Pager AutoWired 이후, Pager Class의 pager(int PageNum,int count)를 사용할것  
