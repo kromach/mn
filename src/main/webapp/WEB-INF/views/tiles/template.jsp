@@ -4,7 +4,9 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>제목</title>
+    <title>Tiles_Template</title>
+    <link href="/resources/css/base.css" rel="stylesheet">
+    <link href="/resources/css/button.css" rel="stylesheet">
     <style>
         #header{            
             width:100%;
