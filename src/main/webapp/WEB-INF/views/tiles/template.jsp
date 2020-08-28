@@ -45,8 +45,10 @@
 		<div id="container">
 			<div id="contentwrap">
 				<div id="content">
-					<div id="main">
-						<tiles:insertAttribute name="body" />
+					<div id="main_content">
+						<div id="main">
+							<tiles:insertAttribute name="body" />
+						</div>
 					</div>
 				</div>
 			</div>
