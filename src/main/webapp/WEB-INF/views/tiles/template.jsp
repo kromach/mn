@@ -9,7 +9,6 @@
     <link href="/resources/css/button.css" rel="stylesheet">
     <style>
         #header{            
-            width:100%;
             height:50px;
             text-align: center;
             background-color: aqua;
@@ -39,9 +38,21 @@
 <body>
     <div style="width:100%; height:100%;">
     <div id="header"><tiles:insertAttribute name="header" /></div>
-    <div id="left"><tiles:insertAttribute name="left" /></div>
-    <div id="main"><tiles:insertAttribute name="body" /></div>    
-    <div id="footer"><tiles:insertAttribute name="footer" /></div>
+		<!-- #contentwrap{width:100%;width:auto;margin:0
+		auto;background:#fff;padding-bottom:20px}
+		#content{float:right;width:892px;text-align:left;min-height:500px;background:#fff}
+		#main_content{width:100%;margin:0 auto;} -->
+		<div id="container">
+			<div id="contentwrap">
+				<div id="content">
+					<div id="main">
+						<tiles:insertAttribute name="body" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="container:after"></div>
+		<div id="footer"><tiles:insertAttribute name="footer" /></div>
     </div>
     <script type="text/javascript">
         $(function() {
