@@ -19,7 +19,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Aspect
 public class MemberAspect {
 
-	@Pointcut("execution(* project.spring.test.controller.HomeController.*(..))")
+	@Pointcut("execution(* project.spring.*.controller.*Controller.*(..))")
 	// @Pointcut("within(project.spring.test.controller.HomeController)")
 	private void pointcutMethod() {
 
