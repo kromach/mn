@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import project.spring.test.vo.UserVO;
+import project.spring.member.vo.UserVO;
 
 public class KakaoLogin {
 	

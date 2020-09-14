@@ -1,4 +1,4 @@
-package project.spring.test.controller;
+package project.spring.member.controller;
 
 import java.io.IOException;
 import java.util.HashMap;

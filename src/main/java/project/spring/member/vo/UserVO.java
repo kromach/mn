@@ -1,4 +1,4 @@
-package project.spring.test.vo;
+package project.spring.member.vo;
 
 import java.util.Date;
 public class UserVO {

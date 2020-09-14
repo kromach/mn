@@ -1,9 +1,9 @@
-package project.spring.test.dao;
+package project.spring.member.dao;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import project.spring.test.vo.MemberDTO;
+import project.spring.member.vo.MemberDTO;
 public class MemberDAOImpl implements MemberDAO{
 	@Override
 	public void insertMember(MemberDTO dto)
