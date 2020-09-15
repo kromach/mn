@@ -45,7 +45,7 @@ public class HomeController {
 	private String callback_URL;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model,
+	public String home_s(Locale locale, Model model,
 			HttpServletRequest request,
 			HttpServletResponse response) {
 		request.setAttribute("restApikey",

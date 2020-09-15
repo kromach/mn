@@ -20,10 +20,12 @@ java/.../module*/service=service
 java/.../module*/sql=mybatis mapper xml    
 WEB-INF/spring =servlet-context.xml을 제외한 모든 xml설정파일 
 WEB-INF/views/tiles/*=layout관련 tileSetting파일  
-## AOP
+
+## ★AOP★
 memberAspect 쿠키/세션/관리자 검사   
 Project.spring.aop.MemberAspect proceed를 기준으로 Session, Cookie검사및 Mapping method log 작성예정  
-## Spring tiles 
+메소드이름 _s로 끝내면 세션검사->로그인폼으로이동 AOP처리
+## ★Spring tiles ★
 ViewResolver String Return시에 "*.p1" 로 리턴하면 template에 끼워지게됩니다.
 Referrence=https://its-easy.tistory.com/13  
 
