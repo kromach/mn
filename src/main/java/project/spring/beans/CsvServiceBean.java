@@ -18,11 +18,13 @@ public class CsvServiceBean {
 		CSVWriter csvWriter = null;
 		try {
 			csvWriter = new CSVWriter(new FileWriter(fileName),',','"');
-			Iterator<String[]> it =  data.iterator();
-			while(it.hasNext()) {
-				String[] s = (String[])it.next();
-				csvWriter.writeNext(s);
-			}
+			csvWriter.writeAll(data);
+			csvWriter.flush();
+//			Iterator<String[]> it =  data.iterator();
+//			while(it.hasNext()) {
+//				String[] s = (String[])it.next();
+//				csvWriter.writeNext(s);
+//			}
 		} catch (Exception e) {e.printStackTrace();} 
 		finally {if (csvWriter != null)try {csvWriter.close();} catch (IOException e) {e.printStackTrace();}
 		}
