@@ -31,15 +31,12 @@ public class CSVController {
 		csvService.writeCSV(data,savePath);
 		return "/util/csvTest";
 	}
-	
 	@RequestMapping("readCsv")
 	public String readCSV(HttpServletRequest request){
 		//기본 SCV 폴더 위치는 resources\csv
 		String readPath = request.getRealPath("resources\\csv");
 		//resource폴더에 CSV파일이름기입
-		readPath += "\\test.csv";
-		
-		
+		readPath += "\\testcsv.csv";	
 		// #일반적인 방식
 		/* 
 		    List<String[]> readData = csvService.readCSV(readPath);
@@ -61,7 +58,6 @@ public class CSVController {
 			System.out.println("pw:"+dto.getPw());
 			System.out.println("mobile:"+dto.getMobile());
 		}
-		
 		
 		return "/util/csvTest";
 	}

@@ -34,7 +34,7 @@
 		<beans:constructor-arg value="http://localhost:8080/mvc/authResult" />
 	</beans:bean>
 	
-	<beans:bean id="fileDown" class="project.spring.beans.DownloadView" /><!--filedown_Logic  -->
+	<beans:bean id="fileDown" class="project.spring.beans.fileDownLoad.DownloadView" /><!--filedown_Logic  -->
 	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<beans:property name="order" value="0" />
 	</beans:bean> 
