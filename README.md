@@ -12,14 +12,14 @@
 ## Url 정리
 Default localhost:8080/
 ## 디렉토리 구조
-java/.../bean=모든 기능구현 클래스  
+java/.../bean=모든 기능구현 클래스  >> CSV 포함
 java/.../module*/dao=DAO interface/class  
 java/.../module*/vo=DTO  
 java/.../module*/mvc=Controller  
 java/.../module*/service=service  	
 java/.../module*/sql=mybatis mapper xml    
 WEB-INF/spring =servlet-context.xml을 제외한 모든 xml설정파일 
-WEB-INF/views/tiles/*=layout관련 tileSetting파일  
+WEB-INF/views/tiles/*=layout관련 tileSetting파일
 
 ## ★AOP★
 memberAspect 쿠키/세션/관리자 검사   
