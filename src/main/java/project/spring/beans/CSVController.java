@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CSVController {
 	
 	@Autowired
-	private CsvServiceBean csvService = null;
+	private CSVServiceBean csvService = null;
 	
 	@RequestMapping("writerCsv")
 	public String writeCSV(HttpServletRequest request){

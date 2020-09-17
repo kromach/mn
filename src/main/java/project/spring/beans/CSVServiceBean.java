@@ -15,7 +15,7 @@ import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 
 @Service
-public class CsvServiceBean {
+public class CSVServiceBean {
 
 	// 1. 파일 쓰기
 	public void writeCSV(List<String[]> data,
