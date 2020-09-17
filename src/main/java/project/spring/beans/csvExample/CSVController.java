@@ -36,7 +36,7 @@ public class CSVController {
 		//기본 SCV 폴더 위치는 resources\csv
 		String readPath = request.getRealPath("resources\\csv");
 		//resource폴더에 CSV파일이름기입
-		readPath += "\\testcsv.csv";	
+		readPath += "\\testscv.csv";	
 		// #일반적인 방식
 		/* 
 		    List<String[]> readData = csvService.readCSV(readPath);
