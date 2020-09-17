@@ -67,6 +67,10 @@ public class CSVServiceBean {
 		try {
 			reader = new CSVReader(new InputStreamReader(new FileInputStream(fileName),"MS949"), ',','"',0);
 			ColumnPositionMappingStrategy<CSVDTO> cpms = new ColumnPositionMappingStrategy<CSVDTO>();
+			cpms.setType(CSVDTO.class); // 어떤 타입(클래스)
+			//실제 컬럼명 맵핑
+			String[] colums = new String[] {"id","pw","mobile"};
+			cpms.setColumnMapping(colums);
 			
 		}catch (Exception e) {
 			e.printStackTrace();
