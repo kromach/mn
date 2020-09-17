@@ -1,4 +1,4 @@
-package project.spring.beans;
+package project.spring.beans.kakaoAPI;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

@@ -1,4 +1,4 @@
-package project.spring.beans;
+package project.spring.beans.csvExample;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,8 +20,10 @@ public class CSVController {
 	@RequestMapping("writerCsv")
 	public String writeCSV(HttpServletRequest request){
 		List<String[]> data = new ArrayList<String[]>();
-		data.add(new String[] {"abc","def","ghi","jkl"});
-		data.add(new String[] {"1","23","456","7890"});
+		//DTO Maaping
+		data.add(new String[] {"spring","1234","010-1111-222"});
+		//data.add(new String[] {"abc","def","ghi","jkl"});
+		//data.add(new String[] {"1","23","456","7890"});
 		//기본 SCV 폴더 위치는 resources\csv
 		String savePath = request.getRealPath("resources\\csv");
 		//resource폴더에 CSV파일이름기입
@@ -35,8 +37,14 @@ public class CSVController {
 		//기본 SCV 폴더 위치는 resources\csv
 		String readPath = request.getRealPath("resources\\csv");
 		//resource폴더에 CSV파일이름기입
-		readPath += "\\지역별 충전기 현황정보.csv";
-		List<String[]> readData = csvService.readCSV(readPath);
+		readPath += "\\test.csv";
+		
+		
+		// #일반적인 방식
+		// List<String[]> readData = csvService.readCSV(readPath);
+
+		// #DTO로 Mapping시켜서 읽어오기
+		List<String[]> readData = csvService.readCSVByDTO(readPath);
 		Iterator<String[]> it = readData.iterator();
 		while(it.hasNext()) {
 			String[] str = (String[])it.next();
@@ -45,6 +53,7 @@ public class CSVController {
 			}
 			System.out.println();
 		}
+		
 		return "/util/csvTest";
 	}
 }

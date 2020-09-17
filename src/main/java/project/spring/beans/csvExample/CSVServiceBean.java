@@ -1,4 +1,4 @@
-package project.spring.beans;
+package project.spring.beans.csvExample;
 
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
+import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 
 @Service
 public class CSVServiceBean {
@@ -57,5 +58,21 @@ public class CSVServiceBean {
 			if(reader!=null)try {reader.close();}catch (Exception e2) {e2.printStackTrace();}
 		}
 		return data;
+	}
+	
+	//3. DTO로 Mapping시켜서 읽어오기
+	public List<String[]> readCSVByDTO(String fileName) {
+		List<String[]> data = new ArrayList<String[]>();
+		CSVReader reader= null;
+		try {
+			reader = new CSVReader(new InputStreamReader(new FileInputStream(fileName),"MS949"), ',','"',0);
+			ColumnPositionMappingStrategy<CSVDTO> cpms = new ColumnPositionMappingStrategy<CSVDTO>();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(reader!=null)try {reader.close();}catch (Exception e2) {e2.printStackTrace();}
+		}		
+		return null;
 	}
 }

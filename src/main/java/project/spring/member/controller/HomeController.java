@@ -26,8 +26,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import project.spring.aop.MemberAspect;
-import project.spring.beans.KakaoLogin;
-import project.spring.beans.KakaoLogout;
+import project.spring.beans.kakaoAPI.KakaoLogin;
+import project.spring.beans.kakaoAPI.KakaoLogout;
 
 @Controller
 public class HomeController {
