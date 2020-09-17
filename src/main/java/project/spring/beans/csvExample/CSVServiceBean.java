@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
+import au.com.bytecode.opencsv.bean.CsvToBean;
 
 @Service
 public class CSVServiceBean {
@@ -71,6 +72,9 @@ public class CSVServiceBean {
 			//실제 컬럼명 맵핑
 			String[] colums = new String[] {"id","pw","mobile"};
 			cpms.setColumnMapping(colums);
+			//parsing해서 DTO에 담아준다
+			CsvToBean<CSVDTO> csv = new CsvToBean<CSVDTO>();
+			csv.parse(cpms, reader);
 			
 		}catch (Exception e) {
 			e.printStackTrace();
