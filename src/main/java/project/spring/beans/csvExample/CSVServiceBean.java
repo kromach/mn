@@ -62,8 +62,8 @@ public class CSVServiceBean {
 	}
 	
 	//3. DTO로 Mapping시켜서 읽어오기
-	public List<String[]> readCSVByDTO(String fileName) {
-		List<String[]> data = new ArrayList<String[]>();
+	public List<CSVDTO> readCSVByDTO(String fileName) {
+		List<CSVDTO> data = new ArrayList<CSVDTO>();
 		CSVReader reader= null;
 		try {
 			reader = new CSVReader(new InputStreamReader(new FileInputStream(fileName),"MS949"), ',','"',0);
@@ -74,13 +74,12 @@ public class CSVServiceBean {
 			cpms.setColumnMapping(colums);
 			//parsing해서 DTO에 담아준다
 			CsvToBean<CSVDTO> csv = new CsvToBean<CSVDTO>();
-			csv.parse(cpms, reader);
-			
+			data = csv.parse(cpms, reader);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			if(reader!=null)try {reader.close();}catch (Exception e2) {e2.printStackTrace();}
 		}		
-		return null;
+		return data;
 	}
 }

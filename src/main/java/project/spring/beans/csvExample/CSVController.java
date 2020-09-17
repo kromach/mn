@@ -41,18 +41,27 @@ public class CSVController {
 		
 		
 		// #일반적인 방식
-		// List<String[]> readData = csvService.readCSV(readPath);
-
-		// #DTO로 Mapping시켜서 읽어오기
-		List<String[]> readData = csvService.readCSVByDTO(readPath);
-		Iterator<String[]> it = readData.iterator();
-		while(it.hasNext()) {
-			String[] str = (String[])it.next();
-			for(String  s : str) {
-				System.out.print(s+" ");
+		/* 
+		    List<String[]> readData = csvService.readCSV(readPath);
+			Iterator<String[]> it = readData.iterator();
+			while(it.hasNext()) {
+				String[] str = (String[])it.next();
+				for(String  s : str) {
+					System.out.print(s+" ");
+				}
+				System.out.println();
 			}
-			System.out.println();
+		*/
+		// #DTO로 Mapping시켜서 읽어오기
+		List<CSVDTO> readData = csvService.readCSVByDTO(readPath);
+		Iterator<CSVDTO> it = readData.iterator();
+		while(it.hasNext()) {
+			CSVDTO dto = it.next();
+			System.out.println("id:"+dto.getId());
+			System.out.println("pw:"+dto.getPw());
+			System.out.println("mobile:"+dto.getMobile());
 		}
+		
 		
 		return "/util/csvTest";
 	}
