@@ -40,15 +40,17 @@ public class CsvServiceBean {
 		List<String[]> data = new ArrayList<String[]>();
 		CSVReader reader= null;
 		try {
-			reader = new CSVReader(new InputStreamReader(new FileInputStream(fileName),"UTF-8"), ',','"',0);
+			//한글일경우
+			//국내파일 MS949 / 해외파일 UTF-8
+			reader = new CSVReader(new InputStreamReader(new FileInputStream(fileName),"MS949"), ',','"',0);
 			data = reader.readAll();
-//			영문일 경우 사용
-//			reader = new CSVReader(new FileReader(fileName),',');
-//			data = reader.readAll();
-//			String[] s;
-//			while((s=reader.readNext())!= null) {
-//				data.add(s);
-//			}
+			//영문일 경우 사용
+			//reader = new CSVReader(new FileReader(fileName),',');
+			//data = reader.readAll();
+			//String[] s;
+			//while((s=reader.readNext())!= null) {
+			//	data.add(s);
+			//}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
