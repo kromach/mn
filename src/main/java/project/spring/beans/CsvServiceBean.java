@@ -1,12 +1,17 @@
 package project.spring.beans;
 
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 
 @Service
@@ -31,7 +36,24 @@ public class CsvServiceBean {
 	}
 
 	// 2. 파일 읽기
-	public void readCSV() {
-
+	public List<String[]> readCSV(String fileName) {
+		List<String[]> data = new ArrayList<String[]>();
+		CSVReader reader= null;
+		try {
+			reader = new CSVReader(new InputStreamReader(new FileInputStream(fileName),"UTF-8"), ',','"',0);
+			data = reader.readAll();
+//			영문일 경우 사용
+//			reader = new CSVReader(new FileReader(fileName),',');
+//			data = reader.readAll();
+//			String[] s;
+//			while((s=reader.readNext())!= null) {
+//				data.add(s);
+//			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(reader!=null)try {reader.close();}catch (Exception e2) {e2.printStackTrace();}
+		}
+		return data;
 	}
 }

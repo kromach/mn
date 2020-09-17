@@ -1,6 +1,7 @@
 package project.spring.beans;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,8 +30,18 @@ public class CSVController {
 	}
 	
 	@RequestMapping("readCsv")
-	public String readCSV(){
-		csvService.readCSV();
+	public String readCSV(HttpServletRequest request){
+		String readPath = request.getRealPath("resources\\csv");
+		readPath += "\\testscv.csv";
+		List<String[]> readData = csvService.readCSV(readPath);
+		Iterator<String[]> it = readData.iterator();
+		while(it.hasNext()) {
+			String[] str = (String[])it.next();
+			for(String  s : str) {
+				System.out.print(s+" ");
+			}
+			System.out.println();
+		}
 		return "/util/csvTest";
 	}
 }
