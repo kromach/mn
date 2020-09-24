@@ -4,44 +4,45 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Tiles_Template</title>
+    <title>이술어때</title>
     <link href="/resources/css/base.css" rel="stylesheet">
     <link href="/resources/css/button.css" rel="stylesheet">
-    <style>
-        #header{            
-            height:50px;
-            text-align: center;
-            background-color: aqua;
-        }
-        #left{
-            float:left;
-             width:15%;
-            background-color: gray;
-        }
-        #main{
-            float:left;
-             width:85%;
-        }
-        #footer{
-            width: 100%;
-            height: 50px;            
-            text-align: center;
-            background-color: orange;
-            clear:both;
-        }
-         #left, #main{ 
-               min-height: 600px;
-         } 
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- BooStrap CDN CSS only -->
+	<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+	<!-- Ajax -->	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- JQuery  -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.js"
+		integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM="
+		crossorigin="anonymous"></script>
+<style>
+#header {
+	height: 50px;
+	text-align: center;
+	border: 1px solid black;
+}
+#left {
+	float: left;
+	width: 15%;
+	background-color: gray;
+}
+#main {
+	float: left;
+	width: 85%;
+}
+#left, #main {
+	min-height: 600px;
+}
+</style>
 </head>
 <body>
-    <div style="width:100%; height:100%;">
-    <div id="header"><tiles:insertAttribute name="header" /></div>
-		<!-- #contentwrap{width:100%;width:auto;margin:0
-		auto;background:#fff;padding-bottom:20px}
-		#content{float:right;width:892px;text-align:left;min-height:500px;background:#fff}
-		#main_content{width:100%;margin:0 auto;} -->
+	<div style="width: 100%; height: 100%;">
+		<div id="header">
+			<tiles:insertAttribute name="header" />
+		</div>
 		<div id="container">
 			<div id="contentwrap">
 				<div id="content">
@@ -53,12 +54,10 @@
 				</div>
 			</div>
 		</div>
-		<div id="container:after"></div>
-		<div id="footer"><tiles:insertAttribute name="footer" /></div>
-    </div>
-    <script type="text/javascript">
+	</div>
+	<script type="text/javascript">
         $(function() {
- 
+
         });    
     </script>    
 </body>
