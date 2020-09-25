@@ -38,20 +38,19 @@ html, body {
 	.grid-item--width2 { width: 32%; }
 	
 }
-@media all and (min-width:700px) and (max-width:845px) {
+@media (min-width: 700px) and (max-width: 845px) {
 	.grid-sizer, .grid-item { width: 23%; }
 	.grid-item--width2 { width: 46%; }
 	
 }
-@media all and (min-width:630px) and (max-width:699px) {
+@media (min-width: 630px) and (max-width: 699px) {
 	.grid-sizer, .grid-item { width: 40%; }
 	.grid-item--width2 { width: 80%; }
 	
 }
-@media all and (max-width:629px){
+@media (min-width:300px) and (max-width:629px){
 	.grid-sizer, .grid-item { width: 46%; }
 	.grid-item--width2 { width: 92%; }
-	
 }
 
 </style>
