@@ -11,7 +11,7 @@
 <div class="grid-sizer"></div>
 <div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
 <div class="grid-item"><img src="/resources/img/main/4.jpg" /></div>
-<div class="grid-item"><img src="/resources/img/main/8.jpg" /></div>
+<div class="grid-item grid-item--width2"><img src="/resources/img/main/8.jpg" /></div>
 <div class="grid-item"><img src="/resources/img/main/7.jpg" /></div>
 <div class="grid-item"><img src="/resources/img/main/3.jpg" /></div>
 <div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
