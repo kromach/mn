@@ -36,7 +36,10 @@ html, body {
 @media all and (min-width: 846px){
 	.grid-sizer, .grid-item { width: 16%; }
 	.grid-item--width2 { width: 32%; }
-	
+	.grid-item--width3 { width: 48%; }
+	.grid-item--width4 { width: 64%; }
+	.grid-item--width5 { width: 80%; }
+	.grid-item--width6 { width: 96%; }
 }
 @media all and (min-width:700px) and (max-width:845px) {
 	.grid-sizer, .grid-item { width: 23%; }
