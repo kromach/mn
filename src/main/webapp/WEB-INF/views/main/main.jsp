@@ -67,7 +67,7 @@
 		// columnWidth: 200
 		columnWidth : '.grid-sizer',
 		percentPosition : true,
-		gutter : 10,
+		gutter : 2,
 	});
 	imagesLoaded('.grid').on('progress', function() {
 		msnry.layout();
