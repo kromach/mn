@@ -21,7 +21,7 @@ crossorigin="anonymous">
   transition: all 500ms ease-out;
   cursor: pointer;
 }
-.ham-menu {border: 2px solid #666; width: 32px; padding: 1px; border-radius: 3px; position: absolute; right: 5px; top: 5px; }
+.ham-menu {border: 2px solid #666; width: 40px; padding: 1px; border-radius: 3px; position: absolute; right: 5px; top: 5px; }
 .ham-menu .line {border: 3px solid #666; line-height: 0; font-size: 0; display: block; margin: 2px;}
 .ham-menu .content {border: 3px solid #666; line-height: 0; font-size: 12; display: block; margin: 2px;}
 .ham-menu:hover {border-color: #99f;}
@@ -33,9 +33,9 @@ right: 5px; top: 5px; }
 </style>
 <h1 align="center">마시는 녀석들</h1>
 <div class="ham-menu">
-  <span class="line"></span>
-  <span class="line"></span>
-  <span class="line"></span>
+	<span class="line"></span>
+	<span class="line"></span>
+	<span class="line"></span>
 </div>
 <div class="dropDownMenu">
 	<span class='content'>상품관리</span>

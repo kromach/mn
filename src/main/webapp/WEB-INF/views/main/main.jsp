@@ -3,40 +3,41 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<style>
-</style>
+</head><script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 <body>
-	<!--<img src="/resources/img/main/1.jpg">  -->
-	<div id="columns"> 
-		<figure>
-			<img src="/resources/img/main/1.jpg">
-		</figure>
-		<figure>
-			<img src="/resources/img/main/1.jpg">
-		</figure>
-		<figure>
-			<img src="/resources/img/main/1.jpg">
-		</figure>
-		<figure>
-			<img src="/resources/img/main/2.jpg">
-		</figure>
-		<figure>
-			<img src="/resources/img/main/1.jpg">
-		</figure>
-		<figure>
-			<img src="/resources/img/main/2.jpg">
-		</figure>
-		<figure>
-			<img src="/resources/img/main/1.jpg">
-		</figure>
-		<figure>
-			<img src="/resources/img/main/2.jpg">
-		</figure>
-		<figure>
-			<img src="/resources/img/main/1.jpg">
-		</figure>
-	</div>
+<div class="grid">
+<div class="grid-sizer"></div>
+<div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
+<div class="grid-item"><img src="/resources/img/main/4.jpg" /></div>
+<div class="grid-item"><img src="/resources/img/main/8.jpg" /></div>
+<div class="grid-item"><img src="/resources/img/main/7.jpg" /></div>
+<div class="grid-item"><img src="/resources/img/main/3.jpg" /></div>
+<div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
+<div class="grid-item"><img src="/resources/img/main/9.jpg" /></div>
+<div class="grid-item"><img src="/resources/img/main/5.jpg" /></div>
+<div class="grid-item"><img src="/resources/img/main/4.jpg" /></div>
+<div class="grid-item"><img src="/resources/img/main/5.jpg" /></div>
+<div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>
+<div class="grid-item"><img src="/resources/img/main/7.jpg" /></div>
+<div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
+<div class="grid-item"><img src="/resources/img/main/4.jpg" /></div>
+<div class="grid-item"><img src="/resources/img/main/7.jpg" /></div>
+<div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
+<div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>
+<div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
+</div>
 </body>
+<script>
+	var msnry = new Masonry('.grid', {
+		itemSelector : '.grid-item',
+		// columnWidth: 200
+		columnWidth : '.grid-sizer',
+		percentPosition : true,
+		gutter : 20,
+	});
+	imagesLoaded('.grid').on('progress', function() {
+		msnry.layout();
+	});
+</script>
 </html>

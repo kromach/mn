@@ -9,10 +9,10 @@
 <link href="/resources/css/base.css" rel="stylesheet">
 <link href="/resources/css/button.css" rel="stylesheet">
 <!-- BooStrap CDN CSS only -->
-<link rel="stylesheet"
+<!-- <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-	crossorigin="anonymous">
+	crossorigin="anonymous"> -->
 <!-- Ajax -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -20,50 +20,21 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.js"
 	integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM="
 	crossorigin="anonymous"></script>
+<!-- JQuery masonry CDN -->
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 <style>
-#columns {
-	column-width: 350px;
-	column-gap: 15px;
+html, body {
+	margin: 0px;
 }
-#columns figure {
-	display: inline-block;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	margin: 0;
-	margin-bottom: 15px;
-	padding: 10px;
-	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);;
-}
-#columns figure img {
-	width: 100%;
-}
-#columns figure figcaption {
-	border-top: 1px solid rgba(0, 0, 0, 0.2);
-	padding: 10px;
-	margin-top: 11px;
-}
+.grid { width:100% }
+.grid-sizer, .grid-item { width: 13%; }
+.grid-item {border:1px solid #8f99f3; margin-bottom:15px; border-radius: 10px; overflow:hidden;}
+.grid-item img {display: block; min-width:100%; max-width: 100%; }
 </style>
 </head>
 <body>
-	<div style="width: 100%; height: 100%;">
-		<div id="header">
-			<tiles:insertAttribute name="header" />
-		</div>
-		<div id="container">
-			<div id="contentwrap">
-				<div id="content">
-					<div id="main_content">
-						<div id="main">
-							<tiles:insertAttribute name="body" />
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript">
-        $(function() {
-
-        });    
-    </script>
+ 	<tiles:insertAttribute name="header" />
+	<tiles:insertAttribute name="body" />
 </body>
 </html>
