@@ -37,6 +37,6 @@ public class MainController {
 			HttpServletRequest request,
 			HttpServletResponse response) {
 	
-		return "/main/main.p1";
+		return "/main/main.mn";
 	}
 }
