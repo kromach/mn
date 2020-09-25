@@ -31,7 +31,7 @@ crossorigin="anonymous">
 padding: 1px; border-radius: 3px; position: absolute; 
 right: 5px; top: 5px; }
 </style>
-<h1>마시는 녀석들</h1>
+<h1 align="center">마시는 녀석들</h1>
 <div class="ham-menu">
   <span class="line"></span>
   <span class="line"></span>
