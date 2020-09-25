@@ -30,6 +30,7 @@ import project.spring.beans.kakaoAPI.KakaoLogin;
 import project.spring.beans.kakaoAPI.KakaoLogout;
 
 @Controller
+@RequestMapping("/kakao")
 public class HomeController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(HomeController.class);
