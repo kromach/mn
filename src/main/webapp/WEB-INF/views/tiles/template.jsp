@@ -47,15 +47,14 @@ html, body {
 	.grid-item--width2 { width: 46%; }
 	
 }
-@media all and (min-width:630px) and (max-width:699px) {
+@media (min-width:630px) and (max-width:699px) {
 	.grid-sizer, .grid-item { width: 40%; }
 	.grid-item--width2 { width: 80%; }
 	
 }
-@media all and (max-width:629px){
+@media (max-width:629px){
 	.grid-sizer, .grid-item { width: 46%; }
 	.grid-item--width2 { width: 92%; }
-	
 }
 
 </style>
