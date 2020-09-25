@@ -6,6 +6,8 @@
 	<title>Insert title here</title>
 </head>
 <body>
+<div id="main">
 Main
+</div>
 </body>
 </html>

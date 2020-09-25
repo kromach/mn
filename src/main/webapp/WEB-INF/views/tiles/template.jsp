@@ -32,6 +32,7 @@
 #main {
 	float: left;
 	width: 85%;
+	background-color: gray;
 }
 #left, #main {
 	min-height: 600px;
