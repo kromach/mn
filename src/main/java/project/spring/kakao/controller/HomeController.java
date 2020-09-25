@@ -1,4 +1,4 @@
-package project.spring.member.controller;
+package project.spring.kakao.controller;
 
 import java.io.IOException;
 import java.util.HashMap;

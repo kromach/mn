@@ -1,9 +1,10 @@
-package project.spring.member.dao;
+package project.spring.kakao.dao;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import project.spring.member.vo.MemberDTO;
+import project.spring.kakao.vo.MemberDTO;
+
 
 public interface MemberDAO {
 	//회원가입
