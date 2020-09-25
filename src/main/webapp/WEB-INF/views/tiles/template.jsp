@@ -31,32 +31,31 @@ html, body {
 .grid-item {border:1px solid #8f99f3; margin-bottom:10px; border-radius: 10px; overflow:hidden;}
 .grid-item img {display: block; min-width:100%; max-width: 100%; }
 
-	
 /*반응형웹(검색영역)*/
-@media screen and (min-width: 846px) {
- 	.grid-sizer, .grid-item { width: 16%; }
+
+/*반응형웹(검색영역)*/
+@media screen and (min-width: 846px){
+	.grid-sizer, .grid-item { width: 16%; }
 	.grid-item--width2 { width: 32%; }
 	.grid-item--width3 { width: 48%; }
 	.grid-item--width4 { width: 64%; }
 	.grid-item--width5 { width: 80%; }
 	.grid-item--width6 { width: 96%; }
 }
-
-@media (min-width:700px) and (max-width:845px) {
+@media  (min-width:700px) and (max-width:845px) {
 	.grid-sizer, .grid-item { width: 23%; }
 	.grid-item--width2 { width: 46%; }
 	
 }
-@media (min-width:630px) and (max-width:699px) {
+@media ()min-width:630px) and (max-width:699px) {
 	.grid-sizer, .grid-item { width: 40%; }
 	.grid-item--width2 { width: 80%; }
 	
 }
-@media (max-width:629px){
+@media  (max-width:629px){
 	.grid-sizer, .grid-item { width: 46%; }
 	.grid-item--width2 { width: 92%; }
 }
-
 </style>
 </head>
 <body>
