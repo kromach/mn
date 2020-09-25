@@ -27,9 +27,9 @@
 html, body {
 	margin: 0px;
 }
-.grid { width:100% }
-.grid-sizer, .grid-item { width: 13%; }
-.grid-item {border:1px solid #8f99f3; margin-bottom:15px; border-radius: 10px; overflow:hidden;}
+.grid { width:100vw }
+.grid-sizer, .grid-item { width: 16%; }
+.grid-item {border:1px solid #8f99f3; margin-bottom:10px; border-radius: 10px; overflow:hidden;}
 .grid-item img {display: block; min-width:100%; max-width: 100%; }
 </style>
 </head>
