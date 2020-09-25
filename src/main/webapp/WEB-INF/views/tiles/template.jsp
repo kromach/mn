@@ -41,6 +41,7 @@ html, body {
 	.grid-item--width5 { width: 80%; }
 	.grid-item--width6 { width: 96%; }
 }
+
 @media all and (min-width:700px) and (max-width:845px) {
 	.grid-sizer, .grid-item { width: 23%; }
 	.grid-item--width2 { width: 46%; }
