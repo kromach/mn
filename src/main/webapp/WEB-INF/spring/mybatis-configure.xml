@@ -9,6 +9,6 @@
 		<mapper resource="project/spring/module02/sql/testSql.xml" />
 		<mapper resource="project/spring/module03/sql/testSql.xml" />
 		<mapper resource="project/spring/module04/sql/testSql.xml" />
-		<mapper resource="project/spring/module05/sql/testSql.xml" />
+		<mapper resource="project/spring/admin/sql/testSql.xml" />
 	</mappers>
 </configuration>

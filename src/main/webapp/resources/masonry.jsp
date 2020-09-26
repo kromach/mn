@@ -14,7 +14,7 @@
 <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 <link href="/resources/css/base.css" rel="stylesheet">
 <link href="/resources/css/button.css" rel="stylesheet">
-</head>
+</head> 
 <body>
 	<div class="grid">
 		<div class="grid-sizer"></div>
