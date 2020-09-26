@@ -60,7 +60,7 @@ html, body {
 	.grid-item--width5 { width: 96%; }
 	.grid-item--width6 { width: 96%; }
 }
-@media only screen and (min-width: 480px) and (max-width: 767px) {
+@media only screen and (min-width: 600px) and (max-width: 767px) {
 	.grid {background-color: yellow;}
 	.grid-sizer, .grid-item { width: 48%; }
 	.grid-item--width2 { width: 96%; }
@@ -69,7 +69,7 @@ html, body {
 	.grid-item--width5 { width: 96%; }
 	.grid-item--width6 { width: 96%; }
 }
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 600px) {
 	.grid {background-color: yellow;}
 	.grid-sizer, .grid-item { width: 96%; }
 	.grid-item--width2 { width: 96%; }
