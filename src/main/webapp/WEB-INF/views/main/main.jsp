@@ -7,7 +7,7 @@
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 <body>
-<div class="gridWrapper">
+<div class="grid-Wrapper">
 	<div class="grid"> 
 		<div class="grid-sizer"></div>
 		<div class="grid-item grid-item--width2"><img src="/resources/img/main/4.jpg" /></div>

@@ -25,7 +25,8 @@ select, input, option,button, textarea{vertical-align:top;font:normal 12px 'Nanu
 /*html select{ padding: 1px 0.2% 1px 0.4%!important}*/
 input[type=text]::-ms-clear {display: none;} 
 /*반응형웹(검색영역)*/
-.grid { width:100% ; background-color: yellow; }
+.grid-Wrapper{width:100% ; text-align: center; }
+.grid { width:80% ; background-color: yellow; display: inline-block;}
 .grid-item {border:1px solid #8f99f3; margin-bottom:10px; border-radius: 10px; overflow:hidden;}
 .grid-item img {display: block; min-width:100%; max-width: 100%; }
 @media only screen and (min-width: 1440px)  {
