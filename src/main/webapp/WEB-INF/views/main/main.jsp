@@ -42,7 +42,7 @@
 		<div class="grid-item"><img src="/resources/img/main/7.jpg" /></div>
 		<div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
 		<div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>
-		<div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
+		<div class="grid-item grid-item--width6"><img src="/resources/img/main/1.jpg" /></div>
 		<div class="grid-item"><img src="/resources/img/main/5.jpg" /></div>
 		<div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>
 		<div class="grid-item"><img src="/resources/img/main/7.jpg" /></div>
