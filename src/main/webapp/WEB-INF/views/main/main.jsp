@@ -9,19 +9,18 @@
 <body>
 <div class="grid">
 <div class="grid-sizer"></div>
-<div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
-<div class="grid-item"><img src="/resources/img/main/4.jpg" /></div>
-<div class="grid-item grid-item--width2"><img src="/resources/img/main/8.jpg" /></div>
+<div class="grid-item grid-item--width2"><img src="/resources/img/main/4.jpg" /></div>
+<div class="grid-item grid-item--width3"><img src="/resources/img/main/8.jpg" /></div>
 <div class="grid-item"><img src="/resources/img/main/7.jpg" /></div>
 <div class="grid-item"><img src="/resources/img/main/3.jpg" /></div>
-<div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
-<div class="grid-item"><img src="/resources/img/main/9.jpg" /></div>
+<div class="grid-item" ><img src="/resources/img/main/1.jpg" /></div>
+<div class="grid-item "><img src="/resources/img/main/9.jpg" /></div>
 <div class="grid-item"><img src="/resources/img/main/5.jpg" /></div>
 <div class="grid-item"><img src="/resources/img/main/4.jpg" /></div>
 <div class="grid-item"><img src="/resources/img/main/5.jpg" /></div>
 <div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>
 <div class="grid-item"><img src="/resources/img/main/7.jpg" /></div>
-<div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
+<div class="grid-item "><img src="/resources/img/main/1.jpg" /></div>
 <div class="grid-item"><img src="/resources/img/main/4.jpg" /></div>
 <div class="grid-item"><img src="/resources/img/main/7.jpg" /></div>
 <div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
@@ -64,7 +63,6 @@
 <script>
 	var msnry = new Masonry('.grid', {
 		itemSelector : '.grid-item',
-		// columnWidth: 200
 		columnWidth : '.grid-sizer',
 		percentPosition : true,
 		gutter : 2,
