@@ -6,7 +6,13 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<iframe src="https://service.dongledongle.com/abcm556" frameborder="0"
-		width="100%" height="500"></iframe>
+<iframe src="https://service.dongledongle.com/abcm556" frameborder="0">
+</iframe>
+<style>
+iframe {
+	width : 100%;
+	height: 95vh;
+}
+</style>	
 </body>
 </html>
