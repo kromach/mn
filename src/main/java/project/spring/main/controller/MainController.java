@@ -39,4 +39,13 @@ public class MainController {
 	
 		return "/main/main.mn";
 	}
+	
+	//chatSs ..> 세션체크 필요
+	@RequestMapping(value = "/chat", method = RequestMethod.GET)
+	public String chat(Locale locale, Model model,
+			HttpServletRequest request,
+			HttpServletResponse response) {
+	
+		return "/main/chat.mn";
+	}
 }

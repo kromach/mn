@@ -62,7 +62,7 @@
 	</div>
 </div>
 <div class="chat">
-	<img src="/resources/img/main/chat.png" >
+	<a href="/chat"><img src="/resources/img/main/chat.png" ></a>
 </div>
 </body>
 <script src="/resources/js/imageLoad.js"></script>

@@ -99,7 +99,7 @@ top:85%;
 left: 90%;
 z-index: 1000;
 }
-.chat > img{
+.chat >a > img{
 width: 100px
 }
 /* Default Link */
