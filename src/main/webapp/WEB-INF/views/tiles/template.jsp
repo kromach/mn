@@ -32,32 +32,29 @@ html, body {
 .grid-item {border:1px solid #8f99f3; margin-bottom:10px; border-radius: 10px; overflow:hidden;}
 .grid-item img {display: block; min-width:100%; max-width: 100%; }
 
- 
-/*반응형웹(검색영역)*/
-
 /*반응형웹(검색영역)*/
 @media only screen and (min-width: 1440px)  {
     .grid {background-color: green;}
-	..grid-sizer, .grid-item { width: calc(100% / 6); }
-	.grid-item--width2 { width: calc(100% / 3); }
-	.grid-item--width3 { width: calc(100% / 2); }
-	.grid-item--width4 { width: calc(100% / 1.5); }
-	.grid-item--width5 { width: calc(100% / 1.2); }
-	.grid-item--width6 { width: calc(100%); }
+	.grid-sizer, .grid-item { width: 16%; }
+	.grid-item--width2 { width: 32%; }
+	.grid-item--width3 { width: 48%; }
+	.grid-item--width4 { width: 64%; }
+	.grid-item--width5 { width: 80%; }
+	.grid-item--width6 { width: 96%; }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
 	.grid {background-color: black;}
-	.grid-sizer, .grid-item { width: calc(100% / 5); }
+	.grid-sizer, .grid-item { width: 24%; }
 	.grid-item--width2 { width: 48%; }
-	.grid-item--width3 { width: 72%; }
+	.grid-item--width3 { width: 72%; } 
 	.grid-item--width4 { width: 96%; }
 	.grid-item--width5 { width: 96%; }
 	.grid-item--width6 { width: 96%; }
 }
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
 	.grid {background-color: navy;}
-	.grid-sizer, .grid-item { width: 48%; }
-	.grid-item--width2 { width: 96%; }
+	.grid-sizer, .grid-item { width: 32%; }
+	.grid-item--width2 { width: 64%; }
 	.grid-item--width3 { width: 96%; }
 	.grid-item--width4 { width: 96%; }
 	.grid-item--width5 { width: 96%; }
@@ -65,10 +62,22 @@ html, body {
 }
 @media only screen and (min-width: 480px) and (max-width: 767px) {
 	.grid {background-color: yellow;}
-	.grid-sizer, .grid-item { width: 100%; }
+	.grid-sizer, .grid-item { width: 48%; }
+	.grid-item--width2 { width: 96%; }
+	.grid-item--width3 { width: 96%; }
+	.grid-item--width4 { width: 96%; }
+	.grid-item--width5 { width: 96%; }
+	.grid-item--width6 { width: 96%; }
 }
-
-
+@media only screen and (max-width: 480px) {
+	.grid {background-color: yellow;}
+	.grid-sizer, .grid-item { width: 96%; }
+	.grid-item--width2 { width: 96%; }
+	.grid-item--width3 { width: 96%; }
+	.grid-item--width4 { width: 96%; }
+	.grid-item--width5 { width: 96%; }
+	.grid-item--width6 { width: 96%; }
+}
 </style>
 </head>
 <body>
