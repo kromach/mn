@@ -63,6 +63,7 @@
 </div>
 </body>
 <script src="/resources/js/imageLoad.js"></script>
+<!-- 데이터 스크롤해서 붙이는 스크립트  -->
 <script type="text/javascript">
 $(window).scroll(
 	function() {
