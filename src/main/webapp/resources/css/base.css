@@ -74,6 +74,25 @@ input[type=text]::-ms-clear {display: none;}
 	.grid-item--width5 { width: 96%; }
 	.grid-item--width6 { width: 96%; }
 }
+/*header menu css  */
+.ham-menu, .ham-menu span {
+  -webkit-transition: all 500ms ease-out;
+  -moz-transition: all 500ms ease-out;
+  -o-transition: all 500ms ease-out;
+  transition: all 500ms ease-out;
+  cursor: pointer;
+}
+.ham-menu {border: 2px solid #666; width: 40px; padding: 1px; border-radius: 3px; position: absolute; right: 5px; top: 5px; }
+.ham-menu .line {border: 3px solid #666; line-height: 0; font-size: 0; display: block; margin: 2px;}
+.ham-menu .content {border: 3px solid #666; line-height: 0; font-size: 12; display: block; margin: 2px;}
+.ham-menu:hover {border-color: #99f;}
+.ham-menu:hover span {border-color: #ccf;}
+.dropDownMenu
+{border: 2px solid #666; width: 100px; margin-top:30px; 
+padding: 1px; border-radius: 3px; position: absolute; 
+right: 5px; top: 5px; z-index: 1 ;background-color: white;}
+
+
 /* Default Link */
 a{font-size:100%;text-decoration:none;font-family:'Nanum Gothic','나눔고딕',"돋움",Dotum,"Trebuchet MS",Helvetica,sans-serif}
 a:link, a:visited, a:active{color:#666;text-decoration:none}

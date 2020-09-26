@@ -12,25 +12,7 @@ crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.js"
 	integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM="
 	crossorigin="anonymous"></script>
-<!-- 메뉴스타일 -->
-<style>
-.ham-menu, .ham-menu span {
-  -webkit-transition: all 500ms ease-out;
-  -moz-transition: all 500ms ease-out;
-  -o-transition: all 500ms ease-out;
-  transition: all 500ms ease-out;
-  cursor: pointer;
-}
-.ham-menu {border: 2px solid #666; width: 40px; padding: 1px; border-radius: 3px; position: absolute; right: 5px; top: 5px; }
-.ham-menu .line {border: 3px solid #666; line-height: 0; font-size: 0; display: block; margin: 2px;}
-.ham-menu .content {border: 3px solid #666; line-height: 0; font-size: 12; display: block; margin: 2px;}
-.ham-menu:hover {border-color: #99f;}
-.ham-menu:hover span {border-color: #ccf;}
-.dropDownMenu
-{border: 2px solid #666; width: 100px; margin-top:30px; 
-padding: 1px; border-radius: 3px; position: absolute; 
-right: 5px; top: 5px; z-index: 1 ;background-color: white;}
-</style>
+<script src="/resources/js/headerMenuJs.js"></script>
 <h1 align="center">마시는 녀석들</h1>
 <div class="menuWrapper">
 	<div class="ham-menu"> 
@@ -47,13 +29,3 @@ right: 5px; top: 5px; z-index: 1 ;background-color: white;}
 	</div>
 </div>
 
-<script type="text/javascript">
-$(document).ready(function(){
-	$(".dropDownMenu").hide();
-	$(".menuWrapper").hover(function() {
-		$(".dropDownMenu").show();
-	}, function() {
-		$(".dropDownMenu").hide();
-	})
-});
-</script>
