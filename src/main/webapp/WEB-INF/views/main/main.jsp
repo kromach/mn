@@ -6,6 +6,7 @@
 </head>
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
 <body>
 <div class="grid"> 
 <div class="grid-sizer"></div>
@@ -60,15 +61,5 @@
 <div class="grid-item"><img src="/resources/img/main/3.jpg" /></div>
 </div>
 </body>
-<script>
-	var msnry = new Masonry('.grid', {
-		itemSelector : '.grid-item',
-		columnWidth : '.grid-sizer',
-		percentPosition : true,
-		gutter : 2,
-	});
-	imagesLoaded('.grid').on('progress', function() {
-		msnry.layout();
-	});
-</script>
+<script src="/resources/js/imageLoad.js"></script>
 </html>
