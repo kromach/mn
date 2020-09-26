@@ -92,7 +92,16 @@ input[type=text]::-ms-clear {display: none;}
 padding: 1px; border-radius: 3px; position: absolute; 
 right: 5px; top: 5px; z-index: 1 ;background-color: white;}
 
-
+/*chat*/
+.chat{
+position: fixed;
+top:85%;
+left: 90%;
+z-index: 1000;
+}
+.chat > img{
+width: 100px
+}
 /* Default Link */
 a{font-size:100%;text-decoration:none;font-family:'Nanum Gothic','나눔고딕',"돋움",Dotum,"Trebuchet MS",Helvetica,sans-serif}
 a:link, a:visited, a:active{color:#666;text-decoration:none}
