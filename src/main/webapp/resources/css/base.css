@@ -26,7 +26,7 @@ select, input, option,button, textarea{vertical-align:top;font:normal 12px 'Nanu
 input[type=text]::-ms-clear {display: none;} 
 /*반응형웹(검색영역)*/
 .grid-Wrapper{width:100% ; text-align: center; }
-.grid { width:80% ; background-color: yellow; display: inline-block;}
+.grid { width:80% ; display: inline-block;}
 .grid-item {margin-bottom:10px; border-radius: 10px; overflow:hidden;}
 .grid-item img {display: block; min-width:100%; max-width: 100%; }
 .gutter-sizer { width: 0.8%; }
