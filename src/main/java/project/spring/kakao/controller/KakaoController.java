@@ -31,9 +31,9 @@ import project.spring.beans.kakaoAPI.KakaoLogout;
 
 @Controller
 @RequestMapping("/kakao")
-public class HomeController {
+public class KakaoController {
 	private static final Logger logger = LoggerFactory
-			.getLogger(HomeController.class);
+			.getLogger(KakaoController.class);
 	@Autowired
 	private String nativeAppkey;
 	@Autowired

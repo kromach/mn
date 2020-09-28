@@ -8,6 +8,8 @@
 <title>마시는 녀석들</title>
 <link href="/resources/css/base.css" rel="stylesheet">
 <link href="/resources/css/button.css" rel="stylesheet">
+<!-- mobile Device  -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- BooStrap CDN CSS only -->
 <!-- <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -23,38 +25,6 @@
 <!-- JQuery masonry CDN -->
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-<style>
-html, body {
-	margin: 0px;
-}
-.grid { width:98vw }
-.grid-item {border:1px solid #8f99f3; margin-bottom:10px; border-radius: 10px; overflow:hidden;}
-.grid-item img {display: block; min-width:100%; max-width: 100%; }
-
-
-/*반응형웹(검색영역)*/
-@media all and (min-width: 846px){
-	.grid-sizer, .grid-item { width: 16%; }
-	.grid-item--width2 { width: 32%; }
-	
-}
-@media all and (min-width:700px) and (max-width:845px) {
-	.grid-sizer, .grid-item { width: 23%; }
-	.grid-item--width2 { width: 46%; }
-	
-}
-@media all and (min-width:630px) and (max-width:699px) {
-	.grid-sizer, .grid-item { width: 40%; }
-	.grid-item--width2 { width: 80%; }
-	
-}
-@media all and (max-width:629px){
-	.grid-sizer, .grid-item { width: 46%; }
-	.grid-item--width2 { width: 92%; }
-	
-}
-
-</style>
 </head>
 <body>
  	<tiles:insertAttribute name="header" />
