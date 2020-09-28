@@ -5,13 +5,13 @@ import org.springframework.stereotype.Service;
 
 import project.spring.beans.memberInterface;
 import project.spring.kakao.vo.MemberDTO;
-import project.spring.member.dao.MemberDAO;
+import project.spring.member.dao.MemberDAOImpl;
 
 @Service
 public class MemberServiceImpl implements memberInterface{
 	
 	@Autowired
-	MemberDAO memberDAO;
+	MemberDAOImpl memberDAO;
 	
 	@Override
 	public int insertItem(MemberDTO dto) {

@@ -1,5 +1,8 @@
 package project.spring.member.dao;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int insertItem() {
