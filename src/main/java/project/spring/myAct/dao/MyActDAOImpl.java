@@ -10,12 +10,6 @@ public class MyActDAOImpl implements MyActDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSession = null;
 	
-	/*
-	 * public void setSqlSession(SqlSessionTemplate sqlSession) { this.sqlSession =
-	 * sqlSession; }
-	 */
-	 
-	
 	@Override
 	public int insertItem() {
 		// TODO Auto-generated method stub
@@ -36,7 +30,7 @@ public class MyActDAOImpl implements MyActDAO{
 	
 	@Override
 	public int myArticleCount(String memId) {
-		int count = sqlSession.selectOne("myAct.bye", memId);
+		int count = sqlSession.selectOne("myAct.myArticle", memId);
 		
 		return count;
 	}
