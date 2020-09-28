@@ -15,7 +15,8 @@ public class MemberServiceImpl implements memberInterface{
 	
 	@Override
 	public int insertItem(MemberDTO dto) {
-		
+		System.out.println(memberDAO);
+		System.out.println(dto);
 		return 0;
 	}
 	@Override
