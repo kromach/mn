@@ -1,5 +1,10 @@
 package project.spring.myAct.service;
 
-public interface MyActService {
+import java.util.List;
 
+import project.spring.beans.CommonInterface;
+
+public interface MyActService extends CommonInterface{
+
+	public List searchItem();
 }

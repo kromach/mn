@@ -1,12 +1,19 @@
 package project.spring.myAct.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import project.spring.myAct.service.MyActService;
+
 @Controller
 @RequestMapping("/myAct")
 public class MyActController {
+	
+	@Autowired
+	MyActService myActService= null;
+	
 	@RequestMapping
 	public String index() {
 		System.out.println("MyActIndex");
