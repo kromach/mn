@@ -22,4 +22,10 @@ public class MemberController {
 		}
 		return returnUrl;
 	}
+	@RequestMapping("/signupPro")
+	public String signUpPro() {
+		
+		return null;
+	}
+	
 }
