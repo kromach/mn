@@ -14,7 +14,7 @@ public class Pager {
 	private int pageBlock = 10;
 	private int startPage = 0;
 	private int endPage = 0;
-	public Pager(){
+	public Pager(){ 
 	}
 	public PageVO pager(String pageNum,int count) {
 		
