@@ -12,8 +12,8 @@
 			<div style="display: block; text-align: center;">
 				<table style="display: inline-block; border: 2px solid black;  padding: 5px; align-content: center;">
 					<tr>
-						<td style="width: 40%"><button>일반사용자</button></td>
-						<td style="width: 40%"><button>판매자</button></td>
+						<td style="width: 40%"><button onclick="window.location.href='/member/signupUser'">일반사용자</button></td>
+						<td style="width: 40%"><button onclick="window.location.href='/member/signupSales'">판매자</button></td>
 					</tr>
 				</table>
 			</div>
