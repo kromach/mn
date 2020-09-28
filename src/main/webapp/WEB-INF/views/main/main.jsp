@@ -8,7 +8,7 @@
 <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 <body>
 <div class="grid-Wrapper">
-	<div class="grid"> 
+	<div class="grid">  
 		<div class="grid-sizer"></div>
 		<div class="grid-item grid-item--width2"><img src="/resources/img/main/4.jpg" /></div>
 		<div class="grid-item"><img src="/resources/img/main/8.jpg" /></div>
