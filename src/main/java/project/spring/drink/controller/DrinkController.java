@@ -90,8 +90,8 @@ public class DrinkController {
 		model.addAttribute("schDkCountry", schDkCountry);
 		model.addAttribute("selectDrinkInfo", selectDrinkInfo);
 		
-		System.out.println(selectDrinkInfo.getDkName());
-		System.out.println(selectDrinkInfo.getDkBkindValue());
+		//System.out.println(selectDrinkInfo.getDkName());
+		//System.out.println(selectDrinkInfo.getDkBkindValue());
 		
 		return "/drink/detail.mn";
 	}
