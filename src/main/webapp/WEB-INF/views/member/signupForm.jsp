@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
-</head>
-<style>
-
-</style>
 <body>
 <div class="grid-Wrapper">
 	<div class="grid">  
@@ -48,32 +42,44 @@
 							</tr>
 							<tr>
 								<td class="t">비밀번호 확인*</td>
-								<td><input type="password" name="pwCh" /></td>
+								<td><input type="password" id="pwCh" /></td>
 							</tr>
 							<tr>
 								<td class="t">생년월일*</td>
-								<td><input type="text" name="id_number1" id="idTest1"
+								<td><input type="text" name="birth" id="idTest1"
 									maxlength="6" size="6" />&nbsp;&nbsp;&nbsp;-
-									<input type="text" name="id_number2" id="idTest2" maxlength="1"
+									<input type="text" name="birth" id="idTest2" maxlength="1"
 									size="1" />******</td>
 							</tr>
 							<tr>
-								<td class="t">주소</td>
-								<td><button class="button"
-										style="width: 80px; height: 30px; text-align: center"
-										type="button" onclick="confirmId(this.form)">주소찾기</button></td>
-							</tr>
-							<tr>
-								<td class="t">전화번호</td>
-								<td>000-0000-0000</td>
-							</tr>
+									<td class="t">전화번호</td>
+									<td>000-0000-0000</td>
+								</tr>
+							<c:if test="${status eq 'user' }">
+								<tr>
+									<td class="t">주소</td>
+									<td><button class="button"
+											style="width: 80px; height: 30px; text-align: center"
+											type="button" onclick="confirmId(this.form)">주소찾기</button></td>
+								</tr>
+							</c:if>
+							<c:if test="${status eq 'salse' }">
+								<tr>
+									<td class="t">사업장 주소</td>
+									<td>000-0000-0000</td>
+								</tr>
+								<tr>
+									<td>사업자 등록증</td>
+									<td><input type="file"></td>
+								</tr>
+							</c:if>
 							<tr>
 								<td colspan="2" align="center" style="padding-top: 30px">
 									<button class="button" type="submit"
 										style="width: 50px; height: 30px; text-align: center">가입</button>
 									<button class="button" type="reset"
 										style="width: 50px; height: 30px; text-align: center"
-										name="reset">재입력</button>
+										>재입력</button>
 									<button class="button" type="button"
 										style="width: 50px; height: 30px; text-align: center"
 										onclick="window.location='../main.jsp'">취소</button>

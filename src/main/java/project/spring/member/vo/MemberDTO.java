@@ -106,6 +106,9 @@ public class MemberDTO {
 	public void setIsExit(String isExit) {
 		this.isExit = isExit;
 	}
+	public MemberDTO() {
+		// TODO Auto-generated constructor stub
+	}
 	@Override
 	public String toString() {
 		return "MemberDTO [id=" + id + ", pw="
