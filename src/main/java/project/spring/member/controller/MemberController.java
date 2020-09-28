@@ -18,28 +18,38 @@ public class MemberController {
 	@Autowired
 	MemberServiceImpl memberService;
 	
+	@RequestMapping("/signup")
+	public String signUp(HttpServletRequest reqest) {
+		String returnUrl = "/";
+		HttpSession session =  reqest.getSession();
+		if(session.getAttribute("memId")==null) {
+			returnUrl = "/member/signStatus.mn";
+		}else{
+			System.out.println("로그인이 된 상태입니다.");
+		}
+		return returnUrl;
+	}
+	
 	@RequestMapping("/signupUser")
 	public String signUpUser(HttpServletRequest reqest) {
-		String returnUrl = "main";
+		String returnUrl = "/";
 		HttpSession session =  reqest.getSession();
 		if(session.getAttribute("memId")==null) {
 			reqest.setAttribute("status", "user");
 			returnUrl = "/member/signupForm.mn";
 		}else{
-			returnUrl = "/";
 			System.out.println("로그인이 된 상태입니다.");
 		}
 		return returnUrl;
 	}
 	@RequestMapping("/signupSales")
 	public String signUpSalses(HttpServletRequest reqest) {
-		String returnUrl = "main";
+		String returnUrl = "/";
 		HttpSession session =  reqest.getSession();
 		if(session.getAttribute("memId")==null) {
 			reqest.setAttribute("status", "salse");
 			returnUrl = "/member/signupForm.mn";
 		}else{
-			returnUrl = "/";
 			System.out.println("로그인이 된 상태입니다.");
 		}
 		return returnUrl;
