@@ -30,20 +30,19 @@
 				<table>
 					<tr>
 						<td>제목</td>
-						<td>글쓴이</td>
 						<td>작성일</td>
 						<td>조회</td>
 						<td>추천</td>
 					</tr>
 
-					<tr>
-						<td>제목</td>
-						<td>글쓴이</td>
-						<td>작성일</td>
-						<td>조회</td>
-						<td>추천</td>
-					</tr>
-
+					<c:forEach var="myArticle" items="${myArticle}" begin="1" step="1">
+						<tr>
+							<td>${myArticle.title}</td>
+							<td>${myArticle.date}</td>
+							<td>${myArticle.viewcount}</td>
+							<td>${myArticle.recommend}</td>
+						</tr>
+					</c:forEach>
 				</table>
 				<br />
 			</div>
