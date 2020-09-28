@@ -57,6 +57,7 @@ public class MemberController {
 	@RequestMapping("/signupPro")
 	public String signUpPro(@ModelAttribute MemberDTO dto) {
 		System.out.println(dto);
+		memberService.insertItem();
 		return null;
 	}
 }
