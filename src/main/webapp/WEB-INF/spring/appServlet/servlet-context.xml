@@ -62,8 +62,8 @@
 		<beans:property name="suffix" value=".jsp" />
 		<beans:property name="order" value="2" />
 	</beans:bean>
-	
-	
+
+	<!-- DB -->	
 	<beans:bean id="dataSourceSpied" class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close"
 		p:driverClassName="oracle.jdbc.driver.OracleDriver"
@@ -86,9 +86,12 @@
 		<beans:property name="dataSource" ref="dataSource"/>
 		<beans:property name="configLocation" value="/WEB-INF/spring/mybatis-configure.xml"/>
 	</beans:bean>
+	
 	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
 		<beans:constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</beans:bean>
+	<!-- DB -->	
+	
 	<context:component-scan base-package="project.spring" /> 
 	<beans:bean id="MemberAspect" class="project.spring.aop.MemberAspect" />
 	<aop:aspectj-autoproxy /> 
