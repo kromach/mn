@@ -45,7 +45,7 @@ public class KakaoController {
 	@Autowired
 	private String callback_URL;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping
 	public String home(Locale locale, Model model,
 			HttpServletRequest request,
 			HttpServletResponse response) {
