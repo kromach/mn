@@ -8,13 +8,13 @@
         <put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
         <put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" />
     </definition>
-    <definition name="*.p1" extends="base1">
+    <definition name="*.mn" extends="base1">
         <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
     </definition>
-     <definition name="*/*.p1" extends="base1">
+     <definition name="*/*.mn" extends="base1">
          <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
      </definition>
-    <definition name="*/*/*.p1" extends="base1">
+    <definition name="*/*/*.mn" extends="base1">
         <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
     </definition>
     <definition name="base2" template="/WEB-INF/views/tiles/template.jsp">
