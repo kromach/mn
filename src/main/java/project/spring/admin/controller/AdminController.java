@@ -39,7 +39,9 @@ public class AdminController {
 				}
 				number = count - (currPage - 1) * pageSize;
 			
-			
+				model.addAttribute("pageNum", pageNum);
+				model.addAttribute("memberList", memberList);
+				
 			return "/admin/memberList.mn";
 		}
 	
