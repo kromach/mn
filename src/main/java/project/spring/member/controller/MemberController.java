@@ -14,12 +14,12 @@ public class MemberController {
 	public String signUpMember(HttpServletRequest reqest) {
 		String returnUrl = "main";
 		HttpSession session =  reqest.getSession();
-		if(session==null) {
-			returnUrl = "signupForm";
-		}else {
-			returnUrl = "main";
+		if(session.getAttribute("memId")==null) {
+			returnUrl = "/member/signupForm.mn";
+		}else{
+			returnUrl = "/";
 			System.out.println("로그인이 된 상태입니다.");
 		}
-		return "returnUrl";
+		return returnUrl;
 	}
 }
