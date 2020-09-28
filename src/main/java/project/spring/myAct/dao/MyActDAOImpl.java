@@ -35,4 +35,22 @@ public class MyActDAOImpl implements MyActDAO{
 		return count;
 	}
 
+	@Override
+	public int insertItem(Object obj) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateItem(Object obj) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteItem(Object obj) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

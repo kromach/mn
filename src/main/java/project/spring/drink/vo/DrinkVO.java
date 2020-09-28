@@ -4,13 +4,12 @@ import java.security.Timestamp;
 
 public class DrinkVO {
 	
-	private String categoryCode;
-	private String categoryValue;
-	private String categorySuperCode;
-	private String categorySuperValue;
-	
 	private String dkCode;
 	private String dkName;
+	private String dkBkind;
+	private String dkBkindValue;
+	private String dkSkind;
+	private String dkSkindValue;
 	private String dkImg;
 	private int dkAlcohol;
 	private String dkCountry;
@@ -19,33 +18,9 @@ public class DrinkVO {
 	private String dkFood;
 	private int dkLike;
 	private int dkApprove;
-	private String insert_id;
-	private Timestamp insert_day;
+	private String insertId;
+	private Timestamp insertDay;
 	
-	public String getCategoryCode() {
-		return categoryCode;
-	}
-	public void setCategoryCode(String categoryCode) {
-		this.categoryCode = categoryCode;
-	}
-	public String getCategoryValue() {
-		return categoryValue;
-	}
-	public void setCategoryValue(String categoryValue) {
-		this.categoryValue = categoryValue;
-	}
-	public String getCategorySuperCode() {
-		return categorySuperCode;
-	}
-	public void setCategorySuperCode(String categorySuperCode) {
-		this.categorySuperCode = categorySuperCode;
-	}
-	public String getCategorySuperValue() {
-		return categorySuperValue;
-	}
-	public void setCategorySuperValue(String categorySuperValue) {
-		this.categorySuperValue = categorySuperValue;
-	}
 	public String getDkCode() {
 		return dkCode;
 	}
@@ -57,6 +32,30 @@ public class DrinkVO {
 	}
 	public void setDkName(String dkName) {
 		this.dkName = dkName;
+	}
+	public String getDkBkind() {
+		return dkBkind;
+	}
+	public void setDkBkind(String dkBkind) {
+		this.dkBkind = dkBkind;
+	}
+	public String getDkBkindValue() {
+		return dkBkindValue;
+	}
+	public void setDkBkindValue(String dkBkindValue) {
+		this.dkBkindValue = dkBkindValue;
+	}
+	public String getDkSkind() {
+		return dkSkind;
+	}
+	public void setDkSkind(String dkSkind) {
+		this.dkSkind = dkSkind;
+	}
+	public String getDkSkindValue() {
+		return dkSkindValue;
+	}
+	public void setDkSkindValue(String dkSkindValue) {
+		this.dkSkindValue = dkSkindValue;
 	}
 	public String getDkImg() {
 		return dkImg;
@@ -106,18 +105,16 @@ public class DrinkVO {
 	public void setDkApprove(int dkApprove) {
 		this.dkApprove = dkApprove;
 	}
-	public String getInsert_id() {
-		return insert_id;
+	public String getInsertId() {
+		return insertId;
 	}
-	public void setInsert_id(String insert_id) {
-		this.insert_id = insert_id;
+	public void setInsertId(String insertId) {
+		this.insertId = insertId;
 	}
-	public Timestamp getInsert_day() {
-		return insert_day;
+	public Timestamp getInsertDay() {
+		return insertDay;
 	}
-	public void setInsert_day(Timestamp insert_day) {
-		this.insert_day = insert_day;
+	public void setInsertDay(Timestamp insertDay) {
+		this.insertDay = insertDay;
 	}
-	
-	
 }

@@ -16,4 +16,19 @@ public class MemberDAOImpl implements MemberDAO {
 	public int deleteItem() {
 		return 0;
 	}
+	@Override
+	public int insertItem(Object obj) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int updateItem(Object obj) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int deleteItem(Object obj) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
