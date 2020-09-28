@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="admin">
+  	<select id="memberCount" resultType="int">
+  		select count(*) from Member_Info
+  	</select>
+  	
+  	<select id="memberList" parameterType="hashmap" resultType="AdminVO">
+  	<![CDATA[
+  		select a.*from(
+  			select aa.*, rownum r from(
+  				select * from member_Info 
+  				order by id DESC
+  			) aa order by id DESC
+  		) aa where r >=#{start} and r <=#{end}
+  	]]>
+  	
+  	</select>
+  </mapper>

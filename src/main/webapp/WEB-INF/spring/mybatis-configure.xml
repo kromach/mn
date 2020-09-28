@@ -3,12 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	<typeAliases>
+		<typeAlias type="project.spring.admin.vo.AdminVO" alias="AdminVO"/>
+	</typeAliases>
+	
 	<mappers>
 		<mapper resource="project/spring/kakao/sql/testSql.xml" />
 		<mapper resource="project/spring/main/sql/testSql.xml" />
 		<mapper resource="project/spring/module02/sql/testSql.xml" />
 		<mapper resource="project/spring/module03/sql/testSql.xml" />
 		<mapper resource="project/spring/module04/sql/testSql.xml" />
-		<mapper resource="project/spring/admin/sql/testSql.xml" />
+		<mapper resource="project/spring/admin/sql/adminSql.xml" />
 	</mappers>
 </configuration>
