@@ -14,7 +14,7 @@
   				select * from member_Info 
   				order by id DESC
   			) aa order by id DESC
-  		) aa where r >=#{start} and r <=#{end}
+  		) a where r >=#{start} and r <=#{end}
   	]]>
   	
   	</select>
