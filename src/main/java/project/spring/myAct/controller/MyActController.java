@@ -12,4 +12,24 @@ public class MyActController {
 		System.out.println("MyActIndex");
 		return "/myAct/index.mn";
 	}
+	
+	@RequestMapping(value = "/attend", method = RequestMethod.GET)
+	public String attend() {
+		return "/myAct/attend.mn";
+	}
+	
+	@RequestMapping(value = "/likeArticle", method = RequestMethod.GET)
+	public String likeArticle() {
+		return "/myAct/likeArticle.mn";
+	}
+	
+	@RequestMapping(value = "/likeDrink", method = RequestMethod.GET)
+	public String likeDrink() {
+		return "/myAct/likeDrink.mn";
+	}
+	@RequestMapping(value = "/title", method = RequestMethod.GET)
+	public String title() {
+		return "/myAct/title.mn";
+	}
+	
 }
