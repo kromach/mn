@@ -16,7 +16,7 @@
 						<td style="width: 40%"><button onclick="window.location.href='/member/signupSales'">판매자</button></td>
 					</tr>
 				</table>
-			</div>
+			</div> 
 		</div>
 	</div>
 </div>
