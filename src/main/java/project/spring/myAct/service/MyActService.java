@@ -7,4 +7,5 @@ import project.spring.beans.CommonInterface;
 public interface MyActService extends CommonInterface{
 
 	public List searchItem();
+	public int myArticleCount(String memId);
 }

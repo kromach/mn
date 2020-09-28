@@ -21,7 +21,7 @@
 		<mapper resource="project/spring/module02/sql/testSql.xml" />
 		<mapper resource="project/spring/module03/sql/testSql.xml" />
 		<mapper resource="project/spring/module04/sql/testSql.xml" />
-		<mapper resource="project/spring/myAct/sql/testSql.xml" />
+		<mapper resource="project/spring/myAct/sql/myActSql.xml" />
 		<mapper resource="project/spring/drink/sql/drinkSql.xml" />
 		<mapper resource="project/spring/admin/sql/testSql.xml" />
 	</mappers>

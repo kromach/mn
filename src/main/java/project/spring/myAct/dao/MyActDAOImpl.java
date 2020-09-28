@@ -1,24 +1,21 @@
-package project.spring.myAct.service;
+package project.spring.myAct.dao;
 
-import java.util.List;
-
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
-import project.spring.myAct.dao.MyActDAO;
+@Repository
+public class MyActDAOImpl implements MyActDAO{
 
-@Service
-public class MyActServiceImpl implements MyActService{
-	
 	@Autowired
-	private MyActDAO myActDAO = null;
+	private SqlSessionTemplate sqlSession = null;
 	
-	@Override
-	public List searchItem() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	/*
+	 * public void setSqlSession(SqlSessionTemplate sqlSession) { this.sqlSession =
+	 * sqlSession; }
+	 */
+	 
+	
 	@Override
 	public int insertItem() {
 		// TODO Auto-generated method stub
@@ -36,10 +33,10 @@ public class MyActServiceImpl implements MyActService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 	@Override
 	public int myArticleCount(String memId) {
-		int count = myActDAO.myArticleCount(memId);
+		int count = sqlSession.selectOne("myAct.bye", memId);
 		
 		return count;
 	}

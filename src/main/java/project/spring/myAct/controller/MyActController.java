@@ -1,5 +1,8 @@
 package project.spring.myAct.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +18,24 @@ public class MyActController {
 	MyActService myActService= null;
 	
 	@RequestMapping
-	public String index() {
+	public String index(String pageNum, HttpSession session) {
 		System.out.println("MyActIndex");
+		//String memId = (String)session.getAttribute("memId");
+		
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		int pageSize=10;
+		int currPage = Integer.parseInt(pageNum);	
+		int startRow = (currPage -1) * pageSize + 1;
+		int endRow = currPage * pageSize;		
+		int count = 0;			
+		int number = 0;	
+		
+		String memId = "abc";
+		count = myActService.myArticleCount(memId);
+		System.out.println(count);
+		
 		return "/myAct/index.mn";
 	}
 	
