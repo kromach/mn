@@ -6,7 +6,7 @@
 </head>
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-<body>
+<body>   
 <div class="grid-Wrapper">
 	<div class="grid">  
 		<div class="grid-sizer"></div>
