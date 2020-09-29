@@ -31,7 +31,7 @@ public class MemberDAOImpl implements MemberDAO {
 	public int insertItem(Object obj) {
 		int result = 0;
 		if (obj instanceof MemberDTO) {
-			result = sqlSession.selectOne("member.memberCount", obj);
+			result = sqlSession.selectOne("member.insertMember", obj);
 		}
 		return result;
 	}

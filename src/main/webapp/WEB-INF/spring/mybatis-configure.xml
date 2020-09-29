@@ -12,6 +12,7 @@
 	<typeAliases>
 		<typeAlias type="project.spring.admin.vo.AdminVO" alias="AdminVO"/>
 		<typeAlias type="project.spring.beans.LowerHashMap" alias="camelmap" />
+		<typeAlias type="project.spring.member.vo.MemberDTO" alias="memberDTO" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="project/spring/kakao/sql/testSql.xml" />

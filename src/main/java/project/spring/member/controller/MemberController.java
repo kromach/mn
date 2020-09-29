@@ -62,6 +62,8 @@ public class MemberController {
 		return returnUrl;
 	}
 	
+//	signupUserPro
+	
 	@RequestMapping("/signupSalesPro")
 	public String signUpPro(
 			@ModelAttribute MemberDTO dto,
@@ -87,12 +89,12 @@ public class MemberController {
 			mf.transferTo(copyFile);
 			//dtoImgSetting
 			dto.setLicenseImg(newName);
+			dto.setUserKind("sales");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-			
 		System.out.println(dto);
-//		memberService.insertItem(dto);
+		memberService.insertItem(dto);
 		return null;
 	}
 }

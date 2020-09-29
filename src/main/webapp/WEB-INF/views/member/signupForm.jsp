@@ -4,18 +4,29 @@
 <html>
 <body>
 <div class="grid-Wrapper">
+	
 	<div class="grid">  
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
 		<div class="grid-item grid-item--width6">
 		<h1 align="center">회원가입</h1><br>
 			<div style="display: block; text-align: center;">
-					<form
-						style="display: inline-block; border: 2px solid black;  padding: 5px; align-content: center;"
-						method="post" action="/member/signupPro"
-						enctype="multipart/form-data" name="inputForm"
-						onsubmit="return check()" accept-charset="utf-8">
-						<table style=" border-collapse: separate; border-spacing: 0 10px;">
+					<c:if test="${status eq 'salse' }">
+						<form
+							style="display: inline-block; border: 2px solid black; padding: 5px; align-content: center;"
+							method="post" action="/member/signupSalesPro"
+							enctype="multipart/form-data" name="inputForm"
+							onsubmit="return check()" accept-charset="utf-8">
+					</c:if>
+					<c:if test="${status eq 'user' }">
+						<form
+							style="display: inline-block; border: 2px solid black; padding: 5px; align-content: center;"
+							method="post" action="/member/signupUserPro"
+							enctype="multipart/form-data" name="inputForm"
+							onsubmit="return check()" accept-charset="utf-8">
+					</c:if>
+
+					<table style=" border-collapse: separate; border-spacing: 0 10px;">
 							<tr>
 								<td class="t">아이디*</td>
 								<td><input type="text" name="id"></td>
