@@ -46,7 +46,8 @@
 					onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code
 						&client_id=${restApikey }&redirect_uri=${callback_URL}'" class="kakaoBtn">
 						카카오로 로그인</button>
-						
+					<%-- <a href="https://kauth.kakao.com/oauth/authorize?response_type=code
+						&client_id=${restApikey }&redirect_uri=${callback_URL}">123</a> --%>
 					<input class="loginInput" type="text" name="id">
 					<input class="loginInput" type="text" name="pw">
 					<button class="greyBtn">로그인</button>
