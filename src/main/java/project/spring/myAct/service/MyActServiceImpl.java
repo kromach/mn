@@ -66,7 +66,7 @@ public class MyActServiceImpl implements MyActService{
 	@Override
 	public int likeArticleCount(String memId) {
 		int count = myActDAO.myLikeArticleCount(memId);
-		return 0;
+		return count;
 	}
 
 	@Override
