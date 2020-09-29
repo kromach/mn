@@ -16,7 +16,7 @@
 		<typeAlias type="project.spring.article.vo.ArticleDTO" alias="ArticleDTO"/>
 		<typeAlias type="project.spring.myAct.vo.MyLikeDTO" alias="MyLikeDTO"/>
 		<typeAlias type="project.spring.member.vo.MemberDTO" alias="memberDTO" />
-	</typeAliases>
+	</typeAliases> 
 	<mappers>
 		<mapper resource="project/spring/kakao/sql/testSql.xml" />
 		<mapper resource="project/spring/main/sql/testSql.xml" />
