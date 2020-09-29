@@ -10,6 +10,7 @@
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	<typeAliases>
+		<typeAlias type="project.spring.product.vo.ProductVo" alias="productvo"/>
 		<typeAlias type="project.spring.admin.vo.AdminVO" alias="AdminVO"/>
 		<typeAlias type="project.spring.beans.LowerHashMap" alias="camelmap" />
 		<typeAlias type="project.spring.article.vo.ArticleDTO" alias="ArticleDTO"/>
@@ -23,5 +24,6 @@
 		<mapper resource="project/spring/myAct/sql/myActSql.xml" />
 		<mapper resource="project/spring/drink/sql/drinkSql.xml" />
 		<mapper resource="project/spring/member/sql/memberSql.xml" />
+		<mapper resource="project/spring/product/sql/productSQL.xml" />
 	</mappers>
 </configuration>
