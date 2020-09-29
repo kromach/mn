@@ -61,6 +61,11 @@ public class DrinkController {
 		
 		DrinkVO selectDrinkInfo = drinkService.selectDrinkServiceInfo(dkCode);
 		
+		System.out.println("c1 " + selectDrinkInfo.getDkContent1());
+		System.out.println("1 " + selectDrinkInfo.getDkContent());
+		selectDrinkInfo.setDkContent();
+		System.out.println("2 " + selectDrinkInfo.getDkContent());
+		
 		// request에 담긴 검색 결과 뽑아내기 
 		String schDkBkind = null;
 		String schDkSkind = null;
@@ -89,9 +94,9 @@ public class DrinkController {
 		model.addAttribute("schDkAlcohol", schDkAlcohol);
 		model.addAttribute("schDkCountry", schDkCountry);
 		model.addAttribute("selectDrinkInfo", selectDrinkInfo);
-		
-		System.out.println(selectDrinkInfo.getDkName());
-		System.out.println(selectDrinkInfo.getDkBkindValue());
+//		
+//		System.out.println(selectDrinkInfo.getDkName());
+//		System.out.println(selectDrinkInfo.getDkBkindValue());
 		
 		return "/drink/detail.mn";
 	}

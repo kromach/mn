@@ -16,11 +16,17 @@ public class DrinkVO {
 	private String dkCity;
 	private String dkPlace;
 	private String dkFood;
+	
+	private String dkContent1;
+	private String dkContent2;
+	private String dkContent3;
+	private String dkContent;
+	
 	private int dkLike;
 	private int dkApprove;
 	private String insertId;
 	private Timestamp insertDay;
-	
+
 	public String getDkCode() {
 		return dkCode;
 	}
@@ -111,10 +117,38 @@ public class DrinkVO {
 	public void setInsertId(String insertId) {
 		this.insertId = insertId;
 	}
+	public String getDkContent1() {
+		return dkContent1;
+	}
+	public void setDkContent1(String dkContent1) {
+		this.dkContent1 = dkContent1;
+	}
+	public String getDkContent2() {
+		return dkContent2;
+	}
+	public void setDkContent2(String dkContent2) {
+		this.dkContent2 = dkContent2;
+	}
+	public String getDkContent3() {
+		return dkContent3;
+	}
+	public void setDkContent3(String dkContent3) {
+		this.dkContent3 = dkContent3;
+	}
 	public Timestamp getInsertDay() {
 		return insertDay;
 	}
 	public void setInsertDay(Timestamp insertDay) {
 		this.insertDay = insertDay;
+	}
+	public String getDkContent() {
+		return dkContent;
+	}
+	public void setDkContent() {
+		String c1 = getDkContent1() != null ? getDkContent1() : "";
+		String c2 = getDkContent2() != null ? getDkContent2() : "";
+		String c3 = getDkContent3() != null ? getDkContent3() : "";
+
+		this.dkContent = c1+c2+c3;
 	}
 }

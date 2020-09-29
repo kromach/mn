@@ -24,14 +24,20 @@ select, input, option,button, textarea{vertical-align:top;font:normal 12px 'Nanu
 .hide{ text-indent:-9999px;}
 /*html select{ padding: 1px 0.2% 1px 0.4%!important}*/
 input[type=text]::-ms-clear {display: none;} 
+
 /*반응형웹(검색영역)*/
 .grid-Wrapper{width:100% ; text-align: center; }
-.grid { width:80% ; background-color: yellow; display: inline-block;}
-.grid-item {margin-bottom:10px; border-radius: 10px; overflow:hidden;}
-.grid-item img {display: block; min-width:100%; max-width: 100%; }
+.grid { width:80% ; display: inline-block;}
+.grid2 { width:60% ; display: inline-block;}
+.grid-item, .detail-item {margin-bottom:10px; border-radius: 10px; overflow:hidden;}
+.grid-item img, .detail-item img {display: block; min-width:100%; max-width: 100%;}
 .gutter-sizer { width: 0.8%; }
+.detail-sizer, .detail-item { width: 16%; }
+.detail-img-div{height:350px!important}
+.detail-info-div{height:350px!important}
+#mainImg{display: block; max-width: 100%; max-height:100%; min-width:auto; margin:0 auto;}
+
 @media only screen and (min-width: 1440px)  {
-    .grid {background-color: green;}
 	.grid-sizer, .grid-item { width: 16%; }
 	.grid-item--width2 { width: 32.8%; }
 	.grid-item--width3 { width: 49.6%; }
@@ -39,27 +45,47 @@ input[type=text]::-ms-clear {display: none;}
 	.grid-item--width5 { width: 83.2%; }
 	.grid-item--width6 { width: 100%; }
 	
+	
+	.detail-width2{width:32.8%;}
+	.detail-width4{width:66.4%;}
+	.detail-width3{width:49.6%;}
+	.detail-width6{width:100%;}
 }
-@media only screen and (min-width: 1024px) and (max-width: 1439px) {
-	.grid {background-color: black;}
+/*@media only screen and (min-width: 1024px) and (max-width: 1439px) {*/
+@media only screen and (min-width: 800px) and (max-width: 1439px) {
 	.grid-sizer, .grid-item { width: 24%; }
 	.grid-item--width2 { width: 48%; }
 	.grid-item--width3 { width: 72%; } 
 	.grid-item--width4 { width: 96%; }
 	.grid-item--width5 { width: 96%; }
 	.grid-item--width6 { width: 96%; }
+	
+	.detail-width2{width:32.8%;}
+	.detail-width4{width:66.4%;}
+	.detail-width3{width:49.6%;}
+	.detail-width6{width:100%;}	
 }
+@media only screen and (max-width: 799px) {
+	.grid-sizer, .grid-item { width: 49.6%; }
+	.grid-item--width2, .grid-item--width3, .grid-item--width4, .grid-item--width5, .grid-item--width6 { width: 100%; }
+	
+	.detail-sizer, .detail-item { width: 100%; }
+	.detail-width2, .detail-width3, .detail-width4, .detail-width6 {width:100%;}	
+	.detail-img-div{height:300px!important}
+	.detail-info-div{height:auto!important}
+}
+/*
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
-	.grid {background-color: navy;}
 	.grid-sizer, .grid-item { width: 32%; }
 	.grid-item--width2 { width: 64%; }
 	.grid-item--width3 { width: 96%; }
 	.grid-item--width4 { width: 96%; }
 	.grid-item--width5 { width: 96%; }
 	.grid-item--width6 { width: 96%; }
+	
+	
 }
 @media only screen and (min-width: 600px) and (max-width: 767px) {
-	.grid {background-color: yellow;}
 	.grid-sizer, .grid-item { width: 48%; }
 	.grid-item--width2 { width: 96%; }
 	.grid-item--width3 { width: 96%; }
@@ -67,8 +93,8 @@ input[type=text]::-ms-clear {display: none;}
 	.grid-item--width5 { width: 96%; }
 	.grid-item--width6 { width: 96%; }
 }
+
 @media only screen and (max-width: 600px) {
-	.grid {background-color: yellow;}
 	.grid-sizer, .grid-item { width: 96%; }
 	.grid-item--width2 { width: 96%; }
 	.grid-item--width3 { width: 96%; }
@@ -76,34 +102,8 @@ input[type=text]::-ms-clear {display: none;}
 	.grid-item--width5 { width: 96%; }
 	.grid-item--width6 { width: 96%; }
 }
-/*header menu css  */
-.ham-menu, .ham-menu span {
-  -webkit-transition: all 500ms ease-out;
-  -moz-transition: all 500ms ease-out;
-  -o-transition: all 500ms ease-out;
-  transition: all 500ms ease-out;
-  cursor: pointer;
-}
-.ham-menu {border: 2px solid #666; width: 40px; padding: 1px; border-radius: 3px; position: absolute; right: 5px; top: 5px; }
-.ham-menu .line {border: 3px solid #666; line-height: 0; font-size: 0; display: block; margin: 2px;}
-.ham-menu .content {border: 3px solid #666; line-height: 0; font-size: 12; display: block; margin: 2px;}
-.ham-menu:hover {border-color: #99f;}
-.ham-menu:hover span {border-color: #ccf;}
-.dropDownMenu
-{border: 2px solid #666; width: 100px; margin-top:30px; 
-padding: 1px; border-radius: 3px; position: absolute; 
-right: 5px; top: 5px; z-index: 1 ;background-color: white;}
+*/
 
-/*chat*/
-.chat{
-position: fixed;
-top:85%;
-left: 90%;
-z-index: 1000;
-}
-.chat >a > img{
-width: 100px
-}
 /* Default Link */
 a{font-size:100%;text-decoration:none;font-family:'Nanum Gothic','나눔고딕',"돋움",Dotum,"Trebuchet MS",Helvetica,sans-serif}
 a:link, a:visited, a:active{color:#666;text-decoration:none}
@@ -240,19 +240,21 @@ h6{font-size:16px;font-weight:600;color:#333}
 #footer{width:100%;width:auto;margin:0 auto;}
 
 /* Header */
-.header_area{width:1100px; margin:0 auto;font-size:11px;color:#666}
+.header_area{width:100%; margin:0 auto;font-size:11px;color:#666}
 .header_area a:link, .header_area a:visited, .header_area a:active{color:#666;text-decoration:none;display:inline-block}
 .header_area a:hover{text-decoration:none}
-.header_area .h_menu{display:inline-block;line-height:64px; height:64px}
+.header_area .h_menu{display:inline-block;line-height:64px; height:64px; padding-right: 20px; z-index:10}
 .header_area .h_menu ul{display:inline-block;margin:0;padding:0}
-.header_area .h_menu li{float:left; font-size:13px}
-.header_area .h_menu li:first-child{padding-right:5px; font-weight: 700;}
-.header_area .h_menu li a{padding:0 10px; border-left: 1px solid #b9b9b9; line-height:11px; height: 11px; vertical-align: middle;}
-.header_area .h_menu li a.logout{margin-left:8px;color:#fff;padding:0px 5px;background:#5096de;border:1px solid #1758c4;font:bold 10px "Trebuchet MS", Arial, Helvetica, sans-serif;height:16px;line-height:16px; display:inline-block}
-.h_logo .logo{display:inline-block; margin:12px 0; overflow:hidden; float:left; height:40px; line-height: 40px;}
-.h_logo .logo a{display:block}
- 
+.header_area .h_menu li{float:left; font-size:15px; padding-right:10px;}
+.header_area .h_menu li:first-child{font-weight: 700;}
+.header_area .h_menu li a{padding:0 15px; border-right: 1px solid #b9b9b9; line-height:11px; height: 11px; vertical-align: middle;}
+.header_area .h_menu li a.logout{margin-left:8px; color:#fff;padding:0px 5px; background:#004080; border:1px solid #1758c4;font:bold 12px "Trebuchet MS", Arial, Helvetica, sans-serif;height:18px;line-height:18px; display:inline-block}
+.header_area .h_menu li #menuBtn{line-height: 64px;}
+.h_logo .logo{display:inline-block; width:100%; margin:12px 0; overflow:hidden; float:left; height:40px; line-height: 40px; position: absolute; text-align: center;}
+.h_logo .logo a{display:block; width:200px; margin:0 auto;}
+
  /* 상단 관리자 & 판매자 LNB 메뉴 */
+ /* 
 .lnb_wrap{ width:100%; height:42px; background:#2f4050; border-top:#23303d; border-bottom:#475665}
 .lnb_wrap .header_lnb{width:1100px;height:42px;margin:0 auto; background:#2f4050; position:relative}
 .lnb_wrap .header_lnb .lnb{ padding:0; position:relative}
@@ -260,7 +262,7 @@ h6{font-size:16px;font-weight:600;color:#333}
 .lnb_wrap .header_lnb .lnb li a{color:#FFF;display:block;padding:13px 20px; font-weight:800; font-size:13px}
 .lnb_wrap .header_lnb .lnb li a:hover{color:#FF0}
 .lnb_wrap .header_lnb .lnb li.last{ background:none}
- 
+  */
 /* Footer 주소 */
 .footer_address{width:1100px;margin:0 auto;}
 .footer_address .addr{display:inline-block;color:#888;font-size:11px;line-height:180%; padding:25px 0}
@@ -269,9 +271,9 @@ h6{font-size:16px;font-weight:600;color:#333}
 .footer_address .addr li{ padding:0 0 3px 0; letter-spacing:0.05em}
 
 /* top 버튼 */
-.topIcon{ position: fixed; left: 1520px; bottom: 15px; border-radius: 3px; border: 1px solid #aaa; line-height: 14px; width: 40px; height: 40px; padding: 4px; z-index:99; background:white}
-.topIcon div{ display: block; color: #666; text-align: center; cursor: pointer; font-size:15px; line-height: 18px;}
-.topIcon div:hover{color: #444}
+.fixIcon{ position: fixed; right: 20px; bottom: 20px; padding: 4px; width:50px; height:100px; z-index:99;}
+.icon{ line-height: 14px; width: 40px; height: 40px; color: #666; text-align: center; cursor: pointer;}
+.icon:hover{color: #444}
 
 /* 검색창 영역 */
 .searchPanel{position:relative; width:50%; background:#ffffffb8; padding:12px 23px 14px 23px; border-top:2px solid #444; border-right:1px solid #ddd; border-left:1px solid #ddd; border-bottom:1px solid #ddd; box-sizing:border-box; float: left; }
@@ -322,14 +324,13 @@ h6{font-size:16px;font-weight:600;color:#333}
 .pr_resultBlock .result_con dt{float:left;width:87px; color: #333}
 .pr_resultBlock .result_con dd{float:left;width:205px; color: #333}
 
-/* 상세페이지 상품 정보 */
-.productDiv {width:100%; padding-top: 15px;}
-.productDiv .productImg {width:40%; max-height:400px; overflow: hidden;}
-.productDiv .productImg img{width:100%;}
-.productDiv .productInfo {width:55%; padding: 20px; border:1px solid #c5c5c5;}
-.productDiv .productInfo dl{overflow:hidden;clear:both;width:100%;padding:20px 0;font-size:13px;color:#666;line-height:19px}
-.productDiv .productInfo dt{float:left;width:23%; color: #333; padding-bottom: 7px;}
-.productDiv .productInfo dd{float:left;width:77%; color: #333; padding-bottom: 7px;}
+/* 주류정보 상세페이지 텍스트 정보 */
+.detail-info {width:100%; _padding-top: 15px;}
+.detail-info h3{font-size:22px; font-weight:800; color:#000080; padding-bottom:15px}
+
+.detail-info dl{overflow:hidden;clear:both;width:70%;padding:20px 0;font-size:16px;color:#666;line-height:19px}
+.detail-info dt{float:left; width:23%; color: #333; padding-bottom: 7px; font-weight:bolder;}
+.detail-info dd{float:left; width:77%; color: #333; padding-bottom: 7px;}
 
 /* 상세페이지 상세정보, 티켓선택 */
 .productMenu {
