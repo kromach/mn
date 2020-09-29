@@ -35,6 +35,7 @@
 	height: 30px;
 }
 </style>
+
 <body>
 	<div class="grid-Wrapper">
 		<div class="grid">
@@ -42,12 +43,8 @@
 			<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
 				<div class="loginWrapper">
-					<button type="button" 
-					onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code
-						&client_id=${restApikey }&redirect_uri=${callback_URL}'" class="kakaoBtn">
-						카카오로 로그인</button>
-					<%-- <a href="https://kauth.kakao.com/oauth/authorize?response_type=code
-						&client_id=${restApikey }&redirect_uri=${callback_URL}">123</a> --%>
+						<button type="button" class="kakaoBtn"
+						onclick='kakaoLogin()'>카카오로 로그인</button>
 					<input class="loginInput" type="text" name="id">
 					<input class="loginInput" type="text" name="pw">
 					<button class="greyBtn">로그인</button>
@@ -59,5 +56,14 @@
 	</div>
 	</div>
 </body>
-</body>
+<script type="text/javascript">
+function kakaoLogin() {
+	var client_id = "${restApikey}";
+	var redirect_uri = "${callback_URL}";
+	var location ='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id='+client_id+'&redirect_uri='+redirect_uri;
+	window.location.href=location;
+}
+
+
+</script>
 </html>
