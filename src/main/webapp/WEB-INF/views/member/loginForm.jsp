@@ -9,7 +9,6 @@
 }
 .loginWrapper >.kakaoBtn{
 	width:250px;
-	padding: 0px 50px 0px 50px;
 	margin-bottom: 5px;
 	color: black;
 	font-size: 14px;
@@ -20,7 +19,6 @@
 }
 .loginWrapper >.greyBtn{
 	width:250px;
-	padding: 0px 50px 0px 50px;
 	margin-bottom: 5px;
 	font-size: 14px;
 	position: relative;
@@ -30,9 +28,7 @@
 }
 .loginWrapper > .loginInput{
 	width:250px;
-	padding: 0px ; 
 	margin-bottom: 5px;
-	color: black;
 	font-size: 14px;
 	position: relative;
 	border-radius: 4px;
