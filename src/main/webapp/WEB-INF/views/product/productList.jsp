@@ -41,18 +41,19 @@
 		</form>
 	</div>
 	<h1>상품 목록 주르륵</h1>
-	<c:forEach var="pr" items="${productlist}">	
-			<div class="grid-Wrapper">
-				<div class="grid">  
-					<div class="grid-sizer"></div>
-					<div class="gutter-sizer"></div>
+		<div class="grid-Wrapper">
+			<div class="grid">
+				<div class="grid-sizer"></div>
+				<div class="gutter-sizer"></div>
+				<c:forEach var="pr" items="${productlist}">
 					<div class="grid-item">
-						<a href="productdetail?prcode=${pr.prCode}" ><img src="${pr.prImg}" /></a>
+						<a href="productdetail?prcode=${pr.prCode}"><img
+							src="${pr.prImg}" /></a>
 					</div>
-				</div>
+				</c:forEach>
 			</div>
-	</c:forEach>
-	<div class="chat">
+		</div>
+		<div class="chat">
 		<a href="/chat"><img src="/resources/img/main/chat.png" ></a>
 	</div>
 	<script src="/resources/js/imageLoad.js"></script>
