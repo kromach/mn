@@ -36,12 +36,12 @@ public class MemberServiceImpl implements memberInterface{
 	}
 	@Override
 	public int insertItem() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	@Override
 	public int insertItem(Object obj) {
-		// TODO Auto-generated method stub
+		int result = 0;
+		memberDAO.insertItem(obj);
 		return 0;
 	}
 	@Override

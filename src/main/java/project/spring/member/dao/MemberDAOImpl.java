@@ -1,9 +1,20 @@
 package project.spring.member.dao;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import project.spring.member.vo.MemberDTO;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
+	
+	@Autowired
+	SqlSessionTemplate sqlSession;
+	
 	@Override
 	public int insertItem() {
 		return 0;
@@ -18,8 +29,12 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	@Override
 	public int insertItem(Object obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		System.out.println(sqlSession);
+		if (obj instanceof MemberDTO) {
+			result = sqlSession.insert("member", obj); 
+		}
+		return result;
 	}
 	@Override
 	public int updateItem(Object obj) {

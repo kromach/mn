@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartRequest;
 
 import project.spring.member.service.MemberServiceImpl;
 import project.spring.member.vo.MemberDTO;
@@ -54,10 +55,11 @@ public class MemberController {
 		}
 		return returnUrl;
 	}
+	
 	@RequestMapping("/signupPro")
-	public String signUpPro(@ModelAttribute MemberDTO dto) {
+	public String signUpPro(@ModelAttribute MemberDTO dto,MultipartRequest mr) {
 		System.out.println(dto);
-		memberService.insertItem();
+		memberService.insertItem(dto);
 		return null;
 	}
 }
