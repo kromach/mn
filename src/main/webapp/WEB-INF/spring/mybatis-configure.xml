@@ -19,6 +19,6 @@
 		<mapper resource="project/spring/admin/sql/adminSql.xml" />
 		<mapper resource="project/spring/myAct/sql/myActSql.xml" />
 		<mapper resource="project/spring/drink/sql/drinkSql.xml" />
-		<mapper resource="project/spring/member/sql/testSql.xml" />
+		<mapper resource="project/spring/member/sql/memberSql.xml" />
 	</mappers>
 </configuration>
