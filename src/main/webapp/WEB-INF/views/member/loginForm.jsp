@@ -42,7 +42,11 @@
 			<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
 				<div class="loginWrapper">
-					<button class="kakaoBtn" onclick="window.location.href='/'">카카오로 로그인</button>
+					<button type="button" 
+					onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code
+						&client_id=${restApikey }&redirect_uri=${callback_URL}'" class="kakaoBtn">
+						카카오로 로그인</button>
+						
 					<input class="loginInput" type="text" name="id">
 					<input class="loginInput" type="text" name="pw">
 					<button class="greyBtn">로그인</button>

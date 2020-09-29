@@ -22,7 +22,16 @@ import project.spring.member.vo.MemberDTO;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-	
+	@Autowired
+	private String nativeAppkey;
+	@Autowired
+	private String restApikey;
+	@Autowired
+	private String javaScriptkey;
+	@Autowired
+	private String adminkey;
+	@Autowired
+	private String callback_URL;
 	@Autowired
 	MemberServiceImpl memberService;
 	
@@ -130,7 +139,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/login")
-	public String login(HttpServletRequest reqest) {
+	public String login(HttpServletRequest reqest,Model model) {
 		String returnUrl = "/";
 		HttpSession session =  reqest.getSession();
 		if(session.getAttribute("memId")==null) {
@@ -139,8 +148,18 @@ public class MemberController {
 		}else{
 			System.out.println("로그인이 된 상태입니다.");
 		}
+		model.addAttribute("restApikey", restApikey);
+		model.addAttribute("callback_URL", callback_URL);
 		return returnUrl;
 	}
+	
+	/*
+	 <a href="https://kauth.kakao.com/oauth/authorize?response_type=code
+		&client_id=${restApikey }
+		&redirect_uri=${callback_URL}">
+	<img src="/resources/img/member/kakao_login_button.png" />
+	</a>
+	*/
 	
 	
 	
