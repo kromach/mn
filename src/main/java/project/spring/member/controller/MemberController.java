@@ -128,4 +128,20 @@ public class MemberController {
 		model.addAttribute("nickName", dto.getNickName());
 		return "/member/singupResult.mn";
 	}
+	
+	@RequestMapping("/login")
+	public String login(HttpServletRequest reqest) {
+		String returnUrl = "/";
+		HttpSession session =  reqest.getSession();
+		if(session.getAttribute("memId")==null) {
+			reqest.setAttribute("status", "salse");
+			returnUrl = "/member/loginForm.mn";
+		}else{
+			System.out.println("로그인이 된 상태입니다.");
+		}
+		return returnUrl;
+	}
+	
+	
+	
 }

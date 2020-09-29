@@ -102,6 +102,9 @@
 SOCIAL BUTTON STYLES
 ********************/
 
+/*KAKAO*/
+.btn.btn-kakao{background-color: #ffe812; background-color: #ffe812;}
+.btn.btn-kakao:active{top: 3px; outline: none;}
 /*FACEBOOK*/
 .btn.btn-facebook{background-color: #2479b6; border-color: #2479b6;}
 .btn.btn-facebook:active{top: 3px; outline: none;}
