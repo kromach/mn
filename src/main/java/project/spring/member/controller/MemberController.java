@@ -66,7 +66,15 @@ public class MemberController {
 	public String signupUserPro(
 			@ModelAttribute MemberDTO dto) {
 		
-		dto.setUserKind("sales");
+		String[] birth_ = dto.getBirth().split(",");
+		String birth = "";
+		for( String i:birth_ ) {
+			birth += i;
+		}
+		
+		dto.setUserKind("user");
+		dto.setBirth(birth);
+		System.out.println(birth);
 		System.out.println(dto);
 		System.out.println("memberInsertReulst="+ memberService.insertItem(dto));
 		return null;
@@ -75,6 +83,13 @@ public class MemberController {
 	public String signupSalesPro(
 			@ModelAttribute MemberDTO dto,
 			MultipartHttpServletRequest mpRequest) {
+		
+		String[] birth_ = dto.getBirth().split(",");
+		String birth = "";
+		for( String i:birth_ ) {
+			birth += i;
+		}
+		
 		//사업자등록증 파일제한 15MB
 		int sizeLimit = 1024*1024*15;
 		MultipartFile mf = null;
@@ -95,6 +110,7 @@ public class MemberController {
 			File copyFile = new File(imPath);
 			mf.transferTo(copyFile);
 			//dtoImgSetting
+			dto.setBirth(birth);
 			dto.setLicenseImg(newName);
 			dto.setUserKind("sales");
 		} catch (Exception e) {
