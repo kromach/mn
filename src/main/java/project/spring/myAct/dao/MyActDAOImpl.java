@@ -67,4 +67,22 @@ public class MyActDAOImpl implements MyActDAO{
 		
 		return list;
 	}
+
+	@Override
+	public int myLikeArticleCount(String memId) {
+		int count = sqlSession.selectOne("myAct.myLikeArticleCount", memId);
+		return count;
+	}
+
+	@Override
+	public List getMyLikeArticles(int startRow, int endRow, String memId) {
+		HashMap map = new HashMap();
+		map.put("start", startRow);
+		map.put("end", endRow);
+		map.put("memId", memId);
+		
+		List list = sqlSession.selectList("myAct.selectLikeArticleAll", map);
+		
+		return list;
+	}
 }

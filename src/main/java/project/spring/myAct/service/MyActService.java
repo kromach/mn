@@ -9,5 +9,6 @@ public interface MyActService extends CommonInterface{
 	public List searchItem();
 	public int myArticleCount(String memId);
 	public List getMyArticle(int startRow, int endRow, String memId);
-	public int likeArticleCount();
+	public int likeArticleCount(String memId);
+	public List myLikeArticle(int startRow, int endRow, String memId);
 }

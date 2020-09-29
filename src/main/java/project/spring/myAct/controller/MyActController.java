@@ -23,16 +23,7 @@ public class MyActController {
 	@RequestMapping
 	public String index(String pageNum, HttpServletRequest request, Model model) {
 		System.out.println("MyActIndex Controller");
-		
-		if(pageNum == null) {
-			pageNum = "1";
-		}
-		int pageSize=10;
-		int currPage = Integer.parseInt(pageNum);	
-		int startRow = (currPage -1) * pageSize + 1;
-		int endRow = currPage * pageSize;		
-		int count = 0;			
-		int number = 0;	
+		int count = 0;				
 		
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
@@ -40,18 +31,6 @@ public class MyActController {
 		count = myActService.myArticleCount(memId);
 		System.out.println("count : " + count);
 		
-		if(count > 0){
-			myArticle = myActService.getMyArticle(startRow, endRow, memId);
-			System.out.println(myArticle);
-		}
-		number = count - (currPage -1) * pageSize;
-		
-		model.addAttribute("number", new Integer(number));
-		model.addAttribute("pageSize", new Integer(pageSize));
-		model.addAttribute("pageNum", new Integer(pageNum));
-		model.addAttribute("currPage", new Integer(currPage));
-		model.addAttribute("startRow", new Integer(startRow));
-		model.addAttribute("endRow", new Integer(endRow));
 		model.addAttribute("count", new Integer(count));
 		model.addAttribute("myArticle", myArticle);
 		
@@ -69,22 +48,18 @@ public class MyActController {
 	}
 	
 	@RequestMapping(value = "/likeArticle", method = RequestMethod.GET)
-	public String likeArticle(String pageNum) {
+	public String likeArticle(String pageNum, HttpServletRequest request, Model model) {
 		System.out.println("MyActLikeArticle Controller");
-		if(pageNum == null) {
-			pageNum = "1";
-		}
-		int pageSize=10;
-		int currPage = Integer.parseInt(pageNum);	
-		int startRow = (currPage -1) * pageSize + 1;
-		int endRow = currPage * pageSize;		
 		int count = 0;			
-		int number = 0;	
 		
+		HttpSession session = request.getSession();
+		String memId = (String)session.getAttribute("memId");
 		List likeArticle = null;
-		count = myActService.likeArticleCount();
+		count = myActService.likeArticleCount(memId);
+		System.out.println("count : " + count);
 		
-		
+		model.addAttribute("count", new Integer(count));
+		//model.addAttribute("myLikeArticle", myLikeArticle);
 		
 		return "/myAct/likeArticle.mn";
 	}
