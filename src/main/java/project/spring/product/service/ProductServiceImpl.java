@@ -1,18 +1,20 @@
-package project.spring.myAct.service;
+package project.spring.product.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import project.spring.myAct.dao.MyActDAO;
+import project.spring.product.dao.ProductDAOImpl;
+import project.spring.product.vo.ProductVo;
 
 @Service
-public class MyActServiceImpl implements MyActService{
-	
-	@Autowired
-	private MyActDAO myActDAO = null;
+public class ProductServiceImpl implements ProductService {
 
+	@Autowired
+	private ProductDAOImpl productDAO = null;
+	
 	@Override
 	public int insertItem() {
 		// TODO Auto-generated method stub
@@ -49,30 +51,27 @@ public class MyActServiceImpl implements MyActService{
 		return 0;
 	}
 
-
 	@Override
-	public int myArticleCount(String memId) {
-		int count = myActDAO.myArticleCount(memId);
+	public int getproductcount() throws SQLException {
 		
+		int count = productDAO.getproductcount();
+		System.out.println("service count");
+		System.out.println(count);
 		return count;
 	}
-	
+
 	@Override
-	public List getMyArticle(int startRow, int endRow, String memId) {
-		List articleList = myActDAO.getMyArticles(startRow, endRow, memId);
-		return articleList;
+	public List getproduct() throws SQLException {
+		List productList = productDAO.getproduct();
+		
+		
+		return productList;
 	}
 
 	@Override
-	public int likeArticleCount(String memId) {
-		int count = myActDAO.myLikeArticleCount(memId);
-		return 0;
-	}
-
-	@Override
-	public List myLikeArticle(int startRow, int endRow, String memId) {
-		List articleList = myActDAO.getMyLikeArticles(startRow, endRow, memId);
-		return articleList;
+	public ProductVo getproductinfo() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
