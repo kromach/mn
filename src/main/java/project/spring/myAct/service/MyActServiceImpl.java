@@ -12,12 +12,6 @@ public class MyActServiceImpl implements MyActService{
 	
 	@Autowired
 	private MyActDAO myActDAO = null;
-	
-	@Override
-	public List searchItem() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public int insertItem() {

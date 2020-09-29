@@ -66,6 +66,8 @@ public class MyActController {
 	
 	@RequestMapping(value = "/likeDrink", method = RequestMethod.GET)
 	public String likeDrink() {
+		
+		
 		return "/myAct/likeDrink.mn";
 	}
 	@RequestMapping(value = "/title", method = RequestMethod.GET)
