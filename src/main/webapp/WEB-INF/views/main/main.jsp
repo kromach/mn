@@ -61,9 +61,9 @@
 		<div class="grid-item"><img src="/resources/img/main/3.jpg" /></div>
 	</div>
 </div>
-<div class="chat">
+<!-- <div class="chat">
 	<a href="/chat"><img src="/resources/img/main/chat.png" ></a>
-</div>
+</div> -->
 <script src="/resources/js/imageLoad.js"></script>
 <!-- 데이터 스크롤해서 붙이는 스크립트  -->
 

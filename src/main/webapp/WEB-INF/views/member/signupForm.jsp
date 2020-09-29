@@ -10,12 +10,22 @@
 		<div class="grid-item grid-item--width6">
 		<h1 align="center">회원가입</h1><br>
 			<div style="display: block; text-align: center;">
-					<form
-						style="display: inline-block; border: 2px solid black;  padding: 5px; align-content: center;"
-						method="post" action="/member/signupPro"
-						enctype="multipart/form-data" name="inputForm"
-						onsubmit="return check()" accept-charset="utf-8">
-						<table style=" border-collapse: separate; border-spacing: 0 10px;">
+					<c:if test="${status eq 'salse' }">
+						<form
+							style="display: inline-block; border: 2px solid black; padding: 5px; align-content: center;"
+							method="post" action="/member/signupSalesPro"
+							enctype="multipart/form-data" name="inputForm"
+							onsubmit="return check()" accept-charset="utf-8">
+					</c:if>
+					<c:if test="${status eq 'user' }">
+						<form
+							style="display: inline-block; border: 2px solid black; padding: 5px; align-content: center;"
+							method="post" action="/member/signupUserPro"
+							enctype="multipart/form-data" name="inputForm"
+							onsubmit="return check()" accept-charset="utf-8">
+					</c:if>
+
+					<table style=" border-collapse: separate; border-spacing: 0 10px;">
 							<tr>
 								<td class="t">아이디*</td>
 								<td><input type="text" name="id"></td>
@@ -27,8 +37,12 @@
 										type="button" onclick="confirmId(this.form)">중복확인</button></td>
 							</tr>
 							<tr>
-								<td class="t">별명*</td>
+								<td class="t">이름*</td>
 								<td><input type="text" name="name"></td>
+							</tr>
+							<tr>
+								<td class="t">별명*</td>
+								<td><input type="text" name="nickName"></td>
 							</tr>
 							<tr>
 								<td class="t">별명 중복체크</td>
@@ -53,12 +67,13 @@
 							</tr>
 							<tr>
 									<td class="t">전화번호</td>
-									<td>000-0000-0000</td>
+									<td><input type="text" name="tel"></td>
 								</tr>
 							<c:if test="${status eq 'user' }">
 								<tr>
 									<td class="t">주소</td>
-									<td><button class="button"
+									<td><input type="text" name="address">
+										<button class="button"
 											style="width: 80px; height: 30px; text-align: center"
 											type="button" onclick="confirmId(this.form)">주소찾기</button></td>
 								</tr>
@@ -66,11 +81,15 @@
 							<c:if test="${status eq 'salse' }">
 								<tr>
 									<td class="t">사업장 주소</td>
-									<td>000-0000-0000</td>
+									<td><input type="text" name="address"></td>
 								</tr>
 								<tr>
 									<td>사업자 등록증</td>
-									<td><input type="file"></td>
+									<td><input type="file" name="file"></td>
+								</tr>
+								<tr>
+									<td>사업자 번호</td>
+									<td><input type="text" name="licenseNum"></td>
 								</tr>
 							</c:if>
 							<tr>
@@ -82,7 +101,7 @@
 										>재입력</button>
 									<button class="button" type="button"
 										style="width: 50px; height: 30px; text-align: center"
-										onclick="window.location='../main.jsp'">취소</button>
+										onclick="window.location='/'">취소</button>
 								</td>
 							</tr>
 						</table>
@@ -91,9 +110,7 @@
 		</div>
 	</div>
 </div>
-<div class="chat">
-	<a href="/chat"><img src="/resources/img/main/chat.png" ></a>
-</div>
+
 <script src="/resources/js/imageLoad.js"></script>
 <!-- 데이터 스크롤해서 붙이는 스크립트  -->
 <script type="text/javascript">

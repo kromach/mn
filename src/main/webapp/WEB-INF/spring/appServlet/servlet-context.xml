@@ -19,16 +19,16 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	
 	<beans:bean id="nativeAppkey" class="java.lang.String">
-		<beans:constructor-arg value="fe713bcce73d60a32659b9522e8191d1" />
+		<beans:constructor-arg value="c7419503693aac3686cf95bf1629f2af" />
 	</beans:bean>
 	<beans:bean id="restApikey" class="java.lang.String">
-		<beans:constructor-arg value="ccd42c0f6ac58e519759c5baf3c7ceb4" />
+		<beans:constructor-arg value="8754233dc50098d2462dcd29e565c075" />
 	</beans:bean>
 	<beans:bean id="javaScriptkey" class="java.lang.String">
-		<beans:constructor-arg value="8c697078e1a9799bd1ad3c27ecacaa18" />
+		<beans:constructor-arg value="b2f22c6b6c816debfb42128969d90c89" />
 	</beans:bean>
 	<beans:bean id="adminkey" class="java.lang.String">
-		<beans:constructor-arg value="e454a8dba20ab15cac38b5db0ec0c22a" />
+		<beans:constructor-arg value="123f31b596815e3f8aee315cac7eead2" />
 	</beans:bean>
 	<beans:bean id="callback_URL" class="java.lang.String">
 		<beans:constructor-arg value="http://localhost:8080/mvc/authResult" />
