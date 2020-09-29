@@ -1,5 +1,7 @@
 package project.spring.myAct.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,7 +21,7 @@ public class MyActController {
 	MyActService myActService= null;
 	
 	@RequestMapping
-	public String index(String pageNum, HttpSession session, Model model) {
+	public String index(String pageNum, HttpServletRequest request, Model model) {
 		System.out.println("MyActIndex");
 		//String memId = (String)session.getAttribute("memId");
 		
@@ -33,10 +35,16 @@ public class MyActController {
 		int count = 0;			
 		int number = 0;	
 		
-		String memId = "abc";
+		HttpSession session = request.getSession();
+		String memId = (String)session.getAttribute("memId");
+		List articleList = null;
 		count = myActService.myArticleCount(memId);
 		System.out.println(count);
-		
+		if(count > 0){
+			articleList = myActService.getMyArticle(startRow, endRow, memId);
+			System.out.println(articleList);
+		}
+		number = count - (currPage -1) * pageSize;
 		return "/myAct/index.mn";
 	}
 	

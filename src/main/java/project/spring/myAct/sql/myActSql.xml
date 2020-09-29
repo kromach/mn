@@ -3,7 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="myAct">
-  		<select id="myArticle" parameterType="string" resultType="int">
+  		<select id="myArticleCount" parameterType="string" resultType="int">
   			select count(*) from BOARD_NORMAL where insert_id=#{value}
   		</select>
+  		<select id="selectAll" parameterType="hashmap" resultType="boardDTO">
+  		<![CDATA[
+  		select * from (select BN_IDX ,KIND ,DK_CODE ,READCOUNT ,HEART ,REPORT ,CONTENT ,INSERT_ID ,INSERT_DAY ,IS_DELETE ,rownum r FROM BOARD_NORMAL bn  WHERE INSERT_ID =#{memId} ORDER BY BN_IDX desc) where r >= #{start} and r <= #{end};
+		]]>
+  	</select>
   </mapper>

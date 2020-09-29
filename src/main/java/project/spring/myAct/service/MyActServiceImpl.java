@@ -38,13 +38,6 @@ public class MyActServiceImpl implements MyActService{
 	}
 
 	@Override
-	public int myArticleCount(String memId) {
-		int count = myActDAO.myArticleCount(memId);
-		
-		return count;
-	}
-
-	@Override
 	public int insertItem(Object obj) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -60,6 +53,20 @@ public class MyActServiceImpl implements MyActService{
 	public int deleteItem(Object obj) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+
+	@Override
+	public int myArticleCount(String memId) {
+		int count = myActDAO.myArticleCount(memId);
+		
+		return count;
+	}
+	
+	@Override
+	public List getMyArticle(int startRow, int endRow, String memId) {
+		List articleList = myActDAO.getMyArticles(startRow, endRow, memId);
+		return articleList;
 	}
 
 }
