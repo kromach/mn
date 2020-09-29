@@ -107,6 +107,7 @@ public class KakaoController {
 		System.out.println("=======API_token_out==========================");
 		return "main.p1";
 	}
+	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Locale locale,
 			Model model) {

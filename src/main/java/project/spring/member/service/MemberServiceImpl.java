@@ -36,6 +36,21 @@ public class MemberServiceImpl implements memberInterface{
 	}
 	@Override
 	public int insertItem() {
+		return 0;
+	}
+	@Override
+	public int insertItem(Object obj) {
+		int result = 0;
+		result = memberDAO.insertItem(obj);
+		return result;
+	}
+	@Override
+	public int updateItem(Object obj) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int deleteItem(Object obj) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

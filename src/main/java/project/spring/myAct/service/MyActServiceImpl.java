@@ -1,18 +1,23 @@
-  package project.spring.admin.dao;
+package project.spring.myAct.service;
 
-import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-@Repository
-public class AdminDAOImpl implements AdminDAO{
+import project.spring.myAct.dao.MyActDAO;
+
+@Service
+public class MyActServiceImpl implements MyActService{
 	
 	@Autowired
-	private SqlSessionTemplate sqlSession = null;
+	private MyActDAO myActDAO = null;
+	
+	@Override
+	public List searchItem() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public int insertItem() {
@@ -33,20 +38,8 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 
 	@Override
-	public List memberList(int start, int end) throws SQLException {
-		
-		HashMap map = new HashMap();
-		map.put("start", start);
-		map.put("end", end);
-		
-		List list = sqlSession.selectList("admin.memberList", map);
-		return list;
-	}
-
-	@Override
-	public int memberCount() throws SQLException {
-		
-		int count = sqlSession.selectOne("admin.memberCount");
+	public int myArticleCount(String memId) {
+		int count = myActDAO.myArticleCount(memId);
 		
 		return count;
 	}

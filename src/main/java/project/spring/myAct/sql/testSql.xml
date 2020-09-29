@@ -26,5 +26,5 @@
   		</update>
   		<delete id="deleteUser" parameterType="string">
   			delete from test where id = #{id}
-  		</delete> -->
+  		</delete> -->  
   </mapper>
