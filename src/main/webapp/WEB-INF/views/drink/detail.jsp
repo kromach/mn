@@ -6,7 +6,6 @@
 		<div class="gutter-sizer"></div>
 		<div class="grid-item grid-item--width4 text-left"><input type="text" name="search" /><input type="submit" class="btn btn-sm btn-blue" value="검색"></div>
 		<div class="grid-item"><img src="/resources/img/main/4.jpg" /></div>
-		
 		<div class="grid-item"><img src="/resources/img/main/3.jpg" /></div>
 		<div class="grid-item"><img src="/resources/img/main/4.jpg" /></div>
 		<div class="grid-item"><img src="/resources/img/main/8.jpg" /></div>

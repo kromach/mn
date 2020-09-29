@@ -8,6 +8,7 @@
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 </head>
+count ${count}
 <c:if test="${count == 0}">
 		<h1>판매중인술이 없습니다</h1>
 	<body>

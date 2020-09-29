@@ -1,17 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>판매상품 상세 내역</title>
-</head>
-<body>
-	<h1>왜 안나오지~~~~~????</h1>
-
-
-
-	
-
-</body>
-</html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<div class="grid-Wrapper">
+	<div class="grid"> 
+		<div class="grid-sizer"></div>
+		<div class="gutter-sizer"></div>
+		<div class="grid-item grid-item--width4 text-left"><input type="text" name="search" /><input type="submit" class="btn btn-sm btn-blue" value="검색"></div>
+		<div class="grid-item"><img src="/resources/img/main/4.jpg" /></div>
+		<div class="grid-item"><img src="/resources/img/main/3.jpg" /></div>
+		<div class="grid-item"><img src="/resources/img/main/4.jpg" /></div>
+		<div class="grid-item"><img src="/resources/img/main/8.jpg" /></div>
+		<div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>
+		<div class="grid-item">이미지<img src=" ${info.prImg}"></div>
+		<div class="grid-item">	상품 이름  ${info.prName}</div>		
+		<div class="grid-item grid-item--width2"><img src="/resources/img/main/4.jpg" /></div>
+		<div class="grid-item grid-item--width2"><img src="/resources/img/main/8.jpg" /></div>
+	</div>
+</div>
+<script src="/resources/js/imageLoad.js"></script>

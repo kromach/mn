@@ -14,5 +14,7 @@ public interface ProductService extends CommonInterface {
 	public List getproduct() throws SQLException;
 	// 게시글 한개 정보 가져오기
 	public ProductVo getproductinfo() throws SQLException;
+	// 주류 코드로 주류 정보 가져오기
+	public ProductVo getproductinfo(String prcode) throws SQLException;
 
 }

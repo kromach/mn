@@ -72,4 +72,13 @@ public class ProductDAOImpl implements ProductDAO {
 		return null;
 	}
 
+	@Override
+	public ProductVo getproductinfo(String prcode) throws SQLException {
+		
+		ProductVo vo =sqlSession.selectOne("product.getproductinfo",prcode);
+		return vo;
+	}
+
+
+
 }

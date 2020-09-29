@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import project.spring.product.service.ProductService;
+import project.spring.product.vo.ProductVo;
 
 @Controller
 @EnableWebMvc
@@ -38,7 +39,11 @@ public class ProductController {
 	
 	
 	@RequestMapping("productdetail")
-		public String productdetail	() {
+		public String productdetail	(String prcode, Model model) throws SQLException {
+		
+		ProductVo info =productservice.getproductinfo(prcode);
+		model.addAttribute("info", info);
+		System.out.println(info);
 		
 		return "/product/productdetail.mn";
 	}

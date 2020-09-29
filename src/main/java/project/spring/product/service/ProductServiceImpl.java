@@ -74,4 +74,10 @@ public class ProductServiceImpl implements ProductService {
 		return null;
 	}
 
+	@Override
+	public ProductVo getproductinfo(String prcode) throws SQLException {
+		ProductVo vo = productDAO.getproductinfo(prcode);
+		return vo;
+	}
+
 }
