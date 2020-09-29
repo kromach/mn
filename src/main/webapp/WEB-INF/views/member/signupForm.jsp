@@ -4,7 +4,6 @@
 <html>
 <body>
 <div class="grid-Wrapper">
-	
 	<div class="grid">  
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
@@ -43,7 +42,7 @@
 							</tr>
 							<tr>
 								<td class="t">별명*</td>
-								<td><input type="text" name="NICKNAME"></td>
+								<td><input type="text" name="nickName"></td>
 							</tr>
 							<tr>
 								<td class="t">별명 중복체크</td>
@@ -102,7 +101,7 @@
 										>재입력</button>
 									<button class="button" type="button"
 										style="width: 50px; height: 30px; text-align: center"
-										onclick="window.location='../main.jsp'">취소</button>
+										onclick="window.location='/'">취소</button>
 								</td>
 							</tr>
 						</table>

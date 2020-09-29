@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,7 +65,9 @@ public class MemberController {
 	
 	@RequestMapping("/signupUserPro")
 	public String signupUserPro(
-			@ModelAttribute MemberDTO dto) {
+			@ModelAttribute MemberDTO dto,
+			Model model
+			) {
 		
 		String[] birth_ = dto.getBirth().split(",");
 		String birth = "";
@@ -77,19 +80,23 @@ public class MemberController {
 		System.out.println(birth);
 		System.out.println(dto);
 		System.out.println("memberInsertReulst="+ memberService.insertItem(dto));
-		return null;
+		System.out.println("nickName : "+dto.getNickName());
+		model.addAttribute("nickName", dto.getNickName());
+		return "/member/singupResult.mn";
 	}
+	
 	@RequestMapping("/signupSalesPro")
 	public String signupSalesPro(
 			@ModelAttribute MemberDTO dto,
-			MultipartHttpServletRequest mpRequest) {
+			Model model,
+			MultipartHttpServletRequest mpRequest
+			) {
 		
 		String[] birth_ = dto.getBirth().split(",");
 		String birth = "";
 		for( String i:birth_ ) {
 			birth += i;
 		}
-		
 		//사업자등록증 파일제한 15MB
 		int sizeLimit = 1024*1024*15;
 		MultipartFile mf = null;
@@ -118,6 +125,7 @@ public class MemberController {
 		}
 		System.out.println(dto);
 		System.out.println("memberInsertReulst="+ memberService.insertItem(dto));
-		return null;
+		model.addAttribute("nickName", dto.getNickName());
+		return "/member/singupResult.mn";
 	}
 }
