@@ -69,4 +69,10 @@ public class MyActServiceImpl implements MyActService{
 		return articleList;
 	}
 
+	@Override
+	public int likeArticleCount() {
+		//int count = myActDAO.myLikeCount();
+		return 0;
+	}
+
 }
