@@ -26,20 +26,20 @@ select, input, option,button, textarea{vertical-align:top;font:normal 12px 'Nanu
 input[type=text]::-ms-clear {display: none;} 
 /*반응형웹(검색영역)*/
 .grid-Wrapper{width:100% ; text-align: center; }
-.grid { width:80% ; background-color: yellow; display: inline-block;}
+.grid { width:80% ; display: inline-block;}
 .grid-item {border:1px solid #8f99f3; margin-bottom:10px; border-radius: 10px; overflow:hidden;}
 .grid-item img {display: block; min-width:100%; max-width: 100%; }
+.gutter-sizer { width: 0.8%; }
 @media only screen and (min-width: 1440px)  {
-    .grid {background-color: green;}
 	.grid-sizer, .grid-item { width: 16%; }
-	.grid-item--width2 { width: 32%; }
-	.grid-item--width3 { width: 48%; }
-	.grid-item--width4 { width: 64%; }
-	.grid-item--width5 { width: 80%; }
-	.grid-item--width6 { width: 96%; }
+	.grid-item--width2 { width: 32.8%; }
+	.grid-item--width3 { width: 49.6%; }
+	.grid-item--width4 { width: 66.4%; }
+	.grid-item--width5 { width: 83.2%; }
+	.grid-item--width6 { width: 100%; }
+	
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
-	.grid {background-color: black;}
 	.grid-sizer, .grid-item { width: 24%; }
 	.grid-item--width2 { width: 48%; }
 	.grid-item--width3 { width: 72%; } 
@@ -48,7 +48,6 @@ input[type=text]::-ms-clear {display: none;}
 	.grid-item--width6 { width: 96%; }
 }
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
-	.grid {background-color: navy;}
 	.grid-sizer, .grid-item { width: 32%; }
 	.grid-item--width2 { width: 64%; }
 	.grid-item--width3 { width: 96%; }
@@ -57,7 +56,6 @@ input[type=text]::-ms-clear {display: none;}
 	.grid-item--width6 { width: 96%; }
 }
 @media only screen and (min-width: 600px) and (max-width: 767px) {
-	.grid {background-color: yellow;}
 	.grid-sizer, .grid-item { width: 48%; }
 	.grid-item--width2 { width: 96%; }
 	.grid-item--width3 { width: 96%; }
@@ -66,7 +64,6 @@ input[type=text]::-ms-clear {display: none;}
 	.grid-item--width6 { width: 96%; }
 }
 @media only screen and (max-width: 600px) {
-	.grid {background-color: yellow;}
 	.grid-sizer, .grid-item { width: 96%; }
 	.grid-item--width2 { width: 96%; }
 	.grid-item--width3 { width: 96%; }
