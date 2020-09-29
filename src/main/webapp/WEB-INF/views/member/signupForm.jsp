@@ -53,12 +53,13 @@
 							</tr>
 							<tr>
 									<td class="t">전화번호</td>
-									<td>000-0000-0000</td>
+									<td><input type="text" name="tel"></td>
 								</tr>
 							<c:if test="${status eq 'user' }">
 								<tr>
 									<td class="t">주소</td>
-									<td><button class="button"
+									<td><input type="text" name="address">
+										<button class="button"
 											style="width: 80px; height: 30px; text-align: center"
 											type="button" onclick="confirmId(this.form)">주소찾기</button></td>
 								</tr>
@@ -66,11 +67,15 @@
 							<c:if test="${status eq 'salse' }">
 								<tr>
 									<td class="t">사업장 주소</td>
-									<td>000-0000-0000</td>
+									<td><input type="text" name="address"></td>
 								</tr>
 								<tr>
 									<td>사업자 등록증</td>
-									<td><input type="file"></td>
+									<td><input type="file" name="file"></td>
+								</tr>
+								<tr>
+									<td>사업자 번호</td>
+									<td><input type="text" name="licenseNum"></td>
 								</tr>
 							</c:if>
 							<tr>
@@ -91,9 +96,7 @@
 		</div>
 	</div>
 </div>
-<div class="chat">
-	<a href="/chat"><img src="/resources/img/main/chat.png" ></a>
-</div>
+
 <script src="/resources/js/imageLoad.js"></script>
 <!-- 데이터 스크롤해서 붙이는 스크립트  -->
 <script type="text/javascript">
