@@ -41,8 +41,8 @@ public class MemberServiceImpl implements memberInterface{
 	@Override
 	public int insertItem(Object obj) {
 		int result = 0;
-		memberDAO.insertItem(obj);
-		return 0;
+		result = memberDAO.insertItem(obj);
+		return result;
 	}
 	@Override
 	public int updateItem(Object obj) {

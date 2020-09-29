@@ -38,8 +38,12 @@
 										type="button" onclick="confirmId(this.form)">중복확인</button></td>
 							</tr>
 							<tr>
-								<td class="t">별명*</td>
+								<td class="t">이름*</td>
 								<td><input type="text" name="name"></td>
+							</tr>
+							<tr>
+								<td class="t">별명*</td>
+								<td><input type="text" name="NICKNAME"></td>
 							</tr>
 							<tr>
 								<td class="t">별명 중복체크</td>

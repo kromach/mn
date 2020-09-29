@@ -62,10 +62,17 @@ public class MemberController {
 		return returnUrl;
 	}
 	
-//	signupUserPro
-	
+	@RequestMapping("/signupUserPro")
+	public String signupUserPro(
+			@ModelAttribute MemberDTO dto) {
+		
+		dto.setUserKind("sales");
+		System.out.println(dto);
+		System.out.println("memberInsertReulst="+ memberService.insertItem(dto));
+		return null;
+	}
 	@RequestMapping("/signupSalesPro")
-	public String signUpPro(
+	public String signupSalesPro(
 			@ModelAttribute MemberDTO dto,
 			MultipartHttpServletRequest mpRequest) {
 		//사업자등록증 파일제한 15MB
@@ -94,7 +101,7 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		System.out.println(dto);
-		memberService.insertItem(dto);
+		System.out.println("memberInsertReulst="+ memberService.insertItem(dto));
 		return null;
 	}
 }
