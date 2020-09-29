@@ -62,7 +62,7 @@ public class MemberController {
 		return returnUrl;
 	}
 	
-	@RequestMapping("/signupPro")
+	@RequestMapping("/signupSalesPro")
 	public String signUpPro(
 			@ModelAttribute MemberDTO dto,
 			MultipartHttpServletRequest mpRequest) {
