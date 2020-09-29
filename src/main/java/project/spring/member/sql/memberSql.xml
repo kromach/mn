@@ -2,10 +2,12 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="test">
-  		<!-- <select id="userCount" resultType="int">
-  			select count(*) from test
+  <mapper namespace="member">
+  		<select id="memberCount" resultType="int">
+  			select count(*) from Member_Info
   		</select>
+  		
+  		<!-- 
   		<select id="maxAge" resultType="int">
 			select max(age) from test  		
   		</select>

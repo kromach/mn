@@ -30,9 +30,8 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int insertItem(Object obj) {
 		int result = 0;
-		System.out.println(sqlSession);
 		if (obj instanceof MemberDTO) {
-			result = sqlSession.insert("member", obj); 
+			result = sqlSession.selectOne("member.memberCount", obj);
 		}
 		return result;
 	}
