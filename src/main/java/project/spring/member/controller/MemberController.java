@@ -83,7 +83,8 @@ public class MemberController {
 	@RequestMapping("/signupUserPro")
 	public String signupUserPro(
 			@ModelAttribute MemberDTO dto,
-			Model model
+			Model model,
+			HttpServletRequest request
 			) {
 		
 		String[] birth_ = dto.getBirth().split(",");
@@ -99,6 +100,9 @@ public class MemberController {
 		System.out.println("memberInsertReulst="+ memberService.insertItem(dto));
 		System.out.println("nickName : "+dto.getNickName());
 		model.addAttribute("nickName", dto.getNickName());
+		request.getSession().setAttribute("memId", dto.getId());
+		request.getSession().setAttribute("memNickName", dto.getNickName());
+		
 		return "/member/singupResult.mn";
 	}
 	
@@ -143,6 +147,8 @@ public class MemberController {
 		System.out.println(dto);
 		System.out.println("memberInsertReulst="+ memberService.insertItem(dto));
 		model.addAttribute("nickName", dto.getNickName());
+		mpRequest.getSession().setAttribute("memId", dto.getId());
+		mpRequest.getSession().setAttribute("memNickName", dto.getNickName());
 		return "/member/singupResult.mn";
 	}
 	
