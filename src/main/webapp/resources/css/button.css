@@ -93,6 +93,30 @@
 	border-radius: 4px;
 	height: 30px;
 }
+.loginWrapper > .birthfirstInput{
+	width:200px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	height: 30px;
+}
+.loginWrapper > .birthsecondInput{
+	width:40px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	height: 30px;
+}
+.loginWrapper > .telInput{
+	width:80px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	height: 30px;
+}
 
 .statusBtnUser{
 	width:500px;
