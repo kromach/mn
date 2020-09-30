@@ -93,16 +93,32 @@
 	border-radius: 4px;
 	height: 30px;
 }
-.loginWrapper > .birthfirstInput{
-	width:200px;
+.loginWrapper > .birthWrapper{
+	width:250px;
 	margin-bottom: 5px;
 	font-size: 14px;
 	position: relative;
 	border-radius: 4px;
 	height: 30px;
 }
-.loginWrapper > .birthsecondInput{
-	width:40px;
+.loginWrapper > .birthWrapper>.birthfirstInput{
+	width:70%;
+	margin-bottom: 5px;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	height: 30px;
+}
+.loginWrapper > .birthWrapper> .birthsecondInput{
+	width:20%;
+	margin-bottom: 5px;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	height: 30px;
+}
+.loginWrapper > .birthWrapper>.telInput{
+	width:30%;
 	margin-bottom: 5px;
 	font-size: 14px;
 	position: relative;

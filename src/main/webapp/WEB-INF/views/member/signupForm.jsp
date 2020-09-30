@@ -2,6 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<style>
+.birthWrapper{
+	width:250px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	height: 30px;
+}
+</style>
 <body>
 	<div class="grid-Wrapper">
 		<div class="grid">
@@ -30,24 +40,45 @@
 						class="loginInput" type="text" name="name"> 닉네임<input
 						class="loginInput" type="text" name="nickName"> 아이디 중복체크
 					<button>중복확인</button>
-					생년월일<input class="birthfirstInput" type="text" name="birth"
-						size="6"> -<input class="birthsecondInput" type="text"
-						name="birth" size="1"> 전화번호<input class="telInput"
-						type="text" name="tel" size="3">- <input class="telInput"
-						type="text" name="tel" size="3">- <input class="telInput"
-						type="text" name="tel" size="3">
+					<br><br>
+					생년월일
+					<br><br>
+					<div class="birthWrapper">
+					<input class="birthfirstInput" type="text" name="birth"
+						size="7">
+					-<input class="birthsecondInput" type="text" name="birth"
+						size="1">
+					</div>
+					<br><br>
+					전화번호
+					<br><br>
+					<div class = "birthWrapper">
+					<input class="telInput"
+					type="text" name="tel" size="3">-<input class="telInput"
+					type="text" name="tel" size="3">-<input class="telInput"
+					type="text" name="tel" size="3">
+					</div>
+					
 					<c:if test="${status eq 'user' }">
-							주소<input type="text" name="address">
-						<button>주소찾기</button>
+					<br>
+					주소
+					<br>
+					<input type="text" name="address" class="loginInput">
+					<br>
+					<button>주소찾기</button>
 					</c:if>
 					<c:if test="${status eq 'salse' }">
-							사업장 주소
-							<input type="text" name="address">
-							사업자 등록증
-							<input type="file" name="file">
-							사업자 번호
-							<input type="text" name="licenseNum">
+						사업장 주소
+						<br>
+						<input type="text" name="address" class="loginInput">
+						사업자 등록증
+						<br>
+						<input type="file" name="file" class="loginInput">
+						사업자 번호
+						<br>
+						<input type="text" name="licenseNum" class="loginInput">
 					</c:if>
+					<br><br>
 					<button>가입</button>
 					<button>재입력</button>
 					<button>취소</button>
