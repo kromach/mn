@@ -9,7 +9,7 @@
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
-				<form method="post" action="/member/login"
+				<form method="post" action="/member/loginPro"
 						name="inputForm" onsubmit="return check()" accept-charset="utf-8">
 				<div class="loginWrapper">
 						<button type="button" class="kakaoBtn"

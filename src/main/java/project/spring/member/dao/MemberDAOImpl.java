@@ -46,4 +46,12 @@ public class MemberDAOImpl implements MemberDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	@Override
+	public int readItem(Object obj) {
+		if (obj instanceof MemberDTO) {
+			sqlSession.selectOne("member.isExistId", obj);
+		}
+		return 0;
+	}
 }

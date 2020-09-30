@@ -193,6 +193,11 @@ public class MemberController {
 		dto.setNickName(nickname);
 		dto.setBirth(birth);
 		
+		/*
+		 * 회원가입 안되어있을때 회원가입하는 로직 조회의 이후에 첨부 필요
+		 */
+		
+		
 		//Session에 값 넣어주기
 		request.getSession().setAttribute("memId", id);
 		
@@ -206,7 +211,19 @@ public class MemberController {
 		System.out.println(model.toString());
 		return "/member/loginResult.mn";
 	}
-
+	
+	@RequestMapping(value = "/loginPro")
+	public String loginPro(HttpServletRequest request,@ModelAttribute MemberDTO model) {
+		
+		//-1 - id x pw x
+		//0 - id o pw x
+		//1 - id o pw o
+		int result = memberService.readItem(model);
+		request.setAttribute("result", result);
+		return "/member/loginResult.mn";
+	}
+	
+	//Kakao와 일반logOut같이 처리할것
 	//logoutLogic
 	@RequestMapping(value = "/logout", 
 			produces = "application/json",

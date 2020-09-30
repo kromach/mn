@@ -54,4 +54,9 @@ public class MemberServiceImpl implements memberInterface{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	@Override
+	public int readItem(Object obj) {
+		int result = memberDAO.readItem(obj);
+		return result;
+	}
 }
