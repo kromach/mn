@@ -148,7 +148,7 @@ public class MemberController {
 	
 	@RequestMapping("/login")
 	public String login(HttpServletRequest reqest,Model model) {
-		String returnUrl = "/";
+		String returnUrl = "redirect:/";
 		HttpSession session =  reqest.getSession();
 		if(session.getAttribute("memId")==null) {
 			reqest.setAttribute("status", "salse");
@@ -156,10 +156,6 @@ public class MemberController {
 		}else{
 			System.out.println("로그인이 된 상태입니다.");
 		}
-		
-		model.addAttribute("restApikey", restApikey);
-		model.addAttribute("callback_URL", callback_URL);
-		
 		return returnUrl;
 	}
 	
@@ -196,13 +192,13 @@ public class MemberController {
 		/*
 		 * 회원가입 안되어있을때 회원가입하는 로직 조회의 이후에 첨부 필요
 		 */
-		
-		
 		//Session에 값 넣어주기
 		request.getSession().setAttribute("memId", id);
-		
-		
+		request.getSession().setAttribute("memNickName", nickname);
 		redirectAttributes.addFlashAttribute("memberDTO", dto);
+		//id O pw O
+		request.setAttribute("result", 1);
+		
 		return "redirect:/member/loginResult";
 	}
 	
@@ -220,6 +216,11 @@ public class MemberController {
 		//1 - id o pw o
 		int result = memberService.readItem(model);
 		request.setAttribute("result", result);
+		if(result==1) {
+			//sessionSetting
+			System.out.println(model.toString());
+		}
+		
 		return "/member/loginResult.mn";
 	}
 	
