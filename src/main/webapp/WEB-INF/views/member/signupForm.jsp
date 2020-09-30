@@ -41,7 +41,7 @@
 					<div class="loginLabel">
 					닉네임
 					</div>
-					<input	class="loginInput" type="text" name="nickName"> 아이디 중복체크
+					<input	class="loginInput" type="text" name="nickName">닉네임 중복체크
 					<button>중복확인</button>
 					<div class="loginLabel">
 					생년월일
