@@ -2,38 +2,6 @@
 <!DOCTYPE html>
 <html>
 <style>
-.loginWrapper{
-	width:250px;
-	text-align: center;
-	display:inline-block;
-}
-.loginWrapper >.kakaoBtn{
-	width:250px;
-	margin-bottom: 5px;
-	color: black;
-	font-size: 14px;
-	position: relative;
-	border-radius: 4px;
-	min-height: 44px;
-	background-color: #ffe812;
-}
-.loginWrapper >.greyBtn{
-	width:250px;
-	margin-bottom: 5px;
-	font-size: 14px;
-	position: relative;
-	border-radius: 4px;
-	min-height: 44px;
-	background-color: gray;
-}
-.loginWrapper > .loginInput{
-	width:250px;
-	margin-bottom: 5px;
-	font-size: 14px;
-	position: relative;
-	border-radius: 4px;
-	height: 30px;
-}
 </style>
 
 <body>

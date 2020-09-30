@@ -58,6 +58,65 @@
 	border-radius:3px
 }
 
+/*login영역 버튼및 css*/
+.loginWrapper{
+	width:250px;
+	text-align: center;
+	display:inline-block;
+}
+.loginWrapper >.kakaoBtn{
+	width:250px;
+	margin-bottom: 5px;
+	color: black;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	min-height: 44px;
+	background-color: #ffe812;
+}
+.loginWrapper >.greyBtn{
+	width:250px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	min-height: 44px;
+	background-color: gray;
+}
+.loginWrapper > .loginInput{
+	width:250px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	height: 30px;
+}
+
+.statusBtnUser{
+	width:500px;
+	height:350px;
+	margin-top:15px;
+	margin-bottom: 5px;
+	font-size: 22px;
+	position: relative;
+	border-radius: 4px;
+	background-color: white;
+	border: 1px solid #004080;
+	color:  #004080;
+	font-weight: bold;
+}
+.statusBtnSales{
+	width:500px;
+	height:350px;
+	margin-top:15px;
+	margin-bottom: 5px;
+	font-size: 22px;
+	position: relative;
+	border-radius: 4px;
+	background-color: #004080;
+	color: white;
+	font-weight: bold;
+}
 /*SEA GREEN BUTTON STYLES*/		
 .btn.btn-mint{background-color: #08bc9a; border-color: #08bc9a;}
 .btn.btn-mint:hover{background-color:#01a183;}
