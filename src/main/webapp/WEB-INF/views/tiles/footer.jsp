@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <div class="fixIcon">
 	<div id="cahtIcon" class="chatIcon icon" onclick="window.location='/chat'">
-		<i class="fas fa-comments" style="font-size:40px"></i>
+		<i class="fas fa-comments" style="font-size:36px; margin-top: 5px;"></i>
 	</div>
-	<div id="topIcon" class="topIcon icon display-none" onclick="window.location='#'">
-		<i class="far fa-caret-square-up"  style="font-size:50px"></i>
+	<div id="topIcon" class="topIcon icon display-none margin-top5" onclick="$('html').animate({scrollTop : 0}, 300)">
+		<i class="fas fa-angle-up"  style="font-size:50px"></i>
 	</div>
 </div>
 <script>

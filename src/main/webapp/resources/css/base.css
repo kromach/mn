@@ -180,7 +180,7 @@ h6{font-size:16px;font-weight:600;color:#333}
 .h_menu li #menuBtn{line-height: 64px;}
 .h_logo .logo{_display:inline-block; width:100%; margin:12px 0; overflow:hidden; float:left; height:40px; line-height: 40px; position: absolute; text-align: center;}
 .h_logo .logo a{_display:block; width:200px; margin:0 auto;}
-.center-text {width: 100%; text-align: center; position: relative; font-size: 40px; color: white; line-height: 60px; top: 155px;}
+.center-text {width: 100%; text-align: center; position: relative; font-size: 35px; color: white; line-height: 55px; top: 155px;}
 .center-text span{background-color: #29292938; padding-bottom: 5px;}
  /* 상단 관리자 & 판매자 LNB 메뉴 */
  /* 
@@ -200,9 +200,9 @@ h6{font-size:16px;font-weight:600;color:#333}
 .footer_address .addr li{ padding:0 0 3px 0; letter-spacing:0.05em}
 
 /* top 버튼 */
-.fixIcon{ position: fixed; right: 20px; bottom: 20px; padding: 4px; width:50px; height:100px; z-index:10;}
-.icon{ line-height: 14px; width: 40px; height: 40px; color: #666; text-align: center; cursor: pointer;}
-.icon:hover{color: #444}
+.fixIcon{ position: fixed; right: 20px; bottom: 15px; padding: 4px; width:50px; z-index:10;}
+.icon{ width: 50px; height: 50px; color: var(--main-color); text-align: center; cursor: pointer; background-color: #fff; border-radius: 30px; box-shadow: 1px 1px #999;}
+.icon:hover{color: var(--main-hover-color)}
 
 
 /*반응형웹(검색영역)*/
@@ -287,15 +287,8 @@ h6{font-size:16px;font-weight:600;color:#333}
 */
 
 /* 햄버거 버튼 & right menu css */
-#menu-container {
-	width: 315px;
-	right: 5px;
-	/* display: block; */
-	position: absolute;
-}
-
 #menu-wrapper {
-	overflow: hidden;
+	position: relative;
 	width: 55px;
 	height: 51px;
 	cursor: pointer;
@@ -310,8 +303,6 @@ h6{font-size:16px;font-weight:600;color:#333}
 	width: 25px;
 	height: 20px;
 	margin: 15px;
-	_right: -5px;
-	_padding: 5px;
 }
 
 #menu-wrapper #hamburger-menu span {
@@ -331,17 +322,9 @@ h6{font-size:16px;font-weight:600;color:#333}
 	transition: .4s ease-in-out;
 }
 
-#menu-wrapper #hamburger-menu span:nth-child(1) {
-	top: 0;
-}
-
-#menu-wrapper #hamburger-menu span:nth-child(2) {
-	top: 9px;
-}
-
-#menu-wrapper #hamburger-menu span:nth-child(3) {
-	top: 18px;
-}
+#menu-wrapper #hamburger-menu span:nth-child(1) {top: 0;}
+#menu-wrapper #hamburger-menu span:nth-child(2) {top: 9px;}
+#menu-wrapper #hamburger-menu span:nth-child(3) {top: 18px;}
 
 #menu-wrapper #hamburger-menu.open span:nth-child(1) {
 	top: 9px;
@@ -372,12 +355,6 @@ nav.rightMenu {
 	z-index:20;
 }
 
-nav.rightMenu ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
 nav.rightMenu ul li a {
 	display: block !important;
 	background: var(--main-color);
@@ -393,41 +370,14 @@ nav.rightMenu ul li a {
 	font-weight:700;
 }
 
-nav.rightMenu ul li a:hover {
-	background: var(--main-hover-color);
-}
-
-nav.rightMenu ul li a .fa {
-	width: 16px;
-	text-align: center;
-	margin-right: 5px;
-}
-
-nav.rightMenu ul li a .badge {
-	display: inline-block;
-	background: #fff;
-	/* IE Fallback */
-	background: rgba(255, 255, 255, 0.2);
-	padding: 3px 7px;
-	color: #fff;
-	font-size: 12px;
-	font-weight: 800;
-}
-
-nav.rightMenu ul li ul li a {
-	background: #444;
-	border-left: 4px solid transparent;
-	padding: 10px 20px;
-}
-
-nav.rightMenu ul li ul li a:hover {
-	background: #333;
-	border-left: 4px solid var(--main-color);
-}
+nav.rightMenu ul li a:hover {background: var(--main-hover-color);}
+nav.rightMenu ul li a .fa {width: 16px; text-align: center;	margin-right: 5px;}
+nav.rightMenu ul li ul li a {background: #444; border-left: 4px solid transparent; padding: 10px 20px;}
+nav.rightMenu ul li ul li a:hover { background: #333; border-left: 4px solid var(--main-color);}
 
 nav.rightMenu .company-info {border-top: 3px #5a5a5a dashed; background-color: #3b6ea4; color: #fff; padding: 20px 5px;}
 nav.rightMenu .company-info p {font-size:14px}
-nav.rightMenu .company-info p:nth-child(1) {font-size:16px}
+nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 
 /* 검색창 영역 */
 .searchPanel{position:relative; width:50%; background:#ffffffb8; padding:12px 23px 14px 23px; border-top:2px solid #444; border-right:1px solid #ddd; border-left:1px solid #ddd; border-bottom:1px solid #ddd; box-sizing:border-box; float: left; }

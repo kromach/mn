@@ -63,21 +63,31 @@
 </nav>
 <script type="text/javascript">
 	$(function() {
-		function slideMenu() {
-			var activeState = $("#menu-container .menu-list")
-					.hasClass("active");
-			$("#menu-container .menu-list").fadeToggle(400);
-		}
+		
+		// 마우스클릭시 메뉴 레이어가 열려 있으면 닫아준다. 
+		$('html').click(function() {
+			if ($(".rightMenu").hasClass('active')) { 
+				$("#menu-wrapper").click();
+			}
+		});
+		
+		// 마우스 클릭 위치가 메뉴 레이어라면 닫히지 않게 막는다.
+		$('.rightMenu').click(function(event){
+		     event.stopPropagation();
+		});
+		
+		// 햄버거 버튼 영역을 클릭하면 애니메이션 효과와 메뉴 레이어를 토글(toggle) 처리한다.
 		$("#menu-wrapper").click(function(event) {
 			event.stopPropagation();
 			$("#hamburger-menu").toggleClass("open");
-			$(".rightMenu").fadeToggle(400);
+			$(".rightMenu").fadeToggle(400).toggleClass("active");
 		});
 
-	}); // jQuery load
+	}); 
 
+	// 메뉴 중에 세부 항목이 있는 메뉴를 클릭하면 세부 항목을 열고 닫는다.
 	$(".sub-menu a").click(function() {
 		$(this).parent(".sub-menu").children("ul").slideToggle("100");
-		$(this).find(".right").toggleClass("fa-caret-up fa-caret-down");
+		$(this).find(".fr").toggleClass("fa-caret-up fa-caret-down");
 	});
 </script>
