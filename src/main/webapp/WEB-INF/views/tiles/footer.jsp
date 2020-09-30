@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="fixIcon">
-	<div id="cahtIcon" class="chatIcon icon" onclick="window.location='/chat'">
-		<i class="fas fa-comments" style="font-size:40px"></i>
-	</div>
+	<c:if test="${not empty sessionScope.memId}">
+		<div id="cahtIcon" class="chatIcon icon" onclick="window.location='/chat'">
+			<i class="fas fa-comments" style="font-size:40px"></i>
+		</div>
+	</c:if>
 	<div id="topIcon" class="topIcon icon display-none" onclick="window.location='#'">
 		<i class="far fa-caret-square-up"  style="font-size:50px"></i>
 	</div>
