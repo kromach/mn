@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -166,7 +168,8 @@ public class MemberController {
 	public String kakaoLogin(
 			@RequestParam("code") String code,
 			HttpServletRequest request,
-			HttpServletResponse response)
+			HttpServletResponse response,
+			RedirectAttributes redirectAttributes)
 			throws Exception {
 
 		//getToken
@@ -176,28 +179,26 @@ public class MemberController {
 		JsonNode userInfo = KakaoLogin.getKakaoUserInfo(token);
 		JsonNode kakao_account = userInfo.get("kakao_account");
 		JsonNode properties = userInfo.path("properties");
-		
+		System.out.println(userInfo);
+		System.out.println("=============================");
 		String id = kakao_account.get("email").asText();
 		String gender = kakao_account.get("gender").asText();
+		String birth = kakao_account.get("birthday").asText();
 		String nickname = properties.path("nickname").toString();	
-		
 		System.out.println("id"+id);
 		System.out.println("gender"+gender);
 		System.out.println("nickname"+nickname);
 		MemberDTO dto = new MemberDTO();
 		dto.setId(id);
 		dto.setNickName(nickname);
-		
-		HttpSession session = request.getSession();
-		request.setAttribute("memberDTO", dto);
-		
-		//add Db Loginc
+		dto.setBirth(birth);
+		redirectAttributes.addFlashAttribute("memberDTO", dto);
 		return "redirect:/member/loginResult";
 	}
 	
 	@RequestMapping(value = "/loginResult")
-	public String loginResult(HttpServletRequest request) {
-		
+	public String loginResult(HttpServletRequest request,@ModelAttribute MemberDTO model) {
+		System.out.println(model.toString());
 		return "/member/loginResult.mn";
 	}
 

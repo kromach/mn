@@ -20,9 +20,6 @@
 		</div>
 	</div>
 </div>
-<div class="chat">
-	<a href="/chat"><img src="/resources/img/main/chat.png" ></a>
-</div>
 <script src="/resources/js/imageLoad.js"></script>
 <!-- 데이터 스크롤해서 붙이는 스크립트  -->
 <script type="text/javascript">
