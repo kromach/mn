@@ -81,7 +81,9 @@
 	position: relative;
 	border-radius: 4px;
 	min-height: 44px;
-	background-color: gray;
+	background-color: #004080;
+	color: white;
+	font-weight: bold;
 }
 .loginWrapper > .loginInput{
 	width:250px;

@@ -3,7 +3,6 @@
 <html>
 <style>
 </style>
-
 <body>
 	<div class="grid-Wrapper">
 		<div class="grid">
@@ -20,8 +19,8 @@
 					<button class="greyBtn">ID찾기</button>
 					<button class="greyBtn">PW찾기</button>
 				</div>
+			</div>
 		</div>
-	</div>
 	</div>
 </body>
 <script type="text/javascript">
