@@ -2,16 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<style>
-.birthWrapper{
-	width:250px;
-	margin-bottom: 5px;
-	font-size: 14px;
-	position: relative;
-	border-radius: 4px;
-	height: 30px;
-}
-</style>
 <body>
 	<div class="grid-Wrapper">
 		<div class="grid">
@@ -32,50 +22,64 @@
 						onsubmit="return check()" accept-charset="utf-8">
 				</c:if>
 				<div class="loginWrapper">
-					아이디<input class="loginInput" type="text" name="id"> 아이디
-					중복체크
+					<div class="loginLabel">아이디</div>
+					<input class="loginInput" type="text" name="id">
+					<div class="loginLabel">아이디중복체크</div>
 					<button>중복확인</button>
-					비밀번호<input class="loginInput" type="text" name="pw"> 비밀번호
-					확인<input class="loginInput" type="password" name="pwCh"> 이름<input
-						class="loginInput" type="text" name="name"> 닉네임<input
-						class="loginInput" type="text" name="nickName"> 아이디 중복체크
+					<div class="loginLabel">
+					비밀번호
+					</div>
+					<input class="loginInput" type="text" name="pw">
+					<div class="loginLabel">
+					비밀번호 확인
+					</div>
+					<input class="loginInput" type="password" name="pwCh"> 
+					<div class="loginLabel">
+					이름
+					</div>
+					<input class="loginInput" type="text" name="name">
+					<div class="loginLabel">
+					닉네임
+					</div>
+					<input	class="loginInput" type="text" name="nickName"> 아이디 중복체크
 					<button>중복확인</button>
-					<br><br>
+					<div class="loginLabel">
 					생년월일
-					<br><br>
+					</div>
 					<div class="birthWrapper">
 					<input class="birthfirstInput" type="text" name="birth"
 						size="7">
 					-<input class="birthsecondInput" type="text" name="birth"
 						size="1">
 					</div>
-					<br><br>
+					<div class="loginLabel">
 					전화번호
-					<br><br>
+					</div>
 					<div class = "birthWrapper">
 					<input class="telInput"
 					type="text" name="tel" size="3">-<input class="telInput"
 					type="text" name="tel" size="3">-<input class="telInput"
 					type="text" name="tel" size="3">
 					</div>
-					
 					<c:if test="${status eq 'user' }">
-					<br>
+					<div class="loginLabel">
 					주소
-					<br>
+					</div>
 					<input type="text" name="address" class="loginInput">
-					<br>
 					<button>주소찾기</button>
 					</c:if>
 					<c:if test="${status eq 'salse' }">
+						<div class="loginLabel">
 						사업장 주소
-						<br>
+						</div>
 						<input type="text" name="address" class="loginInput">
+						<div class="loginLabel">
 						사업자 등록증
-						<br>
+						</div>
 						<input type="file" name="file" class="loginInput">
+						<div class="loginLabel">
 						사업자 번호
-						<br>
+						</div>
 						<input type="text" name="licenseNum" class="loginInput">
 					</c:if>
 					<br><br>

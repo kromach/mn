@@ -59,6 +59,20 @@
 }
 
 /*login영역 버튼및 css*/
+.birthWrapper{
+	width:250px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	height: 30px;
+}
+.loginLabel {
+	width: 250px;
+	background-color: yellow;
+	text-align: left;
+	font-size: 14px;
+}
 .loginWrapper{
 	width:250px;
 	text-align: center;
