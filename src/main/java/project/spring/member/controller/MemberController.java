@@ -45,7 +45,7 @@ public class MemberController {
 	
 	@RequestMapping("/signup")
 	public String signUp(HttpServletRequest reqest) {
-		String returnUrl = "/";
+		String returnUrl = "redirect:/";
 		HttpSession session =  reqest.getSession();
 		if(session.getAttribute("memId")==null) {
 			returnUrl = "/member/signStatus.mn";
@@ -57,7 +57,7 @@ public class MemberController {
 	
 	@RequestMapping("/signupUser")
 	public String signUpUser(HttpServletRequest reqest) {
-		String returnUrl = "/";
+		String returnUrl = "redirect:/";
 		HttpSession session =  reqest.getSession();
 		if(session.getAttribute("memId")==null) {
 			reqest.setAttribute("status", "user");
@@ -69,7 +69,7 @@ public class MemberController {
 	}
 	@RequestMapping("/signupSales")
 	public String signUpSalses(HttpServletRequest reqest) {
-		String returnUrl = "/";
+		String returnUrl = "redirect:/";
 		HttpSession session =  reqest.getSession();
 		if(session.getAttribute("memId")==null) {
 			reqest.setAttribute("status", "salse");
