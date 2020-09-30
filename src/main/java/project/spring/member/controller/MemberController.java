@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
+import project.spring.beans.kakaoAPI.KakaoLogin;
+import project.spring.beans.kakaoAPI.KakaoLogout;
 import project.spring.member.service.MemberServiceImpl;
 import project.spring.member.vo.MemberDTO;
 
@@ -148,18 +154,71 @@ public class MemberController {
 		}else{
 			System.out.println("로그인이 된 상태입니다.");
 		}
+		
 		model.addAttribute("restApikey", restApikey);
 		model.addAttribute("callback_URL", callback_URL);
+		
 		return returnUrl;
 	}
 	
-	/*
-	 <a href="https://kauth.kakao.com/oauth/authorize?response_type=code
-		&client_id=${restApikey }
-		&redirect_uri=${callback_URL}">
-	<img src="/resources/img/member/kakao_login_button.png" />
-	</a>
-	*/
+	@RequestMapping(value = "/authResult", produces = "application/json", method = {
+			RequestMethod.GET,	RequestMethod.POST })
+	public String kakaoLogin(
+			@RequestParam("code") String code,
+			HttpServletRequest request,
+			HttpServletResponse response)
+			throws Exception {
+
+		//getToken
+		JsonNode tokenJson = KakaoLogin.getAccessToken(code);
+		String token = tokenJson.path("access_token").toString();
+		//useToken getuserInfo
+		JsonNode userInfo = KakaoLogin.getKakaoUserInfo(token);
+		JsonNode kakao_account = userInfo.get("kakao_account");
+		JsonNode properties = userInfo.path("properties");
+		
+		String id = kakao_account.get("email").asText();
+		String gender = kakao_account.get("gender").asText();
+		String nickname = properties.path("nickname").toString();	
+		
+		System.out.println("id"+id);
+		System.out.println("gender"+gender);
+		System.out.println("nickname"+nickname);
+		MemberDTO dto = new MemberDTO();
+		dto.setId(id);
+		dto.setNickName(nickname);
+		
+		HttpSession session = request.getSession();
+		request.setAttribute("memberDTO", dto);
+		
+		//add Db Loginc
+		return "redirect:/member/loginResult";
+	}
+	
+	@RequestMapping(value = "/loginResult")
+	public String loginResult(HttpServletRequest request) {
+		
+		return "/member/loginResult.mn";
+	}
+
+	//logoutLogic
+	@RequestMapping(value = "/logout", 
+			produces = "application/json",
+			method = {
+			RequestMethod.GET,
+			RequestMethod.POST })
+	public String kakaoLogout(
+			HttpServletRequest request,
+			HttpServletResponse response)
+			throws Exception {
+		HttpSession session = request.getSession();
+		String token = session.getAttribute("token").toString();
+		System.out.println("token="+token);
+		JsonNode logoutInfo = KakaoLogout.doLogout(token);
+		System.out.println("logoutInfo="+logoutInfo);
+		System.out.println("=======API_token_out==========================");
+		return null;
+	}
 	
 	
 	

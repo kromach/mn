@@ -74,13 +74,12 @@ public class KakaoController {
 		//useToken getuserInfo
 		JsonNode userInfo = KakaoLogin.getKakaoUserInfo(token);
 		System.out.println("userInfo="+userInfo);
-		//String id = userInfo.get("id").toString();
 		String id = userInfo.path("id").asText();
 		JsonNode properties = userInfo.path("properties");
-		System.out.println("properties="+properties);
 		String nickname = properties.path("nickname").toString();
-		request.setAttribute("id", id);
+
 		
+		request.setAttribute("id", id);
 		HttpSession session = request.getSession();
 		session.setAttribute("nickname", nickname);
 		session.setAttribute("code", code);

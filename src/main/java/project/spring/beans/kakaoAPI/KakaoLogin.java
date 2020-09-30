@@ -26,17 +26,13 @@ import project.spring.kakao.vo.UserVO;
 
 public class KakaoLogin {
 	
-	private static String restApiKey_static = "ccd42c0f6ac58e519759c5baf3c7ceb4";
-	private static String adminkey_static = "e454a8dba20ab15cac38b5db0ec0c22a";
-	private static String callback_URL_static = "http://localhost:8080/mvc/authResult";
 	
 	public static  JsonNode getAccessToken(String autorize_code) {
-		System.out.println("restAPIkeyStatic="+restApiKey_static);
 		final String RequestUrl = "https://kauth.kakao.com/oauth/token";
 		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 		postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
-		postParams.add(new BasicNameValuePair("client_id", restApiKey_static)); // REST API KEY
-		postParams.add(new BasicNameValuePair("redirect_uri",callback_URL_static )); // 리다이렉트 URI
+		postParams.add(new BasicNameValuePair("client_id", "8754233dc50098d2462dcd29e565c075")); // REST API KEY
+		postParams.add(new BasicNameValuePair("redirect_uri","http://localhost:8080/member/authResult" )); // 리다이렉트 URI
 		postParams.add(new BasicNameValuePair("code", autorize_code)); // 로그인 과정중 얻은 code 값
 
 		final HttpClient client = HttpClientBuilder.create().build();
@@ -97,6 +93,7 @@ public class KakaoLogin {
 		}
 		return returnJsonNode;
 	}
+
 	public static UserVO changeData(JsonNode userInfo) {
 		UserVO vo = new UserVO();
 		//vo.setUser_snsId(userInfo.path("id").asText()); // id -> vo 넣기
