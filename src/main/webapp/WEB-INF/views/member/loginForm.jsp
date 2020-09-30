@@ -9,16 +9,19 @@
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
+				<form method="post" action="/member/login"
+						name="inputForm" onsubmit="return check()" accept-charset="utf-8">
 				<div class="loginWrapper">
 						<button type="button" class="kakaoBtn"
 						onclick='kakaoLogin()'>카카오로 로그인</button>
 					<input class="loginInput" type="text" name="id">
 					<input class="loginInput" type="text" name="pw">
-					<button class="greyBtn">로그인</button>
-					<button class="greyBtn" onclick="window.location.href='/member/signup'">회원가입</button>
-					<button class="greyBtn">ID찾기</button>
-					<button class="greyBtn">PW찾기</button>
+					<button type="submit" class="greyBtn" >로그인</button>
+					<button type="button" class="greyBtn" onclick="window.location.href='/member/signup'">회원가입</button>
+					<button type="button" class="greyBtn">ID찾기</button>
+					<button type="button" class="greyBtn">PW찾기</button>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>

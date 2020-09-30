@@ -192,6 +192,11 @@ public class MemberController {
 		dto.setId(id);
 		dto.setNickName(nickname);
 		dto.setBirth(birth);
+		
+		//Session에 값 넣어주기
+		request.getSession().setAttribute("memId", id);
+		
+		
 		redirectAttributes.addFlashAttribute("memberDTO", dto);
 		return "redirect:/member/loginResult";
 	}
