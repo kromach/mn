@@ -25,7 +25,7 @@
 					<div class="loginLabel">아이디</div>
 					<input class="loginInput" type="text" name="id">
 					<div class="loginLabel">아이디중복체크</div>
-					<button>중복확인</button>
+					<button type="button">중복확인</button>
 					<div class="loginLabel">
 					비밀번호
 					</div>
@@ -42,7 +42,7 @@
 					닉네임
 					</div>
 					<input	class="loginInput" type="text" name="nickName">닉네임 중복체크
-					<button>중복확인</button>
+					<button type="button">중복확인</button>
 					<div class="loginLabel">
 					생년월일
 					</div>
@@ -66,7 +66,7 @@
 					주소
 					</div>
 					<input type="text" name="address" class="loginInput">
-					<button>주소찾기</button>
+					<button type="button">주소찾기</button>
 					</c:if>
 					<c:if test="${status eq 'salse' }">
 						<div class="loginLabel">
@@ -83,9 +83,9 @@
 						<input type="text" name="licenseNum" class="loginInput">
 					</c:if>
 					<br><br>
-					<button>가입</button>
-					<button>재입력</button>
-					<button>취소</button>
+					<button type="submit">가입</button>
+					<button type="reset">재입력</button>
+					<button type="button">취소</button>
 				</div>
 				</form>
 			</div>
