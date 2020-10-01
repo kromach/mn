@@ -1,4 +1,4 @@
-package project.spring.main.controller;
+package project.spring.beans.chat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +13,6 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
  
-
-@Controller("/chat")
 public class WebSocketChat extends TextWebSocketHandler{
 	private static final Logger logger = LoggerFactory.getLogger(WebSocketChat.class);
 	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();

@@ -16,7 +16,7 @@
 		<websocket:mapping handler="echoHandler" path="/chat"/>
 		<websocket:sockjs/>
 	</websocket:handlers>
-	<beans:bean id="echoHandler" class="project.spring.main.controller.WebSocketChat" />
+	<beans:bean id="echoHandler" class="project.spring.beans.chat.WebSocketChat" />
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
