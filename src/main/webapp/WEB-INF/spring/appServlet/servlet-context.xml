@@ -14,13 +14,15 @@
 
 	<!--chat관련 webSocketSetting  -->
 	<websocket:handlers>
-		<websocket:mapping handler="echoHandler" path="/echo"/>
+		<websocket:mapping handler="replyEchochoHandler"
+			path="/replyEcho" />
 		<websocket:handshake-interceptors>
-			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"></beans:bean>
+			<beans:bean
+				class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
 		</websocket:handshake-interceptors>
-		<websocket:sockjs/>
 	</websocket:handlers>
-	<beans:bean id="echoHandler" class="project.spring.beans.chat.WebSocketChat" />
+
+	<beans:bean id="replyEchochoHandler" class="project.spring.beans.chat.WebSocketChat" />
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />

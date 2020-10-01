@@ -20,7 +20,7 @@ public class WebSocketChat extends TextWebSocketHandler{
 	//클라이언트 연결
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		
+		System.out.println("afterEstablished"+session);
 		if(session.getPrincipal()!=null) {
 			sessionList.add(session);
 			logger.info("{} 연결됨",session.getId());
@@ -30,18 +30,17 @@ public class WebSocketChat extends TextWebSocketHandler{
 	//chat
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		logger.info("{}로 부터 {} 받음",session.getId(),message.getPayload());
-		if(session.getPrincipal()!=null) {
-			//모든 클라이언트에게 전송
-			for(WebSocketSession sess : sessionList) {
-				sess.sendMessage(new TextMessage(session.getPrincipal().getName() +"|"+message.getPayload()));
-			}
+		System.out.println("textMassage:"+session+":"+message);
+		//모든 클라이언트에게 전송
+		for(WebSocketSession sess : sessionList) {
+			sess.sendMessage(new TextMessage(session.getId() +"|"+message.getPayload()));
 		}
 	}
 	
 	//클라이언트 연결해제
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		System.out.println("afterEstablished"+session+":"+status);
 		if(session.getPrincipal()!=null) {
 			sessionList.remove(session);
 			logger.info("{} 연결됨",session.getId());
