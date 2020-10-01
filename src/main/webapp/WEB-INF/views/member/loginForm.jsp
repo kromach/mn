@@ -11,7 +11,7 @@
 			<div class="grid-item grid-item--width6">
 				<form method="post" action="/member/loginPro"
 						name="inputForm" onsubmit="return check()" accept-charset="utf-8">
-				<div class="loginWrapper">
+				<div class="loginWrapper"> 
 						<button type="button" class="kakaoBtn"
 						onclick='kakaoLogin()'>카카오로 로그인</button>
 					<input class="loginInput" type="text" name="id">
@@ -33,7 +33,5 @@ function kakaoLogin() {
 	var location ='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id='+client_id+'&redirect_uri='+redirect_uri;
 	window.location.href=location;
 }
-
-
 </script>
 </html>

@@ -157,7 +157,8 @@ public class MemberController {
 		String returnUrl = "redirect:/";
 		HttpSession session =  reqest.getSession();
 		if(session.getAttribute("memId")==null) {
-			reqest.setAttribute("status", "salse");
+			reqest.setAttribute("restApikey", restApikey);
+			reqest.setAttribute("callback_URL", callback_URL);
 			returnUrl = "/member/loginForm.mn";
 		}else{
 			System.out.println("로그인이 된 상태입니다.");
@@ -177,6 +178,7 @@ public class MemberController {
 		//getToken
 		JsonNode tokenJson = KakaoLogin.getAccessToken(code);
 		String token = tokenJson.path("access_token").toString();
+		request.getSession().setAttribute("token", token);
 		//useToken getuserInfo
 		JsonNode userInfo = KakaoLogin.getKakaoUserInfo(token);
 		JsonNode kakao_account = userInfo.get("kakao_account");
@@ -237,19 +239,28 @@ public class MemberController {
 			method = {
 			RequestMethod.GET,
 			RequestMethod.POST })
-	public String kakaoLogout(
+	public String logoutSs(
 			HttpServletRequest request,
 			HttpServletResponse response)
 			throws Exception {
 		HttpSession session = request.getSession();
-		String token = session.getAttribute("token").toString();
-		System.out.println("token="+token);
-		JsonNode logoutInfo = KakaoLogout.doLogout(token);
-		System.out.println("logoutInfo="+logoutInfo);
-		System.out.println("=======API_token_out==========================");
-		return null;
+		/*kakao logout logic*/
+		if(session.getAttribute("token")!=null) {
+			String token = session.getAttribute("token").toString();
+			System.out.println("token="+token);
+			JsonNode logoutInfo = KakaoLogout.doLogout(token);
+			System.out.println("logoutInfo="+logoutInfo);
+			System.out.println("=======API_token_out==========================");
+		}
+		
+		session.invalidate();
+		
+		return "redirect:/";
 	}
 	
+	//정보수정
+	//id찾기
+	//pw찾기
 	
 	
 }
