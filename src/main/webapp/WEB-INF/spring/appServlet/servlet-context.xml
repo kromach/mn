@@ -12,8 +12,12 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
+	<!--chat관련 webSocketSetting  -->
 	<websocket:handlers>
-		<websocket:mapping handler="echoHandler" path="/chat"/>
+		<websocket:mapping handler="echoHandler" path="/echo"/>
+		<websocket:handshake-interceptors>
+			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"></beans:bean>
+		</websocket:handshake-interceptors>
 		<websocket:sockjs/>
 	</websocket:handlers>
 	<beans:bean id="echoHandler" class="project.spring.beans.chat.WebSocketChat" />

@@ -21,27 +21,32 @@ public class WebSocketChat extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		
-		sessionList.add(session);
-		logger.info("{} 연결됨",session.getId());
-		System.out.println("채팅방 입장자 : "+ session.getPrincipal().getName());
+		if(session.getPrincipal()!=null) {
+			sessionList.add(session);
+			logger.info("{} 연결됨",session.getId());
+			System.out.println("채팅방 입장자 : "+ session.getPrincipal().getName());
+		}
 	}
 	//chat
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		logger.info("{}로 부터 {} 받음",session.getId(),message.getPayload());
-		
-		//모든 클라이언트에게 전송
-		for(WebSocketSession sess : sessionList) {
-			sess.sendMessage(new TextMessage(session.getPrincipal().getName() +":"+message.getPayload()));
+		if(session.getPrincipal()!=null) {
+			//모든 클라이언트에게 전송
+			for(WebSocketSession sess : sessionList) {
+				sess.sendMessage(new TextMessage(session.getPrincipal().getName() +"|"+message.getPayload()));
+			}
 		}
 	}
 	
 	//클라이언트 연결해제
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		sessionList.remove(session);
-		logger.info("{} 연결됨",session.getId());
-		System.out.println("채팅방 퇴장 : "+ session.getPrincipal().getName());
+		if(session.getPrincipal()!=null) {
+			sessionList.remove(session);
+			logger.info("{} 연결됨",session.getId());
+			System.out.println("채팅방 퇴장 : "+ session.getPrincipal().getName());
+		}
 	}
 	
 	
