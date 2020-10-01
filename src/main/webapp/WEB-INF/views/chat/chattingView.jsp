@@ -42,7 +42,6 @@ function connect(){
 	    
 	};
 	ws.onmessage = function (event) {
-		console.log('onmessage');
 	    console.log('Receive MSG : ', event.data+'\n');
 	};
 
@@ -61,7 +60,6 @@ $(document).ready(function(){
 		evt.preventDefault();
 		if (socket.readyState !== 1) return;
 		let msg = $('input#msg').val();
-		alert(msg);
 		socket.send(msg);
 	});
 	connect();
