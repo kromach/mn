@@ -42,6 +42,7 @@ function connect(){
 	    
 	};
 	ws.onmessage = function (event) {
+		console.log('onmessage');
 	    console.log('Receive MSG : ', event.data+'\n');
 	};
 
@@ -54,6 +55,7 @@ function connect(){
 		console.log('ERR: connection closed.', err);
 	};
 }
+
 $(document).ready(function(){
 	$('#btnSend').on('click', function(evt) {
 		evt.preventDefault();

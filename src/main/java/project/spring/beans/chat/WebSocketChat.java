@@ -21,18 +21,16 @@ public class WebSocketChat extends TextWebSocketHandler{
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("afterEstablished"+session);
-		if(session.getPrincipal()!=null) {
-			sessionList.add(session);
-			logger.info("{} 연결됨",session.getId());
-			System.out.println("채팅방 입장자 : "+ session.getPrincipal().getName());
-		}
+		sessionList.add(session);
+		logger.info("{} 연결됨",session.getId());
 	}
 	//chat
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		System.out.println("textMassage:"+session+":"+message);
+		System.out.println("[textMassage]:"+session+":"+message);
 		//모든 클라이언트에게 전송
 		for(WebSocketSession sess : sessionList) {
+			System.out.println("[textSend]");
 			sess.sendMessage(new TextMessage(session.getId() +"|"+message.getPayload()));
 		}
 	}
