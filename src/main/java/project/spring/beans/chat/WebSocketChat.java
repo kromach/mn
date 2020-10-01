@@ -2,11 +2,17 @@ package project.spring.beans.chat;
 
 import java.util.ArrayList;
 import java.util.List;
- 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -29,9 +35,12 @@ public class WebSocketChat extends TextWebSocketHandler{
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		System.out.println("[textMassage]:"+session+":"+message);
 		//모든 클라이언트에게 전송
+		Map<String,Object> map = session.getAttributes();
+		String nickName = "";
+		if(map.get("memNickName")!=null) nickName = (String) map.get("memNickName");
 		for(WebSocketSession sess : sessionList) {
 			System.out.println("[textSend]");
-			sess.sendMessage(new TextMessage(session.getId() +"|"+message.getPayload()));
+			sess.sendMessage(new TextMessage(nickName +"|"+message.getPayload()));
 		}
 	}
 	
