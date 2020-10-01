@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-</head>
-<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-<body>   
+<script>
+	$(function() {
+		$("#header").removeClass("header_color").addClass("main_header");
+		
+		var img_random = Math.ceil(Math.random()*7);
+		$(".main_header").css({"background":"url(/resources/img/main/main" + img_random + ".jpg) no-repeat center center"});
+		$(".center-text").removeClass("display-none")
+	});
+</script>
 <div class="grid-Wrapper">
 	<div class="grid">  
 		<div class="grid-sizer"></div>
@@ -82,4 +83,3 @@ $(window).scroll(
 		}
 	});
 </script>
-</html>
