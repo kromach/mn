@@ -1,6 +1,7 @@
 package project.spring.beans.chat;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 public class WebSocketChat extends TextWebSocketHandler{
 	private static final Logger logger = LoggerFactory.getLogger(WebSocketChat.class);
 	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
+	private Map<WebSocketSession,String> sessionListWithNick = new HashMap<WebSocketSession, String>();
 	
 	//클라이언트 연결
 	@Override
