@@ -13,7 +13,7 @@ import project.spring.kakao.vo.MemberDTO;
 public class ChatController {
 	
 	@RequestMapping(value = "/chattingView", method = RequestMethod.GET)
-	public ModelAndView chat(ModelAndView mv,HttpSession session) {
+	public ModelAndView chatSs(ModelAndView mv,HttpSession session) {
 		System.out.println("chatController");
 		mv.setViewName("/chat/chattingView.mn");
 		mv.addObject("userId", session.getAttribute("memNickName"));
