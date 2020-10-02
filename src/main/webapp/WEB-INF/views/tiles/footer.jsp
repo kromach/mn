@@ -24,7 +24,53 @@
 	bottom:10px;
 	background-color: white;
 	width: 250px;
+	height:350px;
 	z-index: 20;
+	text-overflow:clip;
+	display:inline-block;
+	overflow: auto;
+    overflow-x: hidden;
+	border-radius: 10px;
+}
+.chatWrapper > .member {
+	width:250px;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 5px;
+	height: 10px;
+	margin: 5px;
+	display: inline-block;
+}
+.chatWrapper > .count {
+	width:250px;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 5px;
+	height: 10px;
+	margin: 5px;
+	display: inline-block;
+}
+.chatWrapper > .well {
+	width:250px;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 5px;
+	height: 10px;
+	margin: 5px;
+	display: inline-block;
+}
+#msg, #btnSend{
+	width:100%;
+	height:20px;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: bold;
+}
+#msgWrapper{
+	position:fixed;
+	width: 250px;
+	bottom: 11px;
+	overflow: hidden;
 }
 </style>
 <script>

@@ -28,31 +28,23 @@ $(document).ready(function(){
 	});
 });
 </script>
-<style>
-.chatWrapper{
-	width:250px;
-}
-</style>
 <body>
 	<div class="chatWrapper">
-	<h1>${nickName}</h1>
-	<br>
 	<div class = "member">채팅 참여자 리스트
 		<div class = "detail_member" ></div>
 	</div>
-	<br>
 	<div class = "count">인원
 		<div class = "detail_count" ></div>
 	</div>
-	<br>
 	<div class="well" id="chatdata">
    		<!-- User Session Info Hidden -->
    		<input type="hidden" value='${userid}' id="sessionuserid">
    	</div>
-    <br>
+   	<div id="msgWrapper">
 	<div>
 		<input type="text" id="msg" value="1212"/>
    		<input type="button" id="btnSend" value="전송"/>
+   	</div>
    	</div>
    	</div>
 </body>
