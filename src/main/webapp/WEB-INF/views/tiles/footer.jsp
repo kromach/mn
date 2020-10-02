@@ -18,83 +18,73 @@
 	</div>
 </div>
 <style>
-#chatArea{
-	position:fixed;
-	right:80px;
-	bottom:10px;
+#chatArea {
+	position: fixed;
+	right: 80px;
+	bottom: 10px;
 	background-color: white;
 	width: 250px;
-	height:350px;
+	height: 350px;
 	z-index: 20;
 	border-radius: 10px;
 }
 
-.totChatDIV > .memberWrapper> .member{
-	text-overflow:clip;
-	display:inline-block;
+.totChatDIV>.memberWrapper {
+	border-bottom: 1px solid black;
+	height:50px;
 	overflow: auto;
-    overflow-x: hidden;
-	background-color: yellow;
+	overflow-x: hidden;
+}
+.totChatDIV>.memberWrapper>.member {
+	text-overflow: clip;
+	display: inline-block;
 	font-size: 12px;
 	font-weight: bold;
+	padding-left: 8px;
 }
-.totChatDIV > .countWrapper> .count{
-	text-overflow:clip;
-	display:inline-block;
+
+.totChatDIV>.countWrapper {
+	border-bottom: 1px solid black;
+	height:50px;
 	overflow: auto;
-    overflow-x: hidden;
-	background-color: gray;
+	overflow-x: hidden;
 }
-.totChatDIV > .chatWrapper> .well{
-	text-overflow:clip;
-	display:inline-block;
+.totChatDIV>.countWrapper>.count {
+	text-overflow: clip;
+	display: inline-block;
+	font-size: 12px;
+	font-weight: bold;
+	padding-left: 8px;
+}
+
+.totChatDIV>.chatWrapper {
+	border-bottom: 1px solid black;
+	height: 230px;
 	overflow: auto;
-    overflow-x: hidden;
-	background-color: green;
+	overflow-x: hidden;
 }
-.totChatDIV > .msgWrapper{
+.totChatDIV>.chatWrapper>.well {
+	text-overflow: clip;
+	display: inline-block;
+	font-size: 12px;
+	font-weight: bold;
+	padding-left: 8px;
+}
+
+.totChatDIV>.msgWrapper {
 	background-color: black;
 }
 
+#msg, #btnSend {
+	width: 100%;
+	height: 20px;
+	display: inline-block;
+	font-size: 14px;
+	font-weight: bold;
+}
 
-
-
-.chatWrapper > .member {
-	width:250px;
-	font-size: 14px;
-	font-weight: bold;
-	padding: 5px;
-	height: 10px;
-	margin: 5px;
-	display: inline-block;
-}
-.chatWrapper > .count {
-	width:250px;
-	font-size: 14px;
-	font-weight: bold;
-	padding: 5px;
-	height: 10px;
-	margin: 5px;
-	display: inline-block;
-}
-.chatWrapper > .well {
-	width:250px;
-	font-size: 14px;
-	font-weight: bold;
-	padding: 5px;
-	height: 10px;
-	margin: 5px;
-	display: inline-block;
-}
-#msg, #btnSend{
-	width:100%;
-	height:20px;
-	display: inline-block;
-	font-size: 14px;
-	font-weight: bold;
-}
-#msgWrapper{
-	position:fixed;
+#msgWrapper {
+	position: fixed;
 	width: 250px;
 	bottom: 11px;
 	overflow: hidden;

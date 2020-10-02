@@ -32,17 +32,17 @@ $(document).ready(function(){
 	<div class="totChatDIV">
 		<div class="memberWrapper" style="border-bottom: 1px solid black ;">
 			<div class="member">
-				채팅 참여자 리스트
+				&nbsp;채팅 참여자 리스트
 				<div class="detail_member"></div>
 			</div>
 		</div>
 		<div class="countWrapper" style="border-bottom: 1px solid black ;">
 			<div class="count">
-				인원
-				<div class="detail_count" id=""detail_count""></div>
+				&nbsp;인원
+				<div class="detail_count" id="detail_count"></div>
 			</div>
 		</div>
-		<div class="chatWrapper" style="border-bottom: 1px solid black ; height: 200px;">
+		<div class="chatWrapper">
 			<div class="well" id="chatdata">
 				<!-- User Session Info Hidden -->
 			</div>
