@@ -23,27 +23,42 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 public class WebSocketChat extends TextWebSocketHandler{
 	private static final Logger logger = LoggerFactory.getLogger(WebSocketChat.class);
 	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
-	private Map<WebSocketSession,String> sessionListWithNick = new HashMap<WebSocketSession, String>();
+	private Map<String,WebSocketSession> userSession = new HashMap<String,WebSocketSession>();
+	
+	
+	//getHttpSession
+	private String getId(WebSocketSession session) {
+		Map<String, Object> httpSession = session.getAttributes();
+		String nickName = session.getId();
+		if(httpSession.get("memNickName")!=null) nickName = (String) httpSession.get("memNickName");
+		return nickName;
+	}
 	
 	//클라이언트 연결
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("afterEstablished"+session);
-		sessionList.add(session);
+		String nickName = getId(session);
+		userSession.put(nickName, session);
 		logger.info("{} 연결됨",session.getId());
+		
+		sessionList.add(session);
+		for(WebSocketSession sess : sessionList) {
+			sess.sendMessage(new TextMessage("참여자 수" +"|"+ sessionList.size()));
+		}
 	}
 	//chat
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		System.out.println("[textMassage]:"+session+":"+message);
 		//모든 클라이언트에게 전송
-		Map<String,Object> map = session.getAttributes();
-		String nickName = "";
-		if(map.get("memNickName")!=null) nickName = (String) map.get("memNickName");
+		String nickName = getId(session);
 		for(WebSocketSession sess : sessionList) {
 			System.out.println("[textSend]");
 			sess.sendMessage(new TextMessage(nickName +"|"+message.getPayload()));
 		}
+		
+		//protocol : 참여자목록뽑기 
 	}
 	
 	//클라이언트 연결해제
@@ -55,7 +70,10 @@ public class WebSocketChat extends TextWebSocketHandler{
 			logger.info("{} 연결됨",session.getId());
 			System.out.println("채팅방 퇴장 : "+ session.getPrincipal().getName());
 		}
+		
+		sessionList.remove(session);
+		for(WebSocketSession sess : sessionList) {
+			sess.sendMessage(new TextMessage("참여자 수" +"|"+ sessionList.size()));
+		}
 	}
-	
-	
 }
