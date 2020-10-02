@@ -54,8 +54,10 @@ public class WebSocketChat extends TextWebSocketHandler{
 			//참여자 목록
 			Set<String> nickNames = userSession.keySet();  
 			System.out.println(nickNames.toString());
+			String joinMemberData = "";
 			for(String joinMember : nickNames) {
-				sess.sendMessage(new TextMessage("JoinMember" +"|"+ joinMember));
+				joinMemberData += ","+joinMember;
+				sess.sendMessage(new TextMessage("JoinMember" +"|"+ joinMemberData));
 			}
 		}
 	}

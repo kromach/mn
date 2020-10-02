@@ -3,7 +3,7 @@
 <div class="fixIcon">
 	<c:if test="${not empty sessionScope.memId}">
 		<div id="cahtIcon" class="chatIcon icon"
-			onclick="window.location='/chat'">
+			onclick="window.location='/chattingView'">
 			<i class="fas fa-comments" style="font-size: 36px; margin-top: 5px;"></i>
 		</div>
 	</c:if>
