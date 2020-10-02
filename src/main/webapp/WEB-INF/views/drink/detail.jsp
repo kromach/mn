@@ -156,25 +156,34 @@
 	    });
 		
 	    var words = [
-	  	  {text: "에라이", weight: 13},
-	  	  {text: "되냐?", weight: 10.5},
-	  	  {text: "우냐", weight: 9.4},
+	  	  {text: "페일에일", weight: 13},
+	  	  {text: "에일", weight: 10.5},
+	  	  {text: "한국", weight: 9.4},
 	  	  {text: "Sit", weight: 8},
 	  	  {text: "Amet", weight: 6.2},
 	  	  {text: "Consectetur", weight: 5},
 	  	  {text: "밥", weight: 5},
 	  	  {text: "맥주", weight: 11},
 	  	  {text: "비아", weight: 9},
-	  	  {text: "맛있엉", weight: 1},
-	  	  {text: "플루토", weight: 5},
-	  	  {text: "개와고양이의시간", weight: 3}
+	  	  {text: "ビア", weight: 9},
+	  	  {text: "달달", weight: 1},
+	  	  {text: "플레이그라운드", weight: 5},
+	  	  {text: "스칼라 벨지안 블론드 에일", weight: 3},
+	  	  {text: "스칼라", weight: 9},
+	  	  {text: "경기도", weight: 9},
+	  	  {text: "고양시", weight: 1},
+	  	  {text: "국산맥주", weight: 5},
+	  	  {text: "피자", weight: 3},
+	  	  {text: "치킨", weight: 5},
+	  	  {text: "부드러운", weight: 3},
+	  	  {text: "벨지안 효모", weight: 7}
 	  	];
 
 	  	$('#tagCloud').jQCloud(words, {
 	  		autoResize: true,
 	  		fontSize: {
-	  			from: 0.1,
-	  			to: 0.02
+	  			from: 0.15,
+	  			to: 0.04
 	  		}
 	  	});
 	});

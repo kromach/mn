@@ -377,7 +377,8 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 	.h_menu {padding-right: 10px; width: 160px;}
 	.h_menu li{padding-right: 5px;}
 	nav.rightMenu {right:3px}
-
+	.grid { width:90% ;}
+	.grid2 { width:90% ;}
 }
 /*
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
