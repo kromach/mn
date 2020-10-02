@@ -54,7 +54,7 @@ function connect(){
 	    for(var i=0;i<strArr.length;i++){
 	    	//참여 퇴장 완료
 	    	if(strArr[i] == 'Status'){
-	    		$('.well').append('<div class = "detail",id = "status">'+strArr[i+1]+'</div>');
+	    		$('.well').append('<div class = "detail" id = "status">'+strArr[i+1]+'</div>');
 	    	}
 	    	//참여인원 카운트 셋팅완료
 	    	if(strArr[i] == 'CountMember'){
@@ -79,7 +79,7 @@ function connect(){
 	    		var message = strArr[i+1].split(':');
 	    		sessionNick = message[0];
 	    		message = message[1];
-		    	$('.well').append('<div class = "detail" ,id = "message">'+sessionNick+':'+message+'</div>');
+		    	$('.well').append('<div class = "detail" id = "message">'+sessionNick+':'+message+'</div>');
 	    	}
 	    }
 	};
