@@ -59,7 +59,7 @@ function connect(){
 	    	//참여인원 카운트 셋팅완료
 	    	if(strArr[i] == 'CountMember'){
 	    		console.log("카운트"+strArr[i+1]);
-	    		$('.detail_count').html('<div class = "detail" >'+strArr[i+1]+'</div>');
+	    		$('.detail_count').html('<div class = "detailC" >'+strArr[i+1]+'</div>');
 	    	}
 	    	//참여자 리스트 셋팅완료
 	    	if(strArr[i] == 'JoinMember'){
@@ -71,7 +71,7 @@ function connect(){
 	    		var joinMembers = strArr[i+1].split(',');
 	    		for(var i=0;i<joinMembers.length;i++){
 	    			console.log(joinMembers[i]);
-	    			$('.detail_member').append('<div class = "detail">'+joinMembers[i]+'</div>');
+	    			$('.detail_member').append('<div class = "detailM">'+joinMembers[i]+'</div>');
 	    		}
 	    	}
 	    	
@@ -100,7 +100,6 @@ $(document).ready(function(){
 		if (socket.readyState !== 1) return;
 		let msg = $('input#msg').val();
 		socket.send(msg);
-		console.log($('.detail').length);
 	});
 	connect();
 });
