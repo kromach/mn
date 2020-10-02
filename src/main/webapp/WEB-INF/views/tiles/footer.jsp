@@ -26,12 +26,39 @@
 	width: 250px;
 	height:350px;
 	z-index: 20;
+	border-radius: 10px;
+}
+
+.totChatDIV > .memberWrapper> .member{
 	text-overflow:clip;
 	display:inline-block;
 	overflow: auto;
     overflow-x: hidden;
-	border-radius: 10px;
+	background-color: yellow;
+	font-size: 12px;
+	font-weight: bold;
 }
+.totChatDIV > .countWrapper> .count{
+	text-overflow:clip;
+	display:inline-block;
+	overflow: auto;
+    overflow-x: hidden;
+	background-color: gray;
+}
+.totChatDIV > .chatWrapper> .well{
+	text-overflow:clip;
+	display:inline-block;
+	overflow: auto;
+    overflow-x: hidden;
+	background-color: green;
+}
+.totChatDIV > .msgWrapper{
+	background-color: black;
+}
+
+
+
+
 .chatWrapper > .member {
 	width:250px;
 	font-size: 14px;

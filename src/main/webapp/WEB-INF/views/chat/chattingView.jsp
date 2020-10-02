@@ -29,23 +29,30 @@ $(document).ready(function(){
 });
 </script>
 <body>
-	<div class="chatWrapper">
-	<div class = "member">채팅 참여자 리스트
-		<div class = "detail_member" ></div>
+	<div class="totChatDIV">
+		<div class="memberWrapper" style="border-bottom: 1px solid black ;">
+			<div class="member">
+				채팅 참여자 리스트
+				<div class="detail_member"></div>
+			</div>
+		</div>
+		<div class="countWrapper" style="border-bottom: 1px solid black ;">
+			<div class="count">
+				인원
+				<div class="detail_count" id=""detail_count""></div>
+			</div>
+		</div>
+		<div class="chatWrapper" style="border-bottom: 1px solid black ;">
+			<div class="well" id="chatdata">
+				<!-- User Session Info Hidden -->
+			</div>
+		</div>
+		<div id="msgWrapper">
+			<div>
+				<input type="text" id="msg" value="1212" /> <input type="button"
+					id="btnSend" value="전송" />
+			</div>
+		</div>
 	</div>
-	<div class = "count">인원
-		<div class = "detail_count" ></div>
-	</div>
-	<div class="well" id="chatdata">
-   		<!-- User Session Info Hidden -->
-   		<input type="hidden" value='${userid}' id="sessionuserid">
-   	</div>
-   	<div id="msgWrapper">
-	<div>
-		<input type="text" id="msg" value="1212"/>
-   		<input type="button" id="btnSend" value="전송"/>
-   	</div>
-   	</div>
-   	</div>
 </body>
 </html>

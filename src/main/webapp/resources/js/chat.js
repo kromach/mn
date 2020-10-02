@@ -22,12 +22,12 @@ function getLog(){
 	    for(var i=0;i<strArr.length;i++){
 	    	//참여 퇴장 완료
 	    	if(strArr[i] == 'Status'){
-	    		$('.well').append('<div class = "detail" id = "status">'+strArr[i+1]+'</div>');
+	    		$('#chatdata').append('<div class = "detail" id = "status">'+strArr[i+1]+'</div>');
 	    	}
 	    	//참여인원 카운트 셋팅완료
 	    	if(strArr[i] == 'CountMember'){
 	    		console.log("카운트"+strArr[i+1]);
-	    		$('.detail_count').html('<div class = "detailC" >'+strArr[i+1]+'</div>');
+	    		$('#detail_count').html('<div class = "detailC" >'+strArr[i+1]+'</div>');
 	    	}
 	    	//참여자 리스트 셋팅완료
 	    	if(strArr[i] == 'JoinMember'){
