@@ -30,7 +30,7 @@ $(document).ready(function(){
 </script>
 <style>
 .chatWrapper{
-	width:1000px;
+	width:250px;
 }
 </style>
 <body>

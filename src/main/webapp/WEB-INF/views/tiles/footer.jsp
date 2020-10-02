@@ -3,20 +3,9 @@
 <!-- SocketJS CDN -->
 <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 <script src="/resources/js/chat.js"></script>
-<style>
-	.fixIcon > #text{
-		background-color: green;
-		width: 1000px;
-	}
-	.fixIcon > #chatArea{
-		background-color: yellow;
-		width: 1000px;
-	}
-</style>
+<div id="chatArea"></div>
 <div class="fixIcon">
 	<input type="hidden" value="0" id="isLoad">
-	<div id="text">1243134</div>
-	<div id="chatArea"></div>
 	<c:if test="${not empty sessionScope.memId}">
 		<div id="cahtIcon" class="chatIcon icon"
 			onclick="chatLoad()">
@@ -28,7 +17,16 @@
 		<i class="fas fa-angle-up" style="font-size: 50px"></i>
 	</div>
 </div>
-
+<style>
+#chatArea{
+	position:fixed;
+	right:80px;
+	bottom:10px;
+	background-color: white;
+	width: 250px;
+	z-index: 20;
+}
+</style>
 <script>
 function chatLoad(){
 	var isLoad = $('#isLoad').val();
