@@ -34,5 +34,10 @@ public class DrinkServiceImpl implements DrinkService {
 	public DrinkVO selectDrinkServiceInfo(String dkCode) throws SQLException {
 		return drinkDAO.selectDrinkServiceInfo(dkCode);
 	}
+
+	@Override
+	public HashMap selectCommentStarServiceInfo(String dkCode) throws SQLException {
+		return drinkDAO.selectCommentStarServiceInfo(dkCode);
+	}
 	
 }

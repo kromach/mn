@@ -15,7 +15,10 @@ public interface DrinkService {
 
 	public List<HashMap> selectSmallCategoryList(String bigCategoryCode) throws Exception;
 
+	// 주류정보 상세
 	public DrinkVO selectDrinkServiceInfo(String dkCode) throws SQLException;
-	
+
+	// 주류정보 한줄평 개수 & 평점
+	public HashMap selectCommentStarServiceInfo(String dkCode) throws SQLException;
 	
 }

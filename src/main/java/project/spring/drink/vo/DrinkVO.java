@@ -26,6 +26,18 @@ public class DrinkVO {
 	private int dkApprove;
 	private String insertId;
 	private Timestamp insertDay;
+	
+	private String item1Val;
+	private String item2Val;
+	private String item3Val;
+	private String item4Val;
+	private String item5Val;
+	
+	private int dkItem1;
+	private int dkItem2;
+	private int dkItem3;
+	private int dkItem4;
+	private int dkItem5;
 
 	public String getDkCode() {
 		return dkCode;
@@ -151,4 +163,66 @@ public class DrinkVO {
 
 		this.dkContent = c1+c2+c3;
 	}
+	
+	public String getItem1Val() {
+		return item1Val;
+	}
+	public void setItem1Val(String item1Val) {
+		this.item1Val = item1Val;
+	}
+	public String getItem2Val() {
+		return item2Val;
+	}
+	public void setItem2Val(String item2Val) {
+		this.item2Val = item2Val;
+	}
+	public String getItem3Val() {
+		return item3Val;
+	}
+	public void setItem3Val(String item3Val) {
+		this.item3Val = item3Val;
+	}
+	public String getItem4Val() {
+		return item4Val;
+	}
+	public void setItem4Val(String item4Val) {
+		this.item4Val = item4Val;
+	}
+	public String getItem5Val() {
+		return item5Val;
+	}
+	public void setItem5Val(String item5Val) {
+		this.item5Val = item5Val;
+	}
+	public int getDkItem1() {
+		return dkItem1;
+	}
+	public void setDkItem1(int dkItem1) {
+		this.dkItem1 = dkItem1;
+	}
+	public int getDkItem2() {
+		return dkItem2;
+	}
+	public void setDkItem2(int dkItem2) {
+		this.dkItem2 = dkItem2;
+	}
+	public int getDkItem3() {
+		return dkItem3;
+	}
+	public void setDkItem3(int dkItem3) {
+		this.dkItem3 = dkItem3;
+	}
+	public int getDkItem4() {
+		return dkItem4;
+	}
+	public void setDkItem4(int dkItem4) {
+		this.dkItem4 = dkItem4;
+	}
+	public int getDkItem5() {
+		return dkItem5;
+	}
+	public void setDkItem5(int dkItem5) {
+		this.dkItem5 = dkItem5;
+	}
+
 }
