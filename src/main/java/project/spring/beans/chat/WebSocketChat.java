@@ -27,7 +27,6 @@ public class WebSocketChat extends TextWebSocketHandler{
 	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 	private Map<String,WebSocketSession> userSession = new HashMap<String,WebSocketSession>();
 	
-	
 	//getHttpSession
 	private String getId(WebSocketSession session) {
 		Map<String, Object> httpSession = session.getAttributes();
@@ -63,14 +62,11 @@ public class WebSocketChat extends TextWebSocketHandler{
 	//chat
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		System.out.println("[textMassage]:"+session+":"+message);
 		//모든 클라이언트에게 전송
 		String nickName = getId(session);
 		for(WebSocketSession sess : sessionList) {
-			System.out.println("[textSend]");
-			sess.sendMessage(new TextMessage(nickName +"|"+message.getPayload()));
+			sess.sendMessage(new TextMessage( "Message" +"|"+nickName+":"+message.getPayload()));
 		}
-		
 	}
 	
 	//클라이언트 연결해제

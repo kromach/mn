@@ -41,8 +41,13 @@ function connect(){
 	    
 	};
 	ws.onmessage = function (event) {
-	    console.log('Receive MSG : ', event.data+'\n');
-	    
+	    console.log(event.data+'\n');
+	    var data = event.data.split('|',event.data);
+	    alert();
+	    for(var i in data){
+	    	alert(1);
+	    	console.log(data[i]);
+	    }
 	};
 
 	ws.onclose = function(event) {
