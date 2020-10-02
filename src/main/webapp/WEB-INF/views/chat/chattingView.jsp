@@ -15,9 +15,11 @@
 </head>
 <body>
 	<h1>Chatting Page (id: ${userId})</h1>
+	<br>
 	<div class = "member">채팅 참여자 리스트
 		<div class = "detail_member" ></div>
 	</div>
+	<br>
 	<div class = "count">인원
 		<div class = "detail_count" ></div>
 	</div>
@@ -26,7 +28,7 @@
    		<!-- User Session Info Hidden -->
    		<input type="hidden" value='${userid}' id="sessionuserid">
    	</div>
-   	<br>
+    <br>
 	<div>
 		<input type="text" id="msg" value="1212"/>
    		<input type="button" id="btnSend" value="전송"/>
@@ -52,7 +54,7 @@ function connect(){
 	    for(var i=0;i<strArr.length;i++){
 	    	//참여 퇴장 완료
 	    	if(strArr[i] == 'Status'){
-	    		$('.well').append('<div class = "detail_status">'+strArr[i+1]+'</div>');
+	    		$('.well').append('<div class = "detail",id = "status">'+strArr[i+1]+'</div>');
 	    	}
 	    	//참여인원 카운트 셋팅완료
 	    	if(strArr[i] == 'CountMember'){
@@ -77,8 +79,8 @@ function connect(){
 	    		var message = strArr[i+1].split(':');
 	    		sessionNick = message[0];
 	    		message = message[1];
+		    	$('.well').append('<div class = "detail" ,id = "message">'+sessionNick+':'+message+'</div>');
 	    	}
-	    	
 	    }
 	};
 
@@ -98,6 +100,7 @@ $(document).ready(function(){
 		if (socket.readyState !== 1) return;
 		let msg = $('input#msg').val();
 		socket.send(msg);
+		console.log($('.detail').length);
 	});
 	connect();
 });
