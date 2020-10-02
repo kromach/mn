@@ -42,7 +42,7 @@ $(document).ready(function(){
 				<div class="detail_count" id=""detail_count""></div>
 			</div>
 		</div>
-		<div class="chatWrapper" style="border-bottom: 1px solid black ;">
+		<div class="chatWrapper" style="border-bottom: 1px solid black ; height: 200px;">
 			<div class="well" id="chatdata">
 				<!-- User Session Info Hidden -->
 			</div>

@@ -47,7 +47,7 @@ function getLog(){
 	    		var message = strArr[i+1].split(':');
 	    		sessionNick = message[0];
 	    		message = message[1];
-		    	$('.well').append('<div class = "detail" id = "message">'+sessionNick+':'+message+'</div>');
+		    	$('#chatdata').append('<div class = "detail" id = "message">'+sessionNick+':'+message+'</div>');
 	    	}
 	    }
 	};
