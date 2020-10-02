@@ -3,7 +3,7 @@
 <!-- SocketJS CDN -->
 <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 <script src="/resources/js/chat.js"></script>
-<div id="chatArea"></div>
+<div id="totChatArea"></div>
 <div class="fixIcon">
 	<input type="hidden" value="0" id="isLoad">
 	<c:if test="${not empty sessionScope.memId}">
@@ -94,7 +94,10 @@
 function chatLoad(){
 	var isLoad = $('#isLoad').val();
 	if(isLoad == 0){
-		//chat load
+		//chatZoneCreate
+		$('#totChatArea').append('<div id="chatArea"></div>');
+		
+		//chat load in Zone
 		$("#chatArea").load("/chattingView",function(){
 			$('#isLoad').val(1);
 		});
