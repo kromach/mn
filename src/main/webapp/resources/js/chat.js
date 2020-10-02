@@ -3,9 +3,15 @@ function connect(){
 	var ws = new WebSocket("ws://localhost:8080/replyEcho");
 	socket = ws;
 	socket.onopen = function (event) {
-	    console.log('Info: connection opened.');
+		console.log('Info: connection opened.');
+		console.log(event.data);
+		console.log('------------');
 	};
+}
+function getLog(){
 	socket.onmessage = function (event) {
+		console.log('log');
+		console.log('============');
 	    console.log(event.data+'\n');
 	    var data = event.data;
 	    var sessionNick = null;

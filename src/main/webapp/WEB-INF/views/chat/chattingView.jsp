@@ -18,6 +18,8 @@
 $(document).ready(function(){
 	//chat 연결
 	//default 메세지 출력
+	connect();
+	getLog();
 	$('#btnSend').on('click', function(evt) {
 		evt.preventDefault();
 		if (socket.readyState !== 1) return;

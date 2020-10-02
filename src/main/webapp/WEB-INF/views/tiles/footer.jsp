@@ -27,8 +27,6 @@ function chatLoad(){
 		$("#chatArea").load("/chattingView",function(){
 			$('#isLoad').val(1);
 		});
-		//chat connect
-		connect();
 	}else if(isLoad ==1){
 		console.log(socket);
 		socket.close();
