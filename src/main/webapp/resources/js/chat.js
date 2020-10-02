@@ -4,7 +4,6 @@ function connect(){
 	socket = ws;
 	socket.onopen = function (event) {
 	    console.log('Info: connection opened.');
-	    alert(event);
 	};
 	socket.onmessage = function (event) {
 	    console.log(event.data+'\n');

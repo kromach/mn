@@ -23,13 +23,14 @@
 function chatLoad(){
 	var isLoad = $('#isLoad').val();
 	if(isLoad == 0){
-		//chat connect
-		connect();
+		//chat load
 		$("#chatArea").load("/chattingView",function(){
 			$('#isLoad').val(1);
 		});
+		//chat connect
+		connect();
 	}else if(isLoad ==1){
-		console.log(soket);
+		console.log(socket);
 		socket.close();
 		$('#isLoad').val(0);
 		$("#chatArea").empty();
