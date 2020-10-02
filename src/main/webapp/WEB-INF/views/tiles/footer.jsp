@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- SocketJS CDN -->
+<script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+<script src="/resources/js/chat.js"></script>
 <div class="fixIcon">
+	<input type="hidden" value="0" id="isLoad">
 	<div id="chatArea">
-		<input type="hidden" value="0" id="isLoad">
 	</div>
 	<c:if test="${not empty sessionScope.memId}">
 		<div id="cahtIcon" class="chatIcon icon"
@@ -15,15 +18,21 @@
 		<i class="fas fa-angle-up" style="font-size: 50px"></i>
 	</div>
 </div>
+
 <script>
 function chatLoad(){
 	var isLoad = $('#isLoad').val();
-	alert(isLoad);
 	if(isLoad == 0){
+		//chat connect
+		connect();
 		$("#chatArea").load("/chattingView",function(){
-			$('#isLoad').val() = 1;
-			alert($('#isLoad').val());
+			$('#isLoad').val(1);
 		});
+	}else if(isLoad ==1){
+		console.log(soket);
+		socket.close();
+		$('#isLoad').val(0);
+		$("#chatArea").empty();
 	}
 }
 </script>
