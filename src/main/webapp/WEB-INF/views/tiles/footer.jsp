@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="fixIcon">
+	<div id="chatArea">
+		<input type="hidden" value="0" id="isLoad">
+	</div>
 	<c:if test="${not empty sessionScope.memId}">
 		<div id="cahtIcon" class="chatIcon icon"
-			onclick="window.location='/chattingView'">
+			onclick="chatLoad()">
 			<i class="fas fa-comments" style="font-size: 36px; margin-top: 5px;"></i>
 		</div>
 	</c:if>
@@ -12,6 +15,18 @@
 		<i class="fas fa-angle-up" style="font-size: 50px"></i>
 	</div>
 </div>
+<script>
+function chatLoad(){
+	var isLoad = $('#isLoad').val();
+	alert(isLoad);
+	if(isLoad == 0){
+		$("#chatArea").load("/chattingView",function(){
+			$('#isLoad').val() = 1;
+			alert($('#isLoad').val());
+		});
+	}
+}
+</script>
 <script>
 	//top 버튼 제어
 	//스크롤 위치 확인
