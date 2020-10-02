@@ -28,8 +28,14 @@ $(document).ready(function(){
 	});
 });
 </script>
+<style>
+.chatWrapper{
+	width:1000px;
+}
+</style>
 <body>
-	<h1>Chatting Page (id: ${nickName})</h1>
+	<div class="chatWrapper">
+	<h1>${nickName}</h1>
 	<br>
 	<div class = "member">채팅 참여자 리스트
 		<div class = "detail_member" ></div>
@@ -47,6 +53,7 @@ $(document).ready(function(){
 	<div>
 		<input type="text" id="msg" value="1212"/>
    		<input type="button" id="btnSend" value="전송"/>
+   	</div>
    	</div>
 </body>
 </html>

@@ -3,10 +3,20 @@
 <!-- SocketJS CDN -->
 <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 <script src="/resources/js/chat.js"></script>
+<style>
+	.fixIcon > #text{
+		background-color: green;
+		width: 1000px;
+	}
+	.fixIcon > #chatArea{
+		background-color: yellow;
+		width: 1000px;
+	}
+</style>
 <div class="fixIcon">
 	<input type="hidden" value="0" id="isLoad">
-	<div id="chatArea">
-	</div>
+	<div id="text">1243134</div>
+	<div id="chatArea"></div>
 	<c:if test="${not empty sessionScope.memId}">
 		<div id="cahtIcon" class="chatIcon icon"
 			onclick="chatLoad()">
