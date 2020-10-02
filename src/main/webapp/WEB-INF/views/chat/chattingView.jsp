@@ -14,7 +14,7 @@
 	<script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 </head>
 <body>
-	<h1>Chatting Page (id: ${userId})</h1>
+	<h1>Chatting Page (id: ${nickName})</h1>
 	<br>
 	<div class = "member">채팅 참여자 리스트
 		<div class = "detail_member" ></div>
