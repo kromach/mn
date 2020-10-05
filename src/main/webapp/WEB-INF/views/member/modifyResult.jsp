@@ -8,7 +8,7 @@
 		<div class="grid">
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
-			<div class="grid-item grid-item--width6">${nickName }님의 회원정보가 수정되었습니다.</div>
+			<div class="grid-item grid-item--width6">${sessionScope.memNickName }님의 회원정보가 수정되었습니다.</div>
 		</div>
 	</div>
 	</div>

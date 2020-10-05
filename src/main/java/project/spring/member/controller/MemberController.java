@@ -276,6 +276,7 @@ public class MemberController {
 		
 		System.out.println(dto);
 		memberService.updateItem(dto);
+		
 		return "/member/modifyResult.mn";
 	}
 	
