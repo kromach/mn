@@ -9,6 +9,9 @@
 	<select id="getproduct" resultType="productvo">
 		select * from product_info
 	</select>
+	<select id="getproductinfo" parameterType="String" resultType="productvo">
+		select * from product_info where pr_code= #{value}
+	</select>
 	
 
 </mapper>
