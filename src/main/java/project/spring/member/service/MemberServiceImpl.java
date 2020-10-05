@@ -53,5 +53,12 @@ public class MemberServiceImpl implements memberInterface{
 	public int deleteItem(Object obj) {
 		// TODO Auto-generated method stub
 		return 0;
+	} 
+	@Override
+	public int readItem(Object obj) {
+		System.out.println(obj);
+		int result = memberDAO.readItem(obj);
+		System.out.println("ServiceImpleResult="+result);
+		return result;
 	}
 }

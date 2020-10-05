@@ -33,6 +33,12 @@ public class DrinkDAOImpl implements DrinkDAO {
 
 		return sqlSession.selectOne("drink.selectDrinkServiceInfo", dkCode);
 	}
+
+
+	@Override
+	public HashMap selectCommentStarServiceInfo(String dkCode) throws SQLException {
+		return sqlSession.selectOne("drink.selectCommentStarServiceInfo", dkCode);
+	}
 	
 	/*
 	@Override

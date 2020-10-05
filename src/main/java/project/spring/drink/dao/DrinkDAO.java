@@ -13,4 +13,7 @@ public interface DrinkDAO {
 
 	DrinkVO selectDrinkServiceInfo(String dkCode) throws SQLException;
 
+	HashMap selectCommentStarServiceInfo(String dkCode) throws SQLException;
+
+
 }

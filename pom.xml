@@ -14,6 +14,12 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
+		<!--chat webSoket -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/net.sf.opencsv/opencsv -->
 		<dependency>
 			<groupId>net.sf.opencsv</groupId>

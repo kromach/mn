@@ -2,10 +2,15 @@ package project.spring.member.dao;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import project.spring.member.vo.MemberDTO;
 
@@ -45,5 +50,35 @@ public class MemberDAOImpl implements MemberDAO {
 	public int deleteItem(Object obj) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	@Override
+	public int readItem(Object obj) {
+		int result = -1;
+		if (obj instanceof MemberDTO) {
+			MemberDTO dto = sqlSession.selectOne("member.isExistId", obj);
+			MemberDTO dto_origin = (MemberDTO)obj;
+			//결과값없음
+			if(dto==null) {
+				System.out.println(result);
+				return result;
+			}
+			
+			//id,pw일치
+			if(dto.getId().equals(dto_origin.getId())&&
+				dto.getPw().equals(dto_origin.getPw())
+					) {
+				result = 1;
+				HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+				req.getSession().setAttribute("memId", dto.getId());
+				req.getSession().setAttribute("memNickName", dto.getNickName());
+			}
+			//id만 일치
+			else if(dto.getId().equals(dto_origin.getId())) {
+				result = 0;
+			}
+			System.out.println("DAOImpleResult="+result);
+		} 
+		return result;
 	}
 }
