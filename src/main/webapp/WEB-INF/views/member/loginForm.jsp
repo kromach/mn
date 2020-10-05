@@ -18,8 +18,8 @@
 					<input class="loginInput" type="text" name="pw">
 					<button type="submit" class="greyBtn" >로그인</button>
 					<button type="button" class="greyBtn" onclick="window.location.href='/member/signup'">회원가입</button>
-					<button type="button" class="greyBtn">ID찾기</button>
-					<button type="button" class="greyBtn">PW찾기</button>
+					<button type="button" class="greyBtn" onclick="window.location.href='/member/findId'">ID찾기</button>
+					<button type="button" class="greyBtn" onclick="window.location.href='/member/findPw'">PW찾기</button>
 				</div>
 				</form>
 			</div>

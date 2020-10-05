@@ -280,9 +280,28 @@ public class MemberController {
 		memberService.updateItem(dto);
 		return "/member/modifyResult.mn";
 	}
-	
 	//id찾기
+	@RequestMapping(value = "/findId")
+	public String findIdForm() {
+		return "/member/findIdForm.mn";
+	}
 	//pw찾기
-	
-	
+	@RequestMapping(value = "/findPw")
+	public String findPwForm() {
+		return "/member/findPwForm.mn";
+	}
+	//id찾기 처리
+	@RequestMapping(value = "/findIdPro")
+	public String findIdPro(MemberDTO dto,Model model) {
+		model.addAttribute("memberDTO", dto);
+		model.addAttribute("result","id");
+		return "/member/findResult.mn";
+	}
+	//pw찾기 처리
+	@RequestMapping(value = "/findPwPro")
+	public String findPwPro(MemberDTO dto,Model model) {
+		model.addAttribute("memberDTO", dto);
+		model.addAttribute("result","pw");
+		return "/member/findResult.mn";
+	}
 }
