@@ -57,6 +57,7 @@ public class MemberDAOImpl implements MemberDAO {
 	public int updateItem(Object obj) {
 		int result = 0;
 		if (obj instanceof MemberDTO) {
+			System.out.println("updateOBJ"+(MemberDTO)obj);
 			result = sqlSession.update("member.updateMember", obj);
 		}
 		return result;

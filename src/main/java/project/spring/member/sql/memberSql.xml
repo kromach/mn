@@ -16,9 +16,7 @@
   			SELECT * FROM MEMBER_INFO mi WHERE id = #{value}
   		</select>
   		<update id="updateMember" parameterType="memberDTO" >
-			UPDATE MEMBER_INFO SET (PW ,NICKNAME ,tel,ADDRESS ,LICENSE_IMG
-			,LICENSE_NUM) =
-			(#{PW},#{NICKNAME},#{tel},#{ADDRESS},#{LICENSE_IMG},#{LICENSE_NUM})
-			where id = #{id}
+			UPDATE MEMBER_INFO SET NICKNAME=#{nickName},pw=#{pw},tel=#{tel},ADDRESS=#{address} ,LICENSE_IMG=#{licenseImg}
+			,LICENSE_NUM =#{licenseNum} where id = #{id}
   		</update>
   </mapper>

@@ -51,6 +51,7 @@ public class MemberServiceImpl implements memberInterface{
 	@Override
 	public int updateItem(Object obj) {
 		int result = memberDAO.updateItem(obj);
+		System.out.println("memberUpdateResult = "+result);
 		return result;
 	}
 	@Override
