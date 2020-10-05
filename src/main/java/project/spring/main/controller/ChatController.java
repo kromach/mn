@@ -1,5 +1,6 @@
 package project.spring.main.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -13,10 +14,9 @@ import project.spring.kakao.vo.MemberDTO;
 public class ChatController {
 	
 	@RequestMapping(value = "/chattingView", method = RequestMethod.GET)
-	public ModelAndView chat(ModelAndView mv,HttpSession session) {
+	public String chatSs(HttpServletRequest reqeust,HttpSession session) {
 		System.out.println("chatController");
-		mv.setViewName("/chat/chattingView.mn");
-		mv.addObject("userId", session.getAttribute("memNickName"));
-		return mv;
+		reqeust.setAttribute("nickName", session.getAttribute("memNickName"));
+		return "/chat/chattingView";
 	}
 }
