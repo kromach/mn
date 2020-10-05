@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원정보 관리</title>
 </head>
 <body>
 
@@ -13,6 +13,20 @@
 	<c:forEach var="memberList" items="${memberList }">
 		<h1>${memberList.id }</h1>	
 	</c:forEach>
+
+	<div>
+		<table>
+			<tr>
+				<th>아이디</th>
+				<th>별명</th>
+				<th>가입일</th>
+				<th>생년월일</th>
+				<th>신고글</th>
+				<th>신고회수</th>
+				<th>강퇴</th>
+			</tr>
+		</table>
+	</div>
 
 </body>
 </html>
