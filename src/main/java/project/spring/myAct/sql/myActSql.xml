@@ -14,7 +14,7 @@
  		</select>
  		
  		<select id="myLikeArticle" parameterType="string" resultType="MyLikeDTO">
- 			SELECT * FROM (SELECT ML_IDX, ML_URL, ML_DIFF, INSERT_ID, rownum r FROM MY_LIKE ml) WHERE INSERT_ID =#{value} AND (ML_DIFF = 'F' OR ML_DIFF =  'C') ORDER BY ML_IDX DESC
+ 			SELECT * FROM (SELECT ML_IDX, ML_URL, KIND, INSERT_ID, rownum r FROM MY_LIKE ml) WHERE INSERT_ID =#{value} AND (KIND = 'F' OR KIND =  'C') ORDER BY ML_IDX DESC
  		</select>
  		<select id="myDrinkCount" parameterType="string" resultType="int">
  			select count(*) from BOARD_NORMAL where insert_id=#{value}
