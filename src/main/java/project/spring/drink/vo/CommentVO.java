@@ -15,8 +15,12 @@ public class CommentVO {
 	private int item4;
 	private int item5;
 	private String insertId;
+	private String nickname;
+	private int writerTitleCnt;
+	private String writerTitleName;
 	private Timestamp insertDay;
 	private String isDelete;
+	
 	public int getCmIdx() {
 		return cmIdx;
 	}
@@ -95,4 +99,23 @@ public class CommentVO {
 	public void setIsDelete(String isDelete) {
 		this.isDelete = isDelete;
 	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public int getWriterTitleCnt() {
+		return writerTitleCnt;
+	}
+	public void setWriterTitleCnt(int writerTitleCnt) {
+		this.writerTitleCnt = writerTitleCnt;
+	}
+	public String getWriterTitleName() {
+		return writerTitleName;
+	}
+	public void setWriterTitleName(String writerTitleName) {
+		this.writerTitleName = writerTitleName;
+	}
+	
 }

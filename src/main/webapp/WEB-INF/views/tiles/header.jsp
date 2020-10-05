@@ -45,7 +45,7 @@
 <nav class="rightMenu" style="display: none;">
 	<ul>
 		<li>
-			<a href="#profile"><div class="fa fa-wine-glass-alt"></div> 주류 저장소</a>
+			<a href="/drink/index"><div class="fa fa-wine-glass-alt"></div> 주류 저장소</a>
 		</li>
 		<li class="sub-menu">
 			<a href="#board"><div class="fa fa-list-alt"></div> 게시판 <div class="fa fa-caret-up fr"></div></a>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import project.spring.drink.dao.DrinkDAO;
 import project.spring.drink.service.DrinkService;
+import project.spring.drink.vo.CommentVO;
 import project.spring.drink.vo.DrinkVO;
 
 @Controller
@@ -51,7 +52,7 @@ public class DrinkController {
 			System.out.println("schDkCountry : " + schDkCountry);
 		}
 		
-		return "/drink/index.mn";
+		return "drink/index.mn";
 	}
 	
 	@RequestMapping("detail")
@@ -65,9 +66,19 @@ public class DrinkController {
 		// 총 코멘트 수, 평가 평균 점수 
 		HashMap commentStarInfo = drinkService.selectCommentStarServiceInfo(dkCode);
 		
+		String commentCount = String.valueOf(commentStarInfo.get("cmCount"));
+		
+		List<CommentVO> commentList = null;
+		if((Integer.parseInt(commentCount)) > 1) {
+			commentList = drinkService.selectCommentServiceList(dkCode);
+		}
+		
+		//System.out.println(commentList);
+		
+		// 주류별 태그 정보
 		List<HashMap> tagCloudInfo = drinkService.selectTagCloudServiceInfo(dkCode);
 		
-		System.out.println(tagCloudInfo);
+		//System.out.println(tagCloudInfo);
 		
 		// request에 담긴 검색 결과 뽑아내기 
 		String schDkBkind = null;
@@ -98,11 +109,13 @@ public class DrinkController {
 		model.addAttribute("schDkCountry", schDkCountry);
 		model.addAttribute("drinkInfo", drinkInfo);
 		model.addAttribute("commentStarInfo", commentStarInfo);
+		model.addAttribute("commentList", commentList);
+		model.addAttribute("tagCloudInfo", tagCloudInfo);
 //		
 //		System.out.println(selectDrinkInfo.getDkName());
 //		System.out.println(selectDrinkInfo.getDkBkindValue());
 		
-		return "/drink/detail.mn";
+		return "drink/detail.mn";
 	}
 //	
 //	@RequestMapping("smallCategory.do")

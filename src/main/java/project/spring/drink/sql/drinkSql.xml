@@ -24,16 +24,23 @@
   			SELECT DK_CODE, COUNT(CM_IDX) CM_COUNT, 
   					AVG(ITEM1) CM_ITEM1, AVG(ITEM2) CM_ITEM2, AVG(ITEM3) CM_ITEM3, AVG(ITEM4) CM_ITEM4, AVG(ITEM5) CM_ITEM5  
   			FROM DRINK_COMMENT 
-  			WHERE DK_CODE = #{value} 
+  			WHERE DK_CODE = #{value} AND IS_DELETE = 'N'
   			GROUP BY DK_CODE 
   		</select>
   		
 		<select id="selectTagCloudServiceInfo" parameterType="String" resultType="camelmap">
-  			SELECT ROWNUM AS ROW_COUNT, T.* 
-			FROM (
-				(SELECT DK_CODE, TAG_VALUE, TAG_COUNT FROM DRINK_TAG WHERE dk_code = #{value} ORDER BY TAG_COUNT ) T 
-				) 
-			ORDER BY ROW_COUNT DESC
+  			SELECT DK_CODE, TAG_VALUE, TAG_COUNT FROM DRINK_TAG WHERE dk_code = #{value} ORDER BY TAG_COUNT	
+  		</select>
+  		
+  		<select id="selectCommentServiceList" parameterType="String" resultType="project.spring.drink.vo.CommentVO">
+  			SELECT CM_IDX, DK_CODE, CM_LIKE, CM_UNLIKE, CM_COMMENT, INSERT_ID, NICKNAME, INSERT_DAY, 
+					(SELECT COUNT(T.ID) FROM MY_TITLE T WHERE T.ID = M.ID) AS WRITER_TITLE_CNT, MY.TITLE_INDEX, TL.TITLE_NAME AS WRITER_TITLE_NAME,
+					C.ITEM1, C.ITEM2, C.ITEM3, C.ITEM4, C.ITEM5
+			FROM DRINK_COMMENT C INNER JOIN 
+				 MEMBER_INFO M ON C.INSERT_ID = M.ID LEFT OUTER JOIN 
+				 (SELECT TITLE_INDEX, ID, CHOOSE_TITLE FROM MY_TITLE) MY ON M.ID = MY.ID AND MY.CHOOSE_TITLE = 'Y' LEFT OUTER JOIN
+				 TITLE_LIST TL ON MY.TITLE_INDEX = TL.TITLE_IDX
+			WHERE dk_code = 'DK00001' AND IS_DELETE = 'N' ORDER BY CM_IDX DESC	
   		</select>
   		
   		<!-- <select id="userCount" resultType="int">
