@@ -3,6 +3,8 @@ package project.spring.product.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,5 +49,27 @@ public class ProductController {
 		
 		return "/product/productdetail.mn";
 	}
+	
+	@RequestMapping("myorderlist")
+	public String myorderlist (Model model, HttpSession session) throws SQLException {
+	
+	List myorderlist = null;
+	int myordercount = 0;
+	
+	String id = (String)session.getAttribute("memId");
+	
+	myordercount = productservice.myordercount(id);
+	
+	
+	if(myordercount>0) {
+		myorderlist = productservice.myorderlist(id);
+	}
+	
+	model.addAttribute("myordercount",myordercount);
+	model.addAttribute("myorderlist",myorderlist);
+	
+	
+	return "/product/myorderlist.mn";
+}
 
 }
