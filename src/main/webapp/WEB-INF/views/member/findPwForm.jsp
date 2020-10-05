@@ -21,6 +21,8 @@
 					이름
 					</div>
 					<input class="loginInput" type="text" name="name" >
+					<div class="loginLabel">아이디</div>
+					<input class="loginInput" type="text" name="id">
 					<div class="loginLabel"> 
 					생년월일
 					</div>
