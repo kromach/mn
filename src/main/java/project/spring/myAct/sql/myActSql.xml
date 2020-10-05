@@ -3,7 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="myAct">
-  		<select id="myArticle" parameterType="string" resultType="int">
-  			select count(*) from BOARD_NORMAL where insert_id=#{value}
-  		</select>
+ 		<select id="selectAll" parameterType="string" resultType="ArticleDTO">
+ 		<![CDATA[
+ 		select * from (select BN_IDX,BN_TITLE ,KIND ,DK_CODE ,READCOUNT ,HEART ,REPORT ,CONTENT ,INSERT_ID ,INSERT_DAY ,IS_DELETE ,rownum r FROM BOARD_NORMAL bn  WHERE insert_id=#{value} ORDER BY BN_IDX desc)
+		]]>
+ 		</select>
+ 		
+ 		<select id="myArticleCount" parameterType="string" resultType="int">
+ 			select count(*) from BOARD_NORMAL where insert_id=#{value}
+ 		</select>
+ 		
+ 		<select id="myLikeArticle" parameterType="string" resultType="MyLikeDTO">
+ 			SELECT * FROM (SELECT ML_IDX, ML_URL, KIND, INSERT_ID, rownum r FROM MY_LIKE ml) WHERE INSERT_ID =#{value} AND (KIND = 'F' OR KIND =  'C') ORDER BY ML_IDX DESC
+ 		</select>
+ 		<select id="myDrinkCount" parameterType="string" resultType="int">
+ 			select count(*) from BOARD_NORMAL where insert_id=#{value}
+ 		</select>
+ 		
+ 		<select id="myLikeDrink" parameterType="string" resultType="int">
+ 			select count(*) from MY_LIKE where insert_id=#{value} and ML_DIFF LIKE 'F%'
+ 		</select>
   </mapper>

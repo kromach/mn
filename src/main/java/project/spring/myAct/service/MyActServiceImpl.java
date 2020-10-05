@@ -12,12 +12,6 @@ public class MyActServiceImpl implements MyActService{
 	
 	@Autowired
 	private MyActDAO myActDAO = null;
-	
-	@Override
-	public List searchItem() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public int insertItem() {
@@ -38,10 +32,59 @@ public class MyActServiceImpl implements MyActService{
 	}
 
 	@Override
+	public int insertItem(Object obj) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateItem(Object obj) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteItem(Object obj) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
 	public int myArticleCount(String memId) {
 		int count = myActDAO.myArticleCount(memId);
-		
 		return count;
+	}
+	
+	@Override
+	public List getMyArticle(String memId) {
+		List articleList = myActDAO.getMyArticles(memId);
+		return articleList;
+	}
+
+	@Override
+	public int likeArticleCount(String memId) {
+		int count = myActDAO.myLikeArticleCount(memId);
+		return count;
+	}
+
+	@Override
+	public List myLikeArticle(String memId) {
+		List articleList = myActDAO.myLikeArticle(memId);
+		
+		return articleList;
+	}
+
+	@Override
+	public int likeDrinkCount(String memId) {
+		int count = myActDAO.myLikeDrinkCount(memId);
+		return count;
+	}
+
+	@Override
+	public List myLikeDrink(String memId) {
+		List articleList = myActDAO.myLikeDrink(memId);
+		return articleList;
 	}
 
 }
