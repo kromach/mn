@@ -35,7 +35,7 @@ public class ProductController {
 		
 		model.addAttribute("productlist", productlist);
 		model.addAttribute("count", count);
-		return "/product/productList.mn";
+		return "product/productList.mn";
 	}
 	
 	
@@ -47,29 +47,28 @@ public class ProductController {
 		model.addAttribute("info", info);
 		System.out.println(info);
 		
-		return "/product/productdetail.mn";
+		return "product/productdetail.mn";
 	}
 	
 	@RequestMapping("myorderlist")
 	public String myorderlist (Model model, HttpSession session) throws SQLException {
-	
 	List myorderlist = null;
 	int myordercount = 0;
 	
-	String id = (String)session.getAttribute("memId");
-	
+	//String id = (String)session.getAttribute("memId");
+	String id = "boo";
 	myordercount = productservice.myordercount(id);
-	
+	System.out.println(myordercount);
 	
 	if(myordercount>0) {
 		myorderlist = productservice.myorderlist(id);
 	}
-	
+	System.out.println(myorderlist);
 	model.addAttribute("myordercount",myordercount);
 	model.addAttribute("myorderlist",myorderlist);
 	
 	
-	return "/product/myorderlist.mn";
+	return "product/myorderlist.mn";
 }
 
 }

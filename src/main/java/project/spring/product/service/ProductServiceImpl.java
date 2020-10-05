@@ -89,8 +89,8 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List myorderlist(String id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List myorderlist = productDAO.myorderlist(id);
+		return myorderlist;
 	}
 
 	@Override
