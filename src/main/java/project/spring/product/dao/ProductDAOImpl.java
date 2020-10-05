@@ -83,13 +83,14 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public int myordercount(String id) throws SQLException {
 		int myordercount = sqlSession.selectOne("product.myordercount",id);
+		System.out.println(myordercount);
 		return myordercount;
 	}
 
 	@Override
 	public List myorderlist(String id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List myorderlist =sqlSession.selectList("product.myorderlist",id);
+		return myorderlist;
 	}
 
 	@Override

@@ -12,6 +12,11 @@
 	<select id="getproductinfo" parameterType="String" resultType="productvo">
 		select * from product_info where pr_code= #{value}
 	</select>
-	
+	<select id="myordercount" parameterType="string" resultType="int">
+		select count(*) from order_info where user_id = #{value}
+	</select>
+	<select id="myorderlist" parameterType="string" resultType="ordervo">
+		select * from order_info where user_id = #{value}
+	</select>
 
 </mapper>
