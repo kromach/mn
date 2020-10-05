@@ -66,7 +66,7 @@ public class MyActDAOImpl implements MyActDAO{
 	@Override
 	public int myLikeArticleCount(String memId) {
 		int count = 0 ; 
-//		sqlSession.selectOne("myAct.myLikeArticleCount", memId);
+		sqlSession.selectOne("myAct.myLikeArticleCount", memId);
 		return count;
 	}
 

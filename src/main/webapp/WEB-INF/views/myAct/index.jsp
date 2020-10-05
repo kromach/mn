@@ -25,7 +25,7 @@
 				<a href="/myAct">내 글 보기</a>
 			</div>
 			<div class="linkBar" id="likeArticle">
-				<a onclick="">글 좋아요</a>
+				<a onclick="/myAct/likeArticle">글 좋아요</a>
 			</div>
 			<div class="linkBar" id="likeDrink">
 				<a>술 좋아요</a>
