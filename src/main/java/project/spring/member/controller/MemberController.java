@@ -224,11 +224,6 @@ public class MemberController {
 		//1 - id o pw o
 		int result = memberService.readItem(model);
 		request.setAttribute("result", result);
-		if(result==1) {
-			//sessionSetting
-			System.out.println(model.toString());
-		}
-		
 		return "/member/loginResult.mn";
 	}
 	
@@ -276,7 +271,6 @@ public class MemberController {
 		
 		System.out.println(dto);
 		memberService.updateItem(dto);
-		
 		return "/member/modifyResult.mn";
 	}
 	
@@ -286,10 +280,6 @@ public class MemberController {
 		memberService.updateItem(dto);
 		return "/member/modifyResult.mn";
 	}
-	
-	
-	
-	
 	
 	//id찾기
 	//pw찾기
