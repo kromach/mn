@@ -140,7 +140,7 @@ public class MemberController {
 			//dtoImgSetting
 			dto.setBirth(birth);
 			dto.setLicenseImg(newName);
-			dto.setUserKind("sales");
+			dto.setUserKind("salse");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -260,15 +260,15 @@ public class MemberController {
 	
 	//정보수정
 	@RequestMapping(value = "/modify")
-	public String modifyMemberSs(HttpSession session){
+	public String modifyMemberSs(HttpSession session,Model model){
 		
 		String id = session.getAttribute("memId").toString();
 		MemberDTO result = memberService.readItem();
-		
-		
+		System.out.println(result);
 		System.out.println("modify");
-		
-		return null;
+		model.addAttribute("memberDTO", result);
+		model.addAttribute("status", result.getUserKind());
+		return "/member/modifyForm.mn";
 	} 
 	//id찾기
 	//pw찾기
