@@ -38,7 +38,7 @@ public class MemberAspect {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("memId")==null) {
 			System.out.println("memberAspect.로그인 필요=2");
-			return "member/loginForm";
+			return "redirect:/member/login";
 		}
 		
 		Object obj = joinpoint.proceed(); // 핵심 기능 실행

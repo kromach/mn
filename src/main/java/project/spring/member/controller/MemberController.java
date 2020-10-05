@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
+import project.spring.beans.kakaoAPI.KakaoLogin;
+import project.spring.beans.kakaoAPI.KakaoLogout;
 import project.spring.member.service.MemberServiceImpl;
 import project.spring.member.vo.MemberDTO;
 
@@ -37,7 +45,7 @@ public class MemberController {
 	
 	@RequestMapping("/signup")
 	public String signUp(HttpServletRequest reqest) {
-		String returnUrl = "/";
+		String returnUrl = "redirect:/";
 		HttpSession session =  reqest.getSession();
 		if(session.getAttribute("memId")==null) {
 			returnUrl = "/member/signStatus.mn";
@@ -49,7 +57,7 @@ public class MemberController {
 	
 	@RequestMapping("/signupUser")
 	public String signUpUser(HttpServletRequest reqest) {
-		String returnUrl = "/";
+		String returnUrl = "redirect:/";
 		HttpSession session =  reqest.getSession();
 		if(session.getAttribute("memId")==null) {
 			reqest.setAttribute("status", "user");
@@ -61,7 +69,7 @@ public class MemberController {
 	}
 	@RequestMapping("/signupSales")
 	public String signUpSalses(HttpServletRequest reqest) {
-		String returnUrl = "/";
+		String returnUrl = "redirect:/";
 		HttpSession session =  reqest.getSession();
 		if(session.getAttribute("memId")==null) {
 			reqest.setAttribute("status", "salse");
@@ -75,7 +83,8 @@ public class MemberController {
 	@RequestMapping("/signupUserPro")
 	public String signupUserPro(
 			@ModelAttribute MemberDTO dto,
-			Model model
+			Model model,
+			HttpServletRequest request
 			) {
 		
 		String[] birth_ = dto.getBirth().split(",");
@@ -91,6 +100,9 @@ public class MemberController {
 		System.out.println("memberInsertReulst="+ memberService.insertItem(dto));
 		System.out.println("nickName : "+dto.getNickName());
 		model.addAttribute("nickName", dto.getNickName());
+		request.getSession().setAttribute("memId", dto.getId());
+		request.getSession().setAttribute("memNickName", dto.getNickName());
+		
 		return "/member/singupResult.mn";
 	}
 	
@@ -135,32 +147,120 @@ public class MemberController {
 		System.out.println(dto);
 		System.out.println("memberInsertReulst="+ memberService.insertItem(dto));
 		model.addAttribute("nickName", dto.getNickName());
+		mpRequest.getSession().setAttribute("memId", dto.getId());
+		mpRequest.getSession().setAttribute("memNickName", dto.getNickName());
 		return "/member/singupResult.mn";
 	}
 	
 	@RequestMapping("/login")
 	public String login(HttpServletRequest reqest,Model model) {
-		String returnUrl = "/";
+		String returnUrl = "redirect:/";
 		HttpSession session =  reqest.getSession();
 		if(session.getAttribute("memId")==null) {
-			reqest.setAttribute("status", "salse");
+			reqest.setAttribute("restApikey", restApikey);
+			reqest.setAttribute("callback_URL", callback_URL);
 			returnUrl = "/member/loginForm.mn";
 		}else{
 			System.out.println("로그인이 된 상태입니다.");
 		}
-		model.addAttribute("restApikey", restApikey);
-		model.addAttribute("callback_URL", callback_URL);
 		return returnUrl;
 	}
 	
-	/*
-	 <a href="https://kauth.kakao.com/oauth/authorize?response_type=code
-		&client_id=${restApikey }
-		&redirect_uri=${callback_URL}">
-	<img src="/resources/img/member/kakao_login_button.png" />
-	</a>
-	*/
+	@RequestMapping(value = "/authResult", produces = "application/json", method = {
+			RequestMethod.GET,	RequestMethod.POST })
+	public String kakaoLogin(
+			@RequestParam("code") String code,
+			HttpServletRequest request,
+			HttpServletResponse response,
+			RedirectAttributes redirectAttributes)
+			throws Exception {
+
+		//getToken
+		JsonNode tokenJson = KakaoLogin.getAccessToken(code);
+		String token = tokenJson.path("access_token").toString();
+		request.getSession().setAttribute("token", token);
+		//useToken getuserInfo
+		JsonNode userInfo = KakaoLogin.getKakaoUserInfo(token);
+		JsonNode kakao_account = userInfo.get("kakao_account");
+		JsonNode properties = userInfo.path("properties");
+		System.out.println(userInfo);
+		System.out.println("=============================");
+		String id = kakao_account.get("email").asText();
+		String gender = kakao_account.get("gender").asText();
+		String birth = kakao_account.get("birthday").asText();
+		String nickname = properties.path("nickname").toString();	
+		System.out.println("id"+id);
+		System.out.println("gender"+gender);
+		System.out.println("nickname"+nickname);
+		MemberDTO dto = new MemberDTO();
+		dto.setId(id);
+		dto.setNickName(nickname);
+		dto.setBirth(birth);
+		
+		/*
+		 * 회원가입 안되어있을때 회원가입하는 로직 조회의 이후에 첨부 필요
+		 */
+		//Session에 값 넣어주기
+		request.getSession().setAttribute("memId", id);
+		request.getSession().setAttribute("memNickName", nickname);
+		redirectAttributes.addFlashAttribute("memberDTO", dto);
+		//id O pw O
+		request.setAttribute("result", 1);
+		
+		return "redirect:/member/loginResult";
+	}
 	
+	@RequestMapping(value = "/loginResult")
+	public String loginResult(HttpServletRequest request,@ModelAttribute MemberDTO model) {
+		System.out.println(model.toString());
+		return "/member/loginResult.mn";
+	}
+	
+	@RequestMapping(value = "/loginPro")
+	public String loginPro(HttpServletRequest request,@ModelAttribute MemberDTO model) {
+		
+		//-1 - id x pw x
+		//0 - id o pw x
+		//1 - id o pw o
+		int result = memberService.readItem(model);
+		request.setAttribute("result", result);
+		if(result==1) {
+			//sessionSetting
+			System.out.println(model.toString());
+		}
+		
+		return "/member/loginResult.mn";
+	}
+	
+	//Kakao와 일반logOut같이 처리할것
+	//logoutLogic
+	@RequestMapping(value = "/logout", 
+			produces = "application/json",
+			method = {
+			RequestMethod.GET,
+			RequestMethod.POST })
+	public String logoutSs(
+			HttpServletRequest request,
+			HttpServletResponse response)
+			throws Exception {
+		HttpSession session = request.getSession();
+		/*kakao logout logic*/
+		if(session.getAttribute("token")!=null) {
+			String token = session.getAttribute("token").toString();
+			System.out.println("token="+token);
+			JsonNode logoutInfo = KakaoLogout.doLogout(token);
+			System.out.println("logoutInfo="+logoutInfo);
+			System.out.println("=======API_token_out==========================");
+		}
+		
+		session.invalidate();
+		
+		return "redirect:/";
+	}
+	
+	//정보수정
+	//id찾기
+	//pw찾기
 	
 	
 }

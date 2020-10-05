@@ -3,25 +3,23 @@
 <!DOCTYPE html>
 <html>
 <body>
+<style>
+
+</style>
 <div class="grid-Wrapper">
 	<div class="grid">  
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
 		<div class="grid-item grid-item--width6">
-		<h1 align="center">회원가입</h1><br>
-			<div style="display: block; text-align: center;">
-				<table style="display: inline-block; border: 2px solid black;  padding: 5px; align-content: center;">
-					<tr>
-						<td style="width: 40%"><button onclick="window.location.href='/member/signupUser'">일반사용자</button></td>
-						<td style="width: 40%"><button onclick="window.location.href='/member/signupSales'">판매자</button></td>
-					</tr>
-				</table>
-			</div> 
+			<h1 align="center">회원가입</h1>
+		</div>
+		<div class="grid-item detail-width3">
+			<button class="statusBtnUser" onclick="window.location.href='/member/signupUser'">일반사용자</button>	
+		</div>
+		<div class="grid-item detail-width3">
+			<button class="statusBtnSales" onclick="window.location.href='/member/signupSales'">판매자</button>
 		</div>
 	</div>
-</div>
-<div class="chat">
-	<a href="/chat"><img src="/resources/img/main/chat.png" ></a>
 </div>
 <script src="/resources/js/imageLoad.js"></script>
 <!-- 데이터 스크롤해서 붙이는 스크립트  -->
