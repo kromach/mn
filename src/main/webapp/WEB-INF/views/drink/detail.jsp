@@ -44,11 +44,11 @@
 			<div id="tagCloud" style="width:100%; height:450px; position: relative; background-color: #fff;"></div>
 		</div>
 		<div class="detail-item detail-width6">
-			<h3 class="pad-top10 pad-bottom20">상세정보</h3>
-			${drinkInfo.dkContent}
+			<h3 class="pad-top10 pad-bottom20 text-left">상세정보</h3>
+			<div class="text-left">${drinkInfo.dkContent}</div>
 		</div>
 		<div class="detail-item detail-width6">
-			<h3 class="pad-top10 pad-bottom20">연관 게시글 보기</h3>
+			<h3 class="pad-top10 pad-bottom20 text-left">연관 게시글 보기</h3>
 			<table class="detailTbl tbl-lg">
 				<tr>
 					<th>제목</th>
@@ -61,6 +61,31 @@
 					<td>2020-09-28</td>
 				</tr>
 			</table>
+		</div>
+		<div class="detail-item detail-width6">
+			<h3 class="pad-top10 pad-bottom20 text-left">후기 보기 (${commentStarInfo.cmCount})</h3>
+			<div class="commentDiv" id="commentList">
+				<c:forEach items="${commentList}" var="comment">
+					<div class="nm_like">
+						<!-- 작성자, 좋아요, 싫어요 -->
+						<p>
+							<c:if test="${comment.cmLike == 1}"><i class="far fa-smile"></i></c:if>
+							<c:if test="${comment.cmUnLike == 1}"><i class="far fa-frown"></i></c:if>
+						</p>
+						<p><span class="btn btn-blue">${comment.writerTitleCnt}</span>${comment.writerTitleName} ${comment.nickname}</p>
+					</div>
+					<div class="report">
+						<!-- 별점, 한줄평 -->
+						<c:if test="${!empty comment.item1}">
+							<div>${comment.item1} ${comment.item2} ${comment.item3} ${comment.item4} ${comment.item5}</div>
+							<div>${comment.cmComment}</div>
+						</c:if>
+					</div>
+					<div class="commentDay">
+						${comment.insertDay} 
+					</div>
+				</c:forEach>
+			</div>
 		</div>
 	</div>
 </div>
@@ -155,7 +180,12 @@
 			width: 'auto'
 	    });
 		
-	    var words = [
+	    var words = [];
+	    
+    	<c:forEach items="${tagCloudInfo}" var="tagInfo" varStatus="status" >
+    		words.push({text: "${tagInfo.tagValue}", weight: "${tagInfo.tagCount}"});
+	    </c:forEach>
+/* 
 	  	  {text: "페일에일", weight: 13},
 	  	  {text: "에일", weight: 10.5},
 	  	  {text: "한국", weight: 9.4},
@@ -176,20 +206,58 @@
 	  	  {text: "피자", weight: 3},
 	  	  {text: "치킨", weight: 5},
 	  	  {text: "부드러운", weight: 3},
-	  	  {text: "벨지안 효모", weight: 7}
-	  	];
+	  	  {text: "벨지안 효모", weight: 7} */
+	  	//];
 
+		//태그 클라우드 폰트 사이즈 조절 
+	  	var fromSize = 0.12;
+	  	var toSize = 0.04;
+	  	
+	  	if (words.length < 10) {
+	  		// tag 개수가 적을때 기본 태그 추가
+	  		words.push({text: "마시는 녀석들", weight: 5}, {text: "마녀", weight: 4}, {text: "주류정보", weight: 3},
+	  		{text: "치킨", weight: 6},
+		  	  {text: "부드러운", weight: 8},
+		  	  {text: "벨지안 효모", weight: 7},
+		  	{text: "ビア", weight: 9}
+	  		);
+		  	
+		  	toSize = 0.05;
+	  	} else {
+		  	fromSize = 0.1;
+		  	toSize = 0.02;	  		
+	  	}
+	  	
 	  	$('#tagCloud').jQCloud(words, {
+	  		colors: ["#5944aa", "#d52896", "#7396e5", "#ddbd15", "#9197D3", "#75cb74", "#6187C8", "#6bc3f6", "#49654C", "#e88770"],
 	  		autoResize: true,
 	  		fontSize: {
-	  			from: 0.15,
-	  			to: 0.04
+	  			from: fromSize,
+	  			to: toSize
 	  		}
 	  	});
 	});
-
-	    
 </script>
 
+<script type="text/javascript">
+$(window).scroll(
+	function() {
+		// A(B+C) : document 높이 (고정)
+		//console.log($(document).height());
+		// B : browser 높이 (최상단 기본값)
+		//console.log($(window).height());
+		// C : 스크롤 위치
+		//console.log('SCROLL_TOP' + $(window).scrollTop());
+		if ($(window).scrollTop() >= $(document).height()
+				- $(window).height() - 100) {
+			//호출 메서드
+		}
+	});
+</script>
+<%-- 	<c:forEach items="${tagCloudInfo}" varStatus="status" >
+	var tagNum = "${status.index}";
+	var 	
+	{text: "${tagInfo.tagValue}", weight: "${tagInfo.tagCount}"}
+</c:forEach> --%>
 <!-- 
 <script src="/resources/js/imageLoad.js"></script> -->
