@@ -25,5 +25,6 @@
 		<mapper resource="project/spring/drink/sql/drinkSql.xml" />
 		<mapper resource="project/spring/member/sql/memberSql.xml" />
 		<mapper resource="project/spring/product/sql/productSQL.xml" />
+		<mapper resource="project/spring/adminEvent/sql/adminEventSql.xml" />
 	</mappers>
 </configuration>
