@@ -7,8 +7,7 @@
 </head>
 <body> 
 	<a href="https://kauth.kakao.com/oauth/authorize?response_type=code
-		&client_id=${restApikey }
-		&redirect_uri=${callback_URL}">
+		&client_id=${restApikey }&redirect_uri=${callback_URL}">
 	<img src="/resources/img/member/kakao_login_button.png" />
 	</a>
 </body>

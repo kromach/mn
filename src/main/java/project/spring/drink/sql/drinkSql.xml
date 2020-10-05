@@ -3,6 +3,31 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="drink">
+  		<!--   -->
+		<select id="selectDrinkServiceInfo" parameterType="String" resultType="project.spring.drink.vo.DrinkVO">
+  			SELECT INFO.DK_CODE,INFO.DK_NAME, INFO.DK_BKIND, BCATE.VALUE AS DK_BKIND_VALUE, 
+					INFO.DK_SKIND, SCATE.VALUE AS DK_SKIND_VALUE,
+					INFO.DK_IMG, INFO.DK_ALCOHOL, INFO.DK_COUNTRY, INFO.DK_CITY,
+					INFO.DK_PLACE, INFO.DK_FOOD, INFO.DK_LIKE, INFO.DK_APPROVE, 
+					INFO.DK_CONTENT1, INFO.DK_CONTENT2, INFO.DK_CONTENT3,
+					INFO.INSERT_ID, INFO.INSERT_DAY,
+					EINFO.ITEM1_VAL, EINFO.ITEM2_VAL, EINFO.ITEM3_VAL, EINFO.ITEM4_VAL, EINFO.ITEM5_VAL,
+					INFO.DK_ITEM1, INFO.DK_ITEM2, INFO.DK_ITEM3, INFO.DK_ITEM4, INFO.DK_ITEM5
+			FROM DRINK_INFO INFO INNER JOIN 
+				DRINK_CATEGORY BCATE ON INFO.DK_BKIND = BCATE.CODE INNER JOIN
+				DRINK_CATEGORY SCATE ON INFO.DK_SKIND = SCATE.CODE INNER JOIN
+				ELEMENT_INFO EINFO ON INFO.DK_BKIND = EINFO.DK_BKIND 
+			WHERE DK_CODE = #{value}
+  		</select>
+  		
+		<select id="selectCommentStarServiceInfo" parameterType="String" resultType="camelmap">
+  			SELECT DK_CODE, COUNT(CM_IDX) CM_COUNT, 
+  					AVG(ITEM1) CM_ITEM1, AVG(ITEM2) CM_ITEM2, AVG(ITEM3) CM_ITEM3, AVG(ITEM4) CM_ITEM4, AVG(ITEM5) CM_ITEM5  
+  			FROM DRINK_COMMENT 
+  			WHERE DK_CODE = #{value} 
+  			GROUP BY DK_CODE 
+  		</select>
+  		
   		<!-- <select id="userCount" resultType="int">
   			select count(*) from test
   		</select>

@@ -58,6 +58,125 @@
 	border-radius:3px
 }
 
+/*login영역 버튼및 css*/
+.birthWrapper{
+	width:250px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	height: 30px;
+}
+.loginLabel {
+	width: 250px;
+	background-color: yellow;
+	text-align: left;
+	font-size: 14px;
+}
+.loginWrapper{
+	width:250px;
+	text-align: center;
+	display:inline-block;
+}
+.loginWrapper >.kakaoBtn{
+	width:250px;
+	margin-bottom: 5px;
+	color: black;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	min-height: 44px;
+	background-color: #ffe812;
+}
+.loginWrapper >.greyBtn{
+	width:250px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	min-height: 44px;
+	background-color: #004080;
+	color: white;
+	font-weight: bold;
+}
+.loginWrapper > .loginInput{
+	width:250px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	height: 30px;
+}
+.loginWrapper > .birthWrapper{
+	width:250px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	height: 30px;
+}
+.loginWrapper > .birthWrapper>.birthfirstInput{
+	width:70%;
+	margin-bottom: 5px;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	height: 30px;
+}
+.loginWrapper > .birthWrapper> .birthsecondInput{
+	width:20%;
+	margin-bottom: 5px;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	height: 30px;
+}
+.loginWrapper > .birthWrapper>.telInput{
+	width:30%;
+	margin-bottom: 5px;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	height: 30px;
+}
+.loginWrapper > .telInput{
+	width:80px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	position: relative;
+	border-radius: 4px;
+	height: 30px;
+}
+
+.statusBtnUser{
+	width:500px;
+	height:350px;
+	margin-top:15px;
+	margin-bottom: 5px;
+	margin-letf:5px;
+	margin-right:5px;
+	font-size: 22px;
+	position: relative;
+	border-radius: 4px;
+	background-color: white;
+	border: 1px solid #004080;
+	color:  #004080;
+	font-weight: bold;
+}
+.statusBtnSales{
+	width:500px;
+	height:350px;
+	margin-top:15px;
+	margin-bottom: 5px;
+	margin-letf:5px;
+	margin-right:5px;
+	font-size: 22px;
+	position: relative;
+	border-radius: 4px;
+	background-color: #004080;
+	color: white;
+	font-weight: bold;
+}
 /*SEA GREEN BUTTON STYLES*/		
 .btn.btn-mint{background-color: #08bc9a; border-color: #08bc9a;}
 .btn.btn-mint:hover{background-color:#01a183;}
@@ -102,6 +221,9 @@
 SOCIAL BUTTON STYLES
 ********************/
 
+/*KAKAO*/
+.btnBlack.btn-kakao{background-color: #ffe812; background-color: #ffe812;}
+.btnBlack.btn-kakao:active{top: 3px; outline: none;}
 /*FACEBOOK*/
 .btn.btn-facebook{background-color: #2479b6; border-color: #2479b6;}
 .btn.btn-facebook:active{top: 3px; outline: none;}

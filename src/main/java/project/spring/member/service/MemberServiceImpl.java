@@ -5,13 +5,13 @@ import org.springframework.stereotype.Service;
 
 import project.spring.beans.memberInterface;
 import project.spring.kakao.vo.MemberDTO;
-import project.spring.member.dao.MemberDAO;
+import project.spring.member.dao.MemberDAOImpl;
 
 @Service
 public class MemberServiceImpl implements memberInterface{
 	
 	@Autowired
-	MemberDAO memberDAO;
+	MemberDAOImpl memberDAO;
 	
 	@Override
 	public int insertItem(MemberDTO dto) {
@@ -36,7 +36,29 @@ public class MemberServiceImpl implements memberInterface{
 	}
 	@Override
 	public int insertItem() {
+		return 0;
+	}
+	@Override
+	public int insertItem(Object obj) {
+		int result = 0;
+		result = memberDAO.insertItem(obj);
+		return result;
+	}
+	@Override
+	public int updateItem(Object obj) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	@Override
+	public int deleteItem(Object obj) {
+		// TODO Auto-generated method stub
+		return 0;
+	} 
+	@Override
+	public int readItem(Object obj) {
+		System.out.println(obj);
+		int result = memberDAO.readItem(obj);
+		System.out.println("ServiceImpleResult="+result);
+		return result;
 	}
 }

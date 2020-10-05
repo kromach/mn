@@ -32,95 +32,68 @@ import project.spring.beans.kakaoAPI.KakaoLogout;
 @Controller
 @RequestMapping("/kakao")
 public class KakaoController {
-	private static final Logger logger = LoggerFactory
-			.getLogger(KakaoController.class);
-	@Autowired
-	private String nativeAppkey;
-	@Autowired
-	private String restApikey;
-	@Autowired
-	private String javaScriptkey;
-	@Autowired
-	private String adminkey;
-	@Autowired
-	private String callback_URL;
-
-	@RequestMapping
-	public String home(Locale locale, Model model,
-			HttpServletRequest request,
-			HttpServletResponse response) {
-		request.setAttribute("restApikey",
-				restApikey);
-		request.setAttribute("callback_URL",
-				callback_URL);
-		return "/util/kakao_auth_form.p1";
-	}
-
-	@RequestMapping(value = "/mvc/authResult", produces = "application/json", method = {
-			RequestMethod.GET,
-			RequestMethod.POST })
-	public String kakaoLogin(
-			@RequestParam("code") String code,
-			HttpServletRequest request,
-			HttpServletResponse response)
-			throws Exception {
-		System.out.println("code="+code);
-
-		//getToken
-		JsonNode tokenJson = KakaoLogin.getAccessToken(code);
-		String token = tokenJson.path("access_token").toString();
-		System.out.println("tokenJson="+tokenJson);
-		System.out.println("==================================");
-		//useToken getuserInfo
-		JsonNode userInfo = KakaoLogin.getKakaoUserInfo(token);
-		System.out.println("userInfo="+userInfo);
-		//String id = userInfo.get("id").toString();
-		String id = userInfo.path("id").asText();
-		JsonNode properties = userInfo.path("properties");
-		System.out.println("properties="+properties);
-		String nickname = properties.path("nickname").toString();
-		request.setAttribute("id", id);
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("nickname", nickname);
-		session.setAttribute("code", code);
-		session.setAttribute("token", token);
-		System.out.println("==================================");
-		
-		//add Db Loginc
-		return "redirect:/main.p1";
-	}
-	@RequestMapping(value = "/auth/logout", 
-			produces = "application/json",
-			method = {
-			RequestMethod.GET,
-			RequestMethod.POST })
-	public String kakaoLogout(
-			HttpServletRequest request,
-			HttpServletResponse response)
-			throws Exception {
-		HttpSession session = request.getSession();
-		String token = session.getAttribute("token").toString();
-		System.out.println("token="+token);
-		JsonNode logoutInfo = KakaoLogout.doLogout(token);
-		System.out.println("logoutInfo="+logoutInfo);
-		System.out.println("=======API_token_out==========================");
-		return "main.p1";
-	}
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String main(Locale locale,
-			Model model) {
-		return "/util/kakao_auth_result.p1";
-	}
-	
-	@RequestMapping(value = "/home1", method = RequestMethod.GET)
-	public String home(Locale locale,
-			Model model) {
-		return "homeCss";
-	}
-	@RequestMapping(value = "/home2", method = RequestMethod.GET)
-	public String home_(Locale locale,
-			Model model) {
-		return "homeCss.p1";
-	}
+	/*
+	 * private static final Logger logger = LoggerFactory
+	 * .getLogger(KakaoController.class);
+	 * 
+	 * @Autowired private String nativeAppkey;
+	 * 
+	 * @Autowired private String restApikey;
+	 * 
+	 * @Autowired private String javaScriptkey;
+	 * 
+	 * @Autowired private String adminkey;
+	 * 
+	 * @Autowired private String callback_URL;
+	 * 
+	 * @RequestMapping public String home(Locale locale, Model model,
+	 * HttpServletRequest request, HttpServletResponse response) {
+	 * request.setAttribute("restApikey", restApikey);
+	 * request.setAttribute("callback_URL", callback_URL); return
+	 * "/util/kakao_auth_form.p1"; }
+	 * 
+	 * @RequestMapping(value = "/mvc/authResult", produces = "application/json",
+	 * method = { RequestMethod.GET, RequestMethod.POST }) public String kakaoLogin(
+	 * 
+	 * @RequestParam("code") String code, HttpServletRequest request,
+	 * HttpServletResponse response) throws Exception {
+	 * System.out.println("code="+code);
+	 * 
+	 * //getToken JsonNode tokenJson = KakaoLogin.getAccessToken(code); String token
+	 * = tokenJson.path("access_token").toString();
+	 * System.out.println("tokenJson="+tokenJson);
+	 * System.out.println("=================================="); //useToken
+	 * getuserInfo JsonNode userInfo = KakaoLogin.getKakaoUserInfo(token);
+	 * System.out.println("userInfo="+userInfo); String id =
+	 * userInfo.path("id").asText(); JsonNode properties =
+	 * userInfo.path("properties"); String nickname =
+	 * properties.path("nickname").toString();
+	 * 
+	 * 
+	 * request.setAttribute("id", id); HttpSession session = request.getSession();
+	 * session.setAttribute("nickname", nickname); session.setAttribute("code",
+	 * code); session.setAttribute("token", token);
+	 * System.out.println("==================================");
+	 * 
+	 * //add Db Loginc return "redirect:/main.p1"; }
+	 * 
+	 * @RequestMapping(value = "/auth/logout", produces = "application/json", method
+	 * = { RequestMethod.GET, RequestMethod.POST }) public String kakaoLogout(
+	 * HttpServletRequest request, HttpServletResponse response) throws Exception {
+	 * HttpSession session = request.getSession(); String token =
+	 * session.getAttribute("token").toString(); System.out.println("token="+token);
+	 * JsonNode logoutInfo = KakaoLogout.doLogout(token);
+	 * System.out.println("logoutInfo="+logoutInfo);
+	 * System.out.println("=======API_token_out=========================="); return
+	 * "main.p1"; }
+	 * 
+	 * @RequestMapping(value = "/main", method = RequestMethod.GET) public String
+	 * main(Locale locale, Model model) { return "/util/kakao_auth_result.p1"; }
+	 * 
+	 * @RequestMapping(value = "/home1", method = RequestMethod.GET) public String
+	 * home(Locale locale, Model model) { return "homeCss"; }
+	 * 
+	 * @RequestMapping(value = "/home2", method = RequestMethod.GET) public String
+	 * home_(Locale locale, Model model) { return "homeCss.p1"; }
+	 */
 }

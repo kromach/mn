@@ -5,13 +5,25 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
+	<!--chat관련 webSocketSetting  -->
+	<websocket:handlers>
+		<websocket:mapping handler="replyEchochoHandler"
+			path="/replyEcho" />
+		<websocket:handshake-interceptors>
+			<beans:bean
+				class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+	</websocket:handlers>
+
+	<beans:bean id="replyEchochoHandler" class="project.spring.beans.chat.WebSocketChat" />
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
@@ -19,19 +31,19 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	
 	<beans:bean id="nativeAppkey" class="java.lang.String">
-		<beans:constructor-arg value="fe713bcce73d60a32659b9522e8191d1" />
+		<beans:constructor-arg value="c7419503693aac3686cf95bf1629f2af" />
 	</beans:bean>
 	<beans:bean id="restApikey" class="java.lang.String">
-		<beans:constructor-arg value="ccd42c0f6ac58e519759c5baf3c7ceb4" />
+		<beans:constructor-arg value="8754233dc50098d2462dcd29e565c075" />
 	</beans:bean>
 	<beans:bean id="javaScriptkey" class="java.lang.String">
-		<beans:constructor-arg value="8c697078e1a9799bd1ad3c27ecacaa18" />
+		<beans:constructor-arg value="b2f22c6b6c816debfb42128969d90c89" />
 	</beans:bean>
 	<beans:bean id="adminkey" class="java.lang.String">
-		<beans:constructor-arg value="e454a8dba20ab15cac38b5db0ec0c22a" />
+		<beans:constructor-arg value="123f31b596815e3f8aee315cac7eead2" />
 	</beans:bean>
 	<beans:bean id="callback_URL" class="java.lang.String">
-		<beans:constructor-arg value="http://localhost:8080/mvc/authResult" />
+		<beans:constructor-arg value="http://localhost:8080/member/authResult" />
 	</beans:bean>
 	
 	<beans:bean id="fileDown" class="project.spring.beans.fileDownLoad.DownloadView" /><!--filedown_Logic  -->

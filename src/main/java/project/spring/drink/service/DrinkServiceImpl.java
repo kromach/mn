@@ -1,5 +1,6 @@
 package project.spring.drink.service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,4 +30,14 @@ public class DrinkServiceImpl implements DrinkService {
 		return null;
 	}
 
+	@Override
+	public DrinkVO selectDrinkServiceInfo(String dkCode) throws SQLException {
+		return drinkDAO.selectDrinkServiceInfo(dkCode);
+	}
+
+	@Override
+	public HashMap selectCommentStarServiceInfo(String dkCode) throws SQLException {
+		return drinkDAO.selectCommentStarServiceInfo(dkCode);
+	}
+	
 }
