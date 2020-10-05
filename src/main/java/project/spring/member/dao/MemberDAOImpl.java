@@ -55,8 +55,11 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	@Override
 	public int updateItem(Object obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		if (obj instanceof MemberDTO) {
+			result = sqlSession.update("member.updateMember", obj);
+		}
+		return result;
 	}
 	@Override
 	public int deleteItem(Object obj) {

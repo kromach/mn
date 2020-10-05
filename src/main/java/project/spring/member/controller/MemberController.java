@@ -269,7 +269,27 @@ public class MemberController {
 		model.addAttribute("memberDTO", result);
 		model.addAttribute("status", result.getUserKind());
 		return "/member/modifyForm.mn";
-	} 
+	}
+	//정보수정 Pro
+	@RequestMapping(value = "/modifyUserPro")
+	public String modifyUserProSs(MemberDTO dto) {
+		
+		System.out.println(dto);
+		memberService.updateItem(dto);
+		return "/member/modifyResult.mn";
+	}
+	
+	@RequestMapping(value = "/modifySalesPro")
+	public String modifySalesProSs(MemberDTO dto) {
+		System.out.println(dto);
+		memberService.updateItem(dto);
+		return "/member/modifyResult.mn";
+	}
+	
+	
+	
+	
+	
 	//id찾기
 	//pw찾기
 	

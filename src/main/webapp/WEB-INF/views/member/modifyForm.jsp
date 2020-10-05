@@ -90,7 +90,7 @@
 						<input type="text" name="licenseNum" class="loginInput" value="${memberDTO.licenseNum}">
 					</c:if>
 					<br><br>
-					<button type="submit">가입</button>
+					<button type="submit">수정</button>
 					<button type="reset">재입력</button>
 					<button type="button">취소</button>
 				</div>
