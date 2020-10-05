@@ -15,5 +15,7 @@ public interface DrinkDAO {
 
 	HashMap selectCommentStarServiceInfo(String dkCode) throws SQLException;
 
+	List<HashMap> selectTagCloudServiceInfo(String dkCode) throws SQLException;
+
 
 }
