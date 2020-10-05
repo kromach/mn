@@ -52,7 +52,6 @@ public class MyActDAOImpl implements MyActDAO{
 	@Override
 	public int myArticleCount(String memId) {
 		int count = sqlSession.selectOne("myAct.myArticleCount", memId);
-		
 		return count;
 	}
 	
@@ -66,13 +65,15 @@ public class MyActDAOImpl implements MyActDAO{
 
 	@Override
 	public int myLikeArticleCount(String memId) {
-		int count = sqlSession.selectOne("myAct.myLikeArticleCount", memId);
+		int count = 0 ; 
+//		sqlSession.selectOne("myAct.myLikeArticleCount", memId);
 		return count;
 	}
 
 	@Override
-	public List getMyLikeArticles(String memId) {
-		List list = sqlSession.selectList("myAct.selectLikeArticleAll", memId);
+	public List myLikeArticle(String memId) {
+		List list = sqlSession.selectList("myAct.myLikeArticle", memId);
+		System.out.println(list.toString());
 		return list;
 	}
 
@@ -83,8 +84,8 @@ public class MyActDAOImpl implements MyActDAO{
 	}
 
 	@Override
-	public List getMyLikeDrinks(String memId) {
-		List list = sqlSession.selectList("myAct.selectLikeDrinkAll", memId);
+	public List myLikeDrink(String memId) {
+		List list = sqlSession.selectList("myAct.myLikeDrink", memId);
 		
 		return list;
 	}
