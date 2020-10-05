@@ -9,10 +9,6 @@
 </head>
 <body>
 
-	<h1>멤버리스트</h1>
-	<c:forEach var="memberList" items="${memberList }">
-		<h1>${memberList.id }</h1>	
-	</c:forEach>
 
 	<div>
 		<table>
@@ -25,6 +21,19 @@
 				<th>신고회수</th>
 				<th>강퇴</th>
 			</tr>
+			
+			<c:forEach var="memberList" items="${memberList }">
+				<tr>
+					<td><a href="#"></a>${memberList.id}</td>
+					<td>${memberList.nickname}</td>
+					<td>${memberList.insertDate }</td>
+					<td>${memberList.reportNumber}<!-- jk0001, jk0002 로 저장되므로 스플릿으로 나누어
+					a태그로 걸기 --></td>
+					<td>${memberList.reportNumber }</td>
+					<td><button>강퇴</button>
+				</tr>	
+			</c:forEach>
+			
 		</table>
 	</div>
 
