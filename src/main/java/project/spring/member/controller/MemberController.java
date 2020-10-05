@@ -259,6 +259,17 @@ public class MemberController {
 	}
 	
 	//정보수정
+	@RequestMapping(value = "/modify")
+	public String modifyMemberSs(HttpSession session){
+		
+		String id = session.getAttribute("memId").toString();
+		MemberDTO result = memberService.readItem();
+		
+		
+		System.out.println("modify");
+		
+		return null;
+	} 
 	//id찾기
 	//pw찾기
 	
