@@ -5,12 +5,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tiles.request.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import project.spring.article.vo.ArticleDTO;
 import project.spring.myAct.service.MyActService;
 
 @Controller
@@ -27,18 +29,20 @@ public class MyActController {
 		
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
-		List myArticle = null;
+		List<ArticleDTO> myArticle = null;
 		count = myActService.myArticleCount(memId);
 		System.out.println("count : " + count);
 		
+		myArticle = myActService.getMyArticle(memId);
+		System.out.println("size======"+myArticle.size());		
 		model.addAttribute("count", new Integer(count));
 		model.addAttribute("myArticle", myArticle);
-		
+		for(int i =0 ; i<myArticle.size();i++) {
+			System.out.println("======================================++");
+			myArticle.get(i).toString();
+		}
 		return "/myAct/index.mn";
 	}
-	
-	
-	
 	
 	@RequestMapping(value = "/attend", method = RequestMethod.GET)
 	public String attend() {
@@ -63,10 +67,18 @@ public class MyActController {
 		
 		return "/myAct/likeArticle.mn";
 	}
-	
+	 
 	@RequestMapping(value = "/likeDrink", method = RequestMethod.GET)
-	public String likeDrink() {
+	public String likeDrink(String pageNum, HttpServletRequest request) {
+		System.out.println("MyActLikeDrink Controller");
+		int count = 0;
 		
+		HttpSession session = request.getSession();
+		String memId = (String)session.getAttribute("memId");
+		List likeDrink = null;
+		count = myActService.likeArticleCount(memId);
+		System.out.println("count : " + count);
+
 		
 		return "/myAct/likeDrink.mn";
 	}

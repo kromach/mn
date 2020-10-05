@@ -58,20 +58,32 @@ public class MyActServiceImpl implements MyActService{
 	}
 	
 	@Override
-	public List getMyArticle(int startRow, int endRow, String memId) {
-		List articleList = myActDAO.getMyArticles(startRow, endRow, memId);
+	public List getMyArticle(String memId) {
+		List articleList = myActDAO.getMyArticles(memId);
 		return articleList;
 	}
 
 	@Override
 	public int likeArticleCount(String memId) {
 		int count = myActDAO.myLikeArticleCount(memId);
-		return 0;
+		return count;
 	}
 
 	@Override
-	public List myLikeArticle(int startRow, int endRow, String memId) {
-		List articleList = myActDAO.getMyLikeArticles(startRow, endRow, memId);
+	public List myLikeArticle(String memId) {
+		List articleList = myActDAO.getMyLikeArticles(memId);
+		return articleList;
+	}
+
+	@Override
+	public int likeDrinkCount(String memId) {
+		int count = myActDAO.myLikeDrinkCount(memId);
+		return count;
+	}
+
+	@Override
+	public List myLikeDrink(String memId) {
+		List articleList = myActDAO.getMyLikeDrinks(memId);
 		return articleList;
 	}
 
