@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class ArticleDTO {
 	private int bnIdx;
+	private String bnTitle;
 	private String kind;
 	private String dkCode;
 	private int readcount;
@@ -73,6 +74,19 @@ public class ArticleDTO {
 	}
 	public void setIsDelete(String isDelete) {
 		this.isDelete = isDelete;
+	}
+	
+	public String getBnTitle() {
+		return bnTitle;
+	}
+	public void setBnTitle(String bnTitle) {
+		this.bnTitle = bnTitle;
+	}
+	@Override
+	public String toString() {
+		return "ArticleDTO [bnIdx=" + bnIdx + ", bnTitle=" + bnTitle + ", kind=" + kind + ", dkCode=" + dkCode
+				+ ", readcount=" + readcount + ", heart=" + heart + ", report=" + report + ", content=" + content
+				+ ", insertId=" + insertId + ", insertDay=" + insertDay + ", isDelete=" + isDelete + "]";
 	}
 	
 }

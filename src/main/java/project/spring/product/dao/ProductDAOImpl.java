@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import project.spring.product.vo.OrderVo;
 import project.spring.product.vo.ProductVo;
 
 @Repository
@@ -71,5 +72,33 @@ public class ProductDAOImpl implements ProductDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public ProductVo getproductinfo(String prcode) throws SQLException {
+		
+		ProductVo vo =sqlSession.selectOne("product.getproductinfo",prcode);
+		return vo;
+	}
+
+	@Override
+	public int myordercount(String id) throws SQLException {
+		int myordercount = sqlSession.selectOne("product.myordercount",id);
+		System.out.println(myordercount);
+		return myordercount;
+	}
+
+	@Override
+	public List myorderlist(String id) throws SQLException {
+		List myorderlist =sqlSession.selectList("product.myorderlist",id);
+		return myorderlist;
+	}
+
+	@Override
+	public OrderVo myorderinfo(String id, String prcode) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

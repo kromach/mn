@@ -33,6 +33,18 @@ public class MemberDAOImpl implements MemberDAO {
 		return 0;
 	}
 	@Override
+	public MemberDTO readItem() {		
+	String id = ((ServletRequestAttributes) RequestContextHolder
+				.getRequestAttributes())
+						.getRequest().getSession()
+						.getAttribute("memId")
+						.toString();
+	System.out.println(id);
+	return sqlSession.selectOne("member.getMember", id);
+	}
+	
+	
+	@Override
 	public int insertItem(Object obj) {
 		int result = 0;
 		if (obj instanceof MemberDTO) {
@@ -43,8 +55,12 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	@Override
 	public int updateItem(Object obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		if (obj instanceof MemberDTO) {
+			System.out.println("updateOBJ"+(MemberDTO)obj);
+			result = sqlSession.update("member.updateMember", obj);
+		}
+		return result;
 	}
 	@Override
 	public int deleteItem(Object obj) {

@@ -60,8 +60,8 @@
 		<li class="sub-menu">
 			<a href="#product"><div class="fa fa-wine-bottle"></div> 전통주 주문 <div class="fa fa-caret-up fr"></div></a>
 			<ul style="display: block;">
-				<li><a href="#product"> 우주마켓 </a></li>
-				<li><a href="#product"> 구매내역 </a></li>
+				<li><a href="/product/productList"> 우주마켓 </a></li>
+				<li><a href="/product/myorderlist"> 구매내역 </a></li>
 			</ul>
 		</li>
 		<li>

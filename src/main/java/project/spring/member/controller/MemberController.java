@@ -140,7 +140,7 @@ public class MemberController {
 			//dtoImgSetting
 			dto.setBirth(birth);
 			dto.setLicenseImg(newName);
-			dto.setUserKind("sales");
+			dto.setUserKind("salse");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -224,11 +224,6 @@ public class MemberController {
 		//1 - id o pw o
 		int result = memberService.readItem(model);
 		request.setAttribute("result", result);
-		if(result==1) {
-			//sessionSetting
-			System.out.println(model.toString());
-		}
-		
 		return "/member/loginResult.mn";
 	}
 	
@@ -259,8 +254,54 @@ public class MemberController {
 	}
 	
 	//정보수정
+	@RequestMapping(value = "/modify")
+	public String modifyMemberSs(HttpSession session,Model model){
+		
+		String id = session.getAttribute("memId").toString();
+		MemberDTO result = memberService.readItem();
+		System.out.println(result);
+		System.out.println("modify");
+		model.addAttribute("memberDTO", result);
+		model.addAttribute("status", result.getUserKind());
+		return "/member/modifyForm.mn";
+	}
+	//정보수정 Pro
+	@RequestMapping(value = "/modifyUserPro")
+	public String modifyUserProSs(MemberDTO dto) {
+		
+		System.out.println(dto);
+		memberService.updateItem(dto);
+		return "/member/modifyResult.mn";
+	}
+	
+	@RequestMapping(value = "/modifySalesPro")
+	public String modifySalesProSs(MemberDTO dto) {
+		System.out.println(dto);
+		memberService.updateItem(dto);
+		return "/member/modifyResult.mn";
+	}
 	//id찾기
+	@RequestMapping(value = "/findId")
+	public String findIdForm() {
+		return "/member/findIdForm.mn";
+	}
 	//pw찾기
-	
-	
+	@RequestMapping(value = "/findPw")
+	public String findPwForm() {
+		return "/member/findPwForm.mn";
+	}
+	//id찾기 처리
+	@RequestMapping(value = "/findIdPro")
+	public String findIdPro(MemberDTO dto,Model model) {
+		model.addAttribute("memberDTO", dto);
+		model.addAttribute("result","id");
+		return "/member/findResult.mn";
+	}
+	//pw찾기 처리
+	@RequestMapping(value = "/findPwPro")
+	public String findPwPro(MemberDTO dto,Model model) {
+		model.addAttribute("memberDTO", dto);
+		model.addAttribute("result","pw");
+		return "/member/findResult.mn";
+	}
 }

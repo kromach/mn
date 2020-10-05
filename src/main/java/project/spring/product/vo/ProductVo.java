@@ -129,8 +129,15 @@ public class ProductVo {
 	public void setInsertDay(Timestamp insertDay) {
 		this.insertDay = insertDay;
 	}
-	
-	
-	
-
+	public ProductVo() {
+		// TODO Auto-generated constructor stub
+	}
+	@Override
+	public String toString() {
+		return "ProductVo [prCode=" + prCode + ", prName=" + prName + ", prImg=" + prImg + ", prBkind=" + prBkind
+				+ ", prSkind=" + prSkind + ", prCountry=" + prCountry + ", prCity=" + prCity + ", prAlcohol="
+				+ prAlcohol + ", prPlace=" + prPlace + ", prFood=" + prFood + ", prContent=" + prContent + ", prPrice="
+				+ prPrice + ", prAmount=" + prAmount + ", prTotalcount=" + prTotalcount + ", prLike=" + prLike
+				+ ", prUse=" + prUse + ", insertId=" + insertId + ", insertDay=" + insertDay + "]";
+	}
 }

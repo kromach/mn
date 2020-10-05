@@ -52,36 +52,40 @@ public class MyActDAOImpl implements MyActDAO{
 	@Override
 	public int myArticleCount(String memId) {
 		int count = sqlSession.selectOne("myAct.myArticleCount", memId);
-		
 		return count;
 	}
 	
 	@Override
-	public List getMyArticles(int startRow, int endRow, String memId) {
-		HashMap map = new HashMap();
-		map.put("start", startRow);
-		map.put("end", endRow);
-		map.put("memId", memId);
-		
-		List list = sqlSession.selectList("myAct.selectAll", map);
+	public List getMyArticles(String memId) {
+	
+		List list = sqlSession.selectList("myAct.selectAll", memId);
 		
 		return list;
 	}
 
 	@Override
 	public int myLikeArticleCount(String memId) {
-		int count = sqlSession.selectOne("myAct.myLikeArticleCount", memId);
+		int count = 0 ; 
+//		sqlSession.selectOne("myAct.myLikeArticleCount", memId);
 		return count;
 	}
 
 	@Override
-	public List getMyLikeArticles(int startRow, int endRow, String memId) {
-		HashMap map = new HashMap();
-		map.put("start", startRow);
-		map.put("end", endRow);
-		map.put("memId", memId);
-		
-		List list = sqlSession.selectList("myAct.selectLikeArticleAll", map);
+	public List myLikeArticle(String memId) {
+		List list = sqlSession.selectList("myAct.myLikeArticle", memId);
+		System.out.println(list.toString());
+		return list;
+	}
+
+	@Override
+	public int myLikeDrinkCount(String memId) {
+		int count = sqlSession.selectOne("myAct.myLikeDrinkCount", memId);
+		return count;
+	}
+
+	@Override
+	public List myLikeDrink(String memId) {
+		List list = sqlSession.selectList("myAct.myLikeDrink", memId);
 		
 		return list;
 	}

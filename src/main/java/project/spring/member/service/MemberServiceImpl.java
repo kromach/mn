@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import project.spring.beans.memberInterface;
-import project.spring.kakao.vo.MemberDTO;
 import project.spring.member.dao.MemberDAOImpl;
+import project.spring.member.vo.MemberDTO;
 
 @Service
 public class MemberServiceImpl implements memberInterface{
@@ -29,10 +29,14 @@ public class MemberServiceImpl implements memberInterface{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	//get
 	@Override
 	public MemberDTO readItem() {
 		// TODO Auto-generated method stub
-		return null;
+		MemberDTO dto = new MemberDTO();
+		dto = memberDAO.readItem();
+		
+		return dto; 
 	}
 	@Override
 	public int insertItem() {
@@ -46,14 +50,16 @@ public class MemberServiceImpl implements memberInterface{
 	}
 	@Override
 	public int updateItem(Object obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = memberDAO.updateItem(obj);
+		System.out.println("memberUpdateResult = "+result);
+		return result;
 	}
 	@Override
 	public int deleteItem(Object obj) {
 		// TODO Auto-generated method stub
 		return 0;
 	} 
+	//check
 	@Override
 	public int readItem(Object obj) {
 		System.out.println(obj);
