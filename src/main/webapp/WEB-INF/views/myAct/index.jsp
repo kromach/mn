@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script  src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <style>
 .linkBar {
@@ -23,13 +24,13 @@
 			<div class="linkBar">
 				<a href="/myAct">내 글 보기</a>
 			</div>
-			<div class="linkBar" id="like">
+			<div class="linkBar" id="likeArticle">
 				<a onclick="">글 좋아요</a>
 			</div>
-			<div class="linkBar">
+			<div class="linkBar" id="likeDrink">
 				<a>술 좋아요</a>
 			</div>
-			<div class="linkBar">
+			<div class="linkBar" id="title">
 				칭호</a>
 			</div>
 			<br/>
@@ -53,24 +54,69 @@
 					</c:forEach>
 				</table>
 			</div>
+			<div id="likeArticle_result">
+			
+			</div>
+			<div id="result2">
+			
+			</div>
+			<div id="result3">
+			
+			</div>
 		</div>
 	</div>
+	<input type = "hidden" value="${sessionScope.memId}" id="memId">
 </body>
-<script>
-		$(document).ready(function(){
-			$("#like").click(function(){
+	<script>
+			$(document).ready(function(){
+			$("#likeArticle").click(function(){
 				$.ajax({
 					type:"POST",
-					url:"/myAct",
-					data:{id:$("#id").val()},
+					url:"/myAct/likeArticle",
+					data:{id:$("#memId").val()},
 					success:function(data){
-						$("#result").html(data);
+						console.log(data);
+						$("#likeArticle_result").html(data);
 					}
 				});
 			});
 		});
 	
 	</script>
+		<script>
+		$(document).ready(function(){
+			$("#likeDrink").click(function(){
+				$.ajax({
+					type:"POST",
+					url:"/myAct/likeDrink",
+					data:{id:$("#memId").val()},
+					success:function(data){
+						console.log(data);
+						$("#result2").html(data);
+					}
+				});
+			});
+		});
+	
+	</script>
+	
+		<script>
+		$(document).ready(function(){
+			$("#title").click(function(){
+				$.ajax({
+					type:"POST",
+					url:"/myAct/title",
+					data:{id:$("#memId").val()},
+					success:function(data){
+						console.log(data);
+						$("#result3").html(data);
+					}
+				});
+			});
+		});
+	
+	</script>
+	
 <script src="/resources/js/imageLoad.js"></script>
 <!-- 데이터 스크롤해서 붙이는 스크립트  -->
 <script type="text/javascript">
@@ -88,6 +134,5 @@
 				}
 			});
 </script>
-
 </body>
 </html>

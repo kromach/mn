@@ -1,5 +1,6 @@
 package project.spring.myAct.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.spring.article.vo.ArticleDTO;
 import project.spring.myAct.service.MyActService;
@@ -23,7 +25,7 @@ public class MyActController {
 	MyActService myActService= null;
 	
 	@RequestMapping
-	public String index(String pageNum, HttpServletRequest request, Model model) {
+	public String index(HttpServletRequest request, Model model) {
 		System.out.println("MyActIndex Controller");
 		int count = 0;				
 		
@@ -51,21 +53,24 @@ public class MyActController {
 		return "/myAct/attend.mn";
 	}
 	
-	@RequestMapping(value = "/likeArticle", method = RequestMethod.GET)
-	public String likeArticle(String pageNum, HttpServletRequest request, Model model) {
+	@RequestMapping(value = "/likeArticle", method = {RequestMethod.GET,RequestMethod.POST})
+	@ResponseBody
+	public List likeArticle(String id, HttpServletRequest request, Model model) {
 		System.out.println("MyActLikeArticle Controller");
+		System.out.println("id"+id);
 		int count = 0;			
 		
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
-		List likeArticle = null;
-		count = myActService.likeArticleCount(memId);
+		List likeArticle =null;
+		count = myActService.myArticleCount(memId);
 		System.out.println("count : " + count);
 		
-		model.addAttribute("count", new Integer(count));
-		//model.addAttribute("myLikeArticle", myLikeArticle);
-		
-		return "/myAct/likeArticle.mn";
+		likeArticle = myActService.myLikeArticle(memId);
+		count = myActService.likeArticleCount(memId);
+		System.out.println("count : " + count);
+
+		return likeArticle;
 	}
 	 
 	@RequestMapping(value = "/likeDrink", method = RequestMethod.GET)
@@ -78,8 +83,6 @@ public class MyActController {
 		List likeDrink = null;
 		count = myActService.likeArticleCount(memId);
 		System.out.println("count : " + count);
-
-		
 		return "/myAct/likeDrink.mn";
 	}
 	@RequestMapping(value = "/title", method = RequestMethod.GET)

@@ -53,7 +53,6 @@ public class MyActServiceImpl implements MyActService{
 	@Override
 	public int myArticleCount(String memId) {
 		int count = myActDAO.myArticleCount(memId);
-		
 		return count;
 	}
 	
@@ -71,7 +70,8 @@ public class MyActServiceImpl implements MyActService{
 
 	@Override
 	public List myLikeArticle(String memId) {
-		List articleList = myActDAO.getMyLikeArticles(memId);
+		List articleList = myActDAO.myLikeArticle(memId);
+		
 		return articleList;
 	}
 
@@ -83,7 +83,7 @@ public class MyActServiceImpl implements MyActService{
 
 	@Override
 	public List myLikeDrink(String memId) {
-		List articleList = myActDAO.getMyLikeDrinks(memId);
+		List articleList = myActDAO.myLikeDrink(memId);
 		return articleList;
 	}
 

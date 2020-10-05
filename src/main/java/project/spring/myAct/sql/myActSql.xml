@@ -13,16 +13,14 @@
  			select count(*) from BOARD_NORMAL where insert_id=#{value}
  		</select>
  		
- 		<select id="myLikeArticleCount" parameterType="string" resultType="int">
- 			select count(*) from MY_LIKE where insert_id=#{value} and ML_DIFF LIKE 'F%'
+ 		<select id="myLikeArticle" parameterType="string" resultType="MyLikeDTO">
+ 			SELECT * FROM (SELECT ML_IDX, ML_URL, ML_DIFF, INSERT_ID, rownum r FROM MY_LIKE ml) WHERE INSERT_ID =#{value} AND (ML_DIFF = 'F' OR ML_DIFF =  'C') ORDER BY ML_IDX DESC
  		</select>
- 		
  		<select id="myDrinkCount" parameterType="string" resultType="int">
  			select count(*) from BOARD_NORMAL where insert_id=#{value}
  		</select>
  		
- 		<select id="myLikeDrinkCount" parameterType="string" resultType="int">
+ 		<select id="myLikeDrink" parameterType="string" resultType="int">
  			select count(*) from MY_LIKE where insert_id=#{value} and ML_DIFF LIKE 'F%'
  		</select>
- 		
   </mapper>
