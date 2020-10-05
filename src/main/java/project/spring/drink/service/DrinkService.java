@@ -20,5 +20,7 @@ public interface DrinkService {
 
 	// 주류정보 한줄평 개수 & 평점
 	public HashMap selectCommentStarServiceInfo(String dkCode) throws SQLException;
+
+	public List<HashMap> selectTagCloudServiceInfo(String dkCode) throws SQLException;
 	
 }

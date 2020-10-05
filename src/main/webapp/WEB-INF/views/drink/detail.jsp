@@ -125,7 +125,7 @@
 					lineColor: '#59869c',
 					lineWidth: 2,
 					lineStyle: 'dotted',
-					size: 20
+					size: 15
 				},
 				guide: {  // Guides (both lines and background colors)
 					lineColor: "#607D8B",
