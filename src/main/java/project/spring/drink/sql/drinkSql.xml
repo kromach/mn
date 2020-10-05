@@ -28,6 +28,14 @@
   			GROUP BY DK_CODE 
   		</select>
   		
+		<select id="selectTagCloudServiceInfo" parameterType="String" resultType="camelmap">
+  			SELECT ROWNUM AS ROW_COUNT, T.* 
+			FROM (
+				(SELECT DK_CODE, TAG_VALUE, TAG_COUNT FROM DRINK_TAG WHERE dk_code = #{value} ORDER BY TAG_COUNT ) T 
+				) 
+			ORDER BY ROW_COUNT DESC
+  		</select>
+  		
   		<!-- <select id="userCount" resultType="int">
   			select count(*) from test
   		</select>

@@ -65,7 +65,9 @@ public class DrinkController {
 		// 총 코멘트 수, 평가 평균 점수 
 		HashMap commentStarInfo = drinkService.selectCommentStarServiceInfo(dkCode);
 		
-		System.out.println(commentStarInfo);
+		List<HashMap> tagCloudInfo = drinkService.selectTagCloudServiceInfo(dkCode);
+		
+		System.out.println(tagCloudInfo);
 		
 		// request에 담긴 검색 결과 뽑아내기 
 		String schDkBkind = null;

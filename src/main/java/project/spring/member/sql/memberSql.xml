@@ -12,4 +12,7 @@
   		<select id="isExistId" parameterType="memberDTO" resultType="memberDTO">
   			select * from member_info where id = #{id}
   		</select>
+  		<select id="getMember" parameterType="string" resultType="memberDTO">
+  			SELECT * FROM MEMBER_INFO mi WHERE id = #{value}
+  		</select>
   </mapper>

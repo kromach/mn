@@ -33,6 +33,18 @@ public class MemberDAOImpl implements MemberDAO {
 		return 0;
 	}
 	@Override
+	public MemberDTO readItem() {		
+	String id = ((ServletRequestAttributes) RequestContextHolder
+				.getRequestAttributes())
+						.getRequest().getSession()
+						.getAttribute("memId")
+						.toString();
+	System.out.println(id);
+	return sqlSession.selectOne("member.getMember", id);
+	}
+	
+	
+	@Override
 	public int insertItem(Object obj) {
 		int result = 0;
 		if (obj instanceof MemberDTO) {

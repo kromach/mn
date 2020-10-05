@@ -1,7 +1,7 @@
 package project.spring.beans;
 
 import project.spring.beans.CommonInterface;
-import project.spring.kakao.vo.MemberDTO;
+import project.spring.member.vo.MemberDTO;
 
 public interface memberInterface extends CommonInterface{
 	int insertItem(MemberDTO dto);	

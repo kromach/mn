@@ -116,12 +116,14 @@ public class MemberDTO {
 	public MemberDTO() {
 		// TODO Auto-generated constructor stub
 	}
+	
 	@Override
 	public String toString() {
 		return "MemberDTO [id=" + id + ", pw="
 				+ pw + ", userKind=" + userKind
 				+ ", name=" + name + ", birth="
 				+ birth + ", tel=" + tel
+				+ ", nickName=" + nickName
 				+ ", address=" + address
 				+ ", licenseNum=" + licenseNum
 				+ ", licenseImg=" + licenseImg
