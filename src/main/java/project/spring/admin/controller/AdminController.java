@@ -50,7 +50,7 @@ public class AdminController {
 				model.addAttribute("count", count);
 				model.addAttribute("pageVO", pageVO);
 				
-			return "/admin/memberList.mn";
+			return "admin/memberList.mn";
 		}
 	
 	
