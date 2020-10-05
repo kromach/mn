@@ -80,7 +80,7 @@ public class DrinkController {
 		
 		//System.out.println(tagCloudInfo);
 		
-		// request에 담긴 검색 결과 뽑아내기 
+		// request에 담긴 검색 결과 뽑아내기  
 		String schDkBkind = null;
 		String schDkSkind = null;
 		String[] schDkAlcohol = null;
