@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script  src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <style>
 .linkBar {
@@ -53,8 +54,12 @@
 					</c:forEach>
 				</table>
 			</div>
+			<div id="result">
+			
+			</div>
 		</div>
 	</div>
+	<input type = "hidden" value="${sessionScope.memId}" id="memId">
 </body>
 <script>
 		$(document).ready(function(){
@@ -62,8 +67,9 @@
 				$.ajax({
 					type:"POST",
 					url:"/myAct",
-					data:{id:$("#id").val()},
+					data:{id:$("#memId").val()},
 					success:function(data){
+						console.log(data.val());
 						$("#result").html(data);
 					}
 				});
