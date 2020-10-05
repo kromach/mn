@@ -83,7 +83,7 @@ public class MyActController {
 		List likeDrink = null;
 		count = myActService.likeArticleCount(memId);
 		System.out.println("count : " + count);
-		return "/myAct/likeDrink.mn";
+		return "/myAct/likeDrink.mn"; 
 	}
 	@RequestMapping(value = "/title", method = RequestMethod.GET)
 	public String title() {
