@@ -5,7 +5,8 @@
 		
 		var img_random = Math.ceil(Math.random()*7);
 		$(".main_header").css({"background":"url(/resources/img/main/main" + img_random + ".jpg) no-repeat center center"});
-		$(".center-text").removeClass("display-none")
+		
+		$(".t" + (img_random % 2)).removeClass("display-none")
 	});
 </script>
 <div class="grid-Wrapper">

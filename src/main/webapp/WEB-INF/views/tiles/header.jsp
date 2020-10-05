@@ -32,9 +32,13 @@
 		그 시간에 당신의 마음은 쉬고 있으니까.<br/>
 		- 탈무드
 	</div> -->
-	<div class="center-text display-none">
+	<div class="center-text t0 display-none">
 		<span>&nbsp;술은 지금까지 인간이 만들어 낸 것 중 가장 큰 행복을 만들어내는 것이다.&nbsp;<br /></span>
 		<span>&nbsp;-새뮤얼 존슨&nbsp;</span>
+	</div>
+	<div class="center-text t1 display-none">
+		<span>&nbsp;음주는 Fun 하고 Cool 하고 Sexy 해야죠.&nbsp;<br /></span>
+		<span>&nbsp;그것이 약속이니까.&nbsp;</span>
 	</div>
 </div>
 <div class="margin-bottom20" style="height: 3px; width: 100%; background: #2f4050; border-top: #23303d; border-bottom: #475665;"></div>
