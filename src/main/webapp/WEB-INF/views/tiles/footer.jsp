@@ -105,7 +105,7 @@ function chatLoad(){
 		console.log(socket);
 		socket.close();
 		$('#isLoad').val(0);
-		$("#chatArea").empty();
+		$("#totChatArea").empty();
 	}
 }
 </script>
