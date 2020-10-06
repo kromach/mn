@@ -7,5 +7,6 @@ public interface memberInterface extends CommonInterface{
 	public int insertItem(MemberDTO dto);	
 	public MemberDTO readItem();
 	public MemberDTO findId(MemberDTO dto);
-	int readItem(Object obj);
+	public int readItem(Object obj);
+	public MemberDTO findPw(MemberDTO dto);
 }

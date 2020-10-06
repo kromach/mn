@@ -18,6 +18,9 @@
   		<select id="findId" parameterType="memberDTO" resultType="memberDTO">
 			select * from member_info where name = #{name} and birth = #{birth} and tel = #{tel}		
   		</select>
+  		<select id="findPw" parameterType="memberDTO" resultType="memberDTO">
+			select * from member_info where name = #{name} and birth = #{birth} and tel = #{tel} and id = #{id}	
+  		</select>
   		<update id="updateMember" parameterType="memberDTO" >
 			UPDATE MEMBER_INFO SET NICKNAME=#{nickName},pw=#{pw},tel=#{tel},ADDRESS=#{address} ,LICENSE_IMG=#{licenseImg}
 			,LICENSE_NUM =#{licenseNum} where id = #{id}

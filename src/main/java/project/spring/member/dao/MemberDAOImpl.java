@@ -103,4 +103,9 @@ public class MemberDAOImpl implements MemberDAO {
 		MemberDTO result = sqlSession.selectOne("member.findId", dto);
 		return result;
 	}
+	@Override
+	public MemberDTO findPw(MemberDTO dto) {
+		MemberDTO result = sqlSession.selectOne("member.findPw", dto);
+		return result;
+	}
 }

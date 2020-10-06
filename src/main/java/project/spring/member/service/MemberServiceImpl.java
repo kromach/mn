@@ -73,4 +73,10 @@ public class MemberServiceImpl implements memberInterface{
 		MemberDTO result = memberDAO.findId(dto);
 		return result;
 	}
+	
+	@Override
+	public MemberDTO findPw(MemberDTO dto) {
+		MemberDTO result = memberDAO.findPw(dto);
+		return result;
+	}
 }

@@ -9,10 +9,10 @@
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
-				<c:if test="${result eq id}">
+				<c:if test="${result eq 'id'}">
 					${memberDTO.name }님의 ID는 ${memberDTO.id }입니다.
 				</c:if>
-				<c:if test="${result eq pw}">
+				<c:if test="${result eq 'pw'}">
 					${memberDTO.name }님의 PW는 ${memberDTO.pw }입니다.
 				</c:if>
 			</div>

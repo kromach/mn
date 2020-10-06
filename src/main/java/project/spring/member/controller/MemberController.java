@@ -319,8 +319,22 @@ public class MemberController {
 	@RequestMapping(value = "/findPwPro")
 	public String findPwPro(MemberDTO dto,Model model) {
 		
+		System.out.println(dto);
+		String[] births = dto.getBirth().split(",");
+		String[] tels = dto.getTel().split(",");
+		String birth = "";
+		String tel = "";
+		for(String birth_ : births) {
+			birth += birth_;
+		}
+		for(String tel_ : tels) {
+			tel += tel_;
+		}
+		System.out.println(tel+":"+birth);
+		dto.setBirth(birth);
+		dto.setTel(tel);
 		
-		
+		MemberDTO result = memberService.findPw(dto);
 		model.addAttribute("memberDTO", dto);
 		model.addAttribute("result","pw");
 		return "/member/findResult.mn";
