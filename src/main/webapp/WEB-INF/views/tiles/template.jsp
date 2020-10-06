@@ -6,6 +6,14 @@
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
+	<!-- Toast UI Editor -->
+	<!-- Styles -->
+	<link rel="stylesheet" href="https://uicdn.toast.com/tui-editor/latest/tui-editor.css"></link>
+	<link rel="stylesheet" href="https://uicdn.toast.com/tui-editor/latest/tui-editor-contents.css"></link>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.css"></link>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"></link>
+	<!-- Scripts -->
+	<script src="https://uicdn.toast.com/tui-editor/latest/tui-editor-Editor-full.js"></script>
 	<!-- mobile Device  -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="format-detection" content="telephone=no"> <!-- ios 숫자 전화번호 인식 차단 -->
