@@ -20,16 +20,16 @@
 					<div class="loginLabel">
 					이름
 					</div>
-					<input class="loginInput" type="text" name="name" >
+					<input class="loginInput" type="text" name="name" required="required">
 					<div class="loginLabel">아이디</div>
-					<input class="loginInput" type="text" name="id">
+					<input class="loginInput" type="text" name="id" required="required">
 					<div class="loginLabel"> 
 					생년월일
 					</div>
 					<div class="birthWrapper">
-					<input class="birthfirstInput" type="text" name="birth" 
+					<input class="birthfirstInput" type="text" name="birth" required="required" 
 						size="7"> 
-					-<input class="birthsecondInput" type="text" name="birth" 
+					-<input class="birthsecondInput" type="text" name="birth" required="required"
 						size="1">
 					</div>
 					<div class="loginLabel">
@@ -37,9 +37,9 @@
 					</div>
 					<div class = "birthWrapper">
 					<input class="telInput"
-					type="text" name="tel" size="3">-<input class="telInput"
-					type="text" name="tel" size="3">-<input class="telInput"
-					type="text" name="tel" size="3">
+					type="text" name="tel" size="3" required="required">-<input class="telInput"
+					type="text" name="tel" size="3" required="required">-<input class="telInput"
+					type="text" name="tel" size="3" required="required">
 					</div>
 					<br><br>
 					<button type="submit">찾기</button>
