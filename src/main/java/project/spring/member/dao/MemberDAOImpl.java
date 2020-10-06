@@ -43,7 +43,6 @@ public class MemberDAOImpl implements MemberDAO {
 	return sqlSession.selectOne("member.getMember", id);
 	}
 	
-	
 	@Override
 	public int insertItem(Object obj) {
 		int result = 0;
@@ -95,6 +94,17 @@ public class MemberDAOImpl implements MemberDAO {
 			}
 			System.out.println("DAOImpleResult="+result);
 		} 
+		return result;
+	}
+	
+	@Override
+	public MemberDTO findId(MemberDTO dto) {
+		MemberDTO result = sqlSession.selectOne("member.findId", dto);
+		return result;
+	}
+	@Override
+	public MemberDTO findPw(MemberDTO dto) {
+		MemberDTO result = sqlSession.selectOne("member.findPw", dto);
 		return result;
 	}
 }

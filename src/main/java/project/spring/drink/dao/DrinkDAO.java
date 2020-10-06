@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import project.spring.beans.CommonInterface;
+import project.spring.drink.vo.CommentVO;
 import project.spring.drink.vo.DrinkVO;
 
 public interface DrinkDAO {
@@ -17,5 +18,5 @@ public interface DrinkDAO {
 
 	List<HashMap> selectTagCloudServiceInfo(String dkCode) throws SQLException;
 
-
+	List<CommentVO> selectCommentServiceList(String dkCode) throws SQLException;
 }

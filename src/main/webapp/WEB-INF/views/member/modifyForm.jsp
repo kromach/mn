@@ -53,9 +53,16 @@
 					<c:set var="len" value = "${fn:length(memberDTO.birth)}"/>
 					<c:set var="birth" value="${memberDTO.birth}"/> 
 					<c:set var="birthfrist" value="${fn:substring(birth,0,len-1)}"/>
+					<c:set var="KakaoTest" value="${fn:substring(birth,0,len-5)}"/>
 					<c:set var="birthsecond" value="${fn:substring(birth,len-1,len)}"/>
+					<c:if test="${KakaoTest == '20'}">
 					<input class="birthfirstInput" type="text" name="birth" value="${birthfrist}"
+						size="7">
+					</c:if>
+					<c:if test="${KakaoTest != '20'}">
+					<input class="birthfirstInput" type="text" name="birth" value="${birthfrist}" readonly="readonly"
 						size="7"> 
+					</c:if>
 					-<input class="birthsecondInput" type="text" name="birth" value="${birthsecond}"
 						size="1">
 					</div>

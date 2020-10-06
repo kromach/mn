@@ -25,7 +25,7 @@
 				<a href="/myAct">내 글 보기</a>
 			</div>
 			<div class="linkBar" id="likeArticle">
-				<a onclick="">글 좋아요</a>
+				<a onclick="/myAct/likeArticle">글 좋아요</a>
 			</div>
 			<div class="linkBar" id="likeDrink">
 				<a>술 좋아요</a>
@@ -55,7 +55,24 @@
 				</table>
 			</div>
 			<div id="likeArticle_result">
-			
+				<div class="grid-item grid-item--width6">
+				<table class="tableCss" style="width: 100%;">
+					<tr>
+						<td>제목</td>
+						<td>작성일</td>
+						<td>조회</td>
+						<td>추천</td>
+					</tr>
+					<c:forEach var="likeArticle" items="${likeArticle}">
+						<tr>
+							<td>${likeArticle.bnTitle}</td>
+							<td>${likeArticle.insertDay}</td>
+							<td>${likeArticle.readcount}</td>
+							<td>${likeArticle.heart}</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
 			</div>
 			<div id="result2">
 			

@@ -53,7 +53,7 @@ public class MyActController {
 		return "/myAct/attend.mn";
 	}
 	
-	@RequestMapping(value = "/likeArticle", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/likeArticle")
 	@ResponseBody
 	public List likeArticle(String id, HttpServletRequest request, Model model) {
 		System.out.println("MyActLikeArticle Controller");
@@ -63,12 +63,11 @@ public class MyActController {
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
 		List likeArticle =null;
-		count = myActService.myArticleCount(memId);
-		System.out.println("count : " + count);
 		
 		likeArticle = myActService.myLikeArticle(memId);
 		count = myActService.likeArticleCount(memId);
 		System.out.println("count : " + count);
+		System.out.println(likeArticle.toString());
 
 		return likeArticle;
 	}
@@ -83,7 +82,7 @@ public class MyActController {
 		List likeDrink = null;
 		count = myActService.likeArticleCount(memId);
 		System.out.println("count : " + count);
-		return "/myAct/likeDrink.mn";
+		return "/myAct/likeDrink.mn"; 
 	}
 	@RequestMapping(value = "/title", method = RequestMethod.GET)
 	public String title() {
