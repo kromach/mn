@@ -80,7 +80,6 @@ public class MemberDAOImpl implements MemberDAO {
 				System.out.println(result);
 				return result;
 			}
-			
 			//id,pw일치
 			if(dto.getId().equals(dto_origin.getId())&&
 				dto.getPw().equals(dto_origin.getPw())
@@ -112,6 +111,22 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int insertItemByKakao(MemberDTO dto) {
 		int result = sqlSession.insert("member.kakaoSignup", dto);
+		return result;
+	}
+	
+	@Override
+	public boolean overlapCheck(
+			String checkString, int i) {
+		boolean result = false;
+		int isExist = 0;
+		//0 >> id  // 1>> nickName
+		System.out.println(i+":"+checkString);
+		if(i==0) {
+			isExist = sqlSession.selectOne("member.overlapCheckbyId", checkString);
+		}else if(i==1) {
+			isExist = sqlSession.selectOne("member.overlapCheckbyNick", checkString);
+		}
+		if(isExist==1) result = true;
 		return result;
 	}
 }

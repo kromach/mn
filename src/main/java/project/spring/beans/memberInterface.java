@@ -10,4 +10,5 @@ public interface memberInterface extends CommonInterface{
 	public int readItem(Object obj);
 	public MemberDTO findPw(MemberDTO dto);
 	public int insertItemByKakao(MemberDTO dto);
+	public boolean overlapCheck(String checkString, int i);
 }

@@ -29,7 +29,6 @@ public class MemberServiceImpl implements memberInterface{
 		// TODO Auto-generated method stub
 		MemberDTO dto = new MemberDTO();
 		dto = memberDAO.readItem();
-		
 		return dto; 
 	}
 	@Override
@@ -75,6 +74,12 @@ public class MemberServiceImpl implements memberInterface{
 	@Override
 	public int insertItemByKakao(MemberDTO dto) {
 		int result = memberDAO.insertItemByKakao(dto);
+		return result;
+	}
+	
+	@Override
+	public boolean overlapCheck(String checkString,int i) {
+		boolean result = memberDAO.overlapCheck(checkString,i);
 		return result;
 	}
 }
