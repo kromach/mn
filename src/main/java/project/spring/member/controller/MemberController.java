@@ -335,8 +335,9 @@ public class MemberController {
 		dto.setTel(tel);
 		
 		MemberDTO result = memberService.findPw(dto);
-		model.addAttribute("memberDTO", dto);
+		model.addAttribute("memberDTO", result);
 		model.addAttribute("result","pw");
+		
 		return "/member/findResult.mn";
 	}
 }
