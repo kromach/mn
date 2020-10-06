@@ -23,13 +23,13 @@
 				</c:if>
 				<div class="loginWrapper">
 					<div class="loginLabel">아이디</div>
-					<input class="loginInput" type="text" name="id">
+					<input class="loginInput" type="text" name="id" required="required">
 					<div class="loginLabel">아이디중복체크</div>
 					<button type="button">중복확인</button>
-					<div class="loginLabel">
+					<div class="loginLabel" required="required">
 					비밀번호
 					</div>
-					<input class="loginInput" type="text" name="pw">
+					<input class="loginInput" type="text" name="pw" required="required">
 					<div class="loginLabel">
 					비밀번호 확인
 					</div>
@@ -37,19 +37,19 @@
 					<div class="loginLabel">
 					이름
 					</div>
-					<input class="loginInput" type="text" name="name">
+					<input class="loginInput" type="text" name="name" required="required">
 					<div class="loginLabel">
 					닉네임
 					</div>
-					<input	class="loginInput" type="text" name="nickName">닉네임 중복체크
+					<input	class="loginInput" type="text" name="nickName" required="required">닉네임 중복체크
 					<button type="button">중복확인</button>
 					<div class="loginLabel">
 					생년월일
 					</div>
 					<div class="birthWrapper">
-					<input class="birthfirstInput" type="text" name="birth"
+					<input class="birthfirstInput" type="text" name="birth" required="required"
 						size="7">
-					-<input class="birthsecondInput" type="text" name="birth"
+					-<input class="birthsecondInput" type="text" name="birth" required="required"
 						size="1">
 					</div>
 					<div class="loginLabel">
@@ -57,9 +57,9 @@
 					</div>
 					<div class = "birthWrapper">
 					<input class="telInput"
-					type="text" name="tel" size="3">-<input class="telInput"
-					type="text" name="tel" size="3">-<input class="telInput"
-					type="text" name="tel" size="3">
+					type="text" name="tel" size="3" required="required">-<input class="telInput"
+					type="text" name="tel" size="3" required="required">-<input class="telInput"
+					type="text" name="tel" size="3" required="required">
 					</div>
 					<c:if test="${status eq 'user' }">
 					<div class="loginLabel">
@@ -80,7 +80,7 @@
 						<div class="loginLabel">
 						사업자 번호
 						</div>
-						<input type="text" name="licenseNum" class="loginInput">
+						<input type="text" name="licenseNum" class="loginInput" required="required">
 					</c:if>
 					<br><br>
 					<button type="submit">가입</button>

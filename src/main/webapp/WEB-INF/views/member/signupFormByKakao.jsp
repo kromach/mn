@@ -16,7 +16,7 @@
 						onsubmit="return check()" accept-charset="utf-8">
 				<div class="loginWrapper">
 					<div class="loginLabel">아이디</div>
-					<input class="loginInput" type="text" name="id" value="${kakaoMember.id }" readonly="readonly">
+					<input class="loginInput" type="text" name="id" value="${kakaoMember.id }" readonly="readonly" >
 					<div class="loginLabel">
 					비밀번호
 					</div>
@@ -32,25 +32,25 @@
 					<div class="loginLabel">
 					닉네임
 					</div>
-					<input	class="loginInput" type="text" name="nickName" value="${kakaoMember.nickName}" >닉네임 중복체크
-					<button type="button">중복확인</button>
+					<input	class="loginInput" type="text" name="nickName" value="${kakaoMember.nickName}" required="required">
+					닉네임 중복체크<button type="button">중복확인</button>
 					<div class="loginLabel">
 					생년월일
 					</div>
 					<div class="birthWrapper">
 					<input class="birthfirstInput" type="text" name="birth" required="required" 
-						size="7">
+						size="7" required="required">
 					-<input class="birthsecondInput" type="text" name="birth" required="required" 
-						size="1">
+						size="1" required="required">
 					</div>
 					<div class="loginLabel">
 					전화번호
 					</div>
 					<div class = "birthWrapper">
 					<input class="telInput"
-					type="text" name="tel" size="3">-<input class="telInput"
-					type="text" name="tel" size="3">-<input class="telInput"
-					type="text" name="tel" size="3">
+					type="text" name="tel" size="3" required="required">-<input class="telInput"
+					type="text" name="tel" size="3" required="required">-<input class="telInput"
+					type="text" name="tel" size="3" required="required">
 					</div>
 					<div class="loginLabel">
 					주소
