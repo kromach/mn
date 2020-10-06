@@ -214,7 +214,7 @@ public class MemberController {
 		//id O pw O
 		request.setAttribute("result", 1);
 		
-		return "redirect:/member/loginResult";
+		return "/member/loginResult.mn";
 	}
 	
 	/*=====================================================================================================*/
