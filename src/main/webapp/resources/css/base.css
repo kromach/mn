@@ -395,6 +395,18 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 
 .chart-container {width: 100%; height: 100%; min-height: 450px;}
 
+
+.commentDiv {font-size:14px;}
+.commentDiv .nm_like {float: left; width: 20%;}
+.commentDiv .nm_like .likeArea {font-size: 35px; color: var(--main-color)}
+.commentDiv .nm_like .titleName {font-weight: 700; color: var(--main-color) }
+.commentDiv .nm_like .nickname {font-size: 14px;}
+.commentDiv .report {float: left; width: 70%; text-align: left; font-size:16px;}
+.commentDiv .report .star {margin-bottom: 8px;}
+.commentDiv .report .star i{color:#fe5016}
+.commentDiv .commentDay {float: left; width: 10%;}
+
+
 /*반응형웹(검색영역)*/
 .grid-Wrapper{width:100% ; text-align: center; }
 .grid { width:80% ; display: inline-block;}
@@ -581,9 +593,9 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .tableCss{width:100%;position:relative;font-size:12px;font-family:Arial, Helvetica, sans-serif;border-top:1px solid #cccccc;border-left:1px solid #cccccc;}
 .tableCss table{border-collapse:collapse; border-spacing:0; border:1px solid #cccccc;}
 .tableCss th,
-.tableCss td{padding:7px;border:0;line-height:120%;text-align:center;border-bottom:1px solid #cccccc;border-right:1px solid #cccccc;}
-.tableCss th{color:#333;vertical-align:middle;}
-.tableCss td{color:#555;vertical-align:middle; text-align: center;}
+.tableCss td{padding:7px;border:0;line-height:120%;border-bottom:1px solid #cccccc;border-right:1px solid #cccccc;}
+.tableCss th{color:#333;vertical-align:middle; text-align:center;}
+.tableCss td{color:#555;vertical-align:middle;}
 .tableCss td.left{text-align: left;}
 .tableCss td table {border-collapse:collapse;}
 .tableCss td a{color:#069;text-decoration:none}
