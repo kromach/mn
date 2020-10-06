@@ -94,6 +94,12 @@ public class MyActDAOImpl implements MyActDAO{
 		List list = sqlSession.selectList("myAct.getMyTitle", memId);
 		return list;
 	}
+
+	@Override
+	public List getAllTitle() {
+		List list = sqlSession.selectList("myAct.getAllTitle");
+		return list;
+	}
 	
 	
 	

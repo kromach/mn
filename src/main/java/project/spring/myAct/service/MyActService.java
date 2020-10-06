@@ -13,4 +13,5 @@ public interface MyActService extends CommonInterface{
 	public int likeDrinkCount(String memId);
 	public List myLikeDrink(String memId);
 	public List getMyTitle(String memId);
+	public List getAllTitle();
 }
