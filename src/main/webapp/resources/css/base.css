@@ -514,9 +514,9 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .tableCss{width:100%;position:relative;font-size:12px;font-family:Arial, Helvetica, sans-serif;border-top:1px solid #cccccc;border-left:1px solid #cccccc;}
 .tableCss table{border-collapse:collapse; border-spacing:0; border:1px solid #cccccc;}
 .tableCss th,
-.tableCss td{padding:7px;border:0;line-height:120%;text-align:center;border-bottom:1px solid #cccccc;border-right:1px solid #cccccc;}
-.tableCss th{color:#333;vertical-align:middle;}
-.tableCss td{color:#555;vertical-align:middle; text-align: center;}
+.tableCss td{padding:7px;border:0;line-height:120%;border-bottom:1px solid #cccccc;border-right:1px solid #cccccc;}
+.tableCss th{color:#333;vertical-align:middle; text-align:center;}
+.tableCss td{color:#555;vertical-align:middle;}
 .tableCss td.left{text-align: left;}
 .tableCss td table {border-collapse:collapse;}
 .tableCss td a{color:#069;text-decoration:none}
