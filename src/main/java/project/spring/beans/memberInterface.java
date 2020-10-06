@@ -9,4 +9,5 @@ public interface memberInterface extends CommonInterface{
 	public MemberDTO findId(MemberDTO dto);
 	public int readItem(Object obj);
 	public MemberDTO findPw(MemberDTO dto);
+	public int insertItemByKakao(MemberDTO dto);
 }

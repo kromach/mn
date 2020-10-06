@@ -196,24 +196,15 @@ public class MemberController {
 		
 		dto.setId(id);
 		dto.setNickName(nickname);
-		if(gender.equals("male")) dto.setBirth("00"+birth+"3");
-		else if(gender.equals("female")) dto.setBirth("00"+birth+"4");
+		dto.setName(nickname);
 		
 		int isNew = memberService.readItem(dto);
+		int kakaoSignupResult = 0;
 		if(isNew !=0) {
-			//id가 없음
+			//id가 없음 >> 회원가입
+			request.setAttribute("kakaoMember", dto);
+			return "/member/signupFormByKakao.mn";
 		}
-		
-		/*
-		 * 회원가입 안되어있을때 회원가입하는 로직 조회의 이후에 첨부 필요
-		 */
-		
-		
-		
-		
-		
-		
-		
 		
 		//Session에 값 넣어주기
 		request.getSession().setAttribute("memId", id);
@@ -223,6 +214,12 @@ public class MemberController {
 		request.setAttribute("result", 1);
 		
 		return "redirect:/member/loginResult";
+	}
+	
+	@RequestMapping(value = "/signUpKakaoPro")
+	public String signUpKakaoPro(HttpServletRequest request,@ModelAttribute MemberDTO model) {
+		
+		return "/member/signupResult.mn";
 	}
 	
 	@RequestMapping(value = "/loginResult")
