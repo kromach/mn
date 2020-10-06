@@ -356,6 +356,18 @@ nav.rightMenu .company-info {border-top: 3px #5a5a5a dashed; background-color: #
 nav.rightMenu .company-info p {font-size:14px}
 nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 
+/* selectbox */
+.selectric-wrapper{display:inline-block; vertical-align:middle;}
+.selectric-shorter{min-width:78px;}
+.selectric-shorter .label{margin-left:10px;}
+.selectric-shorter1{min-width:96px;}
+.selectric-shorter1 .label{margin-left:10px;}
+.selectric-short{width:138px;}
+.selectric-middle{width:238px;}
+.selectric-long{width:100%;}
+.selectric-thick .label{height:44px;line-height:44px;}
+.selectric-thick .button{height:44px;}
+
 
  /* 상단 관리자 & 판매자 LNB 메뉴 */
  /* 
@@ -586,8 +598,9 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 
 /* 테이블 사이즈 지정 */
 .tbl-lg{width:100%!important;}
-.tbl-md{width:800px!important; margin:0 auto;}
-.tbl-sm{width:500px!important; margin:0 auto;}
+.tbl-md{width:70%!important; margin:0 auto;}
+.tbl-sm{width:50%!important; margin:0 auto;}
+.tbl-xs{width:30%!important; margin:0 auto;}
 
 /*입력테이블, 공급자&관리자 테이블*/
 .tableCss{width:100%;position:relative;font-size:12px;font-family:Arial, Helvetica, sans-serif;border-top:1px solid #cccccc;border-left:1px solid #cccccc;}
@@ -604,9 +617,9 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .tableCss td a:focus{color:#ff6600;text-decoration:underline}
 .tableCss th{background:#e9f0f0;white-space:nowrap;text-align:center}
 .tableCss td label{padding-right: 5px;}
-.tableCss td .input-sm{width:100px}
-.tableCss td .input-md{width:200px}
-.tableCss td .input-lg{width:400px}
+.tableCss td .input-sm{width:20%}
+.tableCss td .input-md{width:50%}
+.tableCss td .input-lg{width:98%}
 .tableCss td input{vertical-align: middle;}
 
 .detailTbl{border-collapse:collapse; border-spacing:0; border-top:2px solid #333;}
