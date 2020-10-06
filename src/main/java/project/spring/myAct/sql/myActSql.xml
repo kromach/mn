@@ -15,17 +15,24 @@
 
  		
  		<select id="myLikeArticleCount" parameterType="string" resultType="int">
- 			select count(*) from my_like where insert_id=#{value}
+ 		<![CDATA[
+ 			select count(*) from my_like where insert_id=#{value} AND KIND ='F' OR KIND ='C'
+ 		]]>
  		</select>
  		<select id="myLikeArticle" parameterType="string" resultType="ArticleDTO">
  			SELECT * FROM BOARD_NORMAL bn, MY_LIKE ml WHERE bn.BN_IDX = ml.obj_idx AND ml.INSERT_ID=#{value}
  		</select>
  		
- 		
- 		<select id="myDrinkCount" parameterType="string" resultType="int">
- 			select count(*) from BOARD_NORMAL where insert_id=#{value}
- 		</select>
  		<select id="myLikeDrink" parameterType="string" resultType="int">
- 			select count(*) from MY_LIKE where insert_id=#{value} and ML_DIFF LIKE 'F%'
+ 			
+ 		</select>
+ 		<select id="myLikeDrinkCount" parameterType="string" resultType="int">
+ 			<![CDATA[
+	 			select count(*) from my_like where insert_id=#{value} AND KIND ='PR' OR KIND ='DK'
+ 			]]>
+ 		</select>
+ 		
+ 		<select id="getMyTitle" parameterType="string" resultType="MyTitleDTO">
+ 			select * from my_title where id=#{value}
  		</select>
   </mapper>

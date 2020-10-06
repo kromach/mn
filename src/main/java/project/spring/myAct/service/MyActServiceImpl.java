@@ -87,4 +87,12 @@ public class MyActServiceImpl implements MyActService{
 		return articleList;
 	}
 
+	@Override
+	public List getMyTitle(String memId) {
+		List titleList = myActDAO.getMyTitle(memId);
+		return titleList;
+	}
+	
+	
+
 }
