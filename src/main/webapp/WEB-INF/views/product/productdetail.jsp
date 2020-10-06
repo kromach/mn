@@ -4,7 +4,7 @@
 <div class="grid-Wrapper">
 	<div class="grid2"> 
 	
-		<div class="detail-sizer"></div>
+		<div class="detail-sizer"></div> 
 		<div class="gutter-sizer"></div>
 		<div class="detail-item detail-width2 detail-img-div" >
 			<img id="mainImg" src=" ${info.prImg}" alt=" ${info.prName}">
