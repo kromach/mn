@@ -22,11 +22,10 @@
 						onsubmit="return check()" accept-charset="utf-8">
 				</c:if>
 				<div class="loginWrapper">
-					<div class="loginLabel">아이디</div>
-					<input class="loginInput" type="text" name="id" required="required">
-					<div class="loginLabel">아이디중복체크</div>
-					<button type="button" class="btn btn-sm btn-dark" onclick="overlapCheck()">중복확인</button>
-					<div class="loginLabel" required="required">
+					<div class="loginLabel" >아이디</div>
+					<input class="loginInput" type="text" name="id" required="required" id="id">
+					<div class="loginLabel" id="id_label"></div>
+					<div class="loginLabel">
 					비밀번호
 					</div>
 					<input class="loginInput" type="text" name="pw" required="required">
@@ -41,8 +40,8 @@
 					<div class="loginLabel">
 					닉네임
 					</div>
-					<input	class="loginInput" type="text" name="nickName" required="required">
-					<button type="button" class="btn btn-sm btn-dark" onclick="overlapCheck()">중복확인</button>
+					<input	class="loginInput" type="text" name="nickName" required="required" id="nickName">
+					<div class="loginLabel" id="nickName_label"></div>
 					<div class="loginLabel">
 					생년월일
 					</div>
@@ -92,14 +91,38 @@
 			</div>
 		</div>
 	</div>
-	</div>
-	</div>
-	<script src="/resources/js/imageLoad.js"></script>
-	<!-- 데이터 스크롤해서 붙이는 스크립트  -->
 	<script type="text/javascript">
-	function overlapCheck(){
-		alert();
-	}
+	$(document).ready(function() {
+		$('#id').blur(function() {
+			var id = $('#id').val();
+			$.ajax({
+				url:  '${pageContext.request.contextPath}/member/overlapCheck?id='+id,
+				type: "get",
+				success : function(data){
+					if(data){
+						$("#id_label").html('<div  style="color: red;font-size: 11px; margin-bottom: 5px;">이미 사용중이거나 탈퇴한 아이디 입니다.</div>');
+					}else{
+						$("#id_label").empty();
+					}
+				}
+			});
+		});
+		$('#nickName').blur(function() {
+			var nickName = $('#nickName').val();
+			$.ajax({
+				url:  '${pageContext.request.contextPath}/member/overlapCheck?nickName='+nickName,
+				type: "get",
+				success : function(data){
+					if(data){
+						$("#nickName_label").html('<div  style="color: red;font-size: 11px; margin-bottom: 5px;">이미 사용중이거나 탈퇴한 아이디 입니다.</div>');
+					}else{
+						$("#nickName_label").empty();
+					}
+				}
+			});
+		});
+	});
 	</script>
+	<script src="/resources/js/imageLoad.js"></script>
 </body>
 </html>

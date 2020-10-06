@@ -24,6 +24,12 @@
   		<select id="findPw" parameterType="memberDTO" resultType="memberDTO">
 			select * from member_info where name = #{name} and birth = #{birth} and tel = #{tel} and id = #{id}	
   		</select>
+		<select id="overlapCheckbyId" parameterType="string" resultType="int">
+			select count(*) from member_info WHERE id = #{value}
+		</select>
+		<select id="overlapCheckbyNick" parameterType="string" resultType="int">
+			select count(*) from member_info where nickName = #{value}
+		</select>
   		<update id="updateMember" parameterType="memberDTO" >
 			UPDATE MEMBER_INFO SET NICKNAME=#{nickName},pw=#{pw},tel=#{tel},ADDRESS=#{address} ,LICENSE_IMG=#{licenseImg}
 			,LICENSE_NUM =#{licenseNum} where id = #{id}
