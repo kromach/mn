@@ -1,10 +1,12 @@
 package project.spring.drink.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import project.spring.beans.JsonUtil;
 import project.spring.drink.dao.DrinkDAO;
 import project.spring.drink.service.DrinkService;
 import project.spring.drink.vo.CommentVO;
@@ -54,20 +57,6 @@ public class DrinkController {
 		
 		return "drink/index.mn";
 	}
-	
-	@RequestMapping("insert")
-	public String InsertInit(HttpServletRequest request, Model model) throws SQLException {
-		
-		//String dkCode = (String)request.getParameter("dkCode");
-		
-//		model.addAttribute("schDkBkind", schDkBkind);
-//		
-//		System.out.println(selectDrinkInfo.getDkName());
-//		System.out.println(selectDrinkInfo.getDkBkindValue());
-		
-		return "drink/insert.mn";
-	}
-	
 
 	@RequestMapping("detail")
 	public String detailInit(HttpServletRequest request, Model model) throws SQLException {
@@ -131,6 +120,46 @@ public class DrinkController {
 		
 		return "drink/detail.mn";
 	}
+	
+	@RequestMapping("insert")
+	public String InsertInit(HttpServletRequest request, Model model) throws SQLException {
+		
+		List<HashMap> bigCategoryList = drinkService.selectBigCategoryList();
+		
+		//String dkCode = (String)request.getParameter("dkCode");
+		
+		model.addAttribute("bigCategoryList", bigCategoryList);
+//		
+//		System.out.println(selectDrinkInfo.getDkName());
+//		System.out.println(selectDrinkInfo.getDkBkindValue());
+		
+		return "drink/insert.mn";
+	}
+	
+	
+	// AJAX - 대분류 선택시 해당하는 소분류 리스트 리턴
+	@RequestMapping("selectSmallCategory")
+	public void selectSmallCategory(@RequestParam String bigCategory, HttpServletResponse response) throws SQLException, IOException {
+		
+		List<HashMap> smallCategoryList = drinkService.selectSmallCategoryList(bigCategory);
+		System.out.println(smallCategoryList);
+		
+		response.setCharacterEncoding("utf-8");
+		response.getWriter().write(JsonUtil.ListToJson(smallCategoryList));
+	}
+	
+	
+	// AJAX - 대분류 선택시 해당하는 평가항목 명칭을 불러옴
+	@RequestMapping("selectItemValues")
+	public void selectItemValues(@RequestParam String bigCategory, HttpServletResponse response) throws SQLException, IOException {
+		
+		HashMap ItemValuesInfo = drinkService.selectItemValuesInfo(bigCategory);
+		System.out.println(ItemValuesInfo);
+		
+		response.setCharacterEncoding("utf-8");
+		response.getWriter().write(JsonUtil.HashMapToJson(ItemValuesInfo));
+	}
+		
 //	
 //	@RequestMapping("smallCategory.do")
 //	public void smallCategory(@RequestParam String bigCategoryCode) throws Exception {
@@ -139,3 +168,4 @@ public class DrinkController {
 //	}
 //	
 }
+

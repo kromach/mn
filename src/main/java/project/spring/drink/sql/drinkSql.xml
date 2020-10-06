@@ -3,6 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="drink">
+  
+		<select id="selectBigCategoryList" resultType="camelmap">
+  			SELECT CODE, VALUE
+			FROM DRINK_CATEGORY WHERE kind = 1 AND USE_YN = 'Y'
+			ORDER BY CT_IDX
+  		</select>
+  		
+		<select id="selectSmallCategoryList" parameterType="String" resultType="camelmap">
+			SELECT CODE, VALUE
+			FROM DRINK_CATEGORY WHERE kind = 2 AND USE_YN = 'Y' AND SUPER_CODE = #{value}
+			ORDER BY CT_IDX
+  		</select>
+  		
+		<select id="selectItemValuesInfo" parameterType="String" resultType="camelmap">
+			SELECT ITEM1_VAL, ITEM2_VAL, ITEM3_VAL, ITEM4_VAL, ITEM5_VAL
+			FROM ELEMENT_INFO WHERE DK_BKIND = #{value}
+  		</select>
+  		
   		<!--   -->
 		<select id="selectDrinkServiceInfo" parameterType="String" resultType="project.spring.drink.vo.DrinkVO">
   			SELECT INFO.DK_CODE,INFO.DK_NAME, INFO.DK_BKIND, BCATE.VALUE AS DK_BKIND_VALUE, 
