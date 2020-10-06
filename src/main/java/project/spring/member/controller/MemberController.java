@@ -103,7 +103,7 @@ public class MemberController {
 		request.getSession().setAttribute("memId", dto.getId());
 		request.getSession().setAttribute("memNickName", dto.getNickName());
 		
-		return "/member/singupResult.mn";
+		return "/member/signupResult.mn";
 	}
 	
 	@RequestMapping("/signupSalesPro")
