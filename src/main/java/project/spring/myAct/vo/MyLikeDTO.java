@@ -2,8 +2,8 @@ package project.spring.myAct.vo;
 
 public class MyLikeDTO {
 	private int mlIdx;
-	private String mlUrl;
-	private String kind;
+	private String mlKind;
+	private String mlValue;
 	private String insertId;
 	public int getMlIdx() {
 		return mlIdx;
@@ -11,17 +11,17 @@ public class MyLikeDTO {
 	public void setMlIdx(int mlIdx) {
 		this.mlIdx = mlIdx;
 	}
-	public String getMlUrl() {
-		return mlUrl;
+	public String getMlKind() {
+		return mlKind;
 	}
-	public void setMlUrl(String mlUrl) {
-		this.mlUrl = mlUrl;
+	public void setMlKind(String mlKind) {
+		this.mlKind = mlKind;
 	}
-	public String getKind() {
-		return kind;
+	public String getMlValue() {
+		return mlValue;
 	}
-	public void setKind(String kind) {
-		this.kind = kind;
+	public void setMlValue(String mlValue) {
+		this.mlValue = mlValue;
 	}
 	public String getInsertId() {
 		return insertId;
@@ -29,10 +29,10 @@ public class MyLikeDTO {
 	public void setInsertId(String insertId) {
 		this.insertId = insertId;
 	}
-	
 	@Override
 	public String toString() {
-		return "MyLikeDTO [mlIdx=" + mlIdx + ", mlUrl=" + mlUrl + ", kind=" + kind + ", insertId=" + insertId + "]";
+		return "MyLikeDTO [mlIdx=" + mlIdx + ", mlKind=" + mlKind + ", mlValue=" + mlValue + ", insertId=" + insertId
+				+ "]";
 	}
 	
 	
