@@ -117,7 +117,7 @@ public class DrinkController {
 		
 		return "drink/detail.mn";
 	}
-//	
+//	 
 //	@RequestMapping("smallCategory.do")
 //	public void smallCategory(@RequestParam String bigCategoryCode) throws Exception {
 //		
