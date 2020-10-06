@@ -1,6 +1,6 @@
 package project.spring.drink.vo;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class CommentVO {
 	

@@ -55,6 +55,20 @@ public class DrinkController {
 		return "drink/index.mn";
 	}
 	
+	@RequestMapping("insert")
+	public String InsertInit(HttpServletRequest request, Model model) throws SQLException {
+		
+		//String dkCode = (String)request.getParameter("dkCode");
+		
+//		model.addAttribute("schDkBkind", schDkBkind);
+//		
+//		System.out.println(selectDrinkInfo.getDkName());
+//		System.out.println(selectDrinkInfo.getDkBkindValue());
+		
+		return "drink/insert.mn";
+	}
+	
+
 	@RequestMapping("detail")
 	public String detailInit(HttpServletRequest request, Model model) throws SQLException {
 		
