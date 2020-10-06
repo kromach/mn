@@ -293,15 +293,51 @@ public class MemberController {
 	//id찾기 처리
 	@RequestMapping(value = "/findIdPro")
 	public String findIdPro(MemberDTO dto,Model model) {
-		model.addAttribute("memberDTO", dto);
+		System.out.println(dto);
+		String[] births = dto.getBirth().split(",");
+		String[] tels = dto.getTel().split(",");
+		String birth = "";
+		String tel = "";
+		for(String birth_ : births) {
+			birth += birth_;
+		}
+		for(String tel_ : tels) {
+			tel += tel_;
+		}
+		System.out.println(tel+":"+birth);
+		dto.setBirth(birth);
+		dto.setTel(tel);
+		
+		MemberDTO result = memberService.findId(dto);
+
+		model.addAttribute("memberDTO", result);
 		model.addAttribute("result","id");
+		
 		return "/member/findResult.mn";
 	}
 	//pw찾기 처리
 	@RequestMapping(value = "/findPwPro")
 	public String findPwPro(MemberDTO dto,Model model) {
-		model.addAttribute("memberDTO", dto);
+		
+		System.out.println(dto);
+		String[] births = dto.getBirth().split(",");
+		String[] tels = dto.getTel().split(",");
+		String birth = "";
+		String tel = "";
+		for(String birth_ : births) {
+			birth += birth_;
+		}
+		for(String tel_ : tels) {
+			tel += tel_;
+		}
+		System.out.println(tel+":"+birth);
+		dto.setBirth(birth);
+		dto.setTel(tel);
+		
+		MemberDTO result = memberService.findPw(dto);
+		model.addAttribute("memberDTO", result);
 		model.addAttribute("result","pw");
+		
 		return "/member/findResult.mn";
 	}
 }

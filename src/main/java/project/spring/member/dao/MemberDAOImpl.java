@@ -97,4 +97,15 @@ public class MemberDAOImpl implements MemberDAO {
 		} 
 		return result;
 	}
+	
+	@Override
+	public MemberDTO findId(MemberDTO dto) {
+		MemberDTO result = sqlSession.selectOne("member.findId", dto);
+		return result;
+	}
+	@Override
+	public MemberDTO findPw(MemberDTO dto) {
+		MemberDTO result = sqlSession.selectOne("member.findPw", dto);
+		return result;
+	}
 }

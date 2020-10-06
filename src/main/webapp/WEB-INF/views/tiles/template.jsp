@@ -6,6 +6,11 @@
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
+	<!-- Toast Editor 2.0.0과 의존성 -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.css" />
+	<link rel="stylesheet" href="https://uicdn.toast.com/editor/2.0.0/toastui-editor.min.css" />
+	<!-- EditorLoad -->	
+	<script src="https://uicdn.toast.com/editor/2.0.0/toastui-editor-all.min.js"></script>
 	<!-- mobile Device  -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="format-detection" content="telephone=no"> <!-- ios 숫자 전화번호 인식 차단 -->
