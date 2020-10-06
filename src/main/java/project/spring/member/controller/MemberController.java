@@ -199,6 +199,7 @@ public class MemberController {
 		dto.setName(nickname);
 		
 		int isNew = memberService.readItem(dto);
+		System.out.println("KakaoIsNew"+isNew);
 		int kakaoSignupResult = 0;
 		if(isNew !=0) {
 			//id가 없음 >> 회원가입
@@ -236,6 +237,9 @@ public class MemberController {
 		dto.setUserKind("user");
 		System.out.println(dto);
 		memberService.insertItem(dto);
+		request.getSession().setAttribute("memId", dto.getId());
+		request.getSession().setAttribute("memNickName", dto.getNickName());
+		request.setAttribute("result", 1);
 		return "/member/signupResult.mn";
 	}
 	

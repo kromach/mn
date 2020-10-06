@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <body>
+	<h1>${result}</h1>
 	<c:if test="${result == 1 }">
 	<div class="grid-Wrapper">
 		<div class="grid">
