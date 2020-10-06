@@ -9,11 +9,12 @@
 		$(".t" + (img_random % 2)).removeClass("display-none")
 	});
 </script>
+		
 <div class="grid-Wrapper">
-	<div class="grid">  
-		<div class="grid-sizer"></div>
-		<div class="gutter-sizer"></div>
-		<div class="grid-item grid-item--width6"><div id = "editor"></div>
+	<div class="grid">
+			<div class="grid-sizer"></div>
+			<div class="gutter-sizer"></div>
+			<div class="grid-item grid-item--width6"><div id = "editor"></div>
 		<div class="grid-item grid-item--width2"><img src="/resources/img/main/4.jpg" /></div>
 		<div class="grid-item"><img src="/resources/img/main/8.jpg" /></div>
 		<div class="grid-item"><img src="/resources/img/main/7.jpg" /></div>
