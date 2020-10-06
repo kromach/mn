@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +12,10 @@
 
 <!-- 디자인 변경,   술 선택 셀렉트문 가져오기, 술 선택 아래 --- 변경
 	에디터 변경
+	파라미터 수정(id 등)
  -->
+
+
 
 <div class="grid-Wrapper">
 	<div class="grid">  
@@ -36,6 +41,20 @@
 						</select></td>
 				</tr>
 				<tr>
+					<th>
+						기간
+					</th>
+					<td>
+						<div>
+							<label>시작일</label>
+							<input type="date" name="evStart" id="start"/>
+							<label>시작일</label>
+							<input type="date" name="evEnd" id="end"/>
+							
+						</div>
+					</td>
+				</tr>
+				<tr>
 					<td>
 						<hr width="620px" color="#808080"/>
 					</td>
@@ -46,8 +65,7 @@
 			</table>
 			<div>
 				<input type="submit" class="btn-md" value="등록" />
-				<input type="submit" class="btn-md" value="취소" />
-				
+				<input type="button" class="btn-md" value="취소" onclick="window.location='/admin/event/eventList'"/>
 			</div>
 		</form>
 		
