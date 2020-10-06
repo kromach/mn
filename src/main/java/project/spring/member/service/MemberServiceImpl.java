@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import project.spring.beans.memberInterface;
-import project.spring.kakao.vo.MemberDTO;
 import project.spring.member.dao.MemberDAOImpl;
+import project.spring.member.vo.MemberDTO;
 
 @Service
 public class MemberServiceImpl implements memberInterface{
@@ -13,12 +13,6 @@ public class MemberServiceImpl implements memberInterface{
 	@Autowired
 	MemberDAOImpl memberDAO;
 	
-	@Override
-	public int insertItem(MemberDTO dto) {
-		System.out.println(memberDAO);
-		System.out.println(dto);
-		return 0;
-	}
 	@Override
 	public int updateItem() {
 		// TODO Auto-generated method stub
@@ -29,10 +23,13 @@ public class MemberServiceImpl implements memberInterface{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	//get
 	@Override
 	public MemberDTO readItem() {
 		// TODO Auto-generated method stub
-		return null;
+		MemberDTO dto = new MemberDTO();
+		dto = memberDAO.readItem();
+		return dto; 
 	}
 	@Override
 	public int insertItem() {
@@ -46,19 +43,43 @@ public class MemberServiceImpl implements memberInterface{
 	}
 	@Override
 	public int updateItem(Object obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = memberDAO.updateItem(obj);
+		System.out.println("memberUpdateResult = "+result);
+		return result;
 	}
 	@Override
 	public int deleteItem(Object obj) {
 		// TODO Auto-generated method stub
 		return 0;
 	} 
+	//check
 	@Override
 	public int readItem(Object obj) {
 		System.out.println(obj);
 		int result = memberDAO.readItem(obj);
 		System.out.println("ServiceImpleResult="+result);
+		return result;
+	}
+	//findId
+	@Override
+	public MemberDTO findId(MemberDTO dto) {
+		MemberDTO result = memberDAO.findId(dto);
+		return result;
+	}
+	@Override
+	public MemberDTO findPw(MemberDTO dto) {
+		MemberDTO result = memberDAO.findPw(dto);
+		return result;
+	}
+	@Override
+	public int insertItemByKakao(MemberDTO dto) {
+		int result = memberDAO.insertItemByKakao(dto);
+		return result;
+	}
+	
+	@Override
+	public boolean overlapCheck(String checkString,int i) {
+		boolean result = memberDAO.overlapCheck(checkString,i);
 		return result;
 	}
 }

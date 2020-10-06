@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
+import org.apache.tiles.autotag.core.runtime.annotation.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
@@ -103,7 +106,7 @@ public class MemberController {
 		request.getSession().setAttribute("memId", dto.getId());
 		request.getSession().setAttribute("memNickName", dto.getNickName());
 		
-		return "/member/singupResult.mn";
+		return "/member/signupResult.mn";
 	}
 	
 	@RequestMapping("/signupSalesPro")
@@ -140,7 +143,7 @@ public class MemberController {
 			//dtoImgSetting
 			dto.setBirth(birth);
 			dto.setLicenseImg(newName);
-			dto.setUserKind("sales");
+			dto.setUserKind("salse");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -188,18 +191,25 @@ public class MemberController {
 		String id = kakao_account.get("email").asText();
 		String gender = kakao_account.get("gender").asText();
 		String birth = kakao_account.get("birthday").asText();
-		String nickname = properties.path("nickname").toString();	
+		String nickname = properties.path("nickname").toString().replaceAll("\"","");	
 		System.out.println("id"+id);
 		System.out.println("gender"+gender);
 		System.out.println("nickname"+nickname);
 		MemberDTO dto = new MemberDTO();
+		
 		dto.setId(id);
 		dto.setNickName(nickname);
-		dto.setBirth(birth);
+		dto.setName(nickname);
 		
-		/*
-		 * 회원가입 안되어있을때 회원가입하는 로직 조회의 이후에 첨부 필요
-		 */
+		int isNew = memberService.readItem(dto);
+		System.out.println("KakaoIsNew"+isNew);
+		int kakaoSignupResult = 0;
+		if(isNew !=0) {
+			//id가 없음 >> 회원가입
+			request.setAttribute("kakaoMember", dto);
+			return "/member/signupFormByKakao.mn";
+		}
+		
 		//Session에 값 넣어주기
 		request.getSession().setAttribute("memId", id);
 		request.getSession().setAttribute("memNickName", nickname);
@@ -207,7 +217,33 @@ public class MemberController {
 		//id O pw O
 		request.setAttribute("result", 1);
 		
-		return "redirect:/member/loginResult";
+		return "/member/loginResult.mn";
+	}
+	
+	/*=====================================================================================================*/
+	@RequestMapping(value = "/signUpKakaoPro")
+	public String signUpKakaoPro(HttpServletRequest request,@ModelAttribute MemberDTO dto) {
+		System.out.println("Kakao추가정보="+dto);
+		
+		String[] birth_ = dto.getBirth().split(",");
+		String birth = "";
+		for( String i:birth_ ) {
+			birth += i;
+		}
+		dto.setBirth(birth);
+		String[] tels = dto.getTel().split(",");
+		String tel = "";
+		for(String tel_ : tels) {
+			tel += tel_;
+		}
+		dto.setTel(tel);
+		dto.setUserKind("user");
+		System.out.println(dto);
+		memberService.insertItem(dto);
+		request.getSession().setAttribute("memId", dto.getId());
+		request.getSession().setAttribute("memNickName", dto.getNickName());
+		request.setAttribute("result", 1);
+		return "/member/signupResult.mn";
 	}
 	
 	@RequestMapping(value = "/loginResult")
@@ -224,11 +260,6 @@ public class MemberController {
 		//1 - id o pw o
 		int result = memberService.readItem(model);
 		request.setAttribute("result", result);
-		if(result==1) {
-			//sessionSetting
-			System.out.println(model.toString());
-		}
-		
 		return "/member/loginResult.mn";
 	}
 	
@@ -259,8 +290,109 @@ public class MemberController {
 	}
 	
 	//정보수정
+	@RequestMapping(value = "/modify")
+	public String modifyMemberSs(HttpSession session,Model model){
+		
+		String id = session.getAttribute("memId").toString();
+		MemberDTO result = memberService.readItem();
+		System.out.println(result);
+		System.out.println("modify");
+		model.addAttribute("memberDTO", result);
+		model.addAttribute("status", result.getUserKind());
+		return "/member/modifyForm.mn";
+	}
+	//정보수정 Pro
+	@RequestMapping(value = "/modifyUserPro")
+	public String modifyUserProSs(MemberDTO dto) {
+		
+		System.out.println(dto);
+		memberService.updateItem(dto);
+		return "/member/modifyResult.mn";
+	}
+	
+	@RequestMapping(value = "/modifySalesPro")
+	public String modifySalesProSs(MemberDTO dto) {
+		System.out.println(dto);
+		memberService.updateItem(dto);
+		return "/member/modifyResult.mn";
+	}
 	//id찾기
+	@RequestMapping(value = "/findId")
+	public String findIdForm() {
+		return "/member/findIdForm.mn";
+	}
 	//pw찾기
+	@RequestMapping(value = "/findPw")
+	public String findPwForm() {
+		return "/member/findPwForm.mn";
+	}
+	//id찾기 처리
+	@RequestMapping(value = "/findIdPro")
+	public String findIdPro(MemberDTO dto,Model model) {
+		System.out.println(dto);
+		String[] births = dto.getBirth().split(",");
+		String[] tels = dto.getTel().split(",");
+		String birth = "";
+		String tel = "";
+		for(String birth_ : births) {
+			birth += birth_;
+		}
+		for(String tel_ : tels) {
+			tel += tel_;
+		}
+		System.out.println(tel+":"+birth);
+		dto.setBirth(birth);
+		dto.setTel(tel);
+		
+		MemberDTO result = memberService.findId(dto);
+
+		model.addAttribute("memberDTO", result);
+		model.addAttribute("result","id");
+		
+		return "/member/findResult.mn";
+	}
+	//pw찾기 처리
+	@RequestMapping(value = "/findPwPro")
+	public String findPwPro(MemberDTO dto,Model model) {
+		
+		System.out.println(dto);
+		String[] births = dto.getBirth().split(",");
+		String[] tels = dto.getTel().split(",");
+		String birth = "";
+		String tel = "";
+		for(String birth_ : births) {
+			birth += birth_;
+		}
+		for(String tel_ : tels) {
+			tel += tel_;
+		}
+		System.out.println(tel+":"+birth);
+		dto.setBirth(birth);
+		dto.setTel(tel);
+		
+		MemberDTO result = memberService.findPw(dto);
+		model.addAttribute("memberDTO", result);
+		model.addAttribute("result","pw");
+		
+		return "/member/findResult.mn";
+	}
+	
+	@RequestMapping(value = "/overlapCheck")
+	@ResponseBody
+	public Boolean overlapCheck(
+			@RequestParam(value = "nickName", required = false) String nickName,
+			@RequestParam(value = "id", required = false) String id) {
+		
+		boolean result = false;
+		if(id!=null) {
+			result = memberService.overlapCheck(id,0);
+		}
+		if(nickName!=null) {
+			result = memberService.overlapCheck(nickName,1); 
+		}
+		return result;
+	}
+	
 	
 	
 }

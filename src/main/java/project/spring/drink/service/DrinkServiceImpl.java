@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import project.spring.drink.dao.DrinkDAO;
+import project.spring.drink.vo.CommentVO;
 import project.spring.drink.vo.DrinkVO;
 
 @Service
@@ -38,6 +39,16 @@ public class DrinkServiceImpl implements DrinkService {
 	@Override
 	public HashMap selectCommentStarServiceInfo(String dkCode) throws SQLException {
 		return drinkDAO.selectCommentStarServiceInfo(dkCode);
+	}
+
+	@Override
+	public List<HashMap> selectTagCloudServiceInfo(String dkCode) throws SQLException {
+		return drinkDAO.selectTagCloudServiceInfo(dkCode);
+	}
+
+	@Override
+	public List<CommentVO> selectCommentServiceList(String dkCode) throws SQLException {
+		return drinkDAO.selectCommentServiceList(dkCode);
 	}
 	
 }

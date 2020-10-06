@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import project.spring.drink.dao.DrinkDAO;
 import project.spring.drink.service.DrinkService;
+import project.spring.drink.vo.CommentVO;
 import project.spring.drink.vo.DrinkVO;
 
 @Controller
@@ -51,9 +52,23 @@ public class DrinkController {
 			System.out.println("schDkCountry : " + schDkCountry);
 		}
 		
-		return "/drink/index.mn";
+		return "drink/index.mn";
 	}
 	
+	@RequestMapping("insert")
+	public String InsertInit(HttpServletRequest request, Model model) throws SQLException {
+		
+		//String dkCode = (String)request.getParameter("dkCode");
+		
+//		model.addAttribute("schDkBkind", schDkBkind);
+//		
+//		System.out.println(selectDrinkInfo.getDkName());
+//		System.out.println(selectDrinkInfo.getDkBkindValue());
+		
+		return "drink/insert.mn";
+	}
+	
+
 	@RequestMapping("detail")
 	public String detailInit(HttpServletRequest request, Model model) throws SQLException {
 		
@@ -65,9 +80,21 @@ public class DrinkController {
 		// 총 코멘트 수, 평가 평균 점수 
 		HashMap commentStarInfo = drinkService.selectCommentStarServiceInfo(dkCode);
 		
-		System.out.println(commentStarInfo);
+		String commentCount = String.valueOf(commentStarInfo.get("cmCount"));
 		
-		// request에 담긴 검색 결과 뽑아내기 
+		List<CommentVO> commentList = null;
+		if((Integer.parseInt(commentCount)) > 1) {
+			commentList = drinkService.selectCommentServiceList(dkCode);
+		}
+		
+		//System.out.println(commentList);
+		
+		// 주류별 태그 정보
+		List<HashMap> tagCloudInfo = drinkService.selectTagCloudServiceInfo(dkCode);
+		
+		//System.out.println(tagCloudInfo);
+		
+		// request에 담긴 검색 결과 뽑아내기  
 		String schDkBkind = null;
 		String schDkSkind = null;
 		String[] schDkAlcohol = null;
@@ -96,13 +123,15 @@ public class DrinkController {
 		model.addAttribute("schDkCountry", schDkCountry);
 		model.addAttribute("drinkInfo", drinkInfo);
 		model.addAttribute("commentStarInfo", commentStarInfo);
+		model.addAttribute("commentList", commentList);
+		model.addAttribute("tagCloudInfo", tagCloudInfo);
 //		
 //		System.out.println(selectDrinkInfo.getDkName());
 //		System.out.println(selectDrinkInfo.getDkBkindValue());
 		
-		return "/drink/detail.mn";
+		return "drink/detail.mn";
 	}
-//	
+//	 
 //	@RequestMapping("smallCategory.do")
 //	public void smallCategory(@RequestParam String bigCategoryCode) throws Exception {
 //		

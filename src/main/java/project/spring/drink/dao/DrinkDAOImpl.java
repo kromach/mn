@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import project.spring.drink.vo.CommentVO;
 import project.spring.drink.vo.DrinkVO;
 
 @Repository
@@ -38,6 +39,18 @@ public class DrinkDAOImpl implements DrinkDAO {
 	@Override
 	public HashMap selectCommentStarServiceInfo(String dkCode) throws SQLException {
 		return sqlSession.selectOne("drink.selectCommentStarServiceInfo", dkCode);
+	}
+
+
+	@Override
+	public List<HashMap> selectTagCloudServiceInfo(String dkCode) throws SQLException {
+		return sqlSession.selectList("drink.selectTagCloudServiceInfo", dkCode);
+	}
+
+
+	@Override
+	public List<CommentVO> selectCommentServiceList(String dkCode) throws SQLException {
+		return sqlSession.selectList("drink.selectCommentServiceList", dkCode);
 	}
 	
 	/*

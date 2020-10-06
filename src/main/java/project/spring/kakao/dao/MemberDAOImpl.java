@@ -3,8 +3,7 @@ package project.spring.kakao.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import project.spring.kakao.vo.MemberDTO;
-
+import project.spring.member.vo.MemberDTO;
 
 public class MemberDAOImpl implements MemberDAO{
 

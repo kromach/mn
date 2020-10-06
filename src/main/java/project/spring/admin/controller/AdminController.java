@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import project.spring.admin.service.AdminServiceImpl;
 import project.spring.admin.vo.AdminVO;
+import project.spring.beans.PageVO;
+import project.spring.beans.Pager;
 
 @Controller
 @RequestMapping("/admin")
@@ -39,10 +41,16 @@ public class AdminController {
 				}
 				number = count - (currPage - 1) * pageSize;
 			
+				Pager pager = new Pager();
+				PageVO pageVO = pager.pager(pageNum,count);
+				
+				
 				model.addAttribute("pageNum", pageNum);
 				model.addAttribute("memberList", memberList);
+				model.addAttribute("count", count);
+				model.addAttribute("pageVO", pageVO);
 				
-			return "/admin/memberList.mn";
+			return "admin/memberList.mn";
 		}
 	
 	
