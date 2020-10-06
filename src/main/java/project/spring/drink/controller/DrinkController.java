@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import project.spring.beans.JsonUtil;
-import project.spring.drink.dao.DrinkDAO;
 import project.spring.drink.service.DrinkService;
 import project.spring.drink.vo.CommentVO;
 import project.spring.drink.vo.DrinkVO;
@@ -135,8 +134,7 @@ public class DrinkController {
 		
 		return "drink/insert.mn";
 	}
-	
-	
+		
 	// AJAX - 대분류 선택시 해당하는 소분류 리스트 리턴
 	@RequestMapping("selectSmallCategory")
 	public void selectSmallCategory(@RequestParam String bigCategory, HttpServletResponse response) throws SQLException, IOException {
@@ -148,7 +146,6 @@ public class DrinkController {
 		response.getWriter().write(JsonUtil.ListToJson(smallCategoryList));
 	}
 	
-	
 	// AJAX - 대분류 선택시 해당하는 평가항목 명칭을 불러옴
 	@RequestMapping("selectItemValues")
 	public void selectItemValues(@RequestParam String bigCategory, HttpServletResponse response) throws SQLException, IOException {
@@ -158,14 +155,6 @@ public class DrinkController {
 		
 		response.setCharacterEncoding("utf-8");
 		response.getWriter().write(JsonUtil.HashMapToJson(ItemValuesInfo));
-	}
-		
-//	
-//	@RequestMapping("smallCategory.do")
-//	public void smallCategory(@RequestParam String bigCategoryCode) throws Exception {
-//		
-//		List<HashMap> smallCategoryList = DrinkService.selectSmallCategoryList(bigCategoryCode);
-//	}
-//	
+	}	
 }
 

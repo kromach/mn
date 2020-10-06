@@ -40,5 +40,10 @@ public class MyTitleDTO {
 	public void setTiDate(Timestamp tiDate) {
 		this.tiDate = tiDate;
 	}
+	@Override
+	public String toString() {
+		return "MyTitleDTO [tiIdx=" + tiIdx + ", id=" + id + ", titleIndex=" + titleIndex + ", chooseTitle="
+				+ chooseTitle + ", tiDate=" + tiDate + "]";
+	}
 	
 }

@@ -22,14 +22,13 @@
 						onsubmit="return check()" accept-charset="utf-8">
 				</c:if>
 				<div class="loginWrapper">
-					<div class="loginLabel">아이디</div>
-					<input class="loginInput" type="text" name="id">
-					<div class="loginLabel">아이디중복체크</div>
-					<button type="button">중복확인</button>
+					<div class="loginLabel" >아이디</div>
+					<input class="loginInput" type="text" name="id" required="required" id="id">
+					<div class="loginLabel" id="id_label"></div>
 					<div class="loginLabel">
 					비밀번호
 					</div>
-					<input class="loginInput" type="text" name="pw">
+					<input class="loginInput" type="text" name="pw" required="required">
 					<div class="loginLabel">
 					비밀번호 확인
 					</div>
@@ -37,19 +36,19 @@
 					<div class="loginLabel">
 					이름
 					</div>
-					<input class="loginInput" type="text" name="name">
+					<input class="loginInput" type="text" name="name" required="required">
 					<div class="loginLabel">
 					닉네임
 					</div>
-					<input	class="loginInput" type="text" name="nickName">닉네임 중복체크
-					<button type="button">중복확인</button>
+					<input	class="loginInput" type="text" name="nickName" required="required" id="nickName">
+					<div class="loginLabel" id="nickName_label"></div>
 					<div class="loginLabel">
 					생년월일
 					</div>
 					<div class="birthWrapper">
-					<input class="birthfirstInput" type="text" name="birth"
+					<input class="birthfirstInput" type="text" name="birth" required="required"
 						size="7">
-					-<input class="birthsecondInput" type="text" name="birth"
+					-<input class="birthsecondInput" type="text" name="birth" required="required"
 						size="1">
 					</div>
 					<div class="loginLabel">
@@ -57,22 +56,23 @@
 					</div>
 					<div class = "birthWrapper">
 					<input class="telInput"
-					type="text" name="tel" size="3">-<input class="telInput"
-					type="text" name="tel" size="3">-<input class="telInput"
-					type="text" name="tel" size="3">
+					type="text" name="tel" size="3" required="required">-<input class="telInput"
+					type="text" name="tel" size="3" required="required">-<input class="telInput"
+					type="text" name="tel" size="3" required="required">
 					</div>
 					<c:if test="${status eq 'user' }">
 					<div class="loginLabel">
 					주소
 					</div>
 					<input type="text" name="address" class="loginInput">
-					<button type="button">주소찾기</button>
+					<button type="button" class="btn btn-sm btn-dark">주소찾기</button>
 					</c:if>
 					<c:if test="${status eq 'salse' }">
 						<div class="loginLabel">
 						사업장 주소
 						</div>
 						<input type="text" name="address" class="loginInput">
+						<button type="button" class="btn btn-sm btn-dark">주소찾기</button>
 						<div class="loginLabel">
 						사업자 등록증
 						</div>
@@ -80,35 +80,49 @@
 						<div class="loginLabel">
 						사업자 번호
 						</div>
-						<input type="text" name="licenseNum" class="loginInput">
+						<input type="text" name="licenseNum" class="loginInput" required="required">
 					</c:if>
 					<br><br>
-					<button type="submit">가입</button>
-					<button type="reset">재입력</button>
-					<button type="button">취소</button>
+					<button type="submit" class="btn btn-sm btn-grey">가입</button>
+					<button type="reset" class="btn btn-sm btn-grey">재입력</button>
+					<button type="button" class="btn btn-sm btn-grey" onclick="window.location.href='/'">취소</button>
 				</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	</div>
-	</div>
-	<script src="/resources/js/imageLoad.js"></script>
-	<!-- 데이터 스크롤해서 붙이는 스크립트  -->
 	<script type="text/javascript">
-		$(window).scroll(
-				function() {
-					// A(B+C) : document 높이 (고정)
-					console.log($(document).height());
-					// B : browser 높이 (최상단 기본값)
-					console.log($(window).height());
-					// C : 스크롤 위치
-					console.log('SCROLL_TOP' + $(window).scrollTop());
-					if ($(window).scrollTop() >= $(document).height()
-							- $(window).height() - 100) {
-						//호출 메서드
+	$(document).ready(function() {
+		$('#id').blur(function() {
+			var id = $('#id').val();
+			$.ajax({
+				url:  '${pageContext.request.contextPath}/member/overlapCheck?id='+id,
+				type: "get",
+				success : function(data){
+					if(data){
+						$("#id_label").html('<div  style="color: red;font-size: 11px; margin-bottom: 5px;">이미 사용중이거나 탈퇴한 아이디 입니다.</div>');
+					}else{
+						$("#id_label").empty();
 					}
-				});
+				}
+			});
+		});
+		$('#nickName').blur(function() {
+			var nickName = $('#nickName').val();
+			$.ajax({
+				url:  '${pageContext.request.contextPath}/member/overlapCheck?nickName='+nickName,
+				type: "get",
+				success : function(data){
+					if(data){
+						$("#nickName_label").html('<div  style="color: red;font-size: 11px; margin-bottom: 5px;">이미 사용중이거나 탈퇴한 아이디 입니다.</div>');
+					}else{
+						$("#nickName_label").empty();
+					}
+				}
+			});
+		});
+	});
 	</script>
+	<script src="/resources/js/imageLoad.js"></script>
 </body>
 </html>

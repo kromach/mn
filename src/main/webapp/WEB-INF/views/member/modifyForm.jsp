@@ -31,7 +31,7 @@
 					<div class="loginLabel">
 					비밀번호
 					</div>
-					<input class="loginInput" type="text" name="pw" value="${memberDTO.pw}" >
+					<input class="loginInput" type="text" name="pw" value="${memberDTO.pw}"  required="required">
 					<div class="loginLabel">
 					비밀번호 확인
 					</div>
@@ -43,7 +43,7 @@
 					<div class="loginLabel">
 					닉네임
 					</div>
-					<input	class="loginInput" type="text" name="nickName" value="${memberDTO.nickName}">
+					<input	class="loginInput" type="text" name="nickName" value="${memberDTO.nickName}" required="required">
 					닉네임 중복체크
 					<button type="button">중복확인</button>
 					<div class="loginLabel"> 
@@ -53,20 +53,27 @@
 					<c:set var="len" value = "${fn:length(memberDTO.birth)}"/>
 					<c:set var="birth" value="${memberDTO.birth}"/> 
 					<c:set var="birthfrist" value="${fn:substring(birth,0,len-1)}"/>
+					<c:set var="KakaoTest" value="${fn:substring(birth,0,len-5)}"/>
 					<c:set var="birthsecond" value="${fn:substring(birth,len-1,len)}"/>
+					<c:if test="${KakaoTest == '20'}">
 					<input class="birthfirstInput" type="text" name="birth" value="${birthfrist}"
-						size="7"> 
+						size="7" required="required">
+					</c:if>
+					<c:if test="${KakaoTest != '20'}">
+					<input class="birthfirstInput" type="text" name="birth" value="${birthfrist}" readonly="readonly"
+						size="7">  
+					</c:if>
 					-<input class="birthsecondInput" type="text" name="birth" value="${birthsecond}"
-						size="1">
+						size="1" required="required">
 					</div>
 					<div class="loginLabel">
 					전화번호
 					</div>
 					<div class = "birthWrapper">
 					<input class="telInput"
-					type="text" name="tel" size="3">-<input class="telInput"
-					type="text" name="tel" size="3">-<input class="telInput"
-					type="text" name="tel" size="3">
+					type="text" name="tel" size="3" required="required">-<input class="telInput"
+					type="text" name="tel" size="3" required="required">-<input class="telInput"
+					type="text" name="tel" size="3" required="required">
 					</div>
 					<c:if test="${status eq 'user' }">
 					<div class="loginLabel">
@@ -79,7 +86,7 @@
 						<div class="loginLabel">
 						사업장 주소
 						</div>
-						<input type="text" name="address" class="loginInput" value="${memberDTO.address }">
+						<input type="text" name="address" class="loginInput" value="${memberDTO.address }" required="required">
 						<div class="loginLabel">
 						사업자 등록증 
 						</div>
@@ -87,7 +94,7 @@
 						<div class="loginLabel">
 						사업자 번호
 						</div>
-						<input type="text" name="licenseNum" class="loginInput" value="${memberDTO.licenseNum}">
+						<input type="text" name="licenseNum" class="loginInput" value="${memberDTO.licenseNum}" required="required">
 					</c:if>
 					<br><br>
 					<button type="submit">수정</button>

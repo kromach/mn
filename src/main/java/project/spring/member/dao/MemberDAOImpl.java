@@ -43,10 +43,11 @@ public class MemberDAOImpl implements MemberDAO {
 	return sqlSession.selectOne("member.getMember", id);
 	}
 	
-	
 	@Override
 	public int insertItem(Object obj) {
 		int result = 0;
+		System.out.println((MemberDTO)obj);
+		
 		if (obj instanceof MemberDTO) {
 			result = sqlSession.insert("member.insertMember", obj);
 		}
@@ -79,7 +80,6 @@ public class MemberDAOImpl implements MemberDAO {
 				System.out.println(result);
 				return result;
 			}
-			
 			//id,pw일치
 			if(dto.getId().equals(dto_origin.getId())&&
 				dto.getPw().equals(dto_origin.getPw())
@@ -95,6 +95,38 @@ public class MemberDAOImpl implements MemberDAO {
 			}
 			System.out.println("DAOImpleResult="+result);
 		} 
+		return result;
+	}
+	
+	@Override
+	public MemberDTO findId(MemberDTO dto) {
+		MemberDTO result = sqlSession.selectOne("member.findId", dto);
+		return result;
+	}
+	@Override
+	public MemberDTO findPw(MemberDTO dto) {
+		MemberDTO result = sqlSession.selectOne("member.findPw", dto);
+		return result;
+	}
+	@Override
+	public int insertItemByKakao(MemberDTO dto) {
+		int result = sqlSession.insert("member.kakaoSignup", dto);
+		return result;
+	}
+	
+	@Override
+	public boolean overlapCheck(
+			String checkString, int i) {
+		boolean result = false;
+		int isExist = 0;
+		//0 >> id  // 1>> nickName
+		System.out.println(i+":"+checkString);
+		if(i==0) {
+			isExist = sqlSession.selectOne("member.overlapCheckbyId", checkString);
+		}else if(i==1) {
+			isExist = sqlSession.selectOne("member.overlapCheckbyNick", checkString);
+		}
+		if(isExist==1) result = true;
 		return result;
 	}
 }

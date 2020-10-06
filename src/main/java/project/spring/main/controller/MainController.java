@@ -39,4 +39,11 @@ public class MainController {
 	
 		return "/main/main.mn";
 	}
+	@RequestMapping(value = "/editor", method = RequestMethod.GET)
+	public String editor(Locale locale, Model model,
+			HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		return "/main/editor.mn";
+	}
 }

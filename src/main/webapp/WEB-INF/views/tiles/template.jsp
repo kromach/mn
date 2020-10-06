@@ -12,6 +12,7 @@
 	<title>마시는 녀석들</title>	
 	<script src="https://kit.fontawesome.com/78c316e334.js" crossorigin="anonymous"></script>
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
 	<!-- JQuery  -->
 	<script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
 	<!-- JQuery masonry CDN -->

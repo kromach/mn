@@ -14,8 +14,8 @@
 				<div class="loginWrapper"> 
 						<button type="button" class="kakaoBtn"
 						onclick='kakaoLogin()'>카카오로 로그인</button>
-					<input class="loginInput" type="text" name="id">
-					<input class="loginInput" type="text" name="pw">
+					<input class="loginInput" type="text" name="id" required="required">
+					<input class="loginInput" type="text" name="pw" required="required">
 					<button type="submit" class="greyBtn" >로그인</button>
 					<button type="button" class="greyBtn" onclick="window.location.href='/member/signup'">회원가입</button>
 					<button type="button" class="greyBtn" onclick="window.location.href='/member/findId'">ID찾기</button>
