@@ -40,6 +40,7 @@
 				<div id="index">
 					<table class="tableCss" style="width: 100%;">
 						<tr>
+							<td>번호</td>
 							<td>제목</td>
 							<td>작성일</td>
 							<td>조회</td>
@@ -47,6 +48,7 @@
 						</tr>
 						<c:forEach var="myArticle" items="${myArticle}">
 							<tr>
+								<td>${myArticle.bnIdx}</td>
 								<td>${myArticle.bnTitle}</td>
 								<td>${myArticle.insertDay}</td>
 								<td>${myArticle.readcount}</td>
@@ -70,7 +72,6 @@
 	<input type = "hidden" value="${sessionScope.memId}" id="memId">
 </body>
 	<script>
-			
 			$(document).ready(function(){
 			$("#likeArticle").click(function(){
 				$.ajax({
@@ -86,6 +87,7 @@
 						
 						$('#likeArticle_result').append('<table class="tableCss" style="width: 100%;">');
 						$('#likeArticle_result > table').append('<tr>');
+						$('#likeArticle_result > table > tr').append('<td>번호</td>');
 						$('#likeArticle_result > table > tr').append('<td>제목</td>');
 						$('#likeArticle_result > table > tr').append('<td>작성일</td>');
 						$('#likeArticle_result > table > tr').append('<td>조회</td>');
@@ -95,7 +97,11 @@
 						for(var i in likeArticle){
 							console.log(likeArticle[i]);
 							$('#likeArticle_result > table').append('<tr>');
+							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].bnIdx+'</td>');
 							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].bnTitle+'</td>');
+							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].insertDay+'</td>');
+							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].readcount+'</td>');
+							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].heart+'</td>');
 							$('#likeArticle_result > table').append('</tr>');
 						}
 					}
@@ -103,6 +109,45 @@
 			});
 		});
 	</script>
+	<script>
+			$(document).ready(function(){
+			$("#title").click(function(){
+				$.ajax({
+					type:"POST",
+					url:"/myAct/title",
+					data:{id:$("#memId").val()},
+					success:function(data){
+						var likeArticle = data;
+						$('#index').empty();
+						$('#likeDrink_result').empty();
+						$('#title_result').empty();
+						$('#likeArticle_result').empty();	
+						
+						$('#likeArticle_result').append('<table class="tableCss" style="width: 100%;">');
+						$('#likeArticle_result > table').append('<tr>');
+						$('#likeArticle_result > table > tr').append('<td>번호</td>');
+						$('#likeArticle_result > table > tr').append('<td>제목</td>');
+						$('#likeArticle_result > table > tr').append('<td>작성일</td>');
+						$('#likeArticle_result > table > tr').append('<td>조회</td>');
+						$('#likeArticle_result > table > tr').append('<td>추천</td>');
+						$('#likeArticle_result > table').append('</tr>');		
+						
+						for(var i in likeArticle){
+							console.log(likeArticle[i]);
+							$('#likeArticle_result > table').append('<tr>');
+							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].bnIdx+'</td>');
+							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].bnTitle+'</td>');
+							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].insertDay+'</td>');
+							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].readcount+'</td>');
+							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].heart+'</td>');
+							$('#likeArticle_result > table').append('</tr>');
+						}
+					}
+				});
+			});
+		});
+	</script>
+	
 	<script>
 		$(document).ready(function(){
 			$("#likeDrink").click(function(){
