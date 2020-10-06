@@ -188,7 +188,7 @@ public class MemberController {
 		String id = kakao_account.get("email").asText();
 		String gender = kakao_account.get("gender").asText();
 		String birth = kakao_account.get("birthday").asText();
-		String nickname = properties.path("nickname").toString();	
+		String nickname = properties.path("nickname").toString().replaceAll("\"","");	
 		System.out.println("id"+id);
 		System.out.println("gender"+gender);
 		System.out.println("nickname"+nickname);
@@ -216,9 +216,26 @@ public class MemberController {
 		return "redirect:/member/loginResult";
 	}
 	
+	/*=====================================================================================================*/
 	@RequestMapping(value = "/signUpKakaoPro")
-	public String signUpKakaoPro(HttpServletRequest request,@ModelAttribute MemberDTO model) {
+	public String signUpKakaoPro(HttpServletRequest request,@ModelAttribute MemberDTO dto) {
+		System.out.println("Kakao추가정보="+dto);
 		
+		String[] birth_ = dto.getBirth().split(",");
+		String birth = "";
+		for( String i:birth_ ) {
+			birth += i;
+		}
+		dto.setBirth(birth);
+		String[] tels = dto.getTel().split(",");
+		String tel = "";
+		for(String tel_ : tels) {
+			tel += tel_;
+		}
+		dto.setTel(tel);
+		dto.setUserKind("user");
+		System.out.println(dto);
+		memberService.insertItem(dto);
 		return "/member/signupResult.mn";
 	}
 	

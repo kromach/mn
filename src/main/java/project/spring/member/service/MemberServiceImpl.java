@@ -14,12 +14,6 @@ public class MemberServiceImpl implements memberInterface{
 	MemberDAOImpl memberDAO;
 	
 	@Override
-	public int insertItem(MemberDTO dto) {
-		System.out.println(memberDAO);
-		System.out.println(dto);
-		return 0;
-	}
-	@Override
 	public int updateItem() {
 		// TODO Auto-generated method stub
 		return 0;

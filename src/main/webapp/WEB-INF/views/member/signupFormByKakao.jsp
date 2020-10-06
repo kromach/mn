@@ -8,7 +8,7 @@
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
-				<h1 align="center">Kakao 추가정보 ${kakaoMember }</h1>
+				<h1 align="center">Kakao </h1>
 			</div>
 			<div class="grid-item grid-item--width6">
 					<form method="post" action="/member/signUpKakaoPro"
@@ -20,11 +20,11 @@
 					<div class="loginLabel">
 					비밀번호
 					</div>
-					<input class="loginInput" type="text" name="pw">
+					<input class="loginInput" type="text" name="pw" required="required" >
 					<div class="loginLabel">
 					비밀번호 확인
 					</div>
-					<input class="loginInput" type="password" name="pwCh"> 
+					<input class="loginInput" type="password" name="pwCh" required="required" > 
 					<div class="loginLabel">
 					이름
 					</div>
@@ -32,15 +32,15 @@
 					<div class="loginLabel">
 					닉네임
 					</div>
-					<input	class="loginInput" type="text" name="nickName" value="${kakoMember.nickName}" readonly="readonly">닉네임 중복체크
+					<input	class="loginInput" type="text" name="nickName" value="${kakaoMember.nickName}" >닉네임 중복체크
 					<button type="button">중복확인</button>
 					<div class="loginLabel">
 					생년월일
 					</div>
 					<div class="birthWrapper">
-					<input class="birthfirstInput" type="text" name="birth"
+					<input class="birthfirstInput" type="text" name="birth" required="required" 
 						size="7">
-					-<input class="birthsecondInput" type="text" name="birth"
+					-<input class="birthsecondInput" type="text" name="birth" required="required" 
 						size="1">
 					</div>
 					<div class="loginLabel">
@@ -58,7 +58,7 @@
 					<input type="text" name="address" class="loginInput">
 					<button type="button">주소찾기</button>
 					<br><br>
-					<button type="submit">가입</button>
+					<button type="submit">추가입력</button>
 					<button type="reset">재입력</button>
 					<button type="button">취소</button>
 				</div>
