@@ -43,7 +43,6 @@ public class MemberDAOImpl implements MemberDAO {
 	return sqlSession.selectOne("member.getMember", id);
 	}
 	
-	
 	@Override
 	public int insertItem(Object obj) {
 		int result = 0;
