@@ -23,6 +23,8 @@ public class AdminEventController {
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			String evToday = sdf.format(Calendar.getInstance().getTime());
+			System.out.println("evToday :  " + evToday);
+			
 			model.addAttribute("evToday", evToday);
 			
 			return "admin/event/insertEvent.mn";
@@ -35,6 +37,23 @@ public class AdminEventController {
 			System.out.println("이벤트코드" + vo.getCode());
 			System.out.println("이벤트 콘텐트" + vo.getContent());
 			System.out.println("========================");
+			
+			System.out.println("날짜확인 ::::   " + vo.getEvStart());
+			System.out.println(vo.getEvStart().replace("/", ""));
+			String day = vo.getEvStart().replace("/", "").substring(0, 2);
+			System.out.println("day : " +  day);
+			String month = vo.getEvStart().replace("/", "").substring(2, 4);
+			System.out.println("month : " + month);
+			String year = vo.getEvStart().replace("/", "").substring(4, 8);
+			System.out.println("year : " + year);
+			vo.setEvStart(year+month+day);
+			System.out.println("날짜확인 111  :::         " + vo.getEvStart());
+			
+			day = vo.getEvEnd().replace("/", "").substring(0,2);
+			month = vo.getEvEnd().replace("/", "").substring(2,4);
+			year = vo.getEvEnd().replace("/", "").substring(4,8);
+			vo.setEvEnd(year+month+day);
+
 			
 			int result = adminEventService.insertItem(vo);
 			
