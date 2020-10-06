@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,24 +14,33 @@
 <c:if test="${myordercount >0}">
 	<table>
 		<body>
-			<H1>구매 목록</H1>
-			<tr>
-				<td>주문번호</td>
-				<td>상품명</td>
-				<td>수량</td>
-				<td>배송지</td>
-				<td>주문상태</td>
-			</tr>
-			<c:forEach var="my" items="${myorderlist}">
-				<tr>
-					<td>${my.orCode}</td>
-					<td>${my.prName}</td>
-					<td>${my.prCount}</td>
-					<td>${my.receiverAddr}</td>
-					<td>${my.orStatus}</td>
-				</tr>
-			</c:forEach>
-		
+			<div class="grid-Wrapper">
+				<div class="grid">
+					<div class="grid-sizer"></div>
+					<div class="gutter-sizer"></div>
+					<div class="grid-item grid-item--width6">
+						<tr>
+							<td>주문번호</td>
+							<td>상품명</td>
+							<td>수량</td>
+							<td>배송지</td>
+							<td>주문상태</td>
+						</tr>
+					</div>
+					<c:forEach var="my" items="${myorderlist}">
+						<div class="grid-item grid-item--width6">
+							<tr>
+								<td>${my.orCode}</td>
+								<td>${my.prName}</td>
+								<td>${my.prCount}</td>
+								<td>${my.receiverAddr}</td>
+								<td>${my.orStatus}</td>
+							</tr>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+
 		</body>
 	</table>
 </c:if>

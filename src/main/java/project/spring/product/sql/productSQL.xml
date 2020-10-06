@@ -10,7 +10,15 @@
 		select * from product_info
 	</select>
 	<select id="getproductinfo" parameterType="String" resultType="productvo">
-		select * from product_info where pr_code= #{value}
+		SELECT INFO.PR_CODE,INFO.PR_NAME,INFO.PR_IMG,INFO.PR_BKIND, BCATE.VALUE AS PR_BKIND_VALUE,
+		info.PR_SKIND, SCATE.VALUE AS PR_SKIND_VALUE,
+		info.PR_COUNTRY,info.PR_CITY,info.PR_ALCOHOL,info.PR_PLACE,info.PR_FOOD,
+		info.PR_CONTENT,info.PR_PRICE,info.PR_AMOUNT,info.PR_TOTALCOUNT,info.PR_LIKE,
+		info.PR_USE,info.INSERT_ID,info.INSERT_DAY
+		FROM PRODUCT_INFO INFO INNER JOIN
+			DRINK_CATEGORY BCATE ON info.PR_BKIND = BCATE.CODE INNER JOIN
+			DRINK_CATEGORY SCATE ON info.PR_SKIND = SCATE.CODE 
+		WHERE PR_CODE = #{value}
 	</select>
 	<select id="myordercount" parameterType="string" resultType="int">
 		select count(*) from order_info where user_id = #{value}
