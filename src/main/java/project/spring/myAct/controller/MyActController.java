@@ -57,7 +57,7 @@ public class MyActController {
 	@ResponseBody
 	public List likeArticle(String id, HttpServletRequest request, Model model) {
 		System.out.println("MyActLikeArticle Controller");
-		System.out.println("id"+id);
+		System.out.println("id : "+id);
 		int count = 0;			
 		
 		HttpSession session = request.getSession();
@@ -68,12 +68,13 @@ public class MyActController {
 		count = myActService.likeArticleCount(memId);
 		System.out.println("count : " + count);
 		System.out.println(likeArticle.toString());
-
+		
 		return likeArticle;
 	}
 	 
-	@RequestMapping(value = "/likeDrink", method = RequestMethod.GET)
-	public String likeDrink(String pageNum, HttpServletRequest request) {
+	@RequestMapping(value = "/likeDrink")
+	@ResponseBody
+	public List likeDrink(String pageNum, HttpServletRequest request) {
 		System.out.println("MyActLikeDrink Controller");
 		int count = 0;
 		
@@ -82,11 +83,23 @@ public class MyActController {
 		List likeDrink = null;
 		count = myActService.likeArticleCount(memId);
 		System.out.println("count : " + count);
-		return "/myAct/likeDrink.mn"; 
+		return likeDrink;
 	}
-	@RequestMapping(value = "/title", method = RequestMethod.GET)
-	public String title() {
-		return "/myAct/title.mn";
+	@RequestMapping(value = "/title")
+	@ResponseBody
+	public List title(String id, HttpServletRequest request) {
+		System.out.println("Title Controller");
+		System.out.println("id : "+id);
+		
+		HttpSession session = request.getSession();
+		String memId = (String)session.getAttribute("memId");
+		
+		List myTitle = null;
+		myTitle = myActService.getMyTitle(memId);
+		System.out.println(myTitle.toString());
+		
+		
+		return myTitle;
 	}
 	
 }

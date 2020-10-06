@@ -16,6 +16,7 @@
 		<typeAlias type="project.spring.beans.LowerHashMap" alias="camelmap" />
 		<typeAlias type="project.spring.article.vo.ArticleDTO" alias="ArticleDTO"/>
 		<typeAlias type="project.spring.myAct.vo.MyLikeDTO" alias="MyLikeDTO"/>
+		<typeAlias type="project.spring.myAct.vo.MyTitleDTO" alias="MyTitleDTO"/>
 		<typeAlias type="project.spring.member.vo.MemberDTO" alias="memberDTO" />
 	</typeAliases> 
 	<mappers>
