@@ -86,7 +86,18 @@ public class MyActController {
 		
 		return likeDrink;
 	}
-	@RequestMapping(value = "/title")
+	
+	@RequestMapping(value = "/getAllTitle")
+	@ResponseBody
+	public List allTitle() {
+		System.out.println("GetAllTitle Controller");
+		List getAllTitle = null;
+		getAllTitle = myActService.getAllTitle();
+		System.out.println(getAllTitle.toString());
+		return getAllTitle;
+	}
+	
+	@RequestMapping(value = "/myTitle")
 	@ResponseBody
 	public List title(String id, HttpServletRequest request) {
 		System.out.println("Title Controller");
@@ -94,11 +105,10 @@ public class MyActController {
 		
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
-		
+
 		List myTitle = null;
 		myTitle = myActService.getMyTitle(memId);
 		System.out.println(myTitle.toString());
-		
 		
 		return myTitle;
 	}

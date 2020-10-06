@@ -30,7 +30,7 @@
 			<div class="linkBar" id="likeDrink">
 				술 좋아요
 			</div>
-			<div class="linkBar" id="title">
+			<div class="linkBar" id="myTitle">
 				칭호
 			</div>
 			<br/>
@@ -71,7 +71,7 @@
 	</div>
 	<input type = "hidden" value="${sessionScope.memId}" id="memId">
 </body>
-	<script>
+<script>
 			$(document).ready(function(){
 			$("#likeArticle").click(function(){
 				$.ajax({
@@ -109,12 +109,13 @@
 			});
 		});
 	</script>
+	
 	<script>
 			$(document).ready(function(){
-			$("#title").click(function(){
+			$("#myTitle").click(function(){
 				$.ajax({
 					type:"POST",
-					url:"/myAct/title",
+					url:"/myAct/myTitle",
 					data:{id:$("#memId").val()},
 					success:function(data){
 						var likeArticle = data;
@@ -123,24 +124,24 @@
 						$('#title_result').empty();
 						$('#likeArticle_result').empty();	
 						
-						$('#likeArticle_result').append('<table class="tableCss" style="width: 100%;">');
-						$('#likeArticle_result > table').append('<tr>');
-						$('#likeArticle_result > table > tr').append('<td>번호</td>');
-						$('#likeArticle_result > table > tr').append('<td>제목</td>');
-						$('#likeArticle_result > table > tr').append('<td>작성일</td>');
-						$('#likeArticle_result > table > tr').append('<td>조회</td>');
-						$('#likeArticle_result > table > tr').append('<td>추천</td>');
-						$('#likeArticle_result > table').append('</tr>');		
+						$('#title_result').append('<table class="tableCss" style="width: 100%;">');
+						$('#title_result > table').append('<tr>');
+						$('#title_result > table > tr').append('<td>번호</td>');
+						$('#title_result > table > tr').append('<td>제목</td>');
+						$('#title_result > table > tr').append('<td>작성일</td>');
+						$('#title_result > table > tr').append('<td>조회</td>');
+						$('#title_result > table > tr').append('<td>추천</td>');
+						$('#title_result > table').append('</tr>');		
 						
 						for(var i in likeArticle){
 							console.log(likeArticle[i]);
-							$('#likeArticle_result > table').append('<tr>');
-							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].bnIdx+'</td>');
-							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].bnTitle+'</td>');
-							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].insertDay+'</td>');
-							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].readcount+'</td>');
-							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].heart+'</td>');
-							$('#likeArticle_result > table').append('</tr>');
+							$('#title_result > table').append('<tr>');
+							$('#title_result > table > tr:last').append('<td>'+likeArticle[i].bnIdx+'</td>');
+							$('#title_result > table > tr:last').append('<td>'+likeArticle[i].bnTitle+'</td>');
+							$('#title_result > table > tr:last').append('<td>'+likeArticle[i].insertDay+'</td>');
+							$('#title_result > table > tr:last').append('<td>'+likeArticle[i].readcount+'</td>');
+							$('#title_result > table > tr:last').append('<td>'+likeArticle[i].heart+'</td>');
+							$('#title_result > table').append('</tr>');
 						}
 					}
 				});
@@ -169,7 +170,7 @@
 			$("#title").click(function(){
 				$.ajax({
 					type:"POST",
-					url:"/myAct/title",
+					url:"/myAct/myTitle",
 					data:{id:$("#memId").val()},
 					success:function(data){
 						console.log(data);

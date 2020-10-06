@@ -32,6 +32,10 @@
  			]]>
  		</select>
  		
+ 		<select id="getAllTitle" resultType="TitleListDTO">
+ 			select * from title_list
+ 		</select>
+ 		
  		<select id="getMyTitle" parameterType="string" resultType="MyTitleDTO">
  			select * from my_title where id=#{value}
  		</select>
