@@ -67,4 +67,10 @@ public class MemberServiceImpl implements memberInterface{
 		System.out.println("ServiceImpleResult="+result);
 		return result;
 	}
+	//findId
+	@Override
+	public MemberDTO findId(MemberDTO dto) {
+		MemberDTO result = memberDAO.findId(dto);
+		return result;
+	}
 }
