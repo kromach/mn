@@ -46,6 +46,8 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int insertItem(Object obj) {
 		int result = 0;
+		System.out.println((MemberDTO)obj);
+		
 		if (obj instanceof MemberDTO) {
 			result = sqlSession.insert("member.insertMember", obj);
 		}
@@ -105,6 +107,11 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public MemberDTO findPw(MemberDTO dto) {
 		MemberDTO result = sqlSession.selectOne("member.findPw", dto);
+		return result;
+	}
+	@Override
+	public int insertItemByKakao(MemberDTO dto) {
+		int result = sqlSession.insert("member.kakaoSignup", dto);
 		return result;
 	}
 }
