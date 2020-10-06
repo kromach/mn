@@ -4,11 +4,13 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import project.spring.adminEvent.vo.AdminEventVO;
+
 @Repository
 public class AdminEventDAOImpl implements AdminEventDAO {
 	
 	@Autowired
-	private SqlSessionTemplate sqlsession = null;
+	private SqlSessionTemplate sqlSession = null;
 
 
 	@Override
@@ -17,6 +19,12 @@ public class AdminEventDAOImpl implements AdminEventDAO {
 		return 0;
 	}
 
+	public int insertItem(AdminEventVO vo) {
+		
+		sqlSession.insert("adminEvent.insertEvent", vo);
+		return 0;
+	}
+	
 	@Override
 	public int updateItem() {
 		// TODO Auto-generated method stub

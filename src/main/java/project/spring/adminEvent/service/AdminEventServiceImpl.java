@@ -1,9 +1,12 @@
 package project.spring.adminEvent.service;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import project.spring.adminEvent.dao.AdminEventDAOImpl;
+import project.spring.adminEvent.vo.AdminEventVO;
 
 @Service
 public class AdminEventServiceImpl implements AdminEventService{
@@ -16,6 +19,13 @@ public class AdminEventServiceImpl implements AdminEventService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	public int insertItem(AdminEventVO vo) {
+		adminEventDAO.insertItem(vo);
+		return 0;
+	}
+	
+
 
 	@Override
 	public int updateItem() {
@@ -46,6 +56,8 @@ public class AdminEventServiceImpl implements AdminEventService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
 	
 
 }
