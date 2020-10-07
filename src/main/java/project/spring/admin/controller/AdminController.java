@@ -54,7 +54,11 @@ public class AdminController {
 			return "admin/memberList.mn";
 		}
 	
-	
+		@RequestMapping("/drinkList")
+		public String drinkList()throws SQLException{
+			
+			return "admin/drinkList.mn";
+		}
 	
 	
 }

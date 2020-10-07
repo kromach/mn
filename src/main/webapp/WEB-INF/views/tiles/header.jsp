@@ -50,9 +50,9 @@
 		<li class="sub-menu">
 			<a href="#admin"><div class="fa fa-bullhorn"></div> 관리자 메뉴 <div class="fa fa-caret-up fr"></div></a>
 			<ul style="display: block;">
-				<li><a href="#admin"> 회원 관리 </a></li>
-				<li><a href="#admin"> 술 정보 관리 </a></li>
-				<li><a href="#admin"> 이벤트 관리 </a></li>
+				<li><a href="/admin/memberList"> 회원 관리 </a></li>
+				<li><a href="/admin/drinkList"> 술 정보 관리 </a></li>
+				<li><a href="/admin/event/eventList"> 이벤트 관리 </a></li>
 			</ul>
 		</li>
 		</c:if>									

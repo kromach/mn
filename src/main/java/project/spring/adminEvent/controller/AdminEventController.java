@@ -87,4 +87,6 @@ public class AdminEventController {
 
 			return "admin/event/eventList.mn";
 		}
+		
+
 }
