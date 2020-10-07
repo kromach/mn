@@ -98,11 +98,11 @@ public class MyActServiceImpl implements MyActService{
 
 	@Override
 	public List getAllTitle() {
-		List getAllTitle = myActDAO.getAllTitle();
+		List getAllTitle = myActDAO.getAllTitle(); 
 		return getAllTitle;
 	}
 
-	
+	  
 	
 	
 
