@@ -39,4 +39,13 @@
  		<select id="getMyTitle" parameterType="string" resultType="MyTitleDTO">
  			select * from my_title where id=#{value}
  		</select>
+ 		
+ 		<update id="updateTitle" parameterType="string">
+ 			UPDATE MY_TITLE SET CHOOSE_TITLE ='N' WHERE id=#{value};
+ 		</update>
+ 		<update id="chooseTitle" parameterType="string">
+ 			UPDATE MY_TITLE SET CHOOSE_TITLE ='Y' WHERE id= AND TI_IDX ='8';
+ 		</update>
+ 		
+ 		
   </mapper>

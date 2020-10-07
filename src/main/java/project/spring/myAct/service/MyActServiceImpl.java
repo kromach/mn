@@ -98,6 +98,12 @@ public class MyActServiceImpl implements MyActService{
 		List getAllTitle = myActDAO.getAllTitle();
 		return getAllTitle;
 	}
+
+	@Override
+	public int updateTitle(String memId) { 
+		int count = myActDAO.updateTitle(memId);
+		return count;
+	}
 	
 	
 

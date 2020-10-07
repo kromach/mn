@@ -113,4 +113,20 @@ public class MyActController {
 		return myTitle;
 	}
 	
+	@RequestMapping(value = "/selectTitle")
+	public int selectTitle(String id, HttpServletRequest request) {
+		System.out.println("SelectTitle Controller");
+		System.out.println("id : " + id);
+		
+		HttpSession session = request.getSession();
+		String memId = (String)session.getAttribute("memId");
+		
+		request.getParameter("choosenIdx");
+		
+		int count = 0;
+		count = myActService.updateTitle(memId);
+		return count;
+	}
+	
+	
 }
