@@ -23,6 +23,6 @@ public class ArticleController {
 		@RequestMapping("/")
 		public String memberList(String pageNum, Model model)throws SQLException {
 			
-			return "admin/memberList.mn";
+			return "article/articleList.mn";
 		}
 }
