@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import project.spring.member.service.MemberServiceImpl;
+import project.spring.member.vo.MemberDTO;
 import project.spring.product.service.ProductService;
 import project.spring.product.vo.ProductVo;
 
@@ -23,6 +25,9 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productservice = null;
+	@Autowired
+	private MemberServiceImpl memberservice = null;
+	
 	
 	@RequestMapping("productlist")
 		public String productList(Model model) throws SQLException {
@@ -58,14 +63,12 @@ public class ProductController {
 	}
 	
 	@RequestMapping("myorderlist")
-	public String myorderlist (Model model, HttpSession session) throws SQLException {
+	public String myorderlistSs (Model model, HttpSession session) throws SQLException {
 	List myorderlist = null;
 	int myordercount = 0;
 	
-	//String id = (String)session.getAttribute("memId");
-	String id = "boo";
+	String id = (String)session.getAttribute("memId");
 	myordercount = productservice.myordercount(id);
-	System.out.println(myordercount);
 	
 	if(myordercount>0) {
 		myorderlist = productservice.myorderlist(id);
@@ -79,7 +82,16 @@ public class ProductController {
 	}
 	
 	@RequestMapping("productorder")
-	public String productorder ()  throws SQLException{
+	public String productorderSs (HttpServletRequest request, HttpSession session, Model model)  throws SQLException{
+		String amount = request.getParameter("amount");
+		String prcode = request.getParameter("prcode");
+		String id = (String)session.getAttribute("memId");
+		
+		MemberDTO meminfo = memberservice.readItem();
+		ProductVo info =productservice.getproductinfo(prcode);
+		model.addAttribute("info", info);
+		model.addAttribute("amount", amount);
+		model.addAttribute("meminfo", meminfo);
 		
 		return "product/productorder.mn";
 	}
