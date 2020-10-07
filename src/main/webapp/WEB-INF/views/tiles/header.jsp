@@ -72,7 +72,9 @@
 			</ul>
 		</li>
 		<li>
+			<c:if test="${!empty sessionScope.memId}">
 			<a href="#my"><div class="fa fa-award"></div> 나의 활동내역</a>
+			</c:if>
 		</li>
 		<li class="sub-menu">
 			<a href="#product"><div class="fa fa-wine-bottle"></div> 전통주 주문 <div class="fa fa-caret-up fr"></div></a>
