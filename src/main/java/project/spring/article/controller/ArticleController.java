@@ -16,7 +16,7 @@ import project.spring.beans.Pager;
 
 @Controller
 @RequestMapping("/article")
-public class AdminController {
+public class ArticleController {
 		@Autowired
 		private ArticleServiceImpl articleService = null;
 
