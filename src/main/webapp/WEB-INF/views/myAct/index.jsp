@@ -14,7 +14,14 @@
 	float: left;
 	text-align: center;
 }
+#hello {
+	width: 200px;
+	height: 50px;
+	background-color: blue;
+	color: white;
+}
 </style>
+
 <body>
 	<div class="grid-Wrapper">
 		<div class="grid">
@@ -112,27 +119,57 @@
 	
 	<script>
 			$(document).ready(function(){
-			$("#myTitle").click(function(){
+			$("#getAllTitle").click(function(){
 				$.ajax({
 					type:"POST",
-					url:"/myAct/myTitle",
+					url:"/myAct/getAllTitle",
 					data:{id:$("#memId").val()},
 					success:function(data){
-						var getAllTitle = data;
+						var getAllTitle = data.allTitle;
+						var getMyTitle = data.myTitle;
+						console.log(data);
+						
 						$('#index').empty();
 						$('#likeDrink_result').empty();
 						$('#title_result').empty();
 						$('#likeArticle_result').empty();	
 						
 						$('#title_result').append('<table class="tableCss" style="width: 100%;">');
-						for(var i in myTitle){
-							console.log(getAllTitle[i]);
+						for(var i in getAllTitle){
 							$('#title_result > table').append('<tr>');
+							for(var j in getMyTitle){
+								if(getAllTitle[i].titleName == getMyTitle[j].titleName){
+									console.log(getAllTitle[i].titleName+'가 획득한 칭호이다.');
+									getAllTitle[i].titleName
+									$("#hello").css("color","red");
+								} 
+							}							
 							$('#title_result > table > tr:last').append('<td>'+getAllTitle[i].titleName+'</td>');
 							$('#title_result > table').append('</tr>');
 						}
 					}
 				});
+				
+				/* $.ajax({
+					type:"POST",
+					url:"/myAct/myTitle",
+					data:{id:$("#memId").val()},
+					success:function(data){
+						var myTitle = data;
+						var innerText = $('#title_result ').html();
+						console.log(myTitle);
+						console.log(innerText);
+						
+					}
+				}); */
+			});
+		});
+	</script>
+	
+	<script>
+			$(document).ready(function(){
+			$("#myTitle").click(function(){
+				
 			});
 		});
 	</script>
