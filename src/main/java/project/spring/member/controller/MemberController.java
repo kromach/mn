@@ -264,12 +264,12 @@ public class MemberController {
 		//1 - id o pw o
 		int result = memberService.readItem(model);
 		MemberDTO setSessionDTO= null;
-		if(result ==1 ) setSessionDTO = memberService.setSession(model.getId());
-		System.out.println("loginPro"+model);
-		
-		session.setAttribute("userKind", setSessionDTO.getUserKind());
-		session.setAttribute("memId", setSessionDTO.getId());
-		session.setAttribute("memNickName", setSessionDTO.getNickName());
+		if(result ==1 ) {
+			setSessionDTO = memberService.setSession(model.getId());
+			session.setAttribute("userKind", setSessionDTO.getUserKind());
+			session.setAttribute("memId", setSessionDTO.getId());
+			session.setAttribute("memNickName", setSessionDTO.getNickName());
+		}
 		
 		request.setAttribute("result", result);
 		return "/member/loginResult.mn";
