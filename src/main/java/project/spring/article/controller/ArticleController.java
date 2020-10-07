@@ -19,10 +19,16 @@ import project.spring.beans.Pager;
 public class ArticleController {
 		@Autowired
 		private ArticleServiceImpl articleService = null;
-
-		@RequestMapping("/")
+	
+		@RequestMapping
 		public String index(){
-			
+			System.out.println("aritlce Hello");
 			return "article/articleList.mn";
 		}
+		
+		@RequestMapping("/test")
+		public String indexTest(){
+			System.out.println("aritlce Hello");
+			return "article/articleList.mn";
+		}	
 }
