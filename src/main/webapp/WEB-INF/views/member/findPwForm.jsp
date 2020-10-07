@@ -42,9 +42,9 @@
 					type="text" name="tel" size="3" required="required">
 					</div>
 					<br><br>
-					<button type="submit">찾기</button>
-					<button type="reset">재입력</button>
-					<button type="button">취소</button>
+					<button type="submit" class="btn btn-sm btn-grey">찾기</button>
+					<button type="reset" class="btn btn-sm btn-grey">재입력</button>
+					<button type="button" class="btn btn-sm btn-grey">취소</button>
 				</div>
 				</form>
 			</div>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="/resources/js/formCheck.js"></script>
+
 <script src="/resources/js/jquery.selectric.js"></script>
 <link rel="stylesheet" href="/resources/css/selectric.css">
 
@@ -25,13 +27,13 @@
 					<tr>
 						<th>주류 종류</th>
 						<td>
-							<select id="dkBkind" name="dkBkind" class="sel short required">
+							<select id="dkBkind" name="dkBkind" class="sel short required" type="select-one" msg="대분류를" >
 								<option value="">대분류 선택</option>
 								<c:forEach items="${bigCategoryList}" var="bigCategory">
 									<option value="${bigCategory.code}">${bigCategory.value}</option>
 								</c:forEach>
 							</select>
-							<select id="dkSkind" name="dkSkind" class="sel short required">
+							<select id="dkSkind" name="dkSkind" class="sel short required" type="select-one" msg="소분류를" >
 								<option value="">소분류 선택</option>
 							</select>
 						</td>
@@ -39,19 +41,19 @@
 					<tr>
 						<th>주류명</th>
 						<td>
-							<input type="text" name="dkName" class="input-md required" />
+							<input type="text" name="dkName" class="input-lg required" msg="주류명을" />
 						</td>
 					</tr>
 					<tr>
 						<th>대표 이미지</th>
 						<td>
-							<input type="file" name="dkImg" class="input-md required" />
+							<input type="file" name="dkImg" class="required" />
 						</td>
 					</tr>
 					<tr>
 						<th>양조장</th>
 						<td>
-							<input type="text" name="dkPlace" class="input-md required" />
+							<input type="text" name="dkPlace" class="input-lg required" />
 						</td>
 					</tr>
 					<tr>
@@ -64,7 +66,7 @@
 					<tr>
 						<th>알콜 도수</th>
 						<td>
-							<input type="number" name="dkPlace" class="input-sm required" /> 도
+							<input type="number" name="dkPlace" class="input-xs required" /> 도
 						</td>
 					</tr>
 					<tr>
@@ -76,6 +78,7 @@
 					<tr>
 						<th>평가</th>
 						<td id="star_grade">
+							<!-- js로 통합시키기 -->
 							<c:forEach begin="1" end="5" step="1" var="i">
 								<p>
 									<span class="item${i}"></span>
@@ -104,7 +107,7 @@
 					
 				</table>
 				<div class="text-center pad-top10">
-					<input type="submit" class="btn btn-lg btn-blue" value="저장" />
+					<input type="button" class="btn btn-lg btn-blue" value="저장" onclick="insertDrink()" />
 					<input type="button" class="btn btn-lg btn-grey" value="취소" onclick="window.location='index'" />
 				</div>
 			</form>
@@ -114,8 +117,10 @@
 <script>
 	$(function() {
 		
+		// select 형태 바꿔주는 JS 실행
 		$(".sel").selectric();
 		
+		// masonry 실행
 		var msnry = new Masonry('.grid2', {
 			itemSelector : '.detail-item',
 			columnWidth : '.detail-sizer',
@@ -126,7 +131,7 @@
 			msnry.layout();
 		});
 		
-
+		// 대분류의 값이 바뀌었을 경우 소분류 값과 항목명 가져오는 ajax 실행
 	    $('#dkBkind').change(function() {
 	    	getSmallCategory(this.value);
 	    	getItemValues(this.value);
@@ -134,11 +139,13 @@
 
 	});
 	
+	// 평점 별점 조절 
     $('#star_grade a').click(function() {
     	$(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
     	$(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
     });
     
+	// 소분류 값 가져오는 ajax
     function getSmallCategory(bigCategory) {
     	$.ajax({
 			type : "POST",
@@ -154,6 +161,7 @@
     	})
     }
     
+	// ajax 으로 받아온 값을 parse 하여 option 등록
     function addedSmallCategory(data){
     	var json = JSON.parse(data);
     	
@@ -166,6 +174,7 @@
     	$("#dkSkind").selectric("refresh");
     };
     
+    // 평가 항목 명 가져오는 ajax
     function getItemValues(bigCategory) {
     	$.ajax({
 			type : "POST",
@@ -184,6 +193,13 @@
 				alert("error");
 			}
     	})
+    }
+
+    function insertDrink(){
+    	if (checkFormjquery()) {
+    		
+    		//$("form[name='dkForm']").submit();
+    	}
     }
     
 </script>
