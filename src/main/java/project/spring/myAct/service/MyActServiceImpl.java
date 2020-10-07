@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import project.spring.myAct.dao.MyActDAO;
+import project.spring.myAct.vo.TitleListDTO;
 
 @Service
 public class MyActServiceImpl implements MyActService{
@@ -99,11 +102,7 @@ public class MyActServiceImpl implements MyActService{
 		return getAllTitle;
 	}
 
-	@Override
-	public int updateTitle(String memId) { 
-		int count = myActDAO.updateTitle(memId);
-		return count;
-	}
+	
 	
 	
 

@@ -12,10 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.spring.article.vo.ArticleDTO;
 import project.spring.myAct.service.MyActService;
+import project.spring.myAct.vo.TitleListDTO;
 
 @Controller
 @RequestMapping("/myAct")
@@ -117,16 +119,12 @@ public class MyActController {
 	public int selectTitle(String id, HttpServletRequest request) {
 		System.out.println("SelectTitle Controller");
 		System.out.println("id : " + id);
-		
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
+		//TitleListDTO updateTitle = myActService.updateTitle(); 
 		
-		request.getParameter("choosenIdx");
-		
-		int count = 0;
-		count = myActService.updateTitle(memId);
+		int count =0;
 		return count;
+		
 	}
-	
-	
 }
