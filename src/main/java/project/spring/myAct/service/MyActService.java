@@ -5,7 +5,6 @@ import java.util.List;
 import project.spring.beans.CommonInterface;
 
 public interface MyActService extends CommonInterface{
-
 	public int myArticleCount(String memId);
 	public List getMyArticle(String memId);
 	public int likeArticleCount(String memId);
@@ -14,4 +13,5 @@ public interface MyActService extends CommonInterface{
 	public List myLikeDrink(String memId);
 	public List getMyTitle(String memId);
 	public List getAllTitle();
+	//public int updateTitle();
 }

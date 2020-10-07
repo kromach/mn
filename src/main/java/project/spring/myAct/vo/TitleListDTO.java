@@ -36,5 +36,9 @@ public class TitleListDTO {
 	public void setTitleValue(int titleValue) {
 		this.titleValue = titleValue;
 	}
-	
+	@Override
+	public String toString() {
+		return "TitleListDTO [titleIdx=" + titleIdx + ", titleName=" + titleName + ", titleDetail=" + titleDetail
+				+ ", titleKey=" + titleKey + ", titleValue=" + titleValue + "]";
+	}
 }	

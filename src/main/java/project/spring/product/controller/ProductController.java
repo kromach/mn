@@ -1,8 +1,10 @@
 package project.spring.product.controller;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import project.spring.member.service.MemberServiceImpl;
+import project.spring.member.vo.MemberDTO;
 import project.spring.product.service.ProductService;
 import project.spring.product.vo.ProductVo;
 
@@ -21,8 +25,11 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productservice = null;
+	@Autowired
+	private MemberServiceImpl memberservice = null;
 	
-	@RequestMapping("productList")
+	
+	@RequestMapping("productlist")
 		public String productList(Model model) throws SQLException {
 		List productlist =null;
 		int count = 0;
@@ -41,24 +48,27 @@ public class ProductController {
 	
 	
 	@RequestMapping("productdetail")
-		public String productdetail	(String prcode, Model model) throws SQLException {
+		public String productdetail	(HttpServletRequest request, Model model) throws SQLException {
+		String prcode = request.getParameter("prcode");
 		
 		ProductVo info =productservice.getproductinfo(prcode);
 		model.addAttribute("info", info);
 		System.out.println(info);
 		
+		// 총 코멘트 수 / 좋아요 수 
+		HashMap commmetStarinfo = null;
+	
+		
 		return "product/productdetail.mn";
 	}
 	
 	@RequestMapping("myorderlist")
-	public String myorderlist (Model model, HttpSession session) throws SQLException {
+	public String myorderlistSs (Model model, HttpSession session) throws SQLException {
 	List myorderlist = null;
 	int myordercount = 0;
 	
-	//String id = (String)session.getAttribute("memId");
-	String id = "boo";
+	String id = (String)session.getAttribute("memId");
 	myordercount = productservice.myordercount(id);
-	System.out.println(myordercount);
 	
 	if(myordercount>0) {
 		myorderlist = productservice.myorderlist(id);
@@ -69,6 +79,27 @@ public class ProductController {
 	
 	
 	return "product/myorderlist.mn";
-}
+	}
+	
+	@RequestMapping("productorder")
+	public String productorderSs (HttpServletRequest request, HttpSession session, Model model)  throws SQLException{
+		String amount = request.getParameter("amount");
+		String prcode = request.getParameter("prcode");
+		String id = (String)session.getAttribute("memId");
+		
+		MemberDTO meminfo = memberservice.readItem();
+		ProductVo info =productservice.getproductinfo(prcode);
+		model.addAttribute("info", info);
+		model.addAttribute("amount", amount);
+		model.addAttribute("meminfo", meminfo);
+		
+		return "product/productorder.mn";
+	}
+	
+	@RequestMapping("myorderdetail")
+	public String myorderdetail() throws SQLException{
+		
+		return "product/myorderdetail.mn";
+	}
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!DOCTYPE html>
 <html>
 <body>
@@ -64,15 +65,23 @@
 					<div class="loginLabel">
 					주소
 					</div>
-					<input type="text" name="address" class="loginInput">
-					<button type="button" class="btn btn-sm btn-dark">주소찾기</button>
+					<input type="text" name="address" class="loginInput" id="address">
+					<div class="loginLabel">
+					상세 주소
+					</div>
+					<input type="text" name="address" class="loginInput"> 
+					<button type="button" class="btn btn-sm btn-dark" id="find_address">주소찾기</button>
 					</c:if>
 					<c:if test="${status eq 'salse' }">
 						<div class="loginLabel">
 						사업장 주소
 						</div>
-						<input type="text" name="address" class="loginInput">
-						<button type="button" class="btn btn-sm btn-dark">주소찾기</button>
+						<input type="text" name="address" class="loginInput" id="address">
+						<div class="loginLabel">
+						상세 주소
+						</div>
+						<input type="text" name="address" class="loginInput"> 
+						<button type="button" class="btn btn-sm btn-dark" id="find_address">주소찾기</button>
 						<div class="loginLabel">
 						사업자 등록증
 						</div>
@@ -91,38 +100,7 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-	$(document).ready(function() {
-		$('#id').blur(function() {
-			var id = $('#id').val();
-			$.ajax({
-				url:  '${pageContext.request.contextPath}/member/overlapCheck?id='+id,
-				type: "get",
-				success : function(data){
-					if(data){
-						$("#id_label").html('<div  style="color: red;font-size: 11px; margin-bottom: 5px;">이미 사용중이거나 탈퇴한 아이디 입니다.</div>');
-					}else{
-						$("#id_label").empty();
-					}
-				}
-			});
-		});
-		$('#nickName').blur(function() {
-			var nickName = $('#nickName').val();
-			$.ajax({
-				url:  '${pageContext.request.contextPath}/member/overlapCheck?nickName='+nickName,
-				type: "get",
-				success : function(data){
-					if(data){
-						$("#nickName_label").html('<div  style="color: red;font-size: 11px; margin-bottom: 5px;">이미 사용중이거나 탈퇴한 아이디 입니다.</div>');
-					}else{
-						$("#nickName_label").empty();
-					}
-				}
-			});
-		});
-	});
-	</script>
+	<script src="/resources/js/memberForm.js"></script>
 	<script src="/resources/js/imageLoad.js"></script>
 </body>
 </html>

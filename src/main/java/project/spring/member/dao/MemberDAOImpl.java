@@ -129,4 +129,8 @@ public class MemberDAOImpl implements MemberDAO {
 		if(isExist==1) result = true;
 		return result;
 	}
+	@Override
+	public MemberDTO setSession(String id) {
+		return sqlSession.selectOne("member.setSession",id);
+	}
 }

@@ -82,4 +82,9 @@ public class MemberServiceImpl implements memberInterface{
 		boolean result = memberDAO.overlapCheck(checkString,i);
 		return result;
 	}
+	@Override
+	public MemberDTO setSession(String id) {
+		MemberDTO result = memberDAO.setSession(id);
+		return result;
+	}
 }

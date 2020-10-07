@@ -16,7 +16,8 @@
 				<div class="grid-sizer"></div>
 				<div class="gutter-sizer"></div>
 					<div>
-						<form action="">
+						<form action="productlist" name="schForm" id="schForm">
+							<input type="hidden" name="isSearch" value="true"/>
 							<select>
 								<option value="S006">탁주</option>
 								<option value="S007">청주</option>
@@ -38,7 +39,8 @@
 				<div class="grid-sizer"></div>
 				<div class="gutter-sizer"></div>
 					<div class="grid-item grid-item--width6 text-left">
-						<form action="productList">
+						<form action="productlist" name="schForm" id="schForm">
+							<input type="hidden" name="isSearch" value="true"/>
 							<div>
 								<select>
 									<option value="S006">탁주</option>
