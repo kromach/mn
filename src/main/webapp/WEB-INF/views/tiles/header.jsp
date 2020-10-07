@@ -54,6 +54,13 @@
 				<li><a href="#board"> 술 정보 관리 </a></li>
 				<li><a href="#board"> 이벤트 관리 </a></li>
 			</ul>
+			</c:if>									
+			<c:if test="${sessionScope.userKind eq 'salse' }">
+			<a><div class="fa fa-bullhorn"></div> 판매자 메뉴</a>
+			<ul style="display: block;">
+				<li><a href="#board"> 상품 관리 </a></li>
+				<li><a href="#board"> 판매 관리 </a></li>
+			</ul>
 			</c:if>
 			<a href="/drink/index"><div class="fa fa-wine-glass-alt"></div> 주류 저장소</a>
 		</li>
