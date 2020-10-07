@@ -14,12 +14,6 @@ public class MemberServiceImpl implements memberInterface{
 	MemberDAOImpl memberDAO;
 	
 	@Override
-	public int insertItem(MemberDTO dto) {
-		System.out.println(memberDAO);
-		System.out.println(dto);
-		return 0;
-	}
-	@Override
 	public int updateItem() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -35,7 +29,6 @@ public class MemberServiceImpl implements memberInterface{
 		// TODO Auto-generated method stub
 		MemberDTO dto = new MemberDTO();
 		dto = memberDAO.readItem();
-		
 		return dto; 
 	}
 	@Override
@@ -73,10 +66,25 @@ public class MemberServiceImpl implements memberInterface{
 		MemberDTO result = memberDAO.findId(dto);
 		return result;
 	}
-	
 	@Override
 	public MemberDTO findPw(MemberDTO dto) {
 		MemberDTO result = memberDAO.findPw(dto);
+		return result;
+	}
+	@Override
+	public int insertItemByKakao(MemberDTO dto) {
+		int result = memberDAO.insertItemByKakao(dto);
+		return result;
+	}
+	
+	@Override
+	public boolean overlapCheck(String checkString,int i) {
+		boolean result = memberDAO.overlapCheck(checkString,i);
+		return result;
+	}
+	@Override
+	public MemberDTO setSession(String id) {
+		MemberDTO result = memberDAO.setSession(id);
 		return result;
 	}
 }

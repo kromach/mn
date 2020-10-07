@@ -18,6 +18,14 @@ public class AdminEventVO {
 	private String isOpen;
 	private String insertId;
 	private Timestamp insertDay;
+	private String prName;
+	
+	public String getPrName() {
+		return prName;
+	}
+	public void setPrName(String prName) {
+		this.prName = prName;
+	}
 	public int getEd_idx() {
 		return ed_idx;
 	}

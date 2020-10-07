@@ -16,18 +16,26 @@ import project.spring.drink.vo.DrinkVO;
 public class DrinkDAOImpl implements DrinkDAO {
 
 	private final SqlSessionTemplate sqlSession;
-	
+
 	@Autowired
 	DrinkDAOImpl(SqlSessionTemplate sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 	
+	@Override
+	public List<HashMap> selectBigCategoryList() throws SQLException {
+		return sqlSession.selectList("drink.selectBigCategoryList");
+	}
 	
 	@Override
-	public List<HashMap> selectSmallCategoryList(String bigCategoryCode) throws Exception {
-		return null;
+	public List<HashMap> selectSmallCategoryList(String bigCategoryCode) throws SQLException {
+		return sqlSession.selectList("drink.selectSmallCategoryList", bigCategoryCode);
 	}
 
+	@Override
+	public HashMap selectItemValuesInfo(String bigCategoryCode) throws SQLException {
+		return sqlSession.selectOne("drink.selectItemValuesInfo", bigCategoryCode);
+	}
 
 	@Override
 	public DrinkVO selectDrinkServiceInfo(String dkCode) throws SQLException {
@@ -52,7 +60,12 @@ public class DrinkDAOImpl implements DrinkDAO {
 	public List<CommentVO> selectCommentServiceList(String dkCode) throws SQLException {
 		return sqlSession.selectList("drink.selectCommentServiceList", dkCode);
 	}
-	
+
+	@Override
+	public List<String> selectItemValuesList(String bigCategoryCode) throws SQLException {
+		return sqlSession.selectList("drink.selectItemValuesList", bigCategoryCode);
+	}
+
 	/*
 	@Override
 	public void insertAticle(BoardDTO dto) throws SQLException {

@@ -46,4 +46,9 @@ public class MainController {
 		
 		return "/main/editor.mn";
 	}
+	@RequestMapping(value = "/editorData", method = RequestMethod.POST)
+	public String editorData(@RequestParam String data) {
+		System.out.println("["+data+"]");
+		return "/main/editor.mn";
+	}
 }

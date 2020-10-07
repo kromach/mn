@@ -3,6 +3,7 @@ package project.spring.adminEvent.controller;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import project.spring.adminEvent.service.AdminEventService;
 import project.spring.adminEvent.vo.AdminEventVO;
+import project.spring.beans.PageVO;
+import project.spring.beans.Pager;
 
 @Controller
 @RequestMapping("/admin/event")
@@ -21,11 +24,6 @@ public class AdminEventController {
 		@RequestMapping("/insertEvent")
 		public String eventList(Model model)throws SQLException{
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			String evToday = sdf.format(Calendar.getInstance().getTime());
-			System.out.println("evToday :  " + evToday);
-			
-			model.addAttribute("evToday", evToday);
 			
 			return "admin/event/insertEvent.mn";
 		}
@@ -39,24 +37,11 @@ public class AdminEventController {
 			System.out.println("========================");
 			
 			
-			// 날짜 형식 변경해서 vo에 재 세팅
-			System.out.println("날짜확인 ::::   " + vo.getEvStart());
-			System.out.println(vo.getEvStart().replace("/", ""));
-			String day = vo.getEvStart().replace("/", "").substring(0, 2);
-			System.out.println("day : " +  day);
-			String month = vo.getEvStart().replace("/", "").substring(2, 4);
-			System.out.println("month : " + month);
-			String year = vo.getEvStart().replace("/", "").substring(4, 8);
-			System.out.println("year : " + year);
-			vo.setEvStart(year+month+day);
-			System.out.println("날짜확인 111  :::         " + vo.getEvStart());
+			vo.setEvStart(vo.getEvStart().replace("-", ""));
+			vo.setEvEnd(vo.getEvEnd().replace("-", ""));
 			
 			
-			day = vo.getEvEnd().replace("/", "").substring(0,2);
-			month = vo.getEvEnd().replace("/", "").substring(2,4);
-			year = vo.getEvEnd().replace("/", "").substring(4,8);
-			vo.setEvEnd(year+month+day);
-
+			
 			
 			int result = adminEventService.insertItem(vo);
 			
@@ -66,16 +51,42 @@ public class AdminEventController {
 			
 			
 			
-			return "redirect:/admin/memberList";
+			return "redirect:/admin/memberList.mn";
 		}
 		
 		
 		// eventList 보기 페이지
 		@RequestMapping("/eventList")
-		public String eventView()throws SQLException{
+		public String eventView(String pageNum, Model model)throws SQLException{
 			
+			if(pageNum == null) {
+				pageNum = "1";
+			}
 			
+			// 이벤트 글 가져오기
+			int count = adminEventService.eventCount();
 			
-			return "admin/event/eventList";
+			List eventList = null;
+			Pager pager = new Pager();
+			PageVO pageVo = pager.pager(pageNum, count);
+			
+			if(count > 0) {
+				eventList = adminEventService.eventList(pageVo.getStartRow(), pageVo.getEndRow());
+			}
+			
+			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("eventList", eventList);
+			model.addAttribute("count", count);
+			model.addAttribute("pageVO", pageVo);
+			int number = count-(pageVo.getCurrPage()-1)*pageVo.getPageSize();
+			model.addAttribute("number", number);
+
+			System.out.println("===========================");
+			System.out.println("number ;           " + number);
+			System.out.println("count :              " + count);
+
+			return "admin/event/eventList.mn";
 		}
+		
+
 }

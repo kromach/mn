@@ -8,5 +8,6 @@ import project.spring.beans.CommonInterface;
 public interface AdminDAO extends CommonInterface {
 
 	public List memberList(int start, int end) throws SQLException;
+	
 	public int memberCount() throws SQLException;
 }

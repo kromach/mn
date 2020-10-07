@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
+import org.apache.tiles.autotag.core.runtime.annotation.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
@@ -102,8 +105,9 @@ public class MemberController {
 		model.addAttribute("nickName", dto.getNickName());
 		request.getSession().setAttribute("memId", dto.getId());
 		request.getSession().setAttribute("memNickName", dto.getNickName());
+		request.getSession().setAttribute("userKind", dto.getUserKind());
 		
-		return "/member/singupResult.mn";
+		return "/member/signupResult.mn";
 	}
 	
 	@RequestMapping("/signupSalesPro")
@@ -149,6 +153,7 @@ public class MemberController {
 		model.addAttribute("nickName", dto.getNickName());
 		mpRequest.getSession().setAttribute("memId", dto.getId());
 		mpRequest.getSession().setAttribute("memNickName", dto.getNickName());
+		mpRequest.getSession().setAttribute("userKind", dto.getUserKind());
 		return "/member/singupResult.mn";
 	}
 	
@@ -188,7 +193,7 @@ public class MemberController {
 		String id = kakao_account.get("email").asText();
 		String gender = kakao_account.get("gender").asText();
 		String birth = kakao_account.get("birthday").asText();
-		String nickname = properties.path("nickname").toString();	
+		String nickname = properties.path("nickname").toString().replaceAll("\"","");	
 		System.out.println("id"+id);
 		System.out.println("gender"+gender);
 		System.out.println("nickname"+nickname);
@@ -196,33 +201,53 @@ public class MemberController {
 		
 		dto.setId(id);
 		dto.setNickName(nickname);
-		if(gender.equals("male")) dto.setBirth("00"+birth+"3");
-		else if(gender.equals("female")) dto.setBirth("00"+birth+"4");
+		dto.setName(nickname);
 		
 		int isNew = memberService.readItem(dto);
+		System.out.println("KakaoIsNew"+isNew);
+		int kakaoSignupResult = 0;
 		if(isNew !=0) {
-			//id가 없음
+			//id가 없음 >> 회원가입
+			request.setAttribute("kakaoMember", dto);
+			return "/member/signupFormByKakao.mn";
 		}
-		
-		/*
-		 * 회원가입 안되어있을때 회원가입하는 로직 조회의 이후에 첨부 필요
-		 */
-		
-		
-		
-		
-		
-		
-		
 		
 		//Session에 값 넣어주기
 		request.getSession().setAttribute("memId", id);
 		request.getSession().setAttribute("memNickName", nickname);
+		request.getSession().setAttribute("userKind", "user");
 		redirectAttributes.addFlashAttribute("memberDTO", dto);
 		//id O pw O
 		request.setAttribute("result", 1);
 		
-		return "redirect:/member/loginResult";
+		return "/member/loginResult.mn";
+	}
+	
+	/*=====================================================================================================*/
+	@RequestMapping(value = "/signUpKakaoPro")
+	public String signUpKakaoPro(HttpServletRequest request,@ModelAttribute MemberDTO dto) {
+		System.out.println("Kakao추가정보="+dto);
+		
+		String[] birth_ = dto.getBirth().split(",");
+		String birth = "";
+		for( String i:birth_ ) {
+			birth += i;
+		}
+		dto.setBirth(birth);
+		String[] tels = dto.getTel().split(",");
+		String tel = "";
+		for(String tel_ : tels) {
+			tel += tel_;
+		}
+		dto.setTel(tel);
+		dto.setUserKind("user");
+		System.out.println(dto);
+		memberService.insertItem(dto);
+		request.getSession().setAttribute("memId", dto.getId());
+		request.getSession().setAttribute("memNickName", dto.getNickName());
+		request.getSession().setAttribute("userKind", dto.getUserKind());
+		request.setAttribute("result", 1);
+		return "/member/signupResult.mn";
 	}
 	
 	@RequestMapping(value = "/loginResult")
@@ -232,12 +257,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/loginPro")
-	public String loginPro(HttpServletRequest request,@ModelAttribute MemberDTO model) {
+	public String loginPro(HttpServletRequest request,HttpSession session,@ModelAttribute MemberDTO model) {
 		
 		//-1 - id x pw x
 		//0 - id o pw x
 		//1 - id o pw o
 		int result = memberService.readItem(model);
+		MemberDTO setSessionDTO= null;
+		if(result ==1 ) {
+			setSessionDTO = memberService.setSession(model.getId());
+			session.setAttribute("userKind", setSessionDTO.getUserKind());
+			session.setAttribute("memId", setSessionDTO.getId());
+			session.setAttribute("memNickName", setSessionDTO.getNickName());
+		}
 		request.setAttribute("result", result);
 		return "/member/loginResult.mn";
 	}
@@ -354,5 +386,21 @@ public class MemberController {
 		model.addAttribute("result","pw");
 		
 		return "/member/findResult.mn";
+	}
+	
+	@RequestMapping(value = "/overlapCheck")
+	@ResponseBody
+	public Boolean overlapCheck(
+			@RequestParam(value = "nickName", required = false) String nickName,
+			@RequestParam(value = "id", required = false) String id) {
+		
+		boolean result = false;
+		if(id!=null) {
+			result = memberService.overlapCheck(id,0);
+		}
+		if(nickName!=null) {
+			result = memberService.overlapCheck(nickName,1); 
+		}
+		return result;
 	}
 }

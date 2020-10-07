@@ -21,7 +21,7 @@
 #chatArea {
 	position: fixed;
 	right: 80px;
-	bottom: 10px;
+	bottom: 11px;
 	background-color: white;
 	width: 250px;
 	height: 350px;
@@ -59,7 +59,7 @@
 
 .totChatDIV>.chatWrapper {
 	border-bottom: 1px solid black;
-	height: 230px;
+	height: 200px;
 	overflow: auto;
 	overflow-x: hidden;
 }
@@ -75,12 +75,23 @@
 	background-color: black;
 }
 
-#msg, #btnSend {
+#msg {
 	width: 100%;
-	height: 20px;
-	display: inline-block;
-	font-size: 14px;
-	font-weight: bold;
+   	height: 21px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    vertical-align: middle;
+    border: none;
+}
+#btnSend {
+	width: 100%;
+    /* height: 21px; */
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    vertical-align: middle;
+    border: none;
 }
 
 #msgWrapper {

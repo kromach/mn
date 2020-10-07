@@ -1,8 +1,10 @@
 package project.spring.product.controller;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,7 @@ public class ProductController {
 	@Autowired
 	private ProductService productservice = null;
 	
-	@RequestMapping("productList")
+	@RequestMapping("productlist")
 		public String productList(Model model) throws SQLException {
 		List productlist =null;
 		int count = 0;
@@ -41,11 +43,16 @@ public class ProductController {
 	
 	
 	@RequestMapping("productdetail")
-		public String productdetail	(String prcode, Model model) throws SQLException {
+		public String productdetail	(HttpServletRequest request, Model model) throws SQLException {
+		String prcode = request.getParameter("prcode");
 		
 		ProductVo info =productservice.getproductinfo(prcode);
 		model.addAttribute("info", info);
 		System.out.println(info);
+		
+		// 총 코멘트 수 / 좋아요 수 
+		HashMap commmetStarinfo = null;
+	
 		
 		return "product/productdetail.mn";
 	}
@@ -69,6 +76,18 @@ public class ProductController {
 	
 	
 	return "product/myorderlist.mn";
-}
+	}
+	
+	@RequestMapping("productorder")
+	public String productorder ()  throws SQLException{
+		
+		return "product/productorder.mn";
+	}
+	
+	@RequestMapping("myorderdetail")
+	public String myorderdetail() throws SQLException{
+		
+		return "product/myorderdetail.mn";
+	}
 
 }

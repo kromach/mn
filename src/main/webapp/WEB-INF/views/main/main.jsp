@@ -69,6 +69,13 @@
 <script src="/resources/js/imageLoad.js"></script>
 <!-- 데이터 스크롤해서 붙이는 스크립트  -->
 
+<!-- mouse over 작성중
+<script>
+$(document).ready(function(){
+	var data = $('.grid-Wrapper>.grid>.grid-item').siblings();
+	console.log(data);
+})
+</script> -->
 <script type="text/javascript">
 $(window).scroll(
 	function() {

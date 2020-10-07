@@ -5,14 +5,9 @@
 <html>
 <body>
 	<c:if test="${result == 1 }">
-	<div class="grid-Wrapper">
-		<div class="grid">
-			<div class="grid-sizer"></div>
-			<div class="gutter-sizer"></div>
-			<div class="grid-item grid-item--width6">${sessionScope.memNickName}님 환영합니다.</div>
-		</div>
-	</div>
-	</div>
+		<script type="text/javascript">
+			window.location.href= '/';
+		</script>
 	</c:if>
 	<c:if test="${result==0 }">
 		<script type="text/javascript">
