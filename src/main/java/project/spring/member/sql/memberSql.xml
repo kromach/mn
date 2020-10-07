@@ -30,6 +30,9 @@
 		<select id="overlapCheckbyNick" parameterType="string" resultType="int">
 			select count(*) from member_info where nickName = #{value}
 		</select>
+		<select id="setSession" parameterType="string" resultType="memberDTO">
+			select * from member_info where id = #{value}
+		</select>
   		<update id="updateMember" parameterType="memberDTO" >
 			UPDATE MEMBER_INFO SET NICKNAME=#{nickName},pw=#{pw},tel=#{tel},ADDRESS=#{address} ,LICENSE_IMG=#{licenseImg}
 			,LICENSE_NUM =#{licenseNum} where id = #{id}
