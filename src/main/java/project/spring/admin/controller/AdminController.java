@@ -45,6 +45,7 @@ public class AdminController {
 				PageVO pageVO = pager.pager(pageNum,count);
 				
 				
+				
 				model.addAttribute("pageNum", pageNum);
 				model.addAttribute("memberList", memberList);
 				model.addAttribute("count", count);
