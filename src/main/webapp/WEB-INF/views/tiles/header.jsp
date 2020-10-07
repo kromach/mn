@@ -14,6 +14,8 @@
 				<span></span><span></span><span></span>
 			</div>
 		</div>
+		<input type="text" class = "mainFilter">
+		<button style="background-color: white;">검색</button>
 		<div class="fr h_menu">
 			<ul>
 			<li><a href="/member/modify">${sessionScope.memNickName}</a></li>
