@@ -40,8 +40,13 @@
 		<div class="detail-item detail-width2">
 			<h3 class="pad-top10 pad-bottom20">구매하기</h3>
 			
-			가격 ${info.prPrice}
-			<button class="btn btn-lg btn-blue" onclick="orderdetail">구매 페이지</button>
+			<dl class="clear">
+				<dt>수량</dt>
+				<dd class="clfix"><input type="text" name="amount"> 개</dd>
+				<dt>가격</dt>
+				<dd class="clfix">${info.prPrice} 원</dd>
+			</dl>
+			<a class="btn btn-lg btn-yellow" href="productorder">구매하기</a>
 		</div>
 		<div class="detail-item detail-width4">
 			<h3 class="pad-top10 pad-bottom20">연관 게시글 보기</h3>
