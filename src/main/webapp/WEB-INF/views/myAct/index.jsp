@@ -135,16 +135,21 @@
 						$('#likeArticle_result').empty();	
 						
 						$('#title_result').append('<table class="tableCss" style="width: 100%;">');
-						for(var i in getAllTitle){
+							var getTitleIndex;
+							for(var i in getAllTitle){
 							$('#title_result > table').append('<tr>');
 							for(var j in getMyTitle){
 								if(getAllTitle[i].titleName == getMyTitle[j].titleName){
 									console.log(getAllTitle[i].titleName+'가 획득한 칭호이다.');
-									getAllTitle[i].titleName
-									$("#hello").css("color","red");
+									getTitleIndex =i;
 								} 
-							}							
-							$('#title_result > table > tr:last').append('<td>'+getAllTitle[i].titleName+'</td>');
+							}		
+							console.log(getTitleIndex);
+							if(i==getTitleIndex)
+								$('#title_result > table > tr:last').append('<td style="color:red;">'+getAllTitle[i].titleName+'</td>');
+							else{
+								$('#title_result > table > tr:last').append('<td>'+getAllTitle[i].titleName+'</td>');
+							}
 							$('#title_result > table').append('</tr>');
 						}
 					}
