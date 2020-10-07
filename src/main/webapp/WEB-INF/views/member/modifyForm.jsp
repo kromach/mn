@@ -71,26 +71,29 @@
 					type="text" name="tel" size="3" required="required">-<input class="telInput"
 					type="text" name="tel" size="3" required="required">
 					</div>
+					<c:set var="address" value="${fn:split(memberDTO.address,',')}"/> 
+					<c:set var="addressLen" value = "${fn:length(address)}"/>
+					<c:set var="addressfrist" value="${address[0]}"/>
+					<c:set var="addresssecond" value="${address[addressLen-1]}"/>
 					<c:if test="${status eq 'user' }">
 					<div class="loginLabel">
-					주소
 					</div>
-					<input type="text" name="address" class="loginInput" id="address" value="${memberDTO.address }">
+					<input type="text" name="address" class="loginInput" id="address" value="${addressfrist}">
 					<div class="loginLabel">
 					상세 주소
 					</div>
-					<input type="text" name="address" class="loginInput"> 
+					<input type="text" name="address" class="loginInput" value="${addresssecond}">  
 					<button type="button" class="btn btn-sm btn-dark" id="find_address">주소찾기</button>
 					</c:if>
 					<c:if test="${status eq 'salse' }">
 						<div class="loginLabel">
 						사업장 주소
 						</div>
-						<input type="text" name="address" class="loginInput" value="${memberDTO.address }" required="required" id="address">
+						<input type="text" name="address" class="loginInput" value="${addressfrist }" required="required" id="address">
 						<div class="loginLabel">
 						상세 주소
 						</div>
-						<input type="text" name="address" class="loginInput"> 
+						<input type="text" name="address" class="loginInput" value="${addresssecond}">  
 						<button type="button" class="btn btn-sm btn-dark" id="find_address">주소찾기</button>
 						<div class="loginLabel">
 						사업자 등록증 
