@@ -42,6 +42,7 @@
 			
 			<dl class="clear">
 				<dt>수량</dt>
+				<dd class="clfix"><input type="text" name="amount"> 개</dd>
 				<dt>가격</dt>
 				<dd class="clfix">${info.prPrice} 원</dd>
 			</dl>
