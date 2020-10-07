@@ -15,11 +15,19 @@
 			FROM DRINK_CATEGORY WHERE kind = 2 AND USE_YN = 'Y' AND SUPER_CODE = #{value}
 			ORDER BY CT_IDX
   		</select>
-  		
+  		<!-- 
 		<select id="selectItemValuesInfo" parameterType="String" resultType="camelmap">
 			SELECT ITEM1_VAL, ITEM2_VAL, ITEM3_VAL, ITEM4_VAL, ITEM5_VAL
 			FROM ELEMENT_INFO WHERE DK_BKIND = #{value}
   		</select>
+  		 -->
+  		 
+  		<select id="selectItemValuesList" parameterType="String" resultType="String">
+	  		SELECT (CASE ROWNUM WHEN 1 THEN ITEM1_VAL WHEN 2 THEN ITEM2_VAL WHEN 3 THEN ITEM3_VAL WHEN 4 THEN ITEM4_VAL ELSE ITEM5_VAL END) item_values
+			FROM (SELECT ITEM1_VAL, ITEM2_VAL, ITEM3_VAL, ITEM4_VAL, ITEM5_VAL FROM ELEMENT_INFO WHERE DK_BKIND = #{value})
+			CONNECT BY LEVEL <![CDATA[ <= ]]> 5
+		</select>
+		  		
   		
   		<!--   -->
 		<select id="selectDrinkServiceInfo" parameterType="String" resultType="project.spring.drink.vo.DrinkVO">

@@ -6,6 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+
+<!-- 디자인 변경,   술 선택 셀렉트문 가져오기, 술 선택 아래 --- 변경
+	에디터 변경
+	파라미터 수정(id 등)
+ -->
+
 <title>insert Event</title>
 <!-- 날짜 -->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -55,11 +62,6 @@ $( function() {
 
 
 
-
-<!-- 디자인 변경,   술 선택 셀렉트문 가져오기, 술 선택 아래 --- 변경
-	에디터 변경
-	파라미터 수정(id 등)
- -->
 
 <!-- Scripts -->
 

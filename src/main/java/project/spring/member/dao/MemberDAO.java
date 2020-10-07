@@ -11,4 +11,5 @@ public interface MemberDAO extends CommonInterface{
 	public int insertItemByKakao(MemberDTO dto);
 	public boolean overlapCheck(String checkString,
 			int i);
+	public MemberDTO setSession(String id);
 }

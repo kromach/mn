@@ -11,4 +11,5 @@ public interface memberInterface extends CommonInterface{
 	public MemberDTO findPw(MemberDTO dto);
 	public int insertItemByKakao(MemberDTO dto);
 	public boolean overlapCheck(String checkString, int i);
+	public MemberDTO setSession(String id);
 }

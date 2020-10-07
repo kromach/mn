@@ -76,6 +76,18 @@ public class ProductController {
 	
 	
 	return "product/myorderlist.mn";
-}
+	}
+	
+	@RequestMapping("productorder")
+	public String productorder ()  throws SQLException{
+		
+		return "product/productorder.mn";
+	}
+	
+	@RequestMapping("myorderdetail")
+	public String myorderdetail() throws SQLException{
+		
+		return "product/myorderdetail.mn";
+	}
 
 }
