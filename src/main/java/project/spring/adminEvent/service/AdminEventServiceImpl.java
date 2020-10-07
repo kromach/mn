@@ -1,6 +1,7 @@
 package project.spring.adminEvent.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,6 @@ public class AdminEventServiceImpl implements AdminEventService{
 		return 0;
 	}
 	
-
-
 	@Override
 	public int updateItem() {
 		// TODO Auto-generated method stub
@@ -55,6 +54,22 @@ public class AdminEventServiceImpl implements AdminEventService{
 	public int deleteItem(Object obj) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	// 이벤트 개수 가져오기
+	@Override
+	public int eventCount() throws SQLException {
+		
+		int count = adminEventDAO.eventCount();
+		
+		return count;
+	}
+
+	// 이벤트 가져오기
+	@Override
+	public List eventList(int start, int end) throws SQLException {
+		List eventList = adminEventDAO.eventList(start, end);
+		return eventList;
 	}
 
 

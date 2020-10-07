@@ -10,4 +10,5 @@ public interface AdminService extends CommonInterface{
 	public List memberLIst(int start, int end) throws SQLException;
 	
 	public int memberCount() throws SQLException;
+	
 }
