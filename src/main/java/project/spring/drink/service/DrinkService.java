@@ -28,5 +28,7 @@ public interface DrinkService {
 	public List<CommentVO> selectCommentServiceList(String dkCode) throws SQLException;
 
 	public HashMap selectItemValuesInfo(String bigCategoryCode) throws SQLException;
+
+	public List<String> selectItemValuesList(String bigCategoryCode) throws SQLException;
 	
 }

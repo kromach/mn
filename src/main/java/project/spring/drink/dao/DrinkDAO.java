@@ -24,4 +24,6 @@ public interface DrinkDAO {
 
 	HashMap selectItemValuesInfo(String bigCategoryCode) throws SQLException;
 
+	List<String> selectItemValuesList(String bigCategoryCode) throws SQLException;
+
 }

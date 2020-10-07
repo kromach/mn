@@ -49,8 +49,8 @@ $(document).ready(function(){
 		</div>
 		<div id="msgWrapper">
 			<div>
-				<input type="text" id="msg" value="1212" /> <input type="button"
-					id="btnSend" value="전송" />
+				<input type="text"  id="msg" value="1212" />
+				<input type="button" class="btn btn-sm btn-grey" id="btnSend" value="전송" />
 			</div>
 		</div>
 	</div>

@@ -61,6 +61,11 @@ public class DrinkDAOImpl implements DrinkDAO {
 		return sqlSession.selectList("drink.selectCommentServiceList", dkCode);
 	}
 
+	@Override
+	public List<String> selectItemValuesList(String bigCategoryCode) throws SQLException {
+		return sqlSession.selectList("drink.selectItemValuesList", bigCategoryCode);
+	}
+
 	/*
 	@Override
 	public void insertAticle(BoardDTO dto) throws SQLException {
