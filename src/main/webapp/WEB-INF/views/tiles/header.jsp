@@ -46,24 +46,28 @@
 <div class="margin-bottom20" style="height: 3px; width: 100%; background: #2f4050; border-top: #23303d; border-bottom: #475665;"></div>
 <nav class="rightMenu" style="display: none;">
 	<ul>
-		<li>
-			<c:if test="${sessionScope.userKind eq 'admin' }">
-			<a><div class="fa fa-bullhorn"></div> 관리자 메뉴</a>
+		<c:if test="${sessionScope.userKind eq 'admin' }">
+		<li class="sub-menu">
+			<a href="#admin"><div class="fa fa-bullhorn"></div> 관리자 메뉴 <div class="fa fa-caret-up fr"></div></a>
 			<ul style="display: block;">
-				<li><a href="#board"> 회원 관리 </a></li>
-				<li><a href="#board"> 술 정보 관리 </a></li>
-				<li><a href="#board"> 이벤트 관리 </a></li>
+				<li><a href="#admin"> 회원 관리 </a></li>
+				<li><a href="#admin"> 술 정보 관리 </a></li>
+				<li><a href="#admin"> 이벤트 관리 </a></li>
 			</ul>
-			</c:if>									
-			<c:if test="${sessionScope.userKind eq 'salse' }">
-			<a><div class="fa fa-bullhorn"></div> 판매자 메뉴</a>
-			<ul style="display: block;">
-				<li><a href="#board"> 상품 관리 </a></li>
-				<li><a href="#board"> 판매 관리 </a></li>
-			</ul>
-			</c:if>
-			<a href="/drink/index"><div class="fa fa-wine-glass-alt"></div> 주류 저장소</a>
 		</li>
+		</c:if>									
+		<c:if test="${sessionScope.userKind eq 'salse' }">
+		<li class="sub-menu">
+			<a href="#salse"><div class="fa fa-bullhorn"></div> 판매자 메뉴 <div class="fa fa-caret-up fr"></div></a>
+			<ul style="display: block;">
+				<li><a href="#salse"> 상품 관리 </a></li>
+				<li><a href="#salse"> 판매 관리 </a></li>
+			</ul>
+		</li>
+		</c:if>
+		<li>
+		<a href="/drink/index"><div class="fa fa-wine-glass-alt"></div> 주류 저장소</a>
+		</li>	
 		<li class="sub-menu">
 			<a href="#board"><div class="fa fa-list-alt"></div> 게시판 <div class="fa fa-caret-up fr"></div></a>
 			<ul style="display: block;">
