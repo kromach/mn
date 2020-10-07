@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,22 +21,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/editor/")
-public class EditorController implements ServletContextAware {
+public class EditorController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(EditorController.class);
-	private ServletContext context;
 	
 	// 예시 입력폼
 	@RequestMapping(value = "editor", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -62,13 +58,7 @@ public class EditorController implements ServletContextAware {
 		
 		return model;
 	}
-	
-	//context 값을 받아오기 위해 implement 처리 
-	@Override
-	public void setServletContext(ServletContext servletContext) {
-		this.context = servletContext;
-	}
-	
+		
 	// 싱글파일 업로드
 	@RequestMapping(value="file_uploader", method=RequestMethod.POST)
 	public void file_uploader(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException, FileUploadException {
@@ -89,9 +79,6 @@ public class EditorController implements ServletContextAware {
 		try {
 			mf = request.getFile("Filedata");
 			
-			// 파일 저장 위치 
-			//String path = request.getRealPath("save");
-			
 			// 이미지 이름 중복처리 
 			String orgName = mf.getOriginalFilename();
 			
@@ -110,10 +97,10 @@ public class EditorController implements ServletContextAware {
 
 			//파일 기본경로
 			String root = request.getContextPath() + "/resources";
-			String defaultPath = context.getRealPath("/resources");
 						
 			//파일 기본경로 _ 상세경로
-			String path = defaultPath + File.separator + "img/upload" + File.separator;
+			String path = request.getRealPath("resources/img/upload") + File.separator;
+//			System.out.println("req :" + request.getRealPath("resources/img/upload"));
 			
 			File file = new File(path);
 			
@@ -124,18 +111,16 @@ public class EditorController implements ServletContextAware {
 						
 			File copyFile = new File(path + newName); // 새로운 이미지 경로로 업로드 한 파일 복사 생성
 			
-			mf.transferTo(copyFile); // 지정된 경로로 파일 저장		} catch (Exception e) {
+			mf.transferTo(copyFile); // 지정된 경로로 파일 저장
 
 			// 경로, 파일명 리턴
 			return3 = "&bNewLine=true&sFileName=" + orgName + "&sFileURL=" + root + "/img/upload/" + newName;
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			return3 += "&errstr=error";
 		}
 
-		//PrintWriter out = response.getWriter();
-		//out.println(returnStr);		
 		response.sendRedirect(return1+return2+return3);
 	}
 	
@@ -152,10 +137,11 @@ public class EditorController implements ServletContextAware {
 		
 		//파일 기본경로
 		String root = request.getContextPath() + "/resources";
-		String defaultPath = context.getRealPath("/resources");
+		//String defaultPath = context.getRealPath("/resources");
 		
 		//파일 기본경로 _ 상세경로
-		String path = defaultPath + File.separator + "img/upload" + File.separator;
+		//String path = defaultPath + File.separator + "img/upload" + File.separator;
+		String path = request.getRealPath("resources/img/upload") + File.separator;
 		
 		File file = new File(path);
 		
