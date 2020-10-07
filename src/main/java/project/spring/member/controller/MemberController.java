@@ -270,7 +270,6 @@ public class MemberController {
 			session.setAttribute("memId", setSessionDTO.getId());
 			session.setAttribute("memNickName", setSessionDTO.getNickName());
 		}
-		
 		request.setAttribute("result", result);
 		return "/member/loginResult.mn";
 	}

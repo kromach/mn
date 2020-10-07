@@ -47,15 +47,17 @@
 <nav class="rightMenu" style="display: none;">
 	<ul>
 		<li>
-			<c:if test="${sesseionScope.userKind eq 'admin' }">
-			<a href="/drink/index"><div class="fa fa-wine-glass-alt"></div> 회원 관리</a>
-			<a href="/drink/index"><div class="fa fa-wine-glass-alt"></div> 술 정보 관리</a>
-			<a href="/drink/index"><div class="fa fa-wine-glass-alt"></div> 이벤트 관리</a>
+			<c:if test="${sessionScope.userKind eq 'admin' }">
+			<a><div class="fa fa-bullhorn"></div> 관리자 메뉴</a>
+			<ul style="display: block;">
+				<li><a href="#board"> 회원 관리 </a></li>
+				<li><a href="#board"> 술 정보 관리 </a></li>
+				<li><a href="#board"> 이벤트 관리 </a></li>
+			</ul>
 			</c:if>
 			<a href="/drink/index"><div class="fa fa-wine-glass-alt"></div> 주류 저장소</a>
 		</li>
 		<li class="sub-menu">
-			<a href="/drink/index"><div class="fa fa-wine-glass-alt"></div>${sessionScope.userKind }</a>
 			<a href="#board"><div class="fa fa-list-alt"></div> 게시판 <div class="fa fa-caret-up fr"></div></a>
 			<ul style="display: block;">
 				<li><a href="#board"> 자유게시판 </a></li>
