@@ -22,13 +22,18 @@ public class DrinkServiceImpl implements DrinkService {
 	}
 
 	@Override
-	public DrinkVO selectBigCategoryList() {
-		return null;
+	public List<HashMap> selectBigCategoryList() throws SQLException {
+		return drinkDAO.selectBigCategoryList();
 	}
 
 	@Override
-	public List<HashMap> selectSmallCategoryList(String bigCategoryCode) throws Exception {
-		return null;
+	public List<HashMap> selectSmallCategoryList(String bigCategoryCode) throws SQLException {
+		return drinkDAO.selectSmallCategoryList(bigCategoryCode);
+	}
+
+	@Override
+	public HashMap selectItemValuesInfo(String bigCategoryCode) throws SQLException {
+		return drinkDAO.selectItemValuesInfo(bigCategoryCode);
 	}
 
 	@Override

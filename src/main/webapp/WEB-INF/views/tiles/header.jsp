@@ -14,6 +14,8 @@
 				<span></span><span></span><span></span>
 			</div>
 		</div>
+		<input type="text" class = "mainFilter">
+		<button style="background-color: white;">검색</button>
 		<div class="fr h_menu">
 			<ul>
 			<li><a href="/member/modify">${sessionScope.memNickName}</a></li>
@@ -60,7 +62,7 @@
 		<li class="sub-menu">
 			<a href="#product"><div class="fa fa-wine-bottle"></div> 전통주 주문 <div class="fa fa-caret-up fr"></div></a>
 			<ul style="display: block;">
-				<li><a href="/product/productList"> 우주마켓 </a></li>
+				<li><a href="/product/productlist"> 우주마켓 </a></li>
 				<li><a href="/product/myorderlist"> 구매내역 </a></li>
 			</ul>
 		</li>

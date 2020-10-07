@@ -12,9 +12,10 @@ import project.spring.drink.vo.DrinkVO;
 public interface DrinkService {
 
 	// 1차 카테고리 가져오기
-	public DrinkVO selectBigCategoryList();
-
-	public List<HashMap> selectSmallCategoryList(String bigCategoryCode) throws Exception;
+	public List<HashMap> selectBigCategoryList() throws SQLException;
+	
+	// 2차 카테고리 가져오기
+	public List<HashMap> selectSmallCategoryList(String bigCategoryCode) throws SQLException;
 
 	// 주류정보 상세
 	public DrinkVO selectDrinkServiceInfo(String dkCode) throws SQLException;
@@ -25,5 +26,7 @@ public interface DrinkService {
 	public List<HashMap> selectTagCloudServiceInfo(String dkCode) throws SQLException;
 
 	public List<CommentVO> selectCommentServiceList(String dkCode) throws SQLException;
+
+	public HashMap selectItemValuesInfo(String bigCategoryCode) throws SQLException;
 	
 }
