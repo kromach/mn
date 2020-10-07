@@ -86,7 +86,7 @@
 						<div class="loginLabel">
 						사업장 주소
 						</div>
-						<input type="text" name="address" class="loginInput" value="${memberDTO.address }" required="required">
+						<input type="text" name="address" class="loginInput" value="${memberDTO.address }" required="required" id="address">
 						<div class="loginLabel">
 						상세 주소
 						</div>
