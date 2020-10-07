@@ -78,17 +78,7 @@
 					<tr>
 						<th>평가</th>
 						<td id="star_grade">
-							<!-- js로 통합시키기 -->
-							<c:forEach begin="1" end="5" step="1" var="i">
-								<p>
-									<span class="item${i}"></span>
-									<a class="dkItem${i}" href="#" value="1"><i class="fas fa-star"></i></a> 
-									<a class="dkItem${i}" href="#" value="2"><i class="fas fa-star"></i></a> 
-									<a class="dkItem${i}" href="#" value="3"><i class="fas fa-star"></i></a> 
-									<a class="dkItem${i}" href="#" value="4"><i class="fas fa-star"></i></a> 
-									<a class="dkItem${i}" href="#" value="5"><i class="fas fa-star"></i></a>
-								</p>
-							</c:forEach>
+							대분류를 선택하면 평가항목이 노출됩니다.	
 						</td>
 					</tr>
 					<tr>
@@ -138,12 +128,6 @@
 	    });
 
 	});
-	
-	// 평점 별점 조절 
-    $('#star_grade a').click(function() {
-    	$(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
-    	$(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
-    });
     
 	// 소분류 값 가져오는 ajax
     function getSmallCategory(bigCategory) {
@@ -182,12 +166,26 @@
 			data : {bigCategory},  /*{bigCategory:bigCategory} 와 동일*/
 			success : function(data){
 				var json = JSON.parse(data);
-			    $('#star_grade a').removeClass("on");
-				$(".item1").html(json.item1Val);
-				$(".item2").html(json.item2Val);
-				$(".item3").html(json.item3Val);
-				$(".item4").html(json.item4Val);
-				$(".item5").html(json.item5Val);
+				//console.log(json)
+				$('#star_grade').empty();
+				
+				json.forEach(function(item, index) {
+		    		var grade_str = "<p>";
+		    		grade_str += "<span class='item" + index +"'>" + item + "</span>";
+		    		for(i = 1; i < 6; i++) {
+		    			grade_str += "<a class='dkItem"+index+"' href='#' value='"+i+"'><i class='fas fa-star'></i></a>";
+		    		}
+		    		grade_str += "</p>";
+		    		
+		    		$("#star_grade").append(grade_str);
+		    	});
+				
+				// 평점 별점 조절 
+			    $('#star_grade a').click(function() {
+			    	console.log("a");
+			    	$(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+			    	$(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+			    });
 			},
 			error : function() {
 				alert("error");
