@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <!DOCTYPE html>
 <html>
 <body>
@@ -10,7 +9,7 @@
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
-				<h1 align="center">정보수정${status }</h1>
+				<h1 align="center">정보수정</h1>
 			</div>
 			<div class="grid-item grid-item--width6">
 				<c:if test="${status eq 'salse' }">
@@ -26,8 +25,6 @@
 				<div class="loginWrapper">
 					<div class="loginLabel">아이디</div>
 					<input class="loginInput" type="text" name="id" value="${memberDTO.id}" readonly="readonly" style="cursor: default;">
-					<div class="loginLabel">아이디중복체크</div>
-					<button type="button">중복확인</button>
 					<div class="loginLabel">
 					비밀번호
 					</div>
@@ -43,9 +40,8 @@
 					<div class="loginLabel">
 					닉네임
 					</div>
-					<input	class="loginInput" type="text" name="nickName" value="${memberDTO.nickName}" required="required">
-					닉네임 중복체크
-					<button type="button">중복확인</button>
+					<input	class="loginInput" type="text" name="nickName" value="${memberDTO.nickName}" required="required" id="nickName">
+					<div class="loginLabel" id="nickName_label"></div>
 					<div class="loginLabel"> 
 					생년월일
 					</div>
@@ -75,18 +71,30 @@
 					type="text" name="tel" size="3" required="required">-<input class="telInput"
 					type="text" name="tel" size="3" required="required">
 					</div>
+					<c:set var="address" value="${fn:split(memberDTO.address,',')}"/> 
+					<c:set var="addressLen" value = "${fn:length(address)}"/>
+					<c:set var="addressfrist" value="${address[0]}"/>
+					<c:set var="addresssecond" value="${address[addressLen-1]}"/>
 					<c:if test="${status eq 'user' }">
 					<div class="loginLabel">
-					주소
 					</div>
-					<input type="text" name="address" class="loginInput" value="${memberDTO.address }">
-					<button type="button">주소찾기</button>
+					<input type="text" name="address" class="loginInput" id="address" value="${addressfrist}">
+					<div class="loginLabel">
+					상세 주소
+					</div>
+					<input type="text" name="address" class="loginInput" value="${addresssecond}">  
+					<button type="button" class="btn btn-sm btn-dark" id="find_address">주소찾기</button>
 					</c:if>
 					<c:if test="${status eq 'salse' }">
 						<div class="loginLabel">
 						사업장 주소
 						</div>
-						<input type="text" name="address" class="loginInput" value="${memberDTO.address }" required="required">
+						<input type="text" name="address" class="loginInput" value="${addressfrist }" required="required" id="address">
+						<div class="loginLabel">
+						상세 주소
+						</div>
+						<input type="text" name="address" class="loginInput" value="${addresssecond}">  
+						<button type="button" class="btn btn-sm btn-dark" id="find_address">주소찾기</button>
 						<div class="loginLabel">
 						사업자 등록증 
 						</div>
@@ -97,16 +105,16 @@
 						<input type="text" name="licenseNum" class="loginInput" value="${memberDTO.licenseNum}" required="required">
 					</c:if>
 					<br><br>
-					<button type="submit">수정</button>
-					<button type="reset">재입력</button>
-					<button type="button">취소</button>
+					<button type="submit" class="btn btn-sm btn-grey">수정</button>
+					<button type="reset" class="btn btn-sm btn-grey">재입력</button>
+					<button type="button" class="btn btn-sm btn-grey">취소</button>
 				</div>
-				</form>
+				</form>  
 			</div>
 		</div>
 	</div>
-	</div>
-	</div>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="/resources/js/memberForm.js"></script>
 	<script src="/resources/js/imageLoad.js"></script>
 </body>
 </html>
