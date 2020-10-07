@@ -21,7 +21,7 @@ public class ArticleController {
 		private ArticleServiceImpl articleService = null;
 
 		@RequestMapping("/")
-		public String memberList(String pageNum, Model model)throws SQLException {
+		public String index(){
 			
 			return "article/articleList.mn";
 		}
