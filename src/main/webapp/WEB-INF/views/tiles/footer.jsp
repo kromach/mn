@@ -59,7 +59,7 @@
 
 .totChatDIV>.chatWrapper {
 	border-bottom: 1px solid black;
-	height: 230px;
+	height: 200px;
 	overflow: auto;
 	overflow-x: hidden;
 }
