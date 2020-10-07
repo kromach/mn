@@ -55,5 +55,10 @@ public class DrinkServiceImpl implements DrinkService {
 	public List<CommentVO> selectCommentServiceList(String dkCode) throws SQLException {
 		return drinkDAO.selectCommentServiceList(dkCode);
 	}
+
+	@Override
+	public List<String> selectItemValuesList(String bigCategoryCode) throws SQLException {
+		return drinkDAO.selectItemValuesList(bigCategoryCode);
+	}
 	
 }

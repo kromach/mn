@@ -150,11 +150,12 @@ public class DrinkController {
 	@RequestMapping("selectItemValues")
 	public void selectItemValues(@RequestParam String bigCategory, HttpServletResponse response) throws SQLException, IOException {
 		
-		HashMap ItemValuesInfo = drinkService.selectItemValuesInfo(bigCategory);
-		System.out.println(ItemValuesInfo);
+		// HashMap ItemValuesInfo = drinkService.selectItemValuesInfo(bigCategory);
+		List<String> ItemValuesList = drinkService.selectItemValuesList(bigCategory);
+		System.out.println(ItemValuesList);
 		
 		response.setCharacterEncoding("utf-8");
-		response.getWriter().write(JsonUtil.HashMapToJson(ItemValuesInfo));
+		response.getWriter().write(JsonUtil.ListToJson(ItemValuesList));
 	}	
 }
 
