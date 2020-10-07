@@ -38,6 +38,8 @@ public class AdminEventController {
 			System.out.println("이벤트 콘텐트" + vo.getContent());
 			System.out.println("========================");
 			
+			
+			// 날짜 형식 변경해서 vo에 재 세팅
 			System.out.println("날짜확인 ::::   " + vo.getEvStart());
 			System.out.println(vo.getEvStart().replace("/", ""));
 			String day = vo.getEvStart().replace("/", "").substring(0, 2);
@@ -48,6 +50,7 @@ public class AdminEventController {
 			System.out.println("year : " + year);
 			vo.setEvStart(year+month+day);
 			System.out.println("날짜확인 111  :::         " + vo.getEvStart());
+			
 			
 			day = vo.getEvEnd().replace("/", "").substring(0,2);
 			month = vo.getEvEnd().replace("/", "").substring(2,4);
