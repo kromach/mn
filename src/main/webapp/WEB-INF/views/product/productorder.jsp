@@ -7,6 +7,7 @@
 <title>상품 주문 페이지</title>
 </head>
 <body>
+	<h1>상품 주문 페이지</h1>
 
 </body>
 </html>
