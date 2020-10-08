@@ -110,7 +110,7 @@ public class ProductController {
 	
 	@RequestMapping("insertOrder")
 	public String insertOrder(Model model, OrderVo ordervo) throws SQLException{
-		System.out.println("주문 누룸1");
+		System.out.println(ordervo.getReceiverTel());
 		
 		String[] receiverTels = ordervo.getReceiverTel().split(",");
 		String receiverTel = "";
