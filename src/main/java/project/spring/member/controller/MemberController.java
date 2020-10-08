@@ -234,12 +234,7 @@ public class MemberController {
 			birth += i;
 		}
 		dto.setBirth(birth);
-		String[] tels = dto.getTel().split(",");
-		String tel = "";
-		for(String tel_ : tels) {
-			tel += tel_;
-		}
-		dto.setTel(tel);
+
 		dto.setUserKind("user");
 		System.out.println(dto);
 		memberService.insertItem(dto);
@@ -247,6 +242,7 @@ public class MemberController {
 		request.getSession().setAttribute("memNickName", dto.getNickName());
 		request.getSession().setAttribute("userKind", dto.getUserKind());
 		request.setAttribute("result", 1);
+		request.setAttribute("nickName", dto.getNickName());
 		return "/member/signupResult.mn";
 	}
 	
@@ -342,18 +338,11 @@ public class MemberController {
 	public String findIdPro(MemberDTO dto,Model model) {
 		System.out.println(dto);
 		String[] births = dto.getBirth().split(",");
-		String[] tels = dto.getTel().split(",");
 		String birth = "";
-		String tel = "";
 		for(String birth_ : births) {
 			birth += birth_;
 		}
-		for(String tel_ : tels) {
-			tel += tel_;
-		}
-		System.out.println(tel+":"+birth);
 		dto.setBirth(birth);
-		dto.setTel(tel);
 		
 		MemberDTO result = memberService.findId(dto);
 
@@ -368,18 +357,11 @@ public class MemberController {
 		
 		System.out.println(dto);
 		String[] births = dto.getBirth().split(",");
-		String[] tels = dto.getTel().split(",");
 		String birth = "";
-		String tel = "";
 		for(String birth_ : births) {
 			birth += birth_;
 		}
-		for(String tel_ : tels) {
-			tel += tel_;
-		}
-		System.out.println(tel+":"+birth);
 		dto.setBirth(birth);
-		dto.setTel(tel);
 		
 		MemberDTO result = memberService.findPw(dto);
 		model.addAttribute("memberDTO", result);
