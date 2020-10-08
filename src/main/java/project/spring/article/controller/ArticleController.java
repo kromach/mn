@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.spring.admin.service.AdminServiceImpl;
 import project.spring.admin.vo.AdminVO;
@@ -17,18 +19,32 @@ import project.spring.beans.Pager;
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
+	
 		@Autowired
 		private ArticleServiceImpl articleService = null;
 	
 		@RequestMapping
 		public String index(){
-			System.out.println("aritlce Hello");
 			return "article/articleList.mn";
 		}
 		
-		@RequestMapping("/test")
+		@RequestMapping("/writeForm")
 		public String indexTest(){
-			System.out.println("aritlce Hello");
-			return "article/articleList.mn";
+			return "article/writeForm.mn";
 		}	
-}
+		
+		@RequestMapping("/drinkSearch")
+		@ResponseBody
+		public List drinkSearch(
+				@RequestParam(value = "input", required = false) String input) {
+			System.out.println("drink Ajax search Input : "+input);
+			List list = null;
+			
+			if(input !=null) {
+				list = articleService.getDrinkSearch(input);
+			}
+			System.out.println("drink Ajax Result "+list.toString());
+			
+			return list;
+		}
+	}
