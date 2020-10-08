@@ -55,7 +55,8 @@ public class AdminController {
 		}
 	
 		@RequestMapping("/drinkList")
-		public String drinkList()throws SQLException{
+		public String drinkList(String pageNum, Model model)throws SQLException{
+			
 			
 			return "admin/drinkList.mn";
 		}

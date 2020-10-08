@@ -55,19 +55,19 @@ $(function() {
     	// checkFormjquery() form 유효성 검사 JS 
     	// input 등의 class에 required 가 붙은 항목을 검사 후 입력 값이 없으면 msg의 값을 바탕으로
     	// 팝업을 보여주고 멈춤.
-    	// if (checkFormjquery()) {  // 모든 입력 항목 처리에 문제 없을때 주석 해제하기
+    	if (checkFormjquery()) {  // 모든 입력 항목 처리에 문제 없을때 주석 해제하기
 
     		//id가 smarteditor인 textarea에 에디터에서 대입
             editor_object.getById[editerId].exec("UPDATE_CONTENTS_FIELD", []);
     
     		// 이부분에 에디터 validation 검증
-            //var el = document.createElement('html');
-            //el.innerHTML = editor_object.getById["smarteditor"].elPlaceHolder.value;
+            var el = document.createElement('html');
+            el.innerHTML = editor_object.getById["smarteditor"].elPlaceHolder.value;
             
             //폼 submit. 
             // 해당 입력 폼의 id나 name 등으로 select 한 후에 submit()
             $("#frm").submit();
-    	//}   						// 모든 입력 항목 처리에 문제 없을때 주석 해제하기
+    	}   						// 모든 입력 항목 처리에 문제 없을때 주석 해제하기
     });
 });
 </script>
