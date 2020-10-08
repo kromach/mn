@@ -67,9 +67,9 @@
 					</div>
 					<div class = "birthWrapper">
 					<input class="telInput"
-					type="text" name="tel" size="3" required="required">-<input class="telInput"
-					type="text" name="tel" size="3" required="required">-<input class="telInput"
-					type="text" name="tel" size="3" required="required">
+					type="text" name="tel" maxlength="3" required="required">-<input class="telInput"
+					type="text" name="tel" maxlength="4" required="required">-<input class="telInput"
+					type="text" name="tel" maxlength="4" required="required">
 					</div>
 					<c:set var="address" value="${fn:split(memberDTO.address,',')}"/> 
 					<c:set var="addressLen" value = "${fn:length(address)}"/>
