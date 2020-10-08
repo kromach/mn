@@ -23,5 +23,7 @@ public interface ProductService extends CommonInterface {
 	public List myorderlist(String id) throws SQLException;
 	// 구매자 상품목록 디테일 
 	public OrderVo myorderinfo(String id, String prcode) throws SQLException;
+	// 상품 구매정보 저장
+	public void insertorderinfo(OrderVo ordervo) throws SQLException;
 
 }

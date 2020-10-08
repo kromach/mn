@@ -99,6 +99,12 @@ public class ProductDAOImpl implements ProductDAO {
 		return null;
 	}
 
+	@Override
+	public void insertorderinfo(OrderVo ordervo) throws SQLException {
+		sqlSession.update("product.insertorder",ordervo);
+		
+	}
+
 
 
 }

@@ -101,5 +101,25 @@ public class ProductController {
 		
 		return "product/myorderdetail.mn";
 	}
+	
+	@RequestMapping("insertOrder")
+	public String insertOrder(Model model) throws SQLException{
+		
+		List productlist =null;
+		int count = 0;
+		
+		count= productservice.getproductcount();
+		if(count>0) {
+			productlist = productservice.getproduct();
+		}
+		System.out.println(productlist);
+		
+		model.addAttribute("productlist", productlist);
+		model.addAttribute("count", count);
+		
+		
+		
+		return "product/productList.mn";
+	}
 
 }

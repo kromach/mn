@@ -99,4 +99,10 @@ public class ProductServiceImpl implements ProductService {
 		return null;
 	}
 
+	@Override
+	public void insertorderinfo(OrderVo ordervo) throws SQLException {
+		productDAO.insertorderinfo(ordervo);
+		
+	}
+
 }
