@@ -54,12 +54,10 @@ public class ArticleController {
 			}
 			return list;
 		}
-		
 		@RequestMapping("/writePro")
-		public String writePro(ArticleDTO dto,MultipartRequest upload) {
+		public String writePro(ArticleDTO dto) {
 			
 			System.out.println(dto);
-			System.out.println(upload.getFileNames());
 			return "article/articleList.mn";
 		}
 		
