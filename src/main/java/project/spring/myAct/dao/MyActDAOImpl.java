@@ -1,11 +1,15 @@
 package project.spring.myAct.dao;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import project.spring.myAct.vo.MyActivityDTO;
+import project.spring.myAct.vo.TitleListDTO;
 
 @Repository
 public class MyActDAOImpl implements MyActDAO{
@@ -78,23 +82,48 @@ public class MyActDAOImpl implements MyActDAO{
 	}
 
 	@Override
-	public int myLikeDrinkCount(String memId) {
-		int count = sqlSession.selectOne("myAct.myLikeDrinkCount", memId);
-		return count;
-	}
-
-	@Override
-	public List myLikeDrink(String memId) {
-		List list = sqlSession.selectList("myAct.myLikeDrink", memId);
-		return list;
-	}
-
-	@Override
 	public List getMyTitle(String memId) {
 		List list = sqlSession.selectList("myAct.getMyTitle", memId);
 		return list;
 	}
-
+	
+	/*
+	1)
+		title_list 의 value 값을 꺼내온다 				
+		title_list의 key값으로 조건식 만듦
+			my_attendent라면 30 - 90 - 180 - 365 중 어디 해당하는지 
+		value값과 my_activity의 해당컬럼과 비교
+		attendent가 75라면 title_list 의 my_attendent가 30인 값의 index 번호를 가져옴
+	-----------------------------------------------------------------------
+	2)	가져온 index 번호를 my_title에 insert해줌
+		INSERT INTO MY_TITLE values(my_title_seq.nextval, 'testid', 해당인덱스, 'N', sysdate);
+	*/
+	@Override
+	public List updateTitle(String memId) {
+		List<TitleListDTO> titleValue =sqlSession.selectList("myAct.getAllTitle", memId);
+		List<MyActivityDTO> myActivity = sqlSession.selectList("myAct.myActivity", memId);
+		System.out.println(myActivity.toString());
+		
+		for(TitleListDTO dto : titleValue) {
+			int result =0;
+			if(dto.getTitleName().equals("my_attendent")) {
+				int value = dto.getTitleValue();	// value 75			30<90<180<365
+				if( value>=30 && value<90) {
+					result = 2;
+				}else if(value>=90 && value <180) {
+					result = 3;
+				}else if(value>= 180 && value <365) {
+					result = 4;
+				}else if (value >= 365) {
+					result = 5;
+				}
+			}
+			System.out.println(result);
+		}
+		
+		return titleValue;
+	}
+	
 	@Override
 	public List getAllTitle() {
 		List list = sqlSession.selectList("myAct.getAllTitle");
@@ -102,13 +131,18 @@ public class MyActDAOImpl implements MyActDAO{
 	}
 
 	@Override
-	public int updateTitle(String memId) {
-		int count = 0;
-		sqlSession.update("myAct.updateTitle", memId);
-		count = sqlSession.update("myAct.chooseTitle", memId);
-		return count;
-		
+	public List getLikeDrink(String memId) {
+		List list = sqlSession.selectList("myAct.getLikeDrink", memId);
+		return list;
 	}
+	
+	@Override
+	public List getLikeProduct(String memId) {
+		List list = sqlSession.selectList("myAct.getLikeProduct", memId);
+		return list;
+	}
+
+
 	
 	
 	

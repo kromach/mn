@@ -1,5 +1,7 @@
 package project.spring.beans;
 
+import java.util.List;
+
 public interface CommonInterface {
 	public int insertItem();
 	public int updateItem();

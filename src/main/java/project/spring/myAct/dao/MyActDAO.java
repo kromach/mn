@@ -10,10 +10,10 @@ public interface MyActDAO extends CommonInterface{
 	public List getMyArticles(String memId);
 	public int myLikeArticleCount(String memId);
 	public List myLikeArticle(String memId);
-	public int myLikeDrinkCount(String memId);
-	public List myLikeDrink(String memId);
 	public List getMyTitle(String memId);
+	public List updateTitle(String memId);
 	public List getAllTitle();
-	public int updateTitle(String memId);
+	public List getLikeDrink(String memId);
+	public List getLikeProduct(String memId);
 
 }

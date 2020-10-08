@@ -59,4 +59,12 @@ public class MyActivityDTO {
 	public void setDrinkInsertCount(int drinkInsertCount) {
 		this.drinkInsertCount = drinkInsertCount;
 	}
+	@Override
+	public String toString() {
+		return "MyActivityDTO [actIdx=" + actIdx + ", id=" + id + ", myCommentCount=" + myCommentCount
+				+ ", myArticleCount=" + myArticleCount + ", givenHeart=" + givenHeart + ", myAttendent=" + myAttendent
+				+ ", myPurchase=" + myPurchase + ", drinkInsertCount=" + drinkInsertCount + "]";
+	}
+	
+	
 }
