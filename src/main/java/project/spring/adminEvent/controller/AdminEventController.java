@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,18 +31,12 @@ public class AdminEventController {
 		@RequestMapping("/insertEvent")
 		public String eventList(Model model, Locale locale)throws SQLException{
 			
-			Date date = new Date();
-			DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-			
-			String formatedDate = dateFormat.format(date);
-			
-			model.addAttribute("serverTime", formatedDate);
 			
 			return "admin/event/insertEvent.mn";
 		}
 		
 		@RequestMapping("/insertEventPro")
-		public String insertEvent(AdminEventVO vo, Model model, MultipartHttpServletRequest request, HttpServletResponse response)throws SQLException{
+		public String insertEvent(AdminEventVO vo, Model model, HttpServletRequest request, HttpServletResponse response)throws SQLException{
 			System.out.println("========================");
 			System.out.println("이벤트 네임" +  vo.getEventName());
 			System.out.println("이벤트코드" + vo.getCode());
@@ -52,7 +47,13 @@ public class AdminEventController {
 			vo.setEvStart(vo.getEvStart().replace("-", ""));
 			vo.setEvEnd(vo.getEvEnd().replace("-", ""));
 			
+			
+			System.out.println("check---------------------------------------------------");
+
+			System.out.println(vo.getEvStart());
 			System.out.println(request.getAttribute("tarea"));
+			System.out.println(request.getAttribute("title"));
+			
 			
 			
 			

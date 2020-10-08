@@ -57,6 +57,13 @@ public class AdminController {
 		@RequestMapping("/drinkList")
 		public String drinkList(String pageNum, Model model)throws SQLException{
 			
+			if(pageNum == null) {
+				pageNum = "1";
+			}
+			
+			// 주류 글 가져오기
+			
+			
 			
 			return "admin/drinkList.mn";
 		}

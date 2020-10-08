@@ -14,16 +14,45 @@
  -->
 
 <title>insert Event</title>
-<!-- 날짜 -->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  
+
  <!-- 유효성검사 js -->
 <script src="/resources/js/formCheck.js"></script> 
 <!-- 에디터 js -->
-<script type="text/javascript" src="<c:url value="/resources/smarteditor/js/HuskyEZCreator.js"/>" charset="utf-8"></script>
-  
+<script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="/resources/ckeditor/adapters/jquery.js"></script>
+<script type="text/javascript">
+// ckeditor 설정
+CKEDITOR.on('dialogDefinition', function (ev) {
+	
+	var dialogName = ev.data.name;
+	var dialog = ev.data.definition.dialog;
+	var dialogDefinition = ev.data.definition;
+
+	if (dialogName == 'image') {
+		dialog.on('show', function (obj) {
+			this.selectPage('Upload'); //사진 추가 버튼 클릭시 업로드탭으로 시작
+		});	
+		dialogDefinition.removeContents('advanced'); // 자세히탭 제거
+		dialogDefinition.removeContents('Link'); // 링크탭 제거
+	}
+});
+
+//이미지 업로드 url 설정
+var ckedit_config = {
+	filebrowserUploadUrl : 'ckuploader' ,  // 통신할 컨트롤러 매핑 주소 
+	toolbar : ''
+}
+// ckeditor 설정 종료
+
+</script>
  
+ 
+ 
+ 
+<!-- 날짜 -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script>
 $( function() {
     var dateFormat = "mm/dd/yy",
@@ -62,9 +91,6 @@ $( function() {
   } );
 
 </script>
-
-
-
 
 
 </head>
@@ -110,8 +136,8 @@ $( function() {
 					
 					<tr>
 						<td colspan="3" style="margin:0; padding:0">
-							<textarea name="tarea" id="smart-editor" type="textarea" class="required" msg="내용을"  rows="10" cols="100" style="width:100%; height:412px;"></textarea>
-						</td>
+							<textarea name="tarea" id="ckeditor" type="textarea" class="required" msg="내용을"  rows="10" cols="100" style="width:100%; height:412px;"></textarea>
+							<script type="text/javascript">CKEDITOR.replace( 'ckeditor' , ckedit_config);</script>						</td>
 					</tr>
 				</table>
 				<div>
@@ -126,46 +152,21 @@ $( function() {
 
 <script>
 $(function() {
-    var editor_object = [];
-    var editerId = "smart-editor"; //에디터를 붙일 textarea의 id 값을 설정
-
-    nhn.husky.EZCreator.createInIFrame({
-        oAppRef: editor_object,
-        elPlaceHolder: editerId,
-        sSkinURI: "/resources/smarteditor/SmartEditor2Skin.html",
-        htParams : {
-            // 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-            bUseToolbar : true,             
-            // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-            bUseVerticalResizer : true,     
-            // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-            bUseModeChanger : true,
-            fOnBeforeUnload : function(){
-                
-            }
-        }
-    });
-    
 	// 전송버튼 클릭이벤트 
 	// 에디터의 처리가 필요하므로 클릭 이벤트가 필요.
     $("#addBtn").click(function(){
-    	
-    	// checkFormjquery() form 유효성 검사 JS 
-    	// input 등의 class에 required 가 붙은 항목을 검사 후 입력 값이 없으면 msg의 값을 바탕으로
-    	// 팝업을 보여주고 멈춤.
-    	 if (checkFormjquery()) {  // 모든 입력 항목 처리에 문제 없을때 주석 해제하기
-
-    		//id가 smarteditor인 textarea에 에디터에서 대입
-            editor_object.getById[editerId].exec("UPDATE_CONTENTS_FIELD", []);
+    	 $("#frm").submit();
+    	/*
+    	 checkFormjquery() form 유효성 검사 JS 
+    	 input 등의 class에 required 가 붙은 항목을 검사 후 입력 값이 없으면 msg의 값을 바탕으로
+    	 팝업을 보여주고 멈춤.
+    	*/
+    	//if (checkFormjquery()) {  // 모든 입력 항목 처리에 문제 없을때 주석 해제하기
     
-    		// 이부분에 에디터 validation 검증
-            var el = document.createElement('html');
-            el.innerHTML = editor_object.getById["smarteditor"].elPlaceHolder.value;
-            
-            //폼 submit. 
-            // 해당 입력 폼의 id나 name 등으로 select 한 후에 submit()
+            // 해당 입력 폼의 id나 name 등으로 select 한 후에 submit() 실행
             $("#frm").submit();
-    	}   						// 모든 입력 항목 처리에 문제 없을때 주석 해제하기
+    	
+    	//}   						// 모든 입력 항목 처리에 문제 없을때 주석 해제하기
     });
 });
 </script>
