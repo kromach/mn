@@ -4,7 +4,9 @@ CKEDITOR.on('dialogDefinition', function(ev) {
 	var dialogName = ev.data.name;
 	var dialog = ev.data.definition.dialog;
 	var dialogDefinition = ev.data.definition;
-
+	ev.data.config.htmlEncodeOutput = false;
+	ev.data.config.entities = false;
+	
 	if (dialogName == 'image') {
 		dialog.on('show', function(obj) {
 			this.selectPage('Upload'); //사진 추가 버튼 클릭시 업로드탭으로 시작
