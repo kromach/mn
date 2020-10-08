@@ -58,6 +58,10 @@ CKEDITOR.editorConfig = function( config ) {
 	config.image_previewText = '';
 
 	config.height = 250;
+	
+	config.entities = false;
+	config.entities_latin = false;
+	config.basicEntities = false;
 
 	/*
 	//입력창 사이즈 자동조절 추가

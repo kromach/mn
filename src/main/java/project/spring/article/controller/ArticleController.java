@@ -55,7 +55,7 @@ public class ArticleController {
 			return list;
 		}
 		@RequestMapping("/writePro")
-		public String writePro(ArticleDTO dto) {
+		public String writePro(ArticleDTO dto)  throws IOException, FileUploadException {
 			
 			System.out.println(dto);
 			return "article/articleList.mn";

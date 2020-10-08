@@ -5,7 +5,7 @@
 <!-- 에디터 js -->
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="/resources/ckeditor/adapters/jquery.js"></script>
-<script>
+<script charset="utf-8">
 	function searchDk() {
 		var input = $('#dkSch').val();
 		var context = window.location.pathname.substring(0,
