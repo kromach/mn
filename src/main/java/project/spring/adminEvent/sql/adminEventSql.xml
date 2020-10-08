@@ -7,4 +7,22 @@
   			
   		</insert>
   
+  		<select id="eventCount" resultType="int">
+  			select count(*)from EVENT ev INNER JOIN PRODUCT_INFO pr ON ev.PRODUCT_CODE = pr.PR_CODE  
+  		</select>
+  		
+  		<select id="eventList" parameterType="hashmap" resultType="AdminEventVO">
+  		<![CDATA[
+  		
+  		select a.*from(
+	  			select aa.*, rownum r from(
+	  				SELECT ev.event_code, ev.event_name, ev.product_code, ev.ev_start, ev.ev_end, ev.is_open, pr.pr_name FROM 
+	  					EVENT ev INNER JOIN PRODUCT_INFO pr ON ev.PRODUCT_CODE = pr.PR_CODE  
+	  				order by ev_start DESC
+	  			) aa order by ev_start DESC
+	  		) a where r >=#{start} and r <=#{end}
+	  		
+
+  		]]>
+  	</select>
   </mapper>

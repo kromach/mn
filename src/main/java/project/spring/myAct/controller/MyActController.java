@@ -1,7 +1,9 @@
 package project.spring.myAct.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,10 +14,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.spring.article.vo.ArticleDTO;
 import project.spring.myAct.service.MyActService;
+import project.spring.myAct.vo.TitleListDTO;
 
 @Controller
 @RequestMapping("/myAct")
@@ -89,12 +93,26 @@ public class MyActController {
 	
 	@RequestMapping(value = "/getAllTitle")
 	@ResponseBody
-	public List allTitle() {
+	public Map allTitle(HttpServletRequest request) {
 		System.out.println("GetAllTitle Controller");
-		List getAllTitle = null;
+		HttpSession session = request.getSession();
+		String memId = (String)session.getAttribute("memId");
+		
+		List<TitleListDTO> getAllTitle = null;
+		List myTitle = null;
+		Map<String,List> map = new HashMap();
+		
 		getAllTitle = myActService.getAllTitle();
+		myTitle = myActService.getMyTitle(memId);
+		
+		map.put("allTitle",getAllTitle);
+		map.put("myTitle", myTitle);
+		for(TitleListDTO dto : getAllTitle ) {
+			System.out.println(dto);
+		}
+		
 		System.out.println(getAllTitle.toString());
-		return getAllTitle;
+		return map;
 	}
 	
 	@RequestMapping(value = "/myTitle")
@@ -109,8 +127,20 @@ public class MyActController {
 		List myTitle = null;
 		myTitle = myActService.getMyTitle(memId);
 		System.out.println(myTitle.toString());
+		System.out.println(myTitle.get(3));
 		
 		return myTitle;
 	}
 	
+	@RequestMapping(value = "/selectTitle")
+	public int selectTitle(String id, HttpServletRequest request) {
+		System.out.println("SelectTitle Controller");
+		System.out.println("id : " + id);
+		HttpSession session = request.getSession();
+		String memId = (String)session.getAttribute("memId");
+		//TitleListDTO updateTitle = myActService.updateTitle(); 
+		
+		int count =0;
+		return count;
+	}
 }

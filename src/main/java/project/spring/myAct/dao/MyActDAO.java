@@ -14,5 +14,6 @@ public interface MyActDAO extends CommonInterface{
 	public List myLikeDrink(String memId);
 	public List getMyTitle(String memId);
 	public List getAllTitle();
+	public int updateTitle(String memId);
 
 }

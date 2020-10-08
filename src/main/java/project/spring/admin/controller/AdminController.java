@@ -45,6 +45,7 @@ public class AdminController {
 				PageVO pageVO = pager.pager(pageNum,count);
 				
 				
+				
 				model.addAttribute("pageNum", pageNum);
 				model.addAttribute("memberList", memberList);
 				model.addAttribute("count", count);
@@ -53,7 +54,11 @@ public class AdminController {
 			return "admin/memberList.mn";
 		}
 	
-	
+		@RequestMapping("/drinkList")
+		public String drinkList()throws SQLException{
+			
+			return "admin/drinkList.mn";
+		}
 	
 	
 }

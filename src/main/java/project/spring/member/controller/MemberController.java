@@ -105,6 +105,7 @@ public class MemberController {
 		model.addAttribute("nickName", dto.getNickName());
 		request.getSession().setAttribute("memId", dto.getId());
 		request.getSession().setAttribute("memNickName", dto.getNickName());
+		request.getSession().setAttribute("userKind", dto.getUserKind());
 		
 		return "/member/signupResult.mn";
 	}
@@ -121,6 +122,12 @@ public class MemberController {
 		for( String i:birth_ ) {
 			birth += i;
 		}
+		String[] tels = dto.getTel().split(",");
+		String tel = "";
+		for(String tel_ : tels) {
+			tel += tel_;
+		}
+		
 		//사업자등록증 파일제한 15MB
 		int sizeLimit = 1024*1024*15;
 		MultipartFile mf = null;
@@ -141,6 +148,7 @@ public class MemberController {
 			File copyFile = new File(imPath);
 			mf.transferTo(copyFile);
 			//dtoImgSetting
+			dto.setTel(tel);
 			dto.setBirth(birth);
 			dto.setLicenseImg(newName);
 			dto.setUserKind("salse");
@@ -152,6 +160,7 @@ public class MemberController {
 		model.addAttribute("nickName", dto.getNickName());
 		mpRequest.getSession().setAttribute("memId", dto.getId());
 		mpRequest.getSession().setAttribute("memNickName", dto.getNickName());
+		mpRequest.getSession().setAttribute("userKind", dto.getUserKind());
 		return "/member/singupResult.mn";
 	}
 	
@@ -213,6 +222,7 @@ public class MemberController {
 		//Session에 값 넣어주기
 		request.getSession().setAttribute("memId", id);
 		request.getSession().setAttribute("memNickName", nickname);
+		request.getSession().setAttribute("userKind", "user");
 		redirectAttributes.addFlashAttribute("memberDTO", dto);
 		//id O pw O
 		request.setAttribute("result", 1);
@@ -242,6 +252,7 @@ public class MemberController {
 		memberService.insertItem(dto);
 		request.getSession().setAttribute("memId", dto.getId());
 		request.getSession().setAttribute("memNickName", dto.getNickName());
+		request.getSession().setAttribute("userKind", dto.getUserKind());
 		request.setAttribute("result", 1);
 		return "/member/signupResult.mn";
 	}
@@ -253,12 +264,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/loginPro")
-	public String loginPro(HttpServletRequest request,@ModelAttribute MemberDTO model) {
+	public String loginPro(HttpServletRequest request,HttpSession session,@ModelAttribute MemberDTO model) {
 		
 		//-1 - id x pw x
 		//0 - id o pw x
 		//1 - id o pw o
 		int result = memberService.readItem(model);
+		MemberDTO setSessionDTO= null;
+		if(result ==1 ) {
+			setSessionDTO = memberService.setSession(model.getId());
+			session.setAttribute("userKind", setSessionDTO.getUserKind());
+			session.setAttribute("memId", setSessionDTO.getId());
+			session.setAttribute("memNickName", setSessionDTO.getNickName());
+		}
 		request.setAttribute("result", result);
 		return "/member/loginResult.mn";
 	}
@@ -393,6 +411,8 @@ public class MemberController {
 		return result;
 	}
 	
-	
-	
+	@RequestMapping(value = "/test")
+	public String test(){
+		return "/member/signupFormByKakao.mn";
+	}
 }

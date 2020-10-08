@@ -100,6 +100,15 @@ public class MyActDAOImpl implements MyActDAO{
 		List list = sqlSession.selectList("myAct.getAllTitle");
 		return list;
 	}
+
+	@Override
+	public int updateTitle(String memId) {
+		int count = 0;
+		sqlSession.update("myAct.updateTitle", memId);
+		count = sqlSession.update("myAct.chooseTitle", memId);
+		return count;
+		
+	}
 	
 	
 	

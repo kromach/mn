@@ -14,7 +14,14 @@
 	float: left;
 	text-align: center;
 }
+#hello {
+	width: 200px;
+	height: 50px;
+	background-color: blue;
+	color: white;
+}
 </style>
+
 <body>
 	<div class="grid-Wrapper">
 		<div class="grid">
@@ -30,7 +37,7 @@
 			<div class="linkBar" id="likeDrink">
 				술 좋아요
 			</div>
-			<div class="linkBar" id="myTitle">
+			<div class="linkBar" id="getAllTitle">
 				칭호
 			</div>
 			<br/>
@@ -112,39 +119,62 @@
 	
 	<script>
 			$(document).ready(function(){
-			$("#myTitle").click(function(){
+			$("#getAllTitle").click(function(){
 				$.ajax({
 					type:"POST",
-					url:"/myAct/myTitle",
+					url:"/myAct/getAllTitle",
 					data:{id:$("#memId").val()},
 					success:function(data){
-						var likeArticle = data;
+						var getAllTitle = data.allTitle;
+						var getMyTitle = data.myTitle;
+						console.log(data);
+						
 						$('#index').empty();
 						$('#likeDrink_result').empty();
 						$('#title_result').empty();
 						$('#likeArticle_result').empty();	
 						
 						$('#title_result').append('<table class="tableCss" style="width: 100%;">');
-						$('#title_result > table').append('<tr>');
-						$('#title_result > table > tr').append('<td>번호</td>');
-						$('#title_result > table > tr').append('<td>제목</td>');
-						$('#title_result > table > tr').append('<td>작성일</td>');
-						$('#title_result > table > tr').append('<td>조회</td>');
-						$('#title_result > table > tr').append('<td>추천</td>');
-						$('#title_result > table').append('</tr>');		
-						
-						for(var i in likeArticle){
-							console.log(likeArticle[i]);
+							var getTitleIndex;
+							for(var i in getAllTitle){
 							$('#title_result > table').append('<tr>');
-							$('#title_result > table > tr:last').append('<td>'+likeArticle[i].bnIdx+'</td>');
-							$('#title_result > table > tr:last').append('<td>'+likeArticle[i].bnTitle+'</td>');
-							$('#title_result > table > tr:last').append('<td>'+likeArticle[i].insertDay+'</td>');
-							$('#title_result > table > tr:last').append('<td>'+likeArticle[i].readcount+'</td>');
-							$('#title_result > table > tr:last').append('<td>'+likeArticle[i].heart+'</td>');
+							for(var j in getMyTitle){
+								if(getAllTitle[i].titleName == getMyTitle[j].titleName){
+									console.log(getAllTitle[i].titleName+'가 획득한 칭호이다.');
+									getTitleIndex =i;
+								} 
+							}		
+							console.log(getTitleIndex);
+							if(i==getTitleIndex)
+								$('#title_result > table > tr:last').append('<td style="color:red;">'+getAllTitle[i].titleName+'</td>');
+							else{
+								$('#title_result > table > tr:last').append('<td>'+getAllTitle[i].titleName+'</td>');
+							}
 							$('#title_result > table').append('</tr>');
 						}
 					}
 				});
+				
+				/* $.ajax({
+					type:"POST",
+					url:"/myAct/myTitle",
+					data:{id:$("#memId").val()},
+					success:function(data){
+						var myTitle = data;
+						var innerText = $('#title_result ').html();
+						console.log(myTitle);
+						console.log(innerText);
+						
+					}
+				}); */
+			});
+		});
+	</script>
+	
+	<script>
+			$(document).ready(function(){
+			$("#myTitle").click(function(){
+				
 			});
 		});
 	</script>
@@ -165,38 +195,23 @@
 		});
 	
 	</script>
-	<script>
-		$(document).ready(function(){
-			$("#title").click(function(){
-				$.ajax({
-					type:"POST",
-					url:"/myAct/myTitle",
-					data:{id:$("#memId").val()},
-					success:function(data){
-						console.log(data);
-						$("#result3").html(data);
+		
+	<script src="/resources/js/imageLoad.js"></script>
+	<!-- 데이터 스크롤해서 붙이는 스크립트  -->
+	<script type="text/javascript">
+		$(window).scroll(
+				function() {
+					// A(B+C) : document 높이 (고정)
+					console.log($(document).height());
+					// B : browser 높이 (최상단 기본값)
+					console.log($(window).height());
+					// C : 스크롤 위치
+					console.log('SCROLL_TOP' + $(window).scrollTop());
+					if ($(window).scrollTop() >= $(document).height()
+							- $(window).height() - 100) {
+						//호출 메서드
 					}
 				});
-			});
-		});
 	</script>
-	
-<script src="/resources/js/imageLoad.js"></script>
-<!-- 데이터 스크롤해서 붙이는 스크립트  -->
-<script type="text/javascript">
-	$(window).scroll(
-			function() {
-				// A(B+C) : document 높이 (고정)
-				console.log($(document).height());
-				// B : browser 높이 (최상단 기본값)
-				console.log($(window).height());
-				// C : 스크롤 위치
-				console.log('SCROLL_TOP' + $(window).scrollTop());
-				if ($(window).scrollTop() >= $(document).height()
-						- $(window).height() - 100) {
-					//호출 메서드
-				}
-			});
-</script>
 </body>
 </html>
