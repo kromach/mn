@@ -194,11 +194,12 @@ $(function() {
     	 input 등의 class에 required 가 붙은 항목을 검사 후 입력 값이 없으면 msg의 값을 바탕으로
     	 팝업을 보여주고 멈춤.
     	*/
-    	// if (checkFormjquery()) {  // 모든 입력 항목 처리에 문제 없을때 주석 해제하기
+    	//if (checkFormjquery()) {  // 모든 입력 항목 처리에 문제 없을때 주석 해제하기
     
             // 해당 입력 폼의 id나 name 등으로 select 한 후에 submit() 실행
+            $content = CKEDITOR.instances.ckeditor.getData();
             $('#frm').submit();
-    	
+    		
     	//}   						// 모든 입력 항목 처리에 문제 없을때 주석 해제하기
     });
 });
