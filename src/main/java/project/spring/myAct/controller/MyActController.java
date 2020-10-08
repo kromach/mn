@@ -80,13 +80,11 @@ public class MyActController {
 	@ResponseBody
 	public List likeDrink(String pageNum, HttpServletRequest request) {
 		System.out.println("MyActLikeDrink Controller");
-		int count = 0;
 		
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
 		List likeDrink = null;
-		count = myActService.likeArticleCount(memId);
-		System.out.println("count : " + count);
+		likeDrink = myActService.myLikeDrink(memId);
 		
 		return likeDrink;
 	}
