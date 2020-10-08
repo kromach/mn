@@ -122,6 +122,12 @@ public class MemberController {
 		for( String i:birth_ ) {
 			birth += i;
 		}
+		String[] tels = dto.getTel().split(",");
+		String tel = "";
+		for(String tel_ : tels) {
+			tel += tel_;
+		}
+		
 		//사업자등록증 파일제한 15MB
 		int sizeLimit = 1024*1024*15;
 		MultipartFile mf = null;
@@ -142,6 +148,7 @@ public class MemberController {
 			File copyFile = new File(imPath);
 			mf.transferTo(copyFile);
 			//dtoImgSetting
+			dto.setTel(tel);
 			dto.setBirth(birth);
 			dto.setLicenseImg(newName);
 			dto.setUserKind("salse");
@@ -402,5 +409,10 @@ public class MemberController {
 			result = memberService.overlapCheck(nickName,1); 
 		}
 		return result;
+	}
+	
+	@RequestMapping(value = "/test")
+	public String test(){
+		return "/member/signupFormByKakao.mn";
 	}
 }

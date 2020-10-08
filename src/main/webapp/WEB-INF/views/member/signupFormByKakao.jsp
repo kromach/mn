@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!DOCTYPE html>
 <html>
 <body>
@@ -8,7 +9,7 @@
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
-				<h1 align="center">Kakao </h1>
+				<h1 align="center">Kakao 추가정보</h1>
 			</div>
 			<div class="grid-item grid-item--width6">
 					<form method="post" action="/member/signUpKakaoPro"
@@ -32,8 +33,8 @@
 					<div class="loginLabel">
 					닉네임
 					</div>
-					<input	class="loginInput" type="text" name="nickName" value="${kakaoMember.nickName}" required="required">
-					닉네임 중복체크<button type="button">중복확인</button>
+					<input	class="loginInput" type="text" name="nickName" value="${kakaoMember.nickName}" required="required" id="nickName">
+					<div class="loginLabel" id="nickName_label"></div>
 					<div class="loginLabel">
 					생년월일
 					</div>
@@ -55,18 +56,22 @@
 					<div class="loginLabel">
 					주소
 					</div>
-					<input type="text" name="address" class="loginInput">
-					<button type="button">주소찾기</button>
+					<input type="text" name="address" class="loginInput" id="address">
+					<div class="loginLabel">
+					상세 주소
+					</div>
+					<input type="text" name="address" class="loginInput"> 
+					<button type="button" class="btn btn-sm btn-dark" id="find_address">주소찾기</button>
 					<br><br>
-					<button type="submit">추가입력</button>
-					<button type="reset">재입력</button>
-					<button type="button">취소</button>
+					<button type="submit" class="btn btn-sm btn-grey">추가입력</button>
+					<button type="reset" class="btn btn-sm btn-grey">재입력</button>
+					<button type="button" class="btn btn-sm btn-grey">취소</button>
 				</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	</div>
-	</div>
+	<script src="/resources/js/memberForm.js"></script>
+	<script src="/resources/js/imageLoad.js"></script>
 </body>
 </html>
