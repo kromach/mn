@@ -30,5 +30,6 @@
 		<mapper resource="project/spring/member/sql/memberSql.xml" />
 		<mapper resource="project/spring/product/sql/productSQL.xml" />
 		<mapper resource="project/spring/adminEvent/sql/adminEventSql.xml" />
+		<mapper resource="project/spring/article/sql/articleSql.xml"/>
 	</mappers>
 </configuration>
