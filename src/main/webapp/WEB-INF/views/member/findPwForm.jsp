@@ -10,7 +10,7 @@
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
-				<h1 align="center">정보수정${status }</h1>
+				<h1 align="center">PW찾기</h1>
 			</div>
 			<div class="grid-item grid-item--width6">
 					<form method="post" action="/member/findPwPro"
