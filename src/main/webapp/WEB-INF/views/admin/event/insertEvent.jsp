@@ -39,7 +39,7 @@
 
 	//이미지 업로드 url 설정
 	var ckedit_config = {
-		filebrowserUploadUrl : 'ckuploader' ,  // 통신할 컨트롤러 매핑 주소 
+		filebrowserUploadUrl : 'eventImg' ,  // 통신할 컨트롤러 매핑 주소 
 		toolbar : ''
 	}
 	// ckeditor 설정 종료
