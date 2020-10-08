@@ -32,7 +32,7 @@
 	// ckeditor 설정 종료
 	
 </script>
-<form action="ckwrite" method="post" id="frm">
+<form action="ckwrite" method="post" id="frm" accept-charset="utf-8">
 	<table class="tableCss tbl-md">
 		<tr>
 			<td>제목</td>

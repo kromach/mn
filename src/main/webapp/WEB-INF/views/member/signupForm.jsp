@@ -58,8 +58,8 @@
 					<div class = "birthWrapper">
 					<input class="telInput"
 					type="text" name="tel" size="3" required="required">-<input class="telInput"
-					type="text" name="tel" size="3" required="required">-<input class="telInput"
-					type="text" name="tel" size="3" required="required">
+					type="text" name="tel" size="4" required="required">-<input class="telInput"
+					type="text" name="tel" size="4" required="required">
 					</div>
 					<c:if test="${status eq 'user' }">
 					<div class="loginLabel">

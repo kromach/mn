@@ -127,7 +127,7 @@ public class MemberController {
 		for(String tel_ : tels) {
 			tel += tel_;
 		}
-		
+		dto.setUserKind("salse");
 		//사업자등록증 파일제한 15MB
 		int sizeLimit = 1024*1024*15;
 		MultipartFile mf = null;
@@ -151,7 +151,6 @@ public class MemberController {
 			dto.setTel(tel);
 			dto.setBirth(birth);
 			dto.setLicenseImg(newName);
-			dto.setUserKind("salse");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -160,7 +159,7 @@ public class MemberController {
 		model.addAttribute("nickName", dto.getNickName());
 		mpRequest.getSession().setAttribute("memId", dto.getId());
 		mpRequest.getSession().setAttribute("memNickName", dto.getNickName());
-		mpRequest.getSession().setAttribute("userKind", dto.getUserKind());
+		mpRequest.getSession().setAttribute("userKind", "salse");
 		return "/member/singupResult.mn";
 	}
 	

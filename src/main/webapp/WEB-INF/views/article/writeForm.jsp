@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <!-- 유효성검사 js -->
 <script src="/resources/js/formCheck.js"></script> 
 <!-- 에디터 js -->
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="/resources/ckeditor/adapters/jquery.js"></script>
-<script type="text/javascript" src="/resources/js/ckEditor.js" charset="utf-8"></script>
 <script>
 	function searchDk() {
 		var input = $('#dkSch').val();
@@ -36,7 +34,27 @@
 			}
 		});
 	}
-	
+	// ckeditor 설정
+	CKEDITOR.on('dialogDefinition', function (ev) {
+		
+		var dialogName = ev.data.name;
+		var dialog = ev.data.definition.dialog;
+		var dialogDefinition = ev.data.definition;
+
+		if (dialogName == 'image') {
+			dialog.on('show', function (obj) {
+				this.selectPage('Upload'); //사진 추가 버튼 클릭시 업로드탭으로 시작
+			});	
+			dialogDefinition.removeContents('advanced'); // 자세히탭 제거
+			dialogDefinition.removeContents('Link'); // 링크탭 제거
+		}
+	});
+	//이미지 업로드 url 설정
+	var ckedit_config = {
+		filebrowserUploadUrl : 'ckuploader' ,  // 통신할 컨트롤러 매핑 주소 
+		toolbar : ''
+	}
+	// ckeditor 설정 종료
 	//clickEvent부여 및 유효성 검사
 	$(function() {
 		$("#addBtn").click(function() {
@@ -53,7 +71,7 @@
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
-				<form action="/article/writePro" method="post" id="frm">
+				<form action="/article/writePro" method="post" id="frm" accept-charset="utf-8">
 				<table class="tableCss table">
 					<tr>
 						<th>제목</th>
