@@ -108,7 +108,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public OrderVo orderdetail(String orcode) throws SQLException {
 		OrderVo orinfo = productDAO.orderdetail(orcode);
-		return null;
+		return orinfo;
 	}
 
 }
