@@ -39,6 +39,7 @@ public class ArticleServiceImpl implements ArticleService{
 	
 	@Override
 	public List getDrinkSearch(String input) {
+		System.out.println("aritlceInput"+input);
 		List list = null;
 		list = articleDAOimpl.getDrinkSearch(input);
 		return list ; 
