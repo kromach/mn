@@ -78,17 +78,24 @@ public class MyActController {
 	 
 	@RequestMapping(value = "/likeDrink")
 	@ResponseBody
-	public List likeDrink(String pageNum, HttpServletRequest request) {
+	public Map likeDrink(String pageNum, HttpServletRequest request) {
 		System.out.println("MyActLikeDrink Controller");
-		int count = 0;
 		
+		Map<String,List> map = new HashMap();
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
 		List likeDrink = null;
-		count = myActService.likeArticleCount(memId);
-		System.out.println("count : " + count);
+		List likeProduct = null;
+		likeDrink = myActService.myLikeDrink(memId);
+		likeProduct = myActService.myLikeProduct(memId);
 		
-		return likeDrink;
+		map.put("likeDrink", likeDrink);
+		map.put("likeProduct", likeProduct);
+		
+		System.out.println(likeDrink.toString());
+		System.out.println(likeProduct.toString());
+		
+		return map;
 	}
 	
 	@RequestMapping(value = "/getAllTitle")
@@ -99,19 +106,17 @@ public class MyActController {
 		String memId = (String)session.getAttribute("memId");
 		
 		List<TitleListDTO> getAllTitle = null;
+		List<TitleListDTO> updateTitle = null;
 		List myTitle = null;
 		Map<String,List> map = new HashMap();
 		
 		getAllTitle = myActService.getAllTitle();
+		updateTitle = myActService.updateTitle(memId); 
 		myTitle = myActService.getMyTitle(memId);
 		
 		map.put("allTitle",getAllTitle);
 		map.put("myTitle", myTitle);
-		for(TitleListDTO dto : getAllTitle ) {
-			System.out.println(dto);
-		}
 		
-		System.out.println(getAllTitle.toString());
 		return map;
 	}
 	
@@ -131,16 +136,5 @@ public class MyActController {
 		
 		return myTitle;
 	}
-	
-	@RequestMapping(value = "/selectTitle")
-	public int selectTitle(String id, HttpServletRequest request) {
-		System.out.println("SelectTitle Controller");
-		System.out.println("id : " + id);
-		HttpSession session = request.getSession();
-		String memId = (String)session.getAttribute("memId");
-		//TitleListDTO updateTitle = myActService.updateTitle(); 
-		
-		int count =0;
-		return count;
-	}
+
 }

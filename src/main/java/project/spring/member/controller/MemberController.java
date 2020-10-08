@@ -122,6 +122,8 @@ public class MemberController {
 		for( String i:birth_ ) {
 			birth += i;
 		}
+		dto.setBirth(birth);
+		dto.setUserKind("salse");
 		//사업자등록증 파일제한 15MB
 		int sizeLimit = 1024*1024*15;
 		MultipartFile mf = null;
@@ -142,9 +144,7 @@ public class MemberController {
 			File copyFile = new File(imPath);
 			mf.transferTo(copyFile);
 			//dtoImgSetting
-			dto.setBirth(birth);
 			dto.setLicenseImg(newName);
-			dto.setUserKind("salse");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -153,8 +153,8 @@ public class MemberController {
 		model.addAttribute("nickName", dto.getNickName());
 		mpRequest.getSession().setAttribute("memId", dto.getId());
 		mpRequest.getSession().setAttribute("memNickName", dto.getNickName());
-		mpRequest.getSession().setAttribute("userKind", dto.getUserKind());
-		return "/member/singupResult.mn";
+		mpRequest.getSession().setAttribute("userKind", "salse");
+		return "/member/signupResult.mn";
 	}
 	
 	@RequestMapping("/login")
@@ -234,12 +234,7 @@ public class MemberController {
 			birth += i;
 		}
 		dto.setBirth(birth);
-		String[] tels = dto.getTel().split(",");
-		String tel = "";
-		for(String tel_ : tels) {
-			tel += tel_;
-		}
-		dto.setTel(tel);
+
 		dto.setUserKind("user");
 		System.out.println(dto);
 		memberService.insertItem(dto);
@@ -247,6 +242,7 @@ public class MemberController {
 		request.getSession().setAttribute("memNickName", dto.getNickName());
 		request.getSession().setAttribute("userKind", dto.getUserKind());
 		request.setAttribute("result", 1);
+		request.setAttribute("nickName", dto.getNickName());
 		return "/member/signupResult.mn";
 	}
 	
@@ -342,18 +338,11 @@ public class MemberController {
 	public String findIdPro(MemberDTO dto,Model model) {
 		System.out.println(dto);
 		String[] births = dto.getBirth().split(",");
-		String[] tels = dto.getTel().split(",");
 		String birth = "";
-		String tel = "";
 		for(String birth_ : births) {
 			birth += birth_;
 		}
-		for(String tel_ : tels) {
-			tel += tel_;
-		}
-		System.out.println(tel+":"+birth);
 		dto.setBirth(birth);
-		dto.setTel(tel);
 		
 		MemberDTO result = memberService.findId(dto);
 
@@ -368,18 +357,11 @@ public class MemberController {
 		
 		System.out.println(dto);
 		String[] births = dto.getBirth().split(",");
-		String[] tels = dto.getTel().split(",");
 		String birth = "";
-		String tel = "";
 		for(String birth_ : births) {
 			birth += birth_;
 		}
-		for(String tel_ : tels) {
-			tel += tel_;
-		}
-		System.out.println(tel+":"+birth);
 		dto.setBirth(birth);
-		dto.setTel(tel);
 		
 		MemberDTO result = memberService.findPw(dto);
 		model.addAttribute("memberDTO", result);
@@ -402,5 +384,10 @@ public class MemberController {
 			result = memberService.overlapCheck(nickName,1); 
 		}
 		return result;
+	}
+	
+	@RequestMapping(value = "/test")
+	public String test(){
+		return "/member/signupFormByKakao.mn";
 	}
 }

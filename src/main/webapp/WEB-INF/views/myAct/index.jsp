@@ -116,7 +116,6 @@
 			});
 		});
 	</script>
-	
 	<script>
 			$(document).ready(function(){
 			$("#getAllTitle").click(function(){
@@ -154,19 +153,6 @@
 						}
 					}
 				});
-				
-				/* $.ajax({
-					type:"POST",
-					url:"/myAct/myTitle",
-					data:{id:$("#memId").val()},
-					success:function(data){
-						var myTitle = data;
-						var innerText = $('#title_result ').html();
-						console.log(myTitle);
-						console.log(innerText);
-						
-					}
-				}); */
 			});
 		});
 	</script>

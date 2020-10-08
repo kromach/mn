@@ -23,29 +23,27 @@
  			SELECT * FROM BOARD_NORMAL bn, MY_LIKE ml WHERE TO_CHAR( bn.BN_IDX )= ml.ML_VALUE AND ml.INSERT_ID=#{value}
  		</select>
  		
- 		<select id="myLikeDrink" parameterType="string" resultType="int">
- 			
- 		</select>
- 		<select id="myLikeDrinkCount" parameterType="string" resultType="int">
- 			<![CDATA[
-	 			select count(*) from my_like where insert_id=#{value} AND KIND ='PR' OR KIND ='DK'
- 			]]>
- 		</select>
- 		
  		<select id="getAllTitle" resultType="TitleListDTO">
  			select * from title_list
+ 		</select>
+ 		
+ 		<select id="myActivity" resultType="MyActivityDTO" parameterType="string">
+ 			select * from my_activity where id=#{value}
  		</select>
  		
  		<select id="getMyTitle" parameterType="string" resultType="TitleListDTO">
  			SELECT * FROM MY_TITLE mt , TITLE_LIST tl WHERE mt.TITLE_INDEX = tl.TITLE_IDX AND mt.ID=#{value}
  		</select>
- 		
- 		<update id="updateTitle" parameterType="string">
- 			UPDATE MY_TITLE SET CHOOSE_TITLE ='N' WHERE id=#{value};
- 		</update>
  		<update id="chooseTitle" parameterType="string">
  			UPDATE MY_TITLE SET CHOOSE_TITLE ='Y' WHERE id= AND TI_IDX ='8';
- 		</update>
+ 		</update>		
+ 		
+ 		<select id="getLikeDrink" parameterType="string" resultType="DrinkVO">
+ 			SELECT * FROM MY_LIKE ml , DRINK_INFO di WHERE ml.ML_VALUE =di.DK_CODE AND ml.INSERT_ID =#{value}
+ 		</select>
+ 		 <select id="getLikeProduct" parameterType="string" resultType="productvo">
+ 			SELECT * FROM MY_LIKE ml , PRODUCT_INFO pi2 WHERE ml.ML_VALUE  = pi2.PR_CODE AND ml.INSERT_ID =#{value}
+ 		</select>
  		 
  		 
   </mapper>

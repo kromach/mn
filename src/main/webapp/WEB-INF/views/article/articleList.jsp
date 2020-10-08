@@ -25,6 +25,7 @@
 					</select>
 					검색어 : <input type="text" name="search" class="search"/>
 					<input type="submit" value="검색" class="btn btn-sm btn-blue" />
+					<input type="button" value="글쓰기" class="btn btn-sm btn-dark" onclick="window.location.href='/article/writeForm'"/>
 				</form>
 			</div>
 			<div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>

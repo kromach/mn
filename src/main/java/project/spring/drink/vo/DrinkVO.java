@@ -224,5 +224,19 @@ public class DrinkVO {
 	public void setDkItem5(int dkItem5) {
 		this.dkItem5 = dkItem5;
 	}
+	@Override
+	public String toString() {
+		return "DrinkVO [dkCode=" + dkCode + ", dkName=" + dkName + ", dkBkind=" + dkBkind + ", dkBkindValue="
+				+ dkBkindValue + ", dkSkind=" + dkSkind + ", dkSkindValue=" + dkSkindValue + ", dkImg=" + dkImg
+				+ ", dkAlcohol=" + dkAlcohol + ", dkCountry=" + dkCountry + ", dkCity=" + dkCity + ", dkPlace="
+				+ dkPlace + ", dkFood=" + dkFood + ", dkContent1=" + dkContent1 + ", dkContent2=" + dkContent2
+				+ ", dkContent3=" + dkContent3 + ", dkContent=" + dkContent + ", dkLike=" + dkLike + ", dkApprove="
+				+ dkApprove + ", insertId=" + insertId + ", insertDay=" + insertDay + ", item1Val=" + item1Val
+				+ ", item2Val=" + item2Val + ", item3Val=" + item3Val + ", item4Val=" + item4Val + ", item5Val="
+				+ item5Val + ", dkItem1=" + dkItem1 + ", dkItem2=" + dkItem2 + ", dkItem3=" + dkItem3 + ", dkItem4="
+				+ dkItem4 + ", dkItem5=" + dkItem5 + "]";
+	}
 
+	
+	
 }
