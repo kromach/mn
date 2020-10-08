@@ -4,6 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="article">
   	<select id="getDrinkSearch" resultType="hashmap" parameterType="string">
-  		select * from  DRINK_INFO
+  		SELECT * FROM DRINK_CATEGORY WHERE VALUE LIKE '%'||#{value}||'%'
+  	</select>
+  	<select id="getDrinkSearchByCategories" resultType="hashmap" parameterType="string">
+  		SELECT * FROM DRINK_INFO WHERE DK_BKIND = #{value} OR DK_SKIND =#{value}
   	</select>
   </mapper>

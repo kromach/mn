@@ -37,12 +37,14 @@ public class ArticleController {
 		@ResponseBody
 		public List drinkSearch(
 				@RequestParam(value = "input", required = false) String input) {
-			
-			System.out.println("drink Ajax");
+			System.out.println("drink Ajax search Input : "+input);
 			List list = null;
+			
 			if(input !=null) {
-			list = articleService.getDrinkSearch(input);
+				list = articleService.getDrinkSearch(input);
 			}
+			System.out.println("drink Ajax Result "+list.toString());
+			
 			return list;
 		}
 	}
