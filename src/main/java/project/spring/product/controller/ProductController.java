@@ -16,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import project.spring.member.service.MemberServiceImpl;
 import project.spring.member.vo.MemberDTO;
 import project.spring.product.service.ProductService;
+import project.spring.product.vo.OrderVo;
 import project.spring.product.vo.ProductVo;
 
 @Controller
@@ -82,10 +83,15 @@ public class ProductController {
 	}
 	
 	@RequestMapping("productorder")
-	public String productorderSs (HttpServletRequest request, HttpSession session, Model model)  throws SQLException{
+	public String productorderSs (HttpServletRequest request, HttpSession session, Model model )  throws SQLException{
+		
 		String amount = request.getParameter("amount");
 		String prcode = request.getParameter("prcode");
 		String id = (String)session.getAttribute("memId");
+		
+		
+		
+		
 		
 		MemberDTO meminfo = memberservice.readItem();
 		ProductVo info =productservice.getproductinfo(prcode);
@@ -103,7 +109,19 @@ public class ProductController {
 	}
 	
 	@RequestMapping("insertOrder")
-	public String insertOrder(Model model) throws SQLException{
+	public String insertOrder(Model model, OrderVo ordervo) throws SQLException{
+		System.out.println("주문 누룸1");
+		
+		String[] receiverTels = ordervo.getReceiverTel().split(",");
+		String receiverTel = "";
+		for(String receiverTel_ : receiverTels) {
+			receiverTel += receiverTel_ ;
+		}
+		
+		ordervo.setReceiverTel(receiverTel);
+		
+		productservice.insertorderinfo(ordervo);
+		
 		
 		List productlist =null;
 		int count = 0;

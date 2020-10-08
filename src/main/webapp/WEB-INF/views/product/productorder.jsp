@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+
+출처: https://cofs.tistory.com/262 [CofS]
 <div class="grid-Wrapper">
 	<div class="grid2"> 
 	
@@ -32,7 +35,12 @@
 						<tr>
 							<th>받는사람 연락처</th>
 							<td>
-								<input type="text" name="receiverTel" value="${meminfo.tel}">
+								<c:set var="tel" value="${meminfo.tel}"/>
+								<c:set var="telArr" value="${fn:split(tel,',')}"/>
+								
+								<input type="text" name="receiverTel" value="${telArr[0]}" >-
+								<input type="text" name="receiverTel" value="${telArr[1]}" >-
+								<input type="text" name="receiverTel" value="${telArr[2]}" >
 							</td>
 						</tr>
 						<tr>

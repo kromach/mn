@@ -1,6 +1,9 @@
 package project.spring.product.dao;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -98,9 +101,28 @@ public class ProductDAOImpl implements ProductDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	
+	
 	@Override
 	public void insertorderinfo(OrderVo ordervo) throws SQLException {
+		
+		HashMap hash=sqlSession.selectOne("product.sql");
+		
+		int i = ((BigDecimal)hash.get("NEXTVAL")).intValue();
+		String a =(hash.get("'O'||(SELECTTO_CHAR(SYSDATE,'YYYYMMDD')FROMDUAL)||ORDER_INFO_SEQ")).toString();
+		String c = a.substring(a.lastIndexOf("=")+1);
+		String b =c.substring(0,c.length()-1);
+		
+		ordervo.setOrSeq(i);
+		ordervo.setOrCode(b);
+		/*
+		Iterator it = hash.keySet().iterator();  // 키값을 순서대로 담아준다
+		while(it.hasNext()) {
+			String key = (String)it.next(); //ㅋㅣ
+			String value = p.getProperty(key);
+		}
+		*/
 		sqlSession.update("product.insertorder",ordervo);
 		
 	}
