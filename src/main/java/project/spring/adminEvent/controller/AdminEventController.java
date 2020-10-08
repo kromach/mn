@@ -31,6 +31,9 @@ import project.spring.beans.Pager;
 public class AdminEventController {
 		@Autowired
 		private AdminEventService adminEventService = null;
+		@Autowired
+		private ArticleServiceImpl articleService = null;
+		
 		
 		@RequestMapping("/insertEvent")
 		public String eventList(Model model, Locale locale)throws SQLException{
@@ -106,12 +109,10 @@ public class AdminEventController {
 		@ResponseBody
 		public List drinkSearch(@RequestParam(value = "input", required = false) String input) {
 			List list = null;
-			
 			System.out.println(input);
 			if(input !=  null && !input.equals("")) {
-				list = new ArticleServiceImpl().getDrinkSearch(input);
+				list = articleService.getDrinkSearch(input);
 			}
-			
 			return list;
 		}
 
