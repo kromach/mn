@@ -118,7 +118,7 @@ public class ProductController {
 			receiverTel += receiverTel_ ;
 		}
 		
-		ordervo.setReceiverTel(receiverTel);
+		//ordervo.setReceiverTel(receiverTel);
 		
 		productservice.insertorderinfo(ordervo);
 		

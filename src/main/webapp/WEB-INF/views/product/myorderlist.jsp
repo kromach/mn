@@ -33,7 +33,16 @@
 									<td>${my.prName}</td>
 									<td>${my.prCount}</td>
 									<td>${my.receiverAddr}</td>
-									<td>${my.orStatus}</td>
+									
+									<c:choose>
+										<c:when test="${my.orStatus ==1}"><td>주문 미확인</td></c:when>
+										<c:when test="${my.orStatus ==2}"><td>주문 확인</td></c:when>
+										<c:when test="${my.orStatus ==3}"><td>배송 준비</td></c:when>
+										<c:when test="${my.orStatus ==4}"><td>배송 완료</td></c:when>
+										<c:when test="${my.orStatus ==5}"><td>택배로 이동중</td></c:when>
+										<c:otherwise><td>확인 요망</td></c:otherwise>
+									</c:choose>
+	
 								</tr>
 							</div>
 						</c:forEach>
