@@ -122,11 +122,6 @@ public class MemberController {
 		for( String i:birth_ ) {
 			birth += i;
 		}
-		String[] tels = dto.getTel().split(",");
-		String tel = "";
-		for(String tel_ : tels) {
-			tel += tel_;
-		}
 		dto.setUserKind("salse");
 		//사업자등록증 파일제한 15MB
 		int sizeLimit = 1024*1024*15;
@@ -148,7 +143,6 @@ public class MemberController {
 			File copyFile = new File(imPath);
 			mf.transferTo(copyFile);
 			//dtoImgSetting
-			dto.setTel(tel);
 			dto.setBirth(birth);
 			dto.setLicenseImg(newName);
 		} catch (Exception e) {
