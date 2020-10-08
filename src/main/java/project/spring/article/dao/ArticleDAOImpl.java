@@ -2,6 +2,8 @@ package project.spring.article.dao;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -42,5 +44,10 @@ public class ArticleDAOImpl implements ArticleDAO {
 	@Override
 	public int deleteItem(Object obj) {
 		return 0;
+	}
+	@Override
+	public List getDrinkSearch(String input) {
+		List list = sqlSession.selectList("article.getDrinkSearch",input);
+		return list;
 	}
 }

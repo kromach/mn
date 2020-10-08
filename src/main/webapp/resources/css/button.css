@@ -57,8 +57,25 @@
 	line-height:1.2;
 	border-radius:3px
 }
-
-/*login영역 버튼및 css*/
+/*Article영역 영성*/
+.boardTitle_large{
+	width:100%;
+	font-size: 14px;
+	position: relative;
+	border-radius: 3px;
+    border: 1px solid;
+	height: 20px;
+}
+.boardTitle_middle{
+	width:50%;
+	font-size: 14px;
+	position: relative;
+	border-radius: 3px;
+    border: 1px solid;
+	height: 20px;
+	margin-right: 8px;
+}
+/*login영역 버튼및 css 영성*/
 .birthWrapper{
 	width:250px;
 	margin-bottom: 5px;
