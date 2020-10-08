@@ -122,6 +122,7 @@ public class MemberController {
 		for( String i:birth_ ) {
 			birth += i;
 		}
+		dto.setBirth(birth);
 		dto.setUserKind("salse");
 		//사업자등록증 파일제한 15MB
 		int sizeLimit = 1024*1024*15;
@@ -143,7 +144,6 @@ public class MemberController {
 			File copyFile = new File(imPath);
 			mf.transferTo(copyFile);
 			//dtoImgSetting
-			dto.setBirth(birth);
 			dto.setLicenseImg(newName);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -154,7 +154,7 @@ public class MemberController {
 		mpRequest.getSession().setAttribute("memId", dto.getId());
 		mpRequest.getSession().setAttribute("memNickName", dto.getNickName());
 		mpRequest.getSession().setAttribute("userKind", "salse");
-		return "/member/singupResult.mn";
+		return "/member/signupResult.mn";
 	}
 	
 	@RequestMapping("/login")
