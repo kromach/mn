@@ -103,7 +103,10 @@ public class ProductController {
 	}
 	
 	@RequestMapping("myorderdetail")
-	public String myorderdetail() throws SQLException{
+	public String myorderdetail(HttpServletRequest request, Model model) throws SQLException{
+		String orcode = request.getParameter("orcode");
+		System.out.println(orcode);
+		
 		
 		return "product/myorderdetail.mn";
 	}

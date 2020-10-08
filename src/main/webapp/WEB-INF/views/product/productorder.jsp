@@ -3,7 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
-출처: https://cofs.tistory.com/262 [CofS]
 <div class="grid-Wrapper">
 	<div class="grid2"> 
 	

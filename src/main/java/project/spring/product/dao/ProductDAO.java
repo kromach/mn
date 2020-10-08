@@ -27,5 +27,7 @@ public interface ProductDAO extends CommonInterface {
 	public OrderVo myorderinfo(String id, String prcode) throws SQLException;
 	// 상품 구매정보 저장
 	public void insertorderinfo(OrderVo ordervo) throws SQLException;
+	// 구매한 상품 코드로 구매정보 상세 보기
+	public OrderVo orderdetail(String orcode) throws SQLException;
 
 }

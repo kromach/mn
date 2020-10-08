@@ -127,6 +127,12 @@ public class ProductDAOImpl implements ProductDAO {
 		
 	}
 
+	@Override
+	public OrderVo orderdetail(String orcode) throws SQLException {
+		OrderVo orinfo = sqlSession.selectOne("product.orderinfo",orcode);
+		return orinfo;
+	}
+
 
 
 }

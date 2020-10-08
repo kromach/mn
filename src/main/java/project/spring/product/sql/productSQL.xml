@@ -33,5 +33,8 @@
 	<select id="sql" resultType="hashmap">
 		SELECT 'O' ||(SELECT TO_CHAR(SYSDATE,'YYYYMMDD') FROM DUAL)|| ORDER_INFO_seq.nextval ,ORDER_INFO_seq.nextval FROM DUAL
 	</select>
+	<select id="orderinfo" parameterType="string" resultType="ordervo">
+		select * from order_info where or_code = #{value}
+	</select>
 
 </mapper>

@@ -101,9 +101,14 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public void insertorderinfo(OrderVo ordervo) throws SQLException {
-		System.out.println("주문 누룸2");
 		productDAO.insertorderinfo(ordervo);
 		
+	}
+
+	@Override
+	public OrderVo orderdetail(String orcode) throws SQLException {
+		OrderVo orinfo = productDAO.orderdetail(orcode);
+		return null;
 	}
 
 }
