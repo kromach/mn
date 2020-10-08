@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import project.spring.admin.service.AdminServiceImpl;
 import project.spring.admin.vo.AdminVO;
 import project.spring.article.service.ArticleServiceImpl;
+import project.spring.article.vo.ArticleDTO;
 import project.spring.beans.PageVO;
 import project.spring.beans.Pager;
 
@@ -44,4 +45,11 @@ public class ArticleController {
 			}
 			return list;
 		}
-	}
+		
+		@RequestMapping("/writePro")
+		public String writePro(ArticleDTO dto) {
+			
+			System.out.println(dto);
+			return "article/articleList.mn";
+		}
+	}	
