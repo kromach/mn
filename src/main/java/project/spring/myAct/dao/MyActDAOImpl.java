@@ -102,23 +102,25 @@ public class MyActDAOImpl implements MyActDAO{
 	public List updateTitle(String memId) {
 		List<TitleListDTO> titleValue =sqlSession.selectList("myAct.getAllTitle", memId);
 		List<MyActivityDTO> myActivity = sqlSession.selectList("myAct.myActivity", memId);
-		System.out.println(myActivity.toString());
 		
 		for(TitleListDTO dto : titleValue) {
-			int result =0;
-			if(dto.getTitleName().equals("my_attendent")) {
-				int value = dto.getTitleValue();	// value 75			30<90<180<365
-				if( value>=30 && value<90) {
-					result = 2;
-				}else if(value>=90 && value <180) {
-					result = 3;
-				}else if(value>= 180 && value <365) {
-					result = 4;
-				}else if (value >= 365) {
-					result = 5;
+			for(MyActivityDTO source : myActivity) {
+				int result =0;
+				if(dto.getTitleName().equals("my_attendent")) {
+					int value = source.getMyAttendent();	// value 75			30<90<180<365
+					System.out.println("value : " +value);
+					if( value>=30 && value<90) {
+						result = 2;
+					}else if(value>=90 && value <180) {
+						result = 3;
+					}else if(value>= 180 && value <365) {
+						result = 4;
+					}else if (value >= 365) {
+						result = 5;
+					}
 				}
+				System.out.println("result : " +result);
 			}
-			System.out.println(result);
 		}
 		
 		return titleValue;
@@ -141,9 +143,5 @@ public class MyActDAOImpl implements MyActDAO{
 		List list = sqlSession.selectList("myAct.getLikeProduct", memId);
 		return list;
 	}
-
-
-	
-	
 	
 }
