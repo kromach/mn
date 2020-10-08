@@ -50,7 +50,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 	@Override
 	public List getDrinkSearch(String input) {
 		
-		
+		System.out.println("check2");
 		System.out.println("DAO"+input);
 		//우선 카테고리 검사
 		List<HashMap<String, String>> list = sqlSession.selectList("article.getDrinkSearch",input);
