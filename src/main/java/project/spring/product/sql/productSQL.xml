@@ -26,5 +26,12 @@
 	<select id="myorderlist" parameterType="string" resultType="ordervo">
 		select * from order_info where user_id = #{value}
 	</select>
+	<insert id="insertorder" parameterType="ordervo">
+		INSERT INTO ORDER_INFO(or_code,or_day,or_seq,pr_code,pr_name,or_status,pr_price,pr_count,user_id,RECEIVER_NAME ,RECEIVER_TEL ,RECEIVER_ADDR ,INSERT_DAY )
+		values(#{orCode},(SELECT TO_CHAR(SYSDATE,'YYYYMMDD') FROM DUAL),#{orSeq},#{prCode},#{prName},1,#{prPrice},#{prCount},#{userId},#{receiverName},#{receiverTel},#{receiverAddr},sysdate)
+	</insert>
+	<select id="sql" resultType="hashmap">
+		SELECT 'O' ||(SELECT TO_CHAR(SYSDATE,'YYYYMMDD') FROM DUAL)|| ORDER_INFO_seq.nextval ,ORDER_INFO_seq.nextval FROM DUAL
+	</select>
 
 </mapper>
