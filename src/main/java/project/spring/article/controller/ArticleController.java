@@ -39,12 +39,9 @@ public class ArticleController {
 				@RequestParam(value = "input", required = false) String input) {
 			System.out.println("drink Ajax search Input : "+input);
 			List list = null;
-			
-			if(input !=null) {
+			if(input !=null && !input.equals("")) {
 				list = articleService.getDrinkSearch(input);
 			}
-			System.out.println("drink Ajax Result "+list.toString());
-			
 			return list;
 		}
 	}

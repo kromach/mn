@@ -15,6 +15,20 @@ function searchDk(){
 		type: "get",
 		success : function(data){
 			console.log(data);
+			
+			$('#option').empty();
+			$('#option').append('<option value="option">선택</option>');
+			
+			var dataLog;
+			for(var i in data){
+				if(data[i].length>0){
+					dataLog = data[i];
+				}
+			}	
+			for(var j in dataLog){
+				console.log(dataLog[j].DK_NAME);
+				$('#option').append('<option value="'+dataLog[j].DK_NAME+'">'+dataLog[j].DK_NAME+'</option>');
+			} 	
 		}
 	});
 }
@@ -37,8 +51,8 @@ function searchDk(){
 						<tr>
 							<th>술 선택</th>
 							<td>
-							<select>
-									<option value="">선택</option>
+							<select id="option" name="option">
+									<option value="option">선택</option>
 							</select>
 							</td>
 						</tr>
