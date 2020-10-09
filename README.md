@@ -1,4 +1,16 @@
 # 마시는 녀석들  
+## 주요 구현 기능  
+[SpringMVC]    
+[SpringTiles]    
+[SpringWebSocket]  
+[myBatis]  
+[CKEditor]  
+[Kakao OAuth2.0]  
+[gson]  
+[Ajax]  
+[log4j]  
+
+
 ## 개발일정   
 <img src ="https://user-images.githubusercontent.com/64457004/95589062-2f8fa700-0a7f-11eb-85b3-439a412f62b1.png" width="600px"/>
 
