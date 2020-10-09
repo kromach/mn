@@ -1,9 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="/resources/js/formCheck.js"></script>
-
 <script src="/resources/js/jquery.selectric.js"></script>
 <link rel="stylesheet" href="/resources/css/selectric.css">
+<script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="/resources/ckeditor/adapters/jquery.js"></script>
+<script type="text/javascript">
+
+	// ckeditor 설정
+	CKEDITOR.on('dialogDefinition', function (ev) {
+		
+		var dialogName = ev.data.name;
+		var dialog = ev.data.definition.dialog;
+		var dialogDefinition = ev.data.definition;
+
+		if (dialogName == 'image') {
+			dialog.on('show', function (obj) {
+				this.selectPage('Upload'); //사진 추가 버튼 클릭시 업로드탭으로 시작
+			});	
+			dialogDefinition.removeContents('advanced'); // 자세히탭 제거
+			dialogDefinition.removeContents('Link'); // 링크탭 제거
+		}
+	});
+
+	//이미지 업로드 url 설정
+	var ckedit_config = {
+		filebrowserUploadUrl : 'ckuploader' ,  // 통신할 컨트롤러 매핑 주소 
+		toolbar : ''
+	}
+	// ckeditor 설정 종료
+	
+</script>
 
 <style>
      #star_grade a{
@@ -91,7 +118,8 @@
 					<tr>
 						<th>주류 정보</th>
 						<td>
-							<textarea name="dkPlace" class="required" style="width:98%" ></textarea>
+							<textarea name="dkContent" id="dkContent" type="textarea" class="required" style="width:98%" ></textarea>
+							<script type="text/javascript">CKEDITOR.replace( 'dkContent' , ckedit_config);</script>
 						</td>
 					</tr>
 					
@@ -196,7 +224,7 @@
     function insertDrink(){
     	if (checkFormjquery()) {
     		
-    		//$("form[name='dkForm']").submit();
+    		$("form[name='dkForm']").submit();
     	}
     }
     
