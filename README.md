@@ -26,7 +26,8 @@ Default localhost:8080/
 ## 디렉토리 구조
 java/.../aop=AOP 
 java/.../bean=chat/csv/fileDown/kakaoAPI/
-			  CommonInterFace/JsonUtil/LowerHashMap/Pager
+			  CommonInterFace/JsonUtil/LowerHashMap/Pager  
+			  
 ###Module      
 java/.../module*/dao=DAO interface/class  
 java/.../module*/vo=DTO  
