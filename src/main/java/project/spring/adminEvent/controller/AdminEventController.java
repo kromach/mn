@@ -55,6 +55,7 @@ public class AdminEventController {
 			System.out.println("========================");
 			
 			
+			System.out.println("content 확인:"  + vo.getContent() );
 			vo.setEvStart(vo.getEvStart().replace("-", ""));
 			vo.setEvEnd(vo.getEvEnd().replace("-", ""));
 			
