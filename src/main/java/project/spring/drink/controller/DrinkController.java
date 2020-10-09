@@ -1,6 +1,7 @@
 package project.spring.drink.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import project.spring.beans.JsonUtil;
 import project.spring.drink.service.DrinkService;
@@ -133,6 +135,38 @@ public class DrinkController {
 //		System.out.println(selectDrinkInfo.getDkBkindValue());
 		
 		return "drink/insert.mn";
+	}
+	
+	@RequestMapping("insertPro")
+	public String InsertProInit(MultipartHttpServletRequest request, HttpServletResponse response, Model model) throws SQLException, IOException {
+		
+		System.out.println(request.getParameter("dkName"));
+		System.out.println(request.getParameter("dkContent"));
+		
+		//List<HashMap> bigCategoryList = drinkService.selectBigCategoryList();
+		
+		//model.addAttribute("bigCategoryList", bigCategoryList);
+//		
+//		System.out.println(selectDrinkInfo.getDkName());
+//		System.out.println(selectDrinkInfo.getDkBkindValue());
+		PrintWriter printWriter = null;
+		
+		// 인코딩
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");		
+
+		printWriter = response.getWriter();
+
+		// 업로드시 메시지 출력
+		printWriter.println("<script type='text/javascript'>"
+		     + "alert('주류 정보가 등록되었습니다. 관리자 확인 후에 사이트에 게재됩니다.')"
+		     +"</script>");
+		
+		printWriter.flush();
+		
+		model.addAttribute("dkName", request.getParameter("dkName"));
+
+		return "drink/insertPro.mn";
 	}
 		
 	// AJAX - 대분류 선택시 해당하는 소분류 리스트 리턴
