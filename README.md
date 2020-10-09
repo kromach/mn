@@ -12,7 +12,8 @@
 
 ## 테이블 정의서 中
 <img src ="https://user-images.githubusercontent.com/64457004/95589080-38807880-0a7f-11eb-9478-5fc00bf0ec28.png" width="600px"/>
-## Coding Rule
+## Coding Rule  
+
 0. 회의시간 9:30~10:00
 1. Controller마다 Data가 넘어오면 println으로 찍어놓기 - 형식(DataName=value)
 2. coding Branch == master/ys/boo62/product/jahoon/209
