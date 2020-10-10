@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import project.spring.article.vo.ArticleDTO;
 import project.spring.member.vo.MemberDTO;
 
 @Repository
@@ -37,7 +38,12 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 	@Override
 	public int insertItem(Object obj) {
-		return 0;
+		int result = -1;
+		if(obj instanceof ArticleDTO) {
+			System.out.println("daoImpl="+(ArticleDTO)obj);
+			result = sqlSession.insert("article.insertTags", (ArticleDTO)obj);
+		}
+		return result;
 	}
 	@Override
 	public int updateItem(Object obj) {

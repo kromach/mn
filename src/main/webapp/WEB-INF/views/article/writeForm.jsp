@@ -17,7 +17,7 @@
 				console.log(data);
 
 				$('#option').empty();
-				$('#option').append('<option value="option">선택</option>');
+				$('#option').append('<option >선택</option>');
 
 				var dataLog;
 				for ( var i in data) {
@@ -87,7 +87,7 @@
 					<tr>
 						<th>술 선택</th>
 						<td><select id="option" name="dkCode">
-								<option value="option">선택</option>
+								<option >선택</option>
 						</select></td>
 					</tr>
 					<tr>

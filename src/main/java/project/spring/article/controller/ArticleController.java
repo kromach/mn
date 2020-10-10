@@ -40,7 +40,7 @@ public class ArticleController {
 		}
 		
 		@RequestMapping("/writeForm")
-		public String indexTest(){
+		public String indexTestSs(){
 			return "article/writeForm.mn";
 		}	
 		
@@ -55,14 +55,30 @@ public class ArticleController {
 			}
 			return list;
 		}
+		
+		//insertTag
 		@RequestMapping("/writePro")
 		public String writePro(ArticleDTO dto)  throws IOException, FileUploadException {
 			
+			//기본값을 FreeBoard
+			if(dto.getDkCode().equals("선택")) {
+				dto.setDkCode(null);
+			}
+			dto.setKind("F");
 			System.out.println(dto);
+			
+			//insert
 			int result = articleService.insertItem(dto);
+			
+			//insertTags
+			
+			
 			return "article/articleList.mn";
+			
+			
 		}
 		
+		//insertImg
 		@RequestMapping("/writeuploader")
 		public void writeuploader(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException, FileUploadException {
 			// 파일정보 꺼내기

@@ -26,7 +26,8 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 	@Override
 	public int insertItem(Object obj) {
-		return 0;
+		int result = articleDAOimpl.insertItem(obj);
+		return result;
 	}
 	@Override
 	public int updateItem(Object obj) {

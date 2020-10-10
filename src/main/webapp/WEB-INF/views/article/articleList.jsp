@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 .search{
     width: 250px;
@@ -25,7 +26,9 @@
 					</select>
 					검색어 : <input type="text" name="search" class="search"/>
 					<input type="submit" value="검색" class="btn btn-sm btn-blue" />
+					<c:if test="${not empty sessionScope.memId }">
 					<input type="button" value="글쓰기" class="btn btn-sm btn-dark" onclick="window.location.href='/article/writeForm'"/>
+					</c:if>
 				</form>
 			</div>
 			<div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>

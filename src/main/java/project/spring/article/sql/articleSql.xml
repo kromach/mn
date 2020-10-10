@@ -13,4 +13,7 @@
   	<select id="getDrinkSearchByName" resultType="hashmap" parameterType="string">
   		SELECT DK_NAME FROM DRINK_INFO where DK_NAME LIKE '%'||#{value}||'%' 
   	</select>
+  	<insert id="insertTags">
+  		<!-- insert into code..--> 
+  	</insert>
   </mapper>
