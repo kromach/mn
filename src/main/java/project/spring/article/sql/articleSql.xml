@@ -7,13 +7,15 @@
   		SELECT CODE FROM DRINK_CATEGORY WHERE VALUE LIKE '%'||#{value}||'%'
   	</select>
   	<select id="getDrinkSearchByCategories" resultType="hashmap" parameterType="string">
-  		SELECT DK_NAME FROM DRINK_INFO WHERE DK_BKIND = #{value} OR DK_SKIND =#{value}
+  		SELECT DK_NAME,DK_CODE FROM DRINK_INFO WHERE DK_BKIND = #{value} OR DK_SKIND =#{value}
   	</select>
   	
   	<select id="getDrinkSearchByName" resultType="hashmap" parameterType="string">
-  		SELECT DK_NAME FROM DRINK_INFO where DK_NAME LIKE '%'||#{value}||'%' 
+  		SELECT DK_NAME,DK_CODE FROM DRINK_INFO where DK_NAME LIKE '%'||#{value}||'%' 
   	</select>
-  	<insert id="insertTags">
-  		<!-- insert into code..--> 
+  	<insert id="insertTags" parameterType="ArticleDTO">
+	insert into BOARD_NORMAL (BN_IDX,BN_TITLE,KINK,DK_CODE,READCOUNT,HEART,REPORT,CONTENT,INSERT_ID,INSERT_DAY,ID_DELETE)
+	values BOARD_NORMAL_SEQ,#{bnTitle},default,#{dkCode},#{readcount},,#{heart},#{report},#{content},
+	#{insertId},sysdate,default
   	</insert>
   </mapper>

@@ -28,7 +28,7 @@
 				for ( var j in dataLog) {
 					console.log(dataLog[j].DK_NAME);
 					$('#option').append(
-							'<option value="'+dataLog[j].DK_NAME+'">'
+							'<option value="'+dataLog[j].DK_CODE+'">'
 									+ dataLog[j].DK_NAME + '</option>');
 				}
 			}
