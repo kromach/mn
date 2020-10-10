@@ -61,7 +61,7 @@ public class ArticleController {
 		public String writePro(ArticleDTO dto)  throws IOException, FileUploadException {
 			
 			//기본값을 FreeBoard
-			if(dto.getDkCode().equals("선택")) {
+			if(dto.getDkCode()!=null&& dto.getDkCode().equals("선택")) {
 				dto.setDkCode(null);
 			}
 			dto.setKind("F");
