@@ -59,6 +59,7 @@ public class ArticleController {
 		public String writePro(ArticleDTO dto)  throws IOException, FileUploadException {
 			
 			System.out.println(dto);
+			int result = articleService.insertItem(dto);
 			return "article/articleList.mn";
 		}
 		
