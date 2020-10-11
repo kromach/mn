@@ -128,7 +128,7 @@ public class ArticleController {
 				//idx == seq 
 				editor_imageVO.setImg_url(newName);
 				editor_imageVO.setKind("A");
-				//code ==A +""+ (max(idx)+1)
+				//code ==A +""+ (max(idx)+1)  >> 이미지 삽입로직 이야기해볼것
 				articleService.insertImg(editor_imageVO);
 				
 			} catch (Exception e) {
