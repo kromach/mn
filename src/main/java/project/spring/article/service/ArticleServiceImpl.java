@@ -45,4 +45,13 @@ public class ArticleServiceImpl implements ArticleService{
 		list = articleDAOimpl.getDrinkSearch(input);
 		return list ; 
 	}
+	
+	@Override
+	public int insertImg(String newName) {
+		int result = -1;
+		
+		return result;
+		
+		
+	}
 }

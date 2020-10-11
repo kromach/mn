@@ -6,4 +6,5 @@ import project.spring.beans.CommonInterface;
 
 public interface ArticleService extends CommonInterface {
 	public List getDrinkSearch(String input);
+	public int insertImg(String newName);
 }

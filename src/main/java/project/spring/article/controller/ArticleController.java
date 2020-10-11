@@ -126,6 +126,10 @@ public class ArticleController {
 				     + callback+",'"+ root + "/img/upload/" + newName +"','이미지를 업로드하였습니다.')"
 				     +"</script>");
 				printWriter.flush();
+				
+				articleService.insertImg(newName);
+				
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
