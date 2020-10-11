@@ -133,6 +133,22 @@ public class ProductDAOImpl implements ProductDAO {
 		return orinfo;
 	}
 
+	@Override
+	public List getorderlist(String id) throws SQLException {
+		
+		List orderlist = sqlSession.selectList("product.orderlist",id);
+		
+		return orderlist;
+	}
+
+	@Override
+	public int getordercount(String id) throws SQLException {
+		System.out.println("id : "+ id);
+		int ordercount = sqlSession.selectOne("product.selcount",id);
+		System.out.println("ordercount : "+ ordercount);
+		return ordercount;
+	}
+
 
 
 }
