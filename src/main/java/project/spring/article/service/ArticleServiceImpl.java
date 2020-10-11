@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.spring.article.dao.ArticleDAO;
+import project.spring.article.vo.Editor_imageVO;
 
 @Service
 public class ArticleServiceImpl implements ArticleService{
@@ -47,9 +48,9 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 	
 	@Override
-	public int insertImg(String newName) {
+	public int insertImg(Editor_imageVO editor_imageVO) {
 		int result = -1;
-		result = articleDAOimpl.insertImg(newName);
+		result = articleDAOimpl.insertImg(editor_imageVO);
 		return result;
 		
 		
