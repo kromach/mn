@@ -75,4 +75,10 @@ public class ArticleDAOImpl implements ArticleDAO {
 		listByName.add(sqlSession.selectList("article.getDrinkSearchByName",input));
 		return listByName;
 	}
+	@Override
+	public int insertImg(String newName) {
+		int result = -1;
+		
+		return result;
+	}
 }

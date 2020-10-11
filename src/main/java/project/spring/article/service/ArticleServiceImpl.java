@@ -49,7 +49,7 @@ public class ArticleServiceImpl implements ArticleService{
 	@Override
 	public int insertImg(String newName) {
 		int result = -1;
-		
+		result = articleDAOimpl.insertImg(newName);
 		return result;
 		
 		

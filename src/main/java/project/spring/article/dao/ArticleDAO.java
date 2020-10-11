@@ -7,5 +7,6 @@ import project.spring.member.vo.MemberDTO;
 
 public interface ArticleDAO extends CommonInterface{
 	public List getDrinkSearch(String input);
+	public int insertImg(String newName);
 
 }
