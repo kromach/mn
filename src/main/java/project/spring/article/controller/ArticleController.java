@@ -125,8 +125,10 @@ public class ArticleController {
 				printWriter.flush();
 				
 				Editor_imageVO editor_imageVO = new Editor_imageVO();
-				editor_imageVO.setKind("A");
+				//idx == seq 
 				editor_imageVO.setImg_url(newName);
+				editor_imageVO.setKind("A");
+				//code ==A +""+ (max(idx)+1)
 				articleService.insertImg(editor_imageVO);
 				
 			} catch (Exception e) {

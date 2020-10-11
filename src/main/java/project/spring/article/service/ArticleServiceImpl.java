@@ -52,7 +52,5 @@ public class ArticleServiceImpl implements ArticleService{
 		int result = -1;
 		result = articleDAOimpl.insertImg(editor_imageVO);
 		return result;
-		
-		
 	}
 }
