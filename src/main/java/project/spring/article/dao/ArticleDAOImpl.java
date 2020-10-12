@@ -41,9 +41,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 	public int insertItem(Object obj) {
 		int result = -1;
 		if(obj instanceof ArticleDTO) {
-			//전에글 코드이외의 이미지가있으면 지워주는로직 필요
-			
-			
+			//전에글 코드이외의 이미지가있으면 지워주는로직 필요하다면 작성
 			System.out.println("daoImpl="+(ArticleDTO)obj);
 			result = sqlSession.insert("article.insertTags", (ArticleDTO)obj);
 		}
@@ -90,9 +88,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 		String IMG_URL = sqlSession.selectOne("article.checkCodeInEditor",checkCode);
 		
 		//해당코드가 있다면, 한 게시물에서 여러이미지 등록이거나, 
-		//전의 쓰던글에서 이미지만 로딩하고 글을 작성완료안한것이됨.
+		//전의 쓰던글에서 이미지만 로딩하고 글을 작성완료안한것이됨. 제거필요한지 모르겠음
 		//한게시물의 여러이미지 등록 >> 단순 등록처리
-		//전의 쓰던글에서 이미지만 로딩 >> 다음 글 작성에서 검사후 제거
+		//전의 쓰던글에서 이미지만 로딩 >> 필요하다면 다음 글 작성에서 검사후 제거
 		
 		//등록로직
 		editor_imageVO.setCode(checkCode);
