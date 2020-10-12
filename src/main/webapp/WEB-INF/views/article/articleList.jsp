@@ -21,8 +21,9 @@
 			<div class="grid-item grid-item--width6">
 				<form action="/article/articleSearch" name="articleSearch" id="articleSearch">
 					<select id="selectOption" name="selectOption" class="selectOption">
-						<option value="writer">작성자</option>
-						<option value="content">내용</option>
+						<option value="INSERT_ID">작성자</option>
+						<option value="CONTENT">내용</option>
+						<option value="BN_TITLE">제목</option>
 					</select>
 					검색어 : <input type="text" name="search" class="search"/>
 					<input type="submit" value="검색" class="btn btn-sm btn-blue" />
