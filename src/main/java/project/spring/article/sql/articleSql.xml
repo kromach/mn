@@ -13,7 +13,7 @@
   	<select id="getDrinkSearchByName" resultType="hashmap" parameterType="string">
   		SELECT DK_NAME,DK_CODE FROM DRINK_INFO where DK_NAME LIKE '%'||#{value}||'%' 
   	</select>
-  	<select id="selectMaxBnIDX" >
+  	<select id="selectMaxBnIDX" resultType="int">
 		select max(BN_IDX) from board_normal  	
   	</select>
   	<select id="checkCodeInEditor" parameterType="string" resultType="string"> 

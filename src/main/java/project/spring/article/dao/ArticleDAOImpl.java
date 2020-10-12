@@ -82,10 +82,10 @@ public class ArticleDAOImpl implements ArticleDAO {
 		int result = -1;
 		//boardNomal의 글의 +1해서 코드를생성
 		int maxBnInx_BoardNomal = sqlSession.selectOne("article.selectMaxBnIDX");
-		String checkCode = "F0000"+ maxBnInx_BoardNomal;
+		String checkCode = "F0000"+ (maxBnInx_BoardNomal+1);
 		
 		//해당코드로 들어간 이미지가 있는지 보기
-		String IMG_URL = sqlSession.selectOne("article.checkCodeInEditor",checkCode);
+		//String IMG_URL = sqlSession.selectOne("article.checkCodeInEditor",checkCode);
 		
 		//해당코드가 있다면, 한 게시물에서 여러이미지 등록이거나, 
 		//전의 쓰던글에서 이미지만 로딩하고 글을 작성완료안한것이됨. 제거필요한지 모르겠음
