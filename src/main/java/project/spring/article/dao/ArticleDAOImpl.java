@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -93,5 +94,13 @@ public class ArticleDAOImpl implements ArticleDAO {
 		
 		//등록로직
 		return result;
+	}
+	@Override
+	public List searchArticle(String selectOption,
+			String search) {
+		Map map = new HashMap();
+		map.put("selectOption", selectOption);
+		map.put("search",search );
+		return sqlSession.selectList("article.searchArticle", map);
 	}
 }

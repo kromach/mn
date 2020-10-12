@@ -53,4 +53,12 @@ public class ArticleServiceImpl implements ArticleService{
 		result = articleDAOimpl.insertImg(editor_imageVO);
 		return result;
 	}
+	
+	@Override
+	public List searchArticle(String selectOption,
+			String search) {
+		
+		return articleDAOimpl.searchArticle(selectOption,search);
+		
+	}
 }

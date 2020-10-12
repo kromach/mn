@@ -1,5 +1,7 @@
 package project.spring.article.controller;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -71,5 +73,20 @@ public class ArticleController {
 			//imgInsert
 			//insertTags
 			return "article/articleList.mn";
+		}
+		
+		
+		@RequestMapping("/articleSearch")
+		public String articleSearch(
+				@RequestParam(required = false, name = "selectOption")String selectOption,
+				@RequestParam(required = false, name = "search")String search) {
+			if(!search.equals("")) {
+				System.out.println("articleSearchService");
+				articleService.searchArticle(selectOption,search);
+			}
+			
+			
+			
+			return null;
 		}
 	}	
