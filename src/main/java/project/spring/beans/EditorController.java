@@ -103,7 +103,7 @@ public class EditorController{
 			}
 						
 			File copyFile = new File(path + newName); // 새로운 이미지 경로로 업로드 한 파일 복사 생성
-			
+			System.out.println(path+newName);
 			mf.transferTo(copyFile); // 지정된 경로로 파일 저장
 
 			// 경로, 파일명 리턴
