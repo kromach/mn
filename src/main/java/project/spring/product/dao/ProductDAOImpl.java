@@ -134,9 +134,15 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List getorderlist(String id) throws SQLException {
+	public List getorderlist(String id, int startrow ,int endrow) throws SQLException {
 		
-		List orderlist = sqlSession.selectList("product.orderlist",id);
+		HashMap map = new HashMap();
+		map.put("id", id);
+		map.put("startrow", startrow);
+		map.put("endrow", endrow);
+		
+		
+		List orderlist = sqlSession.selectList("product.orderlist",map);
 		
 		return orderlist;
 	}
