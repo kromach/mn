@@ -26,8 +26,16 @@
 							<td align="left"><input type="text" name="prName" /></td>
 						</tr>
 						<tr>
-							<td>구매일자</td>
-							<td align="left"><input type="text" name="prName" /></td>
+							<th>구매일자</th>
+						
+							<td align="left">
+								<div>
+									<label for="from">시작일</label>
+									<input type="text" name="evStart" id="from"/>
+									<label for="to">종료일</label>
+									<input type="text" name="evEnd" id="to"/>
+								</div>
+							</td>
 						</tr>
 						<tr>
 							<td>주문상태</td>
@@ -97,5 +105,49 @@
 		</c:if>	
 	</div>
 </div>
+
+<!-- 날짜 -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+
+<script>
+$( function() {
+    var dateFormat = "mm/dd/yy",
+      from = $( "#from" )
+        .datepicker({
+        	
+          dateFormat: "yy-mm-dd",
+          defaultDate: "+1w",
+          changeMonth: true,
+          numberOfMonths: 3
+        })
+        .on( "change", function() {
+          to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+      to = $( "#to" ).datepicker({
+        dateFormat: "yy-mm-dd",
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 3
+      })
+      .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+      });
+ 
+    function getDate( element ) {
+      var date;
+      try {
+        date = $.datepicker.parseDate( dateFormat, element.value );
+      } catch( error ) {
+        date = null;
+      }
+ 
+      return date;
+    }
+    
+  } );
+
+</script>
 
 </html>
