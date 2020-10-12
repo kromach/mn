@@ -132,6 +132,6 @@ public class ArticleController {
 			ArticleDTO dto = articleService.read(idx);
 			model.addAttribute("articleDTO", dto);
 			System.out.println(model);
-			return null;
+			return "article/detail.mn";
 		}
 	}	
