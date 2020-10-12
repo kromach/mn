@@ -37,14 +37,14 @@
 				<c:forEach var="articleDTO" items="${list}">
 					<c:if test="${not empty articleDTO.thumbNail}">
 						<div class="grid-item">
-							<img src="${articleDTO.thumbNail}"/>
-							<figcaption>${articleDTO.bnTitle}</figcaption>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><img src="${articleDTO.thumbNail}" /></a>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><figcaption>${articleDTO.bnTitle}</figcaption></a>
 						</div>
 					</c:if>
 					<c:if test="${empty articleDTO.thumbNail }">
 						<div class="grid-item">
-							<img src="/resources/img/noImage.jpg"/>
-							<figcaption>${articleDTO.bnTitle}</figcaption>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><img src="/resources/img/noImage.jpg"/></a>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><figcaption>${articleDTO.bnTitle}</figcaption></a>
 						</div>
 					</c:if>
 				</c:forEach>
@@ -54,14 +54,14 @@
 				<c:forEach var="articleDTO" items="${list}">
 					<c:if test="${not empty articleDTO.thumbNail}">
 						<div class="grid-item">
-							<img src="${articleDTO.thumbNail}"/>
-							<figcaption>${articleDTO.bnTitle}</figcaption>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><img src="${articleDTO.thumbNail}"/></a>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><figcaption>${articleDTO.bnTitle}</figcaption></a>
 						</div>
 					</c:if>
 					<c:if test="${empty articleDTO.thumbNail }">
 						<div class="grid-item">
-							<img src="/resources/img/noImage.jpg"/>
-							<figcaption>${articleDTO.bnTitle}</figcaption>
+							<a href="/article/detail?idx=${articleDTO .bnIdx}"><img src="/resources/img/noImage.jpg"/></a>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><figcaption>${articleDTO.bnTitle}</figcaption></a>
 						</div>
 					</c:if>
 				</c:forEach>

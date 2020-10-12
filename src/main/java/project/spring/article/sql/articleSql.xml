@@ -24,6 +24,9 @@
   	<select id="searchAll" resultType="ArticleDTO">
   		select * from board_normal ORDER BY INSERT_DAY DESC 
   	</select>
+  	<select id="read" parameterType="int">
+  		select * from board_normal where idx = #{value}
+  	</select>
   	<insert id="insertTags" parameterType="ArticleDTO">
 	insert into BOARD_NORMAL (BN_IDX,BN_TITLE,KIND ,DK_CODE,READCOUNT,HEART,REPORT,CONTENT,INSERT_ID,INSERT_DAY,IS_DELETE )
 	values (BOARD_NORMAL_SEQ.nextval,#{bnTitle},default,#{dkCode},#{readcount},#{heart},#{report},#{content},

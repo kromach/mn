@@ -108,4 +108,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 	public List searchArticle() {
 		return sqlSession.selectList("article.searchAll");
 	}
+	@Override
+	public ArticleDTO read(int idx) {
+		
+		return sqlSession.selectOne("article.read", idx);
+	}
 }

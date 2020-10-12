@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.spring.article.dao.ArticleDAO;
+import project.spring.article.vo.ArticleDTO;
 import project.spring.article.vo.Editor_imageVO;
 
 @Service
@@ -66,5 +67,11 @@ public class ArticleServiceImpl implements ArticleService{
 		
 		return articleDAOimpl.searchArticle();
 		
+	}
+	
+	@Override
+	public ArticleDTO read(int idx) {
+		
+		return articleDAOimpl.read(idx);
 	}
 }

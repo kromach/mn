@@ -77,6 +77,7 @@ public class ArticleController {
 			return "article/articleList.mn";
 		}
 		
+		//Search >> thumbNail뽑아서 list return
 		@RequestMapping("/articleSearch")
 		public String articleSearch(
 				@RequestParam(required = false, name = "selectOption")String selectOption,
@@ -124,5 +125,13 @@ public class ArticleController {
 			System.out.println(list);
 			request.setAttribute("list", list);
 			return "article/articleList.mn";
+		}
+		@RequestMapping(value = "detail")
+		public String detail(@RequestParam(name="idx",required = false) int idx,Model model) {
+			
+			ArticleDTO dto = articleService.read(idx);
+			model.addAttribute("articleDTO", dto);
+			System.out.println(model);
+			return null;
 		}
 	}	
