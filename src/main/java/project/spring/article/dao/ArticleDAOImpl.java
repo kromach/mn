@@ -78,7 +78,6 @@ public class ArticleDAOImpl implements ArticleDAO {
 	@Override
 	public int insertImg(String newName) {
 		int result = -1;
-		
 		return result;
 	}
 }
