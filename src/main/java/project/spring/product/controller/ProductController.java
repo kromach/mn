@@ -103,7 +103,14 @@ public class ProductController {
 	}
 	
 	@RequestMapping("myorderdetail")
-	public String myorderdetail() throws SQLException{
+	public String myorderdetail(HttpServletRequest request, Model model) throws SQLException{
+		String orcode = request.getParameter("orcode");
+		//System.out.println(orcode);
+		
+		OrderVo orderinfo = productservice.orderdetail(orcode);
+		
+		model.addAttribute("orderinfo",orderinfo);
+		
 		
 		return "product/myorderdetail.mn";
 	}
@@ -139,5 +146,49 @@ public class ProductController {
 		
 		return "product/productList.mn";
 	}
+	
+	@RequestMapping("deleteorder")
+	public String deleteorder() {
+		
+		return "product/deleteorder.mn";
+	}
+	
+	@RequestMapping("orderlist")
+	public String orderlist(HttpSession session, Model model) throws SQLException {
+		String id = (String)session.getAttribute("memId");
+		System.out.println("id===============");
+		System.out.println(id);
+		List orderlist = null;
+		
+		int ordercount = productservice.getordercount(id);
+		System.out.println("ordercount===============");
+		System.out.println(ordercount);
+		if(ordercount >0) { 
+			System.out.println("리스트 부르고");
+			orderlist = productservice.getorderlist(id);
+			System.out.println("리스트는 : "+orderlist);
+		}
+		
+		model.addAttribute("orderlist",orderlist);
+		model.addAttribute("ordercount",ordercount);
+		
+		return "product/orderlist.mn";
+	}
+	
+	@RequestMapping("orderdetail")
+	public String orderdetail(HttpServletRequest request , Model model) throws SQLException {
+		String orcode = request.getParameter("orcode");
+		System.out.println(orcode);
+		
+		model.addAttribute(orcode);
+		
+		OrderVo orderinfo = productservice.orderdetail(orcode);
+		
+		model.addAttribute("orderinfo",orderinfo);
+		
+		return "product/orderdetail.mn";
+	}
+	
+	
 
 }

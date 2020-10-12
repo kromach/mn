@@ -101,9 +101,30 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public void insertorderinfo(OrderVo ordervo) throws SQLException {
-		System.out.println("주문 누룸2");
 		productDAO.insertorderinfo(ordervo);
 		
+	}
+
+	@Override
+	public OrderVo orderdetail(String orcode) throws SQLException {
+		OrderVo orinfo = productDAO.orderdetail(orcode);
+		return orinfo;
+	}
+
+	@Override
+	public List getorderlist(String id) throws SQLException {
+		
+		List orderlist = productDAO.getorderlist(id);
+		
+		return orderlist;
+	}
+
+	@Override
+	public int getordercount(String id) throws SQLException {
+		 
+		int ordercount = productDAO.getordercount(id);
+		
+		return ordercount;
 	}
 
 }
