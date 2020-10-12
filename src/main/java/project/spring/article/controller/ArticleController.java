@@ -60,81 +60,16 @@ public class ArticleController {
 		//insertTag
 		@RequestMapping("/writePro")
 		public String writePro(ArticleDTO dto)  throws IOException, FileUploadException {
-			
 			//기본값을 FreeBoard
 			if(dto.getDkCode()!=null&& dto.getDkCode().equals("선택")) {
 				dto.setDkCode(null);
 			}
 			dto.setKind("F");
 			System.out.println(dto);
-			
 			//insert
 			int result = articleService.insertItem(dto);
-			
+			//imgInsert
 			//insertTags
 			return "article/articleList.mn";
-		}
-		
-		//insertImg
-		@RequestMapping("/writeuploader")
-		public void writeuploader(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException, FileUploadException {
-			// 파일정보 꺼내기
-			MultipartFile mf = null;
-			PrintWriter printWriter = null;
-			// 인코딩
-			response.setCharacterEncoding("utf-8");
-			response.setContentType("text/html;charset=utf-8");		
-			String imgPath = null;
-			//String returnStr = "";
-			try {
-				mf = request.getFile("upload");
-				// 이미지 이름 중복처리 
-				String orgName = mf.getOriginalFilename();
-				// 파일의 이름만 추출
-				String imgName = orgName.substring(0, orgName.lastIndexOf("."));
-				// System.out.println(imgName);
-				// 파일의 확장자만 추출
-				String ext = orgName.substring(orgName.lastIndexOf("."));
-				// System.out.println(ext);
-				// 파일명 중복을 방지하기 위해 지금 시간을 밀리초로 받아와 파일명에 추가
-				long cur = System.currentTimeMillis();
-				String newName = imgName + cur + ext;  //원본 이름 + 현재시각(millis) + 확장자
-				// System.out.println(newName);
-				//파일 기본경로
-				String root = request.getContextPath() + "/resources";
-				//파일 기본경로 _ 상세경로
-				String path = request.getRealPath("resources/img/article") + File.separator;
-//				System.out.println("req :" + request.getRealPath("resources/img/upload"));
-				System.out.println(path + newName);
-				File file = new File(path);
-				//디렉토리 존재하지 않을경우 디렉토리 생성
-				if(!file.exists()) {
-					file.mkdirs();
-				}
-				File copyFile = new File(path + newName); // 새로운 이미지 경로로 업로드 한 파일 복사 생성
-				mf.transferTo(copyFile); // 지정된 경로로 파일 저장
-				// 경로, 파일명 리턴
-				//return3 = "&bNewLine=true&sFileName=" + orgName + "&sFileURL=" + root + "/img/upload/" + newName;
-				String callback = request.getParameter("CKEditorFuncNum");
-				printWriter = response.getWriter();
-				// 업로드시 메시지 출력
-				printWriter.println("<script type='text/javascript'>"
-				     + "window.parent.CKEDITOR.tools.callFunction("
-				     + callback+",'"+ root + "/img/upload/" + newName +"','이미지를 업로드하였습니다.')"
-				     +"</script>");
-				printWriter.flush();
-				
-				Editor_imageVO editor_imageVO = new Editor_imageVO();
-				//idx == seq 
-				editor_imageVO.setImg_url(newName);
-				editor_imageVO.setKind("A");
-				//code ==A +""+ (max(idx)+1)  >> 이미지 삽입로직 이야기해볼것
-				articleService.insertImg(editor_imageVO);
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				if(printWriter != null) try { printWriter.close(); } catch(Exception e) { e.printStackTrace();}
-			}
 		}
 	}	

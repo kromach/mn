@@ -82,7 +82,6 @@ public class ArticleDAOImpl implements ArticleDAO {
 		int result = -1;
 		//boardNomal의 글의 +1해서 코드를생성
 		int maxBnInx_BoardNomal = sqlSession.selectOne("article.selectMaxBnIDX");
-		String checkCode = "F0000"+ (maxBnInx_BoardNomal+1);
 		
 		//해당코드로 들어간 이미지가 있는지 보기
 		//String IMG_URL = sqlSession.selectOne("article.checkCodeInEditor",checkCode);
@@ -93,9 +92,6 @@ public class ArticleDAOImpl implements ArticleDAO {
 		//전의 쓰던글에서 이미지만 로딩 >> 필요하다면 다음 글 작성에서 검사후 제거
 		
 		//등록로직
-		editor_imageVO.setCode(checkCode);
-		System.out.println("ArticleDAOimpl="+editor_imageVO);
-		result  =  sqlSession.insert("article.insertImg", editor_imageVO);
 		return result;
 	}
 }
