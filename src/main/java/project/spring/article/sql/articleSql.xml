@@ -13,12 +13,18 @@
   	<select id="getDrinkSearchByName" resultType="hashmap" parameterType="string">
   		SELECT DK_NAME,DK_CODE FROM DRINK_INFO where DK_NAME LIKE '%'||#{value}||'%' 
   	</select>
+  	<select id="selectMaxBnIDX" >
+		select max(BN_IDX) from board_normal  	
+  	</select>
+  	<select id="checkCodeInEditor" parameterType="string" resultType="string"> 
+  		SELECT IMG_URL FROM EDITOR_IMAGE WHERE code = #{value};
+  	</select>
   	<insert id="insertTags" parameterType="ArticleDTO">
 	insert into BOARD_NORMAL (BN_IDX,BN_TITLE,KIND ,DK_CODE,READCOUNT,HEART,REPORT,CONTENT,INSERT_ID,INSERT_DAY,IS_DELETE )
 	values (BOARD_NORMAL_SEQ.nextval,#{bnTitle},default,#{dkCode},#{readcount},#{heart},#{report},#{content},
 	#{insertId},default,default)
   	</insert>
-  	<insert id="insertImg" parameterType="string" >
-  		insert into 
+  	<insert id="insertImg" parameterType="Editor_imageVO">
+  		INSERT INTO EDITOR_IMAGE VALUES (EDITOR_IMAGE_SEQ.nextVal,#{img_url},#{kind},#{code})
   	</insert>
   </mapper>

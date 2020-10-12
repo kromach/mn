@@ -41,6 +41,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 	public int insertItem(Object obj) {
 		int result = -1;
 		if(obj instanceof ArticleDTO) {
+			//전에글 코드이외의 이미지가있으면 지워주는로직 필요
+			
+			
 			System.out.println("daoImpl="+(ArticleDTO)obj);
 			result = sqlSession.insert("article.insertTags", (ArticleDTO)obj);
 		}
@@ -79,6 +82,21 @@ public class ArticleDAOImpl implements ArticleDAO {
 	@Override
 	public int insertImg(Editor_imageVO editor_imageVO) {
 		int result = -1;
+		//boardNomal의 글의 +1해서 코드를생성
+		int maxBnInx_BoardNomal = sqlSession.selectOne("article.selectMaxBnIDX");
+		String checkCode = "F0000"+ maxBnInx_BoardNomal;
+		
+		//해당코드로 들어간 이미지가 있는지 보기
+		String IMG_URL = sqlSession.selectOne("article.checkCodeInEditor",checkCode);
+		
+		//해당코드가 있다면, 한 게시물에서 여러이미지 등록이거나, 
+		//전의 쓰던글에서 이미지만 로딩하고 글을 작성완료안한것이됨.
+		//한게시물의 여러이미지 등록 >> 단순 등록처리
+		//전의 쓰던글에서 이미지만 로딩 >> 다음 글 작성에서 검사후 제거
+		
+		//등록로직
+		editor_imageVO.setCode(checkCode);
+		System.out.println("ArticleDAOimpl="+editor_imageVO);
 		result  =  sqlSession.insert("article.insertImg", editor_imageVO);
 		return result;
 	}
