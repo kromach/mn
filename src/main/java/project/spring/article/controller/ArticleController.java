@@ -84,8 +84,26 @@ public class ArticleController {
 				HttpServletRequest request
 				) {
 			List<ArticleDTO> list = null;
-			if(!search.equals("")) {
+			if(search!=null&&!search.equals("")) {
 				list = articleService.searchArticle(selectOption,search);
+				String imgThum = "";
+				//썸네일 뽑기
+				Iterator<ArticleDTO> it = list.iterator();
+				while(it.hasNext()) {
+					ArticleDTO dto = it.next();
+					String str = dto.getContent();
+					String[] str_ = str.split("src=\"");
+					for(int i=0;i<str_.length;i++) {
+						System.out.println(str_[i]+"|"+str_[i].contains("src=\""));
+						if(str_[i].contains("/resources")) {
+							imgThum = str_[i].split("\"")[0];
+							dto.setThumbNail(imgThum);
+						}
+					}
+				}
+			}else {
+				//전부 돌려서 랜덤뽑기
+				list = articleService.searchArticle();
 				String imgThum = "";
 				//썸네일 뽑기
 				Iterator<ArticleDTO> it = list.iterator();

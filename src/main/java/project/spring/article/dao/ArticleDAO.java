@@ -11,5 +11,6 @@ public interface ArticleDAO extends CommonInterface{
 	public int insertImg(Editor_imageVO editor_imageVO);
 	public List searchArticle(String selectOption,
 			String search);
+	public List searchArticle();
 
 }

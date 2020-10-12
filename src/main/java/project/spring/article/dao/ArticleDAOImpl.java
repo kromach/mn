@@ -104,4 +104,8 @@ public class ArticleDAOImpl implements ArticleDAO {
 		System.out.println(map);
 		return sqlSession.selectList("article.searchArticle", map);
 	}
+	@Override
+	public List searchArticle() {
+		return sqlSession.selectList("article.searchAll");
+	}
 }

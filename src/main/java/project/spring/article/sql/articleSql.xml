@@ -16,10 +16,13 @@
 		select max(BN_IDX) from board_normal  	
   	</select>
   	<select id="checkCodeInEditor" parameterType="string" resultType="string"> 
-  		SELECT IMG_URL FROM EDITOR_IMAGE WHERE code = #{value};
+  		SELECT IMG_URL FROM EDITOR_IMAGE WHERE code = #{value}
   	</select>
   	<select id="searchArticle" parameterType="hashmap" resultType="ArticleDTO">
   		select * from board_normal where ${selectOption} like '%'||#{search}||'%' 
+  	</select>
+  	<select id="searchAll" resultType="ArticleDTO">
+  		select * from board_normal ORDER BY INSERT_DAY DESC 
   	</select>
   	<insert id="insertTags" parameterType="ArticleDTO">
 	insert into BOARD_NORMAL (BN_IDX,BN_TITLE,KIND ,DK_CODE,READCOUNT,HEART,REPORT,CONTENT,INSERT_ID,INSERT_DAY,IS_DELETE )

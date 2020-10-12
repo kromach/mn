@@ -61,4 +61,10 @@ public class ArticleServiceImpl implements ArticleService{
 		return articleDAOimpl.searchArticle(selectOption,search);
 		
 	}
+	@Override
+	public List searchArticle() {
+		
+		return articleDAOimpl.searchArticle();
+		
+	}
 }
