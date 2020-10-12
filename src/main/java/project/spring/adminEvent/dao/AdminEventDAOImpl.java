@@ -25,8 +25,17 @@ public class AdminEventDAOImpl implements AdminEventDAO {
 
 	public int insertItem(AdminEventVO vo) {
 		
-		sqlSession.insert("adminEvent.insertEvent", vo);
-		return 0;
+		System.out.println("check dao");
+		// event코드 번호 생성 후 가져오기
+		String codeIdx = sqlSession.selectOne("adminEvent.getNumber");
+		vo.setEventCode(codeIdx);
+		System.out.println("이벤트 코드 : " + vo.getEventCode());
+		
+		int result = sqlSession.insert("adminEvent.insertEvent", vo);
+		
+		System.out.println("들어갓나?");
+		
+		return result;
 	}
 	
 	@Override
