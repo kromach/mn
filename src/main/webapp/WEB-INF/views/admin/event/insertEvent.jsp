@@ -173,7 +173,7 @@ function searchDk(){
 			console.log(data);
 			
 			$('#option').empty();
-			$('#option').append('<select id="option" name="productCode"><option value="">선택</option>');
+			$('#option').append('<option value="option">선택</option>');
 			
 			var dataLog;
 			for(var i in data){

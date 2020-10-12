@@ -17,7 +17,7 @@
 				console.log(data);
 
 				$('#option').empty();
-				$('#option').append('<option name="dkCode">선택</option>');
+				$('#option').append('<option value="option">선택</option>');
 
 				var dataLog;
 				for ( var i in data) {
