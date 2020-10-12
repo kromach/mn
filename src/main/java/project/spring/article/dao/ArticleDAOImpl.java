@@ -98,9 +98,10 @@ public class ArticleDAOImpl implements ArticleDAO {
 	@Override
 	public List searchArticle(String selectOption,
 			String search) {
-		Map map = new HashMap();
+		HashMap map = new HashMap();
 		map.put("selectOption", selectOption);
 		map.put("search",search );
+		System.out.println(map);
 		return sqlSession.selectList("article.searchArticle", map);
 	}
 }

@@ -80,13 +80,12 @@ public class ArticleController {
 		public String articleSearch(
 				@RequestParam(required = false, name = "selectOption")String selectOption,
 				@RequestParam(required = false, name = "search")String search) {
+				List<ArticleDTO> list = null;
 			if(!search.equals("")) {
 				System.out.println("articleSearchService");
-				articleService.searchArticle(selectOption,search);
+				list = articleService.searchArticle(selectOption,search);
 			}
-			
-			
-			
-			return null;
+			System.out.println(list);
+			return "article/articleList.mn";
 		}
 	}	
