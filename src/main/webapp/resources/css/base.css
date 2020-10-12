@@ -348,7 +348,7 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .grid-item img:hover{cursor: pointer; opacity: 0.5;}
 .grid-item img, .detail-item img {display: block; min-width:100%; max-width: 100%;}
 .grid-item figcaption {
-	border: 1px solid rgba(0, 0, 0, 0.2);
+	border: 1.3px solid rgba(0, 0, 0, 0.2);
 	padding: 10px;
 	margin-top: 4px; 
 	font-size: 14px;
