@@ -71,8 +71,8 @@ public class AdminEventDAOImpl implements AdminEventDAO {
 
 	@Override
 	public int updateItem(Object obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlSession.update("adminEvent.updateEvent", obj);
+		return result;
 	}
 
 	@Override
@@ -114,6 +114,14 @@ public class AdminEventDAOImpl implements AdminEventDAO {
 		}
 		
 		return list;
+	}
+
+	@Override
+	public AdminEventVO getEventInfo(String eventCode) throws SQLException {
+		
+		AdminEventVO vo = sqlSession.selectOne("adminEvent.getEventInfo", eventCode);
+		
+		return vo;
 	}
 
 }

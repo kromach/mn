@@ -48,8 +48,9 @@ public class AdminEventServiceImpl implements AdminEventService{
 
 	@Override
 	public int updateItem(Object obj) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		int result = adminEventDAO.updateItem(obj);
+		return result;
 	}
 
 	@Override
@@ -73,6 +74,8 @@ public class AdminEventServiceImpl implements AdminEventService{
 		List eventList = adminEventDAO.eventList(start, end);
 		return eventList;
 	}
+	
+	
 
 	
 	// 검색해서 가져오기
@@ -82,6 +85,14 @@ public class AdminEventServiceImpl implements AdminEventService{
 		List list = null;
 		list = adminEventDAO.getDrinkSearch(input);
 		return list;
+	}
+
+	// 이벤트 하나 가져오기
+	@Override
+	public AdminEventVO eventInfo(String eventCode) throws SQLException {
+
+		AdminEventVO vo = adminEventDAO.getEventInfo(eventCode);
+		return vo;
 	}
 
 
