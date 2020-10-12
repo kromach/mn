@@ -93,6 +93,11 @@ $( function() {
 			</form>
 		
 			<table class="tableCss table">
+				<tr align="right">
+					<td colspan="5">
+						<button class="btn btn-md btn-blue"  onclick="window.location='/admin/event/insertEvent'">등록</button>
+					</td>
+				</tr>
 				<tr>
 					<th>No</th>
 					<th>이벤트명</th>
@@ -113,7 +118,7 @@ $( function() {
 						<tr>
 							<td>${number}</td>
 								<c:set var="number" value="${number-1}" />
-							<td>${eventList.eventName}</td>
+							<td><a href="/admin/event/modifyEvent?eventCode=${eventList.eventCode }">${eventList.eventName}</a></td>
 							<td>${eventList.prName }</td>
 							<td>${eventList.evStart} ~ ${eventList.evEnd}</td>
 							<td>
