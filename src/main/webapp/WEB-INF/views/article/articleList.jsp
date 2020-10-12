@@ -32,6 +32,7 @@
 					</c:if>
 				</form>
 			</div>
+			<!--검색이 아닌경우 -->
 			<c:if test="${list.size() == 0 }">
 				<div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>
 				<div class="grid-item"><img src="/resources/img/main/5.jpg" /></div>
@@ -41,6 +42,23 @@
 				<div class="grid-item"><img src="/resources/img/main/4.jpg" /></div>
 				<div class="grid-item"><img src="/resources/img/main/8.jpg" /></div>
 				<div class="grid-item"><img src="/resources/img/main/3.jpg" /></div>
+			</c:if>
+			<!--검색인경우  -->
+			<c:if test="${list.size() != 0 }">
+				<c:forEach var="articleDTO" items="${list}">
+					<c:if test="${not empty articleDTO.thumbNail}">
+						<div class="grid-item">
+							<img src="${articleDTO.thumbNail}"/>
+							<figcaption>${articleDTO.bnTitle}</figcaption>
+						</div>
+					</c:if>
+					<c:if test="${empty articleDTO.thumbNail }">
+						<div class="grid-item">
+							<img src="/resources/img/noImage.jpg"/>
+							<figcaption>123</figcaption>
+						</div>
+					</c:if>
+				</c:forEach>
 			</c:if>
 	</div>
 </div>

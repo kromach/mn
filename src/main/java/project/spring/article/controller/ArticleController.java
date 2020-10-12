@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -75,18 +77,33 @@ public class ArticleController {
 			return "article/articleList.mn";
 		}
 		
-		
 		@RequestMapping("/articleSearch")
 		public String articleSearch(
 				@RequestParam(required = false, name = "selectOption")String selectOption,
 				@RequestParam(required = false, name = "search")String search,
 				HttpServletRequest request
 				) {
-				List<ArticleDTO> list = null;
+			List<ArticleDTO> list = null;
 			if(!search.equals("")) {
-				System.out.println("articleSearchService");
 				list = articleService.searchArticle(selectOption,search);
+				String imgThum = "";
+				//썸네일 뽑기
+				Iterator<ArticleDTO> it = list.iterator();
+				while(it.hasNext()) {
+					ArticleDTO dto = it.next();
+					String str = dto.getContent();
+					String[] str_ = str.split("src=\"");
+					for(int i=0;i<str_.length;i++) {
+						System.out.println(str_[i]+"|"+str_[i].contains("src=\""));
+						if(str_[i].contains("/resources")) {
+							imgThum = str_[i].split("\"")[0];
+							dto.setThumbNail(imgThum);
+						}
+					}
+				}
 			}
+			
+			System.out.println(list);
 			request.setAttribute("list", list);
 			return "article/articleList.mn";
 		}
