@@ -51,9 +51,6 @@ public class AdminEventController {
 		// 이벤트 처리 페이지
 		@RequestMapping("insertEventPro")
 		public String insertEvent(AdminEventVO vo, Model model, HttpServletRequest request, HttpServletResponse response)throws SQLException{
-			System.out.println("========================");
-			System.out.println("vo뭘까??   : ");
-			System.out.println("========================");
 			
 			
 			System.out.println("content 확인:"  + vo.getContent() );
@@ -65,9 +62,39 @@ public class AdminEventController {
 
 			System.out.println(vo.getEvStart());
 			System.out.println("content : " + vo.getContent());
-			System.out.println(request.getAttribute("title"));
+			System.out.println("ed_idx :: " +  vo.getEd_idx());
+			System.out.println("code : " + vo.getCode());
+			System.out.println("stardDay:" +  vo.getEvStart());
+			System.out.println("endDay" + vo.getEvEnd());
+			System.out.println("evnetName : " + vo.getEventName());
+			System.out.println("productCod : " + vo.getProductCode());
+			System.out.println("content : " + vo.getContent());
+			System.out.println("thumImg : " + vo.getThumImg());
 			
 			
+			// img 경로만 따로 꺼내기!
+			// 애러 방지
+			
+			if(vo.getContent().contains("src=")) {
+				String orgContent = vo.getContent();
+				int idx = orgContent.indexOf("src=");
+				int lastidx = orgContent.indexOf("style=");
+				
+				System.out.println("idx : " + idx);
+				System.out.println("last: " + lastidx);
+				
+				
+				String imgName = orgContent.substring((idx+4), lastidx-1);
+				
+				System.out.println("imgName = " + imgName);
+				
+				System.out.println(request.getAttribute("title"));
+				
+				vo.setThumImg(imgName);
+			}
+			
+			vo.setIsOpen("N");
+			vo.setInsertId("admin");
 			
 			
 			int result = adminEventService.insertItem(vo);

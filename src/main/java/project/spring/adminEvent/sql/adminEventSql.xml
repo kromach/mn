@@ -3,8 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="adminEvent">
-  		<insert id = "insertEvent" parameterType="AdminEventVO">
+  		
+  		<select id="getNumber" resultType="String">
+  			SELECT 'EV' || LPAD((SELECT count(event_code)+1 FROM EVENT),5,'0') AS code FROM dual;
   			
+  		</select>
+  
+  		<insert id = "insertEvent" parameterType="AdminEventVO" >
+    		insert into Event values(#{eventCode}, #{evnetName}, #{productCode}, #{evStart}, #{evEnd}. #{content}, #{thumImg}, #{isOpen}, #{insertId}, sysdate)
   		</insert>
   
   		<select id="eventCount" resultType="int">

@@ -116,7 +116,7 @@ $( function() {
 					<tr>
 						<th>술 선택</th>
 						<td colspan="2">
-							<select id="option" name="code">
+							<select id="option" name="productCode">
 								<option value="option">선택</option>
 							</select></td>
 					</tr>
