@@ -32,14 +32,16 @@
 					</c:if>
 				</form>
 			</div>
-			<div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>
-			<div class="grid-item"><img src="/resources/img/main/5.jpg" /></div>
-			<div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>
-			<div class="grid-item"><img src="/resources/img/main/7.jpg" /></div>
-			<div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
-			<div class="grid-item"><img src="/resources/img/main/4.jpg" /></div>
-			<div class="grid-item"><img src="/resources/img/main/8.jpg" /></div>
-			<div class="grid-item"><img src="/resources/img/main/3.jpg" /></div>
+			<c:if test="${list.size() == 0 }">
+				<div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>
+				<div class="grid-item"><img src="/resources/img/main/5.jpg" /></div>
+				<div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>
+				<div class="grid-item"><img src="/resources/img/main/7.jpg" /></div>
+				<div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
+				<div class="grid-item"><img src="/resources/img/main/4.jpg" /></div>
+				<div class="grid-item"><img src="/resources/img/main/8.jpg" /></div>
+				<div class="grid-item"><img src="/resources/img/main/3.jpg" /></div>
+			</c:if>
 	</div>
 </div>
 <script src="/resources/js/imageLoad.js"></script>
