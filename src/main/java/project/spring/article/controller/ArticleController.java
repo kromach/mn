@@ -79,14 +79,15 @@ public class ArticleController {
 		@RequestMapping("/articleSearch")
 		public String articleSearch(
 				@RequestParam(required = false, name = "selectOption")String selectOption,
-				@RequestParam(required = false, name = "search")String search) {
+				@RequestParam(required = false, name = "search")String search,
+				HttpServletRequest request
+				) {
+				List<ArticleDTO> list = null;
 			if(!search.equals("")) {
 				System.out.println("articleSearchService");
-				articleService.searchArticle(selectOption,search);
+				list = articleService.searchArticle(selectOption,search);
 			}
-			
-			
-			
-			return null;
+			request.setAttribute("list", list);
+			return "article/articleList.mn";
 		}
 	}	
