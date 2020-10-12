@@ -112,9 +112,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List getorderlist(String id) throws SQLException {
+	public List getorderlist(String id,int startrow ,int endrow) throws SQLException {
 		
-		List orderlist = productDAO.getorderlist(id);
+		List orderlist = productDAO.getorderlist(id,startrow,endrow);
 		
 		return orderlist;
 	}

@@ -37,12 +37,19 @@
 		select * from order_info where or_code = #{value}
 	</select>
 	
-	<select id="orderlist" parameterType="string" resultType="ordervo">
-		SELECT OINFO.OR_CODE , OINFO.PR_CODE,OINFO.PR_NAME,OINFO.OR_STATUS,OINFO.PR_PRICE,OINFO.PR_COUNT,
-		OINFO.USER_ID,OINFO.RECEIVER_NAME ,OINFO.RECEIVER_TEL,OINFO.RECEIVER_TEL
-		FROM ORDER_INFO OINFO JOIN
-		PRODUCT_INFO INFO ON INFO.PR_CODE = OINFO.PR_CODE 
-		WHERE INFO.INSERT_ID = #{value}
+	<select id="orderlist" parameterType="map" resultType="ordervo">
+		<![CDATA[
+		select a.* from
+			(select aa.* , rownum r from
+				(SELECT OINFO.OR_CODE , OINFO.PR_CODE,OINFO.PR_NAME,OINFO.OR_STATUS,OINFO.PR_PRICE,OINFO.PR_COUNT,
+				OINFO.USER_ID, OINFO.RECEIVER_NAME,OINFO.RECEIVER_TEL,oinfo.INSERT_DAY 
+				FROM ORDER_INFO OINFO JOIN
+				PRODUCT_INFO INFO ON INFO.PR_CODE = OINFO.PR_CODE 
+				WHERE INFO.INSERT_ID = #{id} order by OINFO.INSERT_DAY asc)
+			aa )
+			a where r >= #{startrow} and r <= #{endrow} 
+		
+		]]>
 	</select>
 	
 	<select id="selcount" parameterType="string" resultType="int">
