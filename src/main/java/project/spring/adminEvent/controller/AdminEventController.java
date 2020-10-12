@@ -19,6 +19,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,7 +51,7 @@ public class AdminEventController {
 		
 		// 이벤트 처리 페이지
 		@RequestMapping("insertEventPro")
-		public String insertEvent(AdminEventVO vo, Model model, HttpServletRequest request, HttpServletResponse response)throws SQLException{
+		public String insertEvent(@ModelAttribute AdminEventVO vo, Model model, MultipartHttpServletRequest request, HttpServletResponse response)throws SQLException{
 			
 			
 			System.out.println("content 확인:"  + vo.getContent() );
@@ -58,12 +59,64 @@ public class AdminEventController {
 			vo.setEvEnd(vo.getEvEnd().replace("-", ""));
 			
 			
-			System.out.println("check---------------------------------------------------");
+			// img 경로만 따로 꺼내기!
+			// 애러 방지
+			
+			/*
+			 * if(vo.getContent().contains("src=")) { String orgContent = vo.getContent();
+			 * int idx = orgContent.indexOf("src="); int lastidx =
+			 * orgContent.indexOf("style=");
+			 * 
+			 * System.out.println("idx : " + idx); System.out.println("last: " + lastidx);
+			 * 
+			 * 
+			 * String imgName = orgContent.substring((idx+4), lastidx-1);
+			 * 
+			 * System.out.println("imgName = " + imgName);
+			 * 
+			 * System.out.println(request.getAttribute("title"));
+			 * 
+			 * vo.setThumImg(imgName); }
+			 */
+			
+
+						
+			
+			// 대표이미지 파일 세팅
+			
+			int size = 1024*1024*20;
+			MultipartFile mf = null;
+			String path = null;
+			
+			try {
+				mf = request.getFile("eventImg");
+				path = request.getRealPath("/img/event");
+				
+				String orgName = mf.getOriginalFilename();
+				String imgName = orgName.substring(0,orgName.lastIndexOf('.'));
+				
+				String ext = orgName.substring(orgName.lastIndexOf('.'));
+				Long date = System.currentTimeMillis();
+				String newName = imgName + date + ext;
+				System.out.println("newName  :       " + newName);
+				String newImgPath = path + "\\" + newName;
+				File copyFile = new File(newImgPath);
+				mf.transferTo(copyFile);
+				
+				// vo 에 넣어주기
+				vo.setThumImg(newName);
+				
+				System.out.println("img 경로 : " + vo.getThumImg());
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			System.out.println("check---------------------------------------------------2222");
 
 			System.out.println(vo.getEvStart());
 			System.out.println("content : " + vo.getContent());
 			System.out.println("ed_idx :: " +  vo.getEd_idx());
-			System.out.println("code : " + vo.getCode());
 			System.out.println("stardDay:" +  vo.getEvStart());
 			System.out.println("endDay" + vo.getEvEnd());
 			System.out.println("evnetName : " + vo.getEventName());
@@ -71,37 +124,12 @@ public class AdminEventController {
 			System.out.println("content : " + vo.getContent());
 			System.out.println("thumImg : " + vo.getThumImg());
 			
-			
-			// img 경로만 따로 꺼내기!
-			// 애러 방지
-			
-			if(vo.getContent().contains("src=")) {
-				String orgContent = vo.getContent();
-				int idx = orgContent.indexOf("src=");
-				int lastidx = orgContent.indexOf("style=");
-				
-				System.out.println("idx : " + idx);
-				System.out.println("last: " + lastidx);
-				
-				
-				String imgName = orgContent.substring((idx+4), lastidx-1);
-				
-				System.out.println("imgName = " + imgName);
-				
-				System.out.println(request.getAttribute("title"));
-				
-				vo.setThumImg(imgName);
-			}
-			
+			//나머지 세팅
 			vo.setIsOpen("N");
-			vo.setInsertId("admin");
-			
+			vo.setInsertId((String)request.getSession().getAttribute("memId"));
 			
 			int result = adminEventService.insertItem(vo);
-			
-			System.out.println("결과!!!!!" + result);	
-			
-			
+
 			return "redirect:/admin/memberList.mn";
 		}
 		
@@ -157,75 +185,4 @@ public class AdminEventController {
 		}
 
 		
-		// 에디터 파일 업로드
-		@RequestMapping(value="eventImg", method=RequestMethod.POST)
-		public void eventImgUpload(MultipartHttpServletRequest request, HttpServletResponse response)throws IOException, FileUploadException {
-			System.out.println("확인 체크!!!!");
-			
-			// 파일종보
-			MultipartFile mf = null;
-			PrintWriter printWriter = null;
-			
-			// 인코등
-			response.setCharacterEncoding("utf-8");
-			response.setContentType("text/html;charset=utf-8");		
-			
-			String imgPath = null;
-			try {
-				mf = request.getFile("upload");
-				
-				// 이미지 이름 중복처리 
-				String orgName = mf.getOriginalFilename();
-				
-				// 파일의 이름만 추출
-				String imgName = orgName.substring(0, orgName.lastIndexOf("."));
-				// System.out.println(imgName);
-				
-				// 파일의 확장자만 추출
-				String ext = orgName.substring(orgName.lastIndexOf("."));
-				// System.out.println(ext);
-				
-				// 파일명 중복을 방지하기 위해 지금 시간을 밀리초로 받아와 파일명에 추가
-				long cur = System.currentTimeMillis();
-				String newName = imgName + cur + ext;  //원본 이름 + 현재시각(millis) + 확장자
-				// System.out.println(newName);
-
-				//파일 기본경로
-				String root = request.getContextPath() + "/resources";
-							
-				//파일 기본경로 _ 상세경로
-				String path = request.getRealPath("resources/img/upload") + File.separator;
-//				System.out.println("req :" + request.getRealPath("resources/img/upload"));
-				// System.out.println(path + newName);
-				File file = new File(path);
-				
-				//디렉토리 존재하지 않을경우 디렉토리 생성
-				if(!file.exists()) {
-					file.mkdirs();
-				}
-							
-				File copyFile = new File(path + newName); // 새로운 이미지 경로로 업로드 한 파일 복사 생성
-				
-				mf.transferTo(copyFile); // 지정된 경로로 파일 저장
-
-				// 경로, 파일명 리턴
-				//return3 = "&bNewLine=true&sFileName=" + orgName + "&sFileURL=" + root + "/img/upload/" + newName;
-				   
-				String callback = request.getParameter("CKEditorFuncNum");
-				printWriter = response.getWriter();
-
-				// 업로드시 메시지 출력
-				printWriter.println("<script type='text/javascript'>"
-				     + "window.parent.CKEDITOR.tools.callFunction("
-				     + callback+",'"+ root + "/img/upload/" + newName +"','이미지를 업로드하였습니다.')"
-				     +"</script>");
-				
-				printWriter.flush();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}finally {
-				if(printWriter != null)try {printWriter.close();}catch(Exception e) {e.printStackTrace();}
-			}
-		
-		}
 }

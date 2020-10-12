@@ -10,7 +10,8 @@
   		</select>
   
   		<insert id = "insertEvent" parameterType="AdminEventVO" >
-    		insert into Event values(#{eventCode}, #{evnetName}, #{productCode}, #{evStart}, #{evEnd}. #{content}, #{thumImg}, #{isOpen}, #{insertId}, sysdate)
+    		insert into Event values
+    		(#{eventCode}, #{eventName}, #{productCode}, #{evStart}, #{evEnd}. #{content}, #{thumImg}, #{isOpen}, #{insertId}, DEFAULT)
   		</insert>
   
   		<select id="eventCount" resultType="int">

@@ -7,10 +7,10 @@
   		SELECT CODE FROM DRINK_CATEGORY WHERE VALUE LIKE '%'||#{value}||'%'
   	</select>
   	<select id="getDrinkSearchByCategories" resultType="hashmap" parameterType="string">
-  		SELECT DK_NAME FROM DRINK_INFO WHERE DK_BKIND = #{value} OR DK_SKIND =#{value}
+  		SELECT DK_NAME, DK_CODE FROM DRINK_INFO WHERE DK_BKIND = #{value} OR DK_SKIND =#{value}
   	</select>
   	
   	<select id="getDrinkSearchByName" resultType="hashmap" parameterType="string">
-  		SELECT DK_NAME FROM DRINK_INFO where DK_NAME LIKE '%'||#{value}||'%' 
+  		SELECT DK_NAME, DK_CODE FROM DRINK_INFO where DK_NAME LIKE '%'||#{value}||'%' 
   	</select>
   </mapper>

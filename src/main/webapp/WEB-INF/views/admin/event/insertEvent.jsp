@@ -39,7 +39,7 @@
 
 	//이미지 업로드 url 설정
 	var ckedit_config = {
-		filebrowserUploadUrl : 'eventImg' ,  // 통신할 컨트롤러 매핑 주소 
+		filebrowserUploadUrl : '/editor/ckuploader' ,  // 통신할 컨트롤러 매핑 주소 
 		toolbar : ''
 	}
 	// ckeditor 설정 종료
@@ -100,7 +100,7 @@ $( function() {
 		<div class="gutter-sizer"></div>
 		<div class="grid-item grid-item--width6 ">
 		
-			<form action="insertEventPro" method="post" id="frm">
+			<form action="insertEventPro" method="post" id="frm" enctype="multipart/form-data">
 				<table class="tableCss table">
 					<tr>
 						<th>제목</th>
@@ -133,6 +133,13 @@ $( function() {
 							</div>
 						</td>
 					</tr>
+					<tr>
+						<th>대표사진</th>
+						<td>
+							<input type="file" name="eventImg" />
+						</td>
+					</tr>
+				
 					
 					<tr>
 						<td colspan="3" style="margin:0; padding:0">
@@ -166,7 +173,7 @@ function searchDk(){
 			console.log(data);
 			
 			$('#option').empty();
-			$('#option').append('<option value="option">선택</option>');
+			$('#option').append('<select id="option" name="productCode"><option value="">선택</option>');
 			
 			var dataLog;
 			for(var i in data){
@@ -176,12 +183,20 @@ function searchDk(){
 			}	
 			for(var j in dataLog){
 				console.log(dataLog[j].DK_NAME);
-				$('#option').append('<option value="'+dataLog[j].DK_NAME+'">'+dataLog[j].DK_NAME+'</option>');
+				$('#option').append('<option value="'+dataLog[j].DK_CODE+'">'+dataLog[j].DK_NAME+'</option></select>');
 			} 	
 		}
 	});
 }
 
+
+/* 	<tr>
+						<th>술 선택</th>
+						<td colspan="2">
+							<select id="option" name="productCode">
+								<option value="option">선택</option>
+							</select></td>
+					</tr>  */
 </script>
 <script>
 $(function() {
