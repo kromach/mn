@@ -17,6 +17,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import project.spring.article.vo.ArticleDTO;
+import project.spring.article.vo.Editor_imageVO;
 import project.spring.member.vo.MemberDTO;
 
 @Repository
@@ -76,8 +77,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 		return listByName;
 	}
 	@Override
-	public int insertImg(String newName) {
+	public int insertImg(Editor_imageVO editor_imageVO) {
 		int result = -1;
+		result  =  sqlSession.insert("article.insertImg", editor_imageVO);
 		return result;
 	}
 }

@@ -22,6 +22,7 @@
 		<typeAlias type="project.spring.myAct.vo.MyTitleDTO" alias="MyTitleDTO"/>
 		<typeAlias type="project.spring.myAct.vo.MyActivityDTO" alias="MyActivityDTO"/>
 		<typeAlias type="project.spring.myAct.vo.TitleListDTO" alias="TitleListDTO"/>
+		<typeAlias type="project.spring.article.vo.Editor_imageVO" alias="Editor_imageVO"/>
 	</typeAliases> 
 	<mappers>
 		<mapper resource="project/spring/kakao/sql/testSql.xml" />

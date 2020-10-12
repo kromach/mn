@@ -24,6 +24,7 @@ import project.spring.admin.service.AdminServiceImpl;
 import project.spring.admin.vo.AdminVO;
 import project.spring.article.service.ArticleServiceImpl;
 import project.spring.article.vo.ArticleDTO;
+import project.spring.article.vo.Editor_imageVO;
 import project.spring.beans.PageVO;
 import project.spring.beans.Pager;
 
@@ -71,11 +72,7 @@ public class ArticleController {
 			int result = articleService.insertItem(dto);
 			
 			//insertTags
-			
-			
 			return "article/articleList.mn";
-			
-			
 		}
 		
 		//insertImg
@@ -127,8 +124,12 @@ public class ArticleController {
 				     +"</script>");
 				printWriter.flush();
 				
-				articleService.insertImg(newName);
-				
+				Editor_imageVO editor_imageVO = new Editor_imageVO();
+				//idx == seq 
+				editor_imageVO.setImg_url(newName);
+				editor_imageVO.setKind("A");
+				//code ==A +""+ (max(idx)+1)  >> 이미지 삽입로직 이야기해볼것
+				articleService.insertImg(editor_imageVO);
 				
 			} catch (Exception e) {
 				e.printStackTrace();
