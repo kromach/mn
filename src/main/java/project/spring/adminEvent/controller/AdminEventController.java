@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import project.spring.adminEvent.service.AdminEventService;
+import project.spring.adminEvent.service.AdminEventServiceImpl;
 import project.spring.adminEvent.vo.AdminEventVO;
 import project.spring.article.service.ArticleServiceImpl;
 import project.spring.beans.PageVO;
@@ -37,7 +38,8 @@ import project.spring.beans.Pager;
 @RequestMapping("/admin/event/")
 public class AdminEventController {
 		@Autowired
-		private AdminEventService adminEventService = null;
+		private AdminEventServiceImpl adminEventService = null;
+		
 		@Autowired
 		private ArticleServiceImpl articleService = null;
 		
@@ -127,6 +129,8 @@ public class AdminEventController {
 			vo.setIsOpen("N");
 			vo.setInsertId((String)request.getSession().getAttribute("memId"));
 			
+			
+			System.out.println("controller 확인");
 			int result = adminEventService.insertItem(vo);
 
 			return "redirect:/admin/memberList.mn";
@@ -167,16 +171,24 @@ public class AdminEventController {
 			return "admin/event/eventList.mn";
 		}
 		
-		@RequestMapping("drinkSearch")
+		@RequestMapping("drinkCodeSearch")
 		@ResponseBody
-		public List drinkSearch(@RequestParam(value = "input", required = false) String input) {
+		public List drinkSearch(@RequestParam(value = "input", required = false) String input)throws SQLException {
+			System.out.println("검색기능 확인1");
 			List list = null;
 			System.out.println(input);
 			if(input !=  null && !input.equals("")) {
-				list = articleService.getDrinkSearch(input);
+				list = adminEventService.getDrinkSearch(input);
+				for(int i = 0; i < list.size(); i++) {
+					System.out.println(list.get(i));
+				}
 			}
 			return list;
 		}
 
+		@RequestMapping("modifyEvent")
+		public String modifyEvent() {
+			return "admin/event/modifyEvent.mn";
+		}
 		
 }

@@ -11,4 +11,6 @@ public interface AdminEventDAO extends CommonInterface {
 	
 	public List eventList(int startRow, int endRow) throws SQLException;
 
+	public List getDrinkSearch(String input) throws SQLException;
+	
 }

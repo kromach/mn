@@ -164,27 +164,22 @@ $( function() {
  <script>
 function searchDk(){
 	var input = $('#dkSch').val();
-	console.log(input);
 	var context = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
 	$.ajax({
-		url: context +'/event/drinkSearch?input='+input,
+		url: context +'/event/drinkCodeSearch?input='+input,
 		type: "get",
 		success : function(data){
-			console.log(data);
 			
 			$('#option').empty();
 			$('#option').append('<option value="option">선택</option>');
 			
-			var dataLog;
-			for(var i in data){
-				if(data[i].length>0){
-					dataLog = data[i];
-				}
-			}	
-			for(var j in dataLog){
-				console.log(dataLog[j].DK_NAME);
-				$('#option').append('<option value="'+dataLog[j].DK_CODE+'">'+dataLog[j].DK_NAME+'</option></select>');
-			} 	
+			
+			var index = Object.keys(data).length;
+			console.log(index);
+			for(var i=0 ; i<index;i++){
+				console.log(data[i].prCode);
+				$('#option').append('<option value="'+data[i].prCode+'">'+data[i].prName+'</option>');
+			}
 		}
 	});
 }
