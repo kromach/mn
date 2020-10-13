@@ -28,6 +28,8 @@
 			<h1 align="center">마이 페이지</h1>
 			<br/>
 			<br/>
+			<br/>
+			<br/>
 			<div class="linkBar">
 				<a href="/myAct">내 글 보기</a>
 			</div>
@@ -43,7 +45,7 @@
 			<br/>
 			<br/>
 			<div class="grid-sizer"></div>
-			<div class="grid-item grid-item--width6">
+			<div id="tmp" class="grid-item grid-item--width6">
 				<div id="index">
 					<table class="tableCss" style="width: 100%;">
 						<tr>
@@ -91,7 +93,8 @@
 						$('#index').empty();
 						$('#likeDrink_result').empty();
 						$('#title_result').empty();
-						$('#likeArticle_result').empty();	
+						$('#likeArticle_result').empty();
+						$('#tmp').attr('class','grid-item grid-item--width6');	
 						
 						$('#likeArticle_result').append('<table class="tableCss" style="width: 100%;">');
 						$('#likeArticle_result > table').append('<tr>');
@@ -133,6 +136,7 @@
 						$('#likeDrink_result').empty();
 						$('#title_result').empty();
 						$('#likeArticle_result').empty();	
+						$('#tmp').attr('class','grid-item grid-item--width6');						
 						
 						$('#title_result').append('<table class="tableCss" style="width: 100%;">');
 							var getTitleIndex;
@@ -175,14 +179,28 @@
 					url:"/myAct/likeDrink",
 					data:{id:$("#memId").val()},
 					success:function(data){
-						console.log(data);
-						$("#result2").html(data);
+						var likeDrink = data.likeDrink;
+						var likeProduct = data.likeProduct;
+						console.log(data.likeProduct);
+						$('#index').empty();
+						$('#likeDrink_result').empty();
+						$('#title_result').empty();
+						$('#likeArticle_result').empty();
+						$('#tmp').attr('class','grid-item');
+						
+						for(var i in likeProduct){
+							console.log(likeProduct[i]);
+							console.log(likeDrink[i]);
+							$('#likeDrink_result').append('<a href="/product/productdetail?prcode='+likeProduct[i].prCode+'"><img src="'+likeProduct[i].prImg+'" /></a>');
+							$('#likeDrink_result').append('</div>'); 		
+						}
 					}
 				});
 			});
 		});
 	
 	</script>
+
 		
 	<script src="/resources/js/imageLoad.js"></script>
 	<!-- 데이터 스크롤해서 붙이는 스크립트  -->

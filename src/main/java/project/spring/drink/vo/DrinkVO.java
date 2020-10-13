@@ -237,6 +237,4 @@ public class DrinkVO {
 				+ dkItem4 + ", dkItem5=" + dkItem5 + "]";
 	}
 
-	
-	
 }

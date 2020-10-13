@@ -54,6 +54,10 @@ public class MyActController {
 	public String attend() {
 		System.out.println("MyActAttend Controller");
 		
+		
+		
+		
+		
 		return "/myAct/attend.mn";
 	}
 	
@@ -135,5 +139,6 @@ public class MyActController {
 		
 		return myTitle;
 	}
+	
 
 }
