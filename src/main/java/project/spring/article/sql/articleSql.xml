@@ -7,10 +7,32 @@
   		SELECT CODE FROM DRINK_CATEGORY WHERE VALUE LIKE '%'||#{value}||'%'
   	</select>
   	<select id="getDrinkSearchByCategories" resultType="hashmap" parameterType="string">
-  		SELECT DK_NAME FROM DRINK_INFO WHERE DK_BKIND = #{value} OR DK_SKIND =#{value}
+  		SELECT DK_NAME, DK_CODE FROM DRINK_INFO WHERE DK_BKIND = #{value} OR DK_SKIND =#{value}
   	</select>
-  	
   	<select id="getDrinkSearchByName" resultType="hashmap" parameterType="string">
-  		SELECT DK_NAME FROM DRINK_INFO where DK_NAME LIKE '%'||#{value}||'%' 
+  		SELECT DK_NAME, DK_CODE FROM DRINK_INFO where DK_NAME LIKE '%'||#{value}||'%' 
   	</select>
+  	<select id="selectMaxBnIDX" resultType="int">
+		select max(BN_IDX) from board_normal  	
+  	</select>
+  	<select id="checkCodeInEditor" parameterType="string" resultType="string"> 
+  		SELECT IMG_URL FROM EDITOR_IMAGE WHERE code = #{value}
+  	</select>
+  	<select id="searchArticle" parameterType="hashmap" resultType="ArticleDTO">
+  		select * from board_normal where ${selectOption} like '%'||#{search}||'%' 
+  	</select>
+  	<select id="searchAll" resultType="ArticleDTO">
+  		select * from board_normal ORDER BY INSERT_DAY DESC 
+  	</select>
+  	<select id="read" parameterType="int" resultType="ArticleDTO">
+  		select * from board_normal where BN_IDX = #{value}
+  	</select>
+  	<insert id="insertTags" parameterType="ArticleDTO">
+	insert into BOARD_NORMAL (BN_IDX,BN_TITLE,KIND ,DK_CODE,READCOUNT,HEART,REPORT,CONTENT,INSERT_ID,INSERT_DAY,IS_DELETE )
+	values (BOARD_NORMAL_SEQ.nextval,#{bnTitle},default,#{dkCode},#{readcount},#{heart},#{report},#{content},
+	#{insertId},default,default)
+  	</insert>
+  	<insert id="insertImg" parameterType="Editor_imageVO">
+  		INSERT INTO EDITOR_IMAGE VALUES (EDITOR_IMAGE_SEQ.nextVal,#{img_url},#{kind},#{code})
+  	</insert>
   </mapper>

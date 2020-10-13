@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 .search{
     width: 250px;
@@ -20,22 +21,51 @@
 			<div class="grid-item grid-item--width6">
 				<form action="/article/articleSearch" name="articleSearch" id="articleSearch">
 					<select id="selectOption" name="selectOption" class="selectOption">
-						<option value="writer">작성자</option>
-						<option value="content">내용</option>
+						<option value="INSERT_ID">작성자</option>
+						<option value="CONTENT">내용</option>
+						<option value="BN_TITLE">제목</option>
 					</select>
 					검색어 : <input type="text" name="search" class="search"/>
 					<input type="submit" value="검색" class="btn btn-sm btn-blue" />
+					<c:if test="${not empty sessionScope.memId }">
 					<input type="button" value="글쓰기" class="btn btn-sm btn-dark" onclick="window.location.href='/article/writeForm'"/>
+					</c:if>
 				</form>
 			</div>
-			<div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>
-			<div class="grid-item"><img src="/resources/img/main/5.jpg" /></div>
-			<div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>
-			<div class="grid-item"><img src="/resources/img/main/7.jpg" /></div>
-			<div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
-			<div class="grid-item"><img src="/resources/img/main/4.jpg" /></div>
-			<div class="grid-item"><img src="/resources/img/main/8.jpg" /></div>
-			<div class="grid-item"><img src="/resources/img/main/3.jpg" /></div>
+			<!--검색이 아닌경우 -->
+			<c:if test="${list.size() == 0 }">
+				<c:forEach var="articleDTO" items="${list}">
+					<c:if test="${not empty articleDTO.thumbNail}">
+						<div class="grid-item">
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><img src="${articleDTO.thumbNail}" /></a>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><figcaption>${articleDTO.bnTitle}</figcaption></a>
+						</div>
+					</c:if>
+					<c:if test="${empty articleDTO.thumbNail }">
+						<div class="grid-item">
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><img src="/resources/img/noImage.jpg"/></a>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><figcaption>${articleDTO.bnTitle}</figcaption></a>
+						</div>
+					</c:if>
+				</c:forEach>
+			</c:if>
+			<!--검색인경우  -->
+			<c:if test="${list.size() != 0 }">
+				<c:forEach var="articleDTO" items="${list}">
+					<c:if test="${not empty articleDTO.thumbNail}">
+						<div class="grid-item">
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><img src="${articleDTO.thumbNail}"/></a>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><figcaption>${articleDTO.bnTitle}</figcaption></a>
+						</div>
+					</c:if>
+					<c:if test="${empty articleDTO.thumbNail }">
+						<div class="grid-item">
+							<a href="/article/detail?idx=${articleDTO .bnIdx}"><img src="/resources/img/noImage.jpg"/></a>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><figcaption>${articleDTO.bnTitle}</figcaption></a>
+						</div>
+					</c:if>
+				</c:forEach>
+			</c:if>
 	</div>
 </div>
 <script src="/resources/js/imageLoad.js"></script>

@@ -3,8 +3,16 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="adminEvent">
-  		<insert id = "insertEvent" parameterType="AdminEventVO">
-  			
+  		
+  		<select id="getNumber" resultType="string">
+  			SELECT 'EV' || LPAD((SELECT count(event_code)+1 FROM EVENT),5,'0') AS code FROM dual
+  		</select>
+  
+  		<insert id = "insertEvent" parameterType="AdminEventVO" >
+  			<![CDATA[
+    			insert into Event values
+    			(#{eventCode}, #{eventName}, #{productCode}, #{evStart}, #{evEnd}, #{content}, #{thumImg}, #{isOpen}, #{insertId}, sysdate)
+    		 ]]>
   		</insert>
   
   		<select id="eventCount" resultType="int">
@@ -21,8 +29,24 @@
 	  				order by ev_start DESC
 	  			) aa order by ev_start DESC
 	  		) a where r >=#{start} and r <=#{end}
-	  		
-
+	  	
   		]]>
   	</select>
+  	
+  	<select id="getDrinkSearch" parameterType="string" resultType="AdminEventVO">
+  		select PR_CODE, PR_NAME from product_info where PR_NAME LIKE '%'||#{value}||'%' 
+  	</select>
+  	
+  	<select id="getEventInfo" parameterType="string" resultType="AdminEventVO">
+  		select ev.EVENT_CODE, ev.EVENT_NAME, ev.PRODUCT_CODE, pr.PR_NAME, ev.EV_START, ev.EV_END, ev.CONTENT, ev.THUM_IMG, ev.IS_OPEN, ev.INSERT_ID, ev.INSERT_DAY
+  		 from event ev INNER JOIN PRODUCT_INFO pr on ev.product_code = pr.PR_CODE where ev.event_code=#{value}
+  	</select>
+  	
+  	<update id="updateEvent" parameterType="AdminEventVO">
+  		<![CDATA[
+  			update event set  event_name=#{eventName}, product_code=#{productCode}, ev_start=#{evStart}, ev_end=#{evEnd}, content=#{content}, thum_img=#{thumImg}, is_open=#{isOpen}, insert_id=#{insertId}, insert_day=sysdate
+  			where event_code=#{eventCode}
+  		 ]]>
+  		
+  	</update>
   </mapper>

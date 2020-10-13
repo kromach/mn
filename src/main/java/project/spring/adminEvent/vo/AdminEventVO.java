@@ -18,8 +18,15 @@ public class AdminEventVO {
 	private String isOpen;
 	private String insertId;
 	private Timestamp insertDay;
+	private String prCode;
 	private String prName;
 	
+	public String getPrCode() {
+		return prCode;
+	}
+	public void setPrCode(String prCode) {
+		this.prCode = prCode;
+	}
 	public String getPrName() {
 		return prName;
 	}

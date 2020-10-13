@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import project.spring.beans.PageVO;
+import project.spring.beans.Pager;
 import project.spring.member.service.MemberServiceImpl;
 import project.spring.member.vo.MemberDTO;
 import project.spring.product.service.ProductService;
@@ -103,7 +105,14 @@ public class ProductController {
 	}
 	
 	@RequestMapping("myorderdetail")
-	public String myorderdetail() throws SQLException{
+	public String myorderdetail(HttpServletRequest request, Model model) throws SQLException{
+		String orcode = request.getParameter("orcode");
+		//System.out.println(orcode);
+		
+		OrderVo orderinfo = productservice.orderdetail(orcode);
+		
+		model.addAttribute("orderinfo",orderinfo);
+		
 		
 		return "product/myorderdetail.mn";
 	}
@@ -139,5 +148,57 @@ public class ProductController {
 		
 		return "product/productList.mn";
 	}
+	
+	@RequestMapping("deleteorder")
+	public String deleteorder() {
+		
+		return "product/deleteorder.mn";
+	}
+	
+	@RequestMapping("orderlist")
+	public String orderlist(HttpSession session, Model model , String pageNum) throws SQLException {
+		String id = (String)session.getAttribute("memId");
+		List orderlist = null;
+		if(pageNum ==null)pageNum = "1";
+		
+		
+		
+		int ordercount = productservice.getordercount(id);
+	
+		
+		Pager pager = new Pager();
+		
+		PageVO pageVO =pager.pager(pageNum, ordercount);
+		
+		int startrow = pageVO.getStartRow();
+		int endrow = pageVO.getEndRow();
+		
+		if(ordercount >0) { 
+			orderlist = productservice.getorderlist(id,startrow,endrow);
+		}
+		
+		model.addAttribute("orderlist",orderlist);
+		model.addAttribute("ordercount",ordercount);
+		model.addAttribute("pageVO",pageVO);
+		model.addAttribute("pageNum",pageNum);
+		
+		return "product/orderlist.mn";
+	}
+	
+	@RequestMapping("orderdetail")
+	public String orderdetail(HttpServletRequest request , Model model) throws SQLException {
+		String orcode = request.getParameter("orcode");
+		System.out.println(orcode);
+		
+		model.addAttribute(orcode);
+		
+		OrderVo orderinfo = productservice.orderdetail(orcode);
+		
+		model.addAttribute("orderinfo",orderinfo);
+		
+		return "product/orderdetail.mn";
+	}
+	
+	
 
 }
