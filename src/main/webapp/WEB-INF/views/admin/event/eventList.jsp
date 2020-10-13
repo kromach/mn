@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>eventList view</title>
 
-<!-- 검색기능, href 걸기 디자인하기 -->
+<!-- 검색기능 value 없을때 넘기기 없기, href 걸기 디자인하기 -->
 
 	<!-- 날짜 -->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -60,28 +60,33 @@ $( function() {
 		<div class="gutter-sizer"></div>
 		<div class="grid-item grid-item--width6 ">
 			<h1>이벤트 목록</h1>
-			<form action="#" method="post">
+			<form action="eventList" method="get">
+				<input type="hidden" name="isSearch" value="true">
 				<table class="tableCss table">
 					<tr>
 						<th>이벤트명</th>
-						<td><input name="SchEvName"></td>
+						<td><input name="schEvName"></td>
+					</tr>
+					<tr>
+						<th>판매상품</th>
+						<td><input name="schPrName"></td>
 					</tr>
 					<tr>
 						<th>기간</th>
 						<td>
 							<div>
 								<label for="from">시작일</label>
-								<input type="text" name="evStart" id="from"/>
+								<input type="text" name="schEvStart" id="from"/>
 								<label for="to">종료일</label>
-								<input type="text" name="evEnd" id="to"/>
+								<input type="text" name="schEvEnd" id="to"/>
 							</div>
 						</td>
 					</tr>
 					<tr>
 						<th>상태</th>
 						<td>
-							<label><input type="radio" value="Y" name="isOpen">활성</label>
-							<label><input type="radio" value="N" name="isOpen">비활성</label>							
+							<label><input type="radio" value="Y" name="schIsOpen">활성</label>
+							<label><input type="radio" value="N" name="schIsOpen">비활성</label>							
 						</td>
 					</tr>
 					<tr>
@@ -122,7 +127,7 @@ $( function() {
 							<td>${eventList.prName }</td>
 							<td>${eventList.evStart} ~ ${eventList.evEnd}</td>
 							<td>
-								<c:if test="${eventList.isOpen == 'Y'}">활성</c:if>
+								<c:if test="${eventList.isOpen == 'Y'}"><a onclick="chOpen('${ eventList.eventCode}')">활성</a></c:if>
 								<c:if test="${eventList.isOpen == 'N'}">비활성</c:if>
 							
 							</td>
@@ -135,6 +140,12 @@ $( function() {
 	</div><!-- grid -->
 </div>	<!-- grid-Wrapper -->
 
+<script>
+function chOpen(eventCode){
+	alert(eventCode);
+	alert("해당 이벤트가 비활성화로 변경되었습니다.");
+}
+</script>
 
 
 </body>

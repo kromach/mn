@@ -41,7 +41,7 @@ public class ArticleController {
 	
 		@RequestMapping
 		public String index(){
-			return "article/articleList.mn";
+			return "forward:/article/articleSearch";
 		}
 		
 		@RequestMapping("/writeForm")
@@ -74,9 +74,10 @@ public class ArticleController {
 			int result = articleService.insertItem(dto);
 			//imgInsert
 			//insertTags
-			return "article/articleList.mn";
+			return "redirect:/article";
 		}
 		
+		//Search >> thumbNail뽑아서 list return
 		@RequestMapping("/articleSearch")
 		public String articleSearch(
 				@RequestParam(required = false, name = "selectOption")String selectOption,
@@ -84,8 +85,26 @@ public class ArticleController {
 				HttpServletRequest request
 				) {
 			List<ArticleDTO> list = null;
-			if(!search.equals("")) {
+			if(search!=null&&!search.equals("")) {
 				list = articleService.searchArticle(selectOption,search);
+				String imgThum = "";
+				//썸네일 뽑기
+				Iterator<ArticleDTO> it = list.iterator();
+				while(it.hasNext()) {
+					ArticleDTO dto = it.next();
+					String str = dto.getContent();
+					String[] str_ = str.split("src=\"");
+					for(int i=0;i<str_.length;i++) {
+						System.out.println(str_[i]+"|"+str_[i].contains("src=\""));
+						if(str_[i].contains("/resources")) {
+							imgThum = str_[i].split("\"")[0];
+							dto.setThumbNail(imgThum);
+						}
+					}
+				}
+			}else {
+				//전부 돌려서 랜덤뽑기
+				list = articleService.searchArticle();
 				String imgThum = "";
 				//썸네일 뽑기
 				Iterator<ArticleDTO> it = list.iterator();
@@ -106,5 +125,27 @@ public class ArticleController {
 			System.out.println(list);
 			request.setAttribute("list", list);
 			return "article/articleList.mn";
+		}
+		@RequestMapping(value = "/detail")
+		public String detail(@RequestParam(name="idx",required = false) Integer idx,Model model) {
+			int idx_ = 0;
+			if(idx!=null) idx_ = idx;
+			ArticleDTO dto = articleService.read(idx_);
+			
+			//밑에 게시글 뿌리는 메서드
+			List list = articleService.searchArticleByAdd(0);
+			System.out.println(list);
+			model.addAttribute("articleDTO", dto);
+			model.addAttribute("list", list);
+			return "article/detail.mn";
+		}
+		
+		@RequestMapping(value = "/more")
+		@ResponseBody
+		public List more(@RequestParam(name="num",required = false) Integer num) {
+			//밑에 게시글 뿌리는 메서드
+			List list = articleService.searchArticleByAdd(num);
+			System.out.println(list);
+			return list;
 		}
 	}	

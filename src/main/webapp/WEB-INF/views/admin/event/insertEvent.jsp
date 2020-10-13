@@ -108,7 +108,7 @@ $( function() {
 					</tr>
 					<tr>
 						<th>술 검색</th>
-							<td>
+							<td colspan="2">
 								<input id="dkSch" name="dkSch" class ="boardTitle_middle" />
 								<button type="button" class="btn btn-sm btn-grey" onclick="searchDk()">검색</button>
 							</td>
@@ -124,7 +124,7 @@ $( function() {
 						<th>
 							기간
 						</th>
-						<td>
+						<td colspan="2">
 							<div>
 								<label for="from">시작일</label>
 								<input type="text" name="evStart" id="from"/>
@@ -134,8 +134,15 @@ $( function() {
 						</td>
 					</tr>
 					<tr>
-						<th>대표사진</th>
+						<th>활성화여부</th>
 						<td>
+							<input type="radio" name="isOpen" value="Y" checked="checked">활성화 
+							<input type="radio" name="isOpen" value="N">비활성화 
+						</td>					
+					</tr>
+					<tr>
+						<th>대표사진</th>
+						<td colspan="2">
 							<input type="file" name="eventImg" />
 						</td>
 					</tr>

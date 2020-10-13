@@ -34,28 +34,34 @@
 			</div>
 			<!--검색이 아닌경우 -->
 			<c:if test="${list.size() == 0 }">
-				<div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>
-				<div class="grid-item"><img src="/resources/img/main/5.jpg" /></div>
-				<div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>
-				<div class="grid-item"><img src="/resources/img/main/7.jpg" /></div>
-				<div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
-				<div class="grid-item"><img src="/resources/img/main/4.jpg" /></div>
-				<div class="grid-item"><img src="/resources/img/main/8.jpg" /></div>
-				<div class="grid-item"><img src="/resources/img/main/3.jpg" /></div>
+				<c:forEach var="articleDTO" items="${list}">
+					<c:if test="${not empty articleDTO.thumbNail}">
+						<div class="grid-item">
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><img src="${articleDTO.thumbNail}" /></a>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><figcaption>${articleDTO.bnTitle}</figcaption></a>
+						</div>
+					</c:if>
+					<c:if test="${empty articleDTO.thumbNail }">
+						<div class="grid-item">
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><img src="/resources/img/noImage.jpg"/></a>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><figcaption>${articleDTO.bnTitle}</figcaption></a>
+						</div>
+					</c:if>
+				</c:forEach>
 			</c:if>
 			<!--검색인경우  -->
 			<c:if test="${list.size() != 0 }">
 				<c:forEach var="articleDTO" items="${list}">
 					<c:if test="${not empty articleDTO.thumbNail}">
 						<div class="grid-item">
-							<img src="${articleDTO.thumbNail}"/>
-							<figcaption>${articleDTO.bnTitle}</figcaption>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><img src="${articleDTO.thumbNail}"/></a>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><figcaption>${articleDTO.bnTitle}</figcaption></a>
 						</div>
 					</c:if>
 					<c:if test="${empty articleDTO.thumbNail }">
 						<div class="grid-item">
-							<img src="/resources/img/noImage.jpg"/>
-							<figcaption>123</figcaption>
+							<a href="/article/detail?idx=${articleDTO .bnIdx}"><img src="/resources/img/noImage.jpg"/></a>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }"><figcaption>${articleDTO.bnTitle}</figcaption></a>
 						</div>
 					</c:if>
 				</c:forEach>

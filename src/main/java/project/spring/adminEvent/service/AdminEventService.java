@@ -13,4 +13,8 @@ public interface AdminEventService extends CommonInterface {
 	public List eventList(int start, int end)throws SQLException;
 	
 	public List getDrinkSearch(String input) throws SQLException;
+	
+	public AdminEventVO eventInfo(String eventCode)throws SQLException;
+	
+	public void checkDate(String today)throws SQLException;
 }
