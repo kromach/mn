@@ -64,8 +64,13 @@
 			</table>
 		</div>
 		<div class="detail-item detail-width6">
-			<h3 class="pad-top10 pad-bottom20 text-left">후기 보기 (${commentStarInfo.cmCount})</h3>
+			<h3 class="pad-top10 pad-bottom20 text-left">후기 보기 (${commentStarInfo != null ? commentStarInfo.cmCount : '0'})</h3>
 			<div class="commentDiv margin-bottom30" id="commentList" style="height:500px">
+				<c:if test="${empty commentList}">  
+					<div class="clfix pad-top10" style="border-top: 1px solid #333;">
+						아직 등록된 후기가 없습니다.
+					</div>
+				</c:if>
 				<c:forEach items="${commentList}" var="comment">
 					<div class="clfix pad-top10" style="border-top: 1px solid #333;">
 						<div class="nm_like">

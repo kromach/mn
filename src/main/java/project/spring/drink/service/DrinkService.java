@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import project.spring.beans.CommonInterface;
 import project.spring.drink.dao.DrinkDAO;
 import project.spring.drink.vo.CommentVO;
@@ -30,5 +32,12 @@ public interface DrinkService {
 	public HashMap selectItemValuesInfo(String bigCategoryCode) throws SQLException;
 
 	public List<String> selectItemValuesList(String bigCategoryCode) throws SQLException;
+
+	public String insertDrink(DrinkVO drinkVo) throws SQLException;
+
+	public void updateDrinkTag(HashMap tagInfo) throws SQLException;
+
+	public String insertDrinkImg(MultipartHttpServletRequest request) throws SQLException;
+
 	
 }
