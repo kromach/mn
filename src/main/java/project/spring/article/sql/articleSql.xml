@@ -33,6 +33,9 @@
 		WHERE rnum >= (5*#{value})+1 and rnum <= (5*(#{value}+1))
 	]]>
   	</select>
+  	<select id="alreadyLike" parameterType="hashmap" resultType="int">
+  		select count(*) from board_like where nick = #{memNickName} and BN_IDX = #{num}
+  	</select>
   	<insert id="insertTags" parameterType="ArticleDTO">
 	insert into BOARD_NORMAL (BN_IDX,BN_TITLE,KIND ,DK_CODE,READCOUNT,HEART,REPORT,CONTENT,INSERT_ID,INSERT_DAY,IS_DELETE )
 	values (BOARD_NORMAL_SEQ.nextval,#{bnTitle},default,#{dkCode},#{readcount},#{heart},#{report},#{content},
@@ -41,4 +44,19 @@
   	<insert id="insertImg" parameterType="Editor_imageVO">
   		INSERT INTO EDITOR_IMAGE VALUES (EDITOR_IMAGE_SEQ.nextVal,#{img_url},#{kind},#{code})
   	</insert>
+  	<insert id="like_log" parameterType="hashmap">
+  		insert into board_like values(board_like_seq.nextVal,#{num},#{memNickName})
+  	</insert>
+  	<update id="updateMyActGivenHeart" parameterType="string">
+  		update MY_ACTIVITY set GIVEN_HEART = GIVEN_HEART+1 where id=#{value}; 
+  	</update>
+  	<update id="plusOneReadCount" parameterType="int">
+		UPDATE board_normal SET readcount = readcount+1 WHERE BN_IDX = #{value}
+  	</update>
+  	<update id="like" parameterType="int">
+		UPDATE board_normal SET heart = heart+1 WHERE BN_IDX = #{value}
+  	</update>
+  	<select id="likeReturn" parameterType="int" resultType="int">
+		select heart from board_normal where BN_IDX = #{value}
+  	</select>
   </mapper>
