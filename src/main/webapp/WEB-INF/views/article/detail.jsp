@@ -8,13 +8,13 @@
 			<div class="detail-item detail-width6">
 				<h2 class="pad-top10 pad-bottom10">${articleDTO.bnTitle}</h2>
 			</div>
-			<div class="detail-item detail-width6">
-				<span>작성자</span>
-				<span>작성일</span>
-				<span>조회수</span>
-				<span>좋아요</span>
-			</div>
 				<table class="detailTbl tbl-lg">
+					<tr>
+						<td>작성자</td>
+						<td>작성일</td>
+						<td>조회수</td>
+						<td>좋아요</td>
+					</tr>
 					<tr> 
 						<td>${articleDTO.insertId}</td>
 						<td>${articleDTO.insertDay}</td>
