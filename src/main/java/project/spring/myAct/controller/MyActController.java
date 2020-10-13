@@ -115,8 +115,7 @@ public class MyActController {
 		myTitle = myActService.getMyTitle(memId);
 		
 		map.put("allTitle",getAllTitle);
-		map.put("myTitle", myTitle);
-		
+		map.put("updateTitle", updateTitle);
 		return map;
 	}
 	
