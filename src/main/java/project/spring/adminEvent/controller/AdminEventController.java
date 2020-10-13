@@ -238,8 +238,13 @@ public class AdminEventController {
 		
 		// 이벤트 사용 여부 변경
 		@RequestMapping("chEventCode")
-		public void chEventCode() {
+		@ResponseBody
+		public AdminEventVO chEventCode(@RequestParam String eventCode)throws SQLException {
+			System.out.println("eventCode!!!"+eventCode);
+			AdminEventVO vo = null;
+			//AdminEventVO vo = adminEventService.chOpen(eventCode);
 			
+			return vo;
 		}
 
 		@RequestMapping("modifyEvent")

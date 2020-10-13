@@ -111,5 +111,7 @@
   			update event set is_open='N' where ev_end <= #{value}
   		 ]]>
   	</update>
-  	
+  	<update id="chOpen" parameterType="string">
+  		update event set is_open='N' where event_code = #{value}
+  	</update>
   </mapper>

@@ -148,4 +148,13 @@ public class AdminEventDAOImpl implements AdminEventDAO {
 		sqlSession.update("adminEvent.checkDate", today);
 	}
 
+	@Override
+	public AdminEventVO chOpen(String eventCode) throws SQLException {
+		
+		sqlSession.update("adminEvent.chOpen", eventCode);
+		AdminEventVO vo = sqlSession.selectOne("adminEvent.getEventInfo", eventCode);
+		
+		return vo;
+	}
+
 }
