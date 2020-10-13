@@ -22,7 +22,7 @@
 						<td>${articleDTO.heart}</td>
 					</tr>
 					<tr>
-						<td colspan="4" style="min-height: 400px;">${articleDTO.content }</td>
+						<td colspan="4" style="min-height: 400px; min-width: 0; display: inline-block;">${articleDTO.content }</td>
 					</tr>
 					<tr>
 						<td colspan="4" style="height: 100px; border-bottom: 1px solid;">
