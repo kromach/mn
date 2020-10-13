@@ -148,6 +148,4 @@ public class ArticleController {
 			System.out.println(list);
 			return list;
 		}
-		
-		
 	}	

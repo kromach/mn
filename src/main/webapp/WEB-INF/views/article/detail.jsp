@@ -52,7 +52,8 @@
 				</div>
 			</div>
 			<div class="detail-item detail-width6">
-				<table class="detailTbl tbl-lg">
+				<table class="detailTbl tbl-lg" id="more">
+					<tbody>
 					<tr>
 						<td>제목</td>
 						<td>작성자</td>
@@ -61,7 +62,7 @@
 						<td>좋아요</td>
 					</tr>
 					<c:forEach var="articleDTO" items="${list}">
-						<tr>
+						<tr >
 							<td>${articleDTO.bnTitle}</td>
 							<td>${articleDTO.insertId}</td>
 							<td><fmt:formatDate value="${articleDTO.insertDay}" pattern="yyyy.MM.dd"/></td>
@@ -69,10 +70,11 @@
 							<td>${articleDTO.heart}</td>
 						</tr>
 					</c:forEach>
+					</tbody>
 				</table>
 			</div>
 		</div>
-		<div class="detail-item detail-width6">
+		<div class="detail-item detail-width6" id="add">
 			<input id="addBtn" type="button" class="btn btn-md btn-grey" value="더보기" onclick="more()">
 			<input type ="hidden" value="0" id="moreVal">
 		</div>
@@ -90,7 +92,21 @@ function more(){
 		url : context + '/more?num='+moreVal,
 		type : "post",
 		success : function(data) {
-			console.log(typeof(data));
+			console.log("Object.keys Length : ",Object.keys(data).length);
+			var endlen = Object.keys(data).length;
+			if(endlen != 0){			
+				for(var i in data){
+					$("#more > tbody:last").append('<tr><td>'+data[i].bnTitle
+										+'</td><td>'+data[i].insertId
+										+'</td><td>'+moment(new Date(data[i].insertDay)).format('YYYY.MM.DD') 
+										+'</td><td>'+data[i].readcount
+										+'</td><td>'+data[i].heart
+										+'</td><tr/>'
+					);
+				}
+			}else if(endlen ==0 ){
+				$('#add').remove();
+			}
 		}
 	});
 }
