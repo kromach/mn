@@ -51,6 +51,7 @@
 							<td>제목</td>
 							<td>작성일</td>
 							<td>조회</td>
+							
 							<td>추천</td>
 						</tr>
 						<c:forEach var="myArticle" items="${myArticle}">
@@ -125,9 +126,9 @@
 					data:{id:$("#memId").val()},
 					success:function(data){
 						var getAllTitle = data.allTitle;
-						var getMyTitle = data.myTitle;
-						console.log(data);
-						
+						var updateTitle = data.updateTitle;
+						console.log(updateTitle);
+						/* console.log(updateTitle[j]); */
 						$('#index').empty();
 						$('#likeDrink_result').empty();
 						$('#title_result').empty();
@@ -135,10 +136,11 @@
 						
 						$('#title_result').append('<table class="tableCss" style="width: 100%;">');
 							var getTitleIndex;
-							for(var i in getAllTitle){
+						for(var i in getAllTitle){
 							$('#title_result > table').append('<tr>');
-							for(var j in getMyTitle){
-								if(getAllTitle[i].titleName == getMyTitle[j].titleName){
+							
+							for(var j in updateTitle){
+								if(getAllTitle[i].titleName == updateTitle[j]){
 									console.log(getAllTitle[i].titleName+'가 획득한 칭호이다.');
 									getTitleIndex =i;
 								} 

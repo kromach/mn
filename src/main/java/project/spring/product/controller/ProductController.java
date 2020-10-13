@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import project.spring.beans.PageVO;
+import project.spring.beans.Pager;
 import project.spring.member.service.MemberServiceImpl;
 import project.spring.member.vo.MemberDTO;
 import project.spring.product.service.ProductService;
@@ -154,23 +156,31 @@ public class ProductController {
 	}
 	
 	@RequestMapping("orderlist")
-	public String orderlist(HttpSession session, Model model) throws SQLException {
+	public String orderlist(HttpSession session, Model model , String pageNum) throws SQLException {
 		String id = (String)session.getAttribute("memId");
-		System.out.println("id===============");
-		System.out.println(id);
 		List orderlist = null;
+		if(pageNum ==null)pageNum = "1";
+		
+		
 		
 		int ordercount = productservice.getordercount(id);
-		System.out.println("ordercount===============");
-		System.out.println(ordercount);
+	
+		
+		Pager pager = new Pager();
+		
+		PageVO pageVO =pager.pager(pageNum, ordercount);
+		
+		int startrow = pageVO.getStartRow();
+		int endrow = pageVO.getEndRow();
+		
 		if(ordercount >0) { 
-			System.out.println("리스트 부르고");
-			orderlist = productservice.getorderlist(id);
-			System.out.println("리스트는 : "+orderlist);
+			orderlist = productservice.getorderlist(id,startrow,endrow);
 		}
 		
 		model.addAttribute("orderlist",orderlist);
 		model.addAttribute("ordercount",ordercount);
+		model.addAttribute("pageVO",pageVO);
+		model.addAttribute("pageNum",pageNum);
 		
 		return "product/orderlist.mn";
 	}

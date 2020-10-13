@@ -14,6 +14,7 @@ public class ArticleDTO {
 	private String insertId;
 	private Timestamp insertDay;
 	private String isDelete;
+	private String thumbNail;
 	
 	public int getBnIdx() {
 		return bnIdx;
@@ -82,11 +83,26 @@ public class ArticleDTO {
 	public void setBnTitle(String bnTitle) {
 		this.bnTitle = bnTitle;
 	}
+	
+	public String getThumbNail() {
+		return thumbNail;
+	}
+	public void setThumbNail(String thumbNail) {
+		this.thumbNail = thumbNail;
+	}
 	@Override
 	public String toString() {
-		return "ArticleDTO [bnIdx=" + bnIdx + ", bnTitle=" + bnTitle + ", kind=" + kind + ", dkCode=" + dkCode
-				+ ", readcount=" + readcount + ", heart=" + heart + ", report=" + report + ", content=" + content
-				+ ", insertId=" + insertId + ", insertDay=" + insertDay + ", isDelete=" + isDelete + "]";
+		return "ArticleDTO [bnIdx=" + bnIdx
+				+ ", bnTitle=" + bnTitle
+				+ ", kind=" + kind + ", dkCode="
+				+ dkCode + ", readcount="
+				+ readcount + ", heart=" + heart
+				+ ", report=" + report
+				+ ", content=" + content
+				+ ", insertId=" + insertId
+				+ ", insertDay=" + insertDay
+				+ ", isDelete=" + isDelete
+				+ ", thumbNail=" + thumbNail
+				+ "]";
 	}
-	
 }

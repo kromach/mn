@@ -1,9 +1,13 @@
 package project.spring.article.controller;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +41,7 @@ public class ArticleController {
 	
 		@RequestMapping
 		public String index(){
-			return "article/articleList.mn";
+			return "forward:/article/articleSearch";
 		}
 		
 		@RequestMapping("/writeForm")
@@ -70,6 +74,67 @@ public class ArticleController {
 			int result = articleService.insertItem(dto);
 			//imgInsert
 			//insertTags
+			return "redirect:/article";
+		}
+		
+		//Search >> thumbNail뽑아서 list return
+		@RequestMapping("/articleSearch")
+		public String articleSearch(
+				@RequestParam(required = false, name = "selectOption")String selectOption,
+				@RequestParam(required = false, name = "search")String search,
+				HttpServletRequest request
+				) {
+			List<ArticleDTO> list = null;
+			if(search!=null&&!search.equals("")) {
+				list = articleService.searchArticle(selectOption,search);
+				String imgThum = "";
+				//썸네일 뽑기
+				Iterator<ArticleDTO> it = list.iterator();
+				while(it.hasNext()) {
+					ArticleDTO dto = it.next();
+					String str = dto.getContent();
+					String[] str_ = str.split("src=\"");
+					for(int i=0;i<str_.length;i++) {
+						System.out.println(str_[i]+"|"+str_[i].contains("src=\""));
+						if(str_[i].contains("/resources")) {
+							imgThum = str_[i].split("\"")[0];
+							dto.setThumbNail(imgThum);
+						}
+					}
+				}
+			}else {
+				//전부 돌려서 랜덤뽑기
+				list = articleService.searchArticle();
+				String imgThum = "";
+				//썸네일 뽑기
+				Iterator<ArticleDTO> it = list.iterator();
+				while(it.hasNext()) {
+					ArticleDTO dto = it.next();
+					String str = dto.getContent();
+					String[] str_ = str.split("src=\"");
+					for(int i=0;i<str_.length;i++) {
+						System.out.println(str_[i]+"|"+str_[i].contains("src=\""));
+						if(str_[i].contains("/resources")) {
+							imgThum = str_[i].split("\"")[0];
+							dto.setThumbNail(imgThum);
+						}
+					}
+				}
+			}
+			
+			System.out.println(list);
+			request.setAttribute("list", list);
 			return "article/articleList.mn";
+		}
+		@RequestMapping(value = "detail")
+		public String detail(@RequestParam(name="idx",required = false) int idx,Model model) {
+			ArticleDTO dto = articleService.read(idx);
+			
+			//밑에 게시글 뿌리는 메서드
+			List list = articleService.searchArticleByAdd(0);
+			System.out.println(list);
+			model.addAttribute("articleDTO", dto);
+			model.addAttribute("list", list);
+			return "article/detail.mn";
 		}
 	}	

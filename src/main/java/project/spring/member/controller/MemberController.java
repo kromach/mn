@@ -47,9 +47,9 @@ public class MemberController {
 	MemberServiceImpl memberService;
 	
 	@RequestMapping("/signup")
-	public String signUp(HttpServletRequest reqest) {
+	public String signUp(HttpServletRequest request) {
 		String returnUrl = "redirect:/";
-		HttpSession session =  reqest.getSession();
+		HttpSession session =  request.getSession();
 		if(session.getAttribute("memId")==null) {
 			returnUrl = "/member/signStatus.mn";
 		}else{
@@ -59,11 +59,11 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/signupUser")
-	public String signUpUser(HttpServletRequest reqest) {
+	public String signUpUser(HttpServletRequest request) {
 		String returnUrl = "redirect:/";
-		HttpSession session =  reqest.getSession();
+		HttpSession session =  request.getSession();
 		if(session.getAttribute("memId")==null) {
-			reqest.setAttribute("status", "user");
+			request.setAttribute("status", "user");
 			returnUrl = "/member/signupForm.mn";
 		}else{
 			System.out.println("로그인이 된 상태입니다.");
@@ -71,11 +71,11 @@ public class MemberController {
 		return returnUrl;
 	}
 	@RequestMapping("/signupSales")
-	public String signUpSalses(HttpServletRequest reqest) {
+	public String signUpSalses(HttpServletRequest request) {
 		String returnUrl = "redirect:/";
-		HttpSession session =  reqest.getSession();
+		HttpSession session =  request.getSession();
 		if(session.getAttribute("memId")==null) {
-			reqest.setAttribute("status", "salse");
+			request.setAttribute("status", "sales");
 			returnUrl = "/member/signupForm.mn";
 		}else{
 			System.out.println("로그인이 된 상태입니다.");
@@ -123,7 +123,7 @@ public class MemberController {
 			birth += i;
 		}
 		dto.setBirth(birth);
-		dto.setUserKind("salse");
+		dto.setUserKind("sales");
 		//사업자등록증 파일제한 15MB
 		int sizeLimit = 1024*1024*15;
 		MultipartFile mf = null;
@@ -153,17 +153,17 @@ public class MemberController {
 		model.addAttribute("nickName", dto.getNickName());
 		mpRequest.getSession().setAttribute("memId", dto.getId());
 		mpRequest.getSession().setAttribute("memNickName", dto.getNickName());
-		mpRequest.getSession().setAttribute("userKind", "salse");
+		mpRequest.getSession().setAttribute("userKind", "sales");
 		return "/member/signupResult.mn";
 	}
 	
 	@RequestMapping("/login")
-	public String login(HttpServletRequest reqest,Model model) {
+	public String login(HttpServletRequest request,Model model) {
 		String returnUrl = "redirect:/";
-		HttpSession session =  reqest.getSession();
+		HttpSession session =  request.getSession();
 		if(session.getAttribute("memId")==null) {
-			reqest.setAttribute("restApikey", restApikey);
-			reqest.setAttribute("callback_URL", callback_URL);
+			request.setAttribute("restApikey", restApikey);
+			request.setAttribute("callback_URL", callback_URL);
 			returnUrl = "/member/loginForm.mn";
 		}else{
 			System.out.println("로그인이 된 상태입니다.");
