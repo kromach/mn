@@ -235,6 +235,12 @@ public class AdminEventController {
 			}
 			return list;
 		}
+		
+		// 이벤트 사용 여부 변경
+		@RequestMapping("chEventCode")
+		public void chEventCode() {
+			
+		}
 
 		@RequestMapping("modifyEvent")
 		public String modifyEvent(@RequestParam(value="eventCode", required = false) String eventCode, Model model)throws SQLException {
@@ -301,5 +307,7 @@ public class AdminEventController {
 			
 			return "redirect:/admin/event/eventList.mn";
 		}
+		
+
 		
 }

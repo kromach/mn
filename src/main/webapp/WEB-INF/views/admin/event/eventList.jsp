@@ -126,7 +126,7 @@ $( function() {
 							<td><a href="/admin/event/modifyEvent?eventCode=${eventList.eventCode }">${eventList.eventName}</a></td>
 							<td>${eventList.prName }</td>
 							<td>${eventList.evStart} ~ ${eventList.evEnd}</td>
-							<td>
+							<td id="chOpen">
 								<c:if test="${eventList.isOpen == 'Y'}"><a onclick="chOpen('${ eventList.eventCode}')">활성</a></c:if>
 								<c:if test="${eventList.isOpen == 'N'}">비활성</c:if>
 							
@@ -142,8 +142,18 @@ $( function() {
 
 <script>
 function chOpen(eventCode){
-	alert(eventCode);
+
 	alert("해당 이벤트가 비활성화로 변경되었습니다.");
+	var context = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+
+	$.ajax({
+		url: context + '/admin/event/chEventCode?eventCode='+eventCode,
+		type:"get",
+		success : function(data){
+
+		}
+	})
+	
 }
 </script>
 
