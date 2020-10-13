@@ -1,8 +1,12 @@
 package project.spring.myAct.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,32 +104,69 @@ public class MyActDAOImpl implements MyActDAO{
 	*/
 	@Override
 	public List updateTitle(String memId) {
+		//달성조건
 		List<TitleListDTO> titleValue =sqlSession.selectList("myAct.getAllTitle", memId);
-		List<MyActivityDTO> myActivity = sqlSession.selectList("myAct.myActivity", memId);
-		
+		//내가 가지고 있는 현황
+		MyActivityDTO myActivity = sqlSession.selectOne("myAct.myActivity", memId);
+		Map<String, String> map = new HashMap<String,String>();
+		//기준들의 ArrayList
+		ArrayList<String> standard = new ArrayList<String>();
 		for(TitleListDTO dto : titleValue) {
-			for(MyActivityDTO source : myActivity) {
-				int result =0;
-				if(dto.getTitleName().equals("my_attendent")) {
-					int value = source.getMyAttendent();	// value 75			30<90<180<365
-					System.out.println("value : " +value);
-					if( value>=30 && value<90) {
-						result = 2;
-					}else if(value>=90 && value <180) {
-						result = 3;
-					}else if(value>= 180 && value <365) {
-						result = 4;
-					}else if (value >= 365) {
-						result = 5;
-					}
+			standard.add(dto.getTitleKey());
+		}
+		//중복제거
+		HashSet<String> standardHashSet = new HashSet<String>(standard);
+		System.out.println("=====================HashSetStandard"+standardHashSet);
+		for(TitleListDTO dto : titleValue) {
+			Iterator itStandard =  standardHashSet.iterator();
+			while(itStandard.hasNext()) {
+				String standardString = (String) itStandard.next();
+				//비교
+				if(dto.getTitleKey().equals(standardString)){
+					map.put((dto.getTitleValue()+":"+dto.getTitleKey()), dto.getTitleName());
 				}
-				System.out.println("result : " +result);
 			}
 		}
+		System.out.println("mapPrint================"+map);
 		
-		return titleValue;
+		Set<String> key = map.keySet();
+		Iterator<String> it = key.iterator();
+		
+		List returnList = new ArrayList();
+		while(it.hasNext()) {
+			String keyForMap = it.next();
+			String[] keyForMapTmp = keyForMap.split(":");
+			System.out.println("keyForMapVal================"+keyForMapTmp[0]);
+			System.out.println("keyForMapKey================"+keyForMapTmp[1]);
+			if(keyForMapTmp[1] !=null) {
+				if(keyForMapTmp[1].equals("my_attendent")) {
+					if(myActivity.getMyAttendent() >= Integer.parseInt(keyForMapTmp[0])) {
+						System.out.println(myActivity.getId()+"님이"+ map.get(keyForMap)+"를 획득하였습니다.");
+						returnList.add(map.get(keyForMap));
+					}
+				}
+				if(keyForMapTmp[1].equals("my_like")) {
+					if(myActivity.getGivenHeart() >= Integer.parseInt(keyForMapTmp[0])) {
+						System.out.println(myActivity.getId()+"님이"+ map.get(keyForMap)+"를 획득하였습니다.");
+						returnList.add(map.get(keyForMap));
+					}
+				}
+				if(keyForMapTmp[1].equals("my_article")) {
+					if(myActivity.getMyArticleCount() >= Integer.parseInt(keyForMapTmp[0])) {
+						System.out.println(myActivity.getId()+"님이"+ map.get(keyForMap)+"를 획득하였습니다.");
+						returnList.add(map.get(keyForMap));
+					}
+				}
+				if(keyForMapTmp[1].equals("my_recomment")) {
+					if(myActivity.getMyCommentCount() >= Integer.parseInt(keyForMapTmp[0])) {
+						System.out.println(myActivity.getId()+"님이"+ map.get(keyForMap)+"를 획득하였습니다.");
+						returnList.add(map.get(keyForMap));
+					}
+				}
+			}
+		}
+		return returnList;
 	}
-	
 	@Override
 	public List getAllTitle() {
 		List list = sqlSession.selectList("myAct.getAllTitle");
