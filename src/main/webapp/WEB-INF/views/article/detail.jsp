@@ -1,82 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!-- 유효성검사 js -->
-<script src="/resources/js/formCheck.js"></script> 
-<!-- 에디터 js -->
-<script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="/resources/ckeditor/adapters/jquery.js"></script>
-<script charset="utf-8">
-	function searchDk() {
-		var input = $('#dkSch').val();
-		var context = window.location.pathname.substring(0,
-				window.location.pathname.indexOf("/", 2));
-		$.ajax({
-			url : context + '/drinkSearch?input=' + input,
-			type : "get",
-			success : function(data) {
-				console.log(data);
-
-				$('#option').empty();
-				$('#option').append('<option value="option">선택</option>');
-
-				var dataLog;
-				for ( var i in data) {
-					if (data[i].length > 0) {
-						dataLog = data[i];
-					}
-				}
-				for ( var j in dataLog) {
-					console.log(dataLog[j].DK_NAME);
-					$('#option').append(
-							'<option value="'+dataLog[j].DK_CODE+'">'
-									+ dataLog[j].DK_NAME + '</option>');
-				}
-			}
-		});
-	}
-	// ckeditor 설정
-	CKEDITOR.on('dialogDefinition', function (ev) {
-		
-		var dialogName = ev.data.name;
-		var dialog = ev.data.definition.dialog;
-		var dialogDefinition = ev.data.definition;
-
-		if (dialogName == 'image') {
-			dialog.on('show', function (obj) {
-				this.selectPage('Upload'); //사진 추가 버튼 클릭시 업로드탭으로 시작
-			});	
-			dialogDefinition.removeContents('advanced'); // 자세히탭 제거
-			dialogDefinition.removeContents('Link'); // 링크탭 제거
-		}
-	});
-	//이미지 업로드 url 설정
-	var ckedit_config = {
-		filebrowserUploadUrl : '/editor/ckuploader' ,  // 통신할 컨트롤러 매핑 주소 
-		toolbar : ''
-	}
-	// ckeditor 설정 종료
-	//clickEvent부여 및 유효성 검사
-	$(function() {
-		$("#addBtn").click(function() {
-			checkFormjquery();
-			if (checkFormjquery()){
-				$("#frm").submit();
-			}
-		});
-	});
-</script>
 <body>
 	<div class="grid-Wrapper">
 		<div class="grid">
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
+			<div class="detail-item detail-width6">
+				<h2 class="pad-top10 pad-bottom10">${articleDTO.bnTitle}</h2>
+			</div>
+			<div class="detail-item detail-width6">
+				<span>작성자</span>
+				<span>작성일</span>
+				<span>조회수</span>
+				<span>좋아요</span>
+			</div>
+				<table class="detailTbl tbl-lg">
+					<tr> 
+						<td>${articleDTO.insertId}</td>
+						<td>${articleDTO.insertDay}</td>
+						<td>${articleDTO.readcount}</td>
+						<td>${articleDTO.heart}</td>
+					</tr>
+					<tr>
+						<td colspan="4" style="min-height: 400px;">${articleDTO.content }</td>
+					</tr>
+					<tr>
+						<td colspan="4" style="height: 100px; border-bottom: 1px solid;">
+						<div>
+							<button class="btn btn-lg btn-blue" onclick="">좋아요</button>
+							<a class="btn btn-lg btn-blue" onclick="">신고</a>
+							<a class="btn btn-lg btn-yellow" onclick="">댓글등록</a>
+						</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4" style="height: 50px;">Comment</td>
+					</tr>
+				</table>
+			</div>
 			<div class="grid-item grid-item--width6">
-				<div class="text-center pad-top10">
+				<div class="text-center pad-top10 pad-bottom20">
 					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="전송">
-					<input type="button" class="btn btn-md btn-grey" value="취소" onclick="window.location='/article'" />
+					<input type="button" class="btn btn-md btn-grey" value="목록으로" onclick="window.location='/article'" />
+					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="수정">
+					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="삭제">
 				</div>
 			</div>
+			<div class="detail-item detail-width6">
+				<table class="detailTbl tbl-lg">
+					<tr>	
+						<th style="min-width: 100px;">제목</th>
+						<th style="min-width: 100px;">글쓴이</th>
+						<th style="min-width: 130px;">작성일</th>
+						<th style="min-width: 130px;">조회수</th>
+						<th style="min-width: 130px;">좋아요</th>
+					</tr>
+					<c:forEach var="articleDTO" items="${list}">
+						<tr>
+							<td>${articleDTO.bnTitle}</td>
+							<td>${articleDTO.insertId}</td>
+							<td>${articleDTO.insertDay}</td>
+							<td>${articleDTO.readcount}</td>
+							<td>${articleDTO.heart}</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+			<div class="detail-item detail-width6">
+				<h2>더보기</h2>
+			</div>
 		</div>
-	</div>
 </body>
 </html>
