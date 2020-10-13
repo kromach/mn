@@ -16,4 +16,6 @@ public interface AdminEventDAO extends CommonInterface {
 	
 	public AdminEventVO getEventInfo(String eventCode) throws SQLException;
 	
+	public void checkDate(String today)throws SQLException;
+	
 }

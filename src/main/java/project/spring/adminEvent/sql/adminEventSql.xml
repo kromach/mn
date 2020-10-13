@@ -33,6 +33,41 @@
   		]]>
   	</select>
   	
+  	<select id="schEventList" parameterType="hashmap" resultType="AdminEventVO">
+  		<![CDATA[
+  		
+  		select a.*from(
+	  			select aa.*, rownum r from(
+	  				SELECT ev.event_code, ev.event_name, ev.product_code, ev.ev_start, ev.ev_end, ev.is_open, pr.pr_name FROM 
+	  					EVENT ev INNER JOIN PRODUCT_INFO pr ON ev.PRODUCT_CODE = pr.PR_CODE  
+	  				order by ev_start DESC
+	  			) aa order by ev_start DESC
+	  		) a where r >=#{start} and r <=#{end}
+	  	
+  		]]>
+  		<trim prefix="AND" prefixOverrides="AND">
+  				<if test="eventName != null">
+  					AND event_name like '%' || #{eventName} || '%' 
+  				</if>
+  				<if test="prName != null">
+  					AND pr_name like '%' || #{prName} || '%' 
+  				</if>
+  				<if test="evStart != null">
+  					<![CDATA[
+  						AND ev_start <= #{evStart} 
+  					 ]]>
+  				</if>
+  				<if test="evEnd != null">
+					<![CDATA[
+  						AND ev_end >= #{evEnd} 
+  					 ]]>  				</if>
+  				<if test="isOpen != null">
+  					AND is_open = #{isOpen}
+  				</if>
+  			</trim>
+  	</select>
+  	
+  	
   	<select id="getDrinkSearch" parameterType="string" resultType="AdminEventVO">
   		select PR_CODE, PR_NAME from product_info where PR_NAME LIKE '%'||#{value}||'%' 
   	</select>
@@ -47,6 +82,34 @@
   			update event set  event_name=#{eventName}, product_code=#{productCode}, ev_start=#{evStart}, ev_end=#{evEnd}, content=#{content}, thum_img=#{thumImg}, is_open=#{isOpen}, insert_id=#{insertId}, insert_day=sysdate
   			where event_code=#{eventCode}
   		 ]]>
-  		
   	</update>
+  	<select id="schEventCount" parameterType="HashMap" resultType="int">
+  		select count(*) from event ev INNER JOIN PRODUCT_INFO pr on ev.product_code = pr.PR_CODE
+  			<trim prefix="where" prefixOverrides="AND">
+  				<if test="eventName != null">
+  					AND ev.event_name like '%' || #{eventName} || '%' 
+  				</if>
+  				<if test="prName != null">
+  					AND pr.pr_name like '%' || #{prName} || '%' 
+  				</if>
+  				<if test="evStart != null">
+  					<![CDATA[
+  						AND ev.ev_start <= #{evStart} 
+  					 ]]>
+  				</if>
+  				<if test="evEnd != null">
+					<![CDATA[
+  						AND ev.ev_end >= #{evEnd} 
+  					 ]]>  				</if>
+  				<if test="isOpen != null">
+  					AND ev.is_open = #{isOpen}
+  				</if>
+  			</trim>
+  	</select>
+  	<update id="checkDate" parameterType="string">
+  		<![CDATA[
+  			update event set is_open='N' where ev_end <= #{value}
+  		 ]]>
+  	</update>
+  	
   </mapper>

@@ -1,7 +1,9 @@
 package project.spring.adminEvent.service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,6 +69,13 @@ public class AdminEventServiceImpl implements AdminEventService{
 		
 		return count;
 	}
+	
+	public int eventCount(Map schMap)throws SQLException{
+		
+		int count = adminEventDAO.eventCount(schMap);
+		return count;
+	}
+	
 
 	// 이벤트 가져오기
 	@Override
@@ -75,7 +84,11 @@ public class AdminEventServiceImpl implements AdminEventService{
 		return eventList;
 	}
 	
-	
+	public List eventList(int start, int end, Map schMap)throws SQLException{
+		List eventList = adminEventDAO.eventList(start, end, schMap);
+		
+		return eventList;
+	}
 
 	
 	// 검색해서 가져오기
@@ -93,6 +106,12 @@ public class AdminEventServiceImpl implements AdminEventService{
 
 		AdminEventVO vo = adminEventDAO.getEventInfo(eventCode);
 		return vo;
+	}
+
+	@Override
+	public void checkDate(String today) throws SQLException {
+
+		adminEventDAO.checkDate(today);
 	}
 
 
