@@ -28,6 +28,8 @@
 			<h1 align="center">마이 페이지</h1>
 			<br/>
 			<br/>
+			<br/>
+			<br/>
 			<div class="linkBar">
 				<a href="/myAct">내 글 보기</a>
 			</div>
@@ -188,8 +190,9 @@
 						
 						for(var i in likeProduct){
 							console.log(likeProduct[i]);
+							console.log(likeDrink[i]);
 							$('#likeDrink_result').append('<a href="/product/productdetail?prcode='+likeProduct[i].prCode+'"><img src="'+likeProduct[i].prImg+'" /></a>');
-							$('#likeDrink_result').append('</div>'); 
+							$('#likeDrink_result').append('</div>'); 		
 						}
 					}
 				});
