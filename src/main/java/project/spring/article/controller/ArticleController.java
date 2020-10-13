@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -126,15 +128,66 @@ public class ArticleController {
 			request.setAttribute("list", list);
 			return "article/articleList.mn";
 		}
-		@RequestMapping(value = "detail")
-		public String detail(@RequestParam(name="idx",required = false) int idx,Model model) {
-			ArticleDTO dto = articleService.read(idx);
-			
+		@RequestMapping(value = "/detail")
+		public String detail(@RequestParam(name="idx",required = false) Integer idx,Model model) {
+			int idx_ = 0;
+			if(idx!=null) idx_ = idx;
+			//조회수 올리는 메서드
+			articleService.plusOneReadCount(idx_);
+			//내용 읽어오는 메서드
+			ArticleDTO dto = articleService.read(idx_);
 			//밑에 게시글 뿌리는 메서드
 			List list = articleService.searchArticleByAdd(0);
 			System.out.println(list);
 			model.addAttribute("articleDTO", dto);
 			model.addAttribute("list", list);
+			
 			return "article/detail.mn";
 		}
+		
+		//////AJAX
+		@RequestMapping(value = "/more")
+		@ResponseBody
+		public List more(@RequestParam(name="num",required = false) Integer num) {
+			//밑에 게시글 뿌리는 메서드
+			List list = articleService.searchArticleByAdd(num);
+			System.out.println(list);
+			return list;
+		}
+		@RequestMapping(value = "/like")
+		@ResponseBody
+		public int like(@RequestParam(name="num",required = false) Integer num,
+						@RequestParam(name="nick",required = false) String memNickName,
+						@RequestParam(name="insertId",required = false) String insertId
+				) {
+			
+			//기본값 -1
+			int result = -1;
+			result = articleService.like(num,memNickName,insertId);
+			//unlike
+			return result;
+		}
+		@RequestMapping(value = "/report")
+		@ResponseBody
+		public int report(@RequestParam(name="num",required = false) Integer num) {
+			int result = 0;
+			//result = articleService.searchArticleByAdd(num);
+			return result;
+		}
+		@RequestMapping(value = "/reply")
+		@ResponseBody
+		public int reply(@RequestParam(name="num",required = false) Integer num) {
+			int result = 0;
+			//result = articleService.searchArticleByAdd(num);
+			return result;
+		}
+		@RequestMapping(value = "/move")
+		@ResponseBody
+		public int move(@RequestParam(name="num",required = false) Integer num) {
+			int result = 0;
+			//result = articleService.searchArticleByAdd(num);
+			return result;
+		}
+			
+		
 	}	

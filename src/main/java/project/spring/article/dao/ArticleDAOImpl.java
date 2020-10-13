@@ -118,4 +118,24 @@ public class ArticleDAOImpl implements ArticleDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("article.searchArticleByAdd",i);
 	}
+	@Override
+	public void plusOneReadCount(int idx) {
+		sqlSession.update("article.plusOneReadCount",idx);
+	}
+	@Override
+	public int like(Integer num,String memNickName,String insertId) {
+		HashMap map = new HashMap();
+		map.put("memNickName", memNickName);
+		map.put("num",num);
+		int count = sqlSession.selectOne("article.alreadyLike",map);
+		System.out.println("alreadyCount"+count);
+		if(count == 0) {
+			sqlSession.insert("article.like_log",map);
+			sqlSession.update("article.like", num);
+			sqlSession.update("article.updateMyActGivenHeart",insertId);
+			
+			return sqlSession.selectOne("article.likeReturn",num); 
+		}
+		return -1;
+	}
 }

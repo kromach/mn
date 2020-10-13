@@ -33,15 +33,50 @@ public class ProductController {
 	
 	
 	@RequestMapping("productlist")
-		public String productList(Model model) throws SQLException {
+		public String productList(Model model ,HttpServletRequest request) throws SQLException {
 		List productlist =null;
 		int count = 0;
+		HashMap map = null;
 		
-		count= productservice.getproductcount();
-		if(count>0) {
-			productlist = productservice.getproduct();
+		// 검색 기능
+		if(request.getParameter("isSearch")!=null && request.getParameter("isSearch").equals("true")) {
+			map = new HashMap();
+			
+			if(!request.getParameter("prPrice").equals("0원 - 0원")) {
+				String prPrice = request.getParameter("prPrice");
+				String price[] = prPrice.split("원");
+				int strprice =Integer.parseInt(price[0]);
+				int endprice =Integer.parseInt(price[1]);
+				map.put("strprice", strprice);
+				map.put("endprice", endprice);
+			}
+			if(!request.getParameter("prAlcohol").equals("0도 - 0도")) {
+				String prAlcohol = request.getParameter("prAlcohol");	
+				String alcohol[] = prAlcohol.split("도");
+				int stral =Integer.parseInt(alcohol[0]);
+				int endal =Integer.parseInt(alcohol[1]);
+				map.put("stral", stral);
+				map.put("endal", endal);
+			}
+				
+			if(request.getParameter("Skind")!= null) {
+				String skind = request.getParameter("Skind");
+				System.out.println("skind :"+ skind);
+				
+			}
+			
+			if(request.getParameter("name")!= null) {
+				String name = request.getParameter("name");
+				System.out.println("name :"+ name);
+			}
 		}
-		System.out.println(productlist);
+		else {
+			count= productservice.getproductcount();
+			count = 0;
+			if(count>0) {
+				productlist = productservice.getproduct();
+			}
+		}
 		
 		model.addAttribute("productlist", productlist);
 		model.addAttribute("count", count);
@@ -53,6 +88,7 @@ public class ProductController {
 	@RequestMapping("productdetail")
 		public String productdetail	(HttpServletRequest request, Model model) throws SQLException {
 		String prcode = request.getParameter("prcode");
+		
 		
 		ProductVo info =productservice.getproductinfo(prcode);
 		model.addAttribute("info", info);
@@ -198,7 +234,6 @@ public class ProductController {
 		
 		return "product/orderdetail.mn";
 	}
-	
 	
 
 }

@@ -235,6 +235,17 @@ public class AdminEventController {
 			}
 			return list;
 		}
+		
+		// 이벤트 사용 여부 변경
+		@RequestMapping("chEventCode")
+		@ResponseBody
+		public AdminEventVO chEventCode(@RequestParam String eventCode)throws SQLException {
+			System.out.println("eventCode!!!"+eventCode);
+			AdminEventVO vo = null;
+			//AdminEventVO vo = adminEventService.chOpen(eventCode);
+			
+			return vo;
+		}
 
 		@RequestMapping("modifyEvent")
 		public String modifyEvent(@RequestParam(value="eventCode", required = false) String eventCode, Model model)throws SQLException {
@@ -301,5 +312,7 @@ public class AdminEventController {
 			
 			return "redirect:/admin/event/eventList.mn";
 		}
+		
+
 		
 }

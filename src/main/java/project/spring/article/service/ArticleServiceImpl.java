@@ -1,6 +1,8 @@
 package project.spring.article.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,7 +78,15 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 	
 	@Override
-	public List searchArticleByAdd(int i) {
-		return articleDAOimpl.searchArticleByAdd(i);
+	public List searchArticleByAdd(int idx) {
+		return articleDAOimpl.searchArticleByAdd(idx);
+	}
+	@Override
+	public void plusOneReadCount(int idx) {
+		articleDAOimpl.plusOneReadCount(idx);
+	}
+	@Override
+	public int like(Integer num,String memNickName,String insertId) {
+		return articleDAOimpl.like(num,memNickName,insertId);
 	}
 }
