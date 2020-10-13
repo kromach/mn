@@ -132,7 +132,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 		if(count == 0) {
 			sqlSession.insert("article.like_log",map);
 			sqlSession.update("article.like", num);
-			sqlSession.update("article.updateMyAct",insertId);
+			sqlSession.update("article.updateMyActGivenHeart",insertId);
 			
 			return sqlSession.selectOne("article.likeReturn",num); 
 		}
