@@ -33,5 +33,30 @@
 	<select id="sql" resultType="hashmap">
 		SELECT 'O' ||(SELECT TO_CHAR(SYSDATE,'YYYYMMDD') FROM DUAL)|| ORDER_INFO_seq.nextval ,ORDER_INFO_seq.nextval FROM DUAL
 	</select>
+	<select id="orderinfo" parameterType="string" resultType="ordervo">
+		select * from order_info where or_code = #{value}
+	</select>
+	
+	<select id="orderlist" parameterType="map" resultType="ordervo">
+		<![CDATA[
+		select a.* from
+			(select aa.* , rownum r from
+				(SELECT OINFO.OR_CODE , OINFO.PR_CODE,OINFO.PR_NAME,OINFO.OR_STATUS,OINFO.PR_PRICE,OINFO.PR_COUNT,
+				OINFO.USER_ID, OINFO.RECEIVER_NAME,OINFO.RECEIVER_TEL,oinfo.INSERT_DAY 
+				FROM ORDER_INFO OINFO JOIN
+				PRODUCT_INFO INFO ON INFO.PR_CODE = OINFO.PR_CODE 
+				WHERE INFO.INSERT_ID = #{id} order by OINFO.INSERT_DAY asc)
+			aa )
+			a where r >= #{startrow} and r <= #{endrow} 
+		
+		]]>
+	</select>
+	
+	<select id="selcount" parameterType="string" resultType="int">
+		SELECT count(*)
+			FROM ORDER_INFO OINFO JOIN
+			PRODUCT_INFO INFO ON INFO.PR_CODE = OINFO.PR_CODE 
+			WHERE INFO.INSERT_ID =#{value}
+	</select>
 
 </mapper>

@@ -7,10 +7,56 @@
   		SELECT CODE FROM DRINK_CATEGORY WHERE VALUE LIKE '%'||#{value}||'%'
   	</select>
   	<select id="getDrinkSearchByCategories" resultType="hashmap" parameterType="string">
-  		SELECT DK_NAME FROM DRINK_INFO WHERE DK_BKIND = #{value} OR DK_SKIND =#{value}
+  		SELECT DK_NAME, DK_CODE FROM DRINK_INFO WHERE DK_BKIND = #{value} OR DK_SKIND =#{value}
   	</select>
-  	
   	<select id="getDrinkSearchByName" resultType="hashmap" parameterType="string">
-  		SELECT DK_NAME FROM DRINK_INFO where DK_NAME LIKE '%'||#{value}||'%' 
+  		SELECT DK_NAME, DK_CODE FROM DRINK_INFO where DK_NAME LIKE '%'||#{value}||'%' 
+  	</select>
+  	<select id="selectMaxBnIDX" resultType="int">
+		select max(BN_IDX) from board_normal  	
+  	</select>
+  	<select id="checkCodeInEditor" parameterType="string" resultType="string"> 
+  		SELECT IMG_URL FROM EDITOR_IMAGE WHERE code = #{value}
+  	</select>
+  	<select id="searchArticle" parameterType="hashmap" resultType="ArticleDTO">
+  		select * from board_normal where ${selectOption} like '%'||#{search}||'%' 
+  	</select>
+  	<select id="searchAll" resultType="ArticleDTO">
+  		select * from board_normal ORDER BY INSERT_DAY DESC 
+  	</select>
+  	<select id="read" parameterType="int" resultType="ArticleDTO">
+  		select * from board_normal where BN_IDX = #{value}
+  	</select>
+  	<select id="searchArticleByAdd" resultType="ArticleDTO" parameterType="int">
+  	<![CDATA[	
+		SELECT * FROM ( SELECT a.*, ROWNUM as rnum FROM ( SELECT * FROM board_normal ORDER BY INSERT_DAY DESC)a)
+		WHERE rnum >= (5*#{value})+1 and rnum <= (5*(#{value}+1))
+	]]>
+  	</select>
+  	<select id="alreadyLike" parameterType="hashmap" resultType="int">
+  		select count(*) from board_like where nick = #{memNickName} and BN_IDX = #{num}
+  	</select>
+  	<insert id="insertTags" parameterType="ArticleDTO">
+	insert into BOARD_NORMAL (BN_IDX,BN_TITLE,KIND ,DK_CODE,READCOUNT,HEART,REPORT,CONTENT,INSERT_ID,INSERT_DAY,IS_DELETE )
+	values (BOARD_NORMAL_SEQ.nextval,#{bnTitle},default,#{dkCode},#{readcount},#{heart},#{report},#{content},
+	#{insertId},default,default)
+  	</insert>
+  	<insert id="insertImg" parameterType="Editor_imageVO">
+  		INSERT INTO EDITOR_IMAGE VALUES (EDITOR_IMAGE_SEQ.nextVal,#{img_url},#{kind},#{code})
+  	</insert>
+  	<insert id="like_log" parameterType="hashmap">
+  		insert into board_like values(board_like_seq.nextVal,#{num},#{memNickName})
+  	</insert>
+  	<update id="updateMyActGivenHeart" parameterType="string">
+  		update MY_ACTIVITY set GIVEN_HEART = GIVEN_HEART+1 where id=#{value}; 
+  	</update>
+  	<update id="plusOneReadCount" parameterType="int">
+		UPDATE board_normal SET readcount = readcount+1 WHERE BN_IDX = #{value}
+  	</update>
+  	<update id="like" parameterType="int">
+		UPDATE board_normal SET heart = heart+1 WHERE BN_IDX = #{value}
+  	</update>
+  	<select id="likeReturn" parameterType="int" resultType="int">
+		select heart from board_normal where BN_IDX = #{value}
   	</select>
   </mapper>

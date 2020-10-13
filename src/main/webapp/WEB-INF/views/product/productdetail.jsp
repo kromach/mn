@@ -30,7 +30,8 @@
 				</dl>
 				<div>
 					<button class="btn btn-lg btn-blue" onclick="">좋아요</button>
-					<a class="btn btn-lg btn-yellow" onclick="">후기등록</a>
+					<a class="btn btn-lg btn-yellow" onclick="">싫어요</a>
+					(${info.prLike})
 				</div>
 			</div>
 		</div>

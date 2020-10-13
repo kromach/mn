@@ -1,11 +1,18 @@
 package project.spring.article.controller;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileUploadException;
@@ -23,6 +30,7 @@ import project.spring.admin.service.AdminServiceImpl;
 import project.spring.admin.vo.AdminVO;
 import project.spring.article.service.ArticleServiceImpl;
 import project.spring.article.vo.ArticleDTO;
+import project.spring.article.vo.Editor_imageVO;
 import project.spring.beans.PageVO;
 import project.spring.beans.Pager;
 
@@ -35,11 +43,11 @@ public class ArticleController {
 	
 		@RequestMapping
 		public String index(){
-			return "article/articleList.mn";
+			return "forward:/article/articleSearch";
 		}
 		
 		@RequestMapping("/writeForm")
-		public String indexTest(){
+		public String indexTestSs(){
 			return "article/writeForm.mn";
 		}	
 		
@@ -54,64 +62,132 @@ public class ArticleController {
 			}
 			return list;
 		}
+		
+		//insertTag
 		@RequestMapping("/writePro")
 		public String writePro(ArticleDTO dto)  throws IOException, FileUploadException {
-			
+			//기본값을 FreeBoard
+			if(dto.getDkCode()!=null&& dto.getDkCode().equals("선택")) {
+				dto.setDkCode(null);
+			}
+			dto.setKind("F");
 			System.out.println(dto);
-			return "article/articleList.mn";
+			//insert
+			int result = articleService.insertItem(dto);
+			//imgInsert
+			//insertTags
+			return "redirect:/article";
 		}
 		
-		@RequestMapping("/writeuploader")
-		public void writeuploader(MultipartHttpServletRequest request, HttpServletResponse response) throws IOException, FileUploadException {
-			// 파일정보 꺼내기
-			MultipartFile mf = null;
-			PrintWriter printWriter = null;
-			// 인코딩
-			response.setCharacterEncoding("utf-8");
-			response.setContentType("text/html;charset=utf-8");		
-			String imgPath = null;
-			//String returnStr = "";
-			try {
-				mf = request.getFile("upload");
-				// 이미지 이름 중복처리 
-				String orgName = mf.getOriginalFilename();
-				// 파일의 이름만 추출
-				String imgName = orgName.substring(0, orgName.lastIndexOf("."));
-				// System.out.println(imgName);
-				// 파일의 확장자만 추출
-				String ext = orgName.substring(orgName.lastIndexOf("."));
-				// System.out.println(ext);
-				// 파일명 중복을 방지하기 위해 지금 시간을 밀리초로 받아와 파일명에 추가
-				long cur = System.currentTimeMillis();
-				String newName = imgName + cur + ext;  //원본 이름 + 현재시각(millis) + 확장자
-				// System.out.println(newName);
-				//파일 기본경로
-				String root = request.getContextPath() + "/resources";
-				//파일 기본경로 _ 상세경로
-				String path = request.getRealPath("resources/img/article") + File.separator;
-//				System.out.println("req :" + request.getRealPath("resources/img/upload"));
-				System.out.println(path + newName);
-				File file = new File(path);
-				//디렉토리 존재하지 않을경우 디렉토리 생성
-				if(!file.exists()) {
-					file.mkdirs();
+		//Search >> thumbNail뽑아서 list return
+		@RequestMapping("/articleSearch")
+		public String articleSearch(
+				@RequestParam(required = false, name = "selectOption")String selectOption,
+				@RequestParam(required = false, name = "search")String search,
+				HttpServletRequest request
+				) {
+			List<ArticleDTO> list = null;
+			if(search!=null&&!search.equals("")) {
+				list = articleService.searchArticle(selectOption,search);
+				String imgThum = "";
+				//썸네일 뽑기
+				Iterator<ArticleDTO> it = list.iterator();
+				while(it.hasNext()) {
+					ArticleDTO dto = it.next();
+					String str = dto.getContent();
+					String[] str_ = str.split("src=\"");
+					for(int i=0;i<str_.length;i++) {
+						System.out.println(str_[i]+"|"+str_[i].contains("src=\""));
+						if(str_[i].contains("/resources")) {
+							imgThum = str_[i].split("\"")[0];
+							dto.setThumbNail(imgThum);
+						}
+					}
 				}
-				File copyFile = new File(path + newName); // 새로운 이미지 경로로 업로드 한 파일 복사 생성
-				mf.transferTo(copyFile); // 지정된 경로로 파일 저장
-				// 경로, 파일명 리턴
-				//return3 = "&bNewLine=true&sFileName=" + orgName + "&sFileURL=" + root + "/img/upload/" + newName;
-				String callback = request.getParameter("CKEditorFuncNum");
-				printWriter = response.getWriter();
-				// 업로드시 메시지 출력
-				printWriter.println("<script type='text/javascript'>"
-				     + "window.parent.CKEDITOR.tools.callFunction("
-				     + callback+",'"+ root + "/img/upload/" + newName +"','이미지를 업로드하였습니다.')"
-				     +"</script>");
-				printWriter.flush();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				if(printWriter != null) try { printWriter.close(); } catch(Exception e) { e.printStackTrace();}
+			}else {
+				//전부 돌려서 랜덤뽑기
+				list = articleService.searchArticle();
+				String imgThum = "";
+				//썸네일 뽑기
+				Iterator<ArticleDTO> it = list.iterator();
+				while(it.hasNext()) {
+					ArticleDTO dto = it.next();
+					String str = dto.getContent();
+					String[] str_ = str.split("src=\"");
+					for(int i=0;i<str_.length;i++) {
+						System.out.println(str_[i]+"|"+str_[i].contains("src=\""));
+						if(str_[i].contains("/resources")) {
+							imgThum = str_[i].split("\"")[0];
+							dto.setThumbNail(imgThum);
+						}
+					}
+				}
 			}
+			
+			System.out.println(list);
+			request.setAttribute("list", list);
+			return "article/articleList.mn";
 		}
+		@RequestMapping(value = "/detail")
+		public String detail(@RequestParam(name="idx",required = false) Integer idx,Model model) {
+			int idx_ = 0;
+			if(idx!=null) idx_ = idx;
+			//조회수 올리는 메서드
+			articleService.plusOneReadCount(idx_);
+			//내용 읽어오는 메서드
+			ArticleDTO dto = articleService.read(idx_);
+			//밑에 게시글 뿌리는 메서드
+			List list = articleService.searchArticleByAdd(0);
+			System.out.println(list);
+			model.addAttribute("articleDTO", dto);
+			model.addAttribute("list", list);
+			
+			return "article/detail.mn";
+		}
+		
+		//////AJAX
+		@RequestMapping(value = "/more")
+		@ResponseBody
+		public List more(@RequestParam(name="num",required = false) Integer num) {
+			//밑에 게시글 뿌리는 메서드
+			List list = articleService.searchArticleByAdd(num);
+			System.out.println(list);
+			return list;
+		}
+		@RequestMapping(value = "/like")
+		@ResponseBody
+		public int like(@RequestParam(name="num",required = false) Integer num,
+						@RequestParam(name="nick",required = false) String memNickName,
+						@RequestParam(name="insertId",required = false) String insertId
+				) {
+			
+			//기본값 -1
+			int result = -1;
+			result = articleService.like(num,memNickName,insertId);
+			//unlike
+			return result;
+		}
+		@RequestMapping(value = "/report")
+		@ResponseBody
+		public int report(@RequestParam(name="num",required = false) Integer num) {
+			int result = 0;
+			//result = articleService.searchArticleByAdd(num);
+			return result;
+		}
+		@RequestMapping(value = "/reply")
+		@ResponseBody
+		public int reply(@RequestParam(name="num",required = false) Integer num) {
+			int result = 0;
+			//result = articleService.searchArticleByAdd(num);
+			return result;
+		}
+		@RequestMapping(value = "/move")
+		@ResponseBody
+		public int move(@RequestParam(name="num",required = false) Integer num) {
+			int result = 0;
+			//result = articleService.searchArticleByAdd(num);
+			return result;
+		}
+			
+		
 	}	

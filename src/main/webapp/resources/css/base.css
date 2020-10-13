@@ -346,7 +346,19 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .grid2 { width:60% ; display: inline-block;}
 .grid-item, .detail-item {margin-bottom:10px; border-radius: 10px; overflow:hidden;}
 .grid-item img:hover{cursor: pointer; opacity: 0.5;}
-.grid-item img, .detail-item img {display: block; _min-width:100%; max-width: 100%;}
+.grid-item img, .detail-item img {display: block; min-width:100%; max-width: 100%;}
+.grid-item figcaption {
+	border: 1.3px solid rgba(0, 0, 0, 0.2);
+	padding: 10px;
+	margin-top: 4px; 
+	font-size: 14px;
+	font-weight: bold;
+	cursor: pointer;
+	opacity: 0.5;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
 .gutter-sizer { width: 0.8%; }
 .detail-sizer, .detail-item { width: 16%; }
 .detail-img-div{height:350px!important}

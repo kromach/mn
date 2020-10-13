@@ -28,7 +28,7 @@
 				for ( var j in dataLog) {
 					console.log(dataLog[j].DK_NAME);
 					$('#option').append(
-							'<option value="'+dataLog[j].DK_NAME+'">'
+							'<option value="'+dataLog[j].DK_CODE+'">'
 									+ dataLog[j].DK_NAME + '</option>');
 				}
 			}
@@ -51,7 +51,7 @@
 	});
 	//이미지 업로드 url 설정
 	var ckedit_config = {
-		filebrowserUploadUrl : '/article/writeuploader' ,  // 통신할 컨트롤러 매핑 주소 
+		filebrowserUploadUrl : '/editor/ckuploader' ,  // 통신할 컨트롤러 매핑 주소 
 		toolbar : ''
 	}
 	// ckeditor 설정 종료
@@ -87,7 +87,7 @@
 					<tr>
 						<th>술 선택</th>
 						<td><select id="option" name="dkCode">
-								<option value="option">선택</option>
+								<option >선택</option>
 						</select></td>
 					</tr>
 					<tr>

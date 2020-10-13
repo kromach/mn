@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>eventList view</title>
 
-<!-- 검색기능, href 걸기 디자인하기 -->
+<!-- 검색기능 value 없을때 넘기기 없기, href 걸기 디자인하기 -->
 
 	<!-- 날짜 -->
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -60,28 +60,33 @@ $( function() {
 		<div class="gutter-sizer"></div>
 		<div class="grid-item grid-item--width6 ">
 			<h1>이벤트 목록</h1>
-			<form action="#" method="post">
+			<form action="eventList" method="get">
+				<input type="hidden" name="isSearch" value="true">
 				<table class="tableCss table">
 					<tr>
 						<th>이벤트명</th>
-						<td><input name="SchEvName"></td>
+						<td><input name="schEvName"></td>
+					</tr>
+					<tr>
+						<th>판매상품</th>
+						<td><input name="schPrName"></td>
 					</tr>
 					<tr>
 						<th>기간</th>
 						<td>
 							<div>
 								<label for="from">시작일</label>
-								<input type="text" name="evStart" id="from"/>
+								<input type="text" name="schEvStart" id="from"/>
 								<label for="to">종료일</label>
-								<input type="text" name="evEnd" id="to"/>
+								<input type="text" name="schEvEnd" id="to"/>
 							</div>
 						</td>
 					</tr>
 					<tr>
 						<th>상태</th>
 						<td>
-							<label><input type="radio" value="Y" name="isOpen">활성</label>
-							<label><input type="radio" value="N" name="isOpen">비활성</label>							
+							<label><input type="radio" value="Y" name="schIsOpen">활성</label>
+							<label><input type="radio" value="N" name="schIsOpen">비활성</label>							
 						</td>
 					</tr>
 					<tr>
@@ -93,6 +98,11 @@ $( function() {
 			</form>
 		
 			<table class="tableCss table">
+				<tr align="right">
+					<td colspan="5">
+						<button class="btn btn-md btn-blue"  onclick="window.location='/admin/event/insertEvent'">등록</button>
+					</td>
+				</tr>
 				<tr>
 					<th>No</th>
 					<th>이벤트명</th>
@@ -113,13 +123,14 @@ $( function() {
 						<tr>
 							<td>${number}</td>
 								<c:set var="number" value="${number-1}" />
-							<td>${eventList.eventName}</td>
+							<td><a href="/admin/event/modifyEvent?eventCode=${eventList.eventCode }">${eventList.eventName}</a></td>
 							<td>${eventList.prName }</td>
 							<td>${eventList.evStart} ~ ${eventList.evEnd}</td>
 							<td>
-								<c:if test="${eventList.isOpen == 'Y'}">활성</c:if>
+								<p id=${number }>
+								<c:if test="${eventList.isOpen == 'Y'}"><a onclick="chOpen('${ eventList.eventCode},${number }')">활성</a></c:if>
 								<c:if test="${eventList.isOpen == 'N'}">비활성</c:if>
-							
+								</p>
 							</td>
 						</tr>
 					</c:forEach>
@@ -130,6 +141,29 @@ $( function() {
 	</div><!-- grid -->
 </div>	<!-- grid-Wrapper -->
 
+<script>
+function chOpen(value){
+
+	alert("해당 이벤트가 비활성화로 변경되었습니다.");
+
+	alert(value);
+	var eventCode = value[0-7];
+
+	alert(eventCode);
+
+	
+	var context = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+	$.ajax({
+		url: context + '/event/chEventCode?eventCode='+eventCode,
+		type:"get",
+		success : function(data){
+			
+
+		}
+	})
+	
+}
+</script>
 
 
 </body>

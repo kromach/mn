@@ -61,7 +61,7 @@
 			<a href="#salse"><div class="fa fa-bullhorn"></div> 판매자 메뉴 <div class="fa fa-caret-up fr"></div></a>
 			<ul style="display: block;">
 				<li><a href="#salse"> 상품 관리 </a></li>
-				<li><a href="#salse"> 판매 관리 </a></li>
+				<li><a href="/product/orderlist"> 판매 관리 </a></li>
 			</ul>
 		</li>
 		</c:if>
@@ -77,7 +77,7 @@
 		</li>
 		<li>
 			<c:if test="${!empty sessionScope.memId}">
-			<a href="#my"><div class="fa fa-award"></div> 나의 활동내역</a>
+			<a href="/myAct"><div class="fa fa-award"></div> 나의 활동내역</a>
 			</c:if>
 		</li>
 		<li class="sub-menu">

@@ -39,7 +39,7 @@
 
 	//이미지 업로드 url 설정
 	var ckedit_config = {
-		filebrowserUploadUrl : 'eventImg' ,  // 통신할 컨트롤러 매핑 주소 
+		filebrowserUploadUrl : '/editor/ckuploader' ,  // 통신할 컨트롤러 매핑 주소 
 		toolbar : ''
 	}
 	// ckeditor 설정 종료
@@ -100,7 +100,7 @@ $( function() {
 		<div class="gutter-sizer"></div>
 		<div class="grid-item grid-item--width6 ">
 		
-			<form action="insertEventPro" method="post" id="frm">
+			<form action="insertEventPro" method="post" id="frm" enctype="multipart/form-data">
 				<table class="tableCss table">
 					<tr>
 						<th>제목</th>
@@ -108,7 +108,7 @@ $( function() {
 					</tr>
 					<tr>
 						<th>술 검색</th>
-							<td>
+							<td colspan="2">
 								<input id="dkSch" name="dkSch" class ="boardTitle_middle" />
 								<button type="button" class="btn btn-sm btn-grey" onclick="searchDk()">검색</button>
 							</td>
@@ -116,7 +116,7 @@ $( function() {
 					<tr>
 						<th>술 선택</th>
 						<td colspan="2">
-							<select id="option" name="code">
+							<select id="option" name="productCode">
 								<option value="option">선택</option>
 							</select></td>
 					</tr>
@@ -124,7 +124,7 @@ $( function() {
 						<th>
 							기간
 						</th>
-						<td>
+						<td colspan="2">
 							<div>
 								<label for="from">시작일</label>
 								<input type="text" name="evStart" id="from"/>
@@ -133,6 +133,20 @@ $( function() {
 							</div>
 						</td>
 					</tr>
+					<tr>
+						<th>활성화여부</th>
+						<td>
+							<input type="radio" name="isOpen" value="Y" checked="checked">활성화 
+							<input type="radio" name="isOpen" value="N">비활성화 
+						</td>					
+					</tr>
+					<tr>
+						<th>대표사진</th>
+						<td colspan="2">
+							<input type="file" name="eventImg" />
+						</td>
+					</tr>
+				
 					
 					<tr>
 						<td colspan="3" style="margin:0; padding:0">
@@ -157,31 +171,34 @@ $( function() {
  <script>
 function searchDk(){
 	var input = $('#dkSch').val();
-	console.log(input);
 	var context = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
 	$.ajax({
-		url: context +'/event/drinkSearch?input='+input,
+		url: context +'/event/drinkCodeSearch?input='+input,
 		type: "get",
 		success : function(data){
-			console.log(data);
 			
 			$('#option').empty();
 			$('#option').append('<option value="option">선택</option>');
 			
-			var dataLog;
-			for(var i in data){
-				if(data[i].length>0){
-					dataLog = data[i];
-				}
-			}	
-			for(var j in dataLog){
-				console.log(dataLog[j].DK_NAME);
-				$('#option').append('<option value="'+dataLog[j].DK_NAME+'">'+dataLog[j].DK_NAME+'</option>');
-			} 	
+			
+			var index = Object.keys(data).length;
+			console.log(index);
+			for(var i=0 ; i<index;i++){
+				console.log(data[i].prCode);
+				$('#option').append('<option value="'+data[i].prCode+'">'+data[i].prName+'</option>');
+			}
 		}
 	});
 }
 
+
+/* 	<tr>
+						<th>술 선택</th>
+						<td colspan="2">
+							<select id="option" name="productCode">
+								<option value="option">선택</option>
+							</select></td>
+					</tr>  */
 </script>
 <script>
 $(function() {
