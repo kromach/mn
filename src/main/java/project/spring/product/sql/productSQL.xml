@@ -58,5 +58,37 @@
 			PRODUCT_INFO INFO ON INFO.PR_CODE = OINFO.PR_CODE 
 			WHERE INFO.INSERT_ID =#{value}
 	</select>
+	
+	<select id="schcountAll" parameterType="map" resultType="int">
+		select count(*) from product_info
+			<trim prefix="where" prefixOverrides="and">
+				<if test="skind !=null">
+					AND pr_skind = #{skind}
+				</if> 
+				<if test="skind !=null">
+					AND pr_name like '%' || #{name} || '%'
+				</if> 
+				<if test="strprice != null">
+  					<![CDATA[
+  						AND pr_price >= #{strprice} 
+  					 ]]>
+  				</if>
+  				<if test="endprice != null">
+					<![CDATA[
+  						AND pr_price <= #{endprice} 
+  					 ]]>  				
+  				</if>
+  				<if test="stral != null">
+  					<![CDATA[
+  						AND pr_alcohol >= #{stral} 
+  					 ]]>
+  				</if>
+  				<if test="endal != null">
+					<![CDATA[
+  						AND pr_alcohol <= #{endal} 
+  					 ]]>  				
+  				</if>
+			</trim>
+	</select>
 
 </mapper>

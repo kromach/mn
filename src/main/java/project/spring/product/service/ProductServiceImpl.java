@@ -2,6 +2,7 @@ package project.spring.product.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,8 +57,12 @@ public class ProductServiceImpl implements ProductService {
 	public int getproductcount() throws SQLException {
 		
 		int count = productDAO.getproductcount();
-		System.out.println("service count");
-		System.out.println(count);
+		return count;
+	}
+	
+	public int getproductcount(Map map) throws SQLException {
+		
+		int count = productDAO.getproductcount(map);
 		return count;
 	}
 

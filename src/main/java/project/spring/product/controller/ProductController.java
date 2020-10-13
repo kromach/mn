@@ -18,6 +18,7 @@ import project.spring.beans.Pager;
 import project.spring.member.service.MemberServiceImpl;
 import project.spring.member.vo.MemberDTO;
 import project.spring.product.service.ProductService;
+import project.spring.product.service.ProductServiceImpl;
 import project.spring.product.vo.OrderVo;
 import project.spring.product.vo.ProductVo;
 
@@ -27,7 +28,7 @@ import project.spring.product.vo.ProductVo;
 public class ProductController {
 	
 	@Autowired
-	private ProductService productservice = null;
+	private ProductServiceImpl productservice = null;
 	@Autowired
 	private MemberServiceImpl memberservice = null;
 	
@@ -61,18 +62,19 @@ public class ProductController {
 				
 			if(request.getParameter("Skind")!= null) {
 				String skind = request.getParameter("Skind");
-				System.out.println("skind :"+ skind);
-				
+				map.put("skind", skind);
 			}
 			
 			if(request.getParameter("name")!= null) {
 				String name = request.getParameter("name");
-				System.out.println("name :"+ name);
+				System.out.println(name);
+				map.put("name", name);
 			}
 			
-				
+			count = productservice.getproductcount(map);	
 			
-		
+			System.out.println("count!!!!!!!!!!!!!!!!!!!!!!!");
+			System.out.println(count);
 			
 		
 		
