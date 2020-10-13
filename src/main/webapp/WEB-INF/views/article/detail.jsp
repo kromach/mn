@@ -81,18 +81,16 @@
 
 <script>
 function more(){
-	var moreVal = $('#moreVal').val()+1;
-	$('#moreVal').val(morVal);
+	var moreVal = Number($('#moreVal').val())+1;
+	$('#moreVal').val(moreVal);
 	alert(moreVal);
 	var context = window.location.pathname.substring(0,
 			window.location.pathname.indexOf("/", 2));
 	$.ajax({
-		url : context + '/more',
+		url : context + '/more?num='+moreVal,
 		type : "post",
-		data : moreVal,
 		success : function(data) {
-			console.log(data);
-
+			console.log(typeof(data));
 		}
 	});
 }

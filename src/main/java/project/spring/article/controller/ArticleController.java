@@ -126,9 +126,11 @@ public class ArticleController {
 			request.setAttribute("list", list);
 			return "article/articleList.mn";
 		}
-		@RequestMapping(value = "detail")
-		public String detail(@RequestParam(name="idx",required = false) int idx,Model model) {
-			ArticleDTO dto = articleService.read(idx);
+		@RequestMapping(value = "/detail")
+		public String detail(@RequestParam(name="idx",required = false) Integer idx,Model model) {
+			int idx_ = 0;
+			if(idx!=null) idx_ = idx;
+			ArticleDTO dto = articleService.read(idx_);
 			
 			//밑에 게시글 뿌리는 메서드
 			List list = articleService.searchArticleByAdd(0);
@@ -137,4 +139,15 @@ public class ArticleController {
 			model.addAttribute("list", list);
 			return "article/detail.mn";
 		}
+		
+		@RequestMapping(value = "/more")
+		@ResponseBody
+		public List more(@RequestParam(name="num",required = false) Integer num) {
+			//밑에 게시글 뿌리는 메서드
+			List list = articleService.searchArticleByAdd(num);
+			System.out.println(list);
+			return list;
+		}
+		
+		
 	}	
