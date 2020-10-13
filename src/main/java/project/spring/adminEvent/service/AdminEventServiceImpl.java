@@ -114,6 +114,15 @@ public class AdminEventServiceImpl implements AdminEventService{
 		adminEventDAO.checkDate(today);
 	}
 
+	
+	// 이벤트 사용 여부 변경
+	@Override
+	public AdminEventVO chOpen(String eventCode) throws SQLException {
+
+		AdminEventVO vo =  adminEventDAO.chOpen(eventCode);
+		return vo;
+	}
+
 
 	
 

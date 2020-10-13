@@ -41,7 +41,7 @@ public class ProductController {
 		if(count>0) {
 			productlist = productservice.getproduct();
 		}
-		System.out.println(productlist);
+		//System.out.println(productlist);
 		
 		model.addAttribute("productlist", productlist);
 		model.addAttribute("count", count);

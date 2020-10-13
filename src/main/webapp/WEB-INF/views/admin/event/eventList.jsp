@@ -127,9 +127,10 @@ $( function() {
 							<td>${eventList.prName }</td>
 							<td>${eventList.evStart} ~ ${eventList.evEnd}</td>
 							<td>
-								<c:if test="${eventList.isOpen == 'Y'}"><a onclick="chOpen('${ eventList.eventCode}')">활성</a></c:if>
+								<p id=${number }>
+								<c:if test="${eventList.isOpen == 'Y'}"><a onclick="chOpen('${ eventList.eventCode},${number }')">활성</a></c:if>
 								<c:if test="${eventList.isOpen == 'N'}">비활성</c:if>
-							
+								</p>
 							</td>
 						</tr>
 					</c:forEach>
@@ -141,9 +142,26 @@ $( function() {
 </div>	<!-- grid-Wrapper -->
 
 <script>
-function chOpen(eventCode){
-	alert(eventCode);
+function chOpen(value){
+
 	alert("해당 이벤트가 비활성화로 변경되었습니다.");
+
+	alert(value);
+	var eventCode = value[0-7];
+
+	alert(eventCode);
+
+	
+	var context = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+	$.ajax({
+		url: context + '/event/chEventCode?eventCode='+eventCode,
+		type:"get",
+		success : function(data){
+			
+
+		}
+	})
+	
 }
 </script>
 
