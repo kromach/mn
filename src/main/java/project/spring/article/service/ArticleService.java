@@ -16,5 +16,6 @@ public interface ArticleService extends CommonInterface {
 	public ArticleDTO read(int idx);
 	public List searchArticleByAdd(int i);
 	public void plusOneReadCount(int idx);
-	public int like(Integer num, HashMap map);
+	public int like(Integer num, String memNickName,String insertId);
+	
 }

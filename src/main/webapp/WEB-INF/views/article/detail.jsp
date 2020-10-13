@@ -28,7 +28,7 @@
 						<td colspan="4" style="height: 100px; border-bottom: 1px solid;">
 						<!--login은 실행후 검사 -->
 						<div>
-							<button class="btn btn-lg btn-blue" onclick="like('${articleDTO.bnIdx}')">좋아요</button>
+							<button class="btn btn-lg btn-blue" onclick="like('${articleDTO.bnIdx}','${articleDTO.insertId }')">좋아요</button>
 							<a class="btn btn-lg btn-blue" onclick="report('${articleDTO.bnIdx}')">신고</a>
 							<a class="btn btn-lg btn-yellow" onclick="reply('${articleDTO.bnIdx}')">댓글등록</a>
 						</div>
@@ -82,14 +82,18 @@
 </body>
 
 <script>
-function like(bnIdx){
+function like(bnIdx,inserId){
 	var context = window.location.pathname.substring(0,
 			window.location.pathname.indexOf("/", 2));
 	$.ajax({
-		url : context + '/like?num='+bnIdx,
+		url : context + '/like?num='+bnIdx+'&nick=${memNickName}&insertId='+insertId,
 		type : "post",
 		success : function(data) {
-			console.log(data);
+			if(data == -1){
+				alert("좋아요는 최대 1개만 누를수 있습니다.");
+			}else{
+				alert("좋아요에 추가되셨습니다.")
+			}
 		}
 	});
 }

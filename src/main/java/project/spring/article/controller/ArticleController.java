@@ -156,11 +156,15 @@ public class ArticleController {
 		}
 		@RequestMapping(value = "/like")
 		@ResponseBody
-		public int like(@RequestParam(name="num",required = false) Integer num) {
-			HashMap map  = new HashMap();
+		public int like(@RequestParam(name="num",required = false) Integer num,
+						@RequestParam(name="nick",required = false) String memNickName,
+						@RequestParam(name="insertId",required = false) String insertId
+				) {
+			
 			//기본값 -1
 			int result = -1;
-			result = articleService.like(num,map);
+			result = articleService.like(num,memNickName,insertId);
+			//unlike
 			return result;
 		}
 		@RequestMapping(value = "/report")

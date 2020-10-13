@@ -86,7 +86,7 @@ public class ArticleServiceImpl implements ArticleService{
 		articleDAOimpl.plusOneReadCount(idx);
 	}
 	@Override
-	public int like(Integer num,HashMap map) {
-		return articleDAOimpl.like(num,map);
+	public int like(Integer num,String memNickName,String insertId) {
+		return articleDAOimpl.like(num,memNickName,insertId);
 	}
 }
