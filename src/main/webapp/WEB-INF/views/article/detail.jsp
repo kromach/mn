@@ -28,9 +28,9 @@
 						<td colspan="4" style="height: 100px; border-bottom: 1px solid;">
 						<!--login은 실행후 검사 -->
 						<div>
-							<button class="btn btn-lg btn-blue" onclick="">좋아요</button>
-							<a class="btn btn-lg btn-blue" onclick="">신고</a>
-							<a class="btn btn-lg btn-yellow" onclick="">댓글등록</a>
+							<button class="btn btn-lg btn-blue" onclick="like('${articleDTO.bnIdx}')">좋아요</button>
+							<a class="btn btn-lg btn-blue" onclick="report('${articleDTO.bnIdx}')">신고</a>
+							<a class="btn btn-lg btn-yellow" onclick="reply('${articleDTO.bnIdx}')">댓글등록</a>
 						</div>
 						</td>
 					</tr>
@@ -42,7 +42,7 @@
 			<div class="detail-item detail-width6">
 				<div class="text-center pad-top10 pad-bottom20">
 					<c:if test="${memId eq 'admin' }">
-						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="글이동">
+						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="글이동" onclick="move('${articleDTO.bnIdx}')">
 					</c:if>
 						<input type="button" class="btn btn-md btn-grey" value="목록으로" onclick="window.location='/article'" />
 					<c:if test="${memNickName eq articleDTO.insertId}">
@@ -82,6 +82,47 @@
 </body>
 
 <script>
+function like(bnIdx){
+	var context = window.location.pathname.substring(0,
+			window.location.pathname.indexOf("/", 2));
+	$.ajax({
+		url : context + '/like?num='+bnIdx,
+		type : "post",
+		success : function(data) {
+			console.log(data);
+		}
+	});
+}
+function report(bnIdx){
+	var context = window.location.pathname.substring(0,
+			window.location.pathname.indexOf("/", 2));
+	$.ajax({
+		url : context + '/report?num='+bnIdx,
+		type : "post",
+		success : function(data) {
+		}
+	});
+}
+function reply(bnIdx){
+	//window.open();
+	var context = window.location.pathname.substring(0,
+			window.location.pathname.indexOf("/", 2));
+	$.ajax({
+		url : context + '/reply?num='+bnIdx,
+		type : "post",
+		success : function(data) {
+	}
+});}
+function move(bnIdx){
+	var context = window.location.pathname.substring(0,
+			window.location.pathname.indexOf("/", 2));
+	$.ajax({
+		url : context + '/move?num='+moreVal,
+		type : "post",
+		success : function(data) {
+		}
+	});
+}
 function more(){
 	var moreVal = Number($('#moreVal').val())+1;
 	$('#moreVal').val(moreVal);

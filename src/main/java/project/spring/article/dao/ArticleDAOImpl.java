@@ -118,4 +118,14 @@ public class ArticleDAOImpl implements ArticleDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("article.searchArticleByAdd",i);
 	}
+	@Override
+	public void plusOneReadCount(int idx) {
+		sqlSession.update("article.plusOneReadCount",idx);
+	}
+	@Override
+	public int like(Integer num,HashMap map) {
+		sqlSession.update("article.like", num);
+		sqlSession.update("article.like",map);
+		return sqlSession.selectOne("article.likeReturn",num); 
+	}
 }

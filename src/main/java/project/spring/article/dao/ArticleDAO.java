@@ -1,5 +1,6 @@
 package project.spring.article.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import project.spring.article.vo.ArticleDTO;
@@ -15,5 +16,6 @@ public interface ArticleDAO extends CommonInterface{
 	public List searchArticle();
 	public ArticleDTO read(int idx);
 	public List searchArticleByAdd(int i);
-
+	public void plusOneReadCount(int idx);
+	public int like(Integer num, HashMap map);
 }

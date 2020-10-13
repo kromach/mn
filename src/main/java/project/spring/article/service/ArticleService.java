@@ -1,6 +1,8 @@
 package project.spring.article.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import project.spring.article.vo.ArticleDTO;
 import project.spring.article.vo.Editor_imageVO;
@@ -13,4 +15,6 @@ public interface ArticleService extends CommonInterface {
 	public List searchArticle();
 	public ArticleDTO read(int idx);
 	public List searchArticleByAdd(int i);
+	public void plusOneReadCount(int idx);
+	public int like(Integer num, HashMap map);
 }

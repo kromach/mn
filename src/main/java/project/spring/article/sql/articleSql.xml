@@ -41,4 +41,13 @@
   	<insert id="insertImg" parameterType="Editor_imageVO">
   		INSERT INTO EDITOR_IMAGE VALUES (EDITOR_IMAGE_SEQ.nextVal,#{img_url},#{kind},#{code})
   	</insert>
+  	<update id="plusOneReadCount" parameterType="int">
+		UPDATE board_normal SET readcount = readcount+1 WHERE BN_IDX = #{value}
+  	</update>
+  	<update id="like" parameterType="int">
+		UPDATE board_normal SET heart = heart+1 WHERE BN_IDX = #{value}
+  	</update>
+  	<select id="likeReturn" parameterType="int" resultType="int">
+		select heart from board_normal where BN_IDX = #{value}
+  	</select>
   </mapper>
