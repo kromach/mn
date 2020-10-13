@@ -114,8 +114,8 @@ public class ArticleDAOImpl implements ArticleDAO {
 		return sqlSession.selectOne("article.read", idx);
 	}
 	@Override
-	public List searchArticleByAdd() {
+	public List searchArticleByAdd(int i) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("article.searchArticleByAdd");
+		return sqlSession.selectList("article.searchArticleByAdd",i);
 	}
 }

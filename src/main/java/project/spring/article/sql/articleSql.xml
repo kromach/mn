@@ -29,7 +29,8 @@
   	</select>
   	<select id="searchArticleByAdd" resultType="ArticleDTO" parameterType="int">
   	<![CDATA[	
-		SELECT * FROM (select * from board_normal ORDER BY INSERT_DAY DESC) WHERE ROWNUM <= 3
+		SELECT * FROM ( SELECT a.*, ROWNUM as rnum FROM ( SELECT * FROM board_normal ORDER BY INSERT_DAY DESC)a)
+		WHERE rnum >= (5*#{value})+1 and rnum <= (5*(#{value}+1))
 	]]>
   	</select>
   	<insert id="insertTags" parameterType="ArticleDTO">

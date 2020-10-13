@@ -76,7 +76,7 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 	
 	@Override
-	public List searchArticleByAdd() {
-		return articleDAOimpl.searchArticleByAdd();
+	public List searchArticleByAdd(int i) {
+		return articleDAOimpl.searchArticleByAdd(i);
 	}
 }

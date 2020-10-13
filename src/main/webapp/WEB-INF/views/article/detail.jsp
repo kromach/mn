@@ -26,6 +26,7 @@
 					</tr>
 					<tr>
 						<td colspan="4" style="height: 100px; border-bottom: 1px solid;">
+						<!--login은 실행후 검사 -->
 						<div>
 							<button class="btn btn-lg btn-blue" onclick="">좋아요</button>
 							<a class="btn btn-lg btn-blue" onclick="">신고</a>
@@ -40,10 +41,14 @@
 			</div>
 			<div class="detail-item detail-width6">
 				<div class="text-center pad-top10 pad-bottom20">
-					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="전송">
-					<input type="button" class="btn btn-md btn-grey" value="목록으로" onclick="window.location='/article'" />
-					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="수정">
-					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="삭제">
+					<c:if test="${memId eq 'admin' }">
+						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="글이동">
+					</c:if>
+						<input type="button" class="btn btn-md btn-grey" value="목록으로" onclick="window.location='/article'" />
+					<c:if test="${memNickName eq articleDTO.insertId}">
+						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="수정">
+						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="삭제">
+					</c:if>
 				</div>
 			</div>
 			<div class="detail-item detail-width6">
@@ -68,8 +73,28 @@
 			</div>
 		</div>
 		<div class="detail-item detail-width6">
-			<h2>더보기</h2>
+			<input id="addBtn" type="button" class="btn btn-md btn-grey" value="더보기" onclick="more()">
+			<input type ="hidden" value="0" id="moreVal">
 		</div>
 	</div>
 </body>
+
+<script>
+function more(){
+	var moreVal = $('#moreVal').val()+1;
+	$('#moreVal').val(morVal);
+	alert(moreVal);
+	var context = window.location.pathname.substring(0,
+			window.location.pathname.indexOf("/", 2));
+	$.ajax({
+		url : context + '/more',
+		type : "post",
+		data : moreVal,
+		success : function(data) {
+			console.log(data);
+
+		}
+	});
+}
+</script>
 </html>

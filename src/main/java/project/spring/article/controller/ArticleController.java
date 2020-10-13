@@ -128,9 +128,10 @@ public class ArticleController {
 		}
 		@RequestMapping(value = "detail")
 		public String detail(@RequestParam(name="idx",required = false) int idx,Model model) {
-			
 			ArticleDTO dto = articleService.read(idx);
-			List list = articleService.searchArticleByAdd();
+			
+			//밑에 게시글 뿌리는 메서드
+			List list = articleService.searchArticleByAdd(0);
 			System.out.println(list);
 			model.addAttribute("articleDTO", dto);
 			model.addAttribute("list", list);
