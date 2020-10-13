@@ -51,12 +51,13 @@ public class MyActController {
 	}
 	
 	@RequestMapping(value = "/attend", method = RequestMethod.GET)
-	public String attend() {
+	public String attend(HttpServletRequest request) {
 		System.out.println("MyActAttend Controller");
 		
-		
-		
-		
+		HttpSession session = request.getSession();
+		String memId = (String)session.getAttribute("memId");
+		int result = myActService.attendent(memId);
+		System.out.println("result : " + result);
 		
 		return "/myAct/attend.mn";
 	}

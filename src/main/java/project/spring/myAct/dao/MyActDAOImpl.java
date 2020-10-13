@@ -184,5 +184,16 @@ public class MyActDAOImpl implements MyActDAO{
 		List list = sqlSession.selectList("myAct.getLikeProduct", memId);
 		return list;
 	}
+
+	@Override
+	public int updateAttend(String memId) {
+		int result = 0;
+		
+		sqlSession.update("myAct.updateAttend", memId);
+		
+		
+		
+		return result;
+	}
 	
 }
