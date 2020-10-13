@@ -14,12 +14,6 @@
 	float: left;
 	text-align: center;
 }
-#hello {
-	width: 200px;
-	height: 50px;
-	background-color: blue;
-	color: white;
-}
 </style>
 
 <body>
