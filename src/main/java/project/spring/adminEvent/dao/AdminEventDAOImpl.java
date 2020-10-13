@@ -3,6 +3,7 @@ package project.spring.adminEvent.dao;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +90,14 @@ public class AdminEventDAOImpl implements AdminEventDAO {
 		System.out.println("count : " + count);
 		return count;
 	}
+	
+	public int eventCount(Map schMap)throws SQLException{
+		
+
+		int count = sqlSession.selectOne("adminEvent.schEventCount", schMap);
+		System.out.println("부탁합니다" + count);
+		return count;
+	}
 
 	// 이벤트 리스트 가져오기
 	@Override
@@ -100,6 +109,15 @@ public class AdminEventDAOImpl implements AdminEventDAO {
 		
 		
 		List eventList = sqlSession.selectList("adminEvent.eventList", map);
+		return eventList;
+	}
+	
+	public List eventList(int startRow, int endRow, Map schMap)throws SQLException{
+		
+		schMap.put("start", startRow);
+		schMap.put("end", endRow);
+		List eventList = sqlSession.selectList("adminEvent.schEventList", schMap);
+		
 		return eventList;
 	}
 
@@ -122,6 +140,12 @@ public class AdminEventDAOImpl implements AdminEventDAO {
 		AdminEventVO vo = sqlSession.selectOne("adminEvent.getEventInfo", eventCode);
 		
 		return vo;
+	}
+
+	@Override
+	public void checkDate(String today) throws SQLException {
+
+		sqlSession.update("adminEvent.checkDate", today);
 	}
 
 }
