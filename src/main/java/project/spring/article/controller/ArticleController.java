@@ -41,7 +41,7 @@ public class ArticleController {
 	
 		@RequestMapping
 		public String index(){
-			return "article/articleList.mn";
+			return "forward:/article/articleSearch";
 		}
 		
 		@RequestMapping("/writeForm")
@@ -74,7 +74,7 @@ public class ArticleController {
 			int result = articleService.insertItem(dto);
 			//imgInsert
 			//insertTags
-			return "article/articleList.mn";
+			return "redirect:/article";
 		}
 		
 		//Search >> thumbNail뽑아서 list return
@@ -128,10 +128,13 @@ public class ArticleController {
 		}
 		@RequestMapping(value = "detail")
 		public String detail(@RequestParam(name="idx",required = false) int idx,Model model) {
-			
 			ArticleDTO dto = articleService.read(idx);
+			
+			//밑에 게시글 뿌리는 메서드
+			List list = articleService.searchArticleByAdd(0);
+			System.out.println(list);
 			model.addAttribute("articleDTO", dto);
-			System.out.println(model);
+			model.addAttribute("list", list);
 			return "article/detail.mn";
 		}
 	}	

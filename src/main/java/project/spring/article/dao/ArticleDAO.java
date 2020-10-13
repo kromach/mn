@@ -14,5 +14,6 @@ public interface ArticleDAO extends CommonInterface{
 			String search);
 	public List searchArticle();
 	public ArticleDTO read(int idx);
+	public List searchArticleByAdd(int i);
 
 }

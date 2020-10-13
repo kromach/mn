@@ -74,4 +74,9 @@ public class ArticleServiceImpl implements ArticleService{
 		
 		return articleDAOimpl.read(idx);
 	}
+	
+	@Override
+	public List searchArticleByAdd(int i) {
+		return articleDAOimpl.searchArticleByAdd(i);
+	}
 }

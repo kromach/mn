@@ -12,4 +12,5 @@ public interface ArticleService extends CommonInterface {
 	public List searchArticle(String selectOption,String search);
 	public List searchArticle();
 	public ArticleDTO read(int idx);
+	public List searchArticleByAdd(int i);
 }
