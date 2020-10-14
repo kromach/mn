@@ -128,11 +128,28 @@ public class ArticleDAOImpl implements ArticleDAO {
 		map.put("memNickName", memNickName);
 		map.put("num",num);
 		int count = sqlSession.selectOne("article.alreadyLike",map);
-		System.out.println("alreadyCount"+count);
+		System.out.println("alreadyCountLike"+count);
 		if(count == 0) {
 			sqlSession.insert("article.like_log",map);
 			sqlSession.update("article.like", num);
 			sqlSession.update("article.updateMyActGivenHeart",insertId);
+			
+			return sqlSession.selectOne("article.likeReturn",num); 
+		}
+		return -1;
+	}
+	@Override
+	public int unlike(Integer num,
+			String memNickName, String insertId) {
+		HashMap map = new HashMap();
+		map.put("memNickName", memNickName);
+		map.put("num",num);
+		int count = sqlSession.selectOne("article.alreadyLike",map);
+		System.out.println("alreadyCountUnLike"+count);
+		if(count == 1) {
+			sqlSession.delete("article.like_log_undo",map);
+			sqlSession.update("article.like_undo", num);
+			sqlSession.update("article.updateMyActGivenHeart_undo",insertId);
 			
 			return sqlSession.selectOne("article.likeReturn",num); 
 		}
