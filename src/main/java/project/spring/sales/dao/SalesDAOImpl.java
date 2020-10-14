@@ -66,6 +66,7 @@ public class SalesDAOImpl implements SalesDAO{
 		map.put("end", end);
 		List list = sqlSession.selectList("sales.salesList", map);
 		System.out.println("list 가져왔나 ? " + list.toString());
+		
 		return list;
 	}
 

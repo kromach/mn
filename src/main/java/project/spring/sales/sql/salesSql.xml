@@ -26,6 +26,7 @@
   		<select id="userIdCh" parameterType="string" resultType="string">
   			SELECT user_kind FROM MEMBER_INFO mi WHERE ID = #{value}
   		</select>
+  	
   		
   		
   		

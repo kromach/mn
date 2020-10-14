@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,13 +19,52 @@
 	<div class="grid">  
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
-		<div class="grid-item grid-item--width2"><img src="/resources/img/main/4.jpg" /></div>
+		<div class="grid-item grid-item--width6"></div>
+		
+		<h2> 판매중인 품목 </h2>
+		<br/><br/><br/><br/>
+			<table class="tableCss" style="width: 100%;">
+						<tr>
+							<td>번호</td>
+							<td>상품명</td>
+							<td>상품종류</td>
+							<td>가격</td>
+							<td>판매여부</td>
+						</tr>
+						<c:forEach var="salesList" items="${salesList}">
+							<tr>
+								<td>${salesList.prCode}</td>
+								<td>${salesList.prName}</td>
+								<td>${salesList.prBkindValue}/${salesList.prSkindValue}</td>
+								<td>${salesList.prPrice}</td>
+								<td>${salesList.prUse}</td>
+							</tr>
+						</c:forEach>
+					</table>
+		<br/>
+		<a href="/sales/insert">상품등록</a>
+		<br/><br/><br/>
+		<!-- pager -->
+				<div align="center" class="pageNums">
+						<!-- 게시글이 있을때만 보여주기 -->
+						<c:if test="${count>0}">
+							<!-------------------------------------------------------------------------->
+							<c:if test="${pageVO.startPage > pageVO.pageBlock}">
+								<a href="/sales/index?pageNum=${pageVO.startPage-pageVO.pageBlock}">&lt;</a>
+							</c:if>
+							<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1"> 
+										<a href="/sales/index?pageNum=${i}" class="pageNums">&nbsp;${i}&nbsp;</a>
+							</c:forEach>
+							<c:if test="${pageVO.endPage < pageVO.pageCount}">
+								<a href="/sales/index?pageNum=${pageVO.startPage+pageVO.pageBlock}">&gt;</a>
+							</c:if>
+							<!-------------------------------------------------------------------------->
+						</c:if>
+				</div>
 	</div>
 </div>
 
 <script src="/resources/js/imageLoad.js"></script>
-
-</script> -->
 <script type="text/javascript">
 $(window).scroll(
 	function() {

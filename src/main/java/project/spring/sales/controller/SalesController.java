@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import project.spring.beans.PageVO;
+import project.spring.beans.Pager;
 import project.spring.sales.service.SalesService;
 
 @Controller
@@ -25,12 +27,13 @@ public class SalesController {
 		if(pageNum == null) {
 			pageNum = "1";
 		}
-		int pageSize=10;
-		int currPage = Integer.parseInt(pageNum);	
-		int startRow = (currPage -1) * pageSize + 1;
-		int endRow = currPage * pageSize;		
-		int count = 0;			
+				
+		int count = 0;
+		
+		Pager pager = new Pager();
+		PageVO pageVO = null;
 		int number = 0;
+		
 		
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
@@ -50,23 +53,31 @@ public class SalesController {
 		List salesList = null;
 		
 		if(count > 0) {
-			salesList = salesService.productorList(memId, startRow, endRow);
+			pageVO = pager.pager(pageNum, count);
+			salesList = salesService.productorList(memId, pageVO.getStartRow(), pageVO.getEndRow());
 			System.out.println("salesList" + salesList.toString());
 		}
-		number = count - (currPage -1) * pageSize;
+		number = count - (pageVO.getCurrPage() -1) * pageVO.getPageSize();
 		
 		model.addAttribute("number", new Integer(number));
-		model.addAttribute("pageSize", new Integer(pageSize));
 		model.addAttribute("pageNum", new Integer(pageNum));
-		model.addAttribute("currPage", new Integer(currPage));
-		model.addAttribute("startRow", new Integer(startRow));
-		model.addAttribute("endRow", new Integer(endRow));
 		model.addAttribute("count", new Integer(count));
 		model.addAttribute("salesList", salesList);
-		
+		model.addAttribute("pageVO", pageVO);
 		
 		
 		return "sales/index.mn";
+	}
+	
+	@RequestMapping(value ="/insert")
+	public String insertProduct(String pageNum, HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		String memId = (String)session.getAttribute("memId");
+		System.out.println("Session : " + memId);
+		
+		
+		
+		return null;
 	}
 	
 	
