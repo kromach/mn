@@ -38,6 +38,6 @@
 			,LICENSE_NUM =#{licenseNum} where id = #{id}
   		</update>
   		<update id="attendent" parameterType="string">
-  			UPDATE MY_ACTIVITY SET MY_ATTENDENT =MY_ATTENDENT +1 WHERE id = #{value}; 
+  			UPDATE MY_ACTIVITY SET MY_ATTENDENT =MY_ATTENDENT +1 WHERE id = #{value}
   		</update>
   </mapper>

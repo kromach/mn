@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<style>
+#contentBlock img{
+	min-width: 0;
+	display: inline-block;
+}
+</style>
 <body>
 	<div class="grid-Wrapper">
 		<div class="grid">
@@ -8,7 +14,7 @@
 			<div class="gutter-sizer"></div>
 			<div class="detail-item detail-width6">
 				<h2 class="pad-top10 pad-bottom10">${articleDTO.bnTitle}</h2>
-				<table class="detailTbl tbl-lg">
+				<table class="detailTbl tbl-lg" style="margin: auto;text-align: center;">
 					<tr>
 						<td>작성자</td>
 						<td>작성일</td>
@@ -22,7 +28,7 @@
 						<td>${articleDTO.heart}</td>
 					</tr>
 					<tr>
-						<td colspan="4" style="min-height: 400px; min-width: 0; display: inline-block;">${articleDTO.content }</td>
+						<td colspan="4" style="min-height: 400px;" id="contentBlock">${articleDTO.content }</td>
 					</tr>
 					<tr>
 						<td colspan="4" style="height: 100px; border-bottom: 1px solid;">
@@ -41,7 +47,7 @@
 			</div>
 			<div class="detail-item detail-width6">
 				<div class="text-center pad-top10 pad-bottom20">
-					<c:if test="${memId eq 'admin' }">
+					<c:if test="${memId eq 'admin' }">	
 						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="글이동" onclick="move('${articleDTO.bnIdx}')">
 					</c:if>
 						<input type="button" class="btn btn-md btn-grey" value="목록으로" onclick="window.location='/article'" />
