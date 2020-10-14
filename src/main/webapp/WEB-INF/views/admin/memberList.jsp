@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,8 +37,15 @@
 							<td><a href="#"></a>${memberList.id}</td>
 							<td>${memberList.nickname}</td>
 							<td>${memberList.birth}</td>
-							<td>${memberList.reportNumber}<!-- jk0001, jk0002 로 저장되므로 스플릿으로 나누어
-							a태그로 걸기 --></td>
+							<td>
+								<c:if test="${fn:length(memberList.reportNumber) > 0}">
+									<c:set var="report1" value="${memberList.reportNumber}" />
+									<c:set var ="reportArr" value="${fn:split(report1,',')}" />
+									<c:forEach var="list" items="${reportArr}">
+										<a href="#">${list}</a>
+									</c:forEach>
+								</c:if>
+							</td>
 							<c:if test="${memberList.reportCount != 0 }">
 							<td>${memberList.reportCount}</td>
 							</c:if>
