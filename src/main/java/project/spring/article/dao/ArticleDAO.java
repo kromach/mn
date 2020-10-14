@@ -20,4 +20,6 @@ public interface ArticleDAO extends CommonInterface{
 	public int like(Integer num, String memNickName,String insertId);
 	public int unlike(Integer num,
 			String memNickName, String insertId);
+	public int report(Integer num,
+			String insertId, String reportId);
 }

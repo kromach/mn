@@ -62,6 +62,12 @@
   	<update id="like_undo" parameterType="int">
   		UPDATE board_normal SET heart = heart-1 WHERE BN_IDX = #{value}
   	</update>
+  	<update id="addReportCount" parameterType="string">
+  		UPDATE member_info SET REPORT_COUNT = REPORT_COUNT +1 WHERE id = #{value}
+  	</update>
+  	<update id="addReportNumber" parameterType="hashmap">
+  		UPDATE member_info SET REPORT_NUMBER = #{reportString} WHERE id = #{insertId}
+  	</update>
   	<select id="likeReturn" parameterType="int" resultType="int">
 		select heart from board_normal where BN_IDX = #{value}
   	</select>

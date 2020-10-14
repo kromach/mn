@@ -155,4 +155,22 @@ public class ArticleDAOImpl implements ArticleDAO {
 		}
 		return -1;
 	}
+	@Override
+	public int report(Integer num, String insertId, String reportId) {
+		int result = -1;
+		//작성자 reportCount+1
+		result += sqlSession.update("article.addReportCount", insertId);
+		
+		//reportNumber제작
+		String reportString = num + "F" + reportId;
+		HashMap map = new HashMap();
+		map.put("insertId",insertId);
+		map.put("reportString",reportString);
+		//String넣기
+		result += sqlSession.update("article.addReportNumber",map);
+		
+		//완료시 result 1
+		System.out.println("ReportResult"+result);
+		return result;
+	}
 }

@@ -94,4 +94,10 @@ public class ArticleServiceImpl implements ArticleService{
 			String memNickName, String insertId) {
 		return articleDAOimpl.unlike(num,memNickName,insertId);
 	}
+	@Override
+	public int report(Integer num,
+			String insertId, String reportId) {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.report(num,insertId,reportId);
+	}
 }

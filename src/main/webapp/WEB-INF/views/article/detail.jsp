@@ -35,7 +35,7 @@
 						<!--login은 실행후 검사 -->
 						<div>
 							<button class="btn btn-lg btn-blue" onclick="like('${articleDTO.bnIdx}','${articleDTO.insertId }')">좋아요</button>
-							<a class="btn btn-lg btn-blue" onclick="report('${articleDTO.bnIdx}','${articleDTO.insertId }')">신고</a>
+							<a class="btn btn-lg btn-blue" onclick="report('${articleDTO.bnIdx}','${articleDTO.insertId }','${memId}')">신고</a>
 							<a class="btn btn-lg btn-yellow" onclick="reply('${articleDTO.bnIdx}')">댓글등록</a>
 						</div>
 						</td>
@@ -116,13 +116,13 @@ var session = '<c:out value="${memNickName}"/>';
 		alert("로그인후 이용 가능한 서비스 입니다");
 	}
 }
-function report(bnIdx,insertId){
+function report(bnIdx,insertId,reportId){
 	var context = window.location.pathname.substring(0,
 			window.location.pathname.indexOf("/", 2));
 	var session = '<c:out value="${memNickName}"/>';
 	if(session!=''){
 		$.ajax({
-			url : context + '/report?num='+bnIdx+'&insertId='+insertId,
+			url : context + '/report?num='+bnIdx+'&insertId='+insertId+'&reportId='+reportId,
 			type : "post",
 			success : function(data) {
 			}

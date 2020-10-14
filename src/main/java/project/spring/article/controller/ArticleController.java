@@ -183,10 +183,12 @@ public class ArticleController {
 		@RequestMapping(value = "/report")
 		@ResponseBody
 		public int reportSs(@RequestParam(name="num",required = false) Integer num,
-				@RequestParam(name="insertId",required = false) String insertId) {
+				@RequestParam(name="insertId",required = false) String insertId,
+				@RequestParam(name="reportId",required = false) String reportId
+				) {
 			int result = 0;
-			System.out.println(num+"|"+insertId);
-			//result = articleService.searchArticleByAdd(num);
+			System.out.println(num+"|"+insertId+"|"+reportId);
+			result = articleService.report(num,insertId,reportId);
 			return result;
 		}
 		@RequestMapping(value = "/reply")
