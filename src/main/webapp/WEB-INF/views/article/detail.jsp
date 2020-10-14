@@ -126,9 +126,9 @@ function report(bnIdx,insertId,reportId){
 			type : "post",
 			success : function(data) {
 				if(data==1){
-					console.log("신고가 완료 되었습니다");
+					alert("신고가 완료 되었습니다");
 				}else if(data == -1){
-					console.log("이미 신고하신 글입니다.");
+					alert("이미 신고하신 글입니다.");
 				}
 			}
 		});
