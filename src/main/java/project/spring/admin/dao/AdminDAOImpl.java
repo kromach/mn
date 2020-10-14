@@ -67,7 +67,7 @@ public class AdminDAOImpl implements AdminDAO{
 	public int deleteItem(Object obj) {
 		String memberId = (String)obj;
 		int i = sqlSession.update("admin.deleteMember", memberId);
-		return 0;
+		return i;
 	}
 
 }
