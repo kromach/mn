@@ -23,8 +23,14 @@
 	<select id="myordercount" parameterType="string" resultType="int">
 		select count(*) from order_info where user_id = #{value}
 	</select>
-	<select id="myorderlist" parameterType="string" resultType="ordervo">
-		select * from order_info where user_id = #{value}
+	<select id="myorderlist" parameterType="hashmap" resultType="ordervo">
+		<![CDATA[
+		select a.* from
+			(select aa.*,rownum r from 
+				(select * from order_info where user_id = #{id} ORDER BY INSERT_DAY deSC)
+				aa)
+				a where r >= (5*#{i})+1 and r <= 5*(#{i}+1)
+		]]>
 	</select>
 	<insert id="insertorder" parameterType="ordervo">
 		INSERT INTO ORDER_INFO(or_code,or_day,or_seq,pr_code,pr_name,or_status,pr_price,pr_count,user_id,RECEIVER_NAME ,RECEIVER_TEL ,RECEIVER_ADDR ,INSERT_DAY )

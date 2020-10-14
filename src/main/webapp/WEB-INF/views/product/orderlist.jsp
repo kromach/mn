@@ -18,11 +18,11 @@
 				<div>
 					<table class="tableCss">
 						<tr>
-							<td>상품명</td>
+							<th>상품명</th>
 							<td align="left"><input type="text" name="prName" /></td>
 						</tr>
 						<tr>
-							<td>구매자명</td>
+							<th>구매자명</th>
 							<td align="left"><input type="text" name="prName" /></td>
 						</tr>
 						<tr>
@@ -38,7 +38,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td>주문상태</td>
+							<th>주문상태</th>
 							<td align="left">
 								<input type="checkbox" name="orStatus" value="1" />결재완료
 								<input type="checkbox" name="orStatus" value="2" />배송준비중
@@ -84,10 +84,6 @@
 								</tr>
 						</c:forEach>
 				</table>
-				<!-- 더 보기 구현하기 -->
-				<div>
-					<button id="addBtn" onclick="moreList();">더보기</button>
-				</div>
 				<!-- pager -->
 				<div align="center" class="pageNums">
 							<c:if test="${pageVO.startPage > pageVO.pageBlock}">
