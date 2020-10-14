@@ -56,11 +56,11 @@
 			</ul>
 		</li>
 		</c:if>									
-		<c:if test="${sessionScope.userKind eq 'salse' }">
+		<c:if test="${sessionScope.userKind eq 'sales' }">
 		<li class="sub-menu">
 			<a href="#salse"><div class="fa fa-bullhorn"></div> 판매자 메뉴 <div class="fa fa-caret-up fr"></div></a>
 			<ul style="display: block;">
-				<li><a href="#salse"> 상품 관리 </a></li>
+				<li><a href="/sales/index"> 상품 관리 </a></li>
 				<li><a href="/product/orderlist"> 판매 관리 </a></li>
 			</ul>
 		</li>
