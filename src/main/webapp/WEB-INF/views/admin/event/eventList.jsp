@@ -128,7 +128,7 @@ $( function() {
 							<td>${eventList.evStart} ~ ${eventList.evEnd}</td>
 							<td>
 								<p id=${number }>
-								<c:if test="${eventList.isOpen == 'Y'}"><a onclick="chOpen('${ eventList.eventCode},${number }')">활성</a></c:if>
+								<c:if test="${eventList.isOpen == 'Y'}"><a onclick="chOpen('${ eventList.eventCode}', '${number }')">활성</a></c:if>
 								<c:if test="${eventList.isOpen == 'N'}">비활성</c:if>
 								</p>
 							</td>
@@ -136,20 +136,35 @@ $( function() {
 					</c:forEach>
 				</c:if>
 			</table>
-		
+			
+			<!-- pager -->
+				<div align="center" class="pageNums">
+						<!-- 게시글이 있을때만 보여주기 -->
+						<c:if test="${count>0}">
+							<!-------------------------------------------------------------------------->
+							<c:if test="${pageVO.startPage > pageVO.pageBlock}">
+								<a href="/admin/event/eventList?pageNum=${pageVO.startPage-pageVO.pageBlock}">&lt;</a>
+							</c:if>
+							<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1"> 
+										<a href="/admin/event/eventList?pageNum=${i}" class="pageNums">&nbsp;${i}&nbsp;</a>
+							</c:forEach>
+							<c:if test="${pageVO.endPage < pageVO.pageCount}">
+								<a href="/admin/event/eventList?pageNum=${pageVO.startPage+pageVO.pageBlock}">&gt;</a>
+							</c:if>
+							<!-------------------------------------------------------------------------->
+						</c:if>
+				</div>
 		</div> <!-- grid-item--width6  -->
 	</div><!-- grid -->
 </div>	<!-- grid-Wrapper -->
 
 <script>
-function chOpen(value){
+function chOpen(eventCode, number){
 
 	alert("해당 이벤트가 비활성화로 변경되었습니다.");
 
-	alert(value);
-	var eventCode = value[0-7];
 
-	alert(eventCode);
+	var numberCh = number;
 
 	
 	var context = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
@@ -157,6 +172,8 @@ function chOpen(value){
 		url: context + '/event/chEventCode?eventCode='+eventCode,
 		type:"get",
 		success : function(data){
+			$('#' + number).empty();
+			$('#' + number).append('<p>비활성</p>')
 			
 
 		}
