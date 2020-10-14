@@ -164,13 +164,15 @@ public class ArticleDAOImpl implements ArticleDAO {
 		System.out.println("alreadyReported"+isAlreadyReported);
 		String[] tmp = isAlreadyReported.split(",");
 		for(String reported : tmp) {
-			System.out.println(reported.substring(0, 3));
+			System.out.println(reported.substring(3)+":"+reportId);
+			if(reported.substring(3).equals(reportId)) {
+				isAlreadReported_ = true;
+			}
 		}
 		
-		
+		if(!isAlreadReported_) {
 			//작성자 reportCount+1
 			result += sqlSession.update("article.addReportCount", insertId);
-			
 			//reportNumber제작
 			String reportString = num + "F" + reportId;
 			HashMap map = new HashMap();
@@ -180,8 +182,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 			result += sqlSession.update("article.addReportNumber",map);
 			//완료시 result 1
 			System.out.println("ReportResult"+result);
-			
-			
+		}
+		//-1 >> 이미 신고
+		//1  >> 신고
 		return result;
 	}
 }
