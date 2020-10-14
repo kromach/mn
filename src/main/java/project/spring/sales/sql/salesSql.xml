@@ -7,16 +7,21 @@
   			SELECT count(*) FROM PRODUCT_INFO pi2 WHERE INSERT_ID =#{value}
   		</select>  		
   		
-  		<select id="salesList" parameterType="string" resultType="productvo">
+  		<select id="salesList" parameterType="hashmap" resultType="productvo">
+  		<![CDATA[
+		select a.*from(select aa.*, rownum r from(
 		SELECT INFO.PR_CODE,INFO.PR_NAME,INFO.PR_IMG,INFO.PR_BKIND, BCATE.VALUE AS PR_BKIND_VALUE,
 		info.PR_SKIND, SCATE.VALUE AS PR_SKIND_VALUE,
 		info.PR_COUNTRY,info.PR_CITY,info.PR_ALCOHOL,info.PR_PLACE,info.PR_FOOD,
-		info.PR_CONTENT,info.PR_PRICE,info.PR_AMOUNT,info.PR_TOTALCOUNT,info.PR_LIKE,
+		info.PR_CONTENT,info.PR_PRICE,info.PR_AMOUNT,info. PR_TOTALCOUNT,info.PR_LIKE,
 		info.PR_USE,info.INSERT_ID,info.INSERT_DAY
 		FROM PRODUCT_INFO INFO INNER JOIN
 			DRINK_CATEGORY BCATE ON info.PR_BKIND = BCATE.CODE INNER JOIN
 			DRINK_CATEGORY SCATE ON info.PR_SKIND = SCATE.CODE 
-		WHERE insert_id = #{value}
+		WHERE insert_id = #{memId}
+	  			) aa order by PR_CODE ASC 
+	  		) a where r >=#{start} and r <=#{end}
+	  	]]>
 		</select>
   		<select id="userIdCh" parameterType="string" resultType="string">
   			SELECT user_kind FROM MEMBER_INFO mi WHERE ID = #{value}

@@ -1,5 +1,6 @@
 package project.spring.sales.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -58,8 +59,12 @@ public class SalesDAOImpl implements SalesDAO{
 	}
 
 	@Override
-	public List productorlist(String memId) {
-		List list = sqlSession.selectList("sales.salesList", memId);
+	public List productorlist(String memId, int start, int end) {
+		HashMap map = new HashMap();
+		map.put("memId", memId);
+		map.put("start", start);
+		map.put("end", end);
+		List list = sqlSession.selectList("sales.salesList", map);
 		System.out.println("list 가져왔나 ? " + list.toString());
 		return list;
 	}

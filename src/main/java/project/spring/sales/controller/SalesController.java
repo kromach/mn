@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import project.spring.sales.service.SalesService;
@@ -19,15 +20,17 @@ public class SalesController {
 	SalesService salesService = null;
 	
 	@RequestMapping(value ="/index")
-	public String indexSs(HttpServletRequest request, String pageNum) {
+	public String indexSs(HttpServletRequest request, String pageNum, Model model) {
 		System.out.println("SalesIndex Controller");
-		
-//		int pageSize=10;
-//		int currPage = Integer.parseInt(pageNum);	
-//		int startRow = (currPage -1) * pageSize + 1;
-//		int endRow = currPage * pageSize;		
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		int pageSize=10;
+		int currPage = Integer.parseInt(pageNum);	
+		int startRow = (currPage -1) * pageSize + 1;
+		int endRow = currPage * pageSize;		
 		int count = 0;			
-//		int number = 0;	
+		int number = 0;
 		
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
@@ -44,24 +47,27 @@ public class SalesController {
 		count = salesService.salesCount(memId);
 		System.out.println("count : " + count);
 		
-		if(pageNum == null) {
-			pageNum = "1";
-		}
-		
 		List salesList = null;
 		
-		salesList = salesService.productorList(memId);
-		System.out.println("salesList" + salesList.toString());
+		if(count > 0) {
+			salesList = salesService.productorList(memId, startRow, endRow);
+			System.out.println("salesList" + salesList.toString());
+		}
+		number = count - (currPage -1) * pageSize;
+		
+		model.addAttribute("number", new Integer(number));
+		model.addAttribute("pageSize", new Integer(pageSize));
+		model.addAttribute("pageNum", new Integer(pageNum));
+		model.addAttribute("currPage", new Integer(currPage));
+		model.addAttribute("startRow", new Integer(startRow));
+		model.addAttribute("endRow", new Integer(endRow));
+		model.addAttribute("count", new Integer(count));
+		model.addAttribute("salesList", salesList);
 		
 		
 		
-		return null;
+		return "sales/index.mn";
 	}
-	
-	
-	
-	
-	
 	
 	
 }
