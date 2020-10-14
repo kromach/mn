@@ -108,6 +108,11 @@ public class MyActDAOImpl implements MyActDAO{
 		List<TitleListDTO> titleValue =sqlSession.selectList("myAct.getAllTitle", memId);
 		//내가 가지고 있는 현황
 		MyActivityDTO myActivity = sqlSession.selectOne("myAct.myActivity", memId);
+		
+		if(myActivity == null) {
+			return null;
+		}
+		
 		Map<String, String> map = new HashMap<String,String>();
 		//기준들의 ArrayList
 		ArrayList<String> standard = new ArrayList<String>();
@@ -138,7 +143,7 @@ public class MyActDAOImpl implements MyActDAO{
 			String[] keyForMapTmp = keyForMap.split(":");
 			System.out.println("keyForMapVal================"+keyForMapTmp[0]);
 			System.out.println("keyForMapKey================"+keyForMapTmp[1]);
-			if(keyForMapTmp[1] !=null) {
+			if(keyForMapTmp[1] !=null&&keyForMapTmp[0]!=null) {
 				if(keyForMapTmp[1].equals("my_attendent")) {
 					if(myActivity.getMyAttendent() >= Integer.parseInt(keyForMapTmp[0])) {
 						System.out.println(myActivity.getId()+"님이"+ map.get(keyForMap)+"를 획득하였습니다.");
