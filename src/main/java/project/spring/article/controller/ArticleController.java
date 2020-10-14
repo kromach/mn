@@ -156,7 +156,7 @@ public class ArticleController {
 		}
 		@RequestMapping(value = "/like")
 		@ResponseBody
-		public int like(@RequestParam(name="num",required = false) Integer num,
+		public int likeSs(@RequestParam(name="num",required = false) Integer num,
 						@RequestParam(name="nick",required = false) String memNickName,
 						@RequestParam(name="insertId",required = false) String insertId
 				) {
@@ -167,27 +167,40 @@ public class ArticleController {
 			//unlike
 			return result;
 		}
+		@RequestMapping(value = "/unlike")
+		@ResponseBody
+		public int unlikeSs(@RequestParam(name="num",required = false) Integer num,
+				@RequestParam(name="nick",required = false) String memNickName,
+				@RequestParam(name="insertId",required = false) String insertId
+				) {
+			
+			//기본값 -1
+			int result = -1;
+			result = articleService.unlike(num,memNickName,insertId);
+			//unlike
+			return result;
+		}
 		@RequestMapping(value = "/report")
 		@ResponseBody
-		public int report(@RequestParam(name="num",required = false) Integer num) {
+		public int reportSs(@RequestParam(name="num",required = false) Integer num,
+				@RequestParam(name="insertId",required = false) String insertId) {
 			int result = 0;
+			System.out.println(num+"|"+insertId);
 			//result = articleService.searchArticleByAdd(num);
 			return result;
 		}
 		@RequestMapping(value = "/reply")
 		@ResponseBody
-		public int reply(@RequestParam(name="num",required = false) Integer num) {
+		public int replySs(@RequestParam(name="num",required = false) Integer num) {
 			int result = 0;
 			//result = articleService.searchArticleByAdd(num);
 			return result;
 		}
 		@RequestMapping(value = "/move")
 		@ResponseBody
-		public int move(@RequestParam(name="num",required = false) Integer num) {
+		public int moveSs(@RequestParam(name="num",required = false) Integer num) {
 			int result = 0;
 			//result = articleService.searchArticleByAdd(num);
 			return result;
 		}
-			
-		
 	}	

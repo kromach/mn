@@ -87,4 +87,8 @@ public class MemberServiceImpl implements memberInterface{
 		MemberDTO result = memberDAO.setSession(id);
 		return result;
 	}
+	@Override
+	public void attendent(String id) {
+		memberDAO.attendent(id);
+	}
 }
