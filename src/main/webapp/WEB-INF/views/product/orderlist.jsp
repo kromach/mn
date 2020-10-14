@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,6 +66,7 @@
 							<td>상품명</td>
 							<td>수량</td>
 							<td>주문자아이디/수령자명</td>
+							<td>주문일자</td>
 							<td>주문상태</td>
 						</tr>
 						<c:forEach var="order" items="${orderlist}">
@@ -73,6 +75,7 @@
 									<td><a href="orderdetail?orcode=${order.orCode}">${order.prName}</a></td>
 									<td>${order.prCount}</td>
 									<td>${order.userId}/${order.receiverName}</td>
+									<td><fmt:formatDate value="${order.insertDay}" pattern="yyyy.MM.dd"/></td>
 									<c:choose>
 										<c:when test="${order.orStatus ==1}"><td>주문 미확인</td></c:when>
 										<c:when test="${order.orStatus ==2}"><td>주문 확인</td></c:when>
