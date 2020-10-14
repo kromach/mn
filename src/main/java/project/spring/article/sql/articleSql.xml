@@ -36,6 +36,9 @@
   	<select id="alreadyLike" parameterType="hashmap" resultType="int">
   		select count(*) from board_like where nick = #{memNickName} and BN_IDX = #{num}
   	</select>
+  	<select id="isAlreadyReported" parameterType="string" resultType="string">
+  		SELECT report_number FROM MEMBER_INFO mi  WHERE id = #{value}
+  	</select>
   	<insert id="insertTags" parameterType="ArticleDTO">
 	insert into BOARD_NORMAL (BN_IDX,BN_TITLE,KIND ,DK_CODE,READCOUNT,HEART,REPORT,CONTENT,INSERT_ID,INSERT_DAY,IS_DELETE )
 	values (BOARD_NORMAL_SEQ.nextval,#{bnTitle},default,#{dkCode},#{readcount},#{heart},#{report},#{content},
@@ -61,6 +64,14 @@
   	</update>
   	<update id="like_undo" parameterType="int">
   		UPDATE board_normal SET heart = heart-1 WHERE BN_IDX = #{value}
+  	</update>
+  	<update id="addReportCount" parameterType="string">
+  		UPDATE member_info SET REPORT_COUNT = REPORT_COUNT +1 WHERE id = #{value}
+  	</update>
+  	<update id="addReportNumber" parameterType="hashmap">
+  		<![CDATA[	
+  		UPDATE member_info SET REPORT_NUMBER = (REPORT_NUMBER ||#{reportString}||',') WHERE id = #{insertId}
+  		]]>
   	</update>
   	<select id="likeReturn" parameterType="int" resultType="int">
 		select heart from board_normal where BN_IDX = #{value}
