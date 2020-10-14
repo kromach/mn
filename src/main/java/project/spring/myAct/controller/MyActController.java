@@ -29,7 +29,7 @@ public class MyActController {
 	MyActService myActService= null;
 	
 	@RequestMapping
-	public String index(HttpServletRequest request, Model model) {
+	public String indexSs(HttpServletRequest request, Model model) {
 		System.out.println("MyActIndex Controller");
 		int count = 0;				
 		
@@ -51,7 +51,7 @@ public class MyActController {
 	}
 	
 	@RequestMapping(value = "/attend", method = RequestMethod.GET)
-	public String attend(HttpServletRequest request) {
+	public String attendSs(HttpServletRequest request) {
 		System.out.println("MyActAttend Controller");
 		
 		HttpSession session = request.getSession();
@@ -64,7 +64,7 @@ public class MyActController {
 	
 	@RequestMapping(value = "/likeArticle")
 	@ResponseBody
-	public List likeArticle(String id, HttpServletRequest request, Model model) {
+	public List likeArticleSs(String id, HttpServletRequest request, Model model) {
 		System.out.println("MyActLikeArticle Controller");
 		System.out.println("id : "+id);
 		int count = 0;			
@@ -83,7 +83,7 @@ public class MyActController {
 	 
 	@RequestMapping(value = "/likeDrink")
 	@ResponseBody
-	public Map likeDrink(String pageNum, HttpServletRequest request) {
+	public Map likeDrinkSs(String pageNum, HttpServletRequest request) {
 		System.out.println("MyActLikeDrink Controller");
 		
 		Map<String,List> map = new HashMap();
@@ -105,7 +105,7 @@ public class MyActController {
 	
 	@RequestMapping(value = "/getAllTitle")
 	@ResponseBody
-	public Map allTitle(HttpServletRequest request) {
+	public Map allTitleSs(HttpServletRequest request) {
 		System.out.println("GetAllTitle Controller");
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
@@ -126,7 +126,7 @@ public class MyActController {
 	
 	@RequestMapping(value = "/myTitle")
 	@ResponseBody
-	public List title(String id, HttpServletRequest request) {
+	public List titleSs(String id, HttpServletRequest request) {
 		System.out.println("Title Controller");
 		System.out.println("id : "+id);
 		
@@ -140,6 +140,4 @@ public class MyActController {
 		
 		return myTitle;
 	}
-	
-
 }

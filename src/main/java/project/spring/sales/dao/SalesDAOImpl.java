@@ -2,7 +2,10 @@ package project.spring.sales.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
+@Repository
 public class SalesDAOImpl implements SalesDAO{
 
 	@Autowired
