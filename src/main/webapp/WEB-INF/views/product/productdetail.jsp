@@ -29,8 +29,7 @@
 					<dd class="clfix">${info.prFood} </dd>
 				</dl>
 				<div>
-					<button class="btn btn-lg btn-blue" onclick="">좋아요</button>
-					<a class="btn btn-lg btn-yellow" onclick="">싫어요</a>
+					<button class="btn btn-lg btn-blue" onclick="like('${articleDTO.bnIdx}','${articleDTO.insertId }')">좋아요</button>
 					(${info.prLike})
 				</div>
 			</div>
@@ -125,6 +124,36 @@
 			}				
 		}					
 		document.getElementById("totalprice").innerHTML = Number(price) * sel.selectedIndex;					
-	}						
+	}	
+	
+	function like(bnIdx,insertId){
+		var context = window.location.pathname.substring(0,
+				window.location.pathname.indexOf("/", 2));
+		var session = '<c:out value="${memNickName}"/>';
+			if(session!=''){
+			$.ajax({
+				url : context + '/like?num='+bnIdx+'&nick=${memNickName}&insertId='+insertId,
+				type : "post",
+				success : function(data) {
+					if(data == -1){
+						$.ajax({
+							url : context + '/unlike?num='+bnIdx+'&nick=${memNickName}&insertId='+insertId,
+							type : "post",
+							success : function(data_) {
+								console.log(data_);
+								alert("좋아요가 취소되었습니다.")	
+							}
+						});
+					}else{
+						console.log(data);
+						alert("좋아요에 추가되셨습니다.")
+						}
+					}
+				});
+			}
+			else{
+				alert("로그인후 이용 가능한 서비스 입니다");
+			}
+		}
 </script>							
 

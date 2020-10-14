@@ -9,59 +9,68 @@
 <title>사용자 구매 목록 상세</title>
 </head>
 
-	<div class="grid-Wrapper">
-		<div class="grid">
-			<div class="grid-sizer"></div>
-			<div class="gutter-sizer"></div>
-				<div class="grid-item grid-item--width6">
-					<table class="tableCss table">
-							<tr>
-								<td>주문번호</td>
-								<td>상품명</td>
-								<td>수량</td>
-								<td>가격</td>
-								<td>수령인</td>
-								<td>수령인 전화번호</td>
-								<td>배송지</td>
-								<td>주문상태</td>
-							</tr>
-						
-							<div class="grid-item grid-item--width6">
-								<tr>
-									<td>${orderinfo.orCode}</td>
-									<td>${orderinfo.prName}</td>
-									<td>${orderinfo.prCount}</td>
-									<td>${orderinfo.prPrice}</td>
-									<td>${orderinfo.receiverName}</td>
-									<td>
-										<c:set var="tel" value="${orderinfo.receiverTel}"/>
-										<c:set var="telArr" value="${fn:split(tel,',')}"/>
-										${telArr[0]}-${telArr[1]}-${telArr[2]}
-									</td>
-									<td>${orderinfo.receiverAddr}</td>
-									<c:choose>
-										<c:when test="${orderinfo.orStatus ==1}"><td>주문 미확인
-										<c:if test="${orderinfo.orStatus == 1 ||orderinfo.orStatus == 2||orderinfo.orStatus == 3  }">
-											<a href="deleteorder">배송취소</a>
-										</c:if></td></c:when>
-										<c:when test="${orderinfo.orStatus ==2}"><td>주문 확인
-										<c:if test="${orderinfo.orStatus == 1 ||orderinfo.orStatus == 2||orderinfo.orStatus == 3  }">
-											<a href="deleteorder">배송취소</a>
-										</c:if></td></c:when>
-										<c:when test="${orderinfo.orStatus ==3}"><td>배송 준비
-										<c:if test="${orderinfo.orStatus == 1 ||orderinfo.orStatus == 2||orderinfo.orStatus == 3  }">
-											<a href="deleteorder">배송취소</a>
-										</c:if></td></c:when>
-										<c:when test="${orderinfo.orStatus ==4}"><td>배송 완료</td></c:when>
-										<c:when test="${orderinfo.orStatus ==5}"><td>택배로 이동중</td></c:when>
-										<c:otherwise><td>확인 요망</td></c:otherwise>
-									</c:choose>
-									
-										
-								</tr>
-							</div>
+<div class="grid-Wrapper">
+	<div class="grid">
+		<div class="grid-sizer"></div>
+		<div class="gutter-sizer"></div>
+		<div class="detail-item detail-width3 detail-info-div">
+			<div class="detail-info text-left">
+				<h3>주문 정보</h3>
+				<table class="tableCss">
+					<tr>
+						<th>상품명</th>
+						<td>${orderinfo.prName}</td>
+					</tr>
+					<tr>
+						<th>수량</th>
+						<td>${orderinfo.prCount}</td>
+					</tr>
+					<tr>
+						<th>가격</th>
+						<td>${orderinfo.prPrice}</td>
+					</tr>
 				</table>
 			</div>
+		</div>
+		<div class="detail-item detail-width3 detail-info-div">
+			<div class="detail-info text-left">
+				<h3>주소 정보</h3>
+				<table class="tableCss">
+					<tr>
+						<th>수령자명</th>
+						<td><input type="text" value="${orderinfo.receiverName}" /></td>
+					</tr>
+					<tr>
+						<th>수령자 연락처</th>
+						<td><c:set var="tel" value="${orderinfo.receiverTel}" /> <c:set
+								var="telArr" value="${fn:split(tel,',')}" /> <input type="text"
+							name="receiverTel" value="${telArr[0]}">- <input
+							type="text" name="receiverTel" value="${telArr[1]}">- <input
+							type="text" name="receiverTel" value="${telArr[2]}"></td>
+					</tr>
+					<tr>
+						<th>수령지</th>
+						<td><input type="text" value="${orderinfo.receiverAddr}" /></td>
+
+					</tr>
+				</table>
+				<h3>배송 정보</h3>
+				<table class="tableCss">
+					<tr>
+						<th>배송 현황</th>
+						<td>${orderinfo.orStatus}</td>
+					</tr>
+					<tr>
+						<th>택배 회사</th>
+						<td>${orderinfo.deliveryCompany}</td>
+					</tr>
+					<tr>
+						<th>송장 번호</th>
+						<td>${orderinfo.deliveryNum}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
 	</div>
 </div>
 </html>

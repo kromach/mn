@@ -100,8 +100,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List myorderlist(String id) throws SQLException {
-		List myorderlist = productDAO.myorderlist(id);
+	public List myorderlist(String id , int i) throws SQLException {
+		List myorderlist = productDAO.myorderlist(id,i);
 		return myorderlist;
 	}
 
