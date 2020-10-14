@@ -19,10 +19,14 @@
   		SELECT IMG_URL FROM EDITOR_IMAGE WHERE code = #{value}
   	</select>
   	<select id="searchArticle" parameterType="hashmap" resultType="ArticleDTO">
-  		select * from board_normal where ${selectOption} like '%'||#{search}||'%' 
+  		<![CDATA[	
+  		select * from board_normal where ${selectOption} like '%'||#{search}||'%' and kind = 'F'
+  		]]>
   	</select>
   	<select id="searchAll" resultType="ArticleDTO">
-  		select * from board_normal ORDER BY INSERT_DAY DESC 
+  		<![CDATA[	
+  		select * from board_normal ORDER BY INSERT_DAY DESC  and kind = 'F'
+  		]]> 
   	</select>
   	<select id="read" parameterType="int" resultType="ArticleDTO">
   		select * from board_normal where BN_IDX = #{value}
