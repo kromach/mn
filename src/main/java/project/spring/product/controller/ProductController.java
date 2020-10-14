@@ -43,7 +43,7 @@ public class ProductController {
 		if(request.getParameter("isSearch")!=null && request.getParameter("isSearch").equals("true")) {
 			map = new HashMap();
 			
-			if(!request.getParameter("prPrice").equals("0원 - 0원")) {
+			if(!request.getParameter("prPrice").equals("0원 - 0원") && request.getParameter("prPrice")!=null) {
 				String prPrice = request.getParameter("prPrice");
 				String price[] = prPrice.split("원");
 				int strprice =Integer.parseInt(price[0]);
@@ -51,13 +51,14 @@ public class ProductController {
 				map.put("strprice", strprice);
 				map.put("endprice", endprice);
 			}
-			if(!request.getParameter("prAlcohol").equals("0도 - 0도")) {
+			if(!request.getParameter("prAlcohol").equals("0도 - 0도") && request.getParameter("prAlcohol")!=null) {
 				String prAlcohol = request.getParameter("prAlcohol");	
 				String alcohol[] = prAlcohol.split("도");
 				int stral =Integer.parseInt(alcohol[0]);
 				int endal =Integer.parseInt(alcohol[1]);
 				map.put("stral", stral);
 				map.put("endal", endal);
+				
 			}
 				
 			if(request.getParameter("Skind")!= null && !request.getParameter("Skind").equals("전통주 종류")) {
