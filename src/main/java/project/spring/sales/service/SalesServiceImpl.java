@@ -1,5 +1,7 @@
 package project.spring.sales.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +54,20 @@ public class SalesServiceImpl implements SalesService{
 		int count = 0;
 		count = salesDAO.salesCount(memId);
 		return count;
+	}
+
+	@Override
+	public List productorList(String memId) {
+		List list = null;
+		list = salesDAO.productorlist(memId); 
+		return list;
+	}
+
+	@Override
+	public String userIdCh(String memId) {
+		String result = null;
+		result = salesDAO.userIdch(memId);
+		return result;
 	}
 
 }

@@ -1,5 +1,7 @@
 package project.spring.sales.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -51,7 +53,21 @@ public class SalesDAOImpl implements SalesDAO{
 	public int salesCount(String memId) {
 		int count = 0;
 		count = sqlSession.selectOne("sales.salesCount", memId);
+		System.out.println(count);
 		return count;
+	}
+
+	@Override
+	public List productorlist(String memId) {
+		List list = sqlSession.selectList("sales.salesList", memId);
+		System.out.println("list 가져왔나 ? " + list.toString());
+		return list;
+	}
+
+	@Override
+	public String userIdch(String memId) {
+		String result = sqlSession.selectOne("sales.userIdCh", memId);
+		return result;
 	}
 
 }
