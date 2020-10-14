@@ -241,8 +241,8 @@ public class AdminEventController {
 		@ResponseBody
 		public AdminEventVO chEventCode(@RequestParam String eventCode)throws SQLException {
 			System.out.println("eventCode!!!"+eventCode);
-			AdminEventVO vo = null;
-			//AdminEventVO vo = adminEventService.chOpen(eventCode);
+			
+			AdminEventVO vo = adminEventService.chOpen(eventCode);
 			
 			return vo;
 		}

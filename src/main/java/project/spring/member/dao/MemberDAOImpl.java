@@ -133,4 +133,8 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberDTO setSession(String id) {
 		return sqlSession.selectOne("member.setSession",id);
 	}
+	@Override
+	public void attendent(String id) {
+		sqlSession.update("member.attendent", id);
+	}
 }

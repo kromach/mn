@@ -14,7 +14,7 @@
 		<div class="detail-item detail-width4 detail-info-div">
 			<div class="detail-info text-left">
 				<div class="navi margin-bottom5">
-					<a href="productlist">${info.prBkindValue}</a> > <a href="productlist?schprSkind=${info.prSkind}">${info.prSkindValue}</a>
+					<a href="productlist">${info.prBkindValue}</a> > <a href="productlist?isSearch=true&Skind=${info.prSkind}&name=&prAlcohol=0도+-+0도&prPrice=0원+-+0원">${info.prSkindValue}</a>
 				</div>
 				<h3>${info.prName}</h3>
 				
