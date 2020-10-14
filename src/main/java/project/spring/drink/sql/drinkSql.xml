@@ -69,6 +69,16 @@
 			WHERE dk_code = 'DK00001' AND IS_DELETE = 'N' ORDER BY CM_IDX DESC	
   		</select>
   		
+  		<resultMap id="dkResult" type="hashMap" ></resultMap>
+  		
+  		<insert id="insertDrink" parameterType="project.spring.drink.vo.DrinkVO" statementType="CALLABLE">
+  			{ CALL INSERT_DRINK_INFO(#{dkName}, #{dkBkind}, #{dkSkind}, #{dkImg}, #{dkAlcohol}, #{dkCountry}, #{dkCity}, #{dkPlace}, #{dkFood}, #{dkContent1}, #{dkContent2}, #{dkContent3}, #{dkItem1}, #{dkItem2}, #{dkItem3}, #{dkItem4}, #{dkItem5}, #{dkApprove}, #{insertId}, #{dkCode, mode=OUT, jdbcType=VARCHAR, javaType=String}) }
+  		</insert>
+  		
+  		<update id="updateDrinkTag" parameterType="hashMap" statementType="CALLABLE">
+  			{ CALL UPDATE_DRINK_TAG(#{dkCode}, #{dkTags}) }
+  		</update>
+  		
   		<!-- <select id="userCount" resultType="int">
   			select count(*) from test
   		</select>

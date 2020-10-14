@@ -22,7 +22,7 @@
 						<td>${articleDTO.heart}</td>
 					</tr>
 					<tr>
-						<td colspan="4" style="min-height: 400px;">${articleDTO.content }</td>
+						<td colspan="4" style="min-height: 400px; min-width: 0; display: inline-block;">${articleDTO.content }</td>
 					</tr>
 					<tr>
 						<td colspan="4" style="height: 100px; border-bottom: 1px solid;">
@@ -82,7 +82,7 @@
 </body>
 
 <script>
-function like(bnIdx,inserId){
+function like(bnIdx,insertId){
 	var context = window.location.pathname.substring(0,
 			window.location.pathname.indexOf("/", 2));
 	$.ajax({
