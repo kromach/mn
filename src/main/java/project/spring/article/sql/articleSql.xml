@@ -25,7 +25,7 @@
   	</select>
   	<select id="searchAll" resultType="ArticleDTO">
   		<![CDATA[	
-  		select * from board_normal ORDER BY INSERT_DAY DESC  where kind = 'F'
+  		select * from board_normal WHERE kind = 'F' ORDER BY INSERT_DAY DESC 
   		]]> 
   	</select>
   	<select id="read" parameterType="int" resultType="ArticleDTO">
