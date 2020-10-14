@@ -48,7 +48,7 @@
   		insert into board_like values(board_like_seq.nextVal,#{num},#{memNickName})
   	</insert>
   	<update id="updateMyActGivenHeart" parameterType="string">
-  		update MY_ACTIVITY set GIVEN_HEART = GIVEN_HEART+1 where id=#{value}; 
+  		update MY_ACTIVITY set GIVEN_HEART = GIVEN_HEART+1 where id=#{value}
   	</update>
   	<update id="plusOneReadCount" parameterType="int">
 		UPDATE board_normal SET readcount = readcount+1 WHERE BN_IDX = #{value}
