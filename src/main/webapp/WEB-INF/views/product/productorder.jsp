@@ -50,8 +50,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="detail-item detail-width3 detail-info-div">
-				<div class="detail-info text-left">
+			<div class="grid-item grid-item--width6">
 					<h3>결제 정보</h3>
 					
 					<dl class="clear">

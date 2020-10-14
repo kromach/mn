@@ -20,7 +20,7 @@ public interface ProductService extends CommonInterface {
 	// 구매자 물품구매 수 불러오기
 	public int myordercount(String id) throws SQLException;
 	// 사용자 상품 구매 목록 불러오기
-	public List myorderlist(String id) throws SQLException;
+	public List myorderlist(String id ,int i) throws SQLException;
 	// 구매자 상품목록 디테일 
 	public OrderVo myorderinfo(String id, String prcode) throws SQLException;
 	// 상품 구매정보 저장

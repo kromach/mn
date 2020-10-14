@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import project.spring.beans.PageVO;
@@ -112,11 +114,12 @@ public class ProductController {
 	List myorderlist = null;
 	int myordercount = 0;
 	
+	
 	String id = (String)session.getAttribute("memId");
 	myordercount = productservice.myordercount(id);
 	
 	if(myordercount>0) {
-		myorderlist = productservice.myorderlist(id);
+		myorderlist = productservice.myorderlist(id,0);
 	}
 	System.out.println(myorderlist);
 	model.addAttribute("myordercount",myordercount);
@@ -239,6 +242,22 @@ public class ProductController {
 		model.addAttribute("orderinfo",orderinfo);
 		
 		return "product/orderdetail.mn";
+	}
+	
+	
+	//////ajax 
+	
+	//더보기
+	
+	@RequestMapping("more")
+	@ResponseBody
+	public List more(@RequestParam(name="num",required = false) Integer num,HttpSession session) throws SQLException {
+		// 밑에 게시글 뿌리는 메서드
+		String id = (String)session.getAttribute("memId");
+		List list = productservice.myorderlist(id, num);
+		
+		
+		return list;
 	}
 	
 
