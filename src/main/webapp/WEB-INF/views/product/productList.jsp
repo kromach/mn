@@ -54,7 +54,7 @@
 				<div class="grid-sizer"></div>
 				<div class="gutter-sizer"></div>
 				<div><h1>판매중인술이 없습니다</h1></div>
-					<div class="grid-item grid-item--width4 text-left">
+					<div class="grid-item grid-item--width6 text-left">
 						<form action="productlist" name="schForm" id="schForm" method="get">
 							<input type="hidden" name="isSearch" value="true"/>
 							<div>
@@ -99,7 +99,7 @@
 			<div class="grid">
 				<div class="grid-sizer"></div>
 				<div class="gutter-sizer"></div>
-					<div class="grid-item grid-item--width4 text-left">
+					<div class="grid-item grid-item--width6 text-left">
 						<form action="productlist" name="schForm" id="schForm" method="get">
 							<input type="hidden" name="isSearch" value="true"/>
 							<div>

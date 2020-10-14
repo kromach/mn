@@ -18,5 +18,5 @@ public interface AdminEventService extends CommonInterface {
 	
 	public void checkDate(String today)throws SQLException;
 	
-	public AdminEventVO chOpen(String eventCode)throws SQLException;
+	public void chOpen(String eventCode)throws SQLException;
 }

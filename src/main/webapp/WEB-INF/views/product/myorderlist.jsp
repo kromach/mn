@@ -31,7 +31,7 @@
 							<div class="grid-item grid-item--width6">
 								<tr>
 									<td><a href="myorderdetail?orcode=${my.orCode}">${my.orCode}</a></td>
-									<td>${my.prName}</td>
+									<td><a href="myorderdetail?orcode=${my.orCode}">${my.prName}</a></td>
 									<td>${my.prCount}</td>
 									<td>${my.receiverAddr}</td>
 									

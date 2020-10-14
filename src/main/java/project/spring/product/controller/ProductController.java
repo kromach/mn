@@ -18,6 +18,7 @@ import project.spring.beans.Pager;
 import project.spring.member.service.MemberServiceImpl;
 import project.spring.member.vo.MemberDTO;
 import project.spring.product.service.ProductService;
+import project.spring.product.service.ProductServiceImpl;
 import project.spring.product.vo.OrderVo;
 import project.spring.product.vo.ProductVo;
 
@@ -27,7 +28,7 @@ import project.spring.product.vo.ProductVo;
 public class ProductController {
 	
 	@Autowired
-	private ProductService productservice = null;
+	private ProductServiceImpl productservice = null;
 	@Autowired
 	private MemberServiceImpl memberservice = null;
 	
@@ -42,7 +43,7 @@ public class ProductController {
 		if(request.getParameter("isSearch")!=null && request.getParameter("isSearch").equals("true")) {
 			map = new HashMap();
 			
-			if(!request.getParameter("prPrice").equals("0원 - 0원")) {
+			if(!request.getParameter("prPrice").equals("0원 - 0원") && request.getParameter("prPrice")!=null) {
 				String prPrice = request.getParameter("prPrice");
 				String price[] = prPrice.split("원");
 				int strprice =Integer.parseInt(price[0]);
@@ -50,29 +51,34 @@ public class ProductController {
 				map.put("strprice", strprice);
 				map.put("endprice", endprice);
 			}
-			if(!request.getParameter("prAlcohol").equals("0도 - 0도")) {
+			if(!request.getParameter("prAlcohol").equals("0도 - 0도") && request.getParameter("prAlcohol")!=null) {
 				String prAlcohol = request.getParameter("prAlcohol");	
 				String alcohol[] = prAlcohol.split("도");
 				int stral =Integer.parseInt(alcohol[0]);
 				int endal =Integer.parseInt(alcohol[1]);
 				map.put("stral", stral);
 				map.put("endal", endal);
+				
 			}
 				
-			if(request.getParameter("Skind")!= null) {
+			if(request.getParameter("Skind")!= null && !request.getParameter("Skind").equals("전통주 종류")) {
 				String skind = request.getParameter("Skind");
-				System.out.println("skind :"+ skind);
-				
+				map.put("skind", skind);
 			}
 			
 			if(request.getParameter("name")!= null) {
 				String name = request.getParameter("name");
-				System.out.println("name :"+ name);
+				System.out.println("name :" +name);
+				map.put("name", name);
+			}
+			count = productservice.getproductcount(map);	
+			if(count>0) {
+				productlist = productservice.getproduct(map);
 			}
 		}
 		else {
 			count= productservice.getproductcount();
-			count = 0;
+			
 			if(count>0) {
 				productlist = productservice.getproduct();
 			}

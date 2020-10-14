@@ -1,12 +1,16 @@
 package project.spring.admin.controller;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.digester.SetRootRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.spring.admin.service.AdminServiceImpl;
 import project.spring.admin.vo.AdminVO;
@@ -33,11 +37,37 @@ public class AdminController {
 				int endRow = currPage * pageSize;
 				int number = 0;
 				
-				List memberList = null;
+				List <AdminVO>memberList = null;
 				int count = adminService.memberCount();
 				
 				if(count > 0) {
 					memberList = adminService.memberLIst(startRow, endRow);
+					System.out.println("가져오기 확인!!");
+					String newReportArr  = "";
+					int x = -1;
+					for(int i = 0; i < memberList.size(); i++) {
+						if(memberList.get(i).getReportNumber() != null && memberList.get(i).getReportNumber().length() > 0) {
+							x = 0;
+							String rep = memberList.get(i).getReportNumber();
+							String [] report = rep.split(",");
+							for(int j = 0; j < report.length; j++) {
+								System.out.println(report[j]);
+								int index = report[j].indexOf("F");
+								String chReport = report[j].substring(0, index);
+								System.out.println(chReport);
+								newReportArr += chReport + ",";
+								System.out.println("newre" + newReportArr);
+								
+							}
+						}else {
+							x = -1;
+						}
+						if(x != -1) {
+							memberList.get(i).setReportNumber(newReportArr);
+							System.out.println(memberList.get(i).getReportNumber());
+							}
+					}
+					
 				}
 				number = count - (currPage - 1) * pageSize;
 			
@@ -66,6 +96,13 @@ public class AdminController {
 			
 			
 			return "admin/drinkList.mn";
+		}
+		
+		@RequestMapping("exitUser")
+		@ResponseBody
+		public void exitUser(@RequestParam String memberId)throws SQLException{
+			System.out.println("유저 강퇴하기");
+			adminService.deleteItem(memberId);
 		}
 	
 	

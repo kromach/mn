@@ -89,4 +89,15 @@ public class ArticleServiceImpl implements ArticleService{
 	public int like(Integer num,String memNickName,String insertId) {
 		return articleDAOimpl.like(num,memNickName,insertId);
 	}
+	@Override
+	public int unlike(Integer num,
+			String memNickName, String insertId) {
+		return articleDAOimpl.unlike(num,memNickName,insertId);
+	}
+	@Override
+	public int report(Integer num,
+			String insertId, String reportId) {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.report(num,insertId,reportId);
+	}
 }

@@ -128,7 +128,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 		map.put("memNickName", memNickName);
 		map.put("num",num);
 		int count = sqlSession.selectOne("article.alreadyLike",map);
-		System.out.println("alreadyCount"+count);
+		System.out.println("alreadyCountLike"+count);
 		if(count == 0) {
 			sqlSession.insert("article.like_log",map);
 			sqlSession.update("article.like", num);
@@ -137,5 +137,55 @@ public class ArticleDAOImpl implements ArticleDAO {
 			return sqlSession.selectOne("article.likeReturn",num); 
 		}
 		return -1;
+	}
+	@Override
+	public int unlike(Integer num,
+			String memNickName, String insertId) {
+		HashMap map = new HashMap();
+		map.put("memNickName", memNickName);
+		map.put("num",num);
+		int count = sqlSession.selectOne("article.alreadyLike",map);
+		System.out.println("alreadyCountUnLike"+count);
+		if(count == 1) {
+			sqlSession.delete("article.like_log_undo",map);
+			sqlSession.update("article.like_undo", num);
+			sqlSession.update("article.updateMyActGivenHeart_undo",insertId);
+			
+			return sqlSession.selectOne("article.likeReturn",num); 
+		}
+		return -1;
+	}
+	@Override
+	public int report(Integer num, String insertId, String reportId) {
+		int result = -1;
+		String isAlreadyReported = "";
+		boolean isAlreadyReported_ = false;
+		isAlreadyReported = sqlSession.selectOne("article.isAlreadyReported", insertId);
+		if(isAlreadyReported!=null) {
+			String[] tmp = isAlreadyReported.split(",");
+			for(String reported : tmp) {
+				String[] tmp_ = reported.split("F");
+				if(tmp_[1].equals(reportId)&&tmp_[0].equals(num+"")) {
+					isAlreadyReported_ = true;
+				}
+			}
+		}
+		System.out.println("isAlreadyReportedBoolean"+isAlreadyReported_);
+		if(!isAlreadyReported_) {
+			//작성자 reportCount+1
+			result += sqlSession.update("article.addReportCount", insertId);
+			//reportNumber제작
+			String reportString = num + "F" + reportId;
+			HashMap map = new HashMap();
+			map.put("insertId",insertId);
+			map.put("reportString",reportString);
+			//String넣기
+			result += sqlSession.update("article.addReportNumber",map);
+			//완료시 result 1
+			System.out.println("ReportResult"+result);
+		}
+		//-1 >> 이미 신고
+		//1  >> 신고
+		return result;
 	}
 }

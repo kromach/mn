@@ -164,8 +164,6 @@ function chOpen(eventCode, number){
 	alert("해당 이벤트가 비활성화로 변경되었습니다.");
 
 
-	var numberCh = number;
-
 	
 	var context = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
 	$.ajax({

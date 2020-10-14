@@ -65,9 +65,12 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public int deleteItem(Object obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int i = adminDAO.deleteItem(obj);
+		return i;
 	}
+
+
 
 
 	

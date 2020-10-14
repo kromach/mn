@@ -18,4 +18,8 @@ public interface ArticleDAO extends CommonInterface{
 	public List searchArticleByAdd(int i);
 	public void plusOneReadCount(int idx);
 	public int like(Integer num, String memNickName,String insertId);
+	public int unlike(Integer num,
+			String memNickName, String insertId);
+	public int report(Integer num,
+			String insertId, String reportId);
 }

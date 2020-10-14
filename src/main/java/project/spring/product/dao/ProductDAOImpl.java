@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +59,13 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public int getproductcount() throws SQLException {
 		int count = sqlSession.selectOne("product.countAll");
-		System.out.println("dao count");
-		System.out.println(count);
+		return count;
+	}
+	
+	public int getproductcount(Map map) throws SQLException {
+		
+		
+		int count = sqlSession.selectOne("product.schcountAll",map);
 		return count;
 	}
 
@@ -70,6 +76,10 @@ public class ProductDAOImpl implements ProductDAO {
 		return productlist;
 	}
 
+	public List getproduct(Map map) throws SQLException {
+		List productlist = sqlSession.selectList("product.schgetproduct",map);
+		return productlist;
+	}
 	@Override
 	public ProductVo getproductinfo() throws SQLException {
 		// TODO Auto-generated method stub

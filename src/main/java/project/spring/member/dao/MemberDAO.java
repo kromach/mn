@@ -12,4 +12,5 @@ public interface MemberDAO extends CommonInterface{
 	public boolean overlapCheck(String checkString,
 			int i);
 	public MemberDTO setSession(String id);
+	public void attendent(String id);
 }
