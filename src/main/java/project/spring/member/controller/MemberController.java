@@ -220,6 +220,10 @@ public class MemberController {
 		//id O pw O
 		request.setAttribute("result", 1);
 		
+		//출석+1
+		memberService.attendent(id);	
+		
+		
 		return "/member/loginResult.mn";
 	}
 	
@@ -262,10 +266,14 @@ public class MemberController {
 		MemberDTO setSessionDTO= null;
 		if(result ==1 ) {
 			setSessionDTO = memberService.setSession(model.getId());
+			//출석+1
+			memberService.attendent(model.getId());
+			//Sessionsetting
 			session.setAttribute("userKind", setSessionDTO.getUserKind());
 			session.setAttribute("memId", setSessionDTO.getId());
 			session.setAttribute("memNickName", setSessionDTO.getNickName());
 		}
+		
 		request.setAttribute("result", result);
 		return "/member/loginResult.mn";
 	}

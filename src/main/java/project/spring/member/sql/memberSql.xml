@@ -37,4 +37,7 @@
 			UPDATE MEMBER_INFO SET NICKNAME=#{nickName},pw=#{pw},tel=#{tel},ADDRESS=#{address} ,LICENSE_IMG=#{licenseImg}
 			,LICENSE_NUM =#{licenseNum} where id = #{id}
   		</update>
+  		<update id="attendent" parameterType="string">
+  			UPDATE MY_ACTIVITY SET MY_ATTENDENT =MY_ATTENDENT +1 WHERE id = #{value}; 
+  		</update>
   </mapper>
