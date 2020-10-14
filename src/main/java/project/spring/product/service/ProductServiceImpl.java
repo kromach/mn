@@ -73,6 +73,13 @@ public class ProductServiceImpl implements ProductService {
 		
 		return productList;
 	}
+	
+	public List getproduct(Map map) throws SQLException {
+		List productList = productDAO.getproduct(map);
+		
+		
+		return productList;
+	}
 
 	@Override
 	public ProductVo getproductinfo() throws SQLException {

@@ -76,6 +76,10 @@ public class ProductDAOImpl implements ProductDAO {
 		return productlist;
 	}
 
+	public List getproduct(Map map) throws SQLException {
+		List productlist = sqlSession.selectList("product.schgetproduct",map);
+		return productlist;
+	}
 	@Override
 	public ProductVo getproductinfo() throws SQLException {
 		// TODO Auto-generated method stub

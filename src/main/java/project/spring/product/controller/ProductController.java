@@ -60,30 +60,27 @@ public class ProductController {
 				map.put("endal", endal);
 			}
 				
-			if(request.getParameter("Skind")!= null) {
+			if(request.getParameter("Skind")!= null && !request.getParameter("Skind").equals("전통주 종류")) {
 				String skind = request.getParameter("Skind");
 				map.put("skind", skind);
 			}
 			
 			if(request.getParameter("name")!= null) {
 				String name = request.getParameter("name");
-				System.out.println(name);
+				System.out.println("name :" +name);
 				map.put("name", name);
 			}
 			
 			count = productservice.getproductcount(map);	
 			
-			System.out.println("count!!!!!!!!!!!!!!!!!!!!!!!");
-			System.out.println(count);
 			
-		
-		
-			
-			
+			if(count>0) {
+				productlist = productservice.getproduct(map);
+			}
 		}
 		else {
 			count= productservice.getproductcount();
-			count = 0;
+			
 			if(count>0) {
 				productlist = productservice.getproduct();
 			}
