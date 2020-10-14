@@ -20,7 +20,7 @@
 						<td>작성일</td>
 						<td>조회수</td>
 						<td>좋아요</td>
-					</tr>
+					</tr>	
 					<tr> 
 						<td>${articleDTO.insertId}</td>
 						<td><fmt:formatDate value="${articleDTO.insertDay}" pattern="yyyy.MM.dd"/></td>
