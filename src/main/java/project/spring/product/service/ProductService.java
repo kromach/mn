@@ -31,5 +31,7 @@ public interface ProductService extends CommonInterface {
 	public List getorderlist(String id,int startrow ,int endrow) throws SQLException;
 	// 주문들어온 수 카운트 
 	public int getordercount (String id) throws SQLException;
+	
+	
 
 }

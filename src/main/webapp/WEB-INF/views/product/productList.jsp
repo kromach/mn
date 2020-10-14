@@ -7,25 +7,86 @@
 <title>Insert title here</title>
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  <script>
+  $(function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 99,
+     
+      slide: function( event, ui ) {
+        $( "#amount" ).val( ui.values[ 0 ]  + "도" + ui.values[ 1 ] + "도"  );
+      }
+    });
+    $( "#amount" ).val(  $( "#slider-range" ).slider( "values", 0 ) +
+      "도 - " + $( "#slider-range" ).slider( "values", 1 )+"도" );
+  });
+  </script>
+
+  <script>
+  $(function() {
+    $( "#slider-range1" ).slider({
+      range: true,
+      min: 0,
+      max: 200000,
+      slide: function( event, ui ) {
+        $( "#price" ).val(  ui.values[ 0 ] + "원" + ui.values[ 1 ] + "원"  );
+      }
+    });
+    $( "#price" ).val( $( "#slider-range1" ).slider( "values", 0 ) +
+      "원 - " + $( "#slider-range1" ).slider( "values", 1 )+"원" );
+  });
+  </script>
+
 </head>
+
+
+
 <c:if test="${count == 0}">
-		<h1>판매중인술이 없습니다</h1>
+		
 	<body>
 		<div class="grid-Wrapper">
 			<div class="grid">
 				<div class="grid-sizer"></div>
 				<div class="gutter-sizer"></div>
-					<div>
-						<form action="productlist" name="schForm" id="schForm">
+				<div><h1>판매중인술이 없습니다</h1></div>
+					<div class="grid-item grid-item--width4 text-left">
+						<form action="productlist" name="schForm" id="schForm" method="get">
 							<input type="hidden" name="isSearch" value="true"/>
-							<select>
-								<option value="S006">탁주</option>
-								<option value="S007">청주</option>
-								<option value="S008">약주</option>
-								<option value="S009">증류주</option>
-							</select>
-							<input type="text" name="name" >
-							<input type="submit" value="검색">
+							<div>
+								<select name="Skind">
+									<option selected="selected">전통주 종류</option>
+									<option value="S006">탁주</option>
+									<option value="S007">청주</option>
+									<option value="S008">약주</option>
+									<option value="S009">증류주</option>
+									<option value="S010">리큐르</option>
+									<option value="S011">기타</option>
+									<option value="S012">과실주</option>
+								</select>
+								검색어 : <input type="text" name="name" >
+							</div>
+							<div>
+								<p>
+								  <label for="amount">도수：</label>
+								  <input type="text" id="amount" name="prAlcohol" >
+								</p>
+								 
+								<div id="slider-range"></div>
+		 					</div>
+							<div>
+								<p>
+								  <label for="price">가격：</label>
+								  <input type="text" id="price" name="prPrice">
+								</p>
+								 
+								<div id="slider-range1"></div>
+		 					</div>
+							<div><input type="submit" value="검색" class="btn btn-sm btn-blue"></div>
 						</form>
 					</div>
 			</div>
@@ -38,34 +99,38 @@
 			<div class="grid">
 				<div class="grid-sizer"></div>
 				<div class="gutter-sizer"></div>
-					<div class="grid-item grid-item--width6 text-left">
-						<form action="productlist" name="schForm" id="schForm">
+					<div class="grid-item grid-item--width4 text-left">
+						<form action="productlist" name="schForm" id="schForm" method="get">
 							<input type="hidden" name="isSearch" value="true"/>
 							<div>
-								<select>
+								<select name="Skind">
+									<option selected="selected">전통주 종류</option>
 									<option value="S006">탁주</option>
 									<option value="S007">청주</option>
 									<option value="S008">약주</option>
 									<option value="S009">증류주</option>
+									<option value="S010">리큐르</option>
+									<option value="S011">기타</option>
+									<option value="S012">과실주</option>
 								</select>
 								검색어 : <input type="text" name="name" >
 							</div>
 							<div>
-								<label><input type="checkbox" name="schPdAlcohol" value="0-5"> 0~5도</label>
-								<label><input type="checkbox" name="schPdAlcohol" value="6-10"> 6~10도</label>
-								<label><input type="checkbox" name="schPdAlcohol" value="11-15"> 11~15도</label>
-								<label><input type="checkbox" name="schPdAlcohol" value="16-20"> 16~20도</label>
-								<label><input type="checkbox" name="schPdAlcohol" value="21-25"> 21~25도</label>
-								<label><input type="checkbox" name="schPdAlcohol" value="26-30"> 26~30도</label>
-								<label><input type="checkbox" name="schPdAlcohol" value="31-35"> 31~35도</label>
-								<label><input type="checkbox" name="schPdAlcohol" value="36-40"> 36~40도</label>
-							</div>
+								<p>
+								  <label for="amount">도수：</label>
+								  <input type="text" id="amount" name="prAlcohol" >
+								</p>
+								 
+								<div id="slider-range"></div>
+		 					</div>
 							<div>
-								<label><input type="checkbox" name="price" value="0-10000"> 만원 이하</label>
-								<label><input type="checkbox" name="price" value="10000-20000"> 1만원~2만원</label>
-								<label><input type="checkbox" name="price" value="20000-30000"> 2만원~3만원</label>
-								<label><input type="checkbox" name="price" value="30000~"> 3만원 이상</label>
-							</div>
+								<p>
+								  <label for="price">가격：</label>
+								  <input type="text" id="price" name="prPrice">
+								</p>
+								 
+								<div id="slider-range1"></div>
+		 					</div>
 							<div><input type="submit" value="검색" class="btn btn-sm btn-blue"></div>
 						</form>
 					</div>

@@ -11,7 +11,7 @@ public class DrinkVO {
 	private String dkSkind;
 	private String dkSkindValue;
 	private String dkImg;
-	private int dkAlcohol;
+	private float dkAlcohol;
 	private String dkCountry;
 	private String dkCity;
 	private String dkPlace;
@@ -38,6 +38,8 @@ public class DrinkVO {
 	private int dkItem3;
 	private int dkItem4;
 	private int dkItem5;
+	
+	private String dkTags;
 
 	public String getDkCode() {
 		return dkCode;
@@ -81,10 +83,10 @@ public class DrinkVO {
 	public void setDkImg(String dkImg) {
 		this.dkImg = dkImg;
 	}
-	public int getDkAlcohol() {
+	public float getDkAlcohol() {
 		return dkAlcohol;
 	}
-	public void setDkAlcohol(int dkAlcohol) {
+	public void setDkAlcohol(float dkAlcohol) {
 		this.dkAlcohol = dkAlcohol;
 	}
 	public String getDkCountry() {
@@ -156,6 +158,11 @@ public class DrinkVO {
 	public String getDkContent() {
 		return dkContent;
 	}
+	
+	public void setDkContent(String dkContent) {
+		this.dkContent = dkContent;
+	}
+	
 	public void setDkContent() {
 		String c1 = getDkContent1() != null ? getDkContent1() : "";
 		String c2 = getDkContent2() != null ? getDkContent2() : "";
@@ -224,6 +231,13 @@ public class DrinkVO {
 	public void setDkItem5(int dkItem5) {
 		this.dkItem5 = dkItem5;
 	}
+	public String getDkTags() {
+		return dkTags;
+	}
+	public void setDkTags(String dkTags) {
+		this.dkTags = dkTags;
+	}
+	
 	@Override
 	public String toString() {
 		return "DrinkVO [dkCode=" + dkCode + ", dkName=" + dkName + ", dkBkind=" + dkBkind + ", dkBkindValue="
@@ -237,6 +251,4 @@ public class DrinkVO {
 				+ dkItem4 + ", dkItem5=" + dkItem5 + "]";
 	}
 
-	
-	
 }

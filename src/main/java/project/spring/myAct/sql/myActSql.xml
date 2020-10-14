@@ -44,6 +44,9 @@
  		 <select id="getLikeProduct" parameterType="string" resultType="productvo">
  			SELECT * FROM MY_LIKE ml , PRODUCT_INFO pi2 WHERE ml.ML_VALUE  = pi2.PR_CODE AND ml.INSERT_ID =#{value}
  		</select>
+ 		<update id="updateAttend" parameterType="string">
+ 			UPDATE MY_ACTIVITY SET MY_ATTENDENT=MY_ATTENDENT+1 WHERE ID =#{value}
+ 		</update>
  		 
  		 
   </mapper>

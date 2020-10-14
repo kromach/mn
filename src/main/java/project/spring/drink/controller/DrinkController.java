@@ -3,11 +3,13 @@ package project.spring.drink.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import project.spring.beans.JsonUtil;
@@ -50,10 +53,10 @@ public class DrinkController {
 			schDkAlcohol = request.getParameterValues("schDkAlcohol");
 			schDkCountry = (String)request.getParameter("schDkCountry");
 				
-			System.out.println("schDkBkind : " + schDkBkind);
-			System.out.println("schDkSkind : " + schDkSkind);
+			//System.out.println("schDkBkind : " + schDkBkind);
+			//System.out.println("schDkSkind : " + schDkSkind);
 	//		System.out.println("schDkAlcohol : " + schDkAlcohol);
-			System.out.println("schDkCountry : " + schDkCountry);
+			//System.out.println("schDkCountry : " + schDkCountry);
 		}
 		
 		return "drink/index.mn";
@@ -70,7 +73,10 @@ public class DrinkController {
 		// 총 코멘트 수, 평가 평균 점수 
 		HashMap commentStarInfo = drinkService.selectCommentStarServiceInfo(dkCode);
 		
-		String commentCount = String.valueOf(commentStarInfo.get("cmCount"));
+		String commentCount = "0";
+		if(commentStarInfo != null) {
+			commentCount = String.valueOf(commentStarInfo.get("cmCount"));
+		}
 		
 		List<CommentVO> commentList = null;
 		if((Integer.parseInt(commentCount)) > 1) {
@@ -122,6 +128,7 @@ public class DrinkController {
 		return "drink/detail.mn";
 	}
 	
+	// 입력 페이지
 	@RequestMapping("insert")
 	public String InsertInit(HttpServletRequest request, Model model) throws SQLException {
 		
@@ -137,18 +144,47 @@ public class DrinkController {
 		return "drink/insert.mn";
 	}
 	
+	// 입력 처리
 	@RequestMapping("insertPro")
-	public String InsertProInit(MultipartHttpServletRequest request, HttpServletResponse response, Model model) throws SQLException, IOException {
+	public String InsertProInit(DrinkVO drinkVo, MultipartHttpServletRequest request, HttpServletResponse response, Model model) throws SQLException, IOException {
 		
-		System.out.println(request.getParameter("dkName"));
-		System.out.println(request.getParameter("dkContent"));
+		// 인증 글 여부 
+		drinkVo.setDkApprove(0);
+		HttpSession session =  request.getSession();
+		if(session.getAttribute("userKind") != null) {
+			
+			// 세션으로 userKind 체크 후 admin 인 경우 승인여부 값을 1로 업데이트
+			if (((String)session.getAttribute("userKind")).equals("admin")) {
+				drinkVo.setDkApprove(1);
+			}
+		}
 		
-		//List<HashMap> bigCategoryList = drinkService.selectBigCategoryList();
+		if(session.getAttribute("memId") != null) { // session id
+			drinkVo.setInsertId((String)session.getAttribute("memId"));
+		}
 		
-		//model.addAttribute("bigCategoryList", bigCategoryList);
-//		
-//		System.out.println(selectDrinkInfo.getDkName());
-//		System.out.println(selectDrinkInfo.getDkBkindValue());
+		// 업로드 이미지명 집어넣기
+		MultipartFile mf = null;
+		mf = request.getFile("dkimage"); 
+		drinkVo.setDkImg(mf.getOriginalFilename());
+
+		// (1) 주류 정보 저장 (생성된 코드값 가져오기)
+		String dkCode = drinkService.insertDrink(drinkVo);
+		
+		// (2) 태그 정보 입력 & 업데이트
+		if (dkCode != null && drinkVo.getDkTags() != null && drinkVo.getDkTags().length() > 0 ) {
+			HashMap tagInfo = new HashMap();
+			tagInfo.put("dkCode", dkCode);
+			tagInfo.put("dkTags", drinkVo.getDkTags());
+			
+			drinkService.updateDrinkTag(tagInfo);
+		}
+		
+		// (2) 저장된 코드값으로 이미지 처리
+		request.setAttribute("dkCode", dkCode);
+		String imgPath = drinkService.insertDrinkImg(request);
+		
+		//System.out.println(selectDrinkInfo.getDkBkindValue());
 		PrintWriter printWriter = null;
 		
 		// 인코딩
@@ -164,9 +200,9 @@ public class DrinkController {
 		
 		printWriter.flush();
 		
-		model.addAttribute("dkName", request.getParameter("dkName"));
+		model.addAttribute("dkCode", dkCode);
 
-		return "drink/insertPro.mn";
+		return "drink/detail.mn";
 	}
 		
 	// AJAX - 대분류 선택시 해당하는 소분류 리스트 리턴
@@ -174,7 +210,7 @@ public class DrinkController {
 	public void selectSmallCategory(@RequestParam String bigCategory, HttpServletResponse response) throws SQLException, IOException {
 		
 		List<HashMap> smallCategoryList = drinkService.selectSmallCategoryList(bigCategory);
-		System.out.println(smallCategoryList);
+		//System.out.println(smallCategoryList);
 		
 		response.setCharacterEncoding("utf-8");
 		response.getWriter().write(JsonUtil.ListToJson(smallCategoryList));
@@ -186,7 +222,7 @@ public class DrinkController {
 		
 		// HashMap ItemValuesInfo = drinkService.selectItemValuesInfo(bigCategory);
 		List<String> ItemValuesList = drinkService.selectItemValuesList(bigCategory);
-		System.out.println(ItemValuesList);
+		//System.out.println(ItemValuesList);
 		
 		response.setCharacterEncoding("utf-8");
 		response.getWriter().write(JsonUtil.ListToJson(ItemValuesList));

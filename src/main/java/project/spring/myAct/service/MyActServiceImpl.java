@@ -108,6 +108,12 @@ public class MyActServiceImpl implements MyActService{
 		return articleList;
 	}
 
+	@Override
+	public int attendent(String memId) {
+		int result = myActDAO.updateAttend(memId);
+		return result;
+	}
+
 
 	  
 	
