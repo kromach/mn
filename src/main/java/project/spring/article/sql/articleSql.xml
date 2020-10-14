@@ -36,6 +36,9 @@
   	<select id="alreadyLike" parameterType="hashmap" resultType="int">
   		select count(*) from board_like where nick = #{memNickName} and BN_IDX = #{num}
   	</select>
+  	<select id="isAlreadyReported" parameterType="string" resultType="string">
+  		SELECT report_number FROM MEMBER_INFO mi  WHERE id = #{value}
+  	</select>
   	<insert id="insertTags" parameterType="ArticleDTO">
 	insert into BOARD_NORMAL (BN_IDX,BN_TITLE,KIND ,DK_CODE,READCOUNT,HEART,REPORT,CONTENT,INSERT_ID,INSERT_DAY,IS_DELETE )
 	values (BOARD_NORMAL_SEQ.nextval,#{bnTitle},default,#{dkCode},#{readcount},#{heart},#{report},#{content},

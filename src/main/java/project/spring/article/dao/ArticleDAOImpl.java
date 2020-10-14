@@ -158,18 +158,30 @@ public class ArticleDAOImpl implements ArticleDAO {
 	@Override
 	public int report(Integer num, String insertId, String reportId) {
 		int result = -1;
-		//작성자 reportCount+1
-		result += sqlSession.update("article.addReportCount", insertId);
+		String isAlreadyReported = "";
+		boolean isAlreadReported_ = false;
+		isAlreadyReported = sqlSession.selectOne("article.isAlreadyReported", insertId);
+		System.out.println("alreadyReported"+isAlreadyReported);
+		String[] tmp = isAlreadyReported.split(",");
+		for(String reported : tmp) {
+			System.out.println(reported.substring(0, 3));
+		}
 		
-		//reportNumber제작
-		String reportString = num + "F" + reportId;
-		HashMap map = new HashMap();
-		map.put("insertId",insertId);
-		map.put("reportString",reportString);
-		//String넣기
-		result += sqlSession.update("article.addReportNumber",map);
-		//완료시 result 1
-		System.out.println("ReportResult"+result);
+		
+			//작성자 reportCount+1
+			result += sqlSession.update("article.addReportCount", insertId);
+			
+			//reportNumber제작
+			String reportString = num + "F" + reportId;
+			HashMap map = new HashMap();
+			map.put("insertId",insertId);
+			map.put("reportString",reportString);
+			//String넣기
+			result += sqlSession.update("article.addReportNumber",map);
+			//완료시 result 1
+			System.out.println("ReportResult"+result);
+			
+			
 		return result;
 	}
 }
