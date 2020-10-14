@@ -168,7 +168,6 @@ public class ArticleDAOImpl implements ArticleDAO {
 		map.put("reportString",reportString);
 		//String넣기
 		result += sqlSession.update("article.addReportNumber",map);
-		
 		//완료시 result 1
 		System.out.println("ReportResult"+result);
 		return result;
