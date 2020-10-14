@@ -21,5 +21,6 @@ public interface ArticleService extends CommonInterface {
 			String insertId);
 	public int report(Integer num, String insertId,
 			String reportId);
+	public int moveArticle(Integer num);
 	
 }

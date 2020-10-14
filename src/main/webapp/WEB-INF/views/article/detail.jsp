@@ -148,14 +148,25 @@ function reply(bnIdx){
 	}
 });}
 function move(bnIdx){
+	var session = '<c:out value="${memNickName}"/>';
 	var context = window.location.pathname.substring(0,
 			window.location.pathname.indexOf("/", 2));
-	$.ajax({
-		url : context + '/move?num='+moreVal,
-		type : "post",
-		success : function(data) {
-		}
-	});
+	if(session!=''&&session=='admin'){
+		$.ajax({
+			url : context + '/move?num='+bnIdx,
+			type : "post",
+			success : function(data) {
+				console.log(data);
+				if(data==1){
+					alert("게시글이 읽을거리 글로 이동되었습니다.");
+				}
+			}
+		});
+	}else if(session==''){
+		alert("로그인후 이용 가능한 서비스 입니다");
+	}else if(session!='admin'){
+		alert("관리자만 사용 가능한 메뉴 입니다.");
+	}
 }
 function more(){
 	var moreVal = Number($('#moreVal').val())+1;

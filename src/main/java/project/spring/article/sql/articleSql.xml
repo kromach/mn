@@ -73,6 +73,9 @@
   		UPDATE member_info SET REPORT_NUMBER = (REPORT_NUMBER ||#{reportString}||',') WHERE id = #{insertId}
   		]]>
   	</update>
+  	<update id="moveArticle" parameterType="int"> 
+		UPDATE BOARD_NORMAL SET kind = 'C' WHERE BN_IDX = #{value}	
+  	</update>
   	<select id="likeReturn" parameterType="int" resultType="int">
 		select heart from board_normal where BN_IDX = #{value}
   	</select>

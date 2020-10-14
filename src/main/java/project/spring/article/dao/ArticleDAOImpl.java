@@ -188,4 +188,8 @@ public class ArticleDAOImpl implements ArticleDAO {
 		//1  >> 신고
 		return result;
 	}
+	@Override
+	public int moveArticle(Integer num) {
+		return sqlSession.update("article.moveArticle", num);
+	}
 }

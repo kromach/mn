@@ -203,6 +203,7 @@ public class ArticleController {
 		public int moveSs(@RequestParam(name="num",required = false) Integer num) {
 			int result = 0;
 			//result = articleService.searchArticleByAdd(num);
+			result = articleService.moveArticle(num);
 			return result;
 		}
 	}	
