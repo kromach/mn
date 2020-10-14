@@ -35,7 +35,7 @@
 						<!--login은 실행후 검사 -->
 						<div>
 							<button class="btn btn-lg btn-blue" onclick="like('${articleDTO.bnIdx}','${articleDTO.insertId }')">좋아요</button>
-							<a class="btn btn-lg btn-blue" onclick="report('${articleDTO.bnIdx}')">신고</a>
+							<a class="btn btn-lg btn-blue" onclick="report('${articleDTO.bnIdx}','${articleDTO.insertId }')">신고</a>
 							<a class="btn btn-lg btn-yellow" onclick="reply('${articleDTO.bnIdx}')">댓글등록</a>
 						</div>
 						</td>
@@ -91,7 +91,6 @@ function like(bnIdx,insertId){
 var context = window.location.pathname.substring(0,
 		window.location.pathname.indexOf("/", 2));
 var session = '<c:out value="${memNickName}"/>';
-console.log(session);
 	if(session!=''){
 	$.ajax({
 		url : context + '/like?num='+bnIdx+'&nick=${memNickName}&insertId='+insertId,
@@ -117,15 +116,21 @@ console.log(session);
 		alert("로그인후 이용 가능한 서비스 입니다");
 	}
 }
-function report(bnIdx){
+function report(bnIdx,insertId){
 	var context = window.location.pathname.substring(0,
 			window.location.pathname.indexOf("/", 2));
-	$.ajax({
-		url : context + '/report?num='+bnIdx,
-		type : "post",
-		success : function(data) {
-		}
-	});
+	var session = '<c:out value="${memNickName}"/>';
+	if(session!=''){
+		$.ajax({
+			url : context + '/report?num='+bnIdx+'&insertId='+insertId,
+			type : "post",
+			success : function(data) {
+			}
+		});
+	}
+	else{
+		alert("로그인후 이용 가능한 서비스 입니다");
+	}
 }
 function reply(bnIdx){
 	//window.open();
