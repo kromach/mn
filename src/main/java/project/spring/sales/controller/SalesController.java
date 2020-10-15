@@ -77,5 +77,13 @@ public class SalesController {
 		return "sales/insert.mn";
 	}
 	
+	@RequestMapping(value ="/insert")
+	public List productDetail(String pageNum, Model model) {
+		
+		List detail =salesService.productDetail(pageNum);
+		System.out.println(detail.toString());
+		
+		return detail;
+	}
 	
 }
