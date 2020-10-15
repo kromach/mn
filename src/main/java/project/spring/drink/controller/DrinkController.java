@@ -40,7 +40,7 @@ public class DrinkController {
 	}
 	
 	@RequestMapping("index")
-	public String indexInit(HttpServletRequest request, Model model) {
+	public String indexInit(HttpServletRequest request, Model model) throws SQLException {
 		
 		String schDkBkind = null;
 		String schDkSkind = null;
@@ -59,6 +59,9 @@ public class DrinkController {
 			//System.out.println("schDkCountry : " + schDkCountry);
 		}
 		
+		List<HashMap> bigCategoryList = drinkService.selectBigCategoryList();
+		model.addAttribute("bigCategoryList", bigCategoryList);		
+		
 		return "drink/index.mn";
 	}
 
@@ -66,6 +69,7 @@ public class DrinkController {
 	public String detailInit(HttpServletRequest request, Model model) throws SQLException {
 		
 		String dkCode = (String)request.getParameter("dkCode");
+		System.out.println(dkCode);
 		
 		DrinkVO drinkInfo = drinkService.selectDrinkServiceInfo(dkCode);
 		drinkInfo.setDkContent();
@@ -201,10 +205,11 @@ public class DrinkController {
 		printWriter.flush();
 		
 		model.addAttribute("dkCode", dkCode);
+		//request.setAttribute("dkCode", dkCode);
 
-		return "drink/detail.mn";
+		return "drink/insertPro";
 	}
-		
+	
 	// AJAX - 대분류 선택시 해당하는 소분류 리스트 리턴
 	@RequestMapping("selectSmallCategory")
 	public void selectSmallCategory(@RequestParam String bigCategory, HttpServletResponse response) throws SQLException, IOException {

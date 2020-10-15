@@ -17,7 +17,7 @@
       range: true,
       min: 0,
       max: 99,
-     
+      step: 5,
       slide: function( event, ui ) {
         $( "#amount" ).val( ui.values[ 0 ]  + "도" + ui.values[ 1 ] + "도"  );
       }
@@ -33,6 +33,7 @@
       range: true,
       min: 0,
       max: 200000,
+      step: 5000,
       slide: function( event, ui ) {
         $( "#price" ).val(  ui.values[ 0 ] + "원" + ui.values[ 1 ] + "원"  );
       }

@@ -115,8 +115,13 @@ public class MyActController {
 		List myTitle = null;
 		Map<String,List> map = new HashMap();
 		
+		//모든 Title 뿌려주고
 		getAllTitle = myActService.getAllTitle();
-		updateTitle = myActService.updateTitle(memId); 
+		// 그중 내가 획득한 칭호는 색을 바꿔줌
+		updateTitle = myActService.updateTitle(memId);
+		
+		// SELECT * FROM MY_TITLE mt , TITLE_LIST tl WHERE mt.TITLE_INDEX = tl.TITLE_IDX AND mt.ID='admin';
+		//사용하지 않음
 		myTitle = myActService.getMyTitle(memId);
 		
 		map.put("allTitle",getAllTitle);
@@ -124,6 +129,7 @@ public class MyActController {
 		return map;
 	}
 	
+	//사용하지 않음
 	@RequestMapping(value = "/myTitle")
 	@ResponseBody
 	public List titleSs(String id, HttpServletRequest request) {
@@ -140,4 +146,8 @@ public class MyActController {
 		
 		return myTitle;
 	}
+	
+	
+	
+	
 }

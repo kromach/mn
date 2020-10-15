@@ -3,22 +3,27 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="myAct">
+  
+  		<!-- 내가 작성한 board_normal 테이블의 데이터를 전부 가져옴  -->
  		<select id="selectAll" parameterType="string" resultType="ArticleDTO">
  		<![CDATA[
  		select * from (select BN_IDX,BN_TITLE ,KIND ,DK_CODE ,READCOUNT ,HEART ,REPORT ,CONTENT ,INSERT_ID ,INSERT_DAY ,IS_DELETE ,rownum r FROM BOARD_NORMAL bn  WHERE insert_id=#{value} ORDER BY BN_IDX desc)
 		]]>
  		</select>
  		
+ 		<!-- 내가(session) 작성한 글의 갯수  -->
  		<select id="myArticleCount" parameterType="string" resultType="int">
  			select count(*) from BOARD_NORMAL where insert_id=#{value}
  		</select>
 
- 		
+ 		<!-- 내가 좋아요한 글의 갯수 ML_KIND로 F,C인 것들의 갯수만 가져옴 -->
  		<select id="myLikeArticleCount" parameterType="string" resultType="int">
  		<![CDATA[
  			select count(*) from my_like where insert_id=#{value} AND ML_KIND ='F' OR ML_KIND ='C'
  		]]>
  		</select>
+ 		
+ 		<!-- 내가 좋아요한 글의 데이터를 가져옴 -->
  		<select id="myLikeArticle" parameterType="string" resultType="ArticleDTO">
  			SELECT * FROM BOARD_NORMAL bn, MY_LIKE ml WHERE TO_CHAR( bn.BN_IDX )= ml.ML_VALUE AND ml.INSERT_ID=#{value}
  		</select>
@@ -34,9 +39,6 @@
  		<select id="getMyTitle" parameterType="string" resultType="TitleListDTO">
  			SELECT * FROM MY_TITLE mt , TITLE_LIST tl WHERE mt.TITLE_INDEX = tl.TITLE_IDX AND mt.ID=#{value}
  		</select>
- 		<update id="chooseTitle" parameterType="string">
- 			UPDATE MY_TITLE SET CHOOSE_TITLE ='Y' WHERE id= AND TI_IDX ='8';
- 		</update>		
  		
  		<select id="getLikeDrink" parameterType="string" resultType="DrinkVO">
  			SELECT * FROM MY_LIKE ml , DRINK_INFO di WHERE ml.ML_VALUE =di.DK_CODE AND ml.INSERT_ID =#{value}
@@ -44,9 +46,20 @@
  		 <select id="getLikeProduct" parameterType="string" resultType="productvo">
  			SELECT * FROM MY_LIKE ml , PRODUCT_INFO pi2 WHERE ml.ML_VALUE  = pi2.PR_CODE AND ml.INSERT_ID =#{value}
  		</select>
+ 		
+ 		<!-- 사용하지 않음 -->
  		<update id="updateAttend" parameterType="string">
  			UPDATE MY_ACTIVITY SET MY_ATTENDENT=MY_ATTENDENT+1 WHERE ID =#{value}
  		</update>
+ 		
+ 		<!-- 칭호 선택 시 기존 칭호선택 초기화 & 선택한 칭호 'Y' 로 update -->
+ 		<update id="chooseTitleReset" parameterType="string">
+ 			UPDATE MY_TITLE SET CHOOSE_TITLE='N' WHERE id=#{value};
+ 		</update>		
+ 		<update id="chooseTitle" parameterType="string">
+ 			UPDATE MY_TITLE SET CHOOSE_TITLE ='Y' WHERE id=#{memId} AND TITLE_INDEX = #{titleIdx}
+ 		</update>
+ 		
  		 
  		 
   </mapper>

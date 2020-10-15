@@ -70,4 +70,12 @@ public class SalesServiceImpl implements SalesService{
 		return result;
 	}
 
+	@Override
+	public List productDetail(String pageNum) {
+		List list = null;
+		
+				
+		return null;
+	}
+
 }
