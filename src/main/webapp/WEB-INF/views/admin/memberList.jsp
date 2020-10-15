@@ -30,11 +30,13 @@
 						<th>신고회수</th>
 						<th>가입일</th>
 						<th>강퇴</th>
+						<th></th> 
+						
 					</tr>
 					
 					<c:forEach var="memberList" items="${memberList }">
 						<tr>
-							<td><a href="#"></a>${memberList.id}</td>
+							<td>${memberList.id}</td>
 							<td>${memberList.nickname}</td>
 							<td>${memberList.birth}</td>
 							<td>
@@ -42,7 +44,7 @@
 									<c:set var="report1" value="${memberList.reportNumber}" />
 									<c:set var ="reportArr" value="${fn:split(report1,',')}" />
 									<c:forEach var="list" items="${reportArr}">
-										<a href="#">${list}</a>
+										<a href="/article/detail?idx=${list }">${list} <i class="fas fa-skull"></i></a>
 									</c:forEach>
 								</c:if>
 							</td>
