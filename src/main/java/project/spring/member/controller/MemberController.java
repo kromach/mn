@@ -201,13 +201,25 @@ public class MemberController {
 		System.out.println("=============================");
 		String id = kakao_account.get("email").asText();
 		
-		String gender = kakao_account.get("gender").asText();
-		String birth = kakao_account.get("birthday").asText();
-		String nickname = properties.path("nickname").toString().replaceAll("\"","");	
+		String gender = "";
+		if (kakao_account.get("gender") != null) {
+			gender = kakao_account.get("gender").asText();
+		}
+		String birth = "";
+		if (kakao_account.get("birthday") != null) {
+			birth = kakao_account.get("birthday").asText();
+		}
+		String nickname = "";
+		if (properties.path("nickname").toString() != null) {
+			nickname = properties.path("nickname").toString().replaceAll("\"","");	
+		}
 		
-		if(gender==null)gender = "";
-		if(birth==null)birth ="";
-		if(nickname==null)nickname="";
+		//String gender = kakao_account.get("gender").asText();
+		//String birth = kakao_account.get("birthday").asText();
+		//String nickname = properties.path("nickname").toString().replaceAll("\"","");	
+		// if(gender==null)gender = "";
+		// if(birth==null)birth ="";
+		// if(nickname==null)nickname="";
 		
 		MemberDTO dto = new MemberDTO();
 		

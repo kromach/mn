@@ -230,12 +230,7 @@
 	  	
 	  	if (words.length < 10) {
 	  		// tag 개수가 적을때 기본 태그 추가
-	  		words.push({text: "마시는 녀석들", weight: 5}, {text: "마녀", weight: 4}, {text: "주류정보", weight: 3},
-	  		{text: "치킨", weight: 6},
-		  	  {text: "부드러운", weight: 8},
-		  	  {text: "벨지안 효모", weight: 7},
-		  	{text: "ビア", weight: 9}
-	  		);
+	  		words.push({text: "마시는 녀석들", weight: 5}, {text: "마녀", weight: 4}, {text: "주류정보", weight: 3});
 		  	
 		  	toSize = 0.05;
 	  	} else {
