@@ -76,14 +76,5 @@ public class SalesController {
 		
 		return "sales/insert.mn";
 	}
-	
-	@RequestMapping(value ="/modify")
-	public List productDetail(String pageNum, Model model) {
-		
-		List detail =salesService.productModify(pageNum);
-		System.out.println(detail.toString());
-		
-		return detail;
-	}
-	
+
 }

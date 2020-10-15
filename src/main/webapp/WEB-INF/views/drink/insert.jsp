@@ -26,7 +26,8 @@
 	//이미지 업로드 url 설정
 	var ckedit_config = {
 		filebrowserUploadUrl : '/editor/ckuploader' ,  // 통신할 컨트롤러 매핑 주소 
-		toolbar : ''
+		toolbar : '',
+		height : '500px'
 	}
 	// ckeditor 설정 종료
 	
@@ -43,12 +44,11 @@
 </style>
 
 <div class="grid-Wrapper">
-	<div class="grid2"> 
-	
+	<div class="grid2"> 	
 		<div class="detail-sizer"></div>
 		<div class="gutter-sizer"></div>
 		<div class="detail-item detail-width6">
-			<h3 class="text-left pad-y10">새 정보 등록</h3>
+			<h3 class="text-left pad-y10">주류 정보 등록</h3>
 			<form action="insertPro" name="dkForm" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="dkItem1" id="dkItem1" />
 				<input type="hidden" name="dkItem2" id="dkItem2" />
@@ -123,8 +123,8 @@
 					<tr>
 						<th>주류 정보</th>
 						<td>
-							<textarea name="dkContent" id="dkContent" type="textarea" class="required" style="width:98%" ></textarea>
-							<script type="text/javascript">CKEDITOR.replace( 'dkContent' , ckedit_config);</script>
+							<textarea name="dkContent" id="dkContent" type="textarea" class="required" style="width:98%;" ></textarea>
+							<script type="text/javascript">CKEDITOR.replace('dkContent' , ckedit_config);</script>
 						</td>
 					</tr>
 					

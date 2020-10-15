@@ -138,14 +138,8 @@ function report(bnIdx,insertId,reportId){
 	}
 }
 function reply(bnIdx){
-	//window.open();
-	var context = window.location.pathname.substring(0,
-			window.location.pathname.indexOf("/", 2));
-	$.ajax({
-		url : context + '/reply?num='+bnIdx,
-		type : "post",
-		success : function(data) {
-	}
+	var session = '<c:out value="${memNickName}"/>';
+	
 });}
 function move(bnIdx){
 	var session = '<c:out value="${memNickName}"/>';
