@@ -16,7 +16,7 @@
 	<form action="index" name="schForm" id="schForm">
 		<input type="hidden" name="isSearch" value="true"/>
 		<div class="ssec pad-top15">
-			<p class="slabel fl">주류 구분</p>
+			<p class="s_label fl">주류 구분</p>
 			<select id="schDkBkind" name="schDkBkind" class="sel short" >
 				<option value="">대분류 선택</option>
 				<c:forEach items="${bigCategoryList}" var="bigCategory">
@@ -28,18 +28,20 @@
 			</select>
 		</div>
 		<div class="ssec pad-top15">
-			<p class="slabel fl">검색어</p>
+			<p class="s_label fl">검색어</p>
 			<input type="text" name="schDkVal" class="input"/>
 		</div>
 		<div class="clfix ssec pad-top15" style="pading:10px 0;">
-			<p class="slabel fl">알콜도수</p>
+			<p class="s_label fl">알콜도수</p>
 		    <div class="fl" style="width:400px"><input type="text" class="js-range-slider" name="my_range"/></div>
 		</div>
 		<div class="ssec pad-top15">
-			<p class="slabel fl">국가 선택</p>
-			<label><input type="radio" name="schDkCountry" value="" /> 전체</label>
-			<label><input type="radio" name="schDkCountry" value="K" /> 국내</label>
-			<label><input type="radio" name="schDkCountry" value="O" /> 해외</label>
+			<p class="s_label fl">국가 선택</p>
+			<p style="line-height: 33px; font-size:13px">
+				<label><input type="radio" name="schDkCountry" class="radio" value="" /> 전체</label>
+				<label><input type="radio" name="schDkCountry" class="radio" value="K" /> 국내</label>
+				<label><input type="radio" name="schDkCountry" class="radio" value="O" /> 해외</label>
+			</p>
 		</div>
 		<div class="ssec pad-top15"><input type="submit" value="검색" class="btn btn-sm btn-blue" /></div>
 	</form>
