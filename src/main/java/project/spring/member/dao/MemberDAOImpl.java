@@ -137,4 +137,8 @@ public class MemberDAOImpl implements MemberDAO {
 	public void attendent(String id) {
 		sqlSession.update("member.attendent", id);
 	}
+	@Override
+	public int insertMyAct(String id) {
+		return sqlSession.insert("member.insertMyAct",id);
+	}
 }
