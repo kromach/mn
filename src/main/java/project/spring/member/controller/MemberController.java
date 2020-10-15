@@ -230,7 +230,7 @@ public class MemberController {
 		int isNew = memberService.readItem(dto);
 		System.out.println("KakaoIsNew"+isNew);
 		int kakaoSignupResult = 0;
-		if(isNew !=0||gender.equals("")||birth.equals("")||nickname.equals("")) {
+		if(isNew !=0) {
 			//id가 없어서 첫회원가입이거나,
 			//gender가 없거나 birth가없거나,nickname이 없으면 >> 회원가입
 			request.setAttribute("kakaoMember", dto);
