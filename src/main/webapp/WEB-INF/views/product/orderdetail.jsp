@@ -40,7 +40,8 @@
 									</td>
 									<td>${orderinfo.receiverAddr}</td>
 									<c:choose>
-										<c:when test="${orderinfo.orStatus ==1}"><td>주문 미확인
+										<c:when test="${orderinfo.orStatus ==1}">
+										<td>주문 미확인
 										<c:if test="${orderinfo.orStatus == 1 ||orderinfo.orStatus == 2||orderinfo.orStatus == 3  }">
 											<a href="deleteorder">상태바꾸기</a>
 										</c:if></td></c:when>

@@ -28,6 +28,17 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	public int updateItem(OrderVo ordervo) {
+		int res =productDAO.updateItem(ordervo);
+		return res;
+	}
+	
+	public int updateItem(String orCode) {
+		System.out.println("serviec orCode :"+orCode);
+		int res =productDAO.updateItem(orCode);
+		System.out.println("serviec int :"+res);
+		return res;
+	}
 
 	@Override
 	public int deleteItem() {

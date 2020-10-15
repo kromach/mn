@@ -27,7 +27,8 @@
 		<![CDATA[
 		select a.* from
 			(select aa.*,rownum r from 
-				(select * from order_info where user_id = #{id} ORDER BY INSERT_DAY deSC)
+				(SELECT info.*,SINFO.STATUS_VALUE AS or_status_value FROM ORDER_INFO info INNER JOIN
+		STATUS_INFO sinfo ON info.OR_STATUS = sinfo.STATUS_CODE  where user_id = #{id} ORDER BY INSERT_DAY deSC)
 				aa)
 				a where r >= (5*#{i})+1 and r <= 5*(#{i}+1)
 		]]>
@@ -40,7 +41,8 @@
 		SELECT 'O' ||(SELECT TO_CHAR(SYSDATE,'YYYYMMDD') FROM DUAL)|| ORDER_INFO_seq.nextval ,ORDER_INFO_seq.nextval FROM DUAL
 	</select>
 	<select id="orderinfo" parameterType="string" resultType="ordervo">
-		select * from order_info where or_code = #{value}
+		SELECT info.*,SINFO.STATUS_VALUE AS or_status_value FROM ORDER_INFO info INNER JOIN
+		STATUS_INFO sinfo ON info.OR_STATUS = sinfo.STATUS_CODE  where or_code = #{value}
 	</select>
 	
 	<select id="orderlist" parameterType="map" resultType="ordervo">
@@ -48,9 +50,11 @@
 		select a.* from
 			(select aa.* , rownum r from
 				(SELECT OINFO.OR_CODE , OINFO.PR_CODE,OINFO.PR_NAME,OINFO.OR_STATUS,OINFO.PR_PRICE,OINFO.PR_COUNT,
-				OINFO.USER_ID, OINFO.RECEIVER_NAME,OINFO.RECEIVER_TEL,oinfo.INSERT_DAY 
+				OINFO.USER_ID, OINFO.RECEIVER_NAME,OINFO.RECEIVER_TEL,OINFO.RECEIVER_ADDR,oinfo.INSERT_DAY ,SINFO.STATUS_VALUE AS or_status_value 
 				FROM ORDER_INFO OINFO JOIN
-				PRODUCT_INFO INFO ON INFO.PR_CODE = OINFO.PR_CODE 
+				PRODUCT_INFO INFO ON INFO.PR_CODE = OINFO.PR_CODE INNER JOIN
+				STATUS_INFO sinfo ON oinfo.OR_STATUS = sinfo.STATUS_CODE
+				
 				WHERE INFO.INSERT_ID = #{id} order by OINFO.INSERT_DAY asc)
 			aa )
 			a where r >= #{startrow} and r <= #{endrow} 
@@ -127,6 +131,14 @@
   					 ]]>  				
   				</if>
 			</trim>
+	</select>
+	
+	<select id="updateorder" parameterType="ordervo" resultType="int">
+		update order_info set RECEIVER_NAME =#{receiverName},RECEIVER_TEL=#{receiverTel},RECEIVER_ADDR=#{receiverAddr} where or_code =#{orCode}
+	</select>
+	
+	<select id="delectorder" parameterType="string" resultType="int">
+		update order_info set or_status =4 where or_code =#{value}
 	</select>
 
 </mapper>

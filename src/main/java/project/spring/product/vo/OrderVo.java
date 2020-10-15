@@ -20,14 +20,15 @@ public class OrderVo {
 	private Timestamp insertDay;
 	private Timestamp modifyDay;
 	
-	public String getStatusValue() {
-		return statusValue;
-	}
-	public void setStatusValue(String statusValue) {
-		this.statusValue = statusValue;
-	}
-	private String statusValue;
+
+	private String orStatusValue;
 	
+	public String getOrStatusValue() {
+		return orStatusValue;
+	}
+	public void setOrStatusValue(String orStatusValue) {
+		this.orStatusValue = orStatusValue;
+	}
 	public String getOrCode() {
 		return orCode;
 	}

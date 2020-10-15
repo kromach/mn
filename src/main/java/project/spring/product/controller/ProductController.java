@@ -121,7 +121,6 @@ public class ProductController {
 	if(myordercount>0) {
 		myorderlist = productservice.myorderlist(id,0);
 	}
-	System.out.println(myorderlist);
 	model.addAttribute("myordercount",myordercount);
 	model.addAttribute("myorderlist",myorderlist);
 	
@@ -163,7 +162,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("insertOrder")
-	public String insertOrder(Model model, OrderVo ordervo) throws SQLException{
+	public String insertOrder(Model model, OrderVo ordervo, HttpSession session) throws SQLException{
 		System.out.println(ordervo.getReceiverTel());
 		
 		String[] receiverTels = ordervo.getReceiverTel().split(",");
@@ -176,57 +175,119 @@ public class ProductController {
 		
 		productservice.insertorderinfo(ordervo);
 		
-		
-		List productlist =null;
-		int count = 0;
-		
-		count= productservice.getproductcount();
-		if(count>0) {
-			productlist = productservice.getproduct();
+		String id = (String)session.getAttribute("memId");
+		int myordercount = productservice.myordercount(id);
+		List myorderlist = null;
+		if(myordercount>0) {
+			myorderlist = productservice.myorderlist(id,0);
 		}
-		System.out.println(productlist);
-		
-		model.addAttribute("productlist", productlist);
-		model.addAttribute("count", count);
+		model.addAttribute("myordercount",myordercount);
+		model.addAttribute("myorderlist",myorderlist);
 		
 		
+		return "product/myorderlist.mn";
+	}
+	
+	@RequestMapping("modifyorder")
+	public String modifyorder (Model model, OrderVo ordervo, HttpSession session, HttpServletRequest request) throws SQLException{
+		String orCode =request.getParameter("orcode");
+		System.out.println(orCode);
 		
-		return "product/productList.mn";
+		
+		ordervo.setOrCode(orCode);
+		
+		System.out.println(ordervo.getReceiverTel());
+		System.out.println(ordervo.getOrCode());
+		System.out.println(ordervo.getReceiverAddr());
+		System.out.println(ordervo.getReceiverName());
+		productservice.updateItem(ordervo);
+		
+		String id = (String)session.getAttribute("memId");
+		int myordercount = productservice.myordercount(id);
+		List myorderlist = null;
+		if(myordercount>0) {
+			myorderlist = productservice.myorderlist(id,0);
+		}
+		model.addAttribute("myordercount",myordercount);
+		model.addAttribute("myorderlist",myorderlist);
+		
+		
+		return "product/myorderlist.mn";
 	}
 	
 	@RequestMapping("deleteorder")
-	public String deleteorder() {
+	public String deleteorder(HttpServletRequest request, HttpSession session, Model model) throws SQLException {
+		String orCode = request.getParameter("orcode");
+		productservice.updateItem(orCode);
 		
-		return "product/deleteorder.mn";
+		String id = (String)session.getAttribute("memId");
+		int myordercount = productservice.myordercount(id);
+		List myorderlist = null;
+		if(myordercount>0) {
+			myorderlist = productservice.myorderlist(id,0);
+		}
+		model.addAttribute("myordercount",myordercount);
+		model.addAttribute("myorderlist",myorderlist);
+		
+		
+		return "product/myorderlist.mn";
 	}
 	
 	@RequestMapping("orderlist")
-	public String orderlist(HttpSession session, Model model , String pageNum) throws SQLException {
+	public String orderlist(HttpSession session, Model model , String pageNum, HttpServletRequest request) throws SQLException {
 		String id = (String)session.getAttribute("memId");
 		List orderlist = null;
+		List orStatus = null;
+		int ordercount = 0;
 		if(pageNum ==null)pageNum = "1";
-		
-		
-		
-		int ordercount = productservice.getordercount(id);
-	
-		
 		Pager pager = new Pager();
+		PageVO pageVO = null;
+		HashMap map =null;
 		
-		PageVO pageVO =pager.pager(pageNum, ordercount);
-		
-		int startrow = pageVO.getStartRow();
-		int endrow = pageVO.getEndRow();
-		
-		if(ordercount >0) { 
-			orderlist = productservice.getorderlist(id,startrow,endrow);
+		if(request.getParameter("isSearch") !=null && request.getParameter("isSearch").equals("true")) {
+			map = new HashMap();
+			if(request.getParameter("prName")!= null &&request.getParameter("prName").length() != 0 ) {
+				String prName = request.getParameter("prName");
+				System.out.println("prName :" +prName);
+				map.put("prName", prName);
+			}
+			if(request.getParameter("userId")!= null &&request.getParameter("userId").length() != 0 ) {
+				String userId = request.getParameter("userId");
+				System.out.println("userId :" +userId);
+				map.put("userId", userId);
+			}	
+			if(request.getParameter("orStatus")!= null &&request.getParameter("orStatus").length() != 0 ) {
+				
+				
+				
+			
+				System.out.println(map.get("orStatus"));
+			}	
+			if(request.getParameter("orStart")!= null &&request.getParameter("orStart").length() != 0 ) {
+				String orStart = request.getParameter("orStart");
+				System.out.println("orStart :" +orStart);
+				map.put("orStart", orStart);	
+			}	
+			if(request.getParameter("orEnd")!= null &&request.getParameter("orEnd").length() != 0 ) {
+				String orEnd = request.getParameter("orEnd");
+				System.out.println("orEnd :" +orEnd);
+				map.put("orEnd", orEnd);
+			}
 		}
 		
+		else {
+			ordercount = productservice.getordercount(id);
+			pageVO =pager.pager(pageNum, ordercount);
+			int startrow = pageVO.getStartRow();
+			int endrow = pageVO.getEndRow();
+			if(ordercount >0) { 
+				orderlist = productservice.getorderlist(id,startrow,endrow);
+			}
+		}
 		model.addAttribute("orderlist",orderlist);
 		model.addAttribute("ordercount",ordercount);
 		model.addAttribute("pageVO",pageVO);
 		model.addAttribute("pageNum",pageNum);
-		
 		return "product/orderlist.mn";
 	}
 	
