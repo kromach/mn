@@ -140,7 +140,7 @@ function report(bnIdx,insertId,reportId){
 function reply(bnIdx){
 	var session = '<c:out value="${memNickName}"/>';
 	
-});}
+}
 function move(bnIdx){
 	var session = '<c:out value="${memNickName}"/>';
 	var context = window.location.pathname.substring(0,
