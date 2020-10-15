@@ -141,4 +141,10 @@ public class MemberDAOImpl implements MemberDAO {
 	public int insertMyAct(String id) {
 		return sqlSession.insert("member.insertMyAct",id);
 	}
+	@Override
+	public String findNickForKakaoAcount(
+			String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.findNickForKakaoAcount", id);
+	}
 }

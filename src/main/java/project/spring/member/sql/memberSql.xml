@@ -48,6 +48,9 @@
 		resultType="memberDTO">
 		select * from member_info where id = #{value}
 	</select>
+	<select id="findNickForKakaoAcount" parameterType="string" resultType="string"> 
+		select NICKNAME from member_info where id = #{value}
+	</select>
 	<update id="updateMember" parameterType="memberDTO">
 		UPDATE MEMBER_INFO SET
 		NICKNAME=#{nickName},pw=#{pw},tel=#{tel},ADDRESS=#{address}

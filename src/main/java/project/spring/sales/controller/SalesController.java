@@ -76,6 +76,4 @@ public class SalesController {
 		
 		return "sales/insert.mn";
 	}
-	
-	
 }
