@@ -238,7 +238,6 @@ public class MemberController {
 			birth += i;
 		}
 		dto.setBirth(birth);
-
 		dto.setUserKind("user");
 		System.out.println(dto);
 		memberService.insertItem(dto);
