@@ -24,7 +24,7 @@
 						</tr>
 						<tr>
 							<th>구매자명</th>
-							<td align="left"><input type="text" name="prName" /></td>
+							<td align="left"><input type="text" name="userId" /></td>
 						</tr>
 						<tr>
 							<th>구매일자</th>
@@ -32,20 +32,21 @@
 							<td align="left">
 								<div>
 									<label for="from">시작일</label>
-									<input type="text" name="evStart" id="from"/>
+									<input type="text" name="orStart" id="from"/>
 									<label for="to">종료일</label>
-									<input type="text" name="evEnd" id="to"/>
+									<input type="text" name="orEnd" id="to"/>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<th>주문상태</th>
 							<td align="left">
-								<input type="checkbox" name="orStatus" value="1" />결재완료
+								<input type="checkbox" name="orStatus" value="1" />주문완료
 								<input type="checkbox" name="orStatus" value="2" />배송준비중
-								<input type="checkbox" name="orStatus" value="1" />출고완료
-								<input type="checkbox" name="orStatus" value="1" />취소접수
-								<input type="checkbox" name="orStatus" value="1" />취소
+								<input type="checkbox" name="orStatus" value="3" />출고완료
+								<input type="checkbox" name="orStatus" value="4" />취소접수
+								<input type="checkbox" name="orStatus" value="5" />취소완료
+								<input type="checkbox" name="orStatus" value="6" />주문취소
 							</td>
 						</tr>
 					</table>
@@ -76,14 +77,7 @@
 									<td>${order.prCount}</td>
 									<td>${order.userId}/${order.receiverName}</td>
 									<td><fmt:formatDate value="${order.insertDay}" pattern="yyyy.MM.dd"/></td>
-									<c:choose>
-										<c:when test="${order.orStatus ==1}"><td>주문 미확인</td></c:when>
-										<c:when test="${order.orStatus ==2}"><td>주문 확인</td></c:when>
-										<c:when test="${order.orStatus ==3}"><td>배송 준비</td></c:when>
-										<c:when test="${order.orStatus ==4}"><td>배송 완료</td></c:when>
-										<c:when test="${order.orStatus ==5}"><td>택배로 이동중</td></c:when>
-										<c:otherwise><td>확인 요망</td></c:otherwise>
-									</c:choose>
+									<td>${order.orStatusValue}</td>
 								</tr>
 						</c:forEach>
 				</table>

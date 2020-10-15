@@ -31,6 +31,16 @@ public class ProductDAOImpl implements ProductDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	public int updateItem(OrderVo ordervo) {
+		int res = sqlSession.update("product.updateorder", ordervo);
+		return res;
+	}
+	public int updateItem(String orCode) {
+		System.out.println("dao orCode :"+orCode);
+		int res = sqlSession.update("product.delectorder", orCode);
+		System.out.println("dao orCode :"+orCode);
+		return res;
+	}
 
 	@Override
 	public int deleteItem() {
