@@ -132,6 +132,10 @@
 						$('#likeArticle_result').empty();
 						$('#tmp').attr('class','grid-item');
 						
+						if(data.likeDrink == null && data.likeProduct == null){
+							console.log('뭐가 뭔지 모르겠다');
+							$('#likeDrink_result').append('<h2> 좋아요한 게시글이 없습니다. </h2>');
+						}
 						for(var i in likeProduct){
 							console.log(likeProduct[i]);
 							console.log(likeDrink[i]);
@@ -183,32 +187,11 @@
 							}
 							$('#title_result > table').append('</tr>');
 						}
-						$('#title_result > table').append('<tr>');
-						$('#title_result > table > tr').append('<td>'+getAllTitle[i].titleDetail+'</td>');
-						$('#title_result > table > tr').append('<td><input id="chooseTitle" type="button" class="btn btn-md btn-blue value="칭호변경"/></td>');
-						$('#title_result > table').append('</tr>');	
-						
 					}
 				});
 			});
 		});
 	</script>
-	
-	<script>
-	$(document).ready(function(){
-		$("#chooseTitle").click(function(){
-			$.ajax({
-				type:"POST",
-				url:"/myAct/chooseTitle",
-				data:{id:$("#memId").val()},
-				success:function(data){
-					
-				}
-			});
-		});
-	});
-	</script>
-
 		
 	<script src="/resources/js/imageLoad.js"></script>
 	<!-- 데이터 스크롤해서 붙이는 스크립트  -->
