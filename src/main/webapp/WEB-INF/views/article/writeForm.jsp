@@ -74,7 +74,7 @@
 				<form action="/article/writePro" method="post" id="frm" accept-charset="utf-8">
 				<table class="tableCss table">
 					<tr>
-						<th>제목</th>
+						<th>제목${sessionScope.memId}</th>
 						<td><input type="text" name="bnTitle" id="bnTitle"
 							class="boardTitle_large" class="required" msg="제목을"
 							placeholder="제목"></td>
@@ -98,7 +98,7 @@
 						<script type="text/javascript">CKEDITOR.replace('ckeditor', ckedit_config); </script>
 						</td>
 					</tr>
-					<input type="hidden" value="${sessionScope.memNickName}" name="insertId">
+					<input type="hidden" value="${sessionScope.memId}" name="insertId">
 				</table>
 				</form>
 				<div class="text-center pad-top10">

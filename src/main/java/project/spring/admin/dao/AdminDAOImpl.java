@@ -65,8 +65,9 @@ public class AdminDAOImpl implements AdminDAO{
 
 	@Override
 	public int deleteItem(Object obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		String memberId = (String)obj;
+		int i = sqlSession.update("admin.deleteMember", memberId);
+		return i;
 	}
 
 }

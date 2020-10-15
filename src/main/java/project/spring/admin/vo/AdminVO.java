@@ -1,5 +1,7 @@
 package project.spring.admin.vo;
 
+import java.sql.Timestamp;
+
 public class AdminVO {
 	private String id;
 	private String pw;
@@ -15,7 +17,7 @@ public class AdminVO {
 	private String reportNumber;
 	private String isBan;
 	private String isApprove;
-	private String insertDate;
+	private Timestamp insertDate;
 	private String isExit;
 	public String getId() {
 		return id;
@@ -101,10 +103,10 @@ public class AdminVO {
 	public void setIsApprove(String isApprove) {
 		this.isApprove = isApprove;
 	}
-	public String getInsertDate() {
+	public Timestamp getInsertDate() {
 		return insertDate;
 	}
-	public void setInsertDate(String insertDate) {
+	public void setInsertDate(Timestamp insertDate) {
 		this.insertDate = insertDate;
 	}
 	public String getIsExit() {

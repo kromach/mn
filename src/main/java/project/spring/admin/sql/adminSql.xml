@@ -18,4 +18,8 @@
   	]]>
   	
   	</select>
+  	<update id="deleteMember" parameterType="string">
+  		update member_info set is_ban ='Y' where id = #{value}
+  	</update>
+  	
   </mapper>

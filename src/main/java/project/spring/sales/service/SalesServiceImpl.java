@@ -57,9 +57,9 @@ public class SalesServiceImpl implements SalesService{
 	}
 
 	@Override
-	public List productorList(String memId) {
+	public List productorList(String memId, int start, int end) {
 		List list = null;
-		list = salesDAO.productorlist(memId); 
+		list = salesDAO.productorlist(memId, start, end); 
 		return list;
 	}
 
@@ -68,6 +68,14 @@ public class SalesServiceImpl implements SalesService{
 		String result = null;
 		result = salesDAO.userIdch(memId);
 		return result;
+	}
+
+	@Override
+	public List productDetail(String pageNum) {
+		List list = null;
+		
+				
+		return null;
 	}
 
 }

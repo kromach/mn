@@ -7,8 +7,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import project.spring.beans.PageVO;
+import project.spring.beans.Pager;
 import project.spring.sales.service.SalesService;
 
 @Controller
@@ -19,15 +22,18 @@ public class SalesController {
 	SalesService salesService = null;
 	
 	@RequestMapping(value ="/index")
-	public String indexSs(HttpServletRequest request, String pageNum) {
+	public String indexSs(HttpServletRequest request, String pageNum, Model model) {
 		System.out.println("SalesIndex Controller");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+				
+		int count = 0;
 		
-//		int pageSize=10;
-//		int currPage = Integer.parseInt(pageNum);	
-//		int startRow = (currPage -1) * pageSize + 1;
-//		int endRow = currPage * pageSize;		
-		int count = 0;			
-//		int number = 0;	
+		Pager pager = new Pager();
+		PageVO pageVO = null;
+		int number = 0;
+		
 		
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
@@ -44,24 +50,30 @@ public class SalesController {
 		count = salesService.salesCount(memId);
 		System.out.println("count : " + count);
 		
-		if(pageNum == null) {
-			pageNum = "1";
-		}
-		
 		List salesList = null;
 		
-		salesList = salesService.productorList(memId);
-		System.out.println("salesList" + salesList.toString());
+		if(count > 0) {
+			pageVO = pager.pager(pageNum, count);
+			salesList = salesService.productorList(memId, pageVO.getStartRow(), pageVO.getEndRow());
+			System.out.println("salesList" + salesList.toString());
+		}
+		number = count - (pageVO.getCurrPage() -1) * pageVO.getPageSize();
+		
+		model.addAttribute("number", new Integer(number));
+		model.addAttribute("pageNum", new Integer(pageNum));
+		model.addAttribute("count", new Integer(count));
+		model.addAttribute("salesList", salesList);
+		model.addAttribute("pageVO", pageVO);
 		
 		
-		
-		return null;
+		return "sales/index.mn";
 	}
 	
-	
-	
-	
-	
-	
-	
+	@RequestMapping(value ="/insert")
+	public String insertProduct(String pageNum, Model model) {
+		
+		model.addAttribute("pageNum", pageNum);
+		
+		return "sales/insert.mn";
+	}
 }

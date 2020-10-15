@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,11 +37,32 @@
 							<td><a href="#"></a>${memberList.id}</td>
 							<td>${memberList.nickname}</td>
 							<td>${memberList.birth}</td>
-							<td>${memberList.reportNumber}<!-- jk0001, jk0002 로 저장되므로 스플릿으로 나누어
-							a태그로 걸기 --></td>
-							<td>${memberList.reportNumber }</td>
-							<td>${memberList.insertDate }</td>
-							<td><button>강퇴</button>
+							<td>
+								<c:if test="${fn:length(memberList.reportNumber) > 0}">
+									<c:set var="report1" value="${memberList.reportNumber}" />
+									<c:set var ="reportArr" value="${fn:split(report1,',')}" />
+									<c:forEach var="list" items="${reportArr}">
+										<a href="#">${list}</a>
+									</c:forEach>
+								</c:if>
+							</td>
+							<c:if test="${memberList.reportCount != 0 }">
+							<td>${memberList.reportCount}</td>
+							</c:if>
+							<c:if test="${memberList.reportCount == 0 }">
+							<td></td>
+							</c:if>
+							<td>${memberList.insertDate}</td>
+							<td>
+							<p id="${memberList.id }">
+								<c:if test="${memberList.isBan == 'N'}">
+								<a onclick="exitUser('${memberList.id}')">강퇴</a>
+								</c:if>
+								<c:if test="${memberList.isBan == 'Y'}">
+								강퇴됨
+							</c:if>
+							</p>
+							</td>
 						</tr>	
 					</c:forEach>
 				</table>
@@ -94,7 +117,27 @@
 			}
 		});
 	</script>
+<script>
+function exitUser(memberId){
+
+	alert("해당 아이디를 강퇴하였습니다.");
+	alert(memberId);
+
 	
+	var context = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+	$.ajax({
+		url: context + '/exitUser?memberId='+memberId,
+		type:"get",
+		success : function(data){
+			$('#' + memberId).empty();
+			$('#' + memberId).append('<p>강퇴됨</p>')
+			
+
+		}
+	})
+	
+}
+</script>	
 
 </body>
 

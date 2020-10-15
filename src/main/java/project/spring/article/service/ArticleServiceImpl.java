@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.spring.article.dao.ArticleDAO;
+import project.spring.article.dao.ArticleDAOImpl;
 import project.spring.article.vo.ArticleDTO;
 import project.spring.article.vo.Editor_imageVO;
 
@@ -93,5 +94,16 @@ public class ArticleServiceImpl implements ArticleService{
 	public int unlike(Integer num,
 			String memNickName, String insertId) {
 		return articleDAOimpl.unlike(num,memNickName,insertId);
+	}
+	@Override
+	public int report(Integer num,
+			String insertId, String reportId) {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.report(num,insertId,reportId);
+	}
+	@Override
+	public int moveArticle(Integer num) {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.moveArticle(num);
 	}
 }

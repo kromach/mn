@@ -2,42 +2,62 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="member">
-  		<!-- <select id="memberCount" resultType="int">
-  			select count(*) from Member_Info
-  		</select> -->
-  		<insert id="insertMember" parameterType="memberDTO">
-			INSERT INTO MEMBER_INFO VALUES
-			(#{id},#{pw},#{userKind},#{name},#{birth},#{tel},#{nickName},#{address},#{licenseNum},#{licenseImg},0,#{reportNumber},DEFAULT,DEFAULT,DEFAULT,DEFAULT)</insert>
-		<insert id="kakaoSignup" parameterType="memberDTO">
-			INSERT INTO MEMBER_INFO VALUES		
-		</insert>
-  		<select id="isExistId" parameterType="memberDTO" resultType="memberDTO">
-  			select * from member_info where id = #{id}
-  		</select>
-  		<select id="getMember" parameterType="string" resultType="memberDTO">
-  			SELECT * FROM MEMBER_INFO mi WHERE id = #{value}
-  		</select>
-  		<select id="findId" parameterType="memberDTO" resultType="memberDTO">
-			select * from member_info where name = #{name} and birth = #{birth} and tel = #{tel}		
-  		</select>
-  		<select id="findPw" parameterType="memberDTO" resultType="memberDTO">
-			select * from member_info where name = #{name} and birth = #{birth} and tel = #{tel} and id = #{id}	
-  		</select>
-		<select id="overlapCheckbyId" parameterType="string" resultType="int">
-			select count(*) from member_info WHERE id = #{value} 
-		</select>
-		<select id="overlapCheckbyNick" parameterType="string" resultType="int">
-			select count(*) from member_info where nickName = #{value}
-		</select>
-		<select id="setSession" parameterType="string" resultType="memberDTO">
-			select * from member_info where id = #{value}
-		</select>
-  		<update id="updateMember" parameterType="memberDTO" >
-			UPDATE MEMBER_INFO SET NICKNAME=#{nickName},pw=#{pw},tel=#{tel},ADDRESS=#{address} ,LICENSE_IMG=#{licenseImg}
-			,LICENSE_NUM =#{licenseNum} where id = #{id}
-  		</update>
-  		<update id="attendent" parameterType="string">
-  			UPDATE MY_ACTIVITY SET MY_ATTENDENT =MY_ATTENDENT +1 WHERE id = #{value}
-  		</update>
-  </mapper>
+<mapper namespace="member">
+	<!-- <select id="memberCount" resultType="int"> select count(*) from Member_Info 
+		</select> -->
+	<insert id="insertMember" parameterType="memberDTO">
+		INSERT INTO MEMBER_INFO VALUES
+		(#{id},#{pw},#{userKind},#{name},#{birth},#{tel},#{nickName},#{address},#{licenseNum},#{licenseImg},0,#{reportNumber},DEFAULT,DEFAULT,DEFAULT,DEFAULT)
+	</insert>
+	<!--사용안함 일반insert로 다시들어감  -->
+	<insert id="kakaoSignup" parameterType="memberDTO">
+		INSERT INTO MEMBER_INFO VALUES
+		(#{id},#{pw},#{userKind},#{name},#{birth},#{tel},#{nickName},#{address},#{licenseNum},#{licenseImg},0,#{reportNumber},DEFAULT,DEFAULT,DEFAULT,DEFAULT)
+	</insert>
+	<insert id = "insertMyAct" parameterType="string" >
+		INSERT INTO MY_ACTIVITY VALUES
+		(MY_ACTIVITY_SEQ.NEXTVAL,#{VALUE},0,0,0,0,0,0)
+	</insert>
+	<select id="isExistId" parameterType="memberDTO"
+		resultType="memberDTO">
+		select * from member_info where id = #{id}
+	</select>
+	<select id="getMember" parameterType="string"
+		resultType="memberDTO">
+		SELECT * FROM MEMBER_INFO mi WHERE id = #{value}
+	</select>
+	<select id="findId" parameterType="memberDTO"
+		resultType="memberDTO">
+		select * from member_info where name = #{name} and birth = #{birth} and tel
+		= #{tel}
+	</select>
+	<select id="findPw" parameterType="memberDTO"
+		resultType="memberDTO">
+		select * from member_info where name = #{name} and birth = #{birth} and tel
+		= #{tel} and id = #{id}
+	</select>
+	<select id="overlapCheckbyId" parameterType="string"
+		resultType="int">
+		select count(*) from member_info WHERE id = #{value}
+	</select>
+	<select id="overlapCheckbyNick" parameterType="string"
+		resultType="int">
+		select count(*) from member_info where nickName = #{value}
+	</select>
+	<select id="setSession" parameterType="string"
+		resultType="memberDTO">
+		select * from member_info where id = #{value}
+	</select>
+	<select id="findNickForKakaoAcount" parameterType="string" resultType="string"> 
+		select NICKNAME from member_info where id = #{value}
+	</select>
+	<update id="updateMember" parameterType="memberDTO">
+		UPDATE MEMBER_INFO SET
+		NICKNAME=#{nickName},pw=#{pw},tel=#{tel},ADDRESS=#{address}
+		,LICENSE_IMG=#{licenseImg}
+		,LICENSE_NUM =#{licenseNum} where id = #{id}
+	</update>
+	<update id="attendent" parameterType="string">
+		UPDATE MY_ACTIVITY SET MY_ATTENDENT =MY_ATTENDENT +1 WHERE id = #{value}
+	</update>
+</mapper>
