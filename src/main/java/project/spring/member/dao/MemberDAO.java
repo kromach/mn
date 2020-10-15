@@ -13,4 +13,5 @@ public interface MemberDAO extends CommonInterface{
 			int i);
 	public MemberDTO setSession(String id);
 	public void attendent(String id);
+	public int insertMyAct(String id);
 }

@@ -91,4 +91,8 @@ public class MemberServiceImpl implements memberInterface{
 	public void attendent(String id) {
 		memberDAO.attendent(id);
 	}
+	@Override
+	public int insertMyAct(String id) {
+		return memberDAO.insertMyAct(id);
+	}
 }
