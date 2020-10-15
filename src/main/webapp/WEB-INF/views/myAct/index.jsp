@@ -171,7 +171,7 @@
 							var getTitleIndex;
 						for(var i in getAllTitle){
 							$('#title_result > table').append('<tr>');
-							
+							 
 							for(var j in updateTitle){
 								if(getAllTitle[i].titleName == updateTitle[j]){
 									console.log(getAllTitle[i].titleName+'가 획득한 칭호이다.');
