@@ -34,9 +34,6 @@
  		<select id="getMyTitle" parameterType="string" resultType="TitleListDTO">
  			SELECT * FROM MY_TITLE mt , TITLE_LIST tl WHERE mt.TITLE_INDEX = tl.TITLE_IDX AND mt.ID=#{value}
  		</select>
- 		<update id="chooseTitle" parameterType="string">
- 			UPDATE MY_TITLE SET CHOOSE_TITLE ='Y' WHERE id= AND TI_IDX ='8';
- 		</update>		
  		
  		<select id="getLikeDrink" parameterType="string" resultType="DrinkVO">
  			SELECT * FROM MY_LIKE ml , DRINK_INFO di WHERE ml.ML_VALUE =di.DK_CODE AND ml.INSERT_ID =#{value}
@@ -47,6 +44,10 @@
  		<update id="updateAttend" parameterType="string">
  			UPDATE MY_ACTIVITY SET MY_ATTENDENT=MY_ATTENDENT+1 WHERE ID =#{value}
  		</update>
+ 		<update id="chooseTitle" parameterType="string">
+ 			UPDATE MY_TITLE SET CHOOSE_TITLE ='Y' WHERE id= AND TI_IDX ='8';
+ 		</update>		
+ 		
  		 
  		 
   </mapper>

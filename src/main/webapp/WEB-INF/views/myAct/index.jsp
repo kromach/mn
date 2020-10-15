@@ -53,7 +53,7 @@
 						<c:forEach var="myArticle" items="${myArticle}">
 							<tr>
 								<td>${myArticle.bnIdx}</td>
-								<td>${myArticle.bnTitle}</td>
+								<td><a href="/article/detail?idx=${myArticle.bnIdx}">${myArticle.bnTitle}</a></td>
 								<td>${myArticle.insertDay}</td>
 								<td>${myArticle.readcount}</td>
 								<td>${myArticle.heart}</td>
@@ -103,7 +103,7 @@
 							console.log(likeArticle[i]);
 							$('#likeArticle_result > table').append('<tr>');
 							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].bnIdx+'</td>');
-							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].bnTitle+'</td>');
+							$('#likeArticle_result > table > tr:last').append('<td><a href="/article/detail?idx='+likeArticle[i].bnIdx+'">'+likeArticle[i].bnTitle+'</a></td>');
 							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].insertDay+'</td>');
 							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].readcount+'</td>');
 							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].heart+'</td>');
@@ -114,6 +114,37 @@
 			});
 		});
 	</script>
+		
+	<script>
+		$(document).ready(function(){
+			$("#likeDrink").click(function(){
+				$.ajax({
+					type:"POST",
+					url:"/myAct/likeDrink",
+					data:{id:$("#memId").val()},
+					success:function(data){
+						var likeDrink = data.likeDrink;
+						var likeProduct = data.likeProduct;
+						console.log(data.likeProduct);
+						$('#index').empty();
+						$('#likeDrink_result').empty();
+						$('#title_result').empty();
+						$('#likeArticle_result').empty();
+						$('#tmp').attr('class','grid-item');
+						
+						for(var i in likeProduct){
+							console.log(likeProduct[i]);
+							console.log(likeDrink[i]);
+							$('#likeDrink_result').append('<a href="/product/productdetail?prcode='+likeProduct[i].prCode+'"><img src="'+likeProduct[i].prImg+'" /></a>');
+							$('#likeDrink_result').append('</div>'); 		
+						}
+					}
+				});
+			});
+		});
+	
+	</script>
+	
 	<script>
 			$(document).ready(function(){
 			$("#getAllTitle").click(function(){
@@ -144,55 +175,38 @@
 								} 
 							}		
 							console.log(getTitleIndex);
-							if(i==getTitleIndex)
+							if(i==getTitleIndex){
 								$('#title_result > table > tr:last').append('<td style="color:red;">'+getAllTitle[i].titleName+'</td>');
+							}
 							else{
 								$('#title_result > table > tr:last').append('<td>'+getAllTitle[i].titleName+'</td>');
 							}
 							$('#title_result > table').append('</tr>');
 						}
-					}
-				});
-			});
-		});
-	</script>
-	
-	<script>
-			$(document).ready(function(){
-			$("#myTitle").click(function(){
-				
-			});
-		});
-	</script>
-	
-	<script>
-		$(document).ready(function(){
-			$("#likeDrink").click(function(){
-				$.ajax({
-					type:"POST",
-					url:"/myAct/likeDrink",
-					data:{id:$("#memId").val()},
-					success:function(data){
-						var likeDrink = data.likeDrink;
-						var likeProduct = data.likeProduct;
-						console.log(data.likeProduct);
-						$('#index').empty();
-						$('#likeDrink_result').empty();
-						$('#title_result').empty();
-						$('#likeArticle_result').empty();
-						$('#tmp').attr('class','grid-item');
+						$('#title_result > table').append('<tr>');
+						$('#title_result > table > tr').append('<td>'+getAllTitle[i].titleDetail+'</td>');
+						$('#title_result > table > tr').append('<td><input id="chooseTitle" type="button" class="btn btn-md btn-blue value="칭호변경"/></td>');
+						$('#title_result > table').append('</tr>');	
 						
-						for(var i in likeProduct){
-							console.log(likeProduct[i]);
-							console.log(likeDrink[i]);
-							$('#likeDrink_result').append('<a href="/product/productdetail?prcode='+likeProduct[i].prCode+'"><img src="'+likeProduct[i].prImg+'" /></a>');
-							$('#likeDrink_result').append('</div>'); 		
-						}
 					}
 				});
 			});
 		});
+	</script>
 	
+	<script>
+	$(document).ready(function(){
+		$("#chooseTitle").click(function(){
+			$.ajax({
+				type:"POST",
+				url:"/myAct/chooseTitle",
+				data:{id:$("#memId").val()},
+				success:function(data){
+					
+				}
+			});
+		});
+	});
 	</script>
 
 		
@@ -213,5 +227,6 @@
 					}
 				});
 	</script>
+	
 </body>
 </html>
