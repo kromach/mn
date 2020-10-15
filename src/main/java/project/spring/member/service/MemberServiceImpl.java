@@ -95,4 +95,10 @@ public class MemberServiceImpl implements memberInterface{
 	public int insertMyAct(String id) {
 		return memberDAO.insertMyAct(id);
 	}
+	@Override
+	public String findNickForKakaoAcount(
+			String id) {
+		// TODO Auto-generated method stub
+		return memberDAO.findNickForKakaoAcount(id);
+	}
 }

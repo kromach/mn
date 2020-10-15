@@ -236,10 +236,11 @@ public class MemberController {
 			request.setAttribute("kakaoMember", dto);
 			return "/member/signupFormByKakao.mn";
 		}
-		
-		//모두 있다면 user로 셋팅해서 Session에 값 넣어주기
+
+		//가입되어있다면 추가정보받은 닉네임을 넣어줘야함.
+		String nickNamebyKakao_ = memberService.findNickForKakaoAcount(id);
 		request.getSession().setAttribute("memId", id);
-		request.getSession().setAttribute("memNickName", nickname);
+		request.getSession().setAttribute("memNickName", nickNamebyKakao_);
 		request.getSession().setAttribute("userKind", "user");
 		redirectAttributes.addFlashAttribute("memberDTO", dto);
 		//id O pw O
@@ -267,9 +268,11 @@ public class MemberController {
 		dto.setUserKind("user");
 		//카카로 추가입력으로 넘어온 정보로 회원가입시키기 > 카카오는 user로만 가입
 		memberService.insertItem(dto);
+		
 		request.getSession().setAttribute("memId", dto.getId());
 		request.getSession().setAttribute("memNickName", dto.getNickName());
 		request.getSession().setAttribute("userKind", "user");
+		
 		request.setAttribute("result", 1);
 		request.setAttribute("nickName", dto.getNickName());
 		//출석+1
