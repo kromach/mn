@@ -40,7 +40,7 @@ public class DrinkController {
 	}
 	
 	@RequestMapping("index")
-	public String indexInit(HttpServletRequest request, Model model) {
+	public String indexInit(HttpServletRequest request, Model model) throws SQLException {
 		
 		String schDkBkind = null;
 		String schDkSkind = null;
@@ -58,6 +58,9 @@ public class DrinkController {
 	//		System.out.println("schDkAlcohol : " + schDkAlcohol);
 			//System.out.println("schDkCountry : " + schDkCountry);
 		}
+		
+		List<HashMap> bigCategoryList = drinkService.selectBigCategoryList();
+		model.addAttribute("bigCategoryList", bigCategoryList);		
 		
 		return "drink/index.mn";
 	}
@@ -207,35 +210,6 @@ public class DrinkController {
 		return "drink/insertPro";
 	}
 	
-	// 입력 처리
-	@RequestMapping("testtt")
-	public String testInit(HttpServletRequest request, HttpServletResponse response, Model model) throws SQLException, IOException {
-
-		PrintWriter printWriter = null;
-		
-		// (1) 주류 정보 저장 (생성된 코드값 가져오기)
-		String dkCode = "DK00004";
-		
-		printWriter = response.getWriter();
-
-		// 인코딩
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");		
-
-		// 업로드시 메시지 출력
-		printWriter.println("<script type='text/javascript'>"
-		     + "alert('주류 정보가 등록되었습니다. 관리자 확인 후에 사이트에 게재됩니다.')"
-		     +"</script>");
-		
-		printWriter.flush();
-		
-		model.addAttribute("dkCode", dkCode);
-		//request.setAttribute("dkCode", dkCode);
-		
-		//return "drink/detail";
-		return "redirect:/drink/detail";
-	}
-		
 	// AJAX - 대분류 선택시 해당하는 소분류 리스트 리턴
 	@RequestMapping("selectSmallCategory")
 	public void selectSmallCategory(@RequestParam String bigCategory, HttpServletResponse response) throws SQLException, IOException {
