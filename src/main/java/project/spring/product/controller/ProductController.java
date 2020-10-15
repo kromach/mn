@@ -237,7 +237,7 @@ public class ProductController {
 	public String orderlist(HttpSession session, Model model , String pageNum, HttpServletRequest request) throws SQLException {
 		String id = (String)session.getAttribute("memId");
 		List orderlist = null;
-		List orStatus = null;
+		
 		int ordercount = 0;
 		if(pageNum ==null)pageNum = "1";
 		Pager pager = new Pager();
@@ -257,8 +257,10 @@ public class ProductController {
 				map.put("userId", userId);
 			}	
 			if(request.getParameter("orStatus")!= null &&request.getParameter("orStatus").length() != 0 ) {
-				
-				
+				String arr[] = request.getParameterValues("orStatus");
+				for(String orStatus : arr) {
+					
+				}
 				
 			
 				System.out.println(map.get("orStatus"));
