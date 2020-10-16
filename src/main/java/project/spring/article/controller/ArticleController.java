@@ -191,12 +191,12 @@ public class ArticleController {
 			result = articleService.report(num,insertId,reportId);
 			return result;
 		}
-		@RequestMapping(value = "/reply")
-		@ResponseBody
-		public int replySs(@RequestParam(name="num",required = false) Integer num) {
+		
+		@RequestMapping(value = "/replyPro")
+		public String replySs(@RequestParam(name="num",required = false) Integer num) {
 			int result = 0;
-			//result = articleService.searchArticleByAdd(num);
-			return result;
+			System.out.println("replyPro");
+			return null;
 		}
 		@RequestMapping(value = "/move")
 		@ResponseBody
@@ -205,5 +205,10 @@ public class ArticleController {
 			//result = articleService.searchArticleByAdd(num);
 			result = articleService.moveArticle(num);
 			return result;
+		}
+		@RequestMapping(value = "/replyOpen")
+		public String replyOpen() {
+			System.out.println("replyOpen");
+			return "/article/replyOpen";
 		}
 	}	

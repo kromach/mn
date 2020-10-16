@@ -139,7 +139,7 @@ function report(bnIdx,insertId,reportId){
 }
 function reply(bnIdx){
 	var session = '<c:out value="${memNickName}"/>';
-	
+	window.open('/article/replyOpen?bnIdx='+bnIdx, '','top=10, left=10, width=500, height=300, location=no, status=no, menubar=no, toolbar=no, resizable=no');
 }
 function move(bnIdx){
 	var session = '<c:out value="${memNickName}"/>';
