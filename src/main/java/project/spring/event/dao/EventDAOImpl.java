@@ -1,18 +1,17 @@
-package project.spring.admin.service;
+package project.spring.event.dao;
 
 import java.sql.SQLException;
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
-import project.spring.admin.dao.AdminDAOImpl;
-
-@Service
-public class AdminServiceImpl implements AdminService{
+@Repository
+public class EventDAOImpl implements EventDAO {
 
 	@Autowired
-	private AdminDAOImpl adminDAO = null;
+	private SqlSessionTemplate sqlSession = null;
 	
 	@Override
 	public int insertItem() {
@@ -32,25 +31,6 @@ public class AdminServiceImpl implements AdminService{
 		return 0;
 	}
 
-	
-	// 멤버 전체 가져오기
-	@Override
-	public List memberLIst(int start, int end)throws SQLException {
-		
-		List list =	 adminDAO.memberList(start, end);
-
-		
-		return list;
-	}
-
-	// 멤버 개수 가져오기
-	@Override
-	public int memberCount() throws SQLException {
-		int count = adminDAO.memberCount();
-		
-		return count;
-	}
-
 	@Override
 	public int insertItem(Object obj) {
 		// TODO Auto-generated method stub
@@ -65,12 +45,21 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public int deleteItem(Object obj) {
-		
-		int i = adminDAO.deleteItem(obj);
-		return i;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
+	@Override
+	public int getEventCount() throws SQLException {
+		int count = sqlSession.selectOne("event.eventCount");
+		System.out.println("count!!! :" + count);
+		return count;
+	}
 
-	
-	
+	@Override
+	public List eventList() throws SQLException {
+		List eventList = sqlSession.selectList("event.eventList");
+		return eventList;
+	}
+
 }
