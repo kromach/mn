@@ -1,11 +1,14 @@
 package project.spring.myAct.vo;
 
 public class TitleListDTO {
+	
 	private int titleIdx;
 	private String titleName;
 	private String titleDetail;
 	private String titleKey;
 	private int titleValue;
+	private String chooseTitle;
+	
 	public int getTitleIdx() {
 		return titleIdx;
 	}
@@ -36,6 +39,13 @@ public class TitleListDTO {
 	public void setTitleValue(int titleValue) {
 		this.titleValue = titleValue;
 	}
+	public String getChooseTitle() {
+		return chooseTitle;
+	}
+	public void setChooseTitle(String chooseTitle) {
+		this.chooseTitle = chooseTitle;
+	}
+
 	@Override
 	public String toString() {
 		return "TitleListDTO [titleIdx=" + titleIdx + ", titleName=" + titleName + ", titleDetail=" + titleDetail
