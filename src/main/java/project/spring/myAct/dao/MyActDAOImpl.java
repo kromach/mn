@@ -202,5 +202,12 @@ public class MyActDAOImpl implements MyActDAO{
 		
 		return result;
 	}
+
+	@Override
+	public int choose(String idx, String memId) {
+		int count = 0;
+		count = sqlSession.selectOne("myAct.choose", idx);
+		return count;
+	}
 	
 }

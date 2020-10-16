@@ -42,7 +42,7 @@ a:hover{color:#090;text-decoration:none}
 .clear{clear:both}
 
 /* display */ 
-.display-none{display:none;}
+.display-none{display:none!important}
 
 .line-Block{ display:inline-block; vertical-align:top}
 .inBlock{ display:inline-block!important}

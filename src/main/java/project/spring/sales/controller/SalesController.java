@@ -19,6 +19,7 @@ import project.spring.sales.service.SalesService;
 public class SalesController {
 
 	@Autowired
+	
 	SalesService salesService = null;
 	
 	@RequestMapping(value ="/index")
@@ -76,4 +77,5 @@ public class SalesController {
 		
 		return "sales/insert.mn";
 	}
+
 }

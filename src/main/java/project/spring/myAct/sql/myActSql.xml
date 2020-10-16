@@ -35,9 +35,17 @@
  		<select id="myActivity" resultType="MyActivityDTO" parameterType="string">
  			select * from my_activity where id=#{value}
  		</select>
- 		
+<!--  		
  		<select id="getMyTitle" parameterType="string" resultType="TitleListDTO">
  			SELECT * FROM MY_TITLE mt , TITLE_LIST tl WHERE mt.TITLE_INDEX = tl.TITLE_IDX AND mt.ID=#{value}
+ 		</select>
+ 		
+ -->
+  		<select id="getMyTitle" parameterType="string" resultType="TitleListDTO">
+  			SELECT TL.TITLE_IDX, TITLE_NAME, TITLE_DETAIL, CHOOSE_TITLE 
+  			FROM TITLE_LIST TL LEFT OUTER JOIN 
+				(SELECT * FROM MY_TITLE  WHERE ID = #{value}) MT ON TL.TITLE_IDX  = MT.TITLE_INDEX 
+			ORDER BY TL.TITLE_IDX 
  		</select>
  		
  		<select id="getLikeDrink" parameterType="string" resultType="DrinkVO">
@@ -53,11 +61,8 @@
  		</update>
  		
  		<!-- 칭호 선택 시 기존 칭호선택 초기화 & 선택한 칭호 'Y' 로 update -->
- 		<update id="chooseTitleReset" parameterType="string">
- 			UPDATE MY_TITLE SET CHOOSE_TITLE='N' WHERE id=#{value};
- 		</update>		
- 		<update id="chooseTitle" parameterType="string">
- 			UPDATE MY_TITLE SET CHOOSE_TITLE ='Y' WHERE id=#{memId} AND TITLE_INDEX = #{titleIdx}
+ 		<update id="choose">
+ 			
  		</update>
  		
  		 
