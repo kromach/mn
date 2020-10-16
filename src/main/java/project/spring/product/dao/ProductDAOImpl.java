@@ -41,7 +41,7 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 	public int updateItem(HashMap map) {
 		
-		System.out.println(map.get("orsta"));
+		
 		
 		sqlSession.selectOne("product.changsta",map);
 		return 0;
