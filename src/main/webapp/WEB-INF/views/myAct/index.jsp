@@ -195,10 +195,10 @@
 							var str = '<tr>';
 							str = str + '<td style="'+myTitle+'">'+getAllTitle[i].titleName+'</td>';
 							str = str + '<td>'+getAllTitle[i].titleDetail+'</td>';
-							if (myTitle) {
+							if (myTitle && getAllTitle[i].chooseTitle == "N") {
 							str = str + '<td><button class="btn btn-sm btn-red choosenBtn '+chooseTitle+' btn'+getAllTitle[i].titleIdx+' " onclick="choosen('+getAllTitle[i].titleIdx+')">칭호 선택</button></td>';
 							} else if(getAllTitle[i].chooseTitle == "Y"){
-							str = str + '<td><button> V </button></td>';
+							str = str + '<td><button class="btn btn-sm btn-orange"> 선택 완료 </button></td>';
 							} else{
 							str = str + '<td></td>';
 							}
