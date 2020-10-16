@@ -1,6 +1,7 @@
 package project.spring.product.controller;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,33 +46,35 @@ public class ProductController {
 		if(request.getParameter("isSearch")!=null && request.getParameter("isSearch").equals("true")) {
 			map = new HashMap();
 			
-			if(!request.getParameter("prPrice").equals("0원 - 0원") && request.getParameter("prPrice")!=null) {
+			if(request.getParameter("prPrice")!=null) {
 				String prPrice = request.getParameter("prPrice");
-				String price[] = prPrice.split("원");
+				String price[] = prPrice.split(";");
 				int strprice =Integer.parseInt(price[0]);
 				int endprice =Integer.parseInt(price[1]);
 				map.put("strprice", strprice);
 				map.put("endprice", endprice);
+				model.addAttribute("prPrice", prPrice);
 			}
-			if(!request.getParameter("prAlcohol").equals("0도 - 0도") && request.getParameter("prAlcohol")!=null) {
+			if(request.getParameter("prAlcohol")!=null) {
 				String prAlcohol = request.getParameter("prAlcohol");	
-				String alcohol[] = prAlcohol.split("도");
+				String alcohol[] = prAlcohol.split(";");
 				int stral =Integer.parseInt(alcohol[0]);
 				int endal =Integer.parseInt(alcohol[1]);
 				map.put("stral", stral);
 				map.put("endal", endal);
-				
+				model.addAttribute("prAlcohol", prAlcohol);
 			}
 				
-			if(request.getParameter("Skind")!= null && !request.getParameter("Skind").equals("전통주 종류")) {
+			if(request.getParameter("Skind")!= null && !request.getParameter("Skind").equals("소분류 선택")) {
 				String skind = request.getParameter("Skind");
 				map.put("skind", skind);
+				model.addAttribute("skind", skind);
 			}
 			
-			if(request.getParameter("name")!= null) {
+			if(request.getParameter("name")!= null && !request.getParameter("Skind").equals("")) {
 				String name = request.getParameter("name");
-				System.out.println("name :" +name);
 				map.put("name", name);
+				model.addAttribute("name", name);
 			}
 			count = productservice.getproductcount(map);	
 			if(count>0) {
@@ -85,6 +88,7 @@ public class ProductController {
 				productlist = productservice.getproduct();
 			}
 		}
+		
 		
 		model.addAttribute("productlist", productlist);
 		model.addAttribute("count", count);
@@ -149,7 +153,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("myorderdetail")
-	public String myorderdetail(HttpServletRequest request, Model model) throws SQLException{
+	public String myorderdetailSs (HttpServletRequest request, Model model) throws SQLException{
 		String orcode = request.getParameter("orcode");
 		//System.out.println(orcode);
 		
@@ -162,7 +166,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("insertOrder")
-	public String insertOrder(Model model, OrderVo ordervo, HttpSession session) throws SQLException{
+	public String insertOrderSs (Model model, OrderVo ordervo, HttpSession session) throws SQLException{
 		System.out.println(ordervo.getReceiverTel());
 		
 		String[] receiverTels = ordervo.getReceiverTel().split(",");
@@ -189,7 +193,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("modifyorder")
-	public String modifyorder (Model model, OrderVo ordervo, HttpSession session, HttpServletRequest request) throws SQLException{
+	public String modifyorderSs (Model model, OrderVo ordervo, HttpSession session, HttpServletRequest request) throws SQLException{
 		String orCode =request.getParameter("orcode");
 		System.out.println(orCode);
 		
@@ -216,7 +220,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("deleteorder")
-	public String deleteorder(HttpServletRequest request, HttpSession session, Model model) throws SQLException {
+	public String deleteorderSs(HttpServletRequest request, HttpSession session, Model model) throws SQLException {
 		String orCode = request.getParameter("orcode");
 		productservice.updateItem(orCode);
 		
@@ -234,18 +238,19 @@ public class ProductController {
 	}
 	
 	@RequestMapping("orderlist")
-	public String orderlist(HttpSession session, Model model , String pageNum, HttpServletRequest request) throws SQLException {
+	public String orderlistSs (HttpSession session, Model model , String pageNum, HttpServletRequest request) throws SQLException {
 		String id = (String)session.getAttribute("memId");
 		List orderlist = null;
-		List orStatus = null;
+		
 		int ordercount = 0;
 		if(pageNum ==null)pageNum = "1";
 		Pager pager = new Pager();
 		PageVO pageVO = null;
-		HashMap map =null;
+		HashMap map =new HashMap();
+		map.put("id", id);
 		
 		if(request.getParameter("isSearch") !=null && request.getParameter("isSearch").equals("true")) {
-			map = new HashMap();
+			
 			if(request.getParameter("prName")!= null &&request.getParameter("prName").length() != 0 ) {
 				String prName = request.getParameter("prName");
 				System.out.println("prName :" +prName);
@@ -257,31 +262,47 @@ public class ProductController {
 				map.put("userId", userId);
 			}	
 			if(request.getParameter("orStatus")!= null &&request.getParameter("orStatus").length() != 0 ) {
-				
-				
-				
-			
-				System.out.println(map.get("orStatus"));
+				String arr[] = request.getParameterValues("orStatus");
+				 int[] nums = Arrays.stream(arr).mapToInt(Integer::parseInt).toArray();
+				for(int orStatus : nums) {
+					System.out.println("값들 :"+orStatus);
+				}
+				map.put("nums", nums);
 			}	
 			if(request.getParameter("orStart")!= null &&request.getParameter("orStart").length() != 0 ) {
-				String orStart = request.getParameter("orStart");
+				String ors = request.getParameter("orStart");
+				String orStart = ors.replace("-","");
 				System.out.println("orStart :" +orStart);
 				map.put("orStart", orStart);	
 			}	
 			if(request.getParameter("orEnd")!= null &&request.getParameter("orEnd").length() != 0 ) {
-				String orEnd = request.getParameter("orEnd");
+				String ore = request.getParameter("orEnd");
+				String orEnd = ore.replace("-","");
 				System.out.println("orEnd :" +orEnd);
 				map.put("orEnd", orEnd);
+			}
+			
+			ordercount = productservice.getordercount(map);
+			System.out.println("검색 카운트 숫자 :"+ordercount);
+			pageVO =pager.pager(pageNum, ordercount);
+			int startrow = pageVO.getStartRow();
+			int endrow = pageVO.getEndRow();
+			map.put("startrow", startrow);
+			map.put("endrow", endrow);
+			if(ordercount >0) { 
+				orderlist = productservice.getorderlist(map);
 			}
 		}
 		
 		else {
-			ordercount = productservice.getordercount(id);
+			ordercount = productservice.getordercount(map);
 			pageVO =pager.pager(pageNum, ordercount);
 			int startrow = pageVO.getStartRow();
 			int endrow = pageVO.getEndRow();
+			map.put("startrow", startrow);
+			map.put("endrow", endrow);
 			if(ordercount >0) { 
-				orderlist = productservice.getorderlist(id,startrow,endrow);
+				orderlist = productservice.getorderlist(map);
 			}
 		}
 		model.addAttribute("orderlist",orderlist);
@@ -292,7 +313,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("orderdetail")
-	public String orderdetail(HttpServletRequest request , Model model) throws SQLException {
+	public String orderdetailSs (HttpServletRequest request , Model model) throws SQLException {
 		String orcode = request.getParameter("orcode");
 		System.out.println(orcode);
 		

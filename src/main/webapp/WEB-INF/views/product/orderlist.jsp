@@ -41,9 +41,9 @@
 						<tr>
 							<th>주문상태</th>
 							<td align="left">
-								<input type="checkbox" name="orStatus" value="1" />주문완료
+								<input type="checkbox" name="orStatus" value="1" />접수
 								<input type="checkbox" name="orStatus" value="2" />배송준비중
-								<input type="checkbox" name="orStatus" value="3" />출고완료
+								<input type="checkbox" name="orStatus" value="3" />배송완료
 								<input type="checkbox" name="orStatus" value="4" />취소접수
 								<input type="checkbox" name="orStatus" value="5" />취소완료
 								<input type="checkbox" name="orStatus" value="6" />주문취소
@@ -51,15 +51,13 @@
 						</tr>
 					</table>
 				</div>
-				
-						
-						<div><input type="submit" value="검색" class="btn btn-sm btn-blue" /></div>
+				<div><input type="submit" value="검색" class="btn btn-sm btn-blue" /></div>
 			</form>
 		</div>
 		<c:if test="${ordercount==0}">
 			<h1>주문받은 상품이 없습니다</h1>
 		</c:if>
-		<c:if test="${ordercount >0}">
+		
 			<div class="grid-item grid-item--width6">
 				<table class="tableCss table">
 						<tr>
@@ -95,7 +93,7 @@
 				</div>
 			
 			</div>	
-		</c:if>	
+		
 	</div>
 </div>
 
