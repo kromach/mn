@@ -36,10 +36,15 @@ public class ProductDAOImpl implements ProductDAO {
 		return res;
 	}
 	public int updateItem(String orCode) {
-		System.out.println("dao orCode :"+orCode);
 		int res = sqlSession.update("product.delectorder", orCode);
-		System.out.println("dao orCode :"+orCode);
 		return res;
+	}
+	public int updateItem(HashMap map) {
+		
+		System.out.println(map.get("orsta"));
+		
+		sqlSession.selectOne("product.changsta",map);
+		return 0;
 	}
 
 	@Override
@@ -147,6 +152,7 @@ public class ProductDAOImpl implements ProductDAO {
 			String value = p.getProperty(key);
 		}
 		*/
+		sqlSession.update("product.updatecount",ordervo);
 		sqlSession.update("product.insertorder",ordervo);
 		
 	}

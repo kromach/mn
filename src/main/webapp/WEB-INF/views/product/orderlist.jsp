@@ -54,9 +54,7 @@
 				<div><input type="submit" value="검색" class="btn btn-sm btn-blue" /></div>
 			</form>
 		</div>
-		<c:if test="${ordercount==0}">
-			<h1>주문받은 상품이 없습니다</h1>
-		</c:if>
+
 		
 			<div class="grid-item grid-item--width6">
 				<table class="tableCss table">
@@ -68,6 +66,9 @@
 							<td>주문일자</td>
 							<td>주문상태</td>
 						</tr>
+						<c:if test="${ordercount==0}">
+							<h1>주문받은 상품이 없습니다</h1>
+						</c:if>
 						<c:forEach var="order" items="${orderlist}">
 								<tr>
 									<td>${order.orCode}</td>

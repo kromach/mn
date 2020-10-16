@@ -315,12 +315,22 @@ public class ProductController {
 	@RequestMapping("orderdetail")
 	public String orderdetailSs (HttpServletRequest request , Model model) throws SQLException {
 		String orcode = request.getParameter("orcode");
-		System.out.println(orcode);
+		HashMap map = null;
 		
-		model.addAttribute(orcode);
+		if(request.getParameter("ischang") !=null && request.getParameter("ischang").equals("true")) {
+			String orstatus = request.getParameter("orstatus");
+			int orsta = Integer.parseInt(orstatus);
+			map = new HashMap();
+			map.put("orcode", orcode);
+			map.put("orsta", orsta);
+			productservice.updateItem(map);
+		}
+		
+		
 		
 		OrderVo orderinfo = productservice.orderdetail(orcode);
 		
+		model.addAttribute(orcode);
 		model.addAttribute("orderinfo",orderinfo);
 		
 		return "product/orderdetail.mn";
