@@ -159,7 +159,7 @@ public class MyActController {
 		String memId = (String)session.getAttribute("memId");
 		
 		int chooseTitle =0;
-		//chooseTitle = myActService.choose(idx, memId);
+		chooseTitle = myActService.choose(idx, memId);
 		
 		return 0;
 	} 
