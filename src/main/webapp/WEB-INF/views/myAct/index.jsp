@@ -178,7 +178,8 @@
 							// 선택한 칭호인지 - chooseTitle이 Y 면 선택한 칭호
 							var myTitle = "";
 							var chooseTitle = "";
-							//console.log(getAllTitle[i].chooseTitle);
+							var text = "";
+							console.log(getAllTitle[i].chooseTitle);
 							
 							if(getAllTitle[i].chooseTitle) {
 								myTitle = "color:red";
@@ -195,8 +196,10 @@
 							str = str + '<td style="'+myTitle+'">'+getAllTitle[i].titleName+'</td>';
 							str = str + '<td>'+getAllTitle[i].titleDetail+'</td>';
 							if (myTitle) {
-							str = str + '<td><button class="btn btn-sm btn-red choosenBtn '+chooseTitle+' btn'+getAllTitle[i].titleIdx+' " onclick="choosen('+getAllTitle[i].titleIdx+')">칭호선택</button></td>';
-							} else {
+							str = str + '<td><button class="btn btn-sm btn-red choosenBtn '+chooseTitle+' btn'+getAllTitle[i].titleIdx+' " onclick="choosen('+getAllTitle[i].titleIdx+')">칭호 선택</button></td>';
+							} else if(getAllTitle[i].chooseTitle == "Y"){
+							str = str + '<td><button> V </button></td>';
+							} else{
 							str = str + '<td></td>';
 							}
 							str = str + '</tr>';	
@@ -235,18 +238,20 @@
 	</script>
 
 	<script>
-	
 	function choosen(titleIdx){
+		console.log(typeof(titleIdx));
 		//alert(titleIdx);
 		if(confirm("칭호를 변경하시겠습니까?")) {
+			titleIdx_ = titleIdx+"";
+			
 			$.ajax({
-				url: "/myAct/chooseTitle",
+				url: "/myAct/chooseTitle?titleIdx="+titleIdx,
 				type:"POST",
-				data : {titleIdx},  
 				success : function(data){
 					
 					// 현재 변경한 칭호의 버튼 감추기
 					// 감춰져 있는 이전 칭호의 버튼 표시하기
+					
 					$("#title_result").find(".choosenBtn").removeClass('display-none');
 					$('.btn' + titleIdx).addClass('display-none');
 				}

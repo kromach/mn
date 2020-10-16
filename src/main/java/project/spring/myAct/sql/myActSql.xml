@@ -61,8 +61,11 @@
  		</update>
  		
  		<!-- 칭호 선택 시 기존 칭호선택 초기화 & 선택한 칭호 'Y' 로 update -->
- 		<update id="choose">
- 			
+ 		<update id="choose_" parameterType="string">
+ 			UPDATE MY_TITLE SET CHOOSE_TITLE='N' WHERE id=#{value}
+ 		</update>
+ 		<update id="choose" parameterType="MyTitleDTO">
+ 			UPDATE MY_TITLE SET CHOOSE_TITLE ='Y' WHERE id=#{id} AND TITLE_INDEX =#{titleIndex}
  		</update>
  		
  		 

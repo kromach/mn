@@ -152,8 +152,9 @@ public class MyActController {
 	
 	@RequestMapping(value ="/chooseTitle")
 	@ResponseBody
-	public int chooseTitle(String idx, HttpServletRequest request) {
+	public int chooseTitle(@RequestParam(name = "titleIdx") int idx,HttpServletRequest request) {
 		System.out.println("왔냐?");
+		System.out.println("idx : " + idx);
 		
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
@@ -161,7 +162,7 @@ public class MyActController {
 		int chooseTitle =0;
 		chooseTitle = myActService.choose(idx, memId);
 		
-		return 0;
+		return chooseTitle;
 	} 
 	
 	
