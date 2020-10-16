@@ -46,7 +46,7 @@
 	</select>
 	
 	<select id="orderlist" parameterType="map" resultType="ordervo">
-		<![CDATA[
+		
 		select a.* from
 			(select aa.* , rownum r from
 				(SELECT OINFO.OR_CODE , OINFO.PR_CODE,OINFO.PR_NAME,OINFO.OR_STATUS,OINFO.PR_PRICE,OINFO.PR_COUNT,
@@ -55,18 +55,73 @@
 				PRODUCT_INFO INFO ON INFO.PR_CODE = OINFO.PR_CODE INNER JOIN
 				STATUS_INFO sinfo ON oinfo.OR_STATUS = sinfo.STATUS_CODE
 				
-				WHERE INFO.INSERT_ID = #{id} order by OINFO.INSERT_DAY asc)
+				WHERE INFO.INSERT_ID = #{id}
+				<if test="nums !=null">and (
+					<trim prefix="" prefixOverrides="or">
+						<foreach collection="nums" item="a">
+							or oinfo.or_status = #{a} 
+						</foreach>
+					</trim>
+				)</if> 
+				<trim prefix="and" prefixOverrides="and">
+				<if test="prName !=null">
+					AND INFO.pr_name like '%' || #{prName} || '%'
+				</if> 
+				<if test="userId !=null">
+					AND oINFO.user_id like '%' || #{userId} || '%'
+				</if> 
+				<if test="orStart != null">
+  					<![CDATA[
+  						AND oINFO.or_day >= #{orStart} 
+  					 ]]>
+  				</if>
+  				<if test="endprice != null">
+					<![CDATA[
+  						AND oINFO.or_day <= #{orEnd} 
+  					 ]]>  				
+  				</if>
+  				
+			</trim>
+				 order by OINFO.INSERT_DAY desc)
 			aa )
-			a where r >= #{startrow} and r <= #{endrow} 
+			a <![CDATA[where r >= #{startrow} and r <= #{endrow} ]]>
 		
-		]]>
+		
 	</select>
 	
-	<select id="selcount" parameterType="string" resultType="int">
+	<select id="selcount" parameterType="map" resultType="int">
 		SELECT count(*)
 			FROM ORDER_INFO OINFO JOIN
 			PRODUCT_INFO INFO ON INFO.PR_CODE = OINFO.PR_CODE 
-			WHERE INFO.INSERT_ID =#{value}
+			WHERE INFO.INSERT_ID =#{id}
+			
+				<if test="nums !=null">and (
+					<trim prefix="" prefixOverrides="or">
+						<foreach collection="nums" item="a">
+							or oinfo.or_status = #{a} 
+						</foreach>
+					</trim>
+				)</if> 
+			
+			<trim prefix="and" prefixOverrides="and">
+				<if test="prName !=null">
+					AND INFO.pr_name like '%' || #{prName} || '%'
+				</if> 
+				<if test="userId !=null">
+					AND oINFO.user_id like '%' || #{userId} || '%'
+				</if> 
+				<if test="orStart != null">
+  					<![CDATA[
+  						AND oINFO.or_day >= #{orStart} 
+  					 ]]>
+  				</if>
+  				<if test="endprice != null">
+					<![CDATA[
+  						AND oINFO.or_day <= #{orEnd} 
+  					 ]]>  				
+  				</if>
+  				
+			</trim>
 	</select>
 	
 	<select id="schcountAll" parameterType="map" resultType="int">
