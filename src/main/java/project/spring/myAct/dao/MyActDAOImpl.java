@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import project.spring.myAct.vo.MyActivityDTO;
+import project.spring.myAct.vo.MyTitleDTO;
 import project.spring.myAct.vo.TitleListDTO;
 
 @Repository
@@ -204,9 +205,17 @@ public class MyActDAOImpl implements MyActDAO{
 	}
 
 	@Override
-	public int choose(String idx, String memId) {
+	public int choose(int idx, String memId) {
 		int count = 0;
-		count = sqlSession.selectOne("myAct.choose", idx);
+		int count_ = 0;
+		MyTitleDTO dto = new MyTitleDTO();
+		dto.setId(memId);
+		dto.setTitleIdx(idx);
+		System.out.println(dto.getId());
+		System.out.println(dto.getTitleIdx());
+		
+		count_ = sqlSession.update("myAct.choose_", memId);
+		count = sqlSession.update("myAct.choose", dto);
 		return count;
 	}
 	

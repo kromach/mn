@@ -115,7 +115,7 @@ public class MyActServiceImpl implements MyActService{
 	}
 
 	@Override
-	public int choose(String idx, String memId) {
+	public int choose(int idx, String memId) {
 		int count = myActDAO.choose(idx, memId);
 		return count;
 	}

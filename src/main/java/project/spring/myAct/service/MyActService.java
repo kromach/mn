@@ -16,6 +16,6 @@ public interface MyActService extends CommonInterface{
 	public List myLikeDrink(String memId);
 	public List myLikeProduct(String memId);
 	public int attendent(String memId);
-	public int choose(String idx, String memId);
+	public int choose(int idx, String memId);
 	
 }
