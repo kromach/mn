@@ -39,5 +39,8 @@ public interface DrinkService {
 
 	public String insertDrinkImg(MultipartHttpServletRequest request) throws SQLException;
 
+	// 주류 정보 리스트
+	public List<DrinkVO> selectDrinkServiceList(HashMap<String, Object> schMap) throws SQLException;
+
 	
 }

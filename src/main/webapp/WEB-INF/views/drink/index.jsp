@@ -13,53 +13,43 @@
 <script src="/resources/js/jquery.selectric.js"></script>
 <link rel="stylesheet" href="/resources/css/selectric.css">
 <div class="search-area">
-	<form action="index" name="schForm" id="schForm">
+	<form name="schForm" id="schForm">
 		<input type="hidden" name="isSearch" value="true"/>
 		<div class="ssec pad-top15">
 			<p class="s_label fl">주류 구분</p>
-			<select id="schDkBkind" name="schDkBkind" class="sel short" >
+			<select id="schDkBkind" name="schDkBkind" class="sel short" value="${schDkBkind}" >
 				<option value="">대분류 선택</option>
 				<c:forEach items="${bigCategoryList}" var="bigCategory">
 					<option value="${bigCategory.code}">${bigCategory.value}</option>
 				</c:forEach>
 			</select>
-			<select id="schDkSkind" name="schDkSkind" class="sel short" >
+			<select id="schDkSkind" name="schDkSkind" class="sel short" value="${schDkSkind}" >
 				<option value="">소분류 선택</option>
 			</select>
 		</div>
 		<div class="ssec pad-top15">
 			<p class="s_label fl">검색어</p>
-			<input type="text" name="schDkVal" class="input"/>
+			<input type="text" name="schDkVal" class="input" value="${schDkVal}" />
 		</div>
 		<div class="clfix ssec pad-top15" style="pading:10px 0;">
 			<p class="s_label fl">알콜도수</p>
-		    <div class="fl" style="width:400px"><input type="text" class="js-range-slider" name="my_range"/></div>
+		    <div class="fl" style="width:400px"><input type="text" class="js-range-slider" name="schDkAlcohol" value="${schDkAlcohol}" /></div>
 		</div>
 		<div class="ssec pad-top15">
 			<p class="s_label fl">국가 선택</p>
 			<p style="line-height: 33px; font-size:13px">
-				<label><input type="radio" name="schDkCountry" class="radio" value="" /> 전체</label>
-				<label><input type="radio" name="schDkCountry" class="radio" value="K" /> 국내</label>
-				<label><input type="radio" name="schDkCountry" class="radio" value="O" /> 해외</label>
+				<label><input type="radio" name="schDkCountry" class="radio" value="" <c:if test="${empty schDkCountry}"> checked </c:if> /> 전체</label>
+				<label><input type="radio" name="schDkCountry" class="radio" value="K" <c:if test="${schDkCountry == 'K'}"> checked </c:if> /> 국내</label>
+				<label><input type="radio" name="schDkCountry" class="radio" value="O" <c:if test="${schDkCountry == 'O'}"> checked </c:if> /> 해외</label>
 			</p>
 		</div>
-		<div class="ssec pad-top15"><input type="submit" value="검색" class="btn btn-sm btn-blue" /></div>
+		<div class="ssec pad-top15"><input type="button" id="searchBtn" value="검색" class="btn btn-sm btn-blue" /></div>
 	</form>
 </div>
 <div class="grid-Wrapper">
 	<div class="grid"> 
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
-		
-		<div class="grid-item"><a onclick="setDkcode('DK00001')"><img src="/resources/img/main/4.jpg" /></a></div>
-		<div class="grid-item"><img src="/resources/img/main/3.jpg" /></div>
-		<div class="grid-item"><img src="/resources/img/main/4.jpg" /></div>
-		<div class="grid-item"><img src="/resources/img/main/8.jpg" /></div>
-		<div class="grid-item"><img src="/resources/img/main/2.jpg" /></div>
-		<div class="grid-item"><img src="/resources/img/main/1.jpg" /></div>
-		<div class="grid-item"><img src="/resources/img/main/9.jpg" /></div>		
-		<div class="grid-item grid-item--width2"><img src="/resources/img/main/4.jpg" /></div>
-		<div class="grid-item grid-item--width2"><img src="/resources/img/main/8.jpg" /></div>
 	</div>
 </div>
 <script>
@@ -96,7 +86,106 @@
 	    
 	    $( "#amount" ).val(  $( "#slider-range" ).slider( "values", 0 ) + "도 - " + $( "#slider-range" ).slider( "values", 1 )+"도" );
 		*/
+			
 	});
+	
+	var frm;
+	
+	$("#searchBtn").click(function() {
+		//var frm = JSON.stringify($("#schForm").serializeObject());
+		frm = $("#schForm").serialize();
+		
+		//console.log(frm)
+		
+		getDrinkList(1);
+	});
+	
+
+	// list 가져오기
+	function getDrinkList(pageNum) {
+		console.log(frm);
+		$.ajax({
+			type : "POST",
+			url : "drinkList",
+			data : frm + "&pageNum=" + pageNum,  /*{bigCategory:bigCategory} 와 동일*/
+			success : function(data){
+				var json = JSON.parse(data);
+				//console.log(json)				
+				json.forEach(function(item, index) {
+		    		var grade_str = "<p>";
+		    		grade_str += "<span class='item-val'>" + item + "</span>";
+		    		for(i = 1; i < 6; i++) {
+		    			grade_str += "<a class='item"+ (index + 1) +"' index='"+ (index + 1) +"' value='" + i +"'><i class='fas fa-star'></i></a>";
+		    		}
+		    		grade_str += "</p>";
+		    		
+		    		$("#star_grade").append(grade_str);
+		    	});
+			},
+			error : function() {
+				alert("error");
+			}
+		})
+	}
+	
+	$.fn.serializeObject = function() {
+
+	   var o = {};
+	   var a = this.serializeArray();
+
+	   $.each(a, function() {
+	       if (o[this.name]) {
+	           if (!o[this.name].push) {
+	               o[this.name] = [o[this.name]];
+	           }
+	           o[this.name].push(this.value || '');
+
+	       } else {
+	           o[this.name] = this.value || '';
+	       }
+	   });
+
+	   return o;
+	};
+	/*
+	var ex1jQuery.fn.serializeObject = function() { 
+		var obj = null; 
+		try { 
+			if(this[0].tagName && this[0].tagName.toUpperCase() == "FORM" ) { 
+				var arr = this.serializeArray(); 
+				
+				if(arr) { obj = {}; 
+				jQuery.each(arr, function() { 
+					obj[this.name] = this.value; }); 
+				}
+		    } 
+		}catch(e) { 
+		    alert(e.message); 
+		}finally {} 
+		
+		return obj; 
+   }
+	
+   function to_ajax(){
+ 
+       const serializedValues = $('#chatbotForm').serializeObject()
+
+       $.ajax({
+           type : 'post',
+           url : '/test.jsp',
+           data : JSON.stringify(serializedValues),
+           dataType : 'json',
+           error: function(xhr, status, error){
+               alert(error);
+           }
+           success : function(json){
+               alert(json)
+           },
+       });
+ 
+   }
+	*/
+	
 	
 	// 소분류 값 가져오는 ajax
 	function getSmallCategory(bigCategory) {
