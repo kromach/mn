@@ -37,6 +37,9 @@
 		INSERT INTO ORDER_INFO(or_code,or_day,or_seq,pr_code,pr_name,or_status,pr_price,pr_count,user_id,RECEIVER_NAME ,RECEIVER_TEL ,RECEIVER_ADDR ,INSERT_DAY )
 		values(#{orCode},(SELECT TO_CHAR(SYSDATE,'YYYYMMDD') FROM DUAL),#{orSeq},#{prCode},#{prName},1,#{prPrice},#{prCount},#{userId},#{receiverName},#{receiverTel},#{receiverAddr},sysdate)
 	</insert>
+		<insert id="updatecount" parameterType="ordervo">
+		update product_info set PR_AMOUNT =PR_AMOUNT - #{prCount} , PR_TOTALCOUNT = PR_TOTALCOUNT + #{prCount} WHERE PR_CODE =#{prCode}
+	</insert>
 	<select id="sql" resultType="hashmap">
 		SELECT 'O' ||(SELECT TO_CHAR(SYSDATE,'YYYYMMDD') FROM DUAL)|| ORDER_INFO_seq.nextval ,ORDER_INFO_seq.nextval FROM DUAL
 	</select>
@@ -195,5 +198,9 @@
 	<select id="delectorder" parameterType="string" resultType="int">
 		update order_info set or_status =4 where or_code =#{value}
 	</select>
+	
+	<update id="changsta" parameterType="map">
+		update order_info set or_status =#{orsta} where or_code =#{orcode}
+	</update>
 
 </mapper>

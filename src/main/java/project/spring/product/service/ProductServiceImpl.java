@@ -40,6 +40,10 @@ public class ProductServiceImpl implements ProductService {
 		System.out.println("serviec int :"+res);
 		return res;
 	}
+	public int updateItem(HashMap map) {
+		productDAO.updateItem(map);
+		return 0;
+	}
 
 	@Override
 	public int deleteItem() {

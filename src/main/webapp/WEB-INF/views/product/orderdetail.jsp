@@ -39,26 +39,21 @@
 										${telArr[0]}-${telArr[1]}-${telArr[2]}
 									</td>
 									<td>${orderinfo.receiverAddr}</td>
-									<c:choose>
-										<c:when test="${orderinfo.orStatus ==1}">
-										<td>주문 미확인
-										<c:if test="${orderinfo.orStatus == 1 ||orderinfo.orStatus == 2||orderinfo.orStatus == 3  }">
-											<a href="deleteorder">상태바꾸기</a>
-										</c:if></td></c:when>
-										<c:when test="${orderinfo.orStatus ==2}"><td>주문 확인
-										<c:if test="${orderinfo.orStatus == 1 ||orderinfo.orStatus == 2||orderinfo.orStatus == 3  }">
-											<a href="deleteorder">상태바꾸기</a>
-										</c:if></td></c:when>
-										<c:when test="${orderinfo.orStatus ==3}"><td>배송 준비
-										<c:if test="${orderinfo.orStatus == 1 ||orderinfo.orStatus == 2||orderinfo.orStatus == 3  }">
-											<a href="deleteorder">상태바꾸기</a>
-										</c:if></td></c:when>
-										<c:when test="${orderinfo.orStatus ==4}"><td>배송 완료</td></c:when>
-										<c:when test="${orderinfo.orStatus ==5}"><td>택배로 이동중</td></c:when>
-										<c:otherwise><td>확인 요망</td></c:otherwise>
-									</c:choose>
-									
-										
+									<td>
+										<form action="orderdetail">
+											<input type="hidden" name="orcode" value="${orderinfo.orCode}">
+											<input type="hidden" name="ischang" value="true" />
+											<select name="orstatus">
+												<option value="1" <c:if test="${orderinfo.orStatus==1}">selected</c:if>>접수</option>
+												<option value="2" <c:if test="${orderinfo.orStatus==2}">selected</c:if>>배송준비중</option>
+												<option value="3" <c:if test="${orderinfo.orStatus==3}">selected</c:if>>배송완료</option>
+												<option value="4" <c:if test="${orderinfo.orStatus==4}">selected</c:if>>취소접수</option>
+												<option value="5" <c:if test="${orderinfo.orStatus==5}">selected</c:if>>취소완료</option>
+												<option value="6" <c:if test="${orderinfo.orStatus==6}">selected</c:if>>주문취소</option>
+											</select>
+											<input type="submit" value="적용"/>
+										</form>
+									</td>
 								</tr>
 							</div>
 				</table>
