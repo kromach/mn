@@ -4,6 +4,42 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="drink">
   
+  		<select id="selectDrinkServiceList" parameterType="hashMap" resultType="project.spring.drink.vo.DrinkVO">
+			SELECT DK_CODE, DK_NAME, DK_BKIND, DK_SKIND, DK_IMG, DK_ALCOHOL, DK_COUNTRY, DK_CITY, DK_PLACE, DK_LIKE, DK_APPROVE, INSERT_ID
+			FROM DRINK_INFO 
+			WHERE 
+				<choose>
+				    <when test='memKind == "admin"'>
+				    	<![CDATA[ DK_APPROVE <= 1 ]]>
+				    </when>
+				    <otherwise>
+				    	(<![CDATA[ DK_APPROVE = 1 ]]> <if test="memId != null and !memId.equals('')"> OR (DK_APPROVE = 0 AND INSERT_ID = #{memId}) </if>) 
+				    </otherwise>
+				</choose>
+				<if test="schDkVal != null and !schDkVal.equals('')">
+					AND (DK_NAME LIKE '%' || #{schDkVal} || '%' OR DK_COUNTRY LIKE '%' || #{schDkVal} || '%' OR DK_CITY LIKE '%' || #{schDkVal} || '%' OR DK_PLACE LIKE '%' || #{schDkVal} || '%') 
+				</if>
+				<if test="schDkBkind != null and !schDkBkind.equals('')">
+					AND DK_BKIND = #{schDkBkind} 
+				</if>
+				<if test="schDkSkind != null and !schDkSkind.equals('')">
+					AND DK_SKIND = #{schDkSkind} 
+				</if>
+				<if test="schDkAlcoholMin != null">
+					AND DK_ALCOHOL BETWEEN #{schDkAlcoholMin} AND #{schDkAlcoholMax}
+				</if>
+				
+				<choose>
+				    <when test='schDkCountry == "K"'>
+				      AND DK_COUNTRY = '한국'
+				    </when>
+				    <when test='schDkCountry == "O"'>
+				      AND DK_COUNTRY != '한국'
+				    </when>
+				</choose>
+			ORDER BY INSERT_DAY DESC
+  		</select>
+    
 		<select id="selectBigCategoryList" resultType="camelmap">
   			SELECT CODE, VALUE
 			FROM DRINK_CATEGORY WHERE kind = 1 AND USE_YN = 'Y'
@@ -68,8 +104,6 @@
 				 TITLE_LIST TL ON MY.TITLE_INDEX = TL.TITLE_IDX
 			WHERE dk_code = 'DK00001' AND IS_DELETE = 'N' ORDER BY CM_IDX DESC	
   		</select>
-  		
-  		<resultMap id="dkResult" type="hashMap" ></resultMap>
   		
   		<insert id="insertDrink" parameterType="project.spring.drink.vo.DrinkVO" statementType="CALLABLE">
   			{ CALL INSERT_DRINK_INFO(#{dkName}, #{dkBkind}, #{dkSkind}, #{dkImg}, #{dkAlcohol}, #{dkCountry}, #{dkCity}, #{dkPlace}, #{dkFood}, #{dkContent1}, #{dkContent2}, #{dkContent3}, #{dkItem1}, #{dkItem2}, #{dkItem3}, #{dkItem4}, #{dkItem5}, #{dkApprove}, #{insertId}, #{dkCode, mode=OUT, jdbcType=VARCHAR, javaType=String}) }

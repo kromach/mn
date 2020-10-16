@@ -25,6 +25,11 @@ public class DrinkServiceImpl implements DrinkService {
 	DrinkServiceImpl(DrinkDAO drinkDAO) {
 		this.drinkDAO = drinkDAO;
 	}
+	
+	@Override
+	public List<DrinkVO> selectDrinkServiceList(HashMap<String, Object> schMap) throws SQLException {
+		return drinkDAO.selectDrinkServiceList(schMap);
+	}
 
 	@Override
 	public List<HashMap> selectBigCategoryList() throws SQLException {
@@ -170,5 +175,5 @@ public class DrinkServiceImpl implements DrinkService {
 
 		return imgPath;
 	}
-	
+
 }
