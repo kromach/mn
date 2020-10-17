@@ -56,7 +56,11 @@
 					<tr class="reply">
 						<td>${articleReplyDTO.bnComment}</td>
 						<td>${articleReplyDTO.insertId}</td>
-						<td><fmt:formatDate value="${articleReplyDTO.insertDay}" pattern="yyyy.MM.dd"/></td>
+						<td><fmt:formatDate value="${articleReplyDTO.insertDay}" pattern="yyyy.MM.dd"/>
+							<c:if test="${articleReplyDTO.insertId eq sessionScope.memId}">
+								<button onclick="deleteReply('${articleReplyDTO.bnIdx}','${sessionScope.memId}')">글 삭제</button>
+							</c:if>
+						</td>
 					</tr>
 					</c:forEach>
 					</c:if>
@@ -66,7 +70,7 @@
 							<a onclick="replyReload()" <%-- href="/Spring/board/list.git?pageNum=${pageVO.startPage-pageVO.pageBlock}" --%>>&lt;</a>
 						</c:if>
 						<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1">
-							<a onclick="replyReload('${i}','${articleDTO.bnIdx}')" class="pageNums" id="pageSel${i}">&nbsp;${i}&nbsp;</a>
+							<a onclick="replyReload('${i}','${articleDTO.bnIdx}','${sessionScope.memId}')" class="pageNums" id="pageSel${i}">&nbsp;${i}&nbsp;</a>
 						</c:forEach>
 						<c:if test="${pageVO.endPage < pageVO.pageCount}">
 							<a onclick="replyReload()" <%-- href="/Spring/board/list.git?pageNum=${pageVO.startPage+pageVO.pageBlock}" --%>>&gt;</a>
@@ -230,7 +234,7 @@ function move(bnIdx){
 		alert("관리자만 사용 가능한 메뉴 입니다.");
 	}
 }
-function replyReload(index,idx){
+function replyReload(index,idx,session){
 	console.log("댓글 인덱스"+index);
 	console.log("글번호 "+idx);
 	var context = window.location.pathname.substring(0,
@@ -244,12 +248,20 @@ function replyReload(index,idx){
 			var len = Object.keys(data).length;
 			console.log(len);
 			for(var i=len-1;i>=0;i--){
-				console.log(data[i]);
-				$("<tr class='reply'><td>"+data[i].bnComment+"</td><td>"+data[i].insertId+"</td><td>"+
+				
+				if(session == data[i].insertId){
+					$("<tr class='reply'><td>"+data[i].bnComment+"</td><td>"+data[i].insertId+"</td><td>"+
+							moment(new Date(data[i].insertDay)).format('YYYY.MM.DD')+"&nbsp;<button type='button' onclick=\"deleteReply("+"\'"+data[i].bnIdx+"\',\'"+session+"\')\">글삭제</button></td></tr>").insertAfter('table tr:eq(5)');					
+				}else{			
+					$("<tr class='reply'><td>"+data[i].bnComment+"</td><td>"+data[i].insertId+"</td><td>"+
 						moment(new Date(data[i].insertDay)).format('YYYY.MM.DD')+"</td></tr>").insertAfter('table tr:eq(5)');
+					}
 			}
 		}
 	});
+}
+function deleteReply(bnIdx,session){
+	alert("deleteReply"+bnIdx+":"+session);
 }
 function more(){
 	var moreVal = Number($('#moreVal').val())+1;
