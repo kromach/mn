@@ -198,9 +198,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 		sqlSession.delete("article.insertReply", map);
 	}
 	@Override
-	public List getAllReply() {
-		//모든게시글 가져오기
-		return sqlSession.selectOne("article.getAllReply");
+	public List getReply(int index) {
+		//해당범위 게시글 가져오기
+		return sqlSession.selectList("article.getReply",index);
 	}
 	@Override
 	public int getAllReplyCount() {

@@ -113,9 +113,9 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 	
 	@Override
-	public List getAllReply() {
+	public List getReply(int index) {
 		// TODO Auto-generated method stub
-		return articleDAOimpl.getAllReply();
+		return articleDAOimpl.getReply(index);
 	}
 	@Override
 	public int getAllReplyCount() {

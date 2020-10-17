@@ -129,7 +129,9 @@ public class ArticleController {
 			return "article/articleList.mn";
 		}
 		@RequestMapping(value = "/detail")
-		public String detail(@RequestParam(name="idx",required = false) Integer idx,Model model) {
+		public String detail(
+				@RequestParam(required = false) String pageNum,
+				@RequestParam(name="idx",required = false) Integer idx,Model model) {
 			int idx_ = 0;
 			if(idx!=null) idx_ = idx;
 			//조회수 올리는 메서드
@@ -138,12 +140,21 @@ public class ArticleController {
 			ArticleDTO dto = articleService.read(idx_);
 			//밑에 게시글 뿌리는 메서드
 			List list = articleService.searchArticleByAdd(0);
-			//모든 댓글 수와 댓글 가져오는 메서드
-			int count = articleService.getAllReplyCount();
-			List reply = articleService.getAllReply();
-			
+			//내용
 			model.addAttribute("articleDTO", dto);
+			//밑에 추가게시글
 			model.addAttribute("list", list);
+			
+			//댓글
+			List reply = articleService.getReply(0);
+			model.addAttribute("reply", reply);
+			//댓글 pager
+			int count = articleService.getAllReplyCount();
+			Pager pager = new Pager();
+			PageVO pageVO = pager.pager("1",count);
+			model.addAttribute("count", count);
+			model.addAttribute("pageVO", pageVO);
+			
 			return "article/detail.mn";
 		}
 		

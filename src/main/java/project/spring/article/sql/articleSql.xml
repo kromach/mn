@@ -34,7 +34,7 @@
   	<select id="searchArticleByAdd" resultType="ArticleDTO" parameterType="int">
   	<![CDATA[	
 		SELECT * FROM ( SELECT a.*, ROWNUM as rnum FROM ( SELECT * FROM board_normal ORDER BY INSERT_DAY DESC)a)
-		WHERE rnum >= (5*#{value})+1 and rnum <= (5*(#{value}+1))
+		WHERE rnum >= (10*#{value})+1 and rnum <= (10*(#{value}+1))
 	]]>
   	</select>
   	<select id="alreadyLike" parameterType="hashmap" resultType="int">
@@ -54,7 +54,7 @@
   	</select>
   	<select id="getReply" parameterType="int" resultType="ArticleReplyDTO">
   	<![CDATA[	
-  		select a.*from( select aa.*, rownum r from(	select * from BOARD_COMMENT bc order by INSERT_DAY DESC ) aa ) a where r >= (5*#{value})+1 and r <= (5*(#{value}+1))
+  		select a.*from( select aa.*, rownum r from(	select * from BOARD_COMMENT bc order by INSERT_DAY DESC ) aa ) a where r >= (10*#{value})+1 and r <= (10*(#{value}+1))
   	]]>
   	</select>
   	<insert id="insertReply" parameterType="hashmap" >

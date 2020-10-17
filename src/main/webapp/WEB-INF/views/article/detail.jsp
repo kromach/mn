@@ -39,6 +39,27 @@
 						</div>												 
 						</td>
 					</tr>
+					
+					<tr>
+						<td colspan="4" style="height: 50px;">Comment View
+							<div align="center" class="pageNums">
+								<!-- 게시글이 있을때만 보여주기 -->
+								<c:if test="${count<=0}">등록된 댓글이 존재하지 않습니다.</c:if>
+								<c:if test="${count>0}">
+									${reply }
+									<c:if test="${pageVO.startPage > pageVO.pageBlock}">
+										<a href="/Spring/board/list.git?pageNum=${pageVO.startPage-pageVO.pageBlock}">&lt;</a>
+									</c:if>
+									<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1">
+										<a href="/Spring/board/list.git?pageNum=${i}" class="pageNums">&nbsp;${i}&nbsp;</a>
+									</c:forEach>
+									<c:if test="${pageVO.endPage < pageVO.pageCount}">
+										<a href="/Spring/board/list.git?pageNum=${pageVO.startPage+pageVO.pageBlock}">&gt;</a>
+									</c:if>
+								</c:if>
+							</div>
+						</td>
+					</tr>
 					<tr>
 						<td colspan="4" style="height: 100px; border-bottom: 1px solid;">
 						<textarea name="content" type="textarea" class="required" msg="내용을" placeholder="댓글을 입력해주세요" 
@@ -49,10 +70,6 @@
 						</div>
 						</td>
 					<tr>
-					
-					<tr>
-						<td colspan="4" style="height: 50px;">Comment View</td>
-					</tr>
 				</table>
 			</div>
 			<div class="detail-item detail-width6">
