@@ -31,10 +31,10 @@
   	<select id="read" parameterType="int" resultType="ArticleDTO">
   		select * from board_normal where BN_IDX = #{value}
   	</select>
-  	<select id="searchArticleByAdd" resultType="ArticleDTO" parameterType="int">
+  	<select id="searchArticleByAdd" resultType="ArticleDTO" parameterType="hashmap">
   	<![CDATA[	
-		SELECT * FROM ( SELECT a.*, ROWNUM as rnum FROM ( SELECT * FROM board_normal ORDER BY INSERT_DAY DESC)a)
-		WHERE rnum >= (10*#{value})+1 and rnum <= (10*(#{value}+1))
+		SELECT * FROM ( SELECT a.*, ROWNUM as rnum FROM ( SELECT * FROM board_normal where bn_idx = #{bnidx} ORDER BY INSERT_DAY DESC)a)
+		WHERE rnum >= (10*#{index})+1 and rnum <= (10*(#{index}+1))
 	]]>
   	</select>
   	<select id="alreadyLike" parameterType="hashmap" resultType="int">

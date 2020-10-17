@@ -198,8 +198,11 @@ public class ArticleDAOImpl implements ArticleDAO {
 		sqlSession.delete("article.insertReply", map);
 	}
 	@Override
-	public List getReply(int index) {
+	public List getReply(int index,int bnIdx) {
 		//해당범위 게시글 가져오기
+		HashMap map = new HashMap();
+		map.put("index", index);
+		map.put("bnIdx", bnIdx);
 		return sqlSession.selectList("article.getReply",index);
 	}
 	@Override

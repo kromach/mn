@@ -23,6 +23,6 @@ public interface ArticleService extends CommonInterface {
 			String reportId);
 	public int moveArticle(Integer num);
 	public void insertReply(Map map);
-	public List getReply(int index);
+	public List getReply(int index,int bnIdx);
 	public int getAllReplyCount();
 }

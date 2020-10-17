@@ -46,7 +46,13 @@
 								<!-- 게시글이 있을때만 보여주기 -->
 								<c:if test="${count<=0}">등록된 댓글이 존재하지 않습니다.</c:if>
 								<c:if test="${count>0}">
-									${reply }
+									<c:forEach var="articleReplyDTO" items="${reply}">
+										<tr >
+											<td>${articleReplyDTO.bnComment}</td>
+											<td>${articleReplyDTO.insertId}</td>
+											<td><fmt:formatDate value="${articleReplyDTO.insertDay}" pattern="yyyy.MM.dd"/></td>
+										</tr>
+									</c:forEach>
 									<c:if test="${pageVO.startPage > pageVO.pageBlock}">
 										<a href="/Spring/board/list.git?pageNum=${pageVO.startPage-pageVO.pageBlock}">&lt;</a>
 									</c:if>

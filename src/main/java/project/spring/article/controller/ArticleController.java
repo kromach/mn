@@ -146,7 +146,7 @@ public class ArticleController {
 			model.addAttribute("list", list);
 			
 			//댓글
-			List reply = articleService.getReply(0);
+			List reply = articleService.getReply(0,idx);
 			model.addAttribute("reply", reply);
 			//댓글 pager
 			int count = articleService.getAllReplyCount();
