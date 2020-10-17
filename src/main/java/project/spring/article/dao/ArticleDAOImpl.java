@@ -192,4 +192,22 @@ public class ArticleDAOImpl implements ArticleDAO {
 	public int moveArticle(Integer num) {
 		return sqlSession.update("article.moveArticle", num);
 	}
+	@Override
+	public void insertReply(Map map) {
+		System.out.println("insertREPLY DAO IMPLE======");
+		sqlSession.delete("article.insertReply", map);
+	}
+	@Override
+	public List getReply(int index,int bnIdx) {
+		//해당범위 게시글 가져오기
+		HashMap map = new HashMap();
+		map.put("index", index);
+		map.put("bnIdx", bnIdx);
+		return sqlSession.selectList("article.getReply",map);
+	}
+	@Override
+	public int getAllReplyCount() {
+		//총게시글수
+		return sqlSession.selectOne("article.getCountAllReply");
+	}
 }

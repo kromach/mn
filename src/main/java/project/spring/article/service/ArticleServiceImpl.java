@@ -106,4 +106,20 @@ public class ArticleServiceImpl implements ArticleService{
 		// TODO Auto-generated method stub
 		return articleDAOimpl.moveArticle(num);
 	}
+	
+	@Override
+	public void insertReply(Map map) {
+		articleDAOimpl.insertReply(map);
+	}
+	
+	@Override
+	public List getReply(int index,int bnIdx) {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.getReply(index,bnIdx);
+	}
+	@Override
+	public int getAllReplyCount() {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.getAllReplyCount();
+	}
 }

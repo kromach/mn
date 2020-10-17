@@ -33,7 +33,7 @@
   	</select>
   	<select id="searchArticleByAdd" resultType="ArticleDTO" parameterType="int">
   	<![CDATA[	
-		SELECT * FROM ( SELECT a.*, ROWNUM as rnum FROM ( SELECT * FROM board_normal ORDER BY INSERT_DAY DESC)a)
+		SELECT * FROM ( SELECT a.*, ROWNUM as rnum FROM ( SELECT * FROM board_normal where kind = 'F' ORDER BY INSERT_DAY DESC)a)
 		WHERE rnum >= (5*#{value})+1 and rnum <= (5*(#{value}+1))
 	]]>
   	</select>
@@ -43,6 +43,23 @@
   	<select id="isAlreadyReported" parameterType="string" resultType="string">
   		SELECT report_number FROM MEMBER_INFO mi  WHERE id = #{value}
   	</select>
+  	<select id="likeReturn" parameterType="int" resultType="int">
+		select heart from board_normal where BN_IDX = #{value}
+  	</select>
+  	<select id="getCountAllReply" resultType="int">
+  		SELECT count(*) FROM BOARD_COMMENT
+  	</select>
+  	<select id="getAllReply" resultType="ArticleReplyDTO">
+  		select * from board_comment
+  	</select>
+  	<select id="getReply" parameterType="hashmap" resultType="ArticleReplyDTO">
+  	<![CDATA[	
+  		select a.*from( select aa.*, rownum r from(	select * from BOARD_COMMENT where bn_idx = #{bnIdx} order by INSERT_DAY DESC ) aa ) a where r >= (10*#{index})+1 and r <= (10*(#{index}+1))
+  	]]>
+  	</select>
+  	<insert id="insertReply" parameterType="hashmap" >
+  		INSERT INTO BOARD_COMMENT VALUES (BOARD_COMMENT_seq.nextval,#{bnIdx},#{BN_COMMENT},#{INSERT_ID},sysdate,'N')
+  	</insert>
   	<insert id="insertTags" parameterType="ArticleDTO">
 	insert into BOARD_NORMAL (BN_IDX,BN_TITLE,KIND ,DK_CODE,READCOUNT,HEART,REPORT,CONTENT,INSERT_ID,INSERT_DAY,IS_DELETE )
 	values (BOARD_NORMAL_SEQ.nextval,#{bnTitle},default,#{dkCode},#{readcount},#{heart},#{report},#{content},
@@ -80,9 +97,6 @@
   	<update id="moveArticle" parameterType="int"> 
 		UPDATE BOARD_NORMAL SET kind = 'C' WHERE BN_IDX = #{value}	
   	</update>
-  	<select id="likeReturn" parameterType="int" resultType="int">
-		select heart from board_normal where BN_IDX = #{value}
-  	</select>
   	<delete id="like_log_undo"> 
   		delete from board_like where bn_idx = #{num} and nick = #{memNickName} 
   	</delete>

@@ -129,7 +129,9 @@ public class ArticleController {
 			return "article/articleList.mn";
 		}
 		@RequestMapping(value = "/detail")
-		public String detail(@RequestParam(name="idx",required = false) Integer idx,Model model) {
+		public String detail(
+				@RequestParam(required = false) String pageNum,
+				@RequestParam(name="idx",required = false) Integer idx,Model model) {
 			int idx_ = 0;
 			if(idx!=null) idx_ = idx;
 			//조회수 올리는 메서드
@@ -138,14 +140,39 @@ public class ArticleController {
 			ArticleDTO dto = articleService.read(idx_);
 			//밑에 게시글 뿌리는 메서드
 			List list = articleService.searchArticleByAdd(0);
-			System.out.println(list);
+			//내용
 			model.addAttribute("articleDTO", dto);
+			//밑에 추가게시글
 			model.addAttribute("list", list);
+			
+			//댓글
+			List reply = articleService.getReply(0,idx);
+			model.addAttribute("reply", reply);
+			
+			//댓글 pager
+			int count = articleService.getAllReplyCount();
+			Pager pager = new Pager();
+			PageVO pageVO = pager.pager("1",count);
+			model.addAttribute("count", count);
+			model.addAttribute("pageVO", pageVO);
 			
 			return "article/detail.mn";
 		}
 		
 		//////AJAX
+		@RequestMapping(value = "/replyReload")
+		@ResponseBody
+		public List replyReload(@RequestParam(name = "index") int index,
+								@RequestParam(name = "idx") int idx) {
+			System.out.println(index+":"+idx);
+			//댓글
+			List reply = articleService.getReply(index-1,idx);
+			return reply;
+		}
+		
+		
+		
+		
 		@RequestMapping(value = "/more")
 		@ResponseBody
 		public List more(@RequestParam(name="num",required = false) Integer num) {
@@ -192,11 +219,25 @@ public class ArticleController {
 			return result;
 		}
 		
-		@RequestMapping(value = "/replyPro")
-		public String replySs(@RequestParam(name="num",required = false) Integer num) {
-			int result = 0;
-			System.out.println("replyPro");
-			return null;
+		@RequestMapping(value = "/reply")
+		@ResponseBody
+		public String replySs(
+				@RequestParam(name="bnIdx",required = false) String bnIdx,
+				@RequestParam(name="session",required = false) String session,
+				@RequestParam(name="text",required = false) String text
+				){
+			System.out.println("reply");
+			Map map = new HashMap();
+			map.put("bnIdx", bnIdx);
+			map.put("BN_COMMENT", text);
+			map.put("INSERT_ID", session);
+			//댓글입력
+			articleService.insertReply(map);
+			//다시 댓글가져오기
+			
+			
+			String log = bnIdx+":"+session+":"+text;
+			return log;
 		}
 		@RequestMapping(value = "/move")
 		@ResponseBody
@@ -205,10 +246,5 @@ public class ArticleController {
 			//result = articleService.searchArticleByAdd(num);
 			result = articleService.moveArticle(num);
 			return result;
-		}
-		@RequestMapping(value = "/replyOpen")
-		public String replyOpen() {
-			System.out.println("replyOpen");
-			return "/article/replyOpen";
 		}
 	}	
