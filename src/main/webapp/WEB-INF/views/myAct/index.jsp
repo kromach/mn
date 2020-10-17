@@ -178,15 +178,16 @@
 							// 선택한 칭호인지 - chooseTitle이 Y 면 선택한 칭호
 							var myTitle = "";
 							var chooseTitle = "";
-							var text = "";
+							var value ="";
 							console.log(getAllTitle[i].chooseTitle);
 							
 							if(getAllTitle[i].chooseTitle) {
 								myTitle = "color:red";
 								if(getAllTitle[i].chooseTitle == "Y") {
-									chooseTitle = "display-none";
-									
+									value ="선택 완료";
 									//alert(getAllTitle[i].titleName);
+								}else{
+									value ="칭호 선택";
 								}
 							} 
 							
@@ -195,11 +196,9 @@
 							var str = '<tr>';
 							str = str + '<td style="'+myTitle+'">'+getAllTitle[i].titleName+'</td>';
 							str = str + '<td>'+getAllTitle[i].titleDetail+'</td>';
-							if (myTitle && getAllTitle[i].chooseTitle == "N") {
-							str = str + '<td><button class="btn btn-sm btn-red choosenBtn '+chooseTitle+' btn'+getAllTitle[i].titleIdx+' " onclick="choosen('+getAllTitle[i].titleIdx+')">칭호 선택</button></td>';
-							} else if(getAllTitle[i].chooseTitle == "Y"){
-							str = str + '<td><button class="btn btn-sm btn-orange"> 선택 완료 </button></td>';
-							} else{
+							if (myTitle) {
+							str = str + '<td><button class="btn btn-sm btn-red chooseTitle '+chooseTitle+' btn'+getAllTitle[i].titleIdx+' " onclick="choosen('+getAllTitle[i].titleIdx+')">'+value+'</button></td>';
+							}else{
 							str = str + '<td></td>';
 							}
 							str = str + '</tr>';	
@@ -249,11 +248,10 @@
 				type:"POST",
 				success : function(data){
 					
-					// 현재 변경한 칭호의 버튼 감추기
 					// 감춰져 있는 이전 칭호의 버튼 표시하기
-					
-					$("#title_result").find(".choosenBtn").removeClass('display-none');
-					$('.btn' + titleIdx).addClass('display-none');
+					$("#title_result").find(".chooseTitle").text('칭호 선택');
+					// 현재 변경한 칭호의 버튼 바꾸기
+					$('.btn' + titleIdx).text('선택 완료');
 				}
 			})
 		}
