@@ -135,7 +135,7 @@
 function like(bnIdx,insertId){
 var context = window.location.pathname.substring(0,
 		window.location.pathname.indexOf("/", 2));
-var session = '<c:out value="${memNickName}"/>';
+var session = '<c:out value="${memId}"/>';
 	if(session!=''){
 	$.ajax({
 		url : context + '/like?num='+bnIdx+'&nick=${memNickName}&insertId='+insertId,
@@ -164,7 +164,7 @@ var session = '<c:out value="${memNickName}"/>';
 function report(bnIdx,insertId,reportId){
 	var context = window.location.pathname.substring(0,
 			window.location.pathname.indexOf("/", 2));
-	var session = '<c:out value="${memNickName}"/>';
+	var session = '<c:out value="${memId}"/>';
 	if(session!=''){
 		$.ajax({
 			url : context + '/report?num='+bnIdx+'&insertId='+insertId+'&reportId='+reportId,
@@ -183,7 +183,7 @@ function report(bnIdx,insertId,reportId){
 	}
 }
 function reply(bnIdx){
-	var session = '<c:out value="${memNickName}"/>';
+	var session = '<c:out value="${memId}"/>';
 	var text = $('textarea#content_textArea').val();
 	var context = window.location.pathname.substring(0,
 			window.location.pathname.indexOf("/", 2));
@@ -211,11 +211,11 @@ function reply(bnIdx){
 	$('textarea#content_textArea').val('');
 }
 function replyCancle(bnIdx){
-	var session = '<c:out value="${memNickName}"/>';
+	var session = '<c:out value="${memId}"/>';
 	$('textarea#content_textArea').val('');
 }
 function move(bnIdx){
-	var session = '<c:out value="${memNickName}"/>';
+	var session = '<c:out value="${memId}"/>';
 	var context = window.location.pathname.substring(0,
 			window.location.pathname.indexOf("/", 2));
 	if(session!=''&&session=='admin'){
@@ -251,10 +251,10 @@ function replyReload(index,idx,session){
 			for(var i=len-1;i>=0;i--){
 				
 				if(session == data[i].insertId){
-					$("<tr class='reply'><td>"+data[i].bnComment+"</td><td>"+data[i].insertId+"</td><td>"+
+					$("<tr class='reply'><td>"+data[i].bnComment+"</td><td>"+data[i].nickname+"</td><td>"+
 							moment(new Date(data[i].insertDay)).format('YYYY.MM.DD')+"&nbsp;<button type='button' onclick=\"deleteReply("+"\'"+data[i].bnIdx+"\',\'"+session+"\')\">글삭제</button></td></tr>").insertAfter('table tr:eq(5)');					
 				}else{			
-					$("<tr class='reply'><td>"+data[i].bnComment+"</td><td>"+data[i].insertId+"</td><td>"+
+					$("<tr class='reply'><td>"+data[i].bnComment+"</td><td>"+data[i].nickname+"</td><td>"+
 						moment(new Date(data[i].insertDay)).format('YYYY.MM.DD')+"</td></tr>").insertAfter('table tr:eq(5)');
 					}
 			}

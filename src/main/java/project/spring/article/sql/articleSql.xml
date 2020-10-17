@@ -54,7 +54,7 @@
   	</select>
   	<select id="getReply" parameterType="hashmap" resultType="ArticleReplyDTO">
   	<![CDATA[	
-  		select a.*from( select aa.*, rownum r from(	select * from BOARD_COMMENT where bn_idx = #{bnIdx} order by INSERT_DAY DESC ) aa ) a where r >= (10*#{index})+1 and r <= (10*(#{index}+1))
+  		select a.*from( select aa.*, rownum r from(	select bc.*,mi.NICKNAME,mi.NAME from BOARD_COMMENT bc,MEMBER_INFO mi WHERE bc.INSERT_ID =mi.ID AND bn_idx = #{bnIdx} order by INSERT_DAY DESC ) aa ) a where r >= (10*#{index})+1 and r <= (10*(#{index}+1))
   	]]>
   	</select>
   	<insert id="insertReply" parameterType="hashmap" >

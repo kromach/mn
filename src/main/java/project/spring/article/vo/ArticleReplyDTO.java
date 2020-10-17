@@ -9,6 +9,9 @@ public class ArticleReplyDTO {
 	private String insertId;
 	private Timestamp insertDay;
 	private String isDelete;
+	private String nickname;
+	private String name;
+	
 	public int getCoIdx() {
 		return coIdx;
 	}
@@ -45,9 +48,22 @@ public class ArticleReplyDTO {
 	public void setIsDelete(String isDelete) {
 		this.isDelete = isDelete;
 	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	@Override
 	public String toString() {
 		return "ArticleReplyDTO [coIdx=" + coIdx + ", bnIdx=" + bnIdx + ", bnComment=" + bnComment + ", insertId="
-				+ insertId + ", insertDay=" + insertDay + ", isDelete=" + isDelete + "]";
+				+ insertId + ", insertDay=" + insertDay + ", isDelete=" + isDelete + ", nickname=" + nickname
+				+ ", name=" + name + "]";
 	}
 }
