@@ -20,7 +20,7 @@
   	</select>
   	<select id="searchArticle" parameterType="hashmap" resultType="ArticleDTO">
   		<![CDATA[	
-  		select * from board_normal where ${selectOption} like '%'||#{search}||'%' and kind = 'F'
+  		select BOARD_NORMAL bn ,MEMBER_INFO from board_normal  WHERE bn.INSERT_ID = mi.ID and ${selectOption} like '%'||#{search}||'%' and kind = 'F'
   		]]>
   	</select>
   	<select id="searchAll" resultType="ArticleDTO">

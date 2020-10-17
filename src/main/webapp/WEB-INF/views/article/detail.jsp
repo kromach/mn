@@ -54,7 +54,7 @@
 					<c:if test="${count>0}">
 					<c:forEach var="articleReplyDTO" items="${reply}">
 					<tr class="reply">
-						<td>${articleReplyDTO.bnComment}</td>
+						<td colspan="2">${articleReplyDTO.bnComment}</td>
 						<td>${articleReplyDTO.nickname}</td>
 						<td><fmt:formatDate value="${articleReplyDTO.insertDay}" pattern="yyyy.MM.dd"/>
 							<c:if test="${articleReplyDTO.insertId eq sessionScope.memId}">
