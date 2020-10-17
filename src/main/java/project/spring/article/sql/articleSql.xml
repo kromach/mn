@@ -18,9 +18,14 @@
   	<select id="checkCodeInEditor" parameterType="string" resultType="string"> 
   		SELECT IMG_URL FROM EDITOR_IMAGE WHERE code = #{value}
   	</select>
-  	<select id="searchArticle" parameterType="hashmap" resultType="ArticleDTO">
+  	<select id="searchArticlebyNick" parameterType="hashmap" resultType="ArticleDTO">
   		<![CDATA[	
-  		select BOARD_NORMAL bn ,MEMBER_INFO from board_normal  WHERE bn.INSERT_ID = mi.ID and ${selectOption} like '%'||#{search}||'%' and kind = 'F'
+  		SELECT * FROM BOARD_NORMAL bn ,MEMBER_INFO mi WHERE bn.INSERT_ID = mi.ID and mi.${selectOption} like '%'||#{search}||'%' and kind = 'F'
+  		]]>
+  	</select>
+  	<select id="searchArticlebyOthers" parameterType="hashmap" resultType="ArticleDTO">
+  		<![CDATA[	
+  		SELECT * FROM BOARD_NORMAL bn ,MEMBER_INFO mi WHERE bn.INSERT_ID = mi.ID and bn.${selectOption} like '%'||#{search}||'%' and kind = 'F'
   		]]>
   	</select>
   	<select id="searchAll" resultType="ArticleDTO">

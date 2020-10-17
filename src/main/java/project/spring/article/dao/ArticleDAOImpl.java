@@ -102,7 +102,12 @@ public class ArticleDAOImpl implements ArticleDAO {
 		map.put("selectOption", selectOption);
 		map.put("search",search );
 		System.out.println(map);
-		return sqlSession.selectList("article.searchArticle", map);
+		
+		if(selectOption.equals("NICKNAME")) {
+			return sqlSession.selectList("article.searchArticlebyNick", map);
+		}else{
+			return sqlSession.selectList("article.searchArticlebyOthers", map);
+		}
 	}
 	@Override
 	public List searchArticle() {
