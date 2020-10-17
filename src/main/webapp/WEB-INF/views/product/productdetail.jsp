@@ -27,6 +27,8 @@
 					<dd class="clfix">${info.prAlcohol} %</dd>
 					<dt>어울리는 안주</dt>
 					<dd class="clfix">${info.prFood} </dd>
+					<dt>판매된 수량</dt>
+					<dd class="clfix">${info.prTotalcount} 병 </dd>
 				</dl>
 				<div>
 					<button class="btn btn-lg btn-blue" onclick="like('${articleDTO.bnIdx}','${articleDTO.insertId }')">좋아요</button>

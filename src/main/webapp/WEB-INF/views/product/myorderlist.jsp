@@ -73,6 +73,7 @@ function more(){
 										+'</a></td><td><a href="myorderdetail?orcode='+data[i].orCode+'">'+data[i].prName
 										+'<a></td><td>'+data[i].prCount
 										+'</td><td>'+data[i].receiverAddr
+										+'</td><td>'+data[i].orStatusValue
 										+'</td><tr/>'
 					);
 				}
