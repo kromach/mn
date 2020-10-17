@@ -138,8 +138,9 @@ public class ArticleController {
 			ArticleDTO dto = articleService.read(idx_);
 			//밑에 게시글 뿌리는 메서드
 			List list = articleService.searchArticleByAdd(0);
-			//댓글 가져오는 메서드
-			List reply = articleService.getReply();
+			//모든 댓글 수와 댓글 가져오는 메서드
+			int count = articleService.getAllReplyCount();
+			List reply = articleService.getAllReply();
 			
 			model.addAttribute("articleDTO", dto);
 			model.addAttribute("list", list);
@@ -208,7 +209,7 @@ public class ArticleController {
 			//댓글입력
 			articleService.insertReply(map);
 			//다시 댓글가져오기
-			List reply = articleService.getReply();
+			
 			
 			String log = bnIdx+":"+session+":"+text;
 			return log;

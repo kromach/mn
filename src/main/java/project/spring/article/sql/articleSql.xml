@@ -49,6 +49,9 @@
   	<select id="getCountAllReply" resultType="int">
   		SELECT count(*) FROM BOARD_COMMENT
   	</select>
+  	<select id="getAllReply" resultType="ArticleReplyDTO">
+  		select * from board_comment
+  	</select>
   	<select id="getReply" parameterType="int" resultType="ArticleReplyDTO">
   	<![CDATA[	
   		select a.*from( select aa.*, rownum r from(	select * from BOARD_COMMENT bc order by INSERT_DAY DESC ) aa ) a where r >= (5*#{value})+1 and r <= (5*(#{value}+1))

@@ -25,5 +25,6 @@ public interface ArticleDAO extends CommonInterface{
 			String insertId, String reportId);
 	public int moveArticle(Integer num);
 	public void insertReply(Map map);
-	public List getReply();
+	public List getAllReply();
+	public int getAllReplyCount();
 }
