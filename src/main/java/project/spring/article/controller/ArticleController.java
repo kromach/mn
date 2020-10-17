@@ -148,6 +148,7 @@ public class ArticleController {
 			//댓글
 			List reply = articleService.getReply(0,idx);
 			model.addAttribute("reply", reply);
+			
 			//댓글 pager
 			int count = articleService.getAllReplyCount();
 			Pager pager = new Pager();
@@ -159,6 +160,19 @@ public class ArticleController {
 		}
 		
 		//////AJAX
+		@RequestMapping(value = "/replyReload")
+		@ResponseBody
+		public List replyReload(@RequestParam(name = "index") int index,
+								@RequestParam(name = "idx") int idx) {
+			System.out.println(index+":"+idx);
+			//댓글
+			List reply = articleService.getReply(index-1,idx);
+			return reply;
+		}
+		
+		
+		
+		
 		@RequestMapping(value = "/more")
 		@ResponseBody
 		public List more(@RequestParam(name="num",required = false) Integer num) {

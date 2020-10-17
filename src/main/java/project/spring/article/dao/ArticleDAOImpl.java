@@ -203,7 +203,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 		HashMap map = new HashMap();
 		map.put("index", index);
 		map.put("bnIdx", bnIdx);
-		return sqlSession.selectList("article.getReply",index);
+		return sqlSession.selectList("article.getReply",map);
 	}
 	@Override
 	public int getAllReplyCount() {

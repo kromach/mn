@@ -41,29 +41,36 @@
 					</tr>
 					
 					<tr>
-						<td colspan="4" style="height: 50px;">Comment View
-							<div align="center" class="pageNums">
-								<!-- 게시글이 있을때만 보여주기 -->
-								<c:if test="${count<=0}">등록된 댓글이 존재하지 않습니다.</c:if>
-								<c:if test="${count>0}">
-									<c:forEach var="articleReplyDTO" items="${reply}">
-										<tr >
-											<td>${articleReplyDTO.bnComment}</td>
-											<td>${articleReplyDTO.insertId}</td>
-											<td><fmt:formatDate value="${articleReplyDTO.insertDay}" pattern="yyyy.MM.dd"/></td>
-										</tr>
-									</c:forEach>
-									<c:if test="${pageVO.startPage > pageVO.pageBlock}">
-										<a href="/Spring/board/list.git?pageNum=${pageVO.startPage-pageVO.pageBlock}">&lt;</a>
-									</c:if>
-									<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1">
-										<a href="/Spring/board/list.git?pageNum=${i}" class="pageNums">&nbsp;${i}&nbsp;</a>
-									</c:forEach>
-									<c:if test="${pageVO.endPage < pageVO.pageCount}">
-										<a href="/Spring/board/list.git?pageNum=${pageVO.startPage+pageVO.pageBlock}">&gt;</a>
-									</c:if>
-								</c:if>
-							</div>
+						<td colspan="4" style="height: 50px;" id="replyArea">
+						<h3 class="pad-top10">댓글</h3>
+						</td>
+					<tr>
+						<!-- 게시글이 있을때만 보여주기 -->
+					<c:if test="${count<=0}">
+						<tr>
+							<td colspan="4" style="height: 50px;">등록된 댓글이 존재하지 않습니다.</td>
+						</tr>
+					</c:if>
+					<c:if test="${count>0}">
+					<c:forEach var="articleReplyDTO" items="${reply}">
+					<tr class="reply">
+						<td>${articleReplyDTO.bnComment}</td>
+						<td>${articleReplyDTO.insertId}</td>
+						<td><fmt:formatDate value="${articleReplyDTO.insertDay}" pattern="yyyy.MM.dd"/></td>
+					</tr>
+					</c:forEach>
+					</c:if>
+					<tr>
+						<td colspan="4">
+						<c:if test="${pageVO.startPage > pageVO.pageBlock}">
+							<a onclick="replyReload()" <%-- href="/Spring/board/list.git?pageNum=${pageVO.startPage-pageVO.pageBlock}" --%>>&lt;</a>
+						</c:if>
+						<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1">
+							<a onclick="replyReload('${i}','${articleDTO.bnIdx}')" class="pageNums" id="pageSel${i}">&nbsp;${i}&nbsp;</a>
+						</c:forEach>
+						<c:if test="${pageVO.endPage < pageVO.pageCount}">
+							<a onclick="replyReload()" <%-- href="/Spring/board/list.git?pageNum=${pageVO.startPage+pageVO.pageBlock}" --%>>&gt;</a>
+						</c:if>
 						</td>
 					</tr>
 					<tr>
@@ -191,6 +198,7 @@ function reply(bnIdx){
 				}
 			});
 			alert('댓글이 등록되었습니다.');
+			window.location.reload();
 		}
 	}else{
 		alert("로그인후 이용 가능한 서비스 입니다");
@@ -221,6 +229,27 @@ function move(bnIdx){
 	}else if(session!='admin'){
 		alert("관리자만 사용 가능한 메뉴 입니다.");
 	}
+}
+function replyReload(index,idx){
+	console.log("댓글 인덱스"+index);
+	console.log("글번호 "+idx);
+	var context = window.location.pathname.substring(0,
+			window.location.pathname.indexOf("/", 2));
+	$.ajax({
+		url : context + '/replyReload',
+		data : 'index='+index+'&idx='+idx,
+		type : "post",
+		success : function(data) {
+			$('.reply').remove();
+			var len = Object.keys(data).length;
+			console.log(len);
+			for(var i=len-1;i>=0;i--){
+				console.log(data[i]);
+				$("<tr class='reply'><td>"+data[i].bnComment+"</td><td>"+data[i].insertId+"</td><td>"+
+						moment(new Date(data[i].insertDay)).format('YYYY.MM.DD')+"</td></tr>").insertAfter('table tr:eq(5)');
+			}
+		}
+	});
 }
 function more(){
 	var moreVal = Number($('#moreVal').val())+1;

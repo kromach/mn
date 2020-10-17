@@ -31,10 +31,10 @@
   	<select id="read" parameterType="int" resultType="ArticleDTO">
   		select * from board_normal where BN_IDX = #{value}
   	</select>
-  	<select id="searchArticleByAdd" resultType="ArticleDTO" parameterType="hashmap">
+  	<select id="searchArticleByAdd" resultType="ArticleDTO" parameterType="int">
   	<![CDATA[	
-		SELECT * FROM ( SELECT a.*, ROWNUM as rnum FROM ( SELECT * FROM board_normal where bn_idx = #{bnidx} ORDER BY INSERT_DAY DESC)a)
-		WHERE rnum >= (10*#{index})+1 and rnum <= (10*(#{index}+1))
+		SELECT * FROM ( SELECT a.*, ROWNUM as rnum FROM ( SELECT * FROM board_normal where kind = 'F' ORDER BY INSERT_DAY DESC)a)
+		WHERE rnum >= (5*#{value})+1 and rnum <= (5*(#{value}+1))
 	]]>
   	</select>
   	<select id="alreadyLike" parameterType="hashmap" resultType="int">
@@ -52,9 +52,9 @@
   	<select id="getAllReply" resultType="ArticleReplyDTO">
   		select * from board_comment
   	</select>
-  	<select id="getReply" parameterType="int" resultType="ArticleReplyDTO">
+  	<select id="getReply" parameterType="hashmap" resultType="ArticleReplyDTO">
   	<![CDATA[	
-  		select a.*from( select aa.*, rownum r from(	select * from BOARD_COMMENT bc order by INSERT_DAY DESC ) aa ) a where r >= (10*#{value})+1 and r <= (10*(#{value}+1))
+  		select a.*from( select aa.*, rownum r from(	select * from BOARD_COMMENT where bn_idx = #{bnIdx} order by INSERT_DAY DESC ) aa ) a where r >= (10*#{index})+1 and r <= (10*(#{index}+1))
   	]]>
   	</select>
   	<insert id="insertReply" parameterType="hashmap" >
