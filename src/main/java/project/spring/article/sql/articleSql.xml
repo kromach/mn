@@ -29,11 +29,11 @@
   		]]> 
   	</select>
   	<select id="read" parameterType="int" resultType="ArticleDTO">
-  		select * from board_normal where BN_IDX = #{value}
+  		select bn.*,mi.NAME ,mi.NICKNAME from board_normal bn, MEMBER_INFO mi where bn.INSERT_ID = mi.ID AND BN_IDX = #{value}
   	</select>
   	<select id="searchArticleByAdd" resultType="ArticleDTO" parameterType="int">
   	<![CDATA[	
-		SELECT * FROM ( SELECT a.*, ROWNUM as rnum FROM ( SELECT * FROM board_normal where kind = 'F' ORDER BY INSERT_DAY DESC)a)
+		SELECT * FROM ( SELECT a.*, ROWNUM as rnum FROM ( SELECT  bn.*,mi.NICKNAME,mi.NAME from BOARD_NORMAL bn ,MEMBER_INFO mi where BN .INSERT_ID =mi.ID AND bn.kind = 'F' ORDER BY INSERT_DAY DESC)a)
 		WHERE rnum >= (5*#{value})+1 and rnum <= (5*(#{value}+1))
 	]]>
   	</select>

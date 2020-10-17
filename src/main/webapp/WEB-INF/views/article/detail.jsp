@@ -22,7 +22,7 @@
 						<td>좋아요</td>
 					</tr>	
 					<tr> 
-						<td>${articleDTO.insertId}</td>
+						<td>${articleDTO.nickname}</td>
 						<td><fmt:formatDate value="${articleDTO.insertDay}" pattern="yyyy.MM.dd"/></td>
 						<td>${articleDTO.readcount}</td>
 						<td>${articleDTO.heart}</td>
@@ -55,7 +55,7 @@
 					<c:forEach var="articleReplyDTO" items="${reply}">
 					<tr class="reply">
 						<td>${articleReplyDTO.bnComment}</td>
-						<td>${articleReplyDTO.insertId}</td>
+						<td>${articleReplyDTO.nickname}</td>
 						<td><fmt:formatDate value="${articleReplyDTO.insertDay}" pattern="yyyy.MM.dd"/>
 							<c:if test="${articleReplyDTO.insertId eq sessionScope.memId}">
 								<button onclick="deleteReply('${articleReplyDTO.bnIdx}','${sessionScope.memId}')">글 삭제</button>
@@ -115,7 +115,7 @@
 					<c:forEach var="articleDTO" items="${list}">
 						<tr >
 							<td>${articleDTO.bnTitle}</td>
-							<td>${articleDTO.insertId}</td>
+							<td>${articleDTO.nickname}</td>
 							<td><fmt:formatDate value="${articleDTO.insertDay}" pattern="yyyy.MM.dd"/></td>
 							<td>${articleDTO.readcount}</td>
 							<td>${articleDTO.heart}</td>
@@ -251,10 +251,10 @@ function replyReload(index,idx,session){
 			for(var i=len-1;i>=0;i--){
 				
 				if(session == data[i].insertId){
-					$("<tr class='reply'><td>"+data[i].bnComment+"</td><td>"+data[i].nickname+"</td><td>"+
+					$("<tr class='reply'><td colspan='2'>"+data[i].bnComment+"</td><td>"+data[i].nickname+"</td><td>"+
 							moment(new Date(data[i].insertDay)).format('YYYY.MM.DD')+"&nbsp;<button type='button' onclick=\"deleteReply("+"\'"+data[i].bnIdx+"\',\'"+session+"\')\">글삭제</button></td></tr>").insertAfter('table tr:eq(5)');					
 				}else{			
-					$("<tr class='reply'><td>"+data[i].bnComment+"</td><td>"+data[i].nickname+"</td><td>"+
+					$("<tr class='reply'><td colspan='2'>"+data[i].bnComment+"</td><td>"+data[i].nickname+"</td><td>"+
 						moment(new Date(data[i].insertDay)).format('YYYY.MM.DD')+"</td></tr>").insertAfter('table tr:eq(5)');
 					}
 			}
