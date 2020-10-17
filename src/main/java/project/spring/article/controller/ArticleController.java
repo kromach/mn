@@ -138,10 +138,11 @@ public class ArticleController {
 			ArticleDTO dto = articleService.read(idx_);
 			//밑에 게시글 뿌리는 메서드
 			List list = articleService.searchArticleByAdd(0);
-			System.out.println(list);
+			//댓글 가져오는 메서드
+			List reply = articleService.getReply();
+			
 			model.addAttribute("articleDTO", dto);
 			model.addAttribute("list", list);
-			
 			return "article/detail.mn";
 		}
 		
@@ -204,7 +205,11 @@ public class ArticleController {
 			map.put("bnIdx", bnIdx);
 			map.put("BN_COMMENT", text);
 			map.put("INSERT_ID", session);
+			//댓글입력
 			articleService.insertReply(map);
+			//다시 댓글가져오기
+			List reply = articleService.getReply();
+			
 			String log = bnIdx+":"+session+":"+text;
 			return log;
 		}

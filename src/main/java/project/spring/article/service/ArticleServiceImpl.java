@@ -111,4 +111,10 @@ public class ArticleServiceImpl implements ArticleService{
 	public void insertReply(Map map) {
 		articleDAOimpl.insertReply(map);
 	}
+	
+	@Override
+	public List getReply() {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.getReply();
+	}
 }

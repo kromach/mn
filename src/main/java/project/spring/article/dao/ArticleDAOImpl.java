@@ -194,6 +194,16 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 	@Override
 	public void insertReply(Map map) {
+		System.out.println("insertREPLY DAO IMPLE======");
 		sqlSession.delete("article.insertReply", map);
+	}
+	@Override
+	public List getReply() {
+		
+		//총게시글수
+		int count = sqlSession.selectOne("article.getCountAllReply");
+		
+		
+		return null;
 	}
 }

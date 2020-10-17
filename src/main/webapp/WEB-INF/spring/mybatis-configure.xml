@@ -23,6 +23,7 @@
 		<typeAlias type="project.spring.myAct.vo.MyActivityDTO" alias="MyActivityDTO"/>
 		<typeAlias type="project.spring.myAct.vo.TitleListDTO" alias="TitleListDTO"/>
 		<typeAlias type="project.spring.article.vo.Editor_imageVO" alias="Editor_imageVO"/>
+		<typeAlias type="project.spring.article.vo.ArticleReplyDTO" alias="ArticleReplyDTO"/>
 		<typeAlias type="project.spring.event.vo.EventVO" alias="EventVO"/>
 	</typeAliases> 
 	<mappers>

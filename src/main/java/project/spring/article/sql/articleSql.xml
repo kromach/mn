@@ -46,7 +46,15 @@
   	<select id="likeReturn" parameterType="int" resultType="int">
 		select heart from board_normal where BN_IDX = #{value}
   	</select>
-  	<insert id="insertReply" parameterMap="hashmap" >
+  	<select id="getCountAllReply" resultType="int">
+  		SELECT count(*) FROM BOARD_COMMENT
+  	</select>
+  	<select id="getReply" parameterType="int" resultType="ArticleReplyDTO">
+  	<![CDATA[	
+  		select a.*from( select aa.*, rownum r from(	select * from BOARD_COMMENT bc order by INSERT_DAY DESC ) aa ) a where r >= (5*#{value})+1 and r <= (5*(#{value}+1))
+  	]]>
+  	</select>
+  	<insert id="insertReply" parameterType="hashmap" >
   		INSERT INTO BOARD_COMMENT VALUES (BOARD_COMMENT_seq.nextval,#{bnIdx},#{BN_COMMENT},#{INSERT_ID},sysdate,'N')
   	</insert>
   	<insert id="insertTags" parameterType="ArticleDTO">
