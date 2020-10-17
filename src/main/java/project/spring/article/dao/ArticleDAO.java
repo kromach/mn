@@ -2,6 +2,7 @@ package project.spring.article.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import project.spring.article.vo.ArticleDTO;
 import project.spring.article.vo.Editor_imageVO;
@@ -23,4 +24,5 @@ public interface ArticleDAO extends CommonInterface{
 	public int report(Integer num,
 			String insertId, String reportId);
 	public int moveArticle(Integer num);
+	public void insertReply(Map map);
 }

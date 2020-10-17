@@ -192,4 +192,8 @@ public class ArticleDAOImpl implements ArticleDAO {
 	public int moveArticle(Integer num) {
 		return sqlSession.update("article.moveArticle", num);
 	}
+	@Override
+	public void insertReply(Map map) {
+		sqlSession.delete("article.insertReply", map);
+	}
 }

@@ -200,6 +200,11 @@ public class ArticleController {
 				@RequestParam(name="text",required = false) String text
 				){
 			System.out.println("reply");
+			Map map = new HashMap();
+			map.put("bnIdx", bnIdx);
+			map.put("BN_COMMENT", text);
+			map.put("INSERT_ID", session);
+			articleService.insertReply(map);
 			String log = bnIdx+":"+session+":"+text;
 			return log;
 		}

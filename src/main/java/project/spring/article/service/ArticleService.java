@@ -22,5 +22,5 @@ public interface ArticleService extends CommonInterface {
 	public int report(Integer num, String insertId,
 			String reportId);
 	public int moveArticle(Integer num);
-	
+	public void insertReply(Map map);
 }
