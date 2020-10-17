@@ -10,8 +10,12 @@
 </head>
 
 <c:set var="dis" value=""></c:set>
+<c:set var="del" value=""></c:set>
 <c:if test="${orderinfo.orStatus > 2}">
 	<c:set var="dis" value="disabled"></c:set>
+</c:if>
+<c:if test="${orderinfo.orStatus == 3}">
+	<c:set var="del" value="delivery"></c:set>
 </c:if>
 
 <div class="grid-Wrapper">
@@ -25,7 +29,7 @@
 				<table class="tableCss">
 					<tr>
 						<th>상품명</th>
-						<td>${orderinfo.prName}</td>
+						<td><a href="productdetail?prcode=${orderinfo.prCode}">${orderinfo.prName}</a></td>
 					</tr>
 					<tr>
 						<th>수량</th>
@@ -66,6 +70,7 @@
 						<th>배송 현황</th>
 						<td>${orderinfo.orStatusValue}</td>
 					</tr>
+					<c:if test="${del.equals('delivery') }">
 					<tr>
 						<th>택배 회사</th>
 						<td>${orderinfo.deliveryCompany}</td>
@@ -74,12 +79,16 @@
 						<th>송장 번호</th>
 						<td>${orderinfo.deliveryNum}</td>
 					</tr>
+					</c:if>
 				</table>
 				<c:if test="${!dis.equals('disabled')}">
 					<input type="button" class="btn btn-lg btn-blue" value="주문 취소" 
 					onclick="window.location.href='/product/deleteorder?orcode=${orderinfo.orCode}'">
 					<input type="submit" class="btn btn-lg btn-blue" value="수정하기">
+					
 				</c:if>
+					<input type="button" class="btn btn-lg btn-blue" value="구매목록" 
+					onclick="window.location.href='/product/myorderlist'">
 			</div>
 		</form>
 	</div>

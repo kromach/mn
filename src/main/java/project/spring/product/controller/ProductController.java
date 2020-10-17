@@ -313,8 +313,8 @@ public class ProductController {
 	}
 	
 	@RequestMapping("orderdetail")
-	public String orderdetailSs (HttpServletRequest request , Model model) throws SQLException {
-		String orcode = request.getParameter("orcode");
+	public String orderdetailSs (HttpServletRequest request , Model model ,OrderVo ordervo) throws SQLException {
+		String orcode = ordervo.getOrCode();
 		HashMap map = null;
 		
 		if(request.getParameter("ischang") !=null && request.getParameter("ischang").equals("true")) {
@@ -326,6 +326,10 @@ public class ProductController {
 			productservice.updateItem(map);
 		}
 		
+		if(request.getParameter("insertdel") !=null && request.getParameter("insertdel").equals("true")) {
+			productservice.updateItem(ordervo);
+		}
+		
 		
 		
 		OrderVo orderinfo = productservice.orderdetail(orcode);
@@ -335,6 +339,8 @@ public class ProductController {
 		
 		return "product/orderdetail.mn";
 	}
+	
+
 	
 	
 	//////ajax 

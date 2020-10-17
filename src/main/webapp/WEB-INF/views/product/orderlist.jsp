@@ -71,8 +71,9 @@
 						</c:if>
 						<c:forEach var="order" items="${orderlist}">
 								<tr>
-									<td>${order.orCode}</td>
-									<td><a href="orderdetail?orcode=${order.orCode}">${order.prName}</a></td>
+									
+									<td><a href="orderdetail?orCode=${order.orCode}">${order.orCode}</a></td>
+									<td><a href="orderdetail?orCode=${order.orCode}">${order.prName}</a></td>
 									<td>${order.prCount}</td>
 									<td>${order.userId}/${order.receiverName}</td>
 									<td><fmt:formatDate value="${order.insertDay}" pattern="yyyy.MM.dd"/></td>

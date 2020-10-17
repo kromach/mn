@@ -32,7 +32,16 @@ public class ProductDAOImpl implements ProductDAO {
 		return 0;
 	}
 	public int updateItem(OrderVo ordervo) {
-		int res = sqlSession.update("product.updateorder", ordervo);
+		int res = 0;
+		
+		if(ordervo.getDeliveryCompany()!=null && ordervo.getDeliveryNum()!=null) {
+			 res =  sqlSession.insert("product.insertdel", ordervo);
+		}else {
+			
+			 res = sqlSession.update("product.updateorder", ordervo);
+			System.out.println("일반 구매 정보 저장!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		}
+		
 		return res;
 	}
 	public int updateItem(String orCode) {

@@ -202,5 +202,9 @@
 	<update id="changsta" parameterType="map">
 		update order_info set or_status =#{orsta} where or_code =#{orcode}
 	</update>
+	
+	<select id="insertdel" parameterType="ordervo" resultType="int">
+		update order_info set delivery_company =#{deliveryCompany}, delivery_num =#{deliveryNum} where or_code =#{orCode}
+	</select>
 
 </mapper>
