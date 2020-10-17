@@ -192,11 +192,16 @@ public class ArticleController {
 			return result;
 		}
 		
-		@RequestMapping(value = "/replyPro")
-		public String replySs(@RequestParam(name="num",required = false) Integer num) {
-			int result = 0;
-			System.out.println("replyPro");
-			return null;
+		@RequestMapping(value = "/reply")
+		@ResponseBody
+		public String replySs(
+				@RequestParam(name="bnIdx",required = false) String bnIdx,
+				@RequestParam(name="session",required = false) String session,
+				@RequestParam(name="text",required = false) String text
+				){
+			System.out.println("reply");
+			String log = bnIdx+":"+session+":"+text;
+			return log;
 		}
 		@RequestMapping(value = "/move")
 		@ResponseBody
@@ -205,10 +210,5 @@ public class ArticleController {
 			//result = articleService.searchArticleByAdd(num);
 			result = articleService.moveArticle(num);
 			return result;
-		}
-		@RequestMapping(value = "/replyOpen")
-		public String replyOpen() {
-			System.out.println("replyOpen");
-			return "/article/replyOpen";
 		}
 	}	

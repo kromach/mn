@@ -36,12 +36,22 @@
 						<div>
 							<button class="btn btn-lg btn-blue" onclick="like('${articleDTO.bnIdx}','${articleDTO.insertId }')">좋아요</button>
 							<a class="btn btn-lg btn-blue" onclick="report('${articleDTO.bnIdx}','${articleDTO.insertId }','${memId}')">신고</a>
-							<a class="btn btn-lg btn-yellow" onclick="reply('${articleDTO.bnIdx}')">댓글등록</a>
-						</div>
+						</div>												 
 						</td>
 					</tr>
 					<tr>
-						<td colspan="4" style="height: 50px;">Comment</td>
+						<td colspan="4" style="height: 100px; border-bottom: 1px solid;">
+						<textarea name="content" type="textarea" class="required" msg="내용을" placeholder="댓글을 입력해주세요" 
+					    id="content_textArea" style="width: 90%; display: block; border: 1px solid; height: 109px; margin:auto; resize: none;" ></textarea>
+						<div style="margin-top: 5px">
+							<input id="addBtn" type="button" class="btn btn-md btn-yellow" value="등록" onclick="reply('${articleDTO.bnIdx}')">
+							<input id="addBtn" type="button" class="btn btn-md btn-blue" value="취소" onclick="replyCancle()">
+						</div>
+						</td>
+					<tr>
+					
+					<tr>
+						<td colspan="4" style="height: 50px;">Comment View</td>
 					</tr>
 				</table>
 			</div>
@@ -52,8 +62,8 @@
 					</c:if>
 						<input type="button" class="btn btn-md btn-grey" value="목록으로" onclick="window.location='/article'" />
 					<c:if test="${memNickName eq articleDTO.insertId}">
-						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="수정">
-						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="삭제">
+						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="수정" onclick="window.location.href='/article/update'">
+						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="삭제" onclick="window.location.href='/article/delete'">
 					</c:if>
 				</div>
 			</div>
@@ -139,7 +149,34 @@ function report(bnIdx,insertId,reportId){
 }
 function reply(bnIdx){
 	var session = '<c:out value="${memNickName}"/>';
-	window.open('/article/replyOpen?bnIdx='+bnIdx, '','top=10, left=10, width=500, height=300, location=no, status=no, menubar=no, toolbar=no, resizable=no');
+	var text = $('textarea#content_textArea').val();
+	var context = window.location.pathname.substring(0,
+			window.location.pathname.indexOf("/", 2));
+	console.log(bnIdx);
+	if(session!=''){
+		if(text==''){
+			alert('댓글 입력후 등록해주세요');
+		}else if(text!=''){
+			//댓글 등록 ajax
+			console.log(bnIdx);
+			$.ajax({
+				url : context + '/reply',
+				data : 'bnIdx='+bnIdx+'&session='+session+'&text='+text,
+				type : "post",
+				success : function(data) {
+					console.log(data);
+				}
+			});
+			alert('댓글이 등록되었습니다.');
+		}
+	}else{
+		alert("로그인후 이용 가능한 서비스 입니다");
+	}
+	$('textarea#content_textArea').val('');
+}
+function replyCancle(bnIdx){
+	var session = '<c:out value="${memNickName}"/>';
+	$('textarea#content_textArea').val('');
 }
 function move(bnIdx){
 	var session = '<c:out value="${memNickName}"/>';
