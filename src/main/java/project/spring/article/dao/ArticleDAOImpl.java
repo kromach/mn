@@ -211,8 +211,17 @@ public class ArticleDAOImpl implements ArticleDAO {
 		return sqlSession.selectList("article.getReply",map);
 	}
 	@Override
-	public int getAllReplyCount() {
+	public int getAllReplyCount(int bnIdx) {
 		//총게시글수
-		return sqlSession.selectOne("article.getCountAllReply");
+		return sqlSession.selectOne("article.getCountAllReply",bnIdx);
+	}
+	@Override
+	public int deleteReply(int coIdx, String session) {
+		// TODO Auto-generated method stub
+		HashMap map = new HashMap();
+		map.put("coIdx", coIdx);
+		map.put("insert_Id", session);
+		System.out.println(map);
+		return sqlSession.delete("article.deleteReply", map);
 	}
 }

@@ -52,7 +52,7 @@
 		select heart from board_normal where BN_IDX = #{value}
   	</select>
   	<select id="getCountAllReply" resultType="int">
-  		SELECT count(*) FROM BOARD_COMMENT
+  		SELECT count(*) FROM BOARD_COMMENT where bn_Idx = #{value}
   	</select>
   	<select id="getAllReply" resultType="ArticleReplyDTO">
   		select * from board_comment
@@ -105,8 +105,7 @@
   	<delete id="like_log_undo"> 
   		delete from board_like where bn_idx = #{num} and nick = #{memNickName} 
   	</delete>
-  	
-  	
-  	
-  	
+  	<delete id="deleteReply">
+  		delete from BOARD_COMMENT where co_Idx = #{coIdx} and insert_Id=#{insert_Id}
+  	</delete>
   </mapper>

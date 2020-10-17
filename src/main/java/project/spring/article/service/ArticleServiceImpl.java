@@ -118,8 +118,13 @@ public class ArticleServiceImpl implements ArticleService{
 		return articleDAOimpl.getReply(index,bnIdx);
 	}
 	@Override
-	public int getAllReplyCount() {
+	public int getAllReplyCount(int bnIdx) {
 		// TODO Auto-generated method stub
-		return articleDAOimpl.getAllReplyCount();
+		return articleDAOimpl.getAllReplyCount(bnIdx);
+	}
+	@Override
+	public int deleteReply(int coIdx, String session) {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.deleteReply(coIdx,session);
 	}
 }

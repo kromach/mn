@@ -58,7 +58,7 @@
 						<td>${articleReplyDTO.nickname}</td>
 						<td><fmt:formatDate value="${articleReplyDTO.insertDay}" pattern="yyyy.MM.dd"/>
 							<c:if test="${articleReplyDTO.insertId eq sessionScope.memId}">
-								<button onclick="deleteReply('${articleReplyDTO.bnIdx}','${sessionScope.memId}')">글 삭제</button>
+								<button onclick="deleteReply('${articleReplyDTO.coIdx}','${sessionScope.memId}')">글 삭제</button>
 							</c:if>
 						</td>
 					</tr>
@@ -247,12 +247,12 @@ function replyReload(index,idx,session){
 		success : function(data) {
 			$('.reply').remove();
 			var len = Object.keys(data).length;
-			console.log(len);
+			console.log(data);
 			for(var i=len-1;i>=0;i--){
 				
 				if(session == data[i].insertId){
 					$("<tr class='reply'><td colspan='2'>"+data[i].bnComment+"</td><td>"+data[i].nickname+"</td><td>"+
-							moment(new Date(data[i].insertDay)).format('YYYY.MM.DD')+"&nbsp;<button type='button' onclick=\"deleteReply("+"\'"+data[i].bnIdx+"\',\'"+session+"\')\">글삭제</button></td></tr>").insertAfter('table tr:eq(5)');					
+							moment(new Date(data[i].insertDay)).format('YYYY.MM.DD')+"&nbsp;<button type='button' onclick=\"deleteReply("+"\'"+data[i].coIdx+"\',\'"+session+"\')\">글삭제</button></td></tr>").insertAfter('table tr:eq(5)');					
 				}else{			
 					$("<tr class='reply'><td colspan='2'>"+data[i].bnComment+"</td><td>"+data[i].nickname+"</td><td>"+
 						moment(new Date(data[i].insertDay)).format('YYYY.MM.DD')+"</td></tr>").insertAfter('table tr:eq(5)');
@@ -261,8 +261,22 @@ function replyReload(index,idx,session){
 		}
 	});
 }
-function deleteReply(bnIdx,session){
-	alert("deleteReply"+bnIdx+":"+session);
+function deleteReply(coIdx,session){
+	var context = window.location.pathname.substring(0,
+			window.location.pathname.indexOf("/", 2));
+	var confirmMsg = confirm("정말 삭제하시겠습니까");
+	if(confirmMsg){
+		$.ajax({
+			url : context + '/deleteReply',
+			data : 'coIdx='+coIdx+'&session='+session,
+			type : "post",
+			success : function(data) {
+				console.log(data);
+				alert('해당 댓글이 삭제되었습니다.');
+				window.location.reload();
+			}
+		});
+	}
 }
 function more(){
 	var moreVal = Number($('#moreVal').val())+1;

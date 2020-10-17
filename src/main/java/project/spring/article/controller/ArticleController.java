@@ -150,7 +150,7 @@ public class ArticleController {
 			model.addAttribute("reply", reply);
 			
 			//댓글 pager
-			int count = articleService.getAllReplyCount();
+			int count = articleService.getAllReplyCount(idx);
 			Pager pager = new Pager();
 			PageVO pageVO = pager.pager("1",count);
 			model.addAttribute("count", count);
@@ -169,9 +169,16 @@ public class ArticleController {
 			List reply = articleService.getReply(index-1,idx);
 			return reply;
 		}
-		
-		
-		
+		@RequestMapping(value = "/deleteReply")
+		@ResponseBody
+		public int deleteReply(
+			@RequestParam(name = "coIdx") int coIdx,
+			@RequestParam(name = "session") String session) { 
+			
+			int result = articleService.deleteReply(coIdx,session);
+			
+			return 0;
+		}
 		
 		@RequestMapping(value = "/more")
 		@ResponseBody
