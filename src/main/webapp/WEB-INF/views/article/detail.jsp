@@ -93,12 +93,13 @@
 				<div class="text-center pad-top10 pad-bottom20">
 					<c:if test="${memId eq 'admin' }">	
 						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="글이동" onclick="move('${articleDTO.bnIdx}')">
+						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="삭제" onclick="window.location.href='/article/delete'">
 					</c:if>
-						<input type="button" class="btn btn-md btn-grey" value="목록으로" onclick="window.location='/article'" />
-					<c:if test="${memNickName eq articleDTO.insertId}">
+					<c:if test="${memId eq articleDTO.insertId}">
 						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="수정" onclick="window.location.href='/article/update'">
 						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="삭제" onclick="window.location.href='/article/delete'">
 					</c:if>
+					<input type="button" class="btn btn-md btn-grey" value="목록으로" onclick="window.location='/article'" />
 				</div>
 			</div>
 			<div class="detail-item detail-width6">
