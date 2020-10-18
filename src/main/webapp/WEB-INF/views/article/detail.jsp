@@ -95,7 +95,7 @@
 						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="글이동" onclick="move('${articleDTO.bnIdx}')">
 					</c:if>
 					<c:if test="${memId eq articleDTO.insertId}">
-						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="수정" onclick="window.location.href='/article/update'">
+						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="수정" onclick="window.location.href='/article/update?bnIdx=${articleDTO.bnIdx}'">
 					</c:if>
 					<c:if test="${memId eq 'admin' || memId eq articleDTO.insertId }">
 						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="삭제" onclick="deleteArticle()">

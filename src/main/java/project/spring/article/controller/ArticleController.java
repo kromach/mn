@@ -81,6 +81,22 @@ public class ArticleController {
 			//insertTags
 			return "redirect:/article";
 		}
+		
+		@RequestMapping("/update")
+		public String updateSs(@RequestParam(name = "bnIdx" , required = false) Integer bnIdx,Model model) {
+			HttpServletRequest req = 
+					((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+			String session = req.getSession().getAttribute("memId").toString();
+			HashMap map = new HashMap();
+			map.put("bnIdx",bnIdx);
+			map.put("session",session);
+			ArticleDTO dto = articleService.read(bnIdx);
+			System.out.println(dto);
+			model.addAttribute("article", dto);
+			return null;
+//			return "article/updateForm.mn";
+		}
+		
 		@RequestMapping("/delete")
 		public String deleteSs(@RequestParam(name = "bnIdx" , required = false) Integer bnIdx) {
 			HttpServletRequest req = 

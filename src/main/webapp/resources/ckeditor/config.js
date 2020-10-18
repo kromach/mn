@@ -57,7 +57,7 @@ CKEDITOR.editorConfig = function( config ) {
 	//이미지 미리보기 내 필요 없는 텍스트 제거. 
 	config.image_previewText = '';
 
-	config.height = 250;
+	config.height = 400;
 	config.language = 'ko';
 	/*
 	//입력창 사이즈 자동조절 추가
