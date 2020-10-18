@@ -9,8 +9,8 @@ import project.spring.event.vo.EventVO;
 
 public interface MainDAO extends CommonInterface {
 
-	public List getProductInitial();
-	public List<DrinkVO> getDrinkInitial();
-	public List<EventVO> getEventInitial();
+	public List getProductInitial(int index);
+	public List<DrinkVO> getDrinkInitial(int index);
+	public List<EventVO> getEventInitial(int index);
 
 }

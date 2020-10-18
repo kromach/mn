@@ -1,6 +1,9 @@
 package project.spring.main.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -46,30 +49,40 @@ public class MainController {
 	public String home(Locale locale, Model model,
 			HttpServletRequest request,
 			HttpServletResponse response) {
-	
 		//메인 그림 초기화 블럭
 		//메인으로 갈때 그림30개,링크 셋트를 랜덤으로 가지고 가야함 6*5
 		/****************************************************************/
+		List<MainVO> main = new ArrayList();
 		//product에서 10개
-			List<ProductVo> product = service.getProductInitial();
-			/*
-			<a href="/product/productdetail?prcode=${product[0].prCode}">
-				<img src="${product[0].prImg}" />
-			</a>
-			*/
+			List<ProductVo> product = service.getProductInitial(0);
+			for(ProductVo vo : product) {
+				String aLinkUri = "/product/productdetail?prcode="+vo.getPrCode();
+				MainVO mainVo = new MainVO();
+				mainVo.setaLinkUri(aLinkUri);
+				mainVo.setImgUri(vo.getPrImg());
+				main.add(mainVo);
+			}
 		//drink에서 10개
-			List<DrinkVO> drink = service.getDrinkInitial();
-			/*
-			<a href="/drink/detail?dkCode=${drink[0].dkCode}">
-				<img src="${drink[0].dkImg}" />
-			</a>
-		    */
+			List<DrinkVO> drink = service.getDrinkInitial(0);
+			for(DrinkVO vo : drink) {
+				MainVO mainVo = new MainVO();
+				String aLinkUri = "/drink/detail?dkCode="+vo.getDkCode();
+				mainVo.setaLinkUri(aLinkUri);
+				mainVo.setImgUri(vo.getDkImg());
+				main.add(mainVo);
+			}
 		//event에서 10개
-			List<EventVO> event = service.getEventInitial();
-			
-		model.addAttribute("event", event);	
-		model.addAttribute("drink", drink);	
-		model.addAttribute("product", product);
+			List<EventVO> event = service.getEventInitial(0);
+			for(EventVO vo : event) {
+				MainVO mainVo = new MainVO();
+				String aLinkUri = "/event/detail?event="+vo.getEventCode();
+				mainVo.setaLinkUri(aLinkUri);
+				mainVo.setImgUri("/resources/img/upload/"+vo.getThumImg());
+				main.add(mainVo);
+			}
+		//shuffle
+		Collections.shuffle(main);	
+		model.addAttribute("main", main);	
 		return "/main/main.mn";
 	}
 	@RequestMapping(value = "/editor", method = RequestMethod.GET)
@@ -84,4 +97,54 @@ public class MainController {
 		System.out.println("["+data+"]");
 		return "/main/editor.mn";
 	}
+	//ajax
+	@RequestMapping(value = "/reload")
+	@ResponseBody
+	public List reload(@RequestParam(name = "index") int index) {
+		
+		
+		//메인 과 같은 로직
+			//메인으로 갈때 그림30개,링크 셋트를 랜덤으로 가지고 가야함 6*5
+			/****************************************************************/
+			List<MainVO> main = new ArrayList();
+			//product에서 10개
+				List<ProductVo> product = service.getProductInitial(index+1);
+				for(ProductVo vo : product) {
+					String aLinkUri = "/product/productdetail?prcode="+vo.getPrCode();
+					MainVO mainVo = new MainVO();
+					mainVo.setaLinkUri(aLinkUri);
+					mainVo.setImgUri(vo.getPrImg());
+					main.add(mainVo);
+				}
+			//drink에서 10개
+				List<DrinkVO> drink = service.getDrinkInitial(index+1);
+				for(DrinkVO vo : drink) {
+					MainVO mainVo = new MainVO();
+					String aLinkUri = "/drink/detail?dkCode="+vo.getDkCode();
+					mainVo.setaLinkUri(aLinkUri);
+					mainVo.setImgUri(vo.getDkImg());
+					main.add(mainVo);
+				}
+			//event에서 10개
+				List<EventVO> event = service.getEventInitial(index+1);
+				for(EventVO vo : event) {
+					MainVO mainVo = new MainVO();
+					String aLinkUri = "/event/detail?event="+vo.getEventCode();
+					mainVo.setaLinkUri(aLinkUri);
+					mainVo.setImgUri("/resources/img/upload/"+vo.getThumImg());
+					main.add(mainVo);
+				}
+			//shuffle
+			Collections.shuffle(main);	
+			
+			//return 갯수가 1보다 커야 리턴
+			System.out.println("reload Size========"+main.size());
+			if(main.size()>0) {
+				return main;
+			}else {
+				return null;
+			}
+	}
+	
+	
 }

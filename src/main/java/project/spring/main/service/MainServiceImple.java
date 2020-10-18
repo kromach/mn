@@ -42,16 +42,16 @@ public class MainServiceImple implements MainService{
 	}
 	
 	@Override
-	public List getProductInitial() {
-		return mainDAOimple.getProductInitial();
+	public List getProductInitial(int index) {
+		return mainDAOimple.getProductInitial(index);
 	}
 	@Override
-	public List<DrinkVO> getDrinkInitial() {
+	public List<DrinkVO> getDrinkInitial(int index) {
 		
-		return mainDAOimple.getDrinkInitial();
+		return mainDAOimple.getDrinkInitial(index);
 	}
 	@Override
-	public List<EventVO> getEventInitial() {
-		return mainDAOimple.getEventInitial();
+	public List<EventVO> getEventInitial(int index) {
+		return mainDAOimple.getEventInitial(index);
 	}
 }

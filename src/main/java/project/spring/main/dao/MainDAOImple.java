@@ -42,18 +42,18 @@ public class MainDAOImple implements MainDAO{
 		return 0;
 	}
 	@Override
-	public List getProductInitial() {
-		List<ProductVo> list = sqlSession.selectList("main.getProductInitial");
+	public List getProductInitial(int index) {
+		List<ProductVo> list = sqlSession.selectList("main.getProductInitial",index);
 		return list;
 	}
 	@Override
-	public List<DrinkVO> getDrinkInitial() {
-		List<DrinkVO> list = sqlSession.selectList("main.getDrinkInitial");
+	public List<DrinkVO> getDrinkInitial(int index) {
+		List<DrinkVO> list = sqlSession.selectList("main.getDrinkInitial",index);
 		return list;
 	}
 	@Override
-	public List<EventVO> getEventInitial() {
-		List<EventVO> list = sqlSession.selectList("main.getEventInitial");
+	public List<EventVO> getEventInitial(int index) {
+		List<EventVO> list = sqlSession.selectList("main.getEventInitial",index);
 		return list;
 	}
 }

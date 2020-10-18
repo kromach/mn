@@ -3,19 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="main">
-  		<select id="getProductInitial" resultType="productvo">
+  		<select id="getProductInitial" resultType="productvo" parameterType="int">
   			<![CDATA[	
-  			select * from(select * from PRODUCT_INFO pi2 order by DBMS_RANDOM.RANDOM) where rownum < 10
+  			select rownum, a.* from( select * from PRODUCT_INFO pi2 order by INSERT_DAY DESC) a WHERE rownum >= (10*#{value})+1 and rownum <= (10*(#{value}+1))
+  																								
   			]]>
   		</select>
-  		<select id="getDrinkInitial" resultType="DrinkVO">
+  		<select id="getDrinkInitial" resultType="DrinkVO" parameterType="int">
   			<![CDATA[	
-  			select * from(select * from DRINK_INFO order by DBMS_RANDOM.RANDOM) where rownum < 10
+  			select rownum, a.* from( select * from DRINK_INFO pi2 order by INSERT_DAY DESC) a WHERE rownum >=  (10*#{value})+1 and rownum <= (10*(#{value}+1))
   			]]>
   		</select>
-  		<select id="getEventInitial" resultType="EventVO">
+  		<select id="getEventInitial" resultType="EventVO" parameterType="int">
   			<![CDATA[	
-  			select * from(select * from event order by DBMS_RANDOM.RANDOM) where rownum < 10
+  			select rownum, a.* from( select * from event pi2 order by INSERT_DAY DESC) a WHERE rownum >= (10*#{value})+1 and rownum <= (10*(#{value}+1))
   			]]>
   		</select>
   		
