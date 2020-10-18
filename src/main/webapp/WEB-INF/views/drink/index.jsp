@@ -50,6 +50,9 @@
 	<div class="grid"> 
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
+		<div class="grid-item"><img src="/resources/img/main/8.jpg" /></div>
+		<div class="grid-item"><img src="/resources/img/main/7.jpg" /></div>
+		
 	</div>
 </div>
 <script>
@@ -71,23 +74,9 @@
 	    	step: 5,
 	    	postfix: "도"
 	    });
-
-		
-		/*
-	    $( "#slider-range" ).slider({
-			range: true,
-			min: 0,
-			max: 99,
-			
-			slide: function( event, ui ) {
-				$( "#amount" ).val( ui.values[ 0 ]  + "도" + ui.values[ 1 ] + "도"  );
-			}
-	    });
-	    
-	    $( "#amount" ).val(  $( "#slider-range" ).slider( "values", 0 ) + "도 - " + $( "#slider-range" ).slider( "values", 1 )+"도" );
-		*/
-			
 	});
+
+	
 	
 	var frm;
 	
@@ -108,25 +97,64 @@
 			type : "POST",
 			url : "drinkList",
 			data : frm + "&pageNum=" + pageNum,  /*{bigCategory:bigCategory} 와 동일*/
-			success : function(data){
-				var json = JSON.parse(data);
-				//console.log(json)				
-				json.forEach(function(item, index) {
-		    		var grade_str = "<p>";
-		    		grade_str += "<span class='item-val'>" + item + "</span>";
-		    		for(i = 1; i < 6; i++) {
-		    			grade_str += "<a class='item"+ (index + 1) +"' index='"+ (index + 1) +"' value='" + i +"'><i class='fas fa-star'></i></a>";
-		    		}
-		    		grade_str += "</p>";
-		    		
-		    		$("#star_grade").append(grade_str);
-		    	});
+			success : function(data) {
+				if(pageNum == 1) { 
+					//$(".grid").empty();
+					//$(".grid").append('<div class="grid-sizer"></div><div class="grid-sizer"></div>');
+				}
+				drinkGridView(data);
 			},
 			error : function() {
 				alert("error");
 			}
 		})
 	}
+	
+	var grid = document.querySelector('.grid');
+	
+	// ajax 으로 받아온 값을 parse 하여 option 등록
+    function drinkGridView(data){
+		
+    	var json = JSON.parse(data);
+    	var str = "";
+		var elems = [];
+		var fragment = document.createDocumentFragment();
+		console.log(fragment);
+    	/* json.forEach(function(item, index) {
+    		
+    		str = '<div class="grid-item"><a onclick="setDkcode("'+ item.dkCode +'")"><img src="'+ item.dkImg +'" /></a></div>'
+ 
+			fragment.appendChild( str );
+			elems.push( str );
+    	}); */
+    	//$(".grid").append(str);    	
+		for ( var i = 0; i < 3; i++ ) {
+			var elem = getItemElement();
+			fragment.appendChild( elem );
+			elems.push( elem );
+		}
+		// append elements to container
+		grid.appendChild( fragment );
+		// add and lay out newly appended elements
+		msnry.appended( elems );
+    	
+    	
+		//msnry.appended(str);
+    };
+    
+
+ // create <div class="grid-item"></div>
+ function getItemElement() {
+   var elem = document.createElement('div');
+   var wRand = Math.random();
+   var hRand = Math.random();
+   var widthClass = wRand > 0.8 ? 'grid-item--width3' : wRand > 0.6 ? 'grid-item--width2' : '';
+   var heightClass = hRand > 0.85 ? 'grid-item--height4' : hRand > 0.6 ? 'grid-item--height3' : hRand > 0.35 ? 'grid-item--height2' : '';
+   elem.className = 'grid-item ' + widthClass + ' ' + heightClass;
+   
+   console.log(elem)
+   return elem;
+ }
 	
 	$.fn.serializeObject = function() {
 
