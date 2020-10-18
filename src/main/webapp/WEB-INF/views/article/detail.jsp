@@ -98,7 +98,7 @@
 						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="수정" onclick="window.location.href='/article/update'">
 					</c:if>
 					<c:if test="${memId eq 'admin' || memId eq articleDTO.insertId }">
-						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="삭제" onclick="window.location.href='/article/delete?bnIdx=${articleDTO.bnIdx}'">
+						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="삭제" onclick="deleteArticle()">
 					</c:if>	
 					<input type="button" class="btn btn-md btn-grey" value="목록으로" onclick="window.location='/article'" />
 				</div>
@@ -133,6 +133,13 @@
 	</div>
 </body>
 <script>
+function deleteArticle(){
+	var confirmdelete = confirm('정말 삭제하시겠습니까?');
+	if(confirmdelete){
+		window.location.href='/article/delete?bnIdx=${articleDTO.bnIdx}';
+	}
+}
+
 function like(bnIdx,insertId){
 var context = window.location.pathname.substring(0,
 		window.location.pathname.indexOf("/", 2));
