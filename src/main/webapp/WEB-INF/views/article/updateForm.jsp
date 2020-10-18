@@ -71,13 +71,13 @@
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
-				<form action="/article/writePro" method="post" id="frm" accept-charset="utf-8">
+				<form action="/article/updatePro" method="post" id="frm" accept-charset="utf-8">
 				<table class="tableCss table">
 					<tr>
 						<th>제목</th>
 						<td><input type="text" name="bnTitle" id="bnTitle"
 							class="boardTitle_large" class="required" msg="제목을"
-							placeholder="제목"></td>
+							placeholder="제목" value="${article.bnTitle }"></td>
 					</tr>
 					<tr>
 						<th>술 검색</th>
@@ -94,11 +94,11 @@
 						<td style="margin: 0; padding: 0;" colspan="2">
 						<textarea name="content" id="ckeditor" type="textarea" class="required"
 						msg="내용을" rows="10" cols="100" style="width: 100%; height: 600px;">
-						</textarea>
+						${article.content}</textarea>
 						<script type="text/javascript">CKEDITOR.replace('ckeditor', ckedit_config); </script>
 						</td>
 					</tr>
-					<input type="hidden" value="${sessionScope.memId}" name="insertId">
+						<input type="hidden" value="${article.bnIdx }" name="bnIdx" />
 				</table>
 				</form>
 				<div class="text-center pad-top10">

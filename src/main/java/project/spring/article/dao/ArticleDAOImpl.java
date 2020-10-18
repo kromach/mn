@@ -50,7 +50,11 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 	@Override
 	public int updateItem(Object obj) {
-		return 0;
+		int result = -1;
+		if(obj instanceof ArticleDTO) {
+			result = sqlSession.update("article.updateArticle", (ArticleDTO)obj);
+		}
+		return result;
 	}
 	@Override
 	public int deleteItem(Object obj) {

@@ -81,7 +81,6 @@ public class ArticleController {
 			//insertTags
 			return "redirect:/article";
 		}
-		
 		@RequestMapping("/update")
 		public String updateSs(@RequestParam(name = "bnIdx" , required = false) Integer bnIdx,Model model) {
 			HttpServletRequest req = 
@@ -93,9 +92,20 @@ public class ArticleController {
 			ArticleDTO dto = articleService.read(bnIdx);
 			System.out.println(dto);
 			model.addAttribute("article", dto);
-			return null;
-//			return "article/updateForm.mn";
+			
+			return "article/updateForm.mn";
 		}
+		
+		@RequestMapping("/updatePro")
+		public String updateProSs(ArticleDTO dto) {
+			System.out.println(dto);
+			
+			///update작성0
+			int result = articleService.updateItem(dto);
+			
+			return "redirect:/article";
+		}
+		
 		
 		@RequestMapping("/delete")
 		public String deleteSs(@RequestParam(name = "bnIdx" , required = false) Integer bnIdx) {
