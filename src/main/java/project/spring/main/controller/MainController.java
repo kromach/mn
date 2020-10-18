@@ -26,11 +26,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import project.spring.aop.MemberAspect;
+import project.spring.article.service.ArticleServiceImpl;
 import project.spring.beans.kakaoAPI.KakaoLogin;
 import project.spring.beans.kakaoAPI.KakaoLogout;
+import project.spring.main.service.MainService;
 
 @Controller
 public class MainController {
+	
+	@Autowired
+	private MainService service;
+	
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model,
@@ -39,11 +45,14 @@ public class MainController {
 	
 		//메인 그림 초기화 블럭
 		//메인으로 갈때 그림30개,링크 셋트를 랜덤으로 가지고 가야함 6*5
-			//product에서 10개
+		/****************************************************************/
+		//product에서 10개
+			//url = /product/productdetail?prcode=PR00025
+			service.getProductInitial();
 			
-			//drink에서 10개
-			
-			//upload에서 10개
+		//drink에서 10개
+		
+		//upload에서 10개
 		
 		return "/main/main.mn";
 	}
