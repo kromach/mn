@@ -13,6 +13,21 @@
 	<div class="grid">  
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
+		<div class="grid-item">
+			<a href="/product/productdetail?prcode=${product[0].prCode}">
+				<img src="${product[0].prImg}" />
+			</a>
+		</div>
+		<div class="grid-item">
+			<a href="/drink/detail?dkCode=${drink[0].dkCode}">
+				<img src="${drink[0].dkImg}" />
+			</a>
+		</div>
+		<div class="grid-item">
+			<a href="/event/detail?eventCode=${event[0].eventCode}">
+				<img src="/resources/img/upload/${event[0].thumImg}" />
+			</a>
+		</div>
 		<div class="grid-item grid-item--width2"><img src="/resources/img/main/4.jpg" /></div>
 		<div class="grid-item"><img src="/resources/img/main/8.jpg" /></div>
 		<div class="grid-item"><img src="/resources/img/main/7.jpg" /></div>

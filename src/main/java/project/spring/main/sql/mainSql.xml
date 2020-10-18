@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="main">
+  		<select id="getProductInitial" resultType="productvo">
+  			<![CDATA[	
+  			select * from(select * from PRODUCT_INFO pi2 order by DBMS_RANDOM.RANDOM) where rownum < 10
+  			]]>
+  		</select>
+  		<select id="getDrinkInitial" resultType="DrinkVO">
+  			<![CDATA[	
+  			select * from(select * from DRINK_INFO order by DBMS_RANDOM.RANDOM) where rownum < 10
+  			]]>
+  		</select>
+  		<select id="getEventInitial" resultType="EventVO">
+  			<![CDATA[	
+  			select * from(select * from event order by DBMS_RANDOM.RANDOM) where rownum < 10
+  			]]>
+  		</select>
+  		
+  </mapper>
