@@ -27,7 +27,6 @@
 <!-- <div class="chat">
 	<a href="/chat"><img src="/resources/img/main/chat.png" ></a>
 </div> -->
-<script src="/resources/js/imageLoad.js"></script>
 <script type="text/javascript">
 let isEnd = false;
 $(function(){
@@ -39,7 +38,7 @@ $(function(){
          var context = window.location.pathname.substring(0,
 					window.location.pathname.indexOf("/", 2));
 		 var index = $('#index').val();
-         if( scrollTop + windowHeight > documentHeight ){
+         if( scrollTop + windowHeight +100 > documentHeight ){
         	 fetchList(context,index);
 			}
 		})
@@ -54,15 +53,27 @@ function fetchList(context,index){
 		data : 'index='+index,
 		type : "post",
 		success : function(data) {
-			console.log(data+":"+typeof(data));
 			if(data==""){
 				isEnd = true;
 				console.log('end');
 			}else{
+				
+				var $grid = $('.grid').masonry({
+					itemSelector : '.grid-item',
+					columnWidth : '.grid-sizer',
+					percentPosition : true,
+					gutter: '.gutter-sizer'
+				});
+				for(var i in data){
+					var el = '<div class="grid-item"><a href="'+data[i].aLinkUri+'"><img src="'+data[i].imgUri+'"/></a></div>';
+					$grid.append( el ).masonry( 'appended', el ,true);
+					$grid.append( el ).masonry( 'reloadItems' );
+					//$('.grid').children(":last").after(el).msnry('appended', el).msnry('layout');
+				}
 				$('#index').val(Number(index)+1);
-				$('html').animate({scrollTop : 0}, 300);
 			}
 		}
 	});
 }
 </script>
+<script src="/resources/js/imageLoad.js"></script>
