@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="main">
+  		<select id="getProductInitial" resultType="productvo" parameterType="int">
+  			<![CDATA[	
+  			SELECT * FROM (select a.*,ROWNUM AS rnum from (SELECT * FROM  PRODUCT_INFO order by INSERT_DAY DESC ) a) WHERE rnum >= (10*#{value})+1 and rnum <= (10*(#{value}+1))
+  			]]>
+  		</select>
+  		<select id="getDrinkInitial" resultType="DrinkVO" parameterType="int">
+  			<![CDATA[	
+  			SELECT * FROM (select a.*,ROWNUM AS rnum from (SELECT * FROM  DRINK_INFO order by INSERT_DAY DESC ) a) WHERE rnum >= (10*#{value})+1 and rnum <= (10*(#{value}+1))
+  			]]>
+  		</select>
+  		<select id="getEventInitial" resultType="EventVO" parameterType="int">
+  			<![CDATA[
+  			SELECT * FROM (select a.*,ROWNUM AS rnum from (SELECT * FROM  event order by INSERT_DAY DESC ) a) WHERE rnum >= (10*#{value})+1 and rnum <= (10*(#{value}+1))	
+  			]]>
+  		</select>
+  		
+  </mapper>

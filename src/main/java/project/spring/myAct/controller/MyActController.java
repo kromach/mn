@@ -71,12 +71,13 @@ public class MyActController {
 		
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
-		List likeArticle =null;
+		List<ArticleDTO> likeArticle =null;
 		
 		likeArticle = myActService.myLikeArticle(memId);
 		count = myActService.likeArticleCount(memId);
 		System.out.println("count : " + count);
 		System.out.println(likeArticle.toString());
+		
 		
 		return likeArticle;
 	}
@@ -112,17 +113,18 @@ public class MyActController {
 		
 		List<TitleListDTO> getAllTitle = null;
 		List<TitleListDTO> updateTitle = null;
-		List myTitle = null;
+		//List myTitle = null;
 		Map<String,List> map = new HashMap();
 		
 		//모든 Title 뿌려주고
-		getAllTitle = myActService.getAllTitle();
+		//getAllTitle = myActService.getAllTitle();
+		getAllTitle = myActService.getMyTitle(memId); // 모든 타이틀 + 획득한 칭호 + 선택한 칭호
 		// 그중 내가 획득한 칭호는 색을 바꿔줌
 		updateTitle = myActService.updateTitle(memId);
 		
 		// SELECT * FROM MY_TITLE mt , TITLE_LIST tl WHERE mt.TITLE_INDEX = tl.TITLE_IDX AND mt.ID='admin';
 		//사용하지 않음
-		myTitle = myActService.getMyTitle(memId);
+		//myTitle = myActService.getMyTitle(memId);
 		
 		map.put("allTitle",getAllTitle);
 		map.put("updateTitle", updateTitle);
@@ -146,6 +148,25 @@ public class MyActController {
 		
 		return myTitle;
 	}
+	
+	
+	@RequestMapping(value ="/chooseTitle")
+	@ResponseBody
+	public int chooseTitle(@RequestParam(name = "titleIdx") int idx,HttpServletRequest request) {
+		System.out.println("왔냐?");
+		System.out.println("idx : " + idx);
+		
+		HttpSession session = request.getSession();
+		String memId = (String)session.getAttribute("memId");
+		
+		int chooseTitle =0;
+		chooseTitle = myActService.choose(idx, memId);
+		
+		return chooseTitle;
+	} 
+	
+	
+	
 	
 	
 	

@@ -71,11 +71,11 @@ public class SalesServiceImpl implements SalesService{
 	}
 
 	@Override
-	public List productDetail(String pageNum) {
+	public List productModify(String pageNum) {
 		List list = null;
-		
+		list = salesDAO.productModify(pageNum);
 				
-		return null;
+		return list;
 	}
 
 }

@@ -16,12 +16,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileUploadException;
+import org.apache.tiles.velocity.template.ContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
@@ -78,6 +81,49 @@ public class ArticleController {
 			//insertTags
 			return "redirect:/article";
 		}
+		@RequestMapping("/update")
+		public String updateSs(@RequestParam(name = "bnIdx" , required = false) Integer bnIdx,Model model) {
+			HttpServletRequest req = 
+					((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+			String session = req.getSession().getAttribute("memId").toString();
+			HashMap map = new HashMap();
+			map.put("bnIdx",bnIdx);
+			map.put("session",session);
+			ArticleDTO dto = articleService.read(bnIdx);
+			System.out.println(dto);
+			model.addAttribute("article", dto);
+			
+			return "article/updateForm.mn";
+		}
+		
+		@RequestMapping("/updatePro")
+		public String updateProSs(ArticleDTO dto) {
+			System.out.println(dto);
+			
+			///update작성0
+			int result = articleService.updateItem(dto);
+			
+			return "redirect:/article";
+		}
+		
+		
+		@RequestMapping("/delete")
+		public String deleteSs(@RequestParam(name = "bnIdx" , required = false) Integer bnIdx) {
+			HttpServletRequest req = 
+					((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+			String session = req.getSession().getAttribute("memId").toString();
+			System.out.println(bnIdx+":"+session);
+			HashMap map = new HashMap();
+			map.put("bnIdx",bnIdx);
+			map.put("session",session);
+			
+			int result = articleService.deleteItem(map);
+			System.out.println("deleteArticle"+result);
+			
+			
+			return "redirect:/article";
+		}
+		
 		
 		//Search >> thumbNail뽑아서 list return
 		@RequestMapping("/articleSearch")
@@ -129,7 +175,9 @@ public class ArticleController {
 			return "article/articleList.mn";
 		}
 		@RequestMapping(value = "/detail")
-		public String detail(@RequestParam(name="idx",required = false) Integer idx,Model model) {
+		public String detail(
+				@RequestParam(required = false) String pageNum,
+				@RequestParam(name="idx",required = false) Integer idx,Model model) {
 			int idx_ = 0;
 			if(idx!=null) idx_ = idx;
 			//조회수 올리는 메서드
@@ -138,14 +186,46 @@ public class ArticleController {
 			ArticleDTO dto = articleService.read(idx_);
 			//밑에 게시글 뿌리는 메서드
 			List list = articleService.searchArticleByAdd(0);
-			System.out.println(list);
+			//내용
 			model.addAttribute("articleDTO", dto);
+			//밑에 추가게시글
 			model.addAttribute("list", list);
+			
+			//댓글
+			List reply = articleService.getReply(0,idx);
+			model.addAttribute("reply", reply);
+			
+			//댓글 pager
+			int count = articleService.getAllReplyCount(idx);
+			Pager pager = new Pager();
+			PageVO pageVO = pager.pager("1",count);
+			model.addAttribute("count", count);
+			model.addAttribute("pageVO", pageVO);
 			
 			return "article/detail.mn";
 		}
 		
 		//////AJAX
+		@RequestMapping(value = "/replyReload")
+		@ResponseBody
+		public List replyReload(@RequestParam(name = "index") int index,
+								@RequestParam(name = "idx") int idx) {
+			System.out.println(index+":"+idx);
+			//댓글
+			List reply = articleService.getReply(index-1,idx);
+			return reply;
+		}
+		@RequestMapping(value = "/deleteReply")
+		@ResponseBody
+		public int deleteReply(
+			@RequestParam(name = "coIdx") int coIdx,
+			@RequestParam(name = "session") String session) { 
+			
+			int result = articleService.deleteReply(coIdx,session);
+			
+			return 0;
+		}
+		
 		@RequestMapping(value = "/more")
 		@ResponseBody
 		public List more(@RequestParam(name="num",required = false) Integer num) {
@@ -191,12 +271,26 @@ public class ArticleController {
 			result = articleService.report(num,insertId,reportId);
 			return result;
 		}
+		
 		@RequestMapping(value = "/reply")
 		@ResponseBody
-		public int replySs(@RequestParam(name="num",required = false) Integer num) {
-			int result = 0;
-			//result = articleService.searchArticleByAdd(num);
-			return result;
+		public String replySs(
+				@RequestParam(name="bnIdx",required = false) String bnIdx,
+				@RequestParam(name="session",required = false) String session,
+				@RequestParam(name="text",required = false) String text
+				){
+			System.out.println("reply");
+			Map map = new HashMap();
+			map.put("bnIdx", bnIdx);
+			map.put("BN_COMMENT", text);
+			map.put("INSERT_ID", session);
+			//댓글입력
+			articleService.insertReply(map);
+			//다시 댓글가져오기
+			
+			
+			String log = bnIdx+":"+session+":"+text;
+			return log;
 		}
 		@RequestMapping(value = "/move")
 		@ResponseBody

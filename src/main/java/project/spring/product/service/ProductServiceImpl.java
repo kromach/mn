@@ -1,6 +1,7 @@
 package project.spring.product.service;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +39,10 @@ public class ProductServiceImpl implements ProductService {
 		int res =productDAO.updateItem(orCode);
 		System.out.println("serviec int :"+res);
 		return res;
+	}
+	public int updateItem(HashMap map) {
+		productDAO.updateItem(map);
+		return 0;
 	}
 
 	@Override
@@ -135,19 +140,22 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List getorderlist(String id,int startrow ,int endrow) throws SQLException {
+	public List getorderlist(HashMap map) throws SQLException {
 		
-		List orderlist = productDAO.getorderlist(id,startrow,endrow);
+		List orderlist = productDAO.getorderlist(map);
 		
 		return orderlist;
 	}
 
 	@Override
-	public int getordercount(String id) throws SQLException {
+	public int getordercount(HashMap map) throws SQLException {
 		 
-		int ordercount = productDAO.getordercount(id);
+		int ordercount = productDAO.getordercount(map);
 		
 		return ordercount;
 	}
+
+	
+
 
 }

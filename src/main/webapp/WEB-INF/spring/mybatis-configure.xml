@@ -13,7 +13,7 @@
 		<typeAlias type="project.spring.product.vo.ProductVo" alias="productvo"/>
 		<typeAlias type="project.spring.product.vo.OrderVo" alias="ordervo"/>
 		<typeAlias type="project.spring.admin.vo.AdminVO" alias="AdminVO"/>
-		<typeAlias type="project.spring.admin.vo.DrinkVO" alias="DrinkVO"/>		
+		<typeAlias type="project.spring.drink.vo.DrinkVO" alias="DrinkVO"/>		
 		<typeAlias type="project.spring.adminEvent.vo.AdminEventVO" alias="AdminEventVO"/>		
 		<typeAlias type="project.spring.beans.LowerHashMap" alias="camelmap" />
 		<typeAlias type="project.spring.article.vo.ArticleDTO" alias="ArticleDTO"/>
@@ -23,10 +23,12 @@
 		<typeAlias type="project.spring.myAct.vo.MyActivityDTO" alias="MyActivityDTO"/>
 		<typeAlias type="project.spring.myAct.vo.TitleListDTO" alias="TitleListDTO"/>
 		<typeAlias type="project.spring.article.vo.Editor_imageVO" alias="Editor_imageVO"/>
+		<typeAlias type="project.spring.article.vo.ArticleReplyDTO" alias="ArticleReplyDTO"/>
+		<typeAlias type="project.spring.event.vo.EventVO" alias="EventVO"/>
 	</typeAliases> 
 	<mappers>
 		<mapper resource="project/spring/kakao/sql/testSql.xml" />
-		<mapper resource="project/spring/main/sql/testSql.xml" />
+		<mapper resource="project/spring/main/sql/mainSql.xml" />
 		<mapper resource="project/spring/admin/sql/adminSql.xml" />
 		<mapper resource="project/spring/myAct/sql/myActSql.xml" />
 		<mapper resource="project/spring/drink/sql/drinkSql.xml" />
@@ -35,5 +37,6 @@
 		<mapper resource="project/spring/adminEvent/sql/adminEventSql.xml" />
 		<mapper resource="project/spring/article/sql/articleSql.xml"/>
 		<mapper resource="project/spring/sales/sql/salesSql.xml"/>
+		<mapper resource="project/spring/event/sql/eventSql.xml"/>
 	</mappers>
 </configuration>

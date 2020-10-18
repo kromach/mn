@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import project.spring.sales.vo.ProductInfoDTO;
+
 @Repository
 public class SalesDAOImpl implements SalesDAO{
 
@@ -74,6 +76,15 @@ public class SalesDAOImpl implements SalesDAO{
 	public String userIdch(String memId) {
 		String result = sqlSession.selectOne("sales.userIdCh", memId);
 		return result;
+	}
+
+	@Override
+	public List productModify(String pageNum) {
+		ProductInfoDTO dto = new ProductInfoDTO();
+		
+		
+		List list = sqlSession.selectList("sales.salesModify", pageNum); 
+		return list;
 	}
 
 }

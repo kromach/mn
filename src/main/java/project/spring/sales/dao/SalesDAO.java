@@ -9,5 +9,6 @@ public interface SalesDAO extends CommonInterface{
 	public int salesCount(String memId);
 	public List productorlist(String memId, int start, int end);
 	public String userIdch(String memId);
+	public List productModify(String pageNum);
 
 }
