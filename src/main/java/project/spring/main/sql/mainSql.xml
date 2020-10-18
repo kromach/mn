@@ -5,18 +5,17 @@
   <mapper namespace="main">
   		<select id="getProductInitial" resultType="productvo" parameterType="int">
   			<![CDATA[	
-  			select rownum, a.* from( select * from PRODUCT_INFO pi2 order by INSERT_DAY DESC) a WHERE rownum >= (10*#{value})+1 and rownum <= (10*(#{value}+1))
-  																								
+  			SELECT * FROM (select a.*,ROWNUM AS rnum from (SELECT * FROM  PRODUCT_INFO order by INSERT_DAY DESC ) a) WHERE rnum >= (10*#{value})+1 and rnum <= (10*(#{value}+1))
   			]]>
   		</select>
   		<select id="getDrinkInitial" resultType="DrinkVO" parameterType="int">
   			<![CDATA[	
-  			select rownum, a.* from( select * from DRINK_INFO pi2 order by INSERT_DAY DESC) a WHERE rownum >=  (10*#{value})+1 and rownum <= (10*(#{value}+1))
+  			SELECT * FROM (select a.*,ROWNUM AS rnum from (SELECT * FROM  DRINK_INFO order by INSERT_DAY DESC ) a) WHERE rnum >= (10*#{value})+1 and rnum <= (10*(#{value}+1))
   			]]>
   		</select>
   		<select id="getEventInitial" resultType="EventVO" parameterType="int">
-  			<![CDATA[	
-  			select rownum, a.* from( select * from event pi2 order by INSERT_DAY DESC) a WHERE rownum >= (10*#{value})+1 and rownum <= (10*(#{value}+1))
+  			<![CDATA[
+  			SELECT * FROM (select a.*,ROWNUM AS rnum from (SELECT * FROM  event order by INSERT_DAY DESC ) a) WHERE rnum >= (10*#{value})+1 and rnum <= (10*(#{value}+1))	
   			]]>
   		</select>
   		
