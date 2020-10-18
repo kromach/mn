@@ -37,6 +37,14 @@ public class MainController {
 			HttpServletRequest request,
 			HttpServletResponse response) {
 	
+		//메인 그림 초기화 블럭
+		//메인으로 갈때 그림30개,링크 셋트를 랜덤으로 가지고 가야함 6*5
+			//product에서 10개
+			
+			//drink에서 10개
+			
+			//upload에서 10개
+		
 		return "/main/main.mn";
 	}
 	@RequestMapping(value = "/editor", method = RequestMethod.GET)
