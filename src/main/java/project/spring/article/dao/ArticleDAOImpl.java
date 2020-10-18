@@ -54,6 +54,11 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 	@Override
 	public int deleteItem(Object obj) {
+		
+		if(obj instanceof HashMap) {
+			HashMap map = (HashMap)obj;
+			return sqlSession.delete("article.deleteArticle", map);
+		}
 		return 0;
 	}
 	@Override

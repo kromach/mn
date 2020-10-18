@@ -40,7 +40,7 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 	@Override
 	public int deleteItem(Object obj) {
-		return 0;
+		return articleDAOimpl.deleteItem(obj);
 	}
 	
 	@Override

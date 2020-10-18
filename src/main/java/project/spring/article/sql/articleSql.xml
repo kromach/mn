@@ -108,4 +108,7 @@
   	<delete id="deleteReply">
   		delete from BOARD_COMMENT where co_Idx = #{coIdx} and insert_Id=#{insert_Id}
   	</delete>
+  	<delete id="deleteArticle" parameterType="hashmap" >
+  		delete from BOARD_NORMAL where bn_Idx=#{bnIdx}
+  	</delete>
   </mapper>
