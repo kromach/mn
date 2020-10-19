@@ -17,7 +17,9 @@ public class ArticleDTO {
 	private String thumbNail;
 	private String nickname;
 	private String name;
-	private String chooseTitle;
+	private int writerTitleCnt;
+	private String writerTitleName;
+	
 	public int getBnIdx() {
 		return bnIdx;
 	}
@@ -104,11 +106,19 @@ public class ArticleDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getChooseTitle() {
-		return chooseTitle;
+	public int getWriterTitleCnt() {
+		return writerTitleCnt;
 	}
-	public void setChooseTitle(String chooseTitle) {
-		this.chooseTitle = chooseTitle;
+	public void setWriterTitleCnt(
+			int writerTitleCnt) {
+		this.writerTitleCnt = writerTitleCnt;
+	}
+	public String getWriterTitleName() {
+		return writerTitleName;
+	}
+	public void setWriterTitleName(
+			String writerTitleName) {
+		this.writerTitleName = writerTitleName;
 	}
 	@Override
 	public String toString() {
@@ -125,7 +135,9 @@ public class ArticleDTO {
 				+ ", thumbNail=" + thumbNail
 				+ ", nickname=" + nickname
 				+ ", name=" + name
-				+ ", chooseTitle=" + chooseTitle
-				+ "]";
+				+ ", writerTitleCnt="
+				+ writerTitleCnt
+				+ ", writerTitleName="
+				+ writerTitleName + "]";
 	}
 }
