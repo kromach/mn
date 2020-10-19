@@ -51,9 +51,9 @@
 	<select id="findNickForKakaoAcount" parameterType="string" resultType="string"> 
 		select NICKNAME from member_info where id = #{value}
 	</select>
-	<select id="isBlacked" parameterType="memberDTO" resultType="int">
+	<select id="isBlacked" parameterType="memberDTO"  resultType="int">
 		<![CDATA[	
-		SELECT * FROM MEMBER_INFO mi WHERE id = #{id} AND IS_BAN = 'Y';
+		SELECT count(*) FROM MEMBER_INFO WHERE id = #{id} AND IS_BAN = 'Y'
 		]]>
 	</select>
 	<update id="updateMember" parameterType="memberDTO">
