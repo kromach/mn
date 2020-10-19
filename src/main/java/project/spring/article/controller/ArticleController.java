@@ -44,7 +44,64 @@ public class ArticleController {
 	
 		@Autowired
 		private ArticleServiceImpl articleService = null;
-	
+		/////////////////////POST////////////////////////
+		@RequestMapping(value = "/post")
+		public String post() {
+			return "forward:/article/post/postSearch";
+		}
+		
+		//Search >> thumbNail뽑아서 list return
+				@RequestMapping("/post/postSearch")
+				public String postSearch(
+						@RequestParam(required = false, name = "selectOption")String selectOption,
+						@RequestParam(required = false, name = "search")String search,
+						HttpServletRequest request
+						) {
+					
+					List<ArticleDTO> list = null;
+					if(search!=null&&!search.equals("")) {
+						list = articleService.searchPost(selectOption,search);
+						String imgThum = "";
+						//썸네일 뽑기
+						Iterator<ArticleDTO> it = list.iterator();
+						while(it.hasNext()) {
+							ArticleDTO dto = it.next();
+							String str = dto.getContent();
+							String[] str_ = str.split("src=\"");
+							for(int i=0;i<str_.length;i++) {
+								System.out.println(str_[i]+"|"+str_[i].contains("src=\""));
+								if(str_[i].contains("/resources")) {
+									imgThum = str_[i].split("\"")[0];
+									dto.setThumbNail(imgThum);
+								}
+							}
+						}
+					}else {
+						//전부 돌려서 랜덤뽑기
+						list = articleService.searchPost();
+						String imgThum = "";
+						//썸네일 뽑기
+						Iterator<ArticleDTO> it = list.iterator();
+						while(it.hasNext()) {
+							ArticleDTO dto = it.next();
+							String str = dto.getContent();
+							String[] str_ = str.split("src=\"");
+							for(int i=0;i<str_.length;i++) {
+								System.out.println(str_[i]+"|"+str_[i].contains("src=\""));
+								if(str_[i].contains("/resources")) {
+									imgThum = str_[i].split("\"")[0];
+									dto.setThumbNail(imgThum);
+								}
+							}
+						}
+					}
+					
+					System.out.println(list);
+					request.setAttribute("list", list);
+					return "article/post/postList.mn";
+				}
+		
+		////////////////////////////////////////////////
 		@RequestMapping
 		public String index(){
 			return "forward:/article/articleSearch";
@@ -66,7 +123,6 @@ public class ArticleController {
 			}
 			return list;
 		}
-		
 		//insertTag
 		@RequestMapping("/writePro")
 		public String writePro(ArticleDTO dto)  throws IOException, FileUploadException {
@@ -175,6 +231,7 @@ public class ArticleController {
 			request.setAttribute("list", list);
 			return "article/articleList.mn";
 		}
+		
 		@RequestMapping(value = "/detail")
 		public String detail(
 				@RequestParam(required = false) String pageNum,

@@ -72,7 +72,7 @@
 			<a href="#board"><div class="fa fa-list-alt"></div> 게시판 <div class="fa fa-caret-up fr"></div></a>
 			<ul style="display: block;">
 				<li><a href="/article"> 자유게시판 </a></li>
-				<li><a href="/post"> 읽을거리 </a></li>
+				<li><a href="/article/post"> 읽을거리 </a></li>
 			</ul>
 		</li>
 		<li>

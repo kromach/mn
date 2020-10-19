@@ -128,4 +128,15 @@ public class ArticleServiceImpl implements ArticleService{
 		// TODO Auto-generated method stub
 		return articleDAOimpl.deleteReply(coIdx,session);
 	}
+	@Override
+	public List<ArticleDTO> searchPost(
+			String selectOption, String search) {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.searchPost(selectOption,search);
+	}
+	@Override
+	public List<ArticleDTO> searchPost() {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.searchPost();
+	}
 }

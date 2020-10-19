@@ -232,4 +232,22 @@ public class ArticleDAOImpl implements ArticleDAO {
 		System.out.println(map);
 		return sqlSession.delete("article.deleteReply", map);
 	}
+	@Override
+	public List<ArticleDTO> searchPost(
+			String selectOption, String search) {
+		HashMap map = new HashMap();
+		map.put("selectOption", selectOption);
+		map.put("search",search );
+		System.out.println(map);
+		
+		if(selectOption.equals("NICKNAME")) {
+			return sqlSession.selectList("article.searchPostbyNick", map);
+		}else{
+			return sqlSession.selectList("article.searchPostbyOthers", map);
+		}
+	}
+	@Override
+	public List<ArticleDTO> searchPost() {
+		return sqlSession.selectList("article.searchAllPost");
+	}
 }
