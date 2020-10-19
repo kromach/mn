@@ -115,11 +115,11 @@
 					</tr>
 					<c:forEach var="articleDTO" items="${list}">
 						<tr >
-							<td>${articleDTO.bnTitle}</td>
-							<td>${articleDTO.nickname}</td>
-							<td><fmt:formatDate value="${articleDTO.insertDay}" pattern="yyyy.MM.dd"/></td>
-							<td>${articleDTO.readcount}</td>
-							<td>${articleDTO.heart}</td>
+							<td><a href="/article/detail?idx=${articleDTO.bnIdx}">${articleDTO.bnTitle}</a></td>
+							<td><a href="/article/detail?idx=${articleDTO.bnIdx}">${articleDTO.nickname}</a></td>
+							<td><a href="/article/detail?idx=${articleDTO.bnIdx}"><fmt:formatDate value="${articleDTO.insertDay}" pattern="yyyy.MM.dd"/></a></td>
+							<td><a href="/article/detail?idx=${articleDTO.bnIdx}">${articleDTO.readcount}</a></td>
+							<td><a href="/article/detail?idx=${articleDTO.bnIdx}">${articleDTO.heart}</a></td>
 						</tr>
 					</c:forEach>
 					</tbody>
