@@ -13,5 +13,6 @@ public interface SalesDAO extends CommonInterface{
 	public List productModify(String pageNum);
 	public List getCategory();
 	public String makeprCode(ProductInfoDTO productDTO);
+	public int intsertProduct(ProductInfoDTO productDTO);
 
 }
