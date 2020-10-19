@@ -56,18 +56,36 @@
 		</div>
 		<div class="detail-item detail-width6">
 			<h3 class="pad-top10 pad-bottom20 text-left">연관 게시글 보기</h3>
-			<table class="detailTbl tbl-lg">
+			<table id="boardTbl" class="detailTbl tbl-lg">
 				<tr>
 					<th>제목</th>
 					<th style="min-width:100px;">작성자</th>
 					<th style="min-width:130px;">작성일</th>
 				</tr>
+				<!-- 주류코드별 작성된 글 개수 체크 메서드 & 글 불러오는 메서드 추가 필요 -->
 				<tr>
 					<td>이 술 맛있음요</td>
 					<td>김영성</td>
 					<td>2020-09-28</td>
 				</tr>
 			</table>
+			<!-- pager -->
+			<div align="center" class="pageNums">
+				<!-- 게시글이 있을때만 보여주기 -->
+				<c:if test="${count>0}">
+					<c:if test="${pageVO.startPage > pageVO.pageBlock}">
+						<a href="?dkCode=${drinkInfo.dkCode}&pageNum=${pageVO.startPage-pageVO.pageBlock}#boardTbl">&lt;</a>
+					</c:if>
+					
+					<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1"> 
+						<a href="?dkCode=${drinkInfo.dkCode}&pageNum=${i}#boardTbl" class="pageNums">&nbsp;${i}&nbsp;</a>
+					</c:forEach>
+					
+					<c:if test="${pageVO.endPage < pageVO.pageCount}">
+						<a href="?dkCode=${drinkInfo.dkCode}&pageNum=${pageVO.startPage+pageVO.pageBlock}#boardTbl">&gt;</a>
+					</c:if>
+				</c:if>
+			</div>
 		</div>
 		<div class="detail-item detail-width6">
 			<h3 class="pad-top10 pad-bottom20 text-left">후기 보기 (${commentStarInfo != null ? commentStarInfo.cmCount : '0'})</h3>
