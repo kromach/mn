@@ -52,12 +52,14 @@ function fetchList(context,index){
 		url : context + '/reload',
 		data : 'index='+index,
 		type : "post",
+		async: false,
 		success : function(data) {
 			if(data==""){
 				isEnd = true;
 				console.log('end');
 			}else{
-				
+				console.log(data);
+				$('#index').val(Number(index)+1);
 				var $grid = $('.grid').masonry({
 					itemSelector : '.grid-item',
 					columnWidth : '.grid-sizer',
@@ -66,12 +68,13 @@ function fetchList(context,index){
 				});
 				for(var i in data){
 					var el = '<div class="grid-item"><a href="'+data[i].aLinkUri+'"><img src="'+data[i].imgUri+'"/></a></div>';
-					$grid.append( el ).masonry( 'appended', el ,true).masonry( 'reloadItems' );
+					$grid.append( el ).masonry( 'appended', el ,true);
 				}
 				// 재훈 테스트
 				// masonry 재 실행 
-				
-				$('#index').val(Number(index)+1);
+				// $grid.masonry();
+    			$grid.masonry( 'reloadItems' );
+    			$grid.masonry();
 			}
 		}
 	});
