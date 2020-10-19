@@ -15,7 +15,7 @@
 		<c:forEach var="mainVO" items="${main}">
 			<div class="grid-item">
 				<a href="${mainVO.aLinkUri}">
-					<img src="${mainVO.imgUri}" />
+					<img src="${mainVO.imgUri}" onerror="this.src='/resources/img/noImage.jpg'"/>
 				</a>
 			</div>
 		</c:forEach>
