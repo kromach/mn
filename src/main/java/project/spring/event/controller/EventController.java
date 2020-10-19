@@ -63,6 +63,7 @@ public class EventController {
 		model.addAttribute("eventCode", eventCode);
 		
 		
+		
 		return "event/detail.mn";
 	}
 	
