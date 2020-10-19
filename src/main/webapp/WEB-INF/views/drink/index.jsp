@@ -50,14 +50,12 @@
 	<div class="grid"> 
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
-		<div class="grid-item"><img src="/resources/img/main/8.jpg" /></div>
-		<div class="grid-item"><img src="/resources/img/main/7.jpg" /></div>
 		
 	</div>
 </div>
 <script>
 	$(function() {
-		
+			
 		// select 형태 바꿔주는 JS 실행
 		$(".sel").selectric();
 		
@@ -76,8 +74,6 @@
 	    });
 	});
 
-	
-	
 	var frm;
 	
 	$("#searchBtn").click(function() {
@@ -89,20 +85,35 @@
 		getDrinkList(1);
 	});
 	
+	var $grid = $('.grid').masonry({
+		itemSelector : '.grid-item',
+		columnWidth : '.grid-sizer',
+		percentPosition : true,
+		gutter: '.gutter-sizer'
+	});
+	
+	$grid.masonry();
 
 	// list 가져오기
 	function getDrinkList(pageNum) {
-		console.log(frm);
+		//console.log(frm);
 		$.ajax({
 			type : "POST",
 			url : "drinkList",
 			data : frm + "&pageNum=" + pageNum,  /*{bigCategory:bigCategory} 와 동일*/
 			success : function(data) {
+
 				if(pageNum == 1) { 
-					//$(".grid").empty();
-					//$(".grid").append('<div class="grid-sizer"></div><div class="grid-sizer"></div>');
+					
+					$(document).find(".grid-item").each(function() { 
+						$grid.masonry('remove', this).masonry('layout');
+					});
+					// masonry 재 실행 
+			    	$grid.masonry();
 				}
-				drinkGridView(data);
+				setTimeout(function() { 
+					drinkGridView(data);
+				}, 500);
 			},
 			error : function() {
 				alert("error");
@@ -110,111 +121,23 @@
 		})
 	}
 	
-	var grid = document.querySelector('.grid');
-	
 	// ajax 으로 받아온 값을 parse 하여 option 등록
     function drinkGridView(data){
 		
     	var json = JSON.parse(data);
-    	var str = "";
-		var elems = [];
-		var fragment = document.createDocumentFragment();
-		console.log(fragment);
-    	/* json.forEach(function(item, index) {
+
+    	json.forEach(function(item, index) {
     		
-    		str = '<div class="grid-item"><a onclick="setDkcode("'+ item.dkCode +'")"><img src="'+ item.dkImg +'" /></a></div>'
- 
-			fragment.appendChild( str );
-			elems.push( str );
-    	}); */
-    	//$(".grid").append(str);    	
-		for ( var i = 0; i < 3; i++ ) {
-			var elem = getItemElement();
-			fragment.appendChild( elem );
-			elems.push( elem );
-		}
-		// append elements to container
-		grid.appendChild( fragment );
-		// add and lay out newly appended elements
-		msnry.appended( elems );
-    	
-    	
-		//msnry.appended(str);
+    		var el = '<div class="grid-item"><a href="detail?dkCode='+item.dkCode+'"><img src="'+ item.dkImg +'" /></a></div>';
+ 			
+    		// 그리드 추가, 아이템 배치 
+    		$grid.append( el ).masonry('appended', el).masonry('reloadItems');	
+    	}); 
+		
+    	// masonry 재 실행 
+    	$grid.masonry();
     };
     
-
- // create <div class="grid-item"></div>
- function getItemElement() {
-   var elem = document.createElement('div');
-   var wRand = Math.random();
-   var hRand = Math.random();
-   var widthClass = wRand > 0.8 ? 'grid-item--width3' : wRand > 0.6 ? 'grid-item--width2' : '';
-   var heightClass = hRand > 0.85 ? 'grid-item--height4' : hRand > 0.6 ? 'grid-item--height3' : hRand > 0.35 ? 'grid-item--height2' : '';
-   elem.className = 'grid-item ' + widthClass + ' ' + heightClass;
-   
-   console.log(elem)
-   return elem;
- }
-	
-	$.fn.serializeObject = function() {
-
-	   var o = {};
-	   var a = this.serializeArray();
-
-	   $.each(a, function() {
-	       if (o[this.name]) {
-	           if (!o[this.name].push) {
-	               o[this.name] = [o[this.name]];
-	           }
-	           o[this.name].push(this.value || '');
-
-	       } else {
-	           o[this.name] = this.value || '';
-	       }
-	   });
-
-	   return o;
-	};
-	/*
-	var ex1jQuery.fn.serializeObject = function() { 
-		var obj = null; 
-		try { 
-			if(this[0].tagName && this[0].tagName.toUpperCase() == "FORM" ) { 
-				var arr = this.serializeArray(); 
-				
-				if(arr) { obj = {}; 
-				jQuery.each(arr, function() { 
-					obj[this.name] = this.value; }); 
-				}
-		    } 
-		}catch(e) { 
-		    alert(e.message); 
-		}finally {} 
-		
-		return obj; 
-   }
-	
-   function to_ajax(){
- 
-       const serializedValues = $('#chatbotForm').serializeObject()
-
-       $.ajax({
-           type : 'post',
-           url : '/test.jsp',
-           data : JSON.stringify(serializedValues),
-           dataType : 'json',
-           error: function(xhr, status, error){
-               alert(error);
-           }
-           success : function(json){
-               alert(json)
-           },
-       });
- 
-   }
-	*/
-	
-	
 	// 소분류 값 가져오는 ajax
 	function getSmallCategory(bigCategory) {
 		$.ajax({
@@ -254,5 +177,5 @@
 	}
 
 </script>
-
-<script src="/resources/js/imageLoad.js"></script>
+<!-- 
+<script src="/resources/js/imageLoad.js"></script> -->
