@@ -195,11 +195,9 @@
 							var str = '<tr>';
 							str = str + '<td style="'+myTitle+'">'+getAllTitle[i].titleName+'</td>';
 							str = str + '<td>'+getAllTitle[i].titleDetail+'</td>';
-							if (myTitle && getAllTitle[i].chooseTitle == "N") {
+							if (myTitle) {
 							str = str + '<td><button class="btn btn-sm btn-red choosenBtn '+chooseTitle+' btn'+getAllTitle[i].titleIdx+' " onclick="choosen('+getAllTitle[i].titleIdx+')">칭호 선택</button></td>';
-							} else if(getAllTitle[i].chooseTitle == "Y"){
-							str = str + '<td><button class="btn btn-sm btn-orange"> 선택 완료 </button></td>';
-							} else{
+							}else{
 							str = str + '<td></td>';
 							}
 							str = str + '</tr>';	
@@ -253,7 +251,8 @@
 					// 감춰져 있는 이전 칭호의 버튼 표시하기
 					
 					$("#title_result").find(".choosenBtn").removeClass('display-none');
-					$('.btn' + titleIdx).addClass('display-none');
+					
+					$('.btn' + titleIdx).addClass('btn btn-sm btn-orange choosenBtn '+chooseTitle+' btn'+getAllTitle[i].titleIdx);
 				}
 			})
 		}
