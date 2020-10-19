@@ -75,7 +75,7 @@
 				<form action="/product/writePro" method="post" id="frm" accept-charset="utf-8">
 				<input type="hidden" name="prcode" value="${prcode}" />
 				<input type="hidden" name="prname" value="${prname}" />
-				<input type="hidden" value="${dept}" name="dept">
+				<input type="hidden" name="kind" value="${kind}" />
 				<table class="tableCss table">
 					<tr>
 						<th>제목</th>

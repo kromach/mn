@@ -107,15 +107,18 @@ public class ProductController {
 	@RequestMapping("productdetail")
 		public String productdetail	(HttpServletRequest request, Model model) throws SQLException {
 		String prcode = request.getParameter("prcode");
+		List list = null;
 		
 		ProductVo info =productservice.getproductinfo(prcode);
+		
+//		int count = productservice.getarticlecount(prcode);
+//		if(count > 0) {
+//			list = productservice.getarticle(prcode);
+//			model.addAttribute("list", list);
+//		}
+//		
 		model.addAttribute("info", info);
 		model.addAttribute("prcode", prcode);
-		System.out.println(info);
-		
-		// 총 코멘트 수 / 좋아요 수 
-		HashMap commmetStarinfo = null;
-	
 		
 		return "product/productdetail.mn";
 	}
@@ -361,15 +364,13 @@ public class ProductController {
 				String prcode = request.getParameter("prcode");
 				String prname = request.getParameter("prname");
 				
-			
+				
 				dto.setKind(kind);
 				dto.setDkCode(prcode);
 				System.out.println(dto);
-				//insert
 				int result = articleService.insertItem(dto);
-				//imgInsert
-				//insertTags
-				return "redirect:/article";
+				
+				return "redirect:productdetail?prcode="+prcode;
 			}
 	
 	//////ajax 

@@ -35,7 +35,12 @@ public interface ProductService extends CommonInterface {
 	// 판매상품 좋아요
 	public int like(String prCode, String memId,String insertId);
 	public int unlike(String prCode, String memId,String insertId);
-	
+	// 판매리뷰 수 가져오기
+	public int getarticlecount(String prcode) throws SQLException; 
+	// 판매리뷰 가져오기
+	public List getarticle(String prcode) throws SQLException;
+	// 재고수량 가져오기
+	public int getamount(String prcode) throws SQLException;
 	
 
 }
