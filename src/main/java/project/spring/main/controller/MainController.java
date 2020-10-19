@@ -75,9 +75,9 @@ public class MainController {
 			List<EventVO> event = service.getEventInitial(0);
 			for(EventVO vo : event) {
 				MainVO mainVo = new MainVO();
-				String aLinkUri = "/event/detail?event="+vo.getEventCode();
+				String aLinkUri = "/event/detail?eventCode="+vo.getEventCode();
 				mainVo.setaLinkUri(aLinkUri);
-				mainVo.setImgUri("/resources/img/upload/"+vo.getThumImg());
+				mainVo.setImgUri(vo.getThumImg());
 				main.add(mainVo);
 			}
 		//shuffle

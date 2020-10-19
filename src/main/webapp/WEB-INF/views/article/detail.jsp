@@ -22,7 +22,11 @@
 						<td>좋아요</td>
 					</tr>	
 					<tr> 
-						<td>${articleDTO.nickname}</td>
+						<td>
+						<span class="btn btn-blue btn-xs default">${articleDTO.writerTitleCnt}</span>
+						<span class="titleName">${articleDTO.writerTitleName}</span>
+						${articleDTO.nickname}
+						</td>
 						<td><fmt:formatDate value="${articleDTO.insertDay}" pattern="yyyy.MM.dd"/></td>
 						<td>${articleDTO.readcount}</td>
 						<td>${articleDTO.heart}</td>
@@ -55,7 +59,12 @@
 					<c:forEach var="articleReplyDTO" items="${reply}">
 					<tr class="reply">
 						<td colspan="2">${articleReplyDTO.bnComment}</td>
-						<td>${articleReplyDTO.nickname}</td>
+						<!--칭호필요-->
+						<td>
+						<span class="btn btn-blue btn-xs default">${articleReplyDTO.writerTitleCnt}</span>
+						<span class="titleName">${articleReplyDTO.writerTitleName}</span>
+						${articleReplyDTO.nickname}
+						</td>
 						<td><fmt:formatDate value="${articleReplyDTO.insertDay}" pattern="yyyy.MM.dd"/>
 							<c:if test="${articleReplyDTO.insertId eq sessionScope.memId}">
 								<button onclick="deleteReply('${articleReplyDTO.coIdx}','${sessionScope.memId}')">글 삭제</button>
@@ -116,7 +125,14 @@
 					<c:forEach var="articleDTO" items="${list}">
 						<tr >
 							<td><a href="/article/detail?idx=${articleDTO.bnIdx}">${articleDTO.bnTitle}</a></td>
-							<td><a href="/article/detail?idx=${articleDTO.bnIdx}">${articleDTO.nickname}</a></td>
+							<td>
+								<a href="/article/detail?idx=${articleDTO.bnIdx}">
+									<span class="btn btn-blue btn-xs default">${articleDTO.writerTitleCnt}</span>
+									<span class="titleName">${articleDTO.writerTitleName}</span>
+									${articleDTO.nickname}
+									</td>
+								</a>
+							</td>
 							<td><a href="/article/detail?idx=${articleDTO.bnIdx}"><fmt:formatDate value="${articleDTO.insertDay}" pattern="yyyy.MM.dd"/></a></td>
 							<td><a href="/article/detail?idx=${articleDTO.bnIdx}">${articleDTO.readcount}</a></td>
 							<td><a href="/article/detail?idx=${articleDTO.bnIdx}">${articleDTO.heart}</a></td>
@@ -258,11 +274,12 @@ function replyReload(index,idx,session){
 			console.log(data);
 			for(var i=len-1;i>=0;i--){
 				
+				
 				if(session == data[i].insertId){
-					$("<tr class='reply'><td colspan='2'>"+data[i].bnComment+"</td><td>"+data[i].nickname+"</td><td>"+
+					$("<tr class='reply'><td colspan='2'>"+data[i].bnComment+"</td><td><span class='btn btn-blue btn-xs default'>"+data[i].writerTitleCnt+"</span><span class='titleName'>"+data[i].writerTitleName+"</span>"+data[i].nickname+"</td><td>"+
 							moment(new Date(data[i].insertDay)).format('YYYY.MM.DD')+"&nbsp;<button type='button' onclick=\"deleteReply("+"\'"+data[i].coIdx+"\',\'"+session+"\')\">글삭제</button></td></tr>").insertAfter('table tr:eq(5)');					
 				}else{			
-					$("<tr class='reply'><td colspan='2'>"+data[i].bnComment+"</td><td>"+data[i].nickname+"</td><td>"+
+					$("<tr class='reply'><td colspan='2'>"+data[i].bnComment+"</td><td><span class='btn btn-blue btn-xs default'>"+data[i].writerTitleCnt+"</span><span class='titleName'>"+data[i].writerTitleName+"</span>"+data[i].nickname+"</td><td>"+
 						moment(new Date(data[i].insertDay)).format('YYYY.MM.DD')+"</td></tr>").insertAfter('table tr:eq(5)');
 					}
 			}
@@ -296,7 +313,7 @@ function more(){
 		url : context + '/more?num='+moreVal,
 		type : "post",
 		success : function(data) {
-			console.log("Object.keys Length : ",Object.keys(data).length);
+			console.log(data);
 			var endlen = Object.keys(data).length;
 			if(endlen != 0){			
 				for(var i in data){
