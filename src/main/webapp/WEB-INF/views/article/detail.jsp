@@ -13,7 +13,7 @@
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="detail-item detail-width6">
-				<h2 class="pad-top10 pad-bottom10">${articleDTO.bnTitle}</h2>
+				<h2 class="pad-top10 pad-bottom10">${memId}${articleDTO.bnTitle}</h2>
 				<table class="detailTbl tbl-lg" style="margin: auto;text-align: center;">
 					<tr>
 						<td>작성자</td>
@@ -100,10 +100,10 @@
 			</div>
 			<div class="detail-item detail-width6">
 				<div class="text-center pad-top10 pad-bottom20">
-					<c:if test="${memId eq 'admin' && articleDTO.kind eq 'F'} ">	
+					<c:if test="${memId eq 'admin' && articleDTO.kink eq 'F'} ">	
 						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="글이동" onclick="move('${articleDTO.bnIdx}')">
 					</c:if>
-					<c:if test="${memId eq 'admin' && articleDTO.kind eq 'C'} ">	
+					<c:if test="${memId eq 'admin'&& articleDTO.kink eq 'C'} ">	
 						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="되돌리기" onclick="move('${articleDTO.bnIdx}','back')">
 					</c:if>
 					<c:if test="${memId eq articleDTO.insertId}">
