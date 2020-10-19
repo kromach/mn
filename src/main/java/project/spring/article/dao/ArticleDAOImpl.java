@@ -250,4 +250,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 	public List<ArticleDTO> searchPost() {
 		return sqlSession.selectList("article.searchAllPost");
 	}
+	@Override
+	public int backArticle(int num) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("article.backArticle", num);
+	}
 }

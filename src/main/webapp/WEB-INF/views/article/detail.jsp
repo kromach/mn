@@ -100,11 +100,11 @@
 			</div>
 			<div class="detail-item detail-width6">
 				<div class="text-center pad-top10 pad-bottom20">
-					<c:if test="${memId eq 'admin' && articleDTO.kink eq 'F'} ">	
-						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="글이동" onclick="move('${articleDTO.bnIdx}')">
-					</c:if>
-					<c:if test="${memId eq 'admin'&& articleDTO.kink eq 'C'} ">	
+					<c:if test="${articleDTO.kind eq 'C' }">
 						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="되돌리기" onclick="move('${articleDTO.bnIdx}','back')">
+					</c:if>
+					<c:if test="${articleDTO.kind eq 'F' }">
+						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="글이동" onclick="move('${articleDTO.bnIdx}','move')">
 					</c:if>
 					<c:if test="${memId eq articleDTO.insertId}">
 						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="수정" onclick="window.location.href='/article/update?bnIdx=${articleDTO.bnIdx}'">
@@ -241,14 +241,14 @@ function replyCancle(bnIdx){
 	var session = '<c:out value="${memId}"/>';
 	$('textarea#content_textArea').val('');
 }
-function move(bnIdx,back){
-	alert(back);
+function move(bnIdx,code){
+	alert(code);
 	var session = '<c:out value="${memId}"/>';
 	var context = window.location.pathname.substring(0,
 			window.location.pathname.indexOf("/", 2));
 	if(session!=''&&session=='admin'){
 		$.ajax({
-			url : context + '/move?num='+bnIdx,
+			url : context + '/move?num='+bnIdx+'&code='+code,
 			type : "post",
 			success : function(data) {
 				console.log(data);

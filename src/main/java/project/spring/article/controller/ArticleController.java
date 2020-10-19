@@ -358,10 +358,17 @@ public class ArticleController {
 		}
 		@RequestMapping(value = "/move")
 		@ResponseBody
-		public int moveSs(@RequestParam(name="num",required = false) Integer num) {
+		public int moveSs(@RequestParam(name="num",required = false) Integer num,
+				@RequestParam(name="code",required = false) String code
+				) {
 			int result = 0;
-			//result = articleService.searchArticleByAdd(num);
-			result = articleService.moveArticle(num);
+			System.out.println("CODE===="+code);
+			
+			if(code.equals("move")) {
+				result = articleService.moveArticle(num);
+			}else if(code.equals("back")) {
+				result = articleService.backArticle(num);
+			}
 			return result;
 		}
 	}	

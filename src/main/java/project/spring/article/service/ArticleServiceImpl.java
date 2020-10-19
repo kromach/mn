@@ -139,4 +139,8 @@ public class ArticleServiceImpl implements ArticleService{
 		// TODO Auto-generated method stub
 		return articleDAOimpl.searchPost();
 	}
+	@Override
+	public int backArticle(int num) {
+		return articleDAOimpl.backArticle(num);
+	}
 }

@@ -31,4 +31,5 @@ public interface ArticleDAO extends CommonInterface{
 	public List<ArticleDTO> searchPost(
 			String selectOption, String search);
 	public List<ArticleDTO> searchPost();
+	public int backArticle(int num);
 }

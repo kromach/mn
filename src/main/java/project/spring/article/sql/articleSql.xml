@@ -132,6 +132,9 @@
   	<update id="moveArticle" parameterType="int"> 
 		UPDATE BOARD_NORMAL SET kind = 'C' WHERE BN_IDX = #{value}	
   	</update>
+  	<update id="backArticle" parameterType="int"> 
+		UPDATE BOARD_NORMAL SET kind = 'F' WHERE BN_IDX = #{value}	
+  	</update>
   	<update id="updateArticle" parameterType="ArticleDTO">
 	  	update BOARD_NORMAL set bn_title=#{bnTitle} , content=#{content} where bn_idx = #{bnIdx}
   	</update>
