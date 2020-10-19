@@ -26,10 +26,20 @@
   		<select id="userIdCh" parameterType="string" resultType="string">
   			SELECT user_kind FROM MEMBER_INFO mi WHERE ID = #{value}
   		</select>
-  		<update id="salesModify" parameterType="productvo">
-  		 	UPDATE PRODUCT_INFO SET PR_AMOUNT = 999 WHERE PR_CODE ='PR00006';
-  		</update>
   		
+  		<select id="getCategory" resultType="camelmap">
+  			<![CDATA[
+  				SELECT * FROM DRINK_CATEGORY dc WHERE SUPER_CODE ='B003' ORDER BY CT_IDX
+  			]]>
+  		</select>
+  		<update id="salesModify" parameterType="productvo">
+	  		<![CDATA[
+  		 	UPDATE PRODUCT_INFO SET PR_AMOUNT = 999 WHERE PR_CODE ='PR00006'
+  		 	]]>
+  		</update>
+  		<select id="makeprCode" resultType="String">
+  			SELECT 'PR' || LPAD( (SELECT COUNT(PR_CODE) + 1 FROM PRODUCT_INFO), 5, '0') AS CODE FROM DUAL
+  		</select>
   		
   		
   </mapper>
