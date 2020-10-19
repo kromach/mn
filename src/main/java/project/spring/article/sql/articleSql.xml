@@ -97,7 +97,7 @@
   	</insert>
   	<insert id="insertTags" parameterType="ArticleDTO">
 	insert into BOARD_NORMAL (BN_IDX,BN_TITLE,KIND ,DK_CODE,READCOUNT,HEART,REPORT,CONTENT,INSERT_ID,INSERT_DAY,IS_DELETE )
-	values (BOARD_NORMAL_SEQ.nextval,#{bnTitle},default,#{dkCode},#{readcount},#{heart},#{report},#{content},
+	values (BOARD_NORMAL_SEQ.nextval,#{bnTitle},#{kind},#{dkCode},#{readcount},#{heart},#{report},#{content},
 	#{insertId},default,default)
   	</insert>
   	<insert id="insertImg" parameterType="Editor_imageVO">
