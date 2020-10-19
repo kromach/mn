@@ -25,7 +25,7 @@
   		select count(*)from drink_Info
   	</select>
   	
-  	<select id="drinkList" parameterType="hashmap" resultType="DrinkVO">
+  	<select id="drinkList" parameterType="hashmap" resultType="project.spring.drink.vo.DrinkVO">
   	  	<![CDATA[
 	  		select a.* from(
 	  			select aa.*, rownum r from(

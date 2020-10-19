@@ -8,7 +8,7 @@
   	</select>
   
   	<select id="eventList" resultType="eventVO">
-  		select * from event where is_open='Y'
+  		select event_code, thum_img from event where is_open='Y'
   	</select>
   
   </mapper>
