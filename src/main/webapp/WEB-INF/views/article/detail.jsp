@@ -313,12 +313,13 @@ function more(){
 		url : context + '/more?num='+moreVal,
 		type : "post",
 		success : function(data) {
-			console.log(data);
 			var endlen = Object.keys(data).length;
 			if(endlen != 0){			
 				for(var i in data){
 					$("#more > tbody:last").append('<tr><td>'+data[i].bnTitle
-										+'</td><td>'+data[i].insertId
+										+'</td><td><span class="btn btn-blue btn-xs default">'+data[i].writerTitleCnt+'</span>'
+										+'<span class="titleName">'+data[i].writerTitleName+'</span>'
+										+ data[i].nickname
 										+'</td><td>'+moment(new Date(data[i].insertDay)).format('YYYY.MM.DD') 
 										+'</td><td>'+data[i].readcount
 										+'</td><td>'+data[i].heart
