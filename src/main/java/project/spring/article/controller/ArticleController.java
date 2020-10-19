@@ -237,13 +237,13 @@ public class ArticleController {
 		@RequestMapping(value = "/like")
 		@ResponseBody
 		public int likeSs(@RequestParam(name="num",required = false) Integer num,
-						@RequestParam(name="nick",required = false) String memNickName,
+						@RequestParam(name="id",required = false) String memId,
 						@RequestParam(name="insertId",required = false) String insertId
 				) {
 			
 			//기본값 -1
 			int result = -1;
-			result = articleService.like(num,memNickName,insertId);
+			result = articleService.like(num,memId,insertId);
 			//unlike
 			return result;
 		}

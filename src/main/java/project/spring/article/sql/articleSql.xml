@@ -74,7 +74,7 @@
   		INSERT INTO EDITOR_IMAGE VALUES (EDITOR_IMAGE_SEQ.nextVal,#{img_url},#{kind},#{code})
   	</insert>
   	<insert id="like_log" parameterType="hashmap">
-  		insert into board_like values(board_like_seq.nextVal,#{num},#{memNickName})
+  		insert into board_like values(board_like_seq.nextVal,#{num},#{memId})
   	</insert>
   	<update id="updateMyActGivenHeart" parameterType="string">
   		update MY_ACTIVITY set GIVEN_HEART = GIVEN_HEART+1 where id=#{value}

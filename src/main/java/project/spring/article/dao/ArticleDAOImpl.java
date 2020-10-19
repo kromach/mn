@@ -137,9 +137,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 		sqlSession.update("article.plusOneReadCount",idx);
 	}
 	@Override
-	public int like(Integer num,String memNickName,String insertId) {
+	public int like(Integer num,String memId,String insertId) {
 		HashMap map = new HashMap();
-		map.put("memNickName", memNickName);
+		map.put("memId", memId);
 		map.put("num",num);
 		int count = sqlSession.selectOne("article.alreadyLike",map);
 		System.out.println("alreadyCountLike"+count);

@@ -146,7 +146,7 @@ var context = window.location.pathname.substring(0,
 var session = '<c:out value="${memId}"/>';
 	if(session!=''){
 	$.ajax({
-		url : context + '/like?num='+bnIdx+'&nick=${memNickName}&insertId='+insertId,
+		url : context + '/like?num='+bnIdx+'&id=${memId}&insertId='+insertId,
 		type : "post",
 		success : function(data) {
 			if(data == -1){
