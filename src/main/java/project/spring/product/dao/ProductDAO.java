@@ -34,5 +34,8 @@ public interface ProductDAO extends CommonInterface {
 	public List getorderlist(HashMap map) throws SQLException;
 	// 주문들어온 수 카운트 
 	public int getordercount (HashMap map) throws SQLException;
+	// 판매상품 좋아요
+	public int like(String prCode, String memId,String insertId);
+	public int unlike(String prCode, String memId,String insertId);
 
 }

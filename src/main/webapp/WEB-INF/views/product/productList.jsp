@@ -17,7 +17,7 @@
 	<form action="productlist" name="schForm" id="schForm" method="get">
 		<input type="hidden" name="isSearch" value="true" />
 		<div class="ssec pad-top15">
-			<p class="slabel fl">주류구분</p>
+			<p class="s_label fl">주류구분</p>
 			<select name="Skind" class="sel short">
 				<option selected="selected">소분류 선택</option>
 				<option value="S006">탁주</option>
@@ -30,15 +30,15 @@
 			</select>
 		</div>
 		<div class="ssec pad-top15">
-			<p class="slabel fl">검색어 </p>
+			<p class="s_label fl">검색어 </p>
 			<input type="text" name="name" class="input" value="${name}">
 		</div>
 		<div class="clfix ssec pad-top15" style="pading:10px 0;">
-			<p class="slabel fl">알콜도수</p>
+			<p class="s_label fl">알콜도수</p>
 		    <div class="fl" style="width:400px"><input type="text" class="js-range-slider" name="prAlcohol"/></div>
 		</div>
 		<div class="clfix ssec pad-top15" style="pading:10px 0;">
-			<p class="slabel fl">금액</p>
+			<p class="s_label fl">금액</p>
 		    <div class="fl" style="width:400px"><input type="text" class="js-range-slider1" name="prPrice"/></div>
 		</div>
 		<div class="ssec pad-top15"><input type="submit" value="검색" class="btn btn-sm btn-blue" /></div>
