@@ -135,6 +135,31 @@
   			WHERE DK_CODE = #{dkCode}
   		</update>
   		
+  		<select id="selectDrinkLikeInfo" parameterType="hashmap" resultType="String">
+			SELECT CASE COUNT(ML_IDX) WHEN 0 THEN 'N' ELSE 'Y' END AS likeYn FROM MY_LIKE WHERE ML_KIND = 'DK' AND ML_VALUE = 'DK00001' AND INSERT_ID = 'kromach04@gmail.com'
+  		</select>
+  		
+  		<!-- likeYn 현재 좋아요 상태 : Y - 좋아요, N - 미등록  -->
+  		
+  		<insert id="insertDrinkLikeInfo" parameterType="hashmap">
+			INSERT INTO MY_LIKE VALUES(MY_LIKE_SEQ.NEXTVAL, 'DK', #{dkCode}, #{memId})
+   		</insert>
+   		
+  		<delete id="deleteDrinkLikeInfo" parameterType="hashmap">
+  			DELETE FROM MY_LIKE WHERE ML_KIND = 'DK' AND ML_VALUE = #{dkCode} AND INSERT_ID = #{memId}
+   		</delete>
+   		
+  		<update id="updateDrinkLikeCount" parameterType="hashmap">
+  			UPDATE DRINK_INFO SET   				
+				<if test="likeYn == 'Y'">
+					DK_LIKE = DK_LIKE - 1
+				</if>
+				<if test="likeYn != 'Y'">
+					DK_LIKE = DK_LIKE + 1
+				</if>
+  			WHERE DK_CODE = #{dkCode}
+   		</update>
+   		  		
   		<!-- <select id="userCount" resultType="int">
   			select count(*) from test
   		</select>

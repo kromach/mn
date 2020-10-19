@@ -94,6 +94,43 @@ public class DrinkDAOImpl implements DrinkDAO {
 		return str;
 	}
 
+	@Override
+	public String selectDrinkLikeInfo(HashMap drinkLikeMap) throws SQLException {
+		
+		return sqlSession.selectOne("drink.selectDrinkLikeInfo", drinkLikeMap);
+	}
+
+	@Override
+	public String updateDrinkLikeInfo(HashMap drinkLikeMap) throws SQLException {
+		
+		String likeYn = (String)drinkLikeMap.get("likeYn"); // 변경 전 상태
+		String result = ""; // DB 업데이트 후 상태
+		int res = 0;
+		System.out.println("dao 변경 전 " + likeYn);
+		if (likeYn.equals("Y")) {
+			res = sqlSession.delete("drink.deleteDrinkLikeInfo", drinkLikeMap);
+		} else {
+			res = sqlSession.insert("drink.insertDrinkLikeInfo", drinkLikeMap);
+		}
+		
+		if(res == 1 && likeYn.equals("Y")) {
+			result = "N";
+		}
+		
+		if(res == 1 && likeYn.equals("N")) {
+			result = "Y";
+		}
+		
+		return result;
+	}
+
+	@Override
+	public void updateDrinkLikeCount(HashMap drinkLikeMap) throws SQLException {
+		int res = sqlSession.update("drink.updateDrinkLikeCount", drinkLikeMap);
+		
+		System.out.println("like 업데이트 개수 " + res );
+	}
+
 	/*
 	@Override
 	public void insertAticle(BoardDTO dto) throws SQLException {

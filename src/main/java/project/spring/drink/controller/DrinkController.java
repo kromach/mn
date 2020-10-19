@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -149,6 +150,25 @@ public class DrinkController {
 		
 		//System.out.println(tagCloudInfo);
 		
+		// 주류 정보 좋아요 정보 
+		HttpSession session =  request.getSession();
+		
+		String memId = null;
+		String drinkLikeInfo = null;
+		if(session.getAttribute("memId") != null) { // session id
+			memId = (String)session.getAttribute("memId");
+			
+			// 아이디의 현재 좋아요 여부 가져오기 
+			HashMap drinkLikeMap = new HashMap();
+			
+			drinkLikeMap.put("dkCode", dkCode);
+			drinkLikeMap.put("memId", memId);
+			
+			drinkLikeInfo = drinkService.selectDrinkLikeInfo(drinkLikeMap);
+		}
+		
+		//System.out.println(drinkLikeInfo);
+		
 		// request에 담긴 검색 결과 뽑아내기  
 		String schDkBkind = null;
 		String schDkSkind = null;
@@ -180,6 +200,7 @@ public class DrinkController {
 		model.addAttribute("commentStarInfo", commentStarInfo);
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("tagCloudInfo", tagCloudInfo);
+		model.addAttribute("drinkLikeInfo", drinkLikeInfo);
 //		
 //		System.out.println(selectDrinkInfo.getDkName());
 //		System.out.println(selectDrinkInfo.getDkBkindValue());
@@ -401,5 +422,25 @@ public class DrinkController {
 
 		return "drink/insertPro";
 	}
+	
+	// AJAX - 주류 정보 좋아요 / 좋아요 취소
+	@RequestMapping("like")
+	@ResponseBody
+	public String drinkLikeSs(@RequestParam String dkCode, @RequestParam String memId) throws SQLException, IOException {
+		
+		//List<HashMap> smallCategoryList = drinkService.selectSmallCategoryList(bigCategory);
+		//System.out.println(smallCategoryList);
+		HashMap drinkLikeMap = new HashMap();
+		
+		drinkLikeMap.put("dkCode", dkCode);
+		drinkLikeMap.put("memId", memId);
+		
+		//model.addAttribute("drinkLikeInfo", drinkLikeInfo);		
+		
+		String drinkLikeInfo =  drinkService.updateDrinkLikeInfo(drinkLikeMap);
+		
+		return drinkLikeInfo;
+	}
+
 }
 

@@ -31,7 +31,9 @@
 					<dd class="clfix">${drinkInfo.dkFood} </dd>
 				</dl>
 				<div>
-					<button class="btn btn-lg btn-blue" onclick="">좋아요</button>
+					
+					<input type="hidden" id="drinkLikeYN" value="${drinkLikeInfo}" />
+					<span id="like-btn"></span>
 					<a class="btn btn-lg btn-yellow" onclick="">후기등록</a>
 					<%-- <c:if test="${sessionScope.userKind eq 'admin' }"> --%>
 					<a class="btn btn-lg btn-mint" href="modify?dkCode=${drinkInfo.dkCode}" >수정</a> <!-- 관리자만 노출 -->
@@ -109,6 +111,9 @@
 </div>
 <script>
 	$(function() {
+		
+		likeBtnToggle();
+		
 		var msnry = new Masonry('.grid2', {
 			itemSelector : '.detail-item',
 			columnWidth : '.detail-sizer',
@@ -250,6 +255,36 @@
 	  		}
 	  	});
 	});
+	
+	function likeBtnToggle(){
+		console.log($('#drinkLikeYN').val());
+		var btn = "";
+
+		if($('#drinkLikeYN').val() == 'Y') {
+			btn = '<button class="btn btn-lg btn-gray" onclick="like(\'${drinkInfo.dkCode}\', \'N\')">좋아요 취소</button>'
+		} else {
+			btn = '<button class="btn btn-lg btn-blue" onclick="like(\'${drinkInfo.dkCode}\', \'Y\')">좋아요</button>'
+		}
+		
+		$("#like-btn").empty().html(btn);
+	}
+	
+	function like(dkCode, likeYn) {
+		$.ajax({
+			url : 'like?dkCode='+dkCode+'&memId=${memId}',
+			type : "post",
+			success : function(data) {
+				console.log(data);
+				// 1. input hedden 업데이트 
+				// 2. 버튼 새로고침
+				
+				// 3. 좋아요 개수 업데이트
+			},
+			error : function() {
+				alert("error");
+			}
+		});
+	}
 </script>
 
 <script type="text/javascript">
