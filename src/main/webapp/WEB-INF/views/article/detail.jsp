@@ -316,9 +316,11 @@ function more(){
 			var endlen = Object.keys(data).length;
 			if(endlen != 0){			
 				for(var i in data){
+					var writerTitle = data[i].writerTitleName;
+					if(writerTitle == null )writerTitle = '';
 					$("#more > tbody:last").append('<tr><td>'+data[i].bnTitle
 										+'</td><td><span class="btn btn-blue btn-xs default">'+data[i].writerTitleCnt+'</span>'
-										+'<span class="titleName">'+data[i].writerTitleName+'</span>'
+										+'<span class="titleName">&nbsp;'+writerTitle+'</span>'
 										+ data[i].nickname
 										+'</td><td>'+moment(new Date(data[i].insertDay)).format('YYYY.MM.DD') 
 										+'</td><td>'+data[i].readcount
