@@ -341,14 +341,16 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .commentDiv .report .star i{color:#fe5016}
 .commentDiv .commentDay {float: left; width: 10%;}
 
+/* 주류 정보 입력 & 수정 */
+.dkImg{max-width:400px;}
 
 /*반응형웹(검색영역)*/
 .grid-Wrapper{width:100% ; text-align: center; }
 .grid { width:80% ; display: inline-block;}
 .grid2 { width:60% ; display: inline-block;}
 .grid-item, .detail-item {margin-bottom:10px; border-radius: 10px; overflow:hidden;}
-.grid-item img:hover{cursor: pointer; opacity: 0.5;}
-.grid-item img, .detail-item img {display: block; min-width:100%; max-width: 100%;}
+.grid-item > a >  img:hover{cursor: pointer; opacity: 0.5;}
+.grid-item > a > img, .detail-item > a > img {display: block; min-width:100%; max-width: 100%;}
 .grid-item figcaption {
 	border: 1.3px solid rgba(0, 0, 0, 0.2);
 	padding: 10px;
@@ -419,6 +421,7 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 	.grid { width:90% ;}
 	.grid2 { width:90% ;}
 	.search-area{width:90% ;}
+	.dkImg{max-width:200px;}
 }
 /*
 @media only screen and (min-width: 768px) and (max-width: 1023px) {

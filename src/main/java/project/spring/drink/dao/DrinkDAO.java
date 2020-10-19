@@ -32,5 +32,7 @@ public interface DrinkDAO {
 
 	void updateDrinkTag(HashMap tagInfo) throws SQLException;
 
+	String modifyDrink(DrinkVO drinkVo) throws SQLException;
+
 
 }
