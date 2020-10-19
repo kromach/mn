@@ -33,6 +33,7 @@
 				<div>
 					
 					<input type="hidden" id="drinkLikeYN" value="${drinkLikeInfo}" />
+					<input type="hidden" id="drinkLikeCount" value="${drinkInfo.dkLike}" />
 					<span id="like-btn"></span>
 					<a class="btn btn-lg btn-yellow" onclick="">후기등록</a>
 					<%-- <c:if test="${sessionScope.userKind eq 'admin' }"> --%>
@@ -258,27 +259,32 @@
 	
 	function likeBtnToggle(){
 		console.log($('#drinkLikeYN').val());
-		var btn = "";
-
-		if($('#drinkLikeYN').val() == 'Y') {
-			btn = '<button class="btn btn-lg btn-gray" onclick="like(\'${drinkInfo.dkCode}\', \'N\')">좋아요 취소</button>'
-		} else {
-			btn = '<button class="btn btn-lg btn-blue" onclick="like(\'${drinkInfo.dkCode}\', \'Y\')">좋아요</button>'
+		var likeCount = $('#drinkLikeCount').val();
+		var btn = '<button class="btn btn-lg btn-blue" onclick="like()">[heart] '+ likeCount +'</button>';
+		var heart = '<i class="far fa-heart"></i>';
+		
+		if($('#drinkLikeYN').val() == 'Y') { // 좋아요 상태면
+			heart = '<i class="fas fa-heart c_orange"></i>';
 		}
 		
-		$("#like-btn").empty().html(btn);
+		$("#like-btn").empty().html(btn.replace('[heart]', heart));
 	}
 	
-	function like(dkCode, likeYn) {
+	function like() {
 		$.ajax({
-			url : 'like?dkCode='+dkCode+'&memId=${memId}',
-			type : "post",
+			url : 'like?dkCode=${drinkInfo.dkCode}&memId=${memId}',
+			type : "POST",
 			success : function(data) {
-				console.log(data);
+				//console.log(data);
 				// 1. input hedden 업데이트 
-				// 2. 버튼 새로고침
+				$("#drinkLikeYN").val(data);
+
+				// 2. 좋아요 개수 업데이트
+				var likeCount = $('#drinkLikeCount').val();
+				$("#drinkLikeCount").val((data == 'Y' ? Number(likeCount) + 1 : Number(likeCount) - 1));
 				
-				// 3. 좋아요 개수 업데이트
+				// 3. 버튼 새로고침
+				likeBtnToggle();
 			},
 			error : function() {
 				alert("error");

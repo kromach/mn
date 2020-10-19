@@ -50,6 +50,6 @@ public interface DrinkService {
 	// 주류 정보 좋아요 업데이트
 	public String updateDrinkLikeInfo(HashMap drinkLikeMap) throws SQLException;
 
-
+	public void updateDrinkLikeCount(HashMap drinkLikeMap) throws SQLException;
 	
 }
