@@ -16,7 +16,7 @@
 				<div class="navi margin-bottom5">
 					<a href="productlist">${info.prBkindValue}</a> > <a href="productlist?isSearch=true&Skind=${info.prSkind}">${info.prSkindValue}</a>
 				</div>
-				<h3>${info.prName}</h3>
+				<h3>${info.prName} </h3>
 				
 				<dl class="clear">
 					<dt>양조장</dt>
@@ -31,8 +31,7 @@
 					<dd class="clfix">${info.prTotalcount} 병 </dd>
 				</dl>
 				<div>
-					<input type="button" value="후기등록" name="review" class="btn btn-sm btn-dark" onclick="window.location.href='/product/writeform'"/>
-					<input type="button" value="상품질의응답" name="prqna" class="btn btn-sm btn-dark" onclick="window.location.href='/product/writeform'"/>
+					<input type="button" value="후기등록"  class="btn btn-sm btn-dark" onclick="window.location.href='/product/writeform?kind=r&prcode=${info.prCode}&prname=${info.prName}'"/>
 					<button class="btn btn-lg btn-blue" onclick="like('${info.prCode}','${info.insertId }')">좋아요</button>
 					(${info.prLike})
 				</div>
