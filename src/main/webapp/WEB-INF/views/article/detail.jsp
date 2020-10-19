@@ -100,8 +100,11 @@
 			</div>
 			<div class="detail-item detail-width6">
 				<div class="text-center pad-top10 pad-bottom20">
-					<c:if test="${memId eq 'admin' }">	
+					<c:if test="${memId eq 'admin' and articleDTO.kind eq 'F'} ">	
 						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="글이동" onclick="move('${articleDTO.bnIdx}')">
+					</c:if>
+					<c:if test="${memId eq 'admin' and articleDTO.kind eq 'C'} ">	
+						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="되돌리기" onclick="move('${articleDTO.bnIdx}','back')">
 					</c:if>
 					<c:if test="${memId eq articleDTO.insertId}">
 						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="수정" onclick="window.location.href='/article/update?bnIdx=${articleDTO.bnIdx}'">
@@ -238,7 +241,8 @@ function replyCancle(bnIdx){
 	var session = '<c:out value="${memId}"/>';
 	$('textarea#content_textArea').val('');
 }
-function move(bnIdx){
+function move(bnIdx,back){
+	alert(back);
 	var session = '<c:out value="${memId}"/>';
 	var context = window.location.pathname.substring(0,
 			window.location.pathname.indexOf("/", 2));

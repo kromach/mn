@@ -33,6 +33,21 @@
   		select * from board_normal WHERE kind = 'F' ORDER BY INSERT_DAY DESC 
   		]]> 
   	</select>
+  	<select id="searchPostbyNick" parameterType="hashmap" resultType="ArticleDTO">
+  		<![CDATA[	
+  		SELECT * FROM BOARD_NORMAL bn ,MEMBER_INFO mi WHERE bn.INSERT_ID = mi.ID and mi.${selectOption} like '%'||#{search}||'%' and kind = 'C'
+  		]]>
+  	</select>
+  	<select id="searchPostbyOthers" parameterType="hashmap" resultType="ArticleDTO">
+  		<![CDATA[	
+  		SELECT * FROM BOARD_NORMAL bn ,MEMBER_INFO mi WHERE bn.INSERT_ID = mi.ID and bn.${selectOption} like '%'||#{search}||'%' and kind = 'C'
+  		]]>
+  	</select>
+  	<select id="searchAllPost" resultType="ArticleDTO">
+  		<![CDATA[	
+  		select * from board_normal WHERE kind = 'C' ORDER BY INSERT_DAY DESC 
+  		]]> 
+  	</select>
   	<select id="read" parameterType="int" resultType="ArticleDTO">
 	  	select bn.*,mi.NAME ,mi.NICKNAME,
 		(SELECT COUNT(T.ID) FROM MY_TITLE T WHERE T.ID = MI.ID) AS WRITER_TITLE_CNT, MY.TITLE_INDEX, TL.TITLE_NAME AS WRITER_TITLE_NAME from board_normal bn, MEMBER_INFO mi LEFT OUTER JOIN 
