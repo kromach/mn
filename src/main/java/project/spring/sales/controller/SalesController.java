@@ -134,6 +134,6 @@ public class SalesController {
 			     +"</script>");
 			printWriter.flush();
 			model.addAttribute("prCode", prCode);
-			return "redirect:/sales/index";
+			return "/sales/insertPro";
 	}
 }
