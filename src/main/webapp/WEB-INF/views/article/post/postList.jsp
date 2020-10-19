@@ -19,7 +19,7 @@
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
-				<form action="/article/articleSearch" name="articleSearch" id="articleSearch">
+				<form action="/article/post/postSearch" name="articleSearch" id="articleSearch">
 					<select id="selectOption" name="selectOption" class="selectOption">
 						<option value="NICKNAME">작성자</option>
 						<option value="CONTENT">내용</option>
@@ -27,9 +27,6 @@
 					</select>
 					검색어 : <input type="text" name="search" class="search"/>
 					<input type="submit" value="검색" class="btn btn-sm btn-blue" />
-					<c:if test="${not empty sessionScope.memId }">
-					<input type="button" value="글쓰기" class="btn btn-sm btn-dark" onclick="window.location.href='/article/writeForm'"/>
-					</c:if>
 				</form>
 			</div>
 			<!--검색이 아닌경우 -->
