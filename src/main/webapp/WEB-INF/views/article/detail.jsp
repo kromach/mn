@@ -100,10 +100,10 @@
 			</div>
 			<div class="detail-item detail-width6">
 				<div class="text-center pad-top10 pad-bottom20">
-					<c:if test="${memId eq 'admin' and articleDTO.kind eq 'F'} ">	
+					<c:if test="${memId eq 'admin' && articleDTO.kind eq 'F'} ">	
 						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="글이동" onclick="move('${articleDTO.bnIdx}')">
 					</c:if>
-					<c:if test="${memId eq 'admin' and articleDTO.kind eq 'C'} ">	
+					<c:if test="${memId eq 'admin' && articleDTO.kind eq 'C'} ">	
 						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="되돌리기" onclick="move('${articleDTO.bnIdx}','back')">
 					</c:if>
 					<c:if test="${memId eq articleDTO.insertId}">
