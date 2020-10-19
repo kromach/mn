@@ -36,7 +36,7 @@ $(function(){
          var context = window.location.pathname.substring(0,
 					window.location.pathname.indexOf("/", 2));
 		 var index = $('#index').val();
-         if( scrollTop + windowHeight +100 > documentHeight ){
+         if( scrollTop + windowHeight +20 > documentHeight ){
         	 fetchList(context,index);
 			}
 		})
