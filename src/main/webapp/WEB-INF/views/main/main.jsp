@@ -71,9 +71,9 @@ function fetchList(context,index){
 				// 재훈 테스트
 				// masonry 재 실행 
 				// $grid.masonry();
-    			$grid.masonry( 'reloadItems' );
-    			$grid.masonry();
 			}
+   			$grid.masonry( 'reloadItems' );
+   			$grid.masonry();
 		}
 	});
 }
