@@ -34,7 +34,10 @@
   		]]> 
   	</select>
   	<select id="read" parameterType="int" resultType="ArticleDTO">
-  		select bn.*,mi.NAME ,mi.NICKNAME from board_normal bn, MEMBER_INFO mi where bn.INSERT_ID = mi.ID AND BN_IDX = #{value}
+	  	select bn.*,mi.NAME ,mi.NICKNAME,
+		(SELECT COUNT(T.ID) FROM MY_TITLE T WHERE T.ID = MI.ID) AS WRITER_TITLE_CNT, MY.TITLE_INDEX, TL.TITLE_NAME AS WRITER_TITLE_NAME from board_normal bn, MEMBER_INFO mi LEFT OUTER JOIN 
+		(SELECT TITLE_INDEX, ID, CHOOSE_TITLE FROM MY_TITLE) MY ON mi.ID = MY.ID AND MY.CHOOSE_TITLE = 'Y' LEFT OUTER JOIN
+		TITLE_LIST TL ON MY.TITLE_INDEX = TL.TITLE_IDX where bn.INSERT_ID = mi.ID AND BN_IDX = #{value}
   	</select>
   	<select id="searchArticleByAdd" resultType="ArticleDTO" parameterType="int">
   	<![CDATA[	

@@ -124,7 +124,6 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 	@Override
 	public ArticleDTO read(int idx) {
-		
 		return sqlSession.selectOne("article.read", idx);
 	}
 	@Override
