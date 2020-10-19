@@ -346,7 +346,6 @@ public class ProductController {
 	//////ajax 
 	
 	//더보기
-	
 	@RequestMapping("more")
 	@ResponseBody
 	public List more(@RequestParam(name="num",required = false) Integer num,HttpSession session) throws SQLException {
@@ -356,6 +355,36 @@ public class ProductController {
 		
 		
 		return list;
+	}
+	
+	// 좋아요
+	@RequestMapping(value = "/like")
+	@ResponseBody
+	public int likeSs(@RequestParam(name="prCode",required = false) String prCode,
+					@RequestParam(name="memId",required = false) String memId,
+					@RequestParam(name="insertId",required = false) String insertId
+			) {
+		
+		//기본값 -1
+		int result = -1;
+		result = productservice.like(prCode,memId,insertId);
+		//unlike
+		return result;
+	}
+	
+	// 좋아요 취소??
+	@RequestMapping(value = "/unlike")
+	@ResponseBody
+	public int unlikeSs(@RequestParam(name="prCode",required = false) String prCode,
+			@RequestParam(name="memId",required = false) String memId,
+			@RequestParam(name="insertId",required = false) String insertId
+			) {
+		
+		//기본값 -1
+		int result = -1;
+		result = productservice.unlike(prCode,memId,insertId);
+		//unlike
+		return result;
 	}
 	
 

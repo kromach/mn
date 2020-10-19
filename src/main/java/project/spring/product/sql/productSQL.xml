@@ -206,5 +206,36 @@
 	<select id="insertdel" parameterType="ordervo" resultType="int">
 		update order_info set delivery_company =#{deliveryCompany}, delivery_num =#{deliveryNum} where or_code =#{orCode}
 	</select>
-
+	
+	<select id="alreadyLike" parameterType="hashmap" resultType="int">
+		select count(*) from product_like where id = #{memId} and pr_code = #{prCode}
+	</select>
+	<insert id="like_log" parameterType="hashmap">
+		insert into product_like values(product_like_seq.nextVal,#{prCode},#{memId})
+	</insert>
+	<delete id="like_log_undo" parameterType="hashmap">
+		delete from product_like where pr_code = #{prCode} and id =#{memId}
+	</delete>
+	<update id="like" parameterType="string">
+		update product_info set pr_like = pr_like+1 where pr_code =#{value}
+	</update>
+	<update id="like_undo" parameterType="string">
+		update product_info set pr_like = pr_like-1 where pr_code =#{value}
+	</update>
+	<insert id="updateMylikepr" parameterType="hashmap">
+		insert into MY_LIKE values(my_like_seq.nextVal,pr,#{prCode},#{memId})
+	</insert>
+	<delete id="updateMylikepr_undo" parameterType="hashmap">
+		delete MY_LIKE where ml_value=#{prCode} and insert_id=#{memId})
+	</delete>
+	<update id="updateMyActGivenHeart" parameterType="string">
+		update MY_ACTIVITY set GIVEN_HEART = GIVEN_HEART+1 where id =#{value}
+	</update>
+	<update id="updateMyActGivenHeart_undo" parameterType="string">
+  		update MY_ACTIVITY set GIVEN_HEART = GIVEN_HEART-1 where id=#{value}
+  	</update>
+	<select id="likeReturn" parameterType="String" resultType="int">
+		select pr_like from product_info where pr_code = #{value}
+  	</select>
+	
 </mapper>

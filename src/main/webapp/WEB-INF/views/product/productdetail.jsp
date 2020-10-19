@@ -31,7 +31,9 @@
 					<dd class="clfix">${info.prTotalcount} 병 </dd>
 				</dl>
 				<div>
-					<button class="btn btn-lg btn-blue" onclick="like('${articleDTO.bnIdx}','${articleDTO.insertId }')">좋아요</button>
+					<input type="button" value="후기등록" name="review" class="btn btn-sm btn-dark" onclick="window.location.href='/product/writeform'"/>
+					<input type="button" value="상품질의응답" name="prqna" class="btn btn-sm btn-dark" onclick="window.location.href='/product/writeform'"/>
+					<button class="btn btn-lg btn-blue" onclick="like('${info.prCode}','${info.insertId }')">좋아요</button>
 					(${info.prLike})
 				</div>
 			</div>
@@ -94,68 +96,68 @@
 	</div>
 </div>
 <script>
+
 	$(function() {
 		var msnry = new Masonry('.grid2', {
 			itemSelector : '.detail-item',
 			columnWidth : '.detail-sizer',
 			percentPosition : true,
-			gutter: '.gutter-sizer'
+			gutter : '.gutter-sizer'
 		});
 		imagesLoaded('.grid2').on('progress', function() {
 			msnry.layout();
 		});
 	});
-</script>
 
+	function SetAmount(upDown) {
+		var sel = document.getElementById("amount");
+		var price = document.getElementById("price").innerHTML;
 
-<script>							
-							
-	function SetAmount(upDown){						
-		var sel = document.getElementById("amount");					
-		var price = document.getElementById("price").innerHTML;					
-							
 		//console.log(tk_price);					
-							
-		if(upDown == 'M') {					
-			if(sel.selectedIndex > 0) {				
-				sel.selectedIndex--;			
-			}				
-		} else if(upDown == 'P') {					
-			if(sel.selectedIndex < 10) {				
-				sel.selectedIndex++;			
-			}				
-		}					
-		document.getElementById("totalprice").innerHTML = Number(price) * sel.selectedIndex;					
-	}	
-	
-	function like(bnIdx,insertId){
+
+		if (upDown == 'M') {
+			if (sel.selectedIndex > 0) {
+				sel.selectedIndex--;
+			}
+		} else if (upDown == 'P') {
+			if (sel.selectedIndex < 10) {
+				sel.selectedIndex++;
+			}
+		}
+		document.getElementById("totalprice").innerHTML = Number(price)
+				* sel.selectedIndex;
+	}
+	// 좋아요
+	function like(prCode, insertId) {
 		var context = window.location.pathname.substring(0,
 				window.location.pathname.indexOf("/", 2));
-		var session = '<c:out value="${memNickName}"/>';
-			if(session!=''){
+		var session = '<c:out value="${memId}"/>';
+		if (session != '') {
 			$.ajax({
-				url : context + '/like?num='+bnIdx+'&nick=${memNickName}&insertId='+insertId,
+				url : context + '/like?prCode=' + prCode
+						+ '&memId=${memId}&insertId=' + insertId,
 				type : "post",
 				success : function(data) {
-					if(data == -1){
+					if (data == -1) {
 						$.ajax({
-							url : context + '/unlike?num='+bnIdx+'&nick=${memNickName}&insertId='+insertId,
+							url : context + '/unlike?prCode=' + prCode
+									+ '&memId=${memId}&insertId='
+									+ insertId,
 							type : "post",
 							success : function(data_) {
 								console.log(data_);
-								alert("좋아요가 취소되었습니다.")	
+								alert("좋아요가 취소되었습니다.")
 							}
 						});
-					}else{
+					} else {
 						console.log(data);
 						alert("좋아요에 추가되셨습니다.")
-						}
 					}
-				});
-			}
-			else{
-				alert("로그인후 이용 가능한 서비스 입니다");
-			}
+				}
+			});
+		} else {
+			alert("로그인후 이용 가능한 서비스 입니다");
 		}
+	}
 </script>							
 

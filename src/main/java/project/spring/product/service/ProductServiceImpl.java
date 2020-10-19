@@ -155,6 +155,18 @@ public class ProductServiceImpl implements ProductService {
 		return ordercount;
 	}
 
+	@Override
+	public int like(String prCode, String memId, String insertId) {
+		int like = productDAO.like(prCode, memId, insertId);
+		return like;
+	}
+
+	@Override
+	public int unlike(String prCode, String memId, String insertId) {
+		int unlike = productDAO.unlike(prCode, memId, insertId);
+		return unlike;
+	}
+
 	
 
 

@@ -147,8 +147,8 @@ public class ProductDAOImpl implements ProductDAO {
 		
 		HashMap hash=sqlSession.selectOne("product.sql");
 		
-		int i = ((BigDecimal)hash.get("NEXTVAL")).intValue();
-		String a =(hash.get("'O'||(SELECTTO_CHAR(SYSDATE,'YYYYMMDD')FROMDUAL)||ORDER_INFO_SEQ")).toString();
+		int i = ((BigDecimal)hash.get("NEXTVAL")).intValue(); 
+		String a =(hash.get("'O'||(SELECT TO_CHAR(SYSDATE,'YYYYMMDD') FROM DUAL)|| ORDER_INFO_SEQ")).toString();
 		String c = a.substring(a.lastIndexOf("=")+1);
 		String b =c.substring(0,c.length()-1);
 		
@@ -184,6 +184,39 @@ public class ProductDAOImpl implements ProductDAO {
 		int ordercount = sqlSession.selectOne("product.selcount",map);
 		System.out.println("ordercount : "+ ordercount);
 		return ordercount;
+	}
+
+	@Override
+	public int like(String prCode, String memId, String insertId) {
+		HashMap map = new HashMap();
+		map.put("prCode", prCode);
+		map.put("memId", memId);
+		int count = sqlSession.selectOne("product.alreadyLike", map);
+		System.out.println("alreadyCountLike"+count);
+		if(count == 0) {
+			sqlSession.insert("product.like_log",map);
+			sqlSession.update("product.like", prCode);
+			//sqlSession.update("product.updateMyActGivenHeart",insertId);
+			//sqlSession.update("product.updateMylikepr",insertId);
+			return sqlSession.selectOne("product.likeReturn",prCode); 
+		}
+		return -1;
+	}
+
+	@Override
+	public int unlike(String prCode, String memId, String insertId) {
+		HashMap map = new HashMap();
+		map.put("prCode", prCode);
+		map.put("memId", memId);
+		int count = sqlSession.selectOne("product.alreadyLike", map);
+		if(count == 1) {
+			sqlSession.delete("product.like_log_undo",map);
+			sqlSession.update("product.like_undo", prCode);
+			//sqlSession.update("product.updateMyActGivenHeart_undo",insertId);
+			//sqlSession.update("product.updateMylikepr_undo",insertId);
+			return sqlSession.selectOne("product.likeReturn",prCode); 
+		}
+		return -1;
 	}
 
 
