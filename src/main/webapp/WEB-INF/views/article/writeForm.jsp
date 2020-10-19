@@ -80,15 +80,9 @@
 							placeholder="제목"></td>
 					</tr>
 					<tr>
-						<th>술 검색</th>
+						<th>술이름</th>
 						<td><input id="dkSch" name="dkSch" class="boardTitle_middle" />
 						<button type="button" class="btn btn-sm btn-grey" onclick="searchDk()">검색</button></td>
-					</tr>
-					<tr>
-						<th>술 선택</th>
-						<td><select id="option" name="dkCode">
-								<option >선택</option>
-						</select></td>
 					</tr>
 					<tr>
 						<td style="margin: 0; padding: 0;" colspan="2">

@@ -1,5 +1,6 @@
 package project.spring.product.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import project.spring.article.service.ArticleServiceImpl;
+import project.spring.article.vo.ArticleDTO;
 import project.spring.beans.PageVO;
 import project.spring.beans.Pager;
 import project.spring.member.service.MemberServiceImpl;
@@ -24,6 +28,7 @@ import project.spring.product.service.ProductService;
 import project.spring.product.service.ProductServiceImpl;
 import project.spring.product.vo.OrderVo;
 import project.spring.product.vo.ProductVo;
+import project.spring.product.vo.ProductboardVo;
 
 @Controller
 @EnableWebMvc
@@ -34,6 +39,8 @@ public class ProductController {
 	private ProductServiceImpl productservice = null;
 	@Autowired
 	private MemberServiceImpl memberservice = null;
+	@Autowired
+	private ArticleServiceImpl articleService = null;
 	
 	
 	@RequestMapping("productlist")
@@ -101,9 +108,9 @@ public class ProductController {
 		public String productdetail	(HttpServletRequest request, Model model) throws SQLException {
 		String prcode = request.getParameter("prcode");
 		
-		
 		ProductVo info =productservice.getproductinfo(prcode);
 		model.addAttribute("info", info);
+		model.addAttribute("prcode", prcode);
 		System.out.println(info);
 		
 		// 총 코멘트 수 / 좋아요 수 
@@ -253,32 +260,27 @@ public class ProductController {
 			
 			if(request.getParameter("prName")!= null &&request.getParameter("prName").length() != 0 ) {
 				String prName = request.getParameter("prName");
-				System.out.println("prName :" +prName);
 				map.put("prName", prName);
 			}
 			if(request.getParameter("userId")!= null &&request.getParameter("userId").length() != 0 ) {
 				String userId = request.getParameter("userId");
-				System.out.println("userId :" +userId);
 				map.put("userId", userId);
 			}	
 			if(request.getParameter("orStatus")!= null &&request.getParameter("orStatus").length() != 0 ) {
 				String arr[] = request.getParameterValues("orStatus");
 				 int[] nums = Arrays.stream(arr).mapToInt(Integer::parseInt).toArray();
 				for(int orStatus : nums) {
-					System.out.println("값들 :"+orStatus);
 				}
 				map.put("nums", nums);
 			}	
 			if(request.getParameter("orStart")!= null &&request.getParameter("orStart").length() != 0 ) {
 				String ors = request.getParameter("orStart");
 				String orStart = ors.replace("-","");
-				System.out.println("orStart :" +orStart);
 				map.put("orStart", orStart);	
 			}	
 			if(request.getParameter("orEnd")!= null &&request.getParameter("orEnd").length() != 0 ) {
 				String ore = request.getParameter("orEnd");
 				String orEnd = ore.replace("-","");
-				System.out.println("orEnd :" +orEnd);
 				map.put("orEnd", orEnd);
 			}
 			
@@ -334,14 +336,41 @@ public class ProductController {
 		
 		OrderVo orderinfo = productservice.orderdetail(orcode);
 		
-		model.addAttribute(orcode);
 		model.addAttribute("orderinfo",orderinfo);
 		
 		return "product/orderdetail.mn";
 	}
 	
-
+	@RequestMapping("writeform")
+	public String writerform (HttpServletRequest request, Model model) throws SQLException{
+		String kind = request.getParameter("kind");
+		String prcode = request.getParameter("prcode");
+		String prname = request.getParameter("prname");
+		
+		
+		model.addAttribute("prname",prname);
+		model.addAttribute("kind",kind);
+		model.addAttribute("prcode",prcode);
+		return "product/writeform.mn";
+	}
 	
+	//insertTag
+			@RequestMapping("writePro")
+			public String writePro(ArticleDTO dto, HttpServletRequest request)  throws IOException, FileUploadException {
+				String kind = request.getParameter("kind");
+				String prcode = request.getParameter("prcode");
+				String prname = request.getParameter("prname");
+				
+			
+				dto.setKind(kind);
+				dto.setDkCode(prcode);
+				System.out.println(dto);
+				//insert
+				int result = articleService.insertItem(dto);
+				//imgInsert
+				//insertTags
+				return "redirect:/article";
+			}
 	
 	//////ajax 
 	
