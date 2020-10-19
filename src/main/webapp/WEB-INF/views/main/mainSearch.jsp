@@ -39,7 +39,7 @@ $(function(){
 					window.location.pathname.indexOf("/", 2));
 		 var index = $('#index').val();
 		 var search = '<c:out value="${search}"/>';
-         if( scrollTop + windowHeight +100 > documentHeight ){
+         if( scrollTop + windowHeight +150 > documentHeight ){
         	 fetchList(context,index,search);
 			}
 		})
