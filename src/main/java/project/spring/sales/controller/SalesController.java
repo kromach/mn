@@ -93,7 +93,7 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value = "/insertPro")
-	public String insertPro(ProductInfoDTO productDTO, MultipartHttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+	public String insertProSs(ProductInfoDTO productDTO, MultipartHttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		HttpSession session =  request.getSession();
 		if(session.getAttribute("memId") != null) { // session id
 			productDTO.setInsertId((String)session.getAttribute("memId"));
@@ -102,22 +102,24 @@ public class SalesController {
 			// (1) 상품 코드 생성
 			String prCode = salesService.makeprCode(productDTO);
 			
-			MultipartFile mf = null;
-			mf = request.getFile("primage"); 
-			System.out.println(mf);
-			
-			//System.out.println("파일 네임 : " +mf.getOriginalFilename());
-			productDTO.setPrImg(mf.getOriginalFilename());
-			
 			// (2) 저장된 코드값으로 이미지 처리
 			request.setAttribute("prCode", prCode);
 			String imgPath = salesService.insertProductImg(request);
 			System.out.println("이미지 경로 :" +imgPath);
+			String add = "\\resources\\";
+			String[] imgPath_ = imgPath.split("\\\\resources\\\\");
+			System.out.println(imgPath.length());
+			if(imgPath_.length==2) {
+				imgPath = add.concat(imgPath_[1]);
+			}
+			System.out.println("IMGPATH====="+imgPath);
 			
 			// 업로드 이미지명 집어넣기
 			
 			// (3) 다른것들 insert
-			 
+			productDTO.setInsertId(session.getAttribute("memId").toString());
+			productDTO.setPrImg(imgPath);
+			System.out.println(productDTO);
 			int count = salesService.insertProduct(productDTO);
 			
 			//System.out.println(selectDrinkInfo.getDkBkindValue());
@@ -132,9 +134,6 @@ public class SalesController {
 			     +"</script>");
 			printWriter.flush();
 			model.addAttribute("prCode", prCode);
-
-			return "sales/insertPro";
+			return "redirect:/sales/index";
 	}
-	
-
 }

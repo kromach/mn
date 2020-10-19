@@ -102,29 +102,34 @@ public class SalesServiceImpl implements SalesService{
 	 	
 		// 파일정보 꺼내기
 		MultipartFile mf = null;
-				
 		String imgPath = null;
 
 		try {
-			mf = request.getFile("primage");
-			imgPath = request.getRealPath("/img/product");
-			System.out.println("path : " + imgPath);
-			
+			mf = request.getFile("primage"); // null
+			// 이미지 이름 중복처리 
 			String orgName = mf.getOriginalFilename();
-			String imgName = orgName.substring(0,orgName.lastIndexOf('.'));
-			
-			String ext = orgName.substring(orgName.lastIndexOf('.'));
-			Long date = System.currentTimeMillis();
-			String newName = imgName + date + ext;
-			System.out.println("newName  :       " + newName);
-			String newImgPath = imgPath + "\\" + newName;
-			File copyFile = new File(newImgPath);
-			mf.transferTo(copyFile);
-			
+			// 파일명은 주류 코드로 변경
+			String prCode = (String)request.getAttribute("prCode");
+			// 파일의 확장자만 추출
+			String ext = orgName.substring(orgName.lastIndexOf("."));
+			// System.out.println(ext);
+			String newName = prCode + ext;  // 주류코드 + 확장자
+			System.out.println(newName);
+			//파일 기본경로 _ 상세경로
+			String path = request.getRealPath("resources/img/product") + File.separator;
+	//						System.out.println("req :" + request.getRealPath("resources/img/upload"));
+			// System.out.println(path + newName);
+			File file = new File(path);
+			//디렉토리 존재하지 않을경우 디렉토리 생성
+			if(!file.exists()) {
+				file.mkdirs();
+			}
+			imgPath = path + newName;
+			File copyFile = new File(path + newName); // 새로운 이미지 경로로 업로드 한 파일 복사 생성
+			mf.transferTo(copyFile); // 지정된 경로로 파일 저장
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return imgPath;
 	}
 
