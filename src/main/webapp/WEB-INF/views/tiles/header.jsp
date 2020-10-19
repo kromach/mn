@@ -88,7 +88,7 @@
 			</ul>
 		</li>
 		<li>
-			<a href="#event"><div class="fa fa-bullhorn"></div> 이벤트</a>
+			<a href="/event/index"><div class="fa fa-bullhorn"></div> 이벤트</a>
 		</li>
 	</ul>
 	

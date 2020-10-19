@@ -14,10 +14,82 @@ public class EventVO {
 	private String isOpen;
 	private String insertId;
 	private Timestamp insertDay;
+	private String prName;
+	private String prBkind;
+	private String prBkindValue;
+	private String prSkind;
+	private String prSkindValue;
+	private String prCountry;
+	private String prCity;
+	private String prAlcohol;
+	private String prPlace;
+	private String prFood;
 	private int evIdx;
 	private String id;
 	private Timestamp joinInsertDay;
 	
+	
+	
+	public String getPrName() {
+		return prName;
+	}
+	public void setPrName(String prName) {
+		this.prName = prName;
+	}
+	public String getPrBkind() {
+		return prBkind;
+	}
+	public void setPrBkind(String prBkind) {
+		this.prBkind = prBkind;
+	}
+	public String getPrBkindValue() {
+		return prBkindValue;
+	}
+	public void setPrBkindValue(String prBkindValue) {
+		this.prBkindValue = prBkindValue;
+	}
+	public String getPrSkind() {
+		return prSkind;
+	}
+	public void setPrSkind(String prSkind) {
+		this.prSkind = prSkind;
+	}
+	public String getPrSkindValue() {
+		return prSkindValue;
+	}
+	public void setPrSkindValue(String prSkindValue) {
+		this.prSkindValue = prSkindValue;
+	}
+	public String getPrCountry() {
+		return prCountry;
+	}
+	public void setPrCountry(String prCountry) {
+		this.prCountry = prCountry;
+	}
+	public String getPrCity() {
+		return prCity;
+	}
+	public void setPrCity(String prCity) {
+		this.prCity = prCity;
+	}
+	public String getPrAlcohol() {
+		return prAlcohol;
+	}
+	public void setPrAlcohol(String prAlcohol) {
+		this.prAlcohol = prAlcohol;
+	}
+	public String getPrPlace() {
+		return prPlace;
+	}
+	public void setPrPlace(String prPlace) {
+		this.prPlace = prPlace;
+	}
+	public String getPrFood() {
+		return prFood;
+	}
+	public void setPrFood(String prFood) {
+		this.prFood = prFood;
+	}
 	public String getEventCode() {
 		return eventCode;
 	}
