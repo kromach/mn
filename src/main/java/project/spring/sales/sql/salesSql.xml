@@ -38,8 +38,13 @@
   		 	]]>
   		</update>
   		<select id="makeprCode" resultType="String">
+  		
   			SELECT 'PR' || LPAD( (SELECT COUNT(PR_CODE) + 1 FROM PRODUCT_INFO), 5, '0') AS CODE FROM DUAL
   		</select>
-  		
+  		<insert id="insertProduct" parameterType="productvo" >
+  			<![CDATA[
+			INSERT INTO PRODUCT_INFO VALUES(#{prCode}, #{prName}, #{prImg}, 'B003', #{prSkind}, #{prCountry}, #{prCity}, #{prAlcohol}, #{prPlace}, #{prFood}, #{prContent}, #{prPrice}, #{prAmount}, #{prTotalcount}, #{prLike}, #{prUse}, #{insertId}, sysdate)
+			]]>
+  		</insert>
   		
   </mapper>

@@ -3,7 +3,7 @@
 <div>
 ${prCode}
 </div>
-<c:url var="u" value="detail" >
+<c:url var="u" value="product/productDetail" >
 	<c:param name="prCode" value="${prCode}" />
 </c:url>
 ${u}

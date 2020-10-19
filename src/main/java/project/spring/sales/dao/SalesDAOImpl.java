@@ -103,9 +103,17 @@ public class SalesDAOImpl implements SalesDAO{
 		System.out.println("prCode 생성 됐니? "+prCode);
 		productDTO.setPrCode(prCode);
 		
-		//sqlSession.insert("salses.insertProduct", productDTO);
-		
 		return prCode;
+	}
+
+	@Override
+	public int intsertProduct(ProductInfoDTO productDTO) {
+		int count = 0;
+		System.out.println("insertid : " +productDTO.getInsertId());
+		System.out.println("prlike : " +productDTO.getPrLike());
+		System.out.println("prCode : " + productDTO.getPrCode());
+		count = sqlSession.insert("sales.insertProduct", productDTO);
+		return count;
 	}
 
 }

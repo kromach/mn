@@ -3,6 +3,8 @@ package project.spring.sales.service;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import project.spring.beans.CommonInterface;
 import project.spring.sales.vo.ProductInfoDTO;
 
@@ -14,5 +16,7 @@ public interface SalesService extends CommonInterface{
 	public List productModify(String pageNum);
 	public List getCategory();
 	public String makeprCode(ProductInfoDTO productDTO);
+	public String insertProductImg(MultipartHttpServletRequest request);
+	public int insertProduct(ProductInfoDTO productDTO);
 
 }

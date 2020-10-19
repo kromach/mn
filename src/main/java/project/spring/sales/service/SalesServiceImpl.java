@@ -1,10 +1,14 @@
 package project.spring.sales.service;
 
+import java.io.File;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import project.spring.sales.dao.SalesDAO;
 import project.spring.sales.vo.ProductInfoDTO;
@@ -91,5 +95,45 @@ public class SalesServiceImpl implements SalesService{
 		String prCode = salesDAO.makeprCode(productDTO);
 		return prCode;
 	}
+	
+
+	@Override
+	public String insertProductImg(MultipartHttpServletRequest request) {
+	 	
+		// 파일정보 꺼내기
+		MultipartFile mf = null;
+				
+		String imgPath = null;
+
+		try {
+			mf = request.getFile("primage");
+			imgPath = request.getRealPath("/img/product");
+			System.out.println("path : " + imgPath);
+			
+			String orgName = mf.getOriginalFilename();
+			String imgName = orgName.substring(0,orgName.lastIndexOf('.'));
+			
+			String ext = orgName.substring(orgName.lastIndexOf('.'));
+			Long date = System.currentTimeMillis();
+			String newName = imgName + date + ext;
+			System.out.println("newName  :       " + newName);
+			String newImgPath = imgPath + "\\" + newName;
+			File copyFile = new File(newImgPath);
+			mf.transferTo(copyFile);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return imgPath;
+	}
+
+	@Override
+	public int insertProduct(ProductInfoDTO productDTO) {
+		int count = 0;
+		count = salesDAO.intsertProduct(productDTO);
+		return count;
+	}
+
 
 }

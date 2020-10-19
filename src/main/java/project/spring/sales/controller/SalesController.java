@@ -1,5 +1,6 @@
 package project.spring.sales.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -92,40 +93,44 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value = "/insertPro")
-	public String insertPro(ProductInfoDTO productDTO, MultipartHttpServletRequest request, HttpServletResponse response, Model model) {
+	public String insertPro(ProductInfoDTO productDTO, MultipartHttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		HttpSession session =  request.getSession();
 		if(session.getAttribute("memId") != null) { // session id
 			productDTO.setInsertId((String)session.getAttribute("memId"));
 		}
 				
-			// 업로드 이미지명 집어넣기
+			// (1) 상품 코드 생성
+			String prCode = salesService.makeprCode(productDTO);
+			
 			MultipartFile mf = null;
 			mf = request.getFile("primage"); 
+			System.out.println(mf);
+			
+			//System.out.println("파일 네임 : " +mf.getOriginalFilename());
 			productDTO.setPrImg(mf.getOriginalFilename());
 			
-			// (1) 주류 정보 저장 (생성된 코드값 가져오기)
-			String prCode = salesService.makeprCode(productDTO);
-		
 			// (2) 저장된 코드값으로 이미지 처리
-			request.setAttribute("dkCode", prCode);
-			//String imgPath = salesService.insertProductImg(request);
+			request.setAttribute("prCode", prCode);
+			String imgPath = salesService.insertProductImg(request);
+			System.out.println("이미지 경로 :" +imgPath);
+			
+			// 업로드 이미지명 집어넣기
+			
+			// (3) 다른것들 insert
+			 
+			int count = salesService.insertProduct(productDTO);
 			
 			//System.out.println(selectDrinkInfo.getDkBkindValue());
 			PrintWriter printWriter = null;
-			
 			// 인코딩
 			response.setCharacterEncoding("utf-8");
 			response.setContentType("text/html;charset=utf-8");		
-
-			//printWriter = response.getWriter();
-
+			printWriter = response.getWriter();
 			// 업로드시 메시지 출력
 			printWriter.println("<script type='text/javascript'>"
 			     + "alert('주류 정보가 등록되었습니다. 관리자 확인 후에 사이트에 게재됩니다.')"
 			     +"</script>");
-			
 			printWriter.flush();
-			
 			model.addAttribute("prCode", prCode);
 
 			return "sales/insertPro";
