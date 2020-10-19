@@ -85,6 +85,19 @@ public class MainController {
 		model.addAttribute("main", main);	
 		return "/main/main.mn";
 	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search(Locale locale, Model model,
+			HttpServletRequest request,
+			HttpServletResponse response,
+			@RequestParam(name = "search") String search
+			) {
+		
+		
+		return null;
+	}
+	
+	
 	@RequestMapping(value = "/editor", method = RequestMethod.GET)
 	public String editor(Locale locale, Model model,
 			HttpServletRequest request,
