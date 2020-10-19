@@ -42,7 +42,7 @@ a:hover{color:#090;text-decoration:none}
 .clear{clear:both}
 
 /* display */ 
-.display-none{display:none;}
+.display-none{display:none!important}
 
 .line-Block{ display:inline-block; vertical-align:top}
 .inBlock{ display:inline-block!important}
@@ -314,6 +314,8 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 
 
 /* alcohol db index */
+.search-area {width:80%; padding-bottom:20px; margin:0 auto;}
+.search-area .input {height: 30px; border: 1px solid #d2d2d2;}
 
 /* 주류정보 상세페이지 텍스트 정보 */
 
@@ -416,6 +418,7 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 	nav.rightMenu {right:3px}
 	.grid { width:90% ;}
 	.grid2 { width:90% ;}
+	.search-area{width:90% ;}
 }
 /*
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
@@ -452,14 +455,15 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .searchPanel{position:relative; width:50%; background:#ffffffb8; padding:12px 23px 14px 23px; border-top:2px solid #444; border-right:1px solid #ddd; border-left:1px solid #ddd; border-bottom:1px solid #ddd; box-sizing:border-box; float: left; }
 .searchPanel h3{ font-size:18px; font-weight:800; color:#444; text-align:center; padding-bottom:15px}
 .searchPanel select{ display:inline-block}
-.searchPanel .ssec{ position:relative; margin-top:3px; text-align: left;}
-.searchPanel .ssec .label{ padding-bottom:5px; font-weight:700; font-size:13px; line-height: 33px; color:#333; width:70px;}
-.searchPanel .ssec .m_select{ display:inline-block; border-radius:2px; height:33px; width:160px; position:relative; font-size:13px; border:1px solid #ccc; color:#2f4050; padding:0 0 0 4px; margin-bottom:8px; box-sizing:border-box}
-.searchPanel .ssec select:disabled{ color: graytext;}
-.searchPanel .ssec .m_select option{ padding:2px 4px 2px 6px}
-.searchPanel .ssec .m_text{border-radius:2px; height:34px; padding:0 0 0 8px; font-size:13px; line-height:34px; border:1px solid #ccc; color:#2f4050;  margin-bottom:5px; box-sizing:border-box}
-.searchPanel .ssec input:focus{ outline:none}
-.searchPanel .ssec .searchBtn{ margin-top:15px}
+.ssec{ position:relative; margin-top:3px; text-align: left;}
+.ssec .s_label{ padding-bottom:5px; font-weight:700; font-size:13px; line-height: 33px; color:#333; width:70px;}
+.ssec .m_select{ display:inline-block; border-radius:2px; height:33px; width:160px; position:relative; font-size:13px; border:1px solid #ccc; color:#2f4050; padding:0 0 0 4px; margin-bottom:8px; box-sizing:border-box}
+.ssec select:disabled{ color: graytext;}
+.ssec .m_select option{ padding:2px 4px 2px 6px}
+.ssec .m_text{border-radius:2px; height:34px; padding:0 0 0 8px; font-size:13px; line-height:34px; border:1px solid #ccc; color:#2f4050;  margin-bottom:5px; box-sizing:border-box}
+.ssec .radio{height:33px}
+.ssec input:focus{ outline:none}
+.ssec .searchBtn{ margin-top:15px}
 
 .promotion_section{width:48%; height:272px; overflow:hidden; position:relative; padding-left: 20px; text-align: right;}
 

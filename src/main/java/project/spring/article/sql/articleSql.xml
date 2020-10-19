@@ -18,18 +18,30 @@
   	<select id="checkCodeInEditor" parameterType="string" resultType="string"> 
   		SELECT IMG_URL FROM EDITOR_IMAGE WHERE code = #{value}
   	</select>
-  	<select id="searchArticle" parameterType="hashmap" resultType="ArticleDTO">
-  		select * from board_normal where ${selectOption} like '%'||#{search}||'%' 
+  	<select id="searchArticlebyNick" parameterType="hashmap" resultType="ArticleDTO">
+  		<![CDATA[	
+  		SELECT * FROM BOARD_NORMAL bn ,MEMBER_INFO mi WHERE bn.INSERT_ID = mi.ID and mi.${selectOption} like '%'||#{search}||'%' and kind = 'F'
+  		]]>
+  	</select>
+  	<select id="searchArticlebyOthers" parameterType="hashmap" resultType="ArticleDTO">
+  		<![CDATA[	
+  		SELECT * FROM BOARD_NORMAL bn ,MEMBER_INFO mi WHERE bn.INSERT_ID = mi.ID and bn.${selectOption} like '%'||#{search}||'%' and kind = 'F'
+  		]]>
   	</select>
   	<select id="searchAll" resultType="ArticleDTO">
-  		select * from board_normal ORDER BY INSERT_DAY DESC 
+  		<![CDATA[	
+  		select * from board_normal WHERE kind = 'F' ORDER BY INSERT_DAY DESC 
+  		]]> 
   	</select>
   	<select id="read" parameterType="int" resultType="ArticleDTO">
-  		select * from board_normal where BN_IDX = #{value}
+	  	select bn.*,mi.NAME ,mi.NICKNAME,
+		(SELECT COUNT(T.ID) FROM MY_TITLE T WHERE T.ID = MI.ID) AS WRITER_TITLE_CNT, MY.TITLE_INDEX, TL.TITLE_NAME AS WRITER_TITLE_NAME from board_normal bn, MEMBER_INFO mi LEFT OUTER JOIN 
+		(SELECT TITLE_INDEX, ID, CHOOSE_TITLE FROM MY_TITLE) MY ON mi.ID = MY.ID AND MY.CHOOSE_TITLE = 'Y' LEFT OUTER JOIN
+		TITLE_LIST TL ON MY.TITLE_INDEX = TL.TITLE_IDX where bn.INSERT_ID = mi.ID AND BN_IDX = #{value}
   	</select>
   	<select id="searchArticleByAdd" resultType="ArticleDTO" parameterType="int">
   	<![CDATA[	
-		SELECT * FROM ( SELECT a.*, ROWNUM as rnum FROM ( SELECT * FROM board_normal ORDER BY INSERT_DAY DESC)a)
+		SELECT * FROM ( SELECT a.*, ROWNUM as rnum FROM ( SELECT  bn.*,mi.NICKNAME,mi.NAME from BOARD_NORMAL bn ,MEMBER_INFO mi where BN .INSERT_ID =mi.ID AND bn.kind = 'F' ORDER BY INSERT_DAY DESC)a)
 		WHERE rnum >= (5*#{value})+1 and rnum <= (5*(#{value}+1))
 	]]>
   	</select>
@@ -39,6 +51,23 @@
   	<select id="isAlreadyReported" parameterType="string" resultType="string">
   		SELECT report_number FROM MEMBER_INFO mi  WHERE id = #{value}
   	</select>
+  	<select id="likeReturn" parameterType="int" resultType="int">
+		select heart from board_normal where BN_IDX = #{value}
+  	</select>
+  	<select id="getCountAllReply" resultType="int">
+  		SELECT count(*) FROM BOARD_COMMENT where bn_Idx = #{value}
+  	</select>
+  	<select id="getAllReply" resultType="ArticleReplyDTO">
+  		select * from board_comment
+  	</select>
+  	<select id="getReply" parameterType="hashmap" resultType="ArticleReplyDTO">
+  	<![CDATA[	
+  		select a.*from( select aa.*, rownum r from(	select bc.*,mi.NICKNAME,mi.NAME from BOARD_COMMENT bc,MEMBER_INFO mi WHERE bc.INSERT_ID =mi.ID AND bn_idx = #{bnIdx} order by INSERT_DAY DESC ) aa ) a where r >= (10*#{index})+1 and r <= (10*(#{index}+1))
+  	]]>
+  	</select>
+  	<insert id="insertReply" parameterType="hashmap" >
+  		INSERT INTO BOARD_COMMENT VALUES (BOARD_COMMENT_seq.nextval,#{bnIdx},#{BN_COMMENT},#{INSERT_ID},sysdate,'N')
+  	</insert>
   	<insert id="insertTags" parameterType="ArticleDTO">
 	insert into BOARD_NORMAL (BN_IDX,BN_TITLE,KIND ,DK_CODE,READCOUNT,HEART,REPORT,CONTENT,INSERT_ID,INSERT_DAY,IS_DELETE )
 	values (BOARD_NORMAL_SEQ.nextval,#{bnTitle},default,#{dkCode},#{readcount},#{heart},#{report},#{content},
@@ -48,7 +77,7 @@
   		INSERT INTO EDITOR_IMAGE VALUES (EDITOR_IMAGE_SEQ.nextVal,#{img_url},#{kind},#{code})
   	</insert>
   	<insert id="like_log" parameterType="hashmap">
-  		insert into board_like values(board_like_seq.nextVal,#{num},#{memNickName})
+  		insert into board_like values(board_like_seq.nextVal,#{num},#{memId})
   	</insert>
   	<update id="updateMyActGivenHeart" parameterType="string">
   		update MY_ACTIVITY set GIVEN_HEART = GIVEN_HEART+1 where id=#{value}
@@ -73,14 +102,19 @@
   		UPDATE member_info SET REPORT_NUMBER = (REPORT_NUMBER ||#{reportString}||',') WHERE id = #{insertId}
   		]]>
   	</update>
-  	<select id="likeReturn" parameterType="int" resultType="int">
-		select heart from board_normal where BN_IDX = #{value}
-  	</select>
+  	<update id="moveArticle" parameterType="int"> 
+		UPDATE BOARD_NORMAL SET kind = 'C' WHERE BN_IDX = #{value}	
+  	</update>
+  	<update id="updateArticle" parameterType="ArticleDTO">
+	  	update BOARD_NORMAL set bn_title=#{bnTitle} , content=#{content} where bn_idx = #{bnIdx}
+  	</update>
   	<delete id="like_log_undo"> 
   		delete from board_like where bn_idx = #{num} and nick = #{memNickName} 
   	</delete>
-  	
-  	
-  	
-  	
+  	<delete id="deleteReply">
+  		delete from BOARD_COMMENT where co_Idx = #{coIdx} and insert_Id=#{insert_Id}
+  	</delete>
+  	<delete id="deleteArticle" parameterType="hashmap" >
+  		delete from BOARD_NORMAL where bn_Idx=#{bnIdx}
+  	</delete>
   </mapper>

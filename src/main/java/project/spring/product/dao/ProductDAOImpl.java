@@ -31,6 +31,30 @@ public class ProductDAOImpl implements ProductDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	public int updateItem(OrderVo ordervo) {
+		int res = 0;
+		
+		if(ordervo.getDeliveryCompany()!=null && ordervo.getDeliveryNum()!=null) {
+			 res =  sqlSession.insert("product.insertdel", ordervo);
+		}else {
+			
+			 res = sqlSession.update("product.updateorder", ordervo);
+			System.out.println("일반 구매 정보 저장!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		}
+		
+		return res;
+	}
+	public int updateItem(String orCode) {
+		int res = sqlSession.update("product.delectorder", orCode);
+		return res;
+	}
+	public int updateItem(HashMap map) {
+		
+		
+		
+		sqlSession.selectOne("product.changsta",map);
+		return 0;
+	}
 
 	@Override
 	public int deleteItem() {
@@ -137,6 +161,7 @@ public class ProductDAOImpl implements ProductDAO {
 			String value = p.getProperty(key);
 		}
 		*/
+		sqlSession.update("product.updatecount",ordervo);
 		sqlSession.update("product.insertorder",ordervo);
 		
 	}
@@ -148,23 +173,15 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List getorderlist(String id, int startrow ,int endrow) throws SQLException {
-		
-		HashMap map = new HashMap();
-		map.put("id", id);
-		map.put("startrow", startrow);
-		map.put("endrow", endrow);
-		
-		
+	public List getorderlist(HashMap map) throws SQLException {
 		List orderlist = sqlSession.selectList("product.orderlist",map);
 		
 		return orderlist;
 	}
 
 	@Override
-	public int getordercount(String id) throws SQLException {
-		System.out.println("id : "+ id);
-		int ordercount = sqlSession.selectOne("product.selcount",id);
+	public int getordercount(HashMap map) throws SQLException {
+		int ordercount = sqlSession.selectOne("product.selcount",map);
 		System.out.println("ordercount : "+ ordercount);
 		return ordercount;
 	}

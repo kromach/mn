@@ -10,6 +10,8 @@ import project.spring.drink.vo.DrinkVO;
 
 public interface DrinkDAO {
 	
+	List<DrinkVO> selectDrinkServiceList(HashMap<String, Object> schMap) throws SQLException;
+	
 	List<HashMap> selectBigCategoryList() throws SQLException;
 	
 	List<HashMap> selectSmallCategoryList(String bigCategoryCode) throws SQLException;
@@ -29,5 +31,6 @@ public interface DrinkDAO {
 	String insertDrink(DrinkVO drinkVo) throws SQLException;
 
 	void updateDrinkTag(HashMap tagInfo) throws SQLException;
+
 
 }

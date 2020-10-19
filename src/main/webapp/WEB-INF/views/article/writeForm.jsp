@@ -74,7 +74,7 @@
 				<form action="/article/writePro" method="post" id="frm" accept-charset="utf-8">
 				<table class="tableCss table">
 					<tr>
-						<th>제목${sessionScope.memId}</th>
+						<th>제목</th>
 						<td><input type="text" name="bnTitle" id="bnTitle"
 							class="boardTitle_large" class="required" msg="제목을"
 							placeholder="제목"></td>

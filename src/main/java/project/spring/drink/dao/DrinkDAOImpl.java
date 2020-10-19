@@ -21,6 +21,11 @@ public class DrinkDAOImpl implements DrinkDAO {
 	DrinkDAOImpl(SqlSessionTemplate sqlSession) {
 		this.sqlSession = sqlSession;
 	}
+
+	@Override
+	public List<DrinkVO> selectDrinkServiceList(HashMap<String, Object> schMap) throws SQLException {
+		return sqlSession.selectList("drink.selectDrinkServiceList", schMap);
+	}
 	
 	@Override
 	public List<HashMap> selectBigCategoryList() throws SQLException {

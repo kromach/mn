@@ -15,6 +15,10 @@ public class ArticleDTO {
 	private Timestamp insertDay;
 	private String isDelete;
 	private String thumbNail;
+	private String nickname;
+	private String name;
+	private int writerTitleCnt;
+	private String writerTitleName;
 	
 	public int getBnIdx() {
 		return bnIdx;
@@ -90,6 +94,32 @@ public class ArticleDTO {
 	public void setThumbNail(String thumbNail) {
 		this.thumbNail = thumbNail;
 	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getWriterTitleCnt() {
+		return writerTitleCnt;
+	}
+	public void setWriterTitleCnt(
+			int writerTitleCnt) {
+		this.writerTitleCnt = writerTitleCnt;
+	}
+	public String getWriterTitleName() {
+		return writerTitleName;
+	}
+	public void setWriterTitleName(
+			String writerTitleName) {
+		this.writerTitleName = writerTitleName;
+	}
 	@Override
 	public String toString() {
 		return "ArticleDTO [bnIdx=" + bnIdx
@@ -103,6 +133,11 @@ public class ArticleDTO {
 				+ ", insertDay=" + insertDay
 				+ ", isDelete=" + isDelete
 				+ ", thumbNail=" + thumbNail
-				+ "]";
+				+ ", nickname=" + nickname
+				+ ", name=" + name
+				+ ", writerTitleCnt="
+				+ writerTitleCnt
+				+ ", writerTitleName="
+				+ writerTitleName + "]";
 	}
 }

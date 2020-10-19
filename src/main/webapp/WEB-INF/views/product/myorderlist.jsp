@@ -9,8 +9,16 @@
 <title>사용자 구매 목록</title>
 </head>
 <c:if test="${myordercount==0}">
-	<h1>구매한 상품이 없습니다</h1>
-	<a href="productlist"><h1>구매하러가기</h1></a>
+<div class="grid-Wrapper">
+	<div class="grid">
+		<div class="grid-sizer"></div>
+		<div class="gutter-sizer"></div>
+		<div class="detail-item detail-width6" >
+			<h1>구매한 상품이 없습니다</h1>
+			<a href="productlist"><h1>구매하러가기</h1></a>
+		</div>
+	</div>
+</div>	
 </c:if>
 <c:if test="${myordercount >0}">
 	<div class="grid-Wrapper">
@@ -24,6 +32,7 @@
 								<td>상품명</td>
 								<td>수량</td>
 								<td>배송지</td>
+								<td>주문상태</td>
 							</tr>
 						
 						<c:forEach var="my" items="${myorderlist}">
@@ -33,6 +42,7 @@
 									<td><a href="myorderdetail?orcode=${my.orCode}">${my.prName}</a></td>
 									<td>${my.prCount}</td>
 									<td>${my.receiverAddr}</td>
+									<td>${my.orStatusValue}</td>
 								</tr>
 							</div>
 						</c:forEach>
@@ -63,6 +73,7 @@ function more(){
 										+'</a></td><td><a href="myorderdetail?orcode='+data[i].orCode+'">'+data[i].prName
 										+'<a></td><td>'+data[i].prCount
 										+'</td><td>'+data[i].receiverAddr
+										+'</td><td>'+data[i].orStatusValue
 										+'</td><tr/>'
 					);
 				}

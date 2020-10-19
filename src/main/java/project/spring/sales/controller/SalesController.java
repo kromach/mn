@@ -19,6 +19,7 @@ import project.spring.sales.service.SalesService;
 public class SalesController {
 
 	@Autowired
+	
 	SalesService salesService = null;
 	
 	@RequestMapping(value ="/index")
@@ -70,15 +71,11 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value ="/insert")
-	public String insertProduct(String pageNum, HttpServletRequest request, Model model) {
-		HttpSession session = request.getSession();
-		String memId = (String)session.getAttribute("memId");
-		System.out.println("Session : " + memId);
+	public String insertProduct(String pageNum, Model model) {
 		
+		model.addAttribute("pageNum", pageNum);
 		
-		
-		return null;
+		return "sales/insert.mn";
 	}
-	
-	
+
 }

@@ -40,4 +40,10 @@ public class Pager {
 		System.out.println("VOCHECK="+pager.getNumber());
 		return pager;
 	}
+	@Override
+	public String toString() {
+		return "Pager [startRow=" + startRow + ", endRow=" + endRow + ", pageSize=" + pageSize + ", currPage="
+				+ currPage + ", count=" + count + ", number=" + number + ", pageCount=" + pageCount + ", pageBlock="
+				+ pageBlock + ", startPage=" + startPage + ", endPage=" + endPage + "]";
+	}
 }

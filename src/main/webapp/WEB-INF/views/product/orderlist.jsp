@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,7 @@
 						</tr>
 						<tr>
 							<th>구매자명</th>
-							<td align="left"><input type="text" name="prName" /></td>
+							<td align="left"><input type="text" name="userId" /></td>
 						</tr>
 						<tr>
 							<th>구매일자</th>
@@ -31,33 +32,30 @@
 							<td align="left">
 								<div>
 									<label for="from">시작일</label>
-									<input type="text" name="evStart" id="from"/>
+									<input type="text" name="orStart" id="from"/>
 									<label for="to">종료일</label>
-									<input type="text" name="evEnd" id="to"/>
+									<input type="text" name="orEnd" id="to"/>
 								</div>
 							</td>
 						</tr>
 						<tr>
 							<th>주문상태</th>
 							<td align="left">
-								<input type="checkbox" name="orStatus" value="1" />결재완료
+								<input type="checkbox" name="orStatus" value="1" />접수
 								<input type="checkbox" name="orStatus" value="2" />배송준비중
-								<input type="checkbox" name="orStatus" value="1" />출고완료
-								<input type="checkbox" name="orStatus" value="1" />취소접수
-								<input type="checkbox" name="orStatus" value="1" />취소
+								<input type="checkbox" name="orStatus" value="3" />배송완료
+								<input type="checkbox" name="orStatus" value="4" />취소접수
+								<input type="checkbox" name="orStatus" value="5" />취소완료
+								<input type="checkbox" name="orStatus" value="6" />주문취소
 							</td>
 						</tr>
 					</table>
 				</div>
-				
-						
-						<div><input type="submit" value="검색" class="btn btn-sm btn-blue" /></div>
+				<div><input type="submit" value="검색" class="btn btn-sm btn-blue" /></div>
 			</form>
 		</div>
-		<c:if test="${ordercount==0}">
-			<h1>주문받은 상품이 없습니다</h1>
-		</c:if>
-		<c:if test="${ordercount >0}">
+
+		
 			<div class="grid-item grid-item--width6">
 				<table class="tableCss table">
 						<tr>
@@ -65,22 +63,21 @@
 							<td>상품명</td>
 							<td>수량</td>
 							<td>주문자아이디/수령자명</td>
+							<td>주문일자</td>
 							<td>주문상태</td>
 						</tr>
+						<c:if test="${ordercount==0}">
+							<h1>주문받은 상품이 없습니다</h1>
+						</c:if>
 						<c:forEach var="order" items="${orderlist}">
 								<tr>
-									<td>${order.orCode}</td>
-									<td><a href="orderdetail?orcode=${order.orCode}">${order.prName}</a></td>
+									
+									<td><a href="orderdetail?orCode=${order.orCode}">${order.orCode}</a></td>
+									<td><a href="orderdetail?orCode=${order.orCode}">${order.prName}</a></td>
 									<td>${order.prCount}</td>
 									<td>${order.userId}/${order.receiverName}</td>
-									<c:choose>
-										<c:when test="${order.orStatus ==1}"><td>주문 미확인</td></c:when>
-										<c:when test="${order.orStatus ==2}"><td>주문 확인</td></c:when>
-										<c:when test="${order.orStatus ==3}"><td>배송 준비</td></c:when>
-										<c:when test="${order.orStatus ==4}"><td>배송 완료</td></c:when>
-										<c:when test="${order.orStatus ==5}"><td>택배로 이동중</td></c:when>
-										<c:otherwise><td>확인 요망</td></c:otherwise>
-									</c:choose>
+									<td><fmt:formatDate value="${order.insertDay}" pattern="yyyy.MM.dd"/></td>
+									<td>${order.orStatusValue}</td>
 								</tr>
 						</c:forEach>
 				</table>
@@ -98,7 +95,7 @@
 				</div>
 			
 			</div>	
-		</c:if>	
+		
 	</div>
 </div>
 

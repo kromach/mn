@@ -26,7 +26,9 @@
   		<select id="userIdCh" parameterType="string" resultType="string">
   			SELECT user_kind FROM MEMBER_INFO mi WHERE ID = #{value}
   		</select>
-  	
+  		<update id="salesModify" parameterType="productvo">
+  		 	UPDATE PRODUCT_INFO SET PR_AMOUNT = 999 WHERE PR_CODE ='PR00006';
+  		</update>
   		
   		
   		

@@ -19,7 +19,22 @@ public class OrderVo {
 	private String deliveryNum;
 	private Timestamp insertDay;
 	private Timestamp modifyDay;
+	private String prImg;
+
+	public String getPrImg() {
+		return prImg;
+	}
+	public void setPrImg(String prImg) {
+		this.prImg = prImg;
+	}
+	private String orStatusValue;
 	
+	public String getOrStatusValue() {
+		return orStatusValue;
+	}
+	public void setOrStatusValue(String orStatusValue) {
+		this.orStatusValue = orStatusValue;
+	}
 	public String getOrCode() {
 		return orCode;
 	}

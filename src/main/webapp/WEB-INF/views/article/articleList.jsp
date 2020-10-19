@@ -21,7 +21,7 @@
 			<div class="grid-item grid-item--width6">
 				<form action="/article/articleSearch" name="articleSearch" id="articleSearch">
 					<select id="selectOption" name="selectOption" class="selectOption">
-						<option value="INSERT_ID">작성자</option>
+						<option value="NICKNAME">작성자</option>
 						<option value="CONTENT">내용</option>
 						<option value="BN_TITLE">제목</option>
 					</select>

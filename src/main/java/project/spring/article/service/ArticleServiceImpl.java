@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.spring.article.dao.ArticleDAO;
+import project.spring.article.dao.ArticleDAOImpl;
 import project.spring.article.vo.ArticleDTO;
 import project.spring.article.vo.Editor_imageVO;
 
@@ -35,11 +36,12 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 	@Override
 	public int updateItem(Object obj) {
-		return 0;
+		int result = articleDAOimpl.updateItem(obj);
+		return result;
 	}
 	@Override
 	public int deleteItem(Object obj) {
-		return 0;
+		return articleDAOimpl.deleteItem(obj);
 	}
 	
 	@Override
@@ -86,8 +88,8 @@ public class ArticleServiceImpl implements ArticleService{
 		articleDAOimpl.plusOneReadCount(idx);
 	}
 	@Override
-	public int like(Integer num,String memNickName,String insertId) {
-		return articleDAOimpl.like(num,memNickName,insertId);
+	public int like(Integer num,String memId,String insertId) {
+		return articleDAOimpl.like(num,memId,insertId);
 	}
 	@Override
 	public int unlike(Integer num,
@@ -99,5 +101,31 @@ public class ArticleServiceImpl implements ArticleService{
 			String insertId, String reportId) {
 		// TODO Auto-generated method stub
 		return articleDAOimpl.report(num,insertId,reportId);
+	}
+	@Override
+	public int moveArticle(Integer num) {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.moveArticle(num);
+	}
+	
+	@Override
+	public void insertReply(Map map) {
+		articleDAOimpl.insertReply(map);
+	}
+	
+	@Override
+	public List getReply(int index,int bnIdx) {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.getReply(index,bnIdx);
+	}
+	@Override
+	public int getAllReplyCount(int bnIdx) {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.getAllReplyCount(bnIdx);
+	}
+	@Override
+	public int deleteReply(int coIdx, String session) {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.deleteReply(coIdx,session);
 	}
 }

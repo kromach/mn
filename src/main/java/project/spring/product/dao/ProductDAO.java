@@ -1,6 +1,7 @@
 package project.spring.product.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import project.spring.beans.CommonInterface;
@@ -30,8 +31,8 @@ public interface ProductDAO extends CommonInterface {
 	// 구매한 상품 코드로 구매정보 상세 보기
 	public OrderVo orderdetail(String orcode) throws SQLException;
 	// 판매자 아이디로 등록한 물품 구매한 목록 가져오는 메서드
-	public List getorderlist(String id,int startrow ,int endrow) throws SQLException;
+	public List getorderlist(HashMap map) throws SQLException;
 	// 주문들어온 수 카운트 
-	public int getordercount (String id) throws SQLException;
+	public int getordercount (HashMap map) throws SQLException;
 
 }

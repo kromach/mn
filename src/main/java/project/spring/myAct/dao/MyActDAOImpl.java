@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import project.spring.myAct.vo.MyActivityDTO;
+import project.spring.myAct.vo.MyTitleDTO;
 import project.spring.myAct.vo.TitleListDTO;
 
 @Repository
@@ -104,11 +105,12 @@ public class MyActDAOImpl implements MyActDAO{
 	*/
 	@Override
 	public List updateTitle(String memId) {
-		//달성조건
+		//달성조건(모든 타이틀 정보 가져옴)
 		List<TitleListDTO> titleValue =sqlSession.selectList("myAct.getAllTitle", memId);
-		//내가 가지고 있는 현황
+		//내가 가지고 있는 현황(내가 가진 타이틀 정보 가져옴)
 		MyActivityDTO myActivity = sqlSession.selectOne("myAct.myActivity", memId);
 		
+		// 내가 칭호를 갖고 있지 않다면 null 리턴
 		if(myActivity == null) {
 			return null;
 		}
@@ -122,11 +124,12 @@ public class MyActDAOImpl implements MyActDAO{
 		//중복제거
 		HashSet<String> standardHashSet = new HashSet<String>(standard);
 		System.out.println("=====================HashSetStandard"+standardHashSet);
-		for(TitleListDTO dto : titleValue) {
+		for(TitleListDTO dto : titleValue) {	//titleValue는 모든 title 정보, 기준값 들어있음
 			Iterator itStandard =  standardHashSet.iterator();
 			while(itStandard.hasNext()) {
 				String standardString = (String) itStandard.next();
 				//비교
+				// map의 (key, value) : ((titleValue:titleKey),titleName)
 				if(dto.getTitleKey().equals(standardString)){
 					map.put((dto.getTitleValue()+":"+dto.getTitleKey()), dto.getTitleName());
 				}
@@ -143,6 +146,8 @@ public class MyActDAOImpl implements MyActDAO{
 			String[] keyForMapTmp = keyForMap.split(":");
 			System.out.println("keyForMapVal================"+keyForMapTmp[0]);
 			System.out.println("keyForMapKey================"+keyForMapTmp[1]);
+			
+			//titleKey에 따라서 return을 다르게 해줌
 			if(keyForMapTmp[1] !=null&&keyForMapTmp[0]!=null) {
 				if(keyForMapTmp[1].equals("my_attendent")) {
 					if(myActivity.getMyAttendent() >= Integer.parseInt(keyForMapTmp[0])) {
@@ -196,9 +201,22 @@ public class MyActDAOImpl implements MyActDAO{
 		
 		sqlSession.update("myAct.updateAttend", memId);
 		
-		
-		
 		return result;
+	}
+
+	@Override
+	public int choose(int idx, String memId) {
+		int count = 0;
+		int count_ = 0;
+		MyTitleDTO dto = new MyTitleDTO();
+		dto.setId(memId);
+		dto.setTitleIdx(idx);
+		System.out.println(dto.getId());
+		System.out.println(dto.getTitleIdx());
+		
+		count_ = sqlSession.update("myAct.choose_", memId);
+		count = sqlSession.update("myAct.choose", dto);
+		return count;
 	}
 	
 }

@@ -75,6 +75,12 @@ public class MemberDAOImpl implements MemberDAO {
 		if (obj instanceof MemberDTO) {
 			MemberDTO dto = sqlSession.selectOne("member.isExistId", obj);
 			MemberDTO dto_origin = (MemberDTO)obj;
+			
+			//강퇴당한 회원인지
+			int isBlacked = sqlSession.selectOne("member.isBlacked", obj);
+			if(isBlacked==1) {
+				return -2;
+			}
 			//결과값없음
 			if(dto==null) {
 				System.out.println(result);
@@ -93,6 +99,7 @@ public class MemberDAOImpl implements MemberDAO {
 			else if(dto.getId().equals(dto_origin.getId())) {
 				result = 0;
 			}
+			
 			System.out.println("DAOImpleResult="+result);
 		} 
 		return result;
@@ -136,5 +143,15 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void attendent(String id) {
 		sqlSession.update("member.attendent", id);
+	}
+	@Override
+	public int insertMyAct(String id) {
+		return sqlSession.insert("member.insertMyAct",id);
+	}
+	@Override
+	public String findNickForKakaoAcount(
+			String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.findNickForKakaoAcount", id);
 	}
 }
