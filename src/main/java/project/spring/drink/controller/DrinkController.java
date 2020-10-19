@@ -1,5 +1,6 @@
 package project.spring.drink.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -286,5 +287,119 @@ public class DrinkController {
 		response.setCharacterEncoding("utf-8");
 		response.getWriter().write(JsonUtil.ListToJson(ItemValuesList));
 	}	
+	
+	@RequestMapping("modify")
+	public String modifyInit(HttpServletRequest request, Model model) throws SQLException {
+		
+		String dkCode = (String)request.getParameter("dkCode");
+		//System.out.println(dkCode);
+		
+		DrinkVO drinkInfo = drinkService.selectDrinkServiceInfo(dkCode);
+		drinkInfo.setDkContent();
+		
+		// request에 담긴 검색 결과 뽑아내기  
+		String schDkBkind = null;
+		String schDkSkind = null;
+		String[] schDkAlcohol = null;
+		String schDkCountry = null;
+				
+		if ((String)request.getParameter("isSearch") != null && ((String)request.getParameter("isSearch")).length() > 0) {
+			schDkBkind = (String)request.getParameter("schDkBkind");
+			schDkSkind = (String)request.getParameter("schDkSkind");
+			schDkAlcohol = request.getParameterValues("schDkAlcohol");
+			schDkCountry = (String)request.getParameter("schDkCountry");
+		}
+		
+		model.addAttribute("schDkBkind", schDkBkind);
+		model.addAttribute("schDkSkind", schDkSkind);
+		model.addAttribute("schDkAlcohol", schDkAlcohol);
+		model.addAttribute("schDkCountry", schDkCountry);
+		model.addAttribute("drinkInfo", drinkInfo);
+		
+		List<HashMap> bigCategoryList = drinkService.selectBigCategoryList();
+		model.addAttribute("bigCategoryList", bigCategoryList);
+		
+		return "drink/modify.mn";
+	}
+	
+	// 변경 처리
+	@RequestMapping("modifyPro")
+	public String ModifyProInit(DrinkVO drinkVo, MultipartHttpServletRequest request, HttpServletResponse response, Model model) throws SQLException, IOException {
+		
+		HttpSession session =  request.getSession();
+		if(session.getAttribute("memId") != null) { // session id
+			drinkVo.setInsertId((String)session.getAttribute("memId"));
+		}
+		
+		String dkCode = drinkVo.getDkCode();
+		
+		// 대표 이미지 변경시 기존 파일 삭제 및 신규 업로드 처리
+		MultipartFile mf = null;
+		try {
+			mf = request.getFile("dkimage"); 
+			System.out.println(mf.getOriginalFilename());
+			if(mf != null && mf.getOriginalFilename() != null) {
+				String dkImg = drinkVo.getDkImg();
+				
+				// 파일의 확장자만 추출
+				String ext = dkImg.substring(dkImg.lastIndexOf("."));
+				
+				String path = request.getRealPath("resources/img/drink") + File.separator;
+//				System.out.println("req :" + request.getRealPath("resources/img/upload"));
+				// System.out.println(path + newName);
+				File file = new File(path + dkCode + ext);
+
+				if(file.exists()) { 
+					if(file.delete()) { 
+						System.out.println("파일삭제 성공"); 
+					} else { System.out.println("파일삭제 실패"); } 
+				} else { 
+					System.out.println("파일이 존재하지 않습니다."); 
+				}
+
+				// 저장된 코드값으로 이미지 처리
+				request.setAttribute("dkCode", dkCode);
+				String imgPath = drinkService.insertDrinkImg(request);
+				System.out.println("컨트롤러 이미지 경로 : " + imgPath);
+				
+				drinkVo.setDkImg(imgPath);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// (1) 주류 정보 저장 (생성된 코드값 가져오기)
+		String result = drinkService.modifyDrink(drinkVo);
+		
+		// (2) 태그 정보 입력 & 업데이트
+		if (dkCode != null && drinkVo.getDkTags() != null && drinkVo.getDkTags().length() > 0 ) {
+			HashMap tagInfo = new HashMap();
+			tagInfo.put("dkCode", dkCode);
+			tagInfo.put("dkTags", drinkVo.getDkTags());
+			
+			drinkService.updateDrinkTag(tagInfo);
+		}
+		
+		//System.out.println(selectDrinkInfo.getDkBkindValue());
+		PrintWriter printWriter = null;
+		
+		// 인코딩
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");		
+
+		printWriter = response.getWriter();
+
+		// 업로드시 메시지 출력
+		printWriter.println("<script type='text/javascript'>"
+		     + "alert('"+ result +"')"
+		     +"</script>");
+		
+		printWriter.flush();
+		
+		model.addAttribute("dkCode", dkCode);
+		//request.setAttribute("dkCode", dkCode);
+
+		return "drink/insertPro";
+	}
 }
 

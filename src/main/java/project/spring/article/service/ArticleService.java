@@ -22,8 +22,12 @@ public interface ArticleService extends CommonInterface {
 	public int report(Integer num, String insertId,
 			String reportId);
 	public int moveArticle(Integer num);
+	public int backArticle(int num);
 	public void insertReply(Map map);
 	public List getReply(int index,int bnIdx);
 	public int getAllReplyCount(int bnIdx);
 	public int deleteReply(int coIdx, String session);
+	public List<ArticleDTO> searchPost(String selectOption, String search);
+	public List<ArticleDTO> searchPost();
+	
 }

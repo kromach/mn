@@ -28,5 +28,8 @@ public interface ArticleDAO extends CommonInterface{
 	public List getReply(int index,int bnIdx);
 	public int getAllReplyCount(int bnIdx);
 	public int deleteReply(int coIdx, String session);
-	
+	public List<ArticleDTO> searchPost(
+			String selectOption, String search);
+	public List<ArticleDTO> searchPost();
+	public int backArticle(int num);
 }

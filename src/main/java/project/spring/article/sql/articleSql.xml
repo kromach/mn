@@ -33,12 +33,36 @@
   		select * from board_normal WHERE kind = 'F' ORDER BY INSERT_DAY DESC 
   		]]> 
   	</select>
+  	<select id="searchPostbyNick" parameterType="hashmap" resultType="ArticleDTO">
+  		<![CDATA[	
+  		SELECT * FROM BOARD_NORMAL bn ,MEMBER_INFO mi WHERE bn.INSERT_ID = mi.ID and mi.${selectOption} like '%'||#{search}||'%' and kind = 'C'
+  		]]>
+  	</select>
+  	<select id="searchPostbyOthers" parameterType="hashmap" resultType="ArticleDTO">
+  		<![CDATA[	
+  		SELECT * FROM BOARD_NORMAL bn ,MEMBER_INFO mi WHERE bn.INSERT_ID = mi.ID and bn.${selectOption} like '%'||#{search}||'%' and kind = 'C'
+  		]]>
+  	</select>
+  	<select id="searchAllPost" resultType="ArticleDTO">
+  		<![CDATA[	
+  		select * from board_normal WHERE kind = 'C' ORDER BY INSERT_DAY DESC 
+  		]]> 
+  	</select>
   	<select id="read" parameterType="int" resultType="ArticleDTO">
-  		select bn.*,mi.NAME ,mi.NICKNAME from board_normal bn, MEMBER_INFO mi where bn.INSERT_ID = mi.ID AND BN_IDX = #{value}
+	  	select bn.*,mi.NAME ,mi.NICKNAME,
+		(SELECT COUNT(T.ID) FROM MY_TITLE T WHERE T.ID = MI.ID) AS WRITER_TITLE_CNT, MY.TITLE_INDEX, TL.TITLE_NAME AS WRITER_TITLE_NAME from board_normal bn, MEMBER_INFO mi LEFT OUTER JOIN 
+		(SELECT TITLE_INDEX, ID, CHOOSE_TITLE FROM MY_TITLE) MY ON mi.ID = MY.ID AND MY.CHOOSE_TITLE = 'Y' LEFT OUTER JOIN
+		TITLE_LIST TL ON MY.TITLE_INDEX = TL.TITLE_IDX where bn.INSERT_ID = mi.ID AND BN_IDX = #{value}
   	</select>
   	<select id="searchArticleByAdd" resultType="ArticleDTO" parameterType="int">
   	<![CDATA[	
-		SELECT * FROM ( SELECT a.*, ROWNUM as rnum FROM ( SELECT  bn.*,mi.NICKNAME,mi.NAME from BOARD_NORMAL bn ,MEMBER_INFO mi where BN .INSERT_ID =mi.ID AND bn.kind = 'F' ORDER BY INSERT_DAY DESC)a)
+  		SELECT * FROM (
+		SELECT a.*, ROWNUM as rnum FROM ( 
+		SELECT  bn.*,mi.NICKNAME,mi.NAME
+		,(SELECT count(mt.CHOOSE_TITLE) FROM TITLE_LIST tl ,MY_TITLE mt WHERE tl.TITLE_IDX = mt.TI_IDX AND mt.ID = bn.INSERT_ID ) AS WRITER_TITLE_CNT
+		,(SELECT tl2.TITLE_NAME FROM TITLE_LIST tl2,MY_TITLE mt2 WHERE mt2.CHOOSE_TITLE = 'Y' AND tl2.TITLE_IDX = mt2.TITLE_INDEX AND mt2.id = bn.INSERT_ID )AS WRITER_TITLE_NAME
+		from BOARD_NORMAL bn ,MEMBER_INFO mi 
+		where BN .INSERT_ID =mi.ID AND bn.kind = 'F' ORDER BY INSERT_DAY DESC)a)
 		WHERE rnum >= (5*#{value})+1 and rnum <= (5*(#{value}+1))
 	]]>
   	</select>
@@ -59,7 +83,13 @@
   	</select>
   	<select id="getReply" parameterType="hashmap" resultType="ArticleReplyDTO">
   	<![CDATA[	
-  		select a.*from( select aa.*, rownum r from(	select bc.*,mi.NICKNAME,mi.NAME from BOARD_COMMENT bc,MEMBER_INFO mi WHERE bc.INSERT_ID =mi.ID AND bn_idx = #{bnIdx} order by INSERT_DAY DESC ) aa ) a where r >= (10*#{index})+1 and r <= (10*(#{index}+1))
+		select a.*from( select aa.*, rownum r from(	
+		select bc.*,mi.NICKNAME,mi.NAME,
+		(SELECT tl.TITLE_NAME FROM TITLE_LIST tl ,MY_TITLE mt WHERE mt.ID = bc.INSERT_ID AND mt.CHOOSE_TITLE ='Y' AND tl.TITLE_IDX = mt.TITLE_INDEX) AS WRITER_TITLE_NAME ,
+		(SELECT count(mt2.CHOOSE_TITLE )FROM MY_TITLE mt2 WHERE mt2.id = bc.INSERT_ID ) AS WRITER_TITLE_CNT
+		from BOARD_COMMENT bc,MEMBER_INFO mi 
+		WHERE bc.INSERT_ID =mi.ID AND bn_idx =#{bnIdx}
+		order by INSERT_DAY DESC ) aa ) a where r >= (10*#{index})+1 and r <= (10*(#{index}+1))
   	]]>
   	</select>
   	<insert id="insertReply" parameterType="hashmap" >
@@ -67,14 +97,14 @@
   	</insert>
   	<insert id="insertTags" parameterType="ArticleDTO">
 	insert into BOARD_NORMAL (BN_IDX,BN_TITLE,KIND ,DK_CODE,READCOUNT,HEART,REPORT,CONTENT,INSERT_ID,INSERT_DAY,IS_DELETE )
-	values (BOARD_NORMAL_SEQ.nextval,#{bnTitle},default,#{dkCode},#{readcount},#{heart},#{report},#{content},
+	values (BOARD_NORMAL_SEQ.nextval,#{bnTitle},#{kind},#{dkCode},#{readcount},#{heart},#{report},#{content},
 	#{insertId},default,default)
   	</insert>
   	<insert id="insertImg" parameterType="Editor_imageVO">
   		INSERT INTO EDITOR_IMAGE VALUES (EDITOR_IMAGE_SEQ.nextVal,#{img_url},#{kind},#{code})
   	</insert>
   	<insert id="like_log" parameterType="hashmap">
-  		insert into board_like values(board_like_seq.nextVal,#{num},#{memNickName})
+  		insert into board_like values(board_like_seq.nextVal,#{num},#{memId})
   	</insert>
   	<update id="updateMyActGivenHeart" parameterType="string">
   		update MY_ACTIVITY set GIVEN_HEART = GIVEN_HEART+1 where id=#{value}
@@ -101,6 +131,9 @@
   	</update>
   	<update id="moveArticle" parameterType="int"> 
 		UPDATE BOARD_NORMAL SET kind = 'C' WHERE BN_IDX = #{value}	
+  	</update>
+  	<update id="backArticle" parameterType="int"> 
+		UPDATE BOARD_NORMAL SET kind = 'F' WHERE BN_IDX = #{value}	
   	</update>
   	<update id="updateArticle" parameterType="ArticleDTO">
 	  	update BOARD_NORMAL set bn_title=#{bnTitle} , content=#{content} where bn_idx = #{bnIdx}

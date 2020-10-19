@@ -94,24 +94,31 @@ public class AdminEventController {
 			
 			try {
 				mf = request.getFile("eventImg");
-				path = request.getRealPath("/img/event");
-				System.out.println("path : " + path);
-				
+				// 파일 이름 재 지정
 				String orgName = mf.getOriginalFilename();
 				String imgName = orgName.substring(0,orgName.lastIndexOf('.'));
 				
 				String ext = orgName.substring(orgName.lastIndexOf('.'));
 				Long date = System.currentTimeMillis();
 				String newName = imgName + date + ext;
-				System.out.println("newName  :       " + newName);
-				String newImgPath = path + "\\" + newName;
-				File copyFile = new File(newImgPath);
+				
+				path = request.getRealPath("resources/img/event") +File.separator;;
+				System.out.println("path : " + path);
+				
+				// 디렉토리 없을 경우 생성'
+				
+				File file = new File(path);
+				
+				if(!file.exists()) { file.mkdir(); }
+				
+				File copyFile = new File(path + newName);
 				mf.transferTo(copyFile);
 				
 				// vo 에 넣어주기
-				vo.setThumImg(newName);
+				vo.setThumImg("/resources/img/event/"+newName);
 				
 				System.out.println("img 경로 : " + vo.getThumImg());
+				
 				
 			}catch (Exception e) {
 				e.printStackTrace();
@@ -280,29 +287,42 @@ public class AdminEventController {
 				
 				try {
 					mf = request.getFile("eventImg");
-					path = request.getRealPath("/img/event");
-					System.out.println("path : " + path);
-					
+			
+					// 파일 이름 재지정
 					String orgName = mf.getOriginalFilename();
 					String imgName = orgName.substring(0,orgName.lastIndexOf('.'));
 					
 					String ext = orgName.substring(orgName.lastIndexOf('.'));
 					Long date = System.currentTimeMillis();
 					String newName = imgName + date + ext;
+					
+					//파일 기본 경로
+					String root = request.getContextPath() + "/resources";
+					path = request.getRealPath("resources/img/event") +File.separator;
+					System.out.println("path : " + path);
+					 
+					
 					System.out.println("newName  :       " + newName);
-					String newImgPath = path + "\\" + newName;
-					File copyFile = new File(newImgPath);
+										
+					File File = new File(path);
+					
+					// 디렉토리 없을 경우 생성
+					if(!File.exists()) {
+						File.mkdir();
+					}
+					
+					File copyFile = new File(path + newName);
+					System.out.println("파일경로 : " + path + newName);
 					mf.transferTo(copyFile);
 					
 					// vo 에 넣어주기
-					vo.setThumImg(newName);
+					vo.setThumImg("/resources/img/event/" + newName);
 					
 					System.out.println("img 경로 : " + vo.getThumImg());
 					
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
-
 			}else {
 				vo.setThumImg(request.getParameter("oldImg"));
 			}

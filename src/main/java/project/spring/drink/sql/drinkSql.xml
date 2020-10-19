@@ -113,6 +113,28 @@
   			{ CALL UPDATE_DRINK_TAG(#{dkCode}, #{dkTags}) }
   		</update>
   		
+  		<update id="modifyDrink" parameterType="project.spring.drink.vo.DrinkVO">
+  			UPDATE DRINK_INFO SET   				
+				DK_NAME 		= #{dkName},
+				DK_BKIND 		= #{dkBkind},
+				DK_SKIND 		= #{dkSkind},
+				DK_IMG 			= #{dkImg},
+				DK_ALCOHOL 		= #{dkAlcohol},
+				DK_COUNTRY 		= #{dkCountry},
+				DK_CITY 		= #{dkCity},
+				DK_PLACE 		= #{dkPlace},
+				DK_FOOD 		= #{dkFood},
+				DK_CONTENT1 	= #{dkContent1},
+				DK_CONTENT2 	= #{dkContent2},
+				DK_CONTENT3 	= #{dkContent3},
+				DK_ITEM1 		= #{dkItem1},
+				DK_ITEM2 		= #{dkItem2},
+				DK_ITEM3 		= #{dkItem3},
+				DK_ITEM4 		= #{dkItem4},
+				DK_ITEM5 		= #{dkItem5}
+  			WHERE DK_CODE = #{dkCode}
+  		</update>
+  		
   		<!-- <select id="userCount" resultType="int">
   			select count(*) from test
   		</select>

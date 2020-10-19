@@ -70,4 +70,30 @@ public class AdminDAOImpl implements AdminDAO{
 		return i;
 	}
 
+	@Override
+	public int drinkCount() throws SQLException {
+		int i = sqlSession.selectOne("admin.drinkCount");
+		return i;
+	}
+
+	@Override
+	public List drinkList(int start, int end) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		
+		List list = sqlSession.selectList("admin.drinkList", map);
+		return list;
+	}
+
+	@Override
+	public int approveDrink(String dkCode, String check) throws SQLException {
+		
+		HashMap map = new HashMap();
+		map.put("dkCode", dkCode);
+		map.put("dkApprove", check);
+		int i = sqlSession.update("admin.approveDrink", map);
+		return i;
+	}
+
 }

@@ -51,6 +51,11 @@
 	<select id="findNickForKakaoAcount" parameterType="string" resultType="string"> 
 		select NICKNAME from member_info where id = #{value}
 	</select>
+	<select id="isBlacked" parameterType="memberDTO"  resultType="int">
+		<![CDATA[	
+		SELECT count(*) FROM MEMBER_INFO WHERE id = #{id} AND IS_BAN = 'Y'
+		]]>
+	</select>
 	<update id="updateMember" parameterType="memberDTO">
 		UPDATE MEMBER_INFO SET
 		NICKNAME=#{nickName},pw=#{pw},tel=#{tel},ADDRESS=#{address}

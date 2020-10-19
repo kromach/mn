@@ -88,8 +88,8 @@ public class ArticleServiceImpl implements ArticleService{
 		articleDAOimpl.plusOneReadCount(idx);
 	}
 	@Override
-	public int like(Integer num,String memNickName,String insertId) {
-		return articleDAOimpl.like(num,memNickName,insertId);
+	public int like(Integer num,String memId,String insertId) {
+		return articleDAOimpl.like(num,memId,insertId);
 	}
 	@Override
 	public int unlike(Integer num,
@@ -127,5 +127,20 @@ public class ArticleServiceImpl implements ArticleService{
 	public int deleteReply(int coIdx, String session) {
 		// TODO Auto-generated method stub
 		return articleDAOimpl.deleteReply(coIdx,session);
+	}
+	@Override
+	public List<ArticleDTO> searchPost(
+			String selectOption, String search) {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.searchPost(selectOption,search);
+	}
+	@Override
+	public List<ArticleDTO> searchPost() {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.searchPost();
+	}
+	@Override
+	public int backArticle(int num) {
+		return articleDAOimpl.backArticle(num);
 	}
 }

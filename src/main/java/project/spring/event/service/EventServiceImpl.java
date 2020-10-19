@@ -57,9 +57,9 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public List eventList() throws SQLException {
+	public List eventList(int idx) throws SQLException {
 		
-		List eventList = eventDAO.eventList();
+		List eventList = eventDAO.eventList(idx);
 		return eventList;
 		
 	}

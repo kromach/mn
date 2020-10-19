@@ -17,6 +17,8 @@ public class ArticleDTO {
 	private String thumbNail;
 	private String nickname;
 	private String name;
+	private int writerTitleCnt;
+	private String writerTitleName;
 	
 	public int getBnIdx() {
 		return bnIdx;
@@ -104,11 +106,38 @@ public class ArticleDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public int getWriterTitleCnt() {
+		return writerTitleCnt;
+	}
+	public void setWriterTitleCnt(
+			int writerTitleCnt) {
+		this.writerTitleCnt = writerTitleCnt;
+	}
+	public String getWriterTitleName() {
+		return writerTitleName;
+	}
+	public void setWriterTitleName(
+			String writerTitleName) {
+		this.writerTitleName = writerTitleName;
+	}
 	@Override
 	public String toString() {
-		return "ArticleDTO [bnIdx=" + bnIdx + ", bnTitle=" + bnTitle + ", kind=" + kind + ", dkCode=" + dkCode
-				+ ", readcount=" + readcount + ", heart=" + heart + ", report=" + report + ", content=" + content
-				+ ", insertId=" + insertId + ", insertDay=" + insertDay + ", isDelete=" + isDelete + ", thumbNail="
-				+ thumbNail + ", nickname=" + nickname + ", name=" + name + "]";
+		return "ArticleDTO [bnIdx=" + bnIdx
+				+ ", bnTitle=" + bnTitle
+				+ ", kind=" + kind + ", dkCode="
+				+ dkCode + ", readcount="
+				+ readcount + ", heart=" + heart
+				+ ", report=" + report
+				+ ", content=" + content
+				+ ", insertId=" + insertId
+				+ ", insertDay=" + insertDay
+				+ ", isDelete=" + isDelete
+				+ ", thumbNail=" + thumbNail
+				+ ", nickname=" + nickname
+				+ ", name=" + name
+				+ ", writerTitleCnt="
+				+ writerTitleCnt
+				+ ", writerTitleName="
+				+ writerTitleName + "]";
 	}
 }

@@ -141,13 +141,13 @@ public class DrinkServiceImpl implements DrinkService {
 			
 			// 이미지 이름 중복처리 
 			String orgName = mf.getOriginalFilename();
-						
+			System.out.println(orgName);
+			
 			// 파일명은 주류 코드로 변경
 			String dkCode = (String)request.getAttribute("dkCode");
 			
 			// 파일의 확장자만 추출
 			String ext = orgName.substring(orgName.lastIndexOf("."));
-			// System.out.println(ext);
 			
 			String newName = dkCode + ext;  // 주류코드 + 확장자
 			System.out.println(newName);
@@ -163,8 +163,8 @@ public class DrinkServiceImpl implements DrinkService {
 				file.mkdirs();
 			}
 			
-			imgPath = path + newName;
-			
+			imgPath = "/resources/img/drink/" + newName;
+			System.out.println("service 이미지 경로 : " + imgPath);
 			File copyFile = new File(path + newName); // 새로운 이미지 경로로 업로드 한 파일 복사 생성
 			
 			mf.transferTo(copyFile); // 지정된 경로로 파일 저장
@@ -174,6 +174,23 @@ public class DrinkServiceImpl implements DrinkService {
 		}
 
 		return imgPath;
+	}
+
+	@Override
+	public String modifyDrink(DrinkVO drinkVo) throws SQLException {
+		
+		// 에디터에 입력된 데이터를 3950 byte 기준으로 split 하여 3개의 컬럼에 삽입
+		if (drinkVo.getDkContent().length() > 0) {
+			String[] contentArr = getMaxByteStringArray(drinkVo.getDkContent(), 3950);
+			
+			int arrCnt = contentArr.length;
+			
+			drinkVo.setDkContent1(contentArr[0]);
+			if (arrCnt > 1) drinkVo.setDkContent2(contentArr[1]);
+			if (arrCnt > 2) drinkVo.setDkContent3(contentArr[2]);
+		}
+
+		return drinkDAO.modifyDrink(drinkVo);
 	}
 
 }

@@ -11,6 +11,10 @@ public interface AdminService extends CommonInterface{
 	
 	public int memberCount() throws SQLException;
 	
+	public int drinkCount()throws SQLException;
 	
+	public List drinkList(int start, int end)throws SQLException;
+	
+	public int approveDrink(String dkCode, String check)throws SQLException;
 	
 }

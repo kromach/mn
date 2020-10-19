@@ -1,11 +1,13 @@
 package project.spring.sales.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import project.spring.sales.dao.SalesDAO;
+import project.spring.sales.vo.ProductInfoDTO;
 
 @Service
 public class SalesServiceImpl implements SalesService{
@@ -76,6 +78,18 @@ public class SalesServiceImpl implements SalesService{
 		list = salesDAO.productModify(pageNum);
 				
 		return list;
+	}
+
+	@Override
+	public List getCategory() {
+		List list = salesDAO.getCategory();
+		return list;
+	}
+
+	@Override
+	public String makeprCode(ProductInfoDTO productDTO) {
+		String prCode = salesDAO.makeprCode(productDTO);
+		return prCode;
 	}
 
 }

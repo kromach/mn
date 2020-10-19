@@ -13,7 +13,7 @@
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="detail-item detail-width6">
-				<h2 class="pad-top10 pad-bottom10">${articleDTO.bnTitle}</h2>
+				<h2 class="pad-top10 pad-bottom10">${memId}${articleDTO.bnTitle}</h2>
 				<table class="detailTbl tbl-lg" style="margin: auto;text-align: center;">
 					<tr>
 						<td>작성자</td>
@@ -22,7 +22,11 @@
 						<td>좋아요</td>
 					</tr>	
 					<tr> 
-						<td>${articleDTO.nickname}</td>
+						<td>
+						<span class="btn btn-blue btn-xs default">${articleDTO.writerTitleCnt}</span>
+						<span class="titleName">${articleDTO.writerTitleName}</span>
+						${articleDTO.nickname}
+						</td>
 						<td><fmt:formatDate value="${articleDTO.insertDay}" pattern="yyyy.MM.dd"/></td>
 						<td>${articleDTO.readcount}</td>
 						<td>${articleDTO.heart}</td>
@@ -55,7 +59,12 @@
 					<c:forEach var="articleReplyDTO" items="${reply}">
 					<tr class="reply">
 						<td colspan="2">${articleReplyDTO.bnComment}</td>
-						<td>${articleReplyDTO.nickname}</td>
+						<!--칭호필요-->
+						<td>
+						<span class="btn btn-blue btn-xs default">${articleReplyDTO.writerTitleCnt}</span>
+						<span class="titleName">${articleReplyDTO.writerTitleName}</span>
+						${articleReplyDTO.nickname}
+						</td>
 						<td><fmt:formatDate value="${articleReplyDTO.insertDay}" pattern="yyyy.MM.dd"/>
 							<c:if test="${articleReplyDTO.insertId eq sessionScope.memId}">
 								<button onclick="deleteReply('${articleReplyDTO.coIdx}','${sessionScope.memId}')">글 삭제</button>
@@ -91,8 +100,11 @@
 			</div>
 			<div class="detail-item detail-width6">
 				<div class="text-center pad-top10 pad-bottom20">
-					<c:if test="${memId eq 'admin' }">	
-						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="글이동" onclick="move('${articleDTO.bnIdx}')">
+					<c:if test="${articleDTO.kind eq 'C' }">
+						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="되돌리기" onclick="move('${articleDTO.bnIdx}','back')">
+					</c:if>
+					<c:if test="${articleDTO.kind eq 'F' }">
+						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="글이동" onclick="move('${articleDTO.bnIdx}','move')">
 					</c:if>
 					<c:if test="${memId eq articleDTO.insertId}">
 						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="수정" onclick="window.location.href='/article/update?bnIdx=${articleDTO.bnIdx}'">
@@ -115,11 +127,18 @@
 					</tr>
 					<c:forEach var="articleDTO" items="${list}">
 						<tr >
-							<td>${articleDTO.bnTitle}</td>
-							<td>${articleDTO.nickname}</td>
-							<td><fmt:formatDate value="${articleDTO.insertDay}" pattern="yyyy.MM.dd"/></td>
-							<td>${articleDTO.readcount}</td>
-							<td>${articleDTO.heart}</td>
+							<td><a href="/article/detail?idx=${articleDTO.bnIdx}">${articleDTO.bnTitle}</a></td>
+							<td>
+								<a href="/article/detail?idx=${articleDTO.bnIdx}">
+									<span class="btn btn-blue btn-xs default">${articleDTO.writerTitleCnt}</span>
+									<span class="titleName">${articleDTO.writerTitleName}</span>
+									${articleDTO.nickname}
+									</td>
+								</a>
+							</td>
+							<td><a href="/article/detail?idx=${articleDTO.bnIdx}"><fmt:formatDate value="${articleDTO.insertDay}" pattern="yyyy.MM.dd"/></a></td>
+							<td><a href="/article/detail?idx=${articleDTO.bnIdx}">${articleDTO.readcount}</a></td>
+							<td><a href="/article/detail?idx=${articleDTO.bnIdx}">${articleDTO.heart}</a></td>
 						</tr>
 					</c:forEach>
 					</tbody>
@@ -146,7 +165,7 @@ var context = window.location.pathname.substring(0,
 var session = '<c:out value="${memId}"/>';
 	if(session!=''){
 	$.ajax({
-		url : context + '/like?num='+bnIdx+'&nick=${memNickName}&insertId='+insertId,
+		url : context + '/like?num='+bnIdx+'&id=${memId}&insertId='+insertId,
 		type : "post",
 		success : function(data) {
 			if(data == -1){
@@ -222,13 +241,14 @@ function replyCancle(bnIdx){
 	var session = '<c:out value="${memId}"/>';
 	$('textarea#content_textArea').val('');
 }
-function move(bnIdx){
+function move(bnIdx,code){
+	alert(code);
 	var session = '<c:out value="${memId}"/>';
 	var context = window.location.pathname.substring(0,
 			window.location.pathname.indexOf("/", 2));
 	if(session!=''&&session=='admin'){
 		$.ajax({
-			url : context + '/move?num='+bnIdx,
+			url : context + '/move?num='+bnIdx+'&code='+code,
 			type : "post",
 			success : function(data) {
 				console.log(data);
@@ -258,11 +278,12 @@ function replyReload(index,idx,session){
 			console.log(data);
 			for(var i=len-1;i>=0;i--){
 				
+				
 				if(session == data[i].insertId){
-					$("<tr class='reply'><td colspan='2'>"+data[i].bnComment+"</td><td>"+data[i].nickname+"</td><td>"+
+					$("<tr class='reply'><td colspan='2'>"+data[i].bnComment+"</td><td><span class='btn btn-blue btn-xs default'>"+data[i].writerTitleCnt+"</span><span class='titleName'>"+data[i].writerTitleName+"</span>"+data[i].nickname+"</td><td>"+
 							moment(new Date(data[i].insertDay)).format('YYYY.MM.DD')+"&nbsp;<button type='button' onclick=\"deleteReply("+"\'"+data[i].coIdx+"\',\'"+session+"\')\">글삭제</button></td></tr>").insertAfter('table tr:eq(5)');					
 				}else{			
-					$("<tr class='reply'><td colspan='2'>"+data[i].bnComment+"</td><td>"+data[i].nickname+"</td><td>"+
+					$("<tr class='reply'><td colspan='2'>"+data[i].bnComment+"</td><td><span class='btn btn-blue btn-xs default'>"+data[i].writerTitleCnt+"</span><span class='titleName'>"+data[i].writerTitleName+"</span>"+data[i].nickname+"</td><td>"+
 						moment(new Date(data[i].insertDay)).format('YYYY.MM.DD')+"</td></tr>").insertAfter('table tr:eq(5)');
 					}
 			}
@@ -296,12 +317,15 @@ function more(){
 		url : context + '/more?num='+moreVal,
 		type : "post",
 		success : function(data) {
-			console.log("Object.keys Length : ",Object.keys(data).length);
 			var endlen = Object.keys(data).length;
 			if(endlen != 0){			
 				for(var i in data){
+					var writerTitle = data[i].writerTitleName;
+					if(writerTitle == null )writerTitle = '';
 					$("#more > tbody:last").append('<tr><td>'+data[i].bnTitle
-										+'</td><td>'+data[i].insertId
+										+'</td><td><span class="btn btn-blue btn-xs default">'+data[i].writerTitleCnt+'</span>'
+										+'<span class="titleName">&nbsp;'+writerTitle+'</span>'
+										+ data[i].nickname
 										+'</td><td>'+moment(new Date(data[i].insertDay)).format('YYYY.MM.DD') 
 										+'</td><td>'+data[i].readcount
 										+'</td><td>'+data[i].heart

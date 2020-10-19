@@ -14,8 +14,10 @@
 				<span></span><span></span><span></span>
 			</div>
 		</div>
-		<input type="text" class = "mainFilter">
-		<button style="background-color: white;">검색</button>
+		<form action="/search">
+			<input type="text" class = "mainFilter" name="search">
+			<button type="submit" style="background-color: white;">검색</button>
+		</form>
 		<div class="fr h_menu">
 			<ul>
 			<li><a href="/member/modify">${sessionScope.memNickName}</a></li>
@@ -72,7 +74,7 @@
 			<a href="#board"><div class="fa fa-list-alt"></div> 게시판 <div class="fa fa-caret-up fr"></div></a>
 			<ul style="display: block;">
 				<li><a href="/article"> 자유게시판 </a></li>
-				<li><a href="#board"> 읽을거리 </a></li>
+				<li><a href="/article/post"> 읽을거리 </a></li>
 			</ul>
 		</li>
 		<li>

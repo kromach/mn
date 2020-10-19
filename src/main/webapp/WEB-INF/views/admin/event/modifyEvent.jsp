@@ -140,16 +140,14 @@ $( function() {
 							<input type="radio" name="isOpen" value="Y" checked="checked">활성화 
 							<input type="radio" name="isOpen" value="N">비활성화 
 						</td>					
+						
 					</tr>
 					<tr>
 						<th>대표사진</th>
 						<td>
 							<input type="hidden" name="oldImg" value="${vo.thumImg}">
 							<input type="file" name="eventImg" />
-							<c:set var="imgPath" value="\img\event"></c:set>
-							<c:set var="path" value="${vo.thumImg }"></c:set>
-							<c:set var="imgP" value="${imgPath}\${path}"></c:set>
-							<img src="${imgP}" width="200px">
+							<img src="${vo.thumImg}">
 						</td>
 					</tr>
 

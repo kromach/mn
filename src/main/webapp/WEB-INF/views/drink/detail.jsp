@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+ <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
@@ -33,6 +33,9 @@
 				<div>
 					<button class="btn btn-lg btn-blue" onclick="">좋아요</button>
 					<a class="btn btn-lg btn-yellow" onclick="">후기등록</a>
+					<%-- <c:if test="${sessionScope.userKind eq 'admin' }"> --%>
+					<a class="btn btn-lg btn-mint" href="modify?dkCode=${drinkInfo.dkCode}" >수정</a> <!-- 관리자만 노출 -->
+					<%-- </c:if> --%>
 				</div>
 			</div>
 		</div>

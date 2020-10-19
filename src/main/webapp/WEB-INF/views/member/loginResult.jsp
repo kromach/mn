@@ -4,6 +4,12 @@
 <!DOCTYPE html>
 <html>
 <body>
+	<c:if test="${result==-2 }">
+		<script type="text/javascript">
+			alert("블랙당한 회원입니다.");
+			window.location.href= '/';
+		</script>
+	</c:if>
 	<c:if test="${result == 1 }">
 		<script type="text/javascript">
 			window.location.href= '/';

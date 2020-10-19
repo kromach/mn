@@ -11,7 +11,8 @@ public class ArticleReplyDTO {
 	private String isDelete;
 	private String nickname;
 	private String name;
-	
+	private int writerTitleCnt;
+	private String writerTitleName;
 	public int getCoIdx() {
 		return coIdx;
 	}
@@ -60,10 +61,33 @@ public class ArticleReplyDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public int getWriterTitleCnt() {
+		return writerTitleCnt;
+	}
+	public void setWriterTitleCnt(
+			int writerTitleCnt) {
+		this.writerTitleCnt = writerTitleCnt;
+	}
+	public String getWriterTitleName() {
+		return writerTitleName;
+	}
+	public void setWriterTitleName(
+			String writerTitleName) {
+		this.writerTitleName = writerTitleName;
+	}
 	@Override
 	public String toString() {
-		return "ArticleReplyDTO [coIdx=" + coIdx + ", bnIdx=" + bnIdx + ", bnComment=" + bnComment + ", insertId="
-				+ insertId + ", insertDay=" + insertDay + ", isDelete=" + isDelete + ", nickname=" + nickname
-				+ ", name=" + name + "]";
+		return "ArticleReplyDTO [coIdx=" + coIdx
+				+ ", bnIdx=" + bnIdx
+				+ ", bnComment=" + bnComment
+				+ ", insertId=" + insertId
+				+ ", insertDay=" + insertDay
+				+ ", isDelete=" + isDelete
+				+ ", nickname=" + nickname
+				+ ", name=" + name
+				+ ", writerTitleCnt="
+				+ writerTitleCnt
+				+ ", writerTitleName="
+				+ writerTitleName + "]";
 	}
 }

@@ -124,7 +124,6 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 	@Override
 	public ArticleDTO read(int idx) {
-		
 		return sqlSession.selectOne("article.read", idx);
 	}
 	@Override
@@ -137,9 +136,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 		sqlSession.update("article.plusOneReadCount",idx);
 	}
 	@Override
-	public int like(Integer num,String memNickName,String insertId) {
+	public int like(Integer num,String memId,String insertId) {
 		HashMap map = new HashMap();
-		map.put("memNickName", memNickName);
+		map.put("memId", memId);
 		map.put("num",num);
 		int count = sqlSession.selectOne("article.alreadyLike",map);
 		System.out.println("alreadyCountLike"+count);
@@ -232,5 +231,28 @@ public class ArticleDAOImpl implements ArticleDAO {
 		map.put("insert_Id", session);
 		System.out.println(map);
 		return sqlSession.delete("article.deleteReply", map);
+	}
+	@Override
+	public List<ArticleDTO> searchPost(
+			String selectOption, String search) {
+		HashMap map = new HashMap();
+		map.put("selectOption", selectOption);
+		map.put("search",search );
+		System.out.println(map);
+		
+		if(selectOption.equals("NICKNAME")) {
+			return sqlSession.selectList("article.searchPostbyNick", map);
+		}else{
+			return sqlSession.selectList("article.searchPostbyOthers", map);
+		}
+	}
+	@Override
+	public List<ArticleDTO> searchPost() {
+		return sqlSession.selectList("article.searchAllPost");
+	}
+	@Override
+	public int backArticle(int num) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("article.backArticle", num);
 	}
 }

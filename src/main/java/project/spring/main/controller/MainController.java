@@ -75,9 +75,9 @@ public class MainController {
 			List<EventVO> event = service.getEventInitial(0);
 			for(EventVO vo : event) {
 				MainVO mainVo = new MainVO();
-				String aLinkUri = "/event/detail?event="+vo.getEventCode();
+				String aLinkUri = "event/detail?eventCode="+vo.getEventCode();
 				mainVo.setaLinkUri(aLinkUri);
-				mainVo.setImgUri("/resources/img/upload/"+vo.getThumImg());
+				mainVo.setImgUri(vo.getThumImg());
 				main.add(mainVo);
 			}
 		//shuffle
@@ -85,6 +85,55 @@ public class MainController {
 		model.addAttribute("main", main);	
 		return "/main/main.mn";
 	}
+	//검색창
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search(Locale locale, Model model,
+			HttpServletRequest request,
+			HttpServletResponse response,
+			@RequestParam(name = "search") String search
+			) {
+		List<MainVO> main = new ArrayList();
+		//검색단어를 포함해서
+		//product에서 10개
+		List<ProductVo> product = service.getProductInitial(0,search);
+		for(ProductVo vo : product) {
+			String aLinkUri = "/product/productdetail?prcode="+vo.getPrCode();
+			MainVO mainVo = new MainVO();
+			mainVo.setaLinkUri(aLinkUri);
+			mainVo.setImgUri(vo.getPrImg());
+			main.add(mainVo);
+		}
+		//drink에서 10개
+			List<DrinkVO> drink = service.getDrinkInitial(0,search);
+			for(DrinkVO vo : drink) {
+				MainVO mainVo = new MainVO();
+				String aLinkUri = "/drink/detail?dkCode="+vo.getDkCode();
+				mainVo.setaLinkUri(aLinkUri);
+				mainVo.setImgUri(vo.getDkImg());
+				main.add(mainVo);
+			}
+		//event에서 10개
+			List<EventVO> event = service.getEventInitial(0,search);
+			for(EventVO vo : event) {
+				MainVO mainVo = new MainVO();
+				String aLinkUri = "event/detail?eventCode="+vo.getEventCode();
+				mainVo.setaLinkUri(aLinkUri);
+				mainVo.setImgUri(vo.getThumImg());
+				main.add(mainVo);
+			}
+		//shuffle
+		Collections.shuffle(main);
+		System.out.println("mainSearch=============");
+		for(MainVO vo : main) {
+			System.out.println(vo);
+		}
+		System.out.println("mainSearch=============");
+		model.addAttribute("main", main);
+		model.addAttribute("search", search);
+		return "/main/mainSearch.mn";
+	}
+	
+	
 	@RequestMapping(value = "/editor", method = RequestMethod.GET)
 	public String editor(Locale locale, Model model,
 			HttpServletRequest request,
@@ -101,8 +150,6 @@ public class MainController {
 	@RequestMapping(value = "/reload")
 	@ResponseBody
 	public List reload(@RequestParam(name = "index") int index) {
-		
-		
 		//메인 과 같은 로직
 			//메인으로 갈때 그림30개,링크 셋트를 랜덤으로 가지고 가야함 6*5
 			/****************************************************************/
@@ -144,6 +191,54 @@ public class MainController {
 			}else {
 				return null;
 			}
+	}
+	//ajax
+	@RequestMapping(value = "/reloadSearch")
+	@ResponseBody
+	public List reloadSearch(@RequestParam(name = "index") int index,
+			@RequestParam(name = "search") String search
+			) {
+		//메인 과 같은 로직
+		//메인으로 갈때 그림30개,링크 셋트를 랜덤으로 가지고 가야함 6*5
+		/****************************************************************/
+		List<MainVO> main = new ArrayList();
+		//product에서 10개
+		List<ProductVo> product = service.getProductInitial(index+1);
+		for(ProductVo vo : product) {
+			String aLinkUri = "/product/productdetail?prcode="+vo.getPrCode();
+			MainVO mainVo = new MainVO();
+			mainVo.setaLinkUri(aLinkUri);
+			mainVo.setImgUri(vo.getPrImg());
+			main.add(mainVo);
+		}
+		//drink에서 10개
+		List<DrinkVO> drink = service.getDrinkInitial(index+1);
+		for(DrinkVO vo : drink) {
+			MainVO mainVo = new MainVO();
+			String aLinkUri = "/drink/detail?dkCode="+vo.getDkCode();
+			mainVo.setaLinkUri(aLinkUri);
+			mainVo.setImgUri(vo.getDkImg());
+			main.add(mainVo);
+		}
+		//event에서 10개
+		List<EventVO> event = service.getEventInitial(index+1);
+		for(EventVO vo : event) {
+			MainVO mainVo = new MainVO();
+			String aLinkUri = "/event/detail?event="+vo.getEventCode();
+			mainVo.setaLinkUri(aLinkUri);
+			mainVo.setImgUri("/resources/img/upload/"+vo.getThumImg());
+			main.add(mainVo);
+		}
+		//shuffle
+		Collections.shuffle(main);	
+		
+		//return 갯수가 1보다 커야 리턴
+		System.out.println("reload Size========"+main.size());
+		if(main.size()>0) {
+			return main;
+		}else {
+			return null;
+		}
 	}
 	
 	

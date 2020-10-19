@@ -50,11 +50,12 @@
 	<div class="grid"> 
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
+		
 	</div>
 </div>
 <script>
 	$(function() {
-		
+			
 		// select 형태 바꿔주는 JS 실행
 		$(".sel").selectric();
 		
@@ -71,24 +72,8 @@
 	    	step: 5,
 	    	postfix: "도"
 	    });
-
-		
-		/*
-	    $( "#slider-range" ).slider({
-			range: true,
-			min: 0,
-			max: 99,
-			
-			slide: function( event, ui ) {
-				$( "#amount" ).val( ui.values[ 0 ]  + "도" + ui.values[ 1 ] + "도"  );
-			}
-	    });
-	    
-	    $( "#amount" ).val(  $( "#slider-range" ).slider( "values", 0 ) + "도 - " + $( "#slider-range" ).slider( "values", 1 )+"도" );
-		*/
-			
 	});
-	
+
 	var frm;
 	
 	$("#searchBtn").click(function() {
@@ -100,27 +85,35 @@
 		getDrinkList(1);
 	});
 	
+	var $grid = $('.grid').masonry({
+		itemSelector : '.grid-item',
+		columnWidth : '.grid-sizer',
+		percentPosition : true,
+		gutter: '.gutter-sizer'
+	});
+	
+	$grid.masonry();
 
 	// list 가져오기
 	function getDrinkList(pageNum) {
-		console.log(frm);
+		//console.log(frm);
 		$.ajax({
 			type : "POST",
 			url : "drinkList",
 			data : frm + "&pageNum=" + pageNum,  /*{bigCategory:bigCategory} 와 동일*/
-			success : function(data){
-				var json = JSON.parse(data);
-				//console.log(json)				
-				json.forEach(function(item, index) {
-		    		var grade_str = "<p>";
-		    		grade_str += "<span class='item-val'>" + item + "</span>";
-		    		for(i = 1; i < 6; i++) {
-		    			grade_str += "<a class='item"+ (index + 1) +"' index='"+ (index + 1) +"' value='" + i +"'><i class='fas fa-star'></i></a>";
-		    		}
-		    		grade_str += "</p>";
-		    		
-		    		$("#star_grade").append(grade_str);
-		    	});
+			success : function(data) {
+
+				if(pageNum == 1) { 
+					
+					$(document).find(".grid-item").each(function() { 
+						$grid.masonry('remove', this).masonry('layout');
+					});
+					// masonry 재 실행 
+			    	$grid.masonry();
+				}
+				setTimeout(function() { 
+					drinkGridView(data);
+				}, 500);
 			},
 			error : function() {
 				alert("error");
@@ -128,65 +121,23 @@
 		})
 	}
 	
-	$.fn.serializeObject = function() {
-
-	   var o = {};
-	   var a = this.serializeArray();
-
-	   $.each(a, function() {
-	       if (o[this.name]) {
-	           if (!o[this.name].push) {
-	               o[this.name] = [o[this.name]];
-	           }
-	           o[this.name].push(this.value || '');
-
-	       } else {
-	           o[this.name] = this.value || '';
-	       }
-	   });
-
-	   return o;
-	};
-	/*
-	var ex1jQuery.fn.serializeObject = function() { 
-		var obj = null; 
-		try { 
-			if(this[0].tagName && this[0].tagName.toUpperCase() == "FORM" ) { 
-				var arr = this.serializeArray(); 
-				
-				if(arr) { obj = {}; 
-				jQuery.each(arr, function() { 
-					obj[this.name] = this.value; }); 
-				}
-		    } 
-		}catch(e) { 
-		    alert(e.message); 
-		}finally {} 
+	// ajax 으로 받아온 값을 parse 하여 option 등록
+    function drinkGridView(data){
 		
-		return obj; 
-   }
-	
-   function to_ajax(){
- 
-       const serializedValues = $('#chatbotForm').serializeObject()
+    	var json = JSON.parse(data);
 
-       $.ajax({
-           type : 'post',
-           url : '/test.jsp',
-           data : JSON.stringify(serializedValues),
-           dataType : 'json',
-           error: function(xhr, status, error){
-               alert(error);
-           }
-           success : function(json){
-               alert(json)
-           },
-       });
- 
-   }
-	*/
-	
-	
+    	json.forEach(function(item, index) {
+    		
+    		var el = '<div class="grid-item"><a href="detail?dkCode='+item.dkCode+'"><img src="'+ item.dkImg +'" /></a></div>';
+ 			
+    		// 그리드 추가, 아이템 배치 
+    		$grid.append( el ).masonry('appended', el).masonry('reloadItems');	
+    	}); 
+		
+    	// masonry 재 실행 
+    	$grid.masonry();
+    };
+    
 	// 소분류 값 가져오는 ajax
 	function getSmallCategory(bigCategory) {
 		$.ajax({
@@ -226,5 +177,5 @@
 	}
 
 </script>
-
-<script src="/resources/js/imageLoad.js"></script>
+<!-- 
+<script src="/resources/js/imageLoad.js"></script> -->

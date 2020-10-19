@@ -3,10 +3,8 @@
 <script>
 	$(function() {
 		$("#header").removeClass("header_color").addClass("main_header");
-		
 		var img_random = Math.ceil(Math.random()*7);
 		$(".main_header").css({"background":"url(/resources/img/main/main" + img_random + ".jpg) no-repeat center center"});
-		
 		$(".t" + (img_random % 2)).removeClass("display-none")
 	});
 </script>
@@ -52,12 +50,14 @@ function fetchList(context,index){
 		url : context + '/reload',
 		data : 'index='+index,
 		type : "post",
+		async: false,
 		success : function(data) {
 			if(data==""){
 				isEnd = true;
 				console.log('end');
 			}else{
-				
+				console.log(data);
+				$('#index').val(Number(index)+1);
 				var $grid = $('.grid').masonry({
 					itemSelector : '.grid-item',
 					columnWidth : '.grid-sizer',
@@ -67,10 +67,12 @@ function fetchList(context,index){
 				for(var i in data){
 					var el = '<div class="grid-item"><a href="'+data[i].aLinkUri+'"><img src="'+data[i].imgUri+'"/></a></div>';
 					$grid.append( el ).masonry( 'appended', el ,true);
-					$grid.append( el ).masonry( 'reloadItems' );
-					//$('.grid').children(":last").after(el).msnry('appended', el).msnry('layout');
 				}
-				$('#index').val(Number(index)+1);
+				// 재훈 테스트
+				// masonry 재 실행 
+				// $grid.masonry();
+    			$grid.masonry( 'reloadItems' );
+    			$grid.masonry();
 			}
 		}
 	});

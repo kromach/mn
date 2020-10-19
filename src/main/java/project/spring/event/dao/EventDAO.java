@@ -9,6 +9,6 @@ public interface EventDAO extends CommonInterface{
 	
 	public int getEventCount()throws SQLException;
 
-	public List eventList()throws SQLException;
+	public List eventList(int idx)throws SQLException;
 	
 }

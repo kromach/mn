@@ -87,4 +87,25 @@ public class SalesDAOImpl implements SalesDAO{
 		return list;
 	}
 
+	@Override
+	public List getCategory() {
+		List list = sqlSession.selectList("sales.getCategory");
+		System.out.println("가져왔니?");
+		System.out.println(list.toString());
+		
+		return list;
+	}
+
+	@Override
+	public String makeprCode(ProductInfoDTO productDTO) {
+		String prCode = "";
+		prCode = sqlSession.selectOne("sales.makeprCode");
+		System.out.println("prCode 생성 됐니? "+prCode);
+		productDTO.setPrCode(prCode);
+		
+		//sqlSession.insert("salses.insertProduct", productDTO);
+		
+		return prCode;
+	}
+
 }

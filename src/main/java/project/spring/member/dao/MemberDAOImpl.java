@@ -75,6 +75,12 @@ public class MemberDAOImpl implements MemberDAO {
 		if (obj instanceof MemberDTO) {
 			MemberDTO dto = sqlSession.selectOne("member.isExistId", obj);
 			MemberDTO dto_origin = (MemberDTO)obj;
+			
+			//강퇴당한 회원인지
+			int isBlacked = sqlSession.selectOne("member.isBlacked", obj);
+			if(isBlacked==1) {
+				return -2;
+			}
 			//결과값없음
 			if(dto==null) {
 				System.out.println(result);
@@ -93,6 +99,7 @@ public class MemberDAOImpl implements MemberDAO {
 			else if(dto.getId().equals(dto_origin.getId())) {
 				result = 0;
 			}
+			
 			System.out.println("DAOImpleResult="+result);
 		} 
 		return result;
