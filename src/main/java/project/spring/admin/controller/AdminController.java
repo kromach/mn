@@ -91,6 +91,28 @@ public class AdminController {
 				pageNum = "1";
 			}
 			
+			List drinkList = null;
+			
+			Pager pager = new Pager();
+			
+			PageVO pageVo = null;
+			
+			int number = 0;
+			
+			int count = 0;
+			
+			count = adminService.drinkCount();
+			
+			if(count > 0) {
+				pageVo = pager.pager(pageNum, count);
+				drinkList = adminService.drinkList(pageVo.getStartRow(), pageVo.getEndRow());
+				number = count-(pageVo.getCurrPage()-1)*pageVo.getPageSize();
+			}
+			
+			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("drinkList", drinkList);
+			model.addAttribute("count", count);
+			model.addAttribute("pageVO", pageVo);
 			// 주류 글 가져오기
 			
 			
@@ -105,5 +127,27 @@ public class AdminController {
 			adminService.deleteItem(memberId);
 		}
 	
+		@RequestMapping("checkApprove")
+		@ResponseBody
+		public int checkApprove(@RequestParam String dkCode, @RequestParam String check)throws SQLException {
+			
+			System.out.println("게시글 상태 변경");
+			System.out.println("dkCode : " + dkCode);
+			System.out.println("check : " +check);
+			
+			int i = 0;
+			
+			//게시글 승인
+			if(check.equals("1")) {
+				adminService.approveDrink(dkCode, check);
+				i = 1;
+			}else {
+				i = 0;
+			}
+			
+			System.out.println("i 체크하기" + i);
+			return i;
+		}
+		
 	
 }

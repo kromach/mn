@@ -21,5 +21,22 @@
   	<update id="deleteMember" parameterType="string">
   		update member_info set is_ban ='Y' where id = #{value}
   	</update>
+  	<select id="drinkCount" resultType="int">
+  		select count(*)from drink_Info
+  	</select>
+  	
+  	<select id="drinkList" parameterType="hashmap" resultType="DrinkVO">
+  	  	<![CDATA[
+	  		select a.* from(
+	  			select aa.*, rownum r from(
+	  				select  dk_code, dk_name, dk_approve, insert_day, insert_id from drink_info
+	  				order by dk_approve ASC, DK_CODE ASC 
+	  			)aa
+	  		) a where r >=#{start} and r <=#{end}
+  		]]>
+  	</select>
+  	<update id="approveDrink" parameterType="hashmap" >
+  		update drink_info set dk_approve = #{dkApprove} where dk_code = #{dkCode}
+  	</update>
   	
   </mapper>

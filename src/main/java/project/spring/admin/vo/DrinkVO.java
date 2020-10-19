@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class DrinkVO {
 	public String dkCode;
-	public String deName;
+	public String dkName;
 	public String dkBkind;
 	public String dkSkind;
 	public String dkImg;
@@ -19,23 +19,31 @@ public class DrinkVO {
 	public int dkLike;
 	public int dkApprove;
 	public String insertId;
-	public Timestamp insetDay;
+	public Timestamp insertDay;
 	public int dkItem1;
 	public int dkItem2;
 	public int dkItem3;
 	public int dkItem4;
 	public int dkItem5;
+	
+	
+	public Timestamp getInsertDay() {
+		return insertDay;
+	}
+	public void setInsertDay(Timestamp insertDay) {
+		this.insertDay = insertDay;
+	}
 	public String getDkCode() {
 		return dkCode;
 	}
 	public void setDkCode(String dkCode) {
 		this.dkCode = dkCode;
 	}
-	public String getDeName() {
-		return deName;
+	public String getDkName() {
+		return dkName;
 	}
-	public void setDeName(String deName) {
-		this.deName = deName;
+	public void setDkName(String dkName) {
+		this.dkName = dkName;
 	}
 	public String getDkBkind() {
 		return dkBkind;
@@ -121,12 +129,7 @@ public class DrinkVO {
 	public void setInsertId(String insertId) {
 		this.insertId = insertId;
 	}
-	public Timestamp getInsetDay() {
-		return insetDay;
-	}
-	public void setInsetDay(Timestamp insetDay) {
-		this.insetDay = insetDay;
-	}
+
 	public int getDkItem1() {
 		return dkItem1;
 	}
@@ -157,7 +160,6 @@ public class DrinkVO {
 	public void setDkItem5(int dkItem5) {
 		this.dkItem5 = dkItem5;
 	}
-	
 	
 	
 	

@@ -70,6 +70,24 @@ public class AdminServiceImpl implements AdminService{
 		return i;
 	}
 
+	@Override
+	public int drinkCount() throws SQLException {
+		int i = adminDAO.drinkCount();
+		return i;
+	}
+
+	@Override
+	public List drinkList(int start, int end) throws SQLException {
+		List list = adminDAO.drinkList(start, end);
+		return list;
+	}
+
+	@Override
+	public int approveDrink(String dkCode, String check) throws SQLException {
+		int i = adminDAO.approveDrink(dkCode, check);
+		return i;
+	}
+
 
 	
 	
