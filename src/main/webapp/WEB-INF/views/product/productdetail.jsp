@@ -14,7 +14,7 @@
 		<div class="detail-item detail-width4 detail-info-div">
 			<div class="detail-info text-left">
 				<div class="navi margin-bottom5">
-					<a href="productlist">${info.prBkindValue}</a> > <a href="productlist?isSearch=true&Skind=${info.prSkind}&name=&prAlcohol=0도+-+0도&prPrice=0원+-+0원">${info.prSkindValue}</a>
+					<a href="productlist">${info.prBkindValue}</a> > <a href="productlist?isSearch=true&Skind=${info.prSkind}">${info.prSkindValue}</a>
 				</div>
 				<h3>${info.prName}</h3>
 				
@@ -27,6 +27,8 @@
 					<dd class="clfix">${info.prAlcohol} %</dd>
 					<dt>어울리는 안주</dt>
 					<dd class="clfix">${info.prFood} </dd>
+					<dt>판매된 수량</dt>
+					<dd class="clfix">${info.prTotalcount} 병 </dd>
 				</dl>
 				<div>
 					<button class="btn btn-lg btn-blue" onclick="like('${articleDTO.bnIdx}','${articleDTO.insertId }')">좋아요</button>

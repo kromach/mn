@@ -50,10 +50,19 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 	@Override
 	public int updateItem(Object obj) {
-		return 0;
+		int result = -1;
+		if(obj instanceof ArticleDTO) {
+			result = sqlSession.update("article.updateArticle", (ArticleDTO)obj);
+		}
+		return result;
 	}
 	@Override
 	public int deleteItem(Object obj) {
+		
+		if(obj instanceof HashMap) {
+			HashMap map = (HashMap)obj;
+			return sqlSession.delete("article.deleteArticle", map);
+		}
 		return 0;
 	}
 	@Override
@@ -102,7 +111,12 @@ public class ArticleDAOImpl implements ArticleDAO {
 		map.put("selectOption", selectOption);
 		map.put("search",search );
 		System.out.println(map);
-		return sqlSession.selectList("article.searchArticle", map);
+		
+		if(selectOption.equals("NICKNAME")) {
+			return sqlSession.selectList("article.searchArticlebyNick", map);
+		}else{
+			return sqlSession.selectList("article.searchArticlebyOthers", map);
+		}
 	}
 	@Override
 	public List searchArticle() {
@@ -191,5 +205,32 @@ public class ArticleDAOImpl implements ArticleDAO {
 	@Override
 	public int moveArticle(Integer num) {
 		return sqlSession.update("article.moveArticle", num);
+	}
+	@Override
+	public void insertReply(Map map) {
+		System.out.println("insertREPLY DAO IMPLE======");
+		sqlSession.delete("article.insertReply", map);
+	}
+	@Override
+	public List getReply(int index,int bnIdx) {
+		//해당범위 게시글 가져오기
+		HashMap map = new HashMap();
+		map.put("index", index);
+		map.put("bnIdx", bnIdx);
+		return sqlSession.selectList("article.getReply",map);
+	}
+	@Override
+	public int getAllReplyCount(int bnIdx) {
+		//총게시글수
+		return sqlSession.selectOne("article.getCountAllReply",bnIdx);
+	}
+	@Override
+	public int deleteReply(int coIdx, String session) {
+		// TODO Auto-generated method stub
+		HashMap map = new HashMap();
+		map.put("coIdx", coIdx);
+		map.put("insert_Id", session);
+		System.out.println(map);
+		return sqlSession.delete("article.deleteReply", map);
 	}
 }

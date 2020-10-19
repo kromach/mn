@@ -38,33 +38,87 @@ public class DrinkController {
 	public DrinkController(DrinkService drinkService) {
 		this.drinkService = drinkService;
 	}
-	
+
 	@RequestMapping("index")
-	public String indexInit(HttpServletRequest request, Model model) throws SQLException {
+	public String indexInit(Model model) throws SQLException {
 		
-		String schDkBkind = null;
-		String schDkSkind = null;
-		String[] schDkAlcohol = null;
-		String schDkCountry = null;
-				
-		if ((String)request.getParameter("isSearch") != null && ((String)request.getParameter("isSearch")).length() > 0) {
-			schDkBkind = (String)request.getParameter("schDkBkind");
-			schDkSkind = (String)request.getParameter("schDkSkind");
-			schDkAlcohol = request.getParameterValues("schDkAlcohol");
-			schDkCountry = (String)request.getParameter("schDkCountry");
-				
-			//System.out.println("schDkBkind : " + schDkBkind);
-			//System.out.println("schDkSkind : " + schDkSkind);
-	//		System.out.println("schDkAlcohol : " + schDkAlcohol);
-			//System.out.println("schDkCountry : " + schDkCountry);
-		}
-		
+		// 대분류 가져오기
 		List<HashMap> bigCategoryList = drinkService.selectBigCategoryList();
 		model.addAttribute("bigCategoryList", bigCategoryList);		
 		
 		return "drink/index.mn";
 	}
+	
+	//AJAX 주류 정보 가져오기 (검색어, 페이지번호)
+	@RequestMapping("drinkList")
+	public void drinkList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		String schDkBkind = null;
+		String schDkSkind = null;
+		String schDkVal = null;
+		String[] schDkAlcohol = null;
+		String schDkAlcoholMin = null;
+		String schDkAlcoholMax = null;
+		String schDkCountry = null;
+		int pageNum = 1;
+				
+		if ((String)request.getParameter("isSearch") != null && ((String)request.getParameter("isSearch")).length() > 0) {
+			schDkBkind = (String)request.getParameter("schDkBkind");
+			schDkSkind = (String)request.getParameter("schDkSkind");
+			schDkVal = (String)request.getParameter("schDkVal");
+			System.out.println(request.getParameter("schDkAlcohol"));
+			schDkAlcohol = request.getParameter("schDkAlcohol").split(";");
+			
+			schDkAlcoholMin = schDkAlcohol[0];
+			schDkAlcoholMax = schDkAlcohol[1];
+			schDkCountry = (String)request.getParameter("schDkCountry");
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+			System.out.println("schDkBkind : " + schDkBkind);
+			//System.out.println("schDkSkind : " + schDkSkind);
+			System.out.println("schDkAlcohol : " + schDkAlcohol);
+			System.out.println("schDkAlcoholmin : " + schDkAlcoholMin);
+			System.out.println("schDkAlcoholmax : " + schDkAlcoholMax);
+			//System.out.println("schDkCountry : " + schDkCountry);
+		}
+		
+		HttpSession session =  request.getSession();
+		
+		String memId = null;
+		String memKind = null;
 
+		if(session.getAttribute("memId") != null) { // session id
+			memId = (String)session.getAttribute("memId");
+			memKind = (String)session.getAttribute("memKind");
+		}
+		System.out.println("memId");
+		HashMap<String, Object> schMap = new HashMap<String, Object>();
+		schMap.put("schDkBkind", schDkBkind);
+		schMap.put("schDkSkind", schDkSkind);
+		schMap.put("schDkVal", schDkVal);
+		schMap.put("schDkAlcoholMin", schDkAlcoholMin);
+		schMap.put("schDkAlcoholMax", schDkAlcoholMax);
+		schMap.put("schDkCountry", schDkCountry);
+		schMap.put("memId", memId);
+		schMap.put("memKind", memKind);
+		schMap.put("pageNum", pageNum);
+		
+		//model.addAttribute("schMap", schMap);
+		//검색 정보
+		/*
+		model.addAttribute("schDkBkind", schDkBkind);
+		model.addAttribute("schDkSkind", schDkSkind);
+		model.addAttribute("schDkVal", schDkVal);
+		model.addAttribute("schDkAlcohol", schDkAlcohol);
+		model.addAttribute("schDkCountry", schDkCountry);
+		*/
+		
+		// 검색결과
+		List<DrinkVO> drinkList = drinkService.selectDrinkServiceList(schMap);
+
+		response.setCharacterEncoding("utf-8");
+		response.getWriter().write(JsonUtil.ListToJson(drinkList));
+	}
+	
 	@RequestMapping("detail")
 	public String detailInit(HttpServletRequest request, Model model) throws SQLException {
 		

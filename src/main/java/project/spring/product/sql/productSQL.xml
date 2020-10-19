@@ -37,6 +37,9 @@
 		INSERT INTO ORDER_INFO(or_code,or_day,or_seq,pr_code,pr_name,or_status,pr_price,pr_count,user_id,RECEIVER_NAME ,RECEIVER_TEL ,RECEIVER_ADDR ,INSERT_DAY )
 		values(#{orCode},(SELECT TO_CHAR(SYSDATE,'YYYYMMDD') FROM DUAL),#{orSeq},#{prCode},#{prName},1,#{prPrice},#{prCount},#{userId},#{receiverName},#{receiverTel},#{receiverAddr},sysdate)
 	</insert>
+		<insert id="updatecount" parameterType="ordervo">
+		update product_info set PR_AMOUNT =PR_AMOUNT - #{prCount} , PR_TOTALCOUNT = PR_TOTALCOUNT + #{prCount} WHERE PR_CODE =#{prCode}
+	</insert>
 	<select id="sql" resultType="hashmap">
 		SELECT 'O' ||(SELECT TO_CHAR(SYSDATE,'YYYYMMDD') FROM DUAL)|| ORDER_INFO_seq.nextval ,ORDER_INFO_seq.nextval FROM DUAL
 	</select>
@@ -46,7 +49,7 @@
 	</select>
 	
 	<select id="orderlist" parameterType="map" resultType="ordervo">
-		<![CDATA[
+		
 		select a.* from
 			(select aa.* , rownum r from
 				(SELECT OINFO.OR_CODE , OINFO.PR_CODE,OINFO.PR_NAME,OINFO.OR_STATUS,OINFO.PR_PRICE,OINFO.PR_COUNT,
@@ -55,18 +58,73 @@
 				PRODUCT_INFO INFO ON INFO.PR_CODE = OINFO.PR_CODE INNER JOIN
 				STATUS_INFO sinfo ON oinfo.OR_STATUS = sinfo.STATUS_CODE
 				
-				WHERE INFO.INSERT_ID = #{id} order by OINFO.INSERT_DAY asc)
+				WHERE INFO.INSERT_ID = #{id}
+				<if test="nums !=null">and (
+					<trim prefix="" prefixOverrides="or">
+						<foreach collection="nums" item="a">
+							or oinfo.or_status = #{a} 
+						</foreach>
+					</trim>
+				)</if> 
+				<trim prefix="and" prefixOverrides="and">
+				<if test="prName !=null">
+					AND INFO.pr_name like '%' || #{prName} || '%'
+				</if> 
+				<if test="userId !=null">
+					AND oINFO.user_id like '%' || #{userId} || '%'
+				</if> 
+				<if test="orStart != null">
+  					<![CDATA[
+  						AND oINFO.or_day >= #{orStart} 
+  					 ]]>
+  				</if>
+  				<if test="endprice != null">
+					<![CDATA[
+  						AND oINFO.or_day <= #{orEnd} 
+  					 ]]>  				
+  				</if>
+  				
+			</trim>
+				 order by OINFO.INSERT_DAY desc)
 			aa )
-			a where r >= #{startrow} and r <= #{endrow} 
+			a <![CDATA[where r >= #{startrow} and r <= #{endrow} ]]>
 		
-		]]>
+		
 	</select>
 	
-	<select id="selcount" parameterType="string" resultType="int">
+	<select id="selcount" parameterType="map" resultType="int">
 		SELECT count(*)
 			FROM ORDER_INFO OINFO JOIN
 			PRODUCT_INFO INFO ON INFO.PR_CODE = OINFO.PR_CODE 
-			WHERE INFO.INSERT_ID =#{value}
+			WHERE INFO.INSERT_ID =#{id}
+			
+				<if test="nums !=null">and (
+					<trim prefix="" prefixOverrides="or">
+						<foreach collection="nums" item="a">
+							or oinfo.or_status = #{a} 
+						</foreach>
+					</trim>
+				)</if> 
+			
+			<trim prefix="and" prefixOverrides="and">
+				<if test="prName !=null">
+					AND INFO.pr_name like '%' || #{prName} || '%'
+				</if> 
+				<if test="userId !=null">
+					AND oINFO.user_id like '%' || #{userId} || '%'
+				</if> 
+				<if test="orStart != null">
+  					<![CDATA[
+  						AND oINFO.or_day >= #{orStart} 
+  					 ]]>
+  				</if>
+  				<if test="endprice != null">
+					<![CDATA[
+  						AND oINFO.or_day <= #{orEnd} 
+  					 ]]>  				
+  				</if>
+  				
+			</trim>
 	</select>
 	
 	<select id="schcountAll" parameterType="map" resultType="int">
@@ -139,6 +197,14 @@
 	
 	<select id="delectorder" parameterType="string" resultType="int">
 		update order_info set or_status =4 where or_code =#{value}
+	</select>
+	
+	<update id="changsta" parameterType="map">
+		update order_info set or_status =#{orsta} where or_code =#{orcode}
+	</update>
+	
+	<select id="insertdel" parameterType="ordervo" resultType="int">
+		update order_info set delivery_company =#{deliveryCompany}, delivery_num =#{deliveryNum} where or_code =#{orCode}
 	</select>
 
 </mapper>

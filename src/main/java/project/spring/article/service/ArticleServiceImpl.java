@@ -36,11 +36,12 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 	@Override
 	public int updateItem(Object obj) {
-		return 0;
+		int result = articleDAOimpl.updateItem(obj);
+		return result;
 	}
 	@Override
 	public int deleteItem(Object obj) {
-		return 0;
+		return articleDAOimpl.deleteItem(obj);
 	}
 	
 	@Override
@@ -105,5 +106,26 @@ public class ArticleServiceImpl implements ArticleService{
 	public int moveArticle(Integer num) {
 		// TODO Auto-generated method stub
 		return articleDAOimpl.moveArticle(num);
+	}
+	
+	@Override
+	public void insertReply(Map map) {
+		articleDAOimpl.insertReply(map);
+	}
+	
+	@Override
+	public List getReply(int index,int bnIdx) {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.getReply(index,bnIdx);
+	}
+	@Override
+	public int getAllReplyCount(int bnIdx) {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.getAllReplyCount(bnIdx);
+	}
+	@Override
+	public int deleteReply(int coIdx, String session) {
+		// TODO Auto-generated method stub
+		return articleDAOimpl.deleteReply(coIdx,session);
 	}
 }
