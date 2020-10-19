@@ -42,5 +42,7 @@ public interface DrinkService {
 	// 주류 정보 리스트
 	public List<DrinkVO> selectDrinkServiceList(HashMap<String, Object> schMap) throws SQLException;
 
+	public String modifyDrink(DrinkVO drinkVo) throws SQLException;
+
 	
 }

@@ -75,7 +75,7 @@ public class DrinkDAOImpl implements DrinkDAO {
 	public String insertDrink(DrinkVO drinkVo) throws SQLException {
 		sqlSession.insert("drink.insertDrink", drinkVo);
 		
-		System.out.println(drinkVo.getDkCode());
+		//System.out.println(drinkVo.getDkCode());
 		return drinkVo.getDkCode(); 
 	}
 
@@ -83,6 +83,15 @@ public class DrinkDAOImpl implements DrinkDAO {
 	public void updateDrinkTag(HashMap tagInfo) throws SQLException {
 		sqlSession.update("drink.updateDrinkTag", tagInfo);
 		//System.out.println(res);
+	}
+
+	@Override
+	public String modifyDrink(DrinkVO drinkVo) throws SQLException {
+		int result = sqlSession.update("drink.modifyDrink", drinkVo);
+		
+		String str = (result == 1 ? "주류 정보가 수정되었습니다." : "수정이 실패하였습니다.");
+		
+		return str;
 	}
 
 	/*
