@@ -60,7 +60,11 @@
 					<tr class="reply">
 						<td colspan="2">${articleReplyDTO.bnComment}</td>
 						<!--칭호필요-->
-						<td>${articleReplyDTO.nickname}</td>
+						<td>
+						<span class="btn btn-blue btn-xs default">${articleReplyDTO.writerTitleCnt}</span>
+						<span class="titleName">${articleReplyDTO.writerTitleName}</span>
+						${articleReplyDTO.nickname}
+						</td>
 						<td><fmt:formatDate value="${articleReplyDTO.insertDay}" pattern="yyyy.MM.dd"/>
 							<c:if test="${articleReplyDTO.insertId eq sessionScope.memId}">
 								<button onclick="deleteReply('${articleReplyDTO.coIdx}','${sessionScope.memId}')">글 삭제</button>
