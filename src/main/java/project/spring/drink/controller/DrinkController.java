@@ -428,8 +428,6 @@ public class DrinkController {
 	@ResponseBody
 	public String drinkLikeSs(@RequestParam String dkCode, @RequestParam String memId) throws SQLException, IOException {
 		
-		//List<HashMap> smallCategoryList = drinkService.selectSmallCategoryList(bigCategory);
-		//System.out.println(smallCategoryList);
 		HashMap drinkLikeMap = new HashMap();
 		
 		drinkLikeMap.put("dkCode", dkCode);
