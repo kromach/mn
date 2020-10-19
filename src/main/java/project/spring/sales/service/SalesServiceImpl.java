@@ -77,14 +77,6 @@ public class SalesServiceImpl implements SalesService{
 	}
 
 	@Override
-	public List productModify(String pageNum) {
-		List list = null;
-		list = salesDAO.productModify(pageNum);
-				
-		return list;
-	}
-
-	@Override
 	public List getCategory() {
 		List list = salesDAO.getCategory();
 		return list;
@@ -138,6 +130,18 @@ public class SalesServiceImpl implements SalesService{
 		int count = 0;
 		count = salesDAO.intsertProduct(productDTO);
 		return count;
+	}
+
+	@Override
+	public String sessionIdCh(String memId) {
+		String kind = salesDAO.sessionIdCh(memId);
+		return kind;
+	}
+
+	@Override
+	public List productDetail(String prCode) {
+		List list = salesDAO.productDetail(prCode);
+		return list;
 	}
 
 

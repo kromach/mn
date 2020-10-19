@@ -32,11 +32,7 @@
   				SELECT * FROM DRINK_CATEGORY dc WHERE SUPER_CODE ='B003' ORDER BY CT_IDX
   			]]>
   		</select>
-  		<update id="salesModify" parameterType="productvo">
-	  		<![CDATA[
-  		 	UPDATE PRODUCT_INFO SET PR_AMOUNT = 999 WHERE PR_CODE ='PR00006'
-  		 	]]>
-  		</update>
+  		
   		<select id="makeprCode" resultType="String">
   		
   			SELECT 'PR' || LPAD( (SELECT COUNT(PR_CODE) + 1 FROM PRODUCT_INFO), 5, '0') AS CODE FROM DUAL
@@ -46,5 +42,13 @@
 			INSERT INTO PRODUCT_INFO VALUES(#{prCode}, #{prName}, #{prImg}, 'B003', #{prSkind}, #{prCountry}, #{prCity}, #{prAlcohol}, #{prPlace}, #{prFood}, #{prContent}, #{prPrice}, #{prAmount}, #{prTotalcount}, #{prLike}, #{prUse}, #{insertId}, sysdate)
 			]]>
   		</insert>
+  		
+  		<select id="sessionIdCh" parameterType="String" resultType="String">
+  			SELECT USER_KIND FROM MEMBER_INFO mi WHERE ID =#{value}
+  		</select>
+  		
+  		<select id="productDetail" parameterType="String" resultType="productvo">
+  			SELECT * FROM PRODUCT_INFO pi2 WHERE PR_CODE =#{value}
+  		</select>
   		
   </mapper>
