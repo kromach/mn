@@ -13,7 +13,6 @@ public class ArticleReplyDTO {
 	private String name;
 	private int writerTitleCnt;
 	private String writerTitleName;
-	
 	public int getCoIdx() {
 		return coIdx;
 	}

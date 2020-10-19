@@ -33,6 +33,7 @@ import project.spring.admin.service.AdminServiceImpl;
 import project.spring.admin.vo.AdminVO;
 import project.spring.article.service.ArticleServiceImpl;
 import project.spring.article.vo.ArticleDTO;
+import project.spring.article.vo.ArticleReplyDTO;
 import project.spring.article.vo.Editor_imageVO;
 import project.spring.beans.PageVO;
 import project.spring.beans.Pager;
@@ -190,9 +191,15 @@ public class ArticleController {
 			model.addAttribute("articleDTO", dto);
 			//밑에 추가게시글
 			model.addAttribute("list", list);
-			
 			//댓글
-			List reply = articleService.getReply(0,idx);
+			List<ArticleReplyDTO> reply = articleService.getReply(0,idx);
+			
+			System.out.println("내용============");
+			System.out.println(dto);
+			for(ArticleReplyDTO re : reply) {
+				System.out.println(re);
+			}
+			
 			model.addAttribute("reply", reply);
 			
 			//댓글 pager
