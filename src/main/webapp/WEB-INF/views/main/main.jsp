@@ -65,7 +65,7 @@ function fetchList(context,index){
 					gutter: '.gutter-sizer'
 				});
 				for(var i in data){
-					var el = '<div class="grid-item"><a href="'+data[i].aLinkUri+'"><img src="'+data[i].imgUri+'"/></a></div>';
+					var el = '<div class="grid-item"><a href="'+data[i].aLinkUri+'"><img src="'+data[i].imgUri+'" onerror="this.src=\'/resources/img/noImage.jpg\'" /></a></div>';
 					$grid.append( el ).masonry( 'appended', el ,true);
 				}
 				// 재훈 테스트
