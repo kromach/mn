@@ -24,7 +24,7 @@
 					<tr> 
 						<td>
 						<span class="btn btn-blue btn-xs default">${articleDTO.writerTitleCnt}</span>
-						<span class="titleName">writerTitleName</span>
+						<span class="titleName">${articleDTO.writerTitleName}</span>
 						${articleDTO.nickname}
 						</td>
 						<td><fmt:formatDate value="${articleDTO.insertDay}" pattern="yyyy.MM.dd"/></td>
@@ -59,6 +59,7 @@
 					<c:forEach var="articleReplyDTO" items="${reply}">
 					<tr class="reply">
 						<td colspan="2">${articleReplyDTO.bnComment}</td>
+						<!--칭호필요-->
 						<td>${articleReplyDTO.nickname}</td>
 						<td><fmt:formatDate value="${articleReplyDTO.insertDay}" pattern="yyyy.MM.dd"/>
 							<c:if test="${articleReplyDTO.insertId eq sessionScope.memId}">
