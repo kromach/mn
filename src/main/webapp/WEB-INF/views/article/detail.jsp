@@ -22,7 +22,11 @@
 						<td>좋아요</td>
 					</tr>	
 					<tr> 
-						<td>${articleDTO.nickname}</td>
+						<td>
+						<span class="btn btn-blue btn-xs default">${articleDTO.writerTitleCnt}</span>
+						<span class="titleName">writerTitleName</span>
+						${articleDTO.nickname}
+						</td>
 						<td><fmt:formatDate value="${articleDTO.insertDay}" pattern="yyyy.MM.dd"/></td>
 						<td>${articleDTO.readcount}</td>
 						<td>${articleDTO.heart}</td>
