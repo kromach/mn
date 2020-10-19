@@ -55,10 +55,10 @@ public class EventController {
 		return "event/index.mn";
 	}
 	
-	@RequestMapping("datail")
+	@RequestMapping("detail")
 	public String deatil(HttpServletRequest request, Model model) {
 		
-		String eventCode = request.getParameter("event");
+		String eventCode = request.getParameter("eventCode");
 		
 		model.addAttribute("eventCode", eventCode);
 		

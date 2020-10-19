@@ -75,7 +75,8 @@ public class MainController {
 			List<EventVO> event = service.getEventInitial(0);
 			for(EventVO vo : event) {
 				MainVO mainVo = new MainVO();
-				String aLinkUri = "/event/detail?eventCode="+vo.getEventCode();
+				String aLinkUri = "event/detail?eventCode="+vo.getEventCode();
+				System.out.println("eventCode : " + vo.getEventCode());
 				mainVo.setaLinkUri(aLinkUri);
 				mainVo.setImgUri(vo.getThumImg());
 				main.add(mainVo);
