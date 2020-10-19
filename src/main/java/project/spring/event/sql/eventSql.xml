@@ -7,8 +7,16 @@
   		select count(*) from event where is_open='Y'
   	</select>
   
-  	<select id="eventList" resultType="eventVO">
-  		select event_code, thum_img from event where is_open='Y'
+  	<select id="eventList" resultType="eventVO" parameterType="int">
+  	<![CDATA[
+  		select * from(
+  			select a.*, rownum as rnum from(
+  				select event_code, thum_img from event where is_open='Y' order by insert_day DESC
+  				)a 
+  			)where rnum >= (10*#{value})+1 and rnum <= (10*(#{value}+1))	
+  	
+  	]]>
   	</select>
   
   </mapper>
+  

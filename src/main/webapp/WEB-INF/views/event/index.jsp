@@ -1,23 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script>
-	$(function() {
-		$("#header").removeClass("header_color").addClass("main_header");
-		
-		var img_random = Math.ceil(Math.random()*7);
-		$(".main_header").css({"background":"url(/resources/img/main/main" + img_random + ".jpg) no-repeat center center"});
-		
-		$(".t" + (img_random % 2)).removeClass("display-none")
-	});
-</script>
+
 <div class="grid-Wrapper">
 	<div class="grid">  
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
-		<c:forEach var="mainVO" items="${main}">
+		<c:forEach var="eventList" items="${eventList}">
 			<div class="grid-item">
-				<a href="${mainVO.aLinkUri}">
-					<img src="${mainVO.imgUri}" />
+				<a href="/event/datail?event=${eventList.eventCode }">
+					<img src="${eventList.thumImg}" />
 				</a>
 			</div>
 		</c:forEach>
@@ -67,7 +58,7 @@ function fetchList(context,index){
 					gutter: '.gutter-sizer'
 				});
 				for(var i in data){
-					var el = '<div class="grid-item"><a href="'+data[i].aLinkUri+'"><img src="'+data[i].imgUri+'"/></a></div>';
+					var el = '<div class="grid-item"><a href="'+data[i].eventCodei+'"><img src="'+data[i].thumImg+'"/></a></div>';
 					$grid.append( el ).masonry( 'appended', el ,true);
 				}
 				// 재훈 테스트

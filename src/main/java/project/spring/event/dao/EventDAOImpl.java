@@ -57,8 +57,8 @@ public class EventDAOImpl implements EventDAO {
 	}
 
 	@Override
-	public List eventList() throws SQLException {
-		List eventList = sqlSession.selectList("event.eventList");
+	public List eventList(int idx) throws SQLException {
+		List eventList = sqlSession.selectList("event.eventList", idx);
 		return eventList;
 	}
 
