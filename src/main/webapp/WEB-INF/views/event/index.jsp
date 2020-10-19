@@ -7,7 +7,7 @@
 		<div class="gutter-sizer"></div>
 		<c:forEach var="eventList" items="${eventList}">
 			<div class="grid-item">
-				<a href="/event/datail?event=${eventList.eventCode }">
+				<a href="/event/detail?eventCode=${eventList.eventCode }">
 					<img src="${eventList.thumImg}" />
 				</a>
 			</div>
