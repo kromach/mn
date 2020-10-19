@@ -3,8 +3,10 @@
 <script>
 	$(function() {
 		$("#header").removeClass("header_color").addClass("main_header");
+		
 		var img_random = Math.ceil(Math.random()*7);
 		$(".main_header").css({"background":"url(/resources/img/main/main" + img_random + ".jpg) no-repeat center center"});
+		
 		$(".t" + (img_random % 2)).removeClass("display-none")
 	});
 </script>
@@ -36,8 +38,9 @@ $(function(){
          var context = window.location.pathname.substring(0,
 					window.location.pathname.indexOf("/", 2));
 		 var index = $('#index').val();
+		 var search = '<c:out value="${search}"/>';
          if( scrollTop + windowHeight +100 > documentHeight ){
-        	 fetchList(context,index);
+        	 fetchList(context,index,search);
 			}
 		})
 })
@@ -47,8 +50,8 @@ function fetchList(context,index){
 		return;
 	}
 	$.ajax({
-		url : context + '/reload',
-		data : 'index='+index,
+		url : context + '/reloadSearch',
+		data : 'index='+index+"&search="+search,
 		type : "post",
 		async: false,
 		success : function(data) {
