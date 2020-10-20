@@ -106,5 +106,8 @@
 	<context:component-scan base-package="project.spring" /> 
 	<beans:bean id="MemberAspect" class="project.spring.aop.MemberAspect" />
 	<aop:aspectj-autoproxy /> 
+	<context:component-scan base-package="project.spring" /> 
+	<beans:bean id="AdminAspect" class="project.spring.aop.AdminAspect" />
+	<aop:aspectj-autoproxy /> 
 	
 </beans:beans>

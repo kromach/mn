@@ -17,6 +17,20 @@
   	
   	]]>
   	</select>
+  	<select id="getEvent" parameterType="string" resultType="eventVO">
+  		SELECT ev.*, PR_INFO.pr_name, PR_INFO.PR_BKIND, bcate.VALUE AS PR_BKIND_VALUE, PR_INFO.PR_SKIND, SCATE.VALUE AS PR_SKIND_VALUE, pr_info.PR_COUNTRY, pr_info.PR_CITY, pr_info.PR_ALCOHOL, pr_info.PR_PLACE, PR_INFO.PR_FOOD
+			FROM event ev INNER JOIN 
+				PRODUCT_INFO pr_info ON ev.PRODUCT_CODE = pr_info.PR_CODE INNER JOIN 
+				DRINK_CATEGORY BCATE ON PR_INFO.PR_BKIND = BCATE.CODE INNER JOIN
+				DRINK_CATEGORY SCATE ON PR_INFO.PR_SKIND = SCATE.CODE 
+			WHERE ev.EVENT_CODE = #{value}
+  	</select>
+  	<insert id="requestEvent" parameterType="hashmap">
+  		INSERT INTO event_member values((SELECT count(*) +1 FROM event_member), #{eventCode}, #{id}, sysdate)
+  	</insert>
+  	<select id="checkJoinEvent" parameterType="hashmap" resultType="int">
+  		select count(ev_idx) from event_member where id=#{id} and event_code =#{eventCode}
+  	</select>
   
   </mapper>
   

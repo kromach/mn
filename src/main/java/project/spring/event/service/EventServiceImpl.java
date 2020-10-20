@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import project.spring.event.dao.EventDAOImpl;
+import project.spring.event.vo.EventVO;
 
 @Service
 public class EventServiceImpl implements EventService{
@@ -62,6 +63,23 @@ public class EventServiceImpl implements EventService{
 		List eventList = eventDAO.eventList(idx);
 		return eventList;
 		
+	}
+
+	@Override
+	public EventVO getEvent(String eventCode) throws SQLException {
+		EventVO vo = eventDAO.getEvent(eventCode);
+		return vo;
+	}
+
+	@Override
+	public void requestEvent(String eventCode, String id) throws SQLException {
+		eventDAO.requestEvent(eventCode, id);
+	}
+
+	@Override
+	public int checkJoinEvent(String eventCode, String id) throws SQLException {
+		int idx = eventDAO.checkJoinEvent(eventCode, id);
+		return idx;
 	}
 
 }
