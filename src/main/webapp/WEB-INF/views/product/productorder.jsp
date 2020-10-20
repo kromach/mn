@@ -58,7 +58,7 @@
 						<dd class="clfix ">${info.prPrice*amount}원</dd>
 					</dl>
 				</div>
-				<input type="button" class="btn btn-lg btn-rouge" value="결제하기" onclick="insertOrder('${amount}','${info.prAmount}')">
+				<input type="button" class="btn btn-lg btn-rouge" value="결제하기" onclick="insertOrder()">
 			</div>
 		</form>
 	</div>
@@ -77,20 +77,11 @@
 		});
 	});
 	
-
-	function insertOrder(amount, prAmount) {
-		if (checkFormjquery()) {
-			if (amount > 0) {
-				if (amount < prAmount) {
-					$("form[name='orForm']").submit();
-				} else {
-					arler("재고가 부족합니다");
-				}
-			} else {
-				arler("구매 개수는 1개 이상입니다");
-			}
-		}
-	}
+	  function insertOrder(amount,prAmount){
+	    	if (checkFormjquery()) {
+	    		$("form[name='orForm']").submit();
+	    	}
+	    }
 </script>
 
 
