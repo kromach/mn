@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +52,10 @@
 						<td>승인거절</td>
 					</c:if>
 					<td>${drinkList.insertId}</td>
-					<td>${drinkList.insertDay}</td>
+					<td>
+						<fmt:formatDate value="${drinkList.insertDay}" var="date" pattern="yyyy-MM-dd"  />
+								${date}
+					</td>
 					<td><a href="/drink/modify?dkCode=${drinkList.dkCode}">수정</a></td>
 				</tr>
 			</c:forEach>
