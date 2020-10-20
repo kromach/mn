@@ -39,7 +39,7 @@
 					type="text" name="tel" maxlength="4">-<input class="telInput required" msg="전화번호를" type="text" name="tel" maxlength="4">
 					</div>
 					<br><br>
-					<button type="submit" class="btn btn-sm btn-grey">찾기</button>
+					<button type="button" class="btn btn-sm btn-grey" onclick="insert()">찾기</button>
 					<button type="reset" class="btn btn-sm btn-grey">재입력</button>
 					<button type="button" class="btn btn-sm btn-grey">취소</button>
 				</div>
