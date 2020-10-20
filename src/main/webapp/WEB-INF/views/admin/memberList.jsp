@@ -121,21 +121,24 @@ pageEncoding="UTF-8"%>
 <script>													
 function exitUser(memberId){													
 													
-	alert("해당 아이디를 강퇴하였습니다.");												
-	alert(memberId);												
-													
-													
-	var context = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));												
-	$.ajax({												
-		url: context + '/exitUser?memberId='+memberId,											
-		type:"get",											
-		success : function(data){											
-			$('#' + memberId).empty();										
-			$('#' + memberId).append('<p>강퇴됨</p>')										
-													
-													
-		}											
-	})												
+	var cofirmMsg = confirm("정말 강퇴할래요?")
+	if(cofirmMsg){
+		
+		alert("해당 아이디를 강퇴하였습니다.");												
+																												
+		var context = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));												
+		$.ajax({												
+			url: context + '/exitUser?memberId='+memberId,											
+			type:"get",											
+			success : function(data){											
+				$('#' + memberId).empty();										
+				$('#' + memberId).append('<p>강퇴됨</p>');									
+														
+														
+			}											
+		})			
+	}
+										
 													
 }													
 </script>													

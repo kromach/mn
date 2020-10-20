@@ -70,7 +70,7 @@
   	
   	<select id="getDrinkSearch" parameterType="string" resultType="AdminEventVO">
   		select PR_CODE, PR_NAME from product_info where PR_NAME LIKE '%'||#{value}||'%' 
-  	</select>
+  	</select> 
   	
   	<select id="getEventInfo" parameterType="string" resultType="AdminEventVO">
   		select ev.EVENT_CODE, ev.EVENT_NAME, ev.PRODUCT_CODE, pr.PR_NAME, ev.EV_START, ev.EV_END, ev.CONTENT, ev.THUM_IMG, ev.IS_OPEN, ev.INSERT_ID, ev.INSERT_DAY
