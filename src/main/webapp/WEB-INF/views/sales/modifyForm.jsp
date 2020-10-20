@@ -50,6 +50,7 @@
 		<div class="detail-item detail-width6">
 			<h3 class="text-left pad-y10">정보 수정</h3>
 			<form action="modifyPro" name="prForm" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="prcode" value="${prCode}">
 				<table class="tableCss tbl-lg text-left">
 					<tr>
 						<th>주류 종류</th>
@@ -70,13 +71,13 @@
 					<tr>
 						<th>상품 이미지</th>
 						<td>
-							<input type="file" name="primage" />
+							<input type="file" name="primage" class="required" msg="이미지를"/>
 						</td>
 					</tr>
 					<tr>
 						<th>양조장</th>
 						<td>
-							<input type="text" name="prPlace" class="input-lg required" value="${detail.prPlace}"/>
+							<input type="text" name="prPlace" class="input-lg" value="${detail.prPlace}"/>
 						</td>
 					</tr>
 					<tr>
@@ -95,13 +96,13 @@
 					<tr>
 						<th>어울리는 안주</th>
 						<td>
-							<input type="text" name="prFood" class="input-lg required" value="${detail.prFood }"/>
+							<input type="text" name="prFood" class="input-lg" value="${detail.prFood }"/>
 						</td>
 					</tr>
 					<tr>
 						<th>가격</th>
 						<td>
-							<input type="number" name="prPrice" class="input-sm required" value="${detail.prPrice}" />  원	
+							<input type="number" name="prPrice" class="input-sm" value="${detail.prPrice}" />  원	
 						</td>													
 					</tr>
 					<tr>
@@ -129,7 +130,7 @@
 					<tr>
 						<th>주류 정보</th>
 						<td>
-							<textarea name="prContent" id="prContent" type="textarea" class="required" style="width:98%" >${detail.prContent}</textarea>
+							<textarea name="prContent" id="prContent" type="textarea" style="width:98%" >${detail.prContent}</textarea>
 							<script type="text/javascript">CKEDITOR.replace( 'prContent' , ckedit_config);</script>
 						</td>
 					</tr>

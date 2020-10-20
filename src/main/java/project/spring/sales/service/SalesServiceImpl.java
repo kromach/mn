@@ -84,7 +84,7 @@ public class SalesServiceImpl implements SalesService{
 	}
 
 	@Override
-	public String makeprCode(ProductInfoDTO productDTO) {
+	public String makeprCode(ProductVo productDTO) {
 		String prCode = salesDAO.makeprCode(productDTO);
 		return prCode;
 	}
@@ -127,17 +127,24 @@ public class SalesServiceImpl implements SalesService{
 	}
 
 	@Override
-	public int insertProduct(ProductInfoDTO productDTO) {
+	public int insertProduct(ProductVo productDTO) {
 		int count = 0;
-		count = salesDAO.intsertProduct(productDTO);
+		count = salesDAO.insertProduct(productDTO);
 		return count;
 	}
 
 	@Override
 	public ProductVo getDatail(String prCode) {
-		System.out.println("왔냐????????????????????????????????????????????????????????????");
+		System.out.println("왔냐??");
 		ProductVo dto = salesDAO.getDatail(prCode);
 		return dto;
+	}
+
+	@Override
+	public int updateProduct(ProductVo dto) {
+		int count = 0;
+		count = salesDAO.updateProduct(dto);
+		return count;
 	}
 
 
