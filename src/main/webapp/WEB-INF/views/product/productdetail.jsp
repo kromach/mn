@@ -82,7 +82,7 @@
 					</div>
 			</form>
 		</div>
-		<div class="detail-item detail-width4">
+		<div class="detail-item detail-width6">
 			<h3 class="pad-top10 pad-bottom20">상품 후기</h3>
 			<table class="detailTbl tbl-lg" id="more2">
 				<tr>
@@ -101,7 +101,7 @@
 				</c:forEach>
 			</table>
 		</div>
-		<div class="detail-item detail-width4" id="add">
+		<div class="detail-item detail-width6" id="add">
 			<input id="addBtn" type="button" class="btn btn-sm btn-dark"
 				value="더보기" onclick="more2('${info.prCode}')"> <input type="hidden"
 				value="0" id="moreVal">
