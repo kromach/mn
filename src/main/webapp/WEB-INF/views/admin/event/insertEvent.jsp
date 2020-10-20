@@ -6,16 +6,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
-
-<!-- 디자인 변경,   술 선택 셀렉트문 가져오기, 술 선택 아래 --- 변경
-	에디터 변경
-	파라미터 수정(id 등)
- -->
-
 <title>insert Event</title>
-<!-- 유효성검사 js -->
-<script src="/resources/js/formCheck.js"></script> 
+<script src="/resources/js/formCheck.js"></script>
+<script src="/resources/js/jquery.selectric.js"></script>
+
 <!-- 에디터 js -->
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="/resources/ckeditor/adapters/jquery.js"></script>
@@ -45,9 +39,6 @@
 	// ckeditor 설정 종료
 	
 </script>
- 
-
-<!-- 날짜 -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -56,7 +47,6 @@ $( function() {
     var dateFormat = "mm/dd/yy",
       from = $( "#from" )
         .datepicker({
-        	
           dateFormat: "yy-mm-dd",
           defaultDate: "+1w",
           changeMonth: true,
@@ -82,12 +72,9 @@ $( function() {
       } catch( error ) {
         date = null;
       }
- 
       return date;
     }
-    
   } );
-
 </script>
 
 
@@ -99,12 +86,13 @@ $( function() {
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
 		<div class="grid-item grid-item--width6 ">
-		
 			<form action="insertEventPro" method="post" id="frm" enctype="multipart/form-data">
 				<table class="tableCss table">
 					<tr>
 						<th>제목</th>
-						<td colspan="2"><input type="text" name="eventName" id="tilte" class="required" msg="제목을" placeholder="제목" size="130"/></td>
+						<td colspan="2">
+							<input type="text" name="eventName" id="tilte" class="input-lg required" msg="제목을" />
+						</td>
 					</tr>
 					<tr>
 						<th>술 검색</th>
@@ -116,7 +104,7 @@ $( function() {
 					<tr>
 						<th>술 선택</th>
 						<td colspan="2">
-							<select id="option" name="productCode">
+							<select id="option" name="productCode" class="required" msg="술을">
 								<option value="option">선택</option>
 							</select></td>
 					</tr>
@@ -127,9 +115,9 @@ $( function() {
 						<td colspan="2">
 							<div>
 								<label for="from">시작일</label>
-								<input type="text" name="evStart" id="from"/>
+								<input type="text" name="evStart" onchange="return checkDay()" id="from" class="required" msg="시작일을"/>
 								<label for="to">종료일</label>
-								<input type="text" name="evEnd" id="to"/>
+								<input type="text" name="evEnd" id="to" class="required" msg="종료일을" onchange="return checkDay()"/>
 							</div>
 						</td>
 					</tr>
@@ -143,7 +131,7 @@ $( function() {
 					<tr>
 						<th>대표사진</th>
 						<td colspan="2">
-							<input type="file" name="eventImg" />
+							<input type="file" name="eventImg" class="required" msg="대표사진을" />
 						</td>
 					</tr>
 				
@@ -156,7 +144,7 @@ $( function() {
 					</tr>
 				</table>
 				<div class="text-center pad-top10">
-					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="바보">
+					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="저장">
 					<input type="button" class="btn-md" value="취소" onclick="window.location='/admin/event/eventList'"/>
 				</div>
 			</form>
@@ -164,7 +152,6 @@ $( function() {
 	</div>
 </div>
 </body>
-
 
  <!-- 검색기능 -->
  
@@ -180,7 +167,6 @@ function searchDk(){
 			$('#option').empty();
 			$('#option').append('<option value="option">선택</option>');
 			
-			
 			var index = Object.keys(data).length;
 			console.log(index);
 			for(var i=0 ; i<index;i++){
@@ -190,36 +176,64 @@ function searchDk(){
 		}
 	});
 }
-
-
-/* 	<tr>
-						<th>술 선택</th>
-						<td colspan="2">
-							<select id="option" name="productCode">
-								<option value="option">선택</option>
-							</select></td>
-					</tr>  */
 </script>
+
+
 <script>
 $(function() {
 	// 전송버튼 클릭이벤트 
 	// 에디터의 처리가 필요하므로 클릭 이벤트가 필요.
     $('#addBtn').click(function(){
     	
-    	/*
-    	 checkFormjquery() form 유효성 검사 JS 
+    	/* checkFormjquery() form 유효성 검사 JS 
     	 input 등의 class에 required 가 붙은 항목을 검사 후 입력 값이 없으면 msg의 값을 바탕으로
     	 팝업을 보여주고 멈춤.
     	*/
-    	//if (checkFormjquery()) {  // 모든 입력 항목 처리에 문제 없을때 주석 해제하기
+    	if (checkFormjquery()) {  // 모든 입력 항목 처리에 문제 없을때 주석 해제하기
     
             // 해당 입력 폼의 id나 name 등으로 select 한 후에 submit() 실행
             $content = CKEDITOR.instances.ckeditor.getData();
             $('#frm').submit();
     		
-    	//}   						// 모든 입력 항목 처리에 문제 없을때 주석 해제하기
+    	}   						// 모든 입력 항목 처리에 문제 없을때 주석 해제하기
     });
 });
 
+</script>
+
+<script>
+	function checkDay(){
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = new String(date.getMonth() + 1);
+		var day = new String(date.getDate());
+		if(month.length == 1){
+			month = "0" + month;
+		}
+		if(day.length == 1){
+			day = "0" + day;
+		}
+		var today = year+month+day;
+		var today1 = new Date(today);
+		var from1 = $('#from').val();
+		var from1Arr = from1.split('-');
+
+		var fromCompare = from1Arr[0] + from1Arr[1] + from1Arr[2];
+		
+		if(today > fromCompare){
+			alert("오늘 전 날짜로 지정할 수 없습니다")
+			$('#from').val("");
+			return false;
+		}
+		var to1 = $('#to').val();
+		var to1Arr = to1.split('-');
+
+		var toCompare = to1Arr[0] + to1Arr[1] + to1Arr[2];
+		if(fromCompare > toCompare){
+			alert("시작일 날짜로 지정할 수 없습니다")
+			$('#to').val("");
+			return false;
+		}
+	}
 </script>
 </html>

@@ -8,10 +8,6 @@
 <meta charset="UTF-8">
 
 
-<!-- 디자인 변경,   술 선택 셀렉트문 가져오기, 술 선택 아래 --- 변경
-	에디터 변경
-	파라미터 수정(id 등)
- -->
 
 <title>insert Event</title>
 <!-- 유효성검사 js -->
@@ -82,14 +78,11 @@ $( function() {
       } catch( error ) {
         date = null;
       }
- 
       return date;
-    }
-    
+    } 
   } );
 
 </script>
-
 
 </head>
 <body>
@@ -105,7 +98,7 @@ $( function() {
 				<table class="tableCss table">
 					<tr>
 						<th>제목</th>
-						<td colspan="2"><input type="text" name="eventName" id="tilte" class="required" msg="제목을" placeholder="제목" size="130" value="${vo.eventName }" /></td>
+						<td colspan="2"><input type="text" name="eventName" id="tilte" class="input-lg required" msg="제목을" placeholder="제목" size="130" value="${vo.eventName }" /></td>
 					</tr>
 					<tr>
 						<th>술 검색</th>
@@ -117,7 +110,7 @@ $( function() {
 					<tr>
 						<th>술 선택</th>
 						<td colspan="2">
-							<select id="option" name="productCode">
+							<select id="option" name="productCode" class="required" msg="술을">
 								<option value="${vo.productCode}" selected="selected" >${vo.prName }</option>
 							</select></td>
 					</tr>
@@ -128,25 +121,31 @@ $( function() {
 						<td>
 							<div>
 								<label for="from">시작일</label>
-								<input type="text" name="evStart" id="from" value="${vo.evStart }"/>
+								<input type="text" name="evStart" id="from" value="${vo.evStart }" onchange="return checkDay()" class="required" msg="시작일을"/>
 								<label for="to">종료일</label>
-								<input type="text" name="evEnd" id="to" value="${vo.evEnd }"/>
+								<input type="text" name="evEnd" id="to" value="${vo.evEnd }" onchange="return checkDay()" class="required" msg="종료일을"/>
 							</div>
 						</td>
 					</tr>
 					<tr>
 						<th>활성화여부</th>
 						<td>
+							<c:if test="${vo.isOpen eq 'Y' }">
 							<input type="radio" name="isOpen" value="Y" checked="checked">활성화 
 							<input type="radio" name="isOpen" value="N">비활성화 
+							</c:if>
+							<c:if test="${vo.isOpen eq 'N' }">
+							<input type="radio" name="isOpen" value="Y" >활성화 
+							<input type="radio" name="isOpen" value="N" checked="checked">비활성화 
+							</c:if>
 						</td>					
 						
 					</tr>
 					<tr>
 						<th>대표사진</th>
 						<td>
-							<input type="hidden" name="oldImg" value="${vo.thumImg}">
-							<input type="file" name="eventImg" />
+							<input type="hidden" name="oldImg" value="${vo.thumImg}" >
+							<input type="file" name="eventImg"  />
 							<img src="${vo.thumImg}">
 						</td>
 					</tr>
@@ -159,7 +158,7 @@ $( function() {
 					</tr>
 				</table>
 				<div class="text-center pad-top10">
-					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="바보">
+					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="수정">
 					<input type="button" class="btn-md" value="취소" onclick="window.location='/admin/event/eventList'"/>
 				</div>
 			</form>
@@ -214,15 +213,54 @@ $(function() {
     	 input 등의 class에 required 가 붙은 항목을 검사 후 입력 값이 없으면 msg의 값을 바탕으로
     	 팝업을 보여주고 멈춤.
     	*/
-    	//if (checkFormjquery()) {  // 모든 입력 항목 처리에 문제 없을때 주석 해제하기
+    	if (checkFormjquery()) {  // 모든 입력 항목 처리에 문제 없을때 주석 해제하기
     
             // 해당 입력 폼의 id나 name 등으로 select 한 후에 submit() 실행
             $content = CKEDITOR.instances.ckeditor.getData();
+    	
             $('#frm').submit();
     		
-    	//}   						// 모든 입력 항목 처리에 문제 없을때 주석 해제하기
+    	}   						// 모든 입력 항목 처리에 문제 없을때 주석 해제하기
     });
 });
 
+</script>
+
+<script>
+	function checkDay(){
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = new String(date.getMonth() + 1);
+		var day = new String(date.getDate());
+		if(month.length == 1){
+			month = "0" + month;
+		}
+		if(day.length == 1){
+			day = "0" + day;
+		}
+		var today = year+month+day;
+		var today1 = new Date(today);
+		var from1 = $('#from').val();
+		var from1Arr = from1.split('-');
+		
+		
+		var fromCompare = from1Arr[0] + from1Arr[1] + from1Arr[2];
+		
+		
+		if(today > fromCompare){
+			alert("오늘 전 날짜로 지정할 수 없습니다")
+			$('#from').val("");
+			return false;
+		}
+		var to1 = $('#to').val();
+		var to1Arr = to1.split('-');
+
+		var toCompare = to1Arr[0] + to1Arr[1] + to1Arr[2];
+		if(fromCompare > toCompare){
+			alert("시작일 날짜로 지정할 수 없습니다")
+			$('#to').val("");
+			return false;
+		}
+	}
 </script>
 </html>
