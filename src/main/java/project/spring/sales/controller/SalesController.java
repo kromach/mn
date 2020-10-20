@@ -23,6 +23,7 @@ import project.spring.beans.JsonUtil;
 import project.spring.beans.PageVO;
 import project.spring.beans.Pager;
 import project.spring.drink.vo.DrinkVO;
+import project.spring.product.vo.ProductVo;
 import project.spring.sales.service.SalesService;
 import project.spring.sales.vo.ProductInfoDTO;
 
@@ -139,33 +140,24 @@ public class SalesController {
 	
 	@RequestMapping(value = "/modifyForm")
 	public String modifyForm(@RequestParam(name="prcode") String prCode,HttpServletRequest request) {
+		
 		System.out.println("sales modifyForm controller");
+		System.out.println("prCodr" + prCode);
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
 		System.out.println(memId);
 
 		//prCode로 해당 detail 가져오기
-		List<ProductInfoDTO> detailList = null;
-		detailList = salesService.productDetail(prCode);
-		System.out.println("datailList : " +detailList.toString());
-		
 		// 해당 판매자가 맞는지 체크 PRCODE의 insert_id와 session값이 일치하지 않으면 main으로 리턴
-		String sessionCh = null;
-		sessionCh = salesService.sessionIdCh(memId);
-		if(!(sessionCh.equals("sales") || sessionCh.equals("admin"))) {
+		ProductVo dto = salesService.getDatail(prCode);
+		System.out.println(dto.getInsertId()+" =====vs===== "+ memId);
+		System.out.println();
+		
+		if(!(dto.getInsertId().equals(memId))) {
 			return "redirect:/";
 		}
 		
-		
-		
-		
-		
-		return "/sales/modifyPro";
+		return "/sales/modifyPro.mn";
 	}
-	
-	
-	
-	
-	
 	
 }

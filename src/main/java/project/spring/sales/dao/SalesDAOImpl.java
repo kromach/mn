@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import project.spring.product.vo.ProductVo;
 import project.spring.sales.vo.ProductInfoDTO;
 
 @Repository
@@ -108,16 +109,9 @@ public class SalesDAOImpl implements SalesDAO{
 	}
 
 	@Override
-	public String sessionIdCh(String memId) {
-		String kind = "";
-		kind = sqlSession.selectOne("sales.sessionIdCh", memId);
-		return kind;
-	}
-
-	@Override
-	public List productDetail(String prCode) {
-		List list = sqlSession.selectList("sales.productDetail", prCode);
-		return list;
+	public ProductVo getDatail(String prCode) {
+		ProductVo dto = sqlSession.selectOne("sales.getDatail", prCode);
+		return dto;
 	}
 
 }

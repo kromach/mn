@@ -3,6 +3,7 @@ package project.spring.sales.dao;
 import java.util.List;
 
 import project.spring.beans.CommonInterface;
+import project.spring.product.vo.ProductVo;
 import project.spring.sales.vo.ProductInfoDTO;
 
 public interface SalesDAO extends CommonInterface{
@@ -13,7 +14,6 @@ public interface SalesDAO extends CommonInterface{
 	public List getCategory();
 	public String makeprCode(ProductInfoDTO productDTO);
 	public int intsertProduct(ProductInfoDTO productDTO);
-	public String sessionIdCh(String memId);
-	public List productDetail(String prCode);
+	public ProductVo getDatail(String prCode);
 
 }
