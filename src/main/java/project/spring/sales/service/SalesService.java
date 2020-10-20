@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import project.spring.beans.CommonInterface;
+import project.spring.product.vo.ProductVo;
 import project.spring.sales.vo.ProductInfoDTO;
 
 public interface SalesService extends CommonInterface{
@@ -17,7 +18,6 @@ public interface SalesService extends CommonInterface{
 	public String makeprCode(ProductInfoDTO productDTO);
 	public String insertProductImg(MultipartHttpServletRequest request);
 	public int insertProduct(ProductInfoDTO productDTO);
-	public String sessionIdCh(String memId);
-	public List productDetail(String prCode);
+	public ProductVo getDatail(String prCode);
 
 }

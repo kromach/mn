@@ -34,7 +34,7 @@
 						<c:forEach var="salesList" items="${salesList}">
 							<tr>
 								<td>${salesList.prCode.substring(2,7)}</td>
-								<td><a href="/product/productdetail?prcode=${salesList.prCode}">${salesList.prName}</a></td>
+								<td><a href="/sales/modifyForm?prcode=${salesList.prCode}">${salesList.prName}</a></td>
 								<td>${salesList.prBkindValue}/${salesList.prSkindValue}</td>
 								<td>${salesList.prPrice}</td>
 								<td>${salesList.prUse}</td>

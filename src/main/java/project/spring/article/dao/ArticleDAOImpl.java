@@ -62,7 +62,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 		
 		if(obj instanceof HashMap) {
 			HashMap map = (HashMap)obj;
-			return sqlSession.delete("article.deleteArticle", map);
+			return sqlSession.update("article.deleteArticle", map);
 		}
 		return 0;
 	}
@@ -231,7 +231,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 		map.put("coIdx", coIdx);
 		map.put("insert_Id", session);
 		System.out.println(map);
-		return sqlSession.delete("article.deleteReply", map);
+		return sqlSession.update("article.deleteReply", map);
 	}
 	@Override
 	public List<ArticleDTO> searchPost(
