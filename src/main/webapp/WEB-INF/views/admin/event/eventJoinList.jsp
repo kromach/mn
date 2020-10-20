@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-이벤트 조인 리스트
+
+
+
 </body>
 </html>
