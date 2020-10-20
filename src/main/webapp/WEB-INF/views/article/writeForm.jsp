@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script src="/resources/js/jquery.selectric.js"></script>
+<link rel="stylesheet" href="/resources/css/selectric.css">
 <!-- 유효성검사 js -->
 <script src="/resources/js/formCheck.js"></script> 
 <!-- 에디터 js -->
@@ -64,6 +66,7 @@
 			   		 $('#option').append('<option value="'+uniqueArr[j]+'">'
 							+j + '</option>'); 
 			   	}
+			   	$("#option").selectric("refresh");
 			}
 		});
 	}
@@ -88,6 +91,11 @@
 		toolbar : ''
 	}
 	// ckeditor 설정 종료
+	
+	// select box 설정
+	$(function(){
+		$("#option").selectric();
+	});
 	
 </script>
 <body>
