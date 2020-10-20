@@ -56,14 +56,19 @@
 	}
 	// ckeditor 설정 종료
 	//clickEvent부여 및 유효성 검사
-	$(function() {
-		$("#addBtn").click(function() {
-			checkFormjquery();
-			if (checkFormjquery()){
-				$("#frm").submit();
+	function insert(){
+		if (checkFormjquery()) {
+			// 에디터 입력값 체크 
+			var value = CKEDITOR.instances['ckeditor'].getData();
+			if(!value) {
+	    		alert("수정 정보를 입력해주세요.");    			
+	    		return false;
+			}    		
+			if (confirm("정보를 수정하시겠습니까?")) {
+	    		$("form[name='inputForm']").submit();
 			}
-		});
-	});
+		}
+	}
 </script>
 <body>
 	<div class="grid-Wrapper">
@@ -92,9 +97,8 @@
 					</tr>
 					<tr>
 						<td style="margin: 0; padding: 0;" colspan="2">
-						<textarea name="content" id="ckeditor" type="textarea" class="required"
-						msg="내용을" rows="10" cols="100" style="width: 100%; height: 600px;">
-						${article.content}</textarea>
+						<textarea name="content" id="ckeditor" type="textarea" class="required" 
+						rows="10" cols="100" style="width: 100%; height: 600px;">${article.content}</textarea>
 						<script type="text/javascript">CKEDITOR.replace('ckeditor', ckedit_config); </script>
 						</td>
 					</tr>
