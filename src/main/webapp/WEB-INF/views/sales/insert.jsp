@@ -80,16 +80,16 @@
 						</td>
 					</tr>
 					<tr>
-						<th>국가/도시</th>
+						<th>도시</th>
 						<td>
-							<input type="text" name="prCountry" class="input-sm required" placeholder="국가" msg="국가를"/>
-							&nbsp;<input type="text" name="prCity" class="input-sm required" placeholder="도시" msg="도시를"/>
+							<input type="hidden" name="prCountry" value="한국">
+							<input type="text" name="prCity" class="input-sm required" placeholder="도시" msg="도시를"/>
 						</td>
 					</tr>
 					<tr>
 						<th>알콜 도수</th>
 						<td>
-							<input type="text" name="prAlcohol_" class="input-xs required" msg="도수를"/> 도
+							<input type="number" name="prAlcohol" class="input-xs required" chknum msg="도수를"/> 도
 						</td>
 					</tr>
 					<tr>
@@ -101,13 +101,13 @@
 					<tr>
 						<th>가격</th>
 						<td>
-							<input type="text" name="prPrice_" class="input-sm required" msg="가격을"/>  원	
+							<input type="number" name="prPrice" class="input-sm required" msg="가격을"/>  원	
 						</td>
 					</tr>
 					<tr>
 						<th>수량</th>
 						<td>
-							<input type="text" name="prAmount_" class="input-xs required" msg="수량을"/> 병
+							<input type="number" name="prAmount" class="input-xs required" msg="수량을"/> 병
 						</td>
 					</tr>
 					<tr>
@@ -120,7 +120,7 @@
 					<tr>
 						<th>상품 정보</th>
 						<td>
-							<textarea name="prContent" id="prContent" type="textarea" class="required" style="width:98%" ></textarea>
+							<textarea name="prContent" id="prContent" class="required" style="width:98%" ></textarea>
 							<script type="text/javascript">CKEDITOR.replace( 'prContent' , ckedit_config);</script>
 						</td>
 					</tr>
@@ -163,8 +163,17 @@
     function insertProduct(){
     	if (checkFormjquery()) {
     		
-    		$("form[name='prForm']").submit();
+    		// 에디터 입력값 체크 
+    		var value = CKEDITOR.instances['prContent'].getData();
+    		if(!value) {
+	    		alert("상품 정보를 입력해주세요.");    			
+	    		return false;
+    		}    		
+    		if (confirm("정보를 입력하시겠습니까?")) {
+	    		$("form[name='prForm']").submit();
+			}
     	}
     }
+    
     
 </script>
