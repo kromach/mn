@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
+import project.spring.article.vo.ArticleDTO;
 import project.spring.beans.CommonInterface;
 import project.spring.product.vo.OrderVo;
 import project.spring.product.vo.ProductVo;
@@ -13,7 +14,7 @@ public interface ProductService extends CommonInterface {
 	// 판매할 상품목록수 불러오기
 	public int getproductcount() throws SQLException; 
 	// 게시글 가져오기 
-	public List getproduct() throws SQLException;
+	public List getproduct(int idx) throws SQLException;
 	// 게시글 한개 정보 가져오기
 	public ProductVo getproductinfo() throws SQLException;
 	// 주류 코드로 주류 정보 가져오기
@@ -41,6 +42,8 @@ public interface ProductService extends CommonInterface {
 	public List getarticle(String prcode) throws SQLException;
 	// 재고수량 가져오기
 	public int getamount(String prcode) throws SQLException;
+	// 리뷰 상세
+	public ArticleDTO getarticldetail(int bnIdx) throws SQLException;
 	
 
 }

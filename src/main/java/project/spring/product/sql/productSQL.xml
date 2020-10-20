@@ -3,12 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="product">
+
 	<select id="countAll" resultType="int" >
 		select count(*) from product_info
 	</select>
-	<select id="getproduct" resultType="productvo">
-		select * from product_info
+	
+	<select id="getproduct" resultType="productvo" parameterType="int">
+		<![CDATA[
+	  		select * from(
+	  			select a.*, rownum as rnum from(
+	  				select * from product_info where pr_use ='Y'
+	  				)a 
+	  			)where rnum >= (10*#{value})+1 and rnum <= (10*(#{value}+1))	
+  		]]>
 	</select>
+	
 	<select id="getproductinfo" parameterType="String" resultType="productvo">
 		SELECT INFO.PR_CODE,INFO.PR_NAME,INFO.PR_IMG,INFO.PR_BKIND, BCATE.VALUE AS PR_BKIND_VALUE,
 		info.PR_SKIND, SCATE.VALUE AS PR_SKIND_VALUE,
@@ -20,9 +29,11 @@
 			DRINK_CATEGORY SCATE ON info.PR_SKIND = SCATE.CODE 
 		WHERE PR_CODE = #{value}
 	</select>
+	
 	<select id="myordercount" parameterType="string" resultType="int">
 		select count(*) from order_info where user_id = #{value}
 	</select>
+	
 	<select id="myorderlist" parameterType="hashmap" resultType="ordervo">
 		<![CDATA[
 		select a.* from
@@ -33,16 +44,20 @@
 				a where r >= (5*#{i})+1 and r <= 5*(#{i}+1)
 		]]>
 	</select>
+	
 	<insert id="insertorder" parameterType="ordervo">
 		INSERT INTO ORDER_INFO(or_code,or_day,or_seq,pr_code,pr_name,or_status,pr_price,pr_count,user_id,RECEIVER_NAME ,RECEIVER_TEL ,RECEIVER_ADDR ,INSERT_DAY )
 		values(#{orCode},(SELECT TO_CHAR(SYSDATE,'YYYYMMDD') FROM DUAL),#{orSeq},#{prCode},#{prName},1,#{prPrice},#{prCount},#{userId},#{receiverName},#{receiverTel},#{receiverAddr},sysdate)
 	</insert>
-		<insert id="updatecount" parameterType="ordervo">
+	
+	<insert id="updatecount" parameterType="ordervo">
 		update product_info set PR_AMOUNT =PR_AMOUNT - #{prCount} , PR_TOTALCOUNT = PR_TOTALCOUNT + #{prCount} WHERE PR_CODE =#{prCode}
 	</insert>
+	
 	<select id="sql" resultType="hashmap">
 		SELECT 'O' ||(SELECT TO_CHAR(SYSDATE,'YYYYMMDD') FROM DUAL)|| ORDER_INFO_seq.nextval ,ORDER_INFO_seq.nextval FROM DUAL
 	</select>
+	
 	<select id="orderinfo" parameterType="string" resultType="ordervo">
 		SELECT info.*,SINFO.STATUS_VALUE AS or_status_value FROM ORDER_INFO info INNER JOIN
 		STATUS_INFO sinfo ON info.OR_STATUS = sinfo.STATUS_CODE  where or_code = #{value}
@@ -88,8 +103,6 @@
 				 order by OINFO.INSERT_DAY desc)
 			aa )
 			a <![CDATA[where r >= #{startrow} and r <= #{endrow} ]]>
-		
-		
 	</select>
 	
 	<select id="selcount" parameterType="map" resultType="int">
@@ -97,7 +110,6 @@
 			FROM ORDER_INFO OINFO JOIN
 			PRODUCT_INFO INFO ON INFO.PR_CODE = OINFO.PR_CODE 
 			WHERE INFO.INSERT_ID =#{id}
-			
 				<if test="nums !=null">and (
 					<trim prefix="" prefixOverrides="or">
 						<foreach collection="nums" item="a">
@@ -105,7 +117,6 @@
 						</foreach>
 					</trim>
 				)</if> 
-			
 			<trim prefix="and" prefixOverrides="and">
 				<if test="prName !=null">
 					AND INFO.pr_name like '%' || #{prName} || '%'
@@ -123,7 +134,6 @@
   						AND oINFO.or_day <= #{orEnd} 
   					 ]]>  				
   				</if>
-  				
 			</trim>
 	</select>
 	
@@ -210,42 +220,61 @@
 	<select id="alreadyLike" parameterType="hashmap" resultType="int">
 		select count(*) from product_like where id = #{memId} and pr_code = #{prCode}
 	</select>
+	
 	<insert id="like_log" parameterType="hashmap">
 		insert into product_like values(product_like_seq.nextVal,#{prCode},#{memId})
 	</insert>
+	
 	<delete id="like_log_undo" parameterType="hashmap">
 		delete from product_like where pr_code = #{prCode} and id =#{memId}
 	</delete>
+	
 	<update id="like" parameterType="string">
 		update product_info set pr_like = pr_like+1 where pr_code =#{value}
 	</update>
+	
 	<update id="like_undo" parameterType="string">
 		update product_info set pr_like = pr_like-1 where pr_code =#{value}
 	</update>
+	
 	<insert id="updateMylikepr" parameterType="hashmap">
 		insert into MY_LIKE values(my_like_seq.nextVal,pr,#{prCode},#{memId})
 	</insert>
+	
 	<delete id="updateMylikepr_undo" parameterType="hashmap">
 		delete MY_LIKE where ml_value=#{prCode} and insert_id=#{memId})
 	</delete>
+	
 	<update id="updateMyActGivenHeart" parameterType="string">
 		update MY_ACTIVITY set GIVEN_HEART = GIVEN_HEART+1 where id =#{value}
 	</update>
+	
 	<update id="updateMyActGivenHeart_undo" parameterType="string">
   		update MY_ACTIVITY set GIVEN_HEART = GIVEN_HEART-1 where id=#{value}
   	</update>
+  	
 	<select id="likeReturn" parameterType="String" resultType="int">
-		select pr_like from product_info where pr_code = #{value}
+		select pr_like from product_info where pr_code = #{value} 
   	</select>
+  	
   	<select id="getarticlecount" parameterType="String" resultType="int">
-		select count(*) from BOARD_NORMAL where dk_code = #{value}
+		select count(*) from BOARD_NORMAL where dk_code = #{value} and is_delete ='N'
   	</select>
+  	
   	<select id="getarticle" parameterType="String" resultType="ArticleDTO">
-		select * from BOARD_NORMAL where dk_code = #{value}
+		select * from BOARD_NORMAL where dk_code = #{value} and is_delete ='N'
   	</select>
+  	
   	<select id="stock" parameterType="string" resultType="int">
   		select pr_amount from product_info where pr_code =#{value}
   	</select>
   	
+  	<update id="deletereview" parameterType="int">
+  		update BOARD_NORMAL set is_delete ='Y' where bn_idx = #{value}
+  	</update>
+  	
+  	<select id="review" parameterType="int" resultType="ArticleDTO">
+  		select * from BOARD_NORMAL where bn_idx = #{value}
+  	</select>
   	
 </mapper>

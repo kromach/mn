@@ -62,6 +62,7 @@
 					src="${pr.prImg}" /></a>
 			</div>
 		</c:forEach>
+		<input type="hidden" id="index" value="0">
 	</div>
 </div>
 
@@ -88,6 +89,62 @@
 	    	postfix: "원"
 	    });
 	});   
+	
+	
+</script>
+
+<script type="text/javascript">
+	let isEnd = false;
+	$(function(){
+		$(window).scroll(function() {
+			 let $window = $(this);
+	         let scrollTop = $window.scrollTop();
+	         let windowHeight = $window.height();
+	         let documentHeight = $(document).height();
+	         var context = window.location.pathname.substring(0,
+						window.location.pathname.indexOf("/", 2));
+			 var index = $('#index').val();
+	         if( scrollTop + windowHeight +100 > documentHeight ){
+	        	 fetchList(context,index);
+				}
+			})
+	})
+
+	function fetchList(context,index){
+		if(isEnd == true){
+			return;
+		}
+		$.ajax({
+			url : context + '/reload',
+			data : 'index='+index,
+			type : "post",
+			async: false,
+			success : function(data) {
+				if(data==""){
+					isEnd = true;
+					console.log('end');
+				}else{
+					console.log(data);
+					$('#index').val(Number(index)+1);
+					var $grid = $('.grid').masonry({
+						itemSelector : '.grid-item',
+						columnWidth : '.grid-sizer',
+						percentPosition : true,
+						gutter: '.gutter-sizer'
+					});
+					for(var i in data){
+						var el = '<div class="grid-item"><a href="'+data[i].prCode+'"><img src="'+data[i].prImg+'"/></a></div>';
+						$grid.append( el ).masonry( 'appended', el ,true);
+					}
+					// 재훈 테스트
+					// masonry 재 실행 
+					// $grid.masonry();
+	    			$grid.masonry( 'reloadItems' );
+	    			$grid.masonry();
+				}
+			}
+		});
+	}
 </script>
 
 <script src="/resources/js/imageLoad.js"></script>

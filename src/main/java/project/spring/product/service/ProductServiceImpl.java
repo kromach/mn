@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import project.spring.article.vo.ArticleDTO;
 import project.spring.product.dao.ProductDAOImpl;
 import project.spring.product.vo.OrderVo;
 import project.spring.product.vo.ProductVo;
@@ -30,14 +31,12 @@ public class ProductServiceImpl implements ProductService {
 		return 0;
 	}
 	public int updateItem(OrderVo ordervo) {
-		int res =productDAO.updateItem(ordervo);
-		return res;
+		
+		return 0;
 	}
 	
 	public int updateItem(String orCode) {
-		System.out.println("serviec orCode :"+orCode);
 		int res =productDAO.updateItem(orCode);
-		System.out.println("serviec int :"+res);
 		return res;
 	}
 	public int updateItem(HashMap map) {
@@ -49,6 +48,11 @@ public class ProductServiceImpl implements ProductService {
 	public int deleteItem() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	public int deleteItem(int bnIdx) {
+		
+		
+		return productDAO.deleteItem(bnIdx);
 	}
 
 	@Override
@@ -65,8 +69,8 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public int deleteItem(Object obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return productDAO.deleteItem(obj);
 	}
 
 	@Override
@@ -83,8 +87,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List getproduct() throws SQLException {
-		List productList = productDAO.getproduct();
+	public List getproduct(int idx) throws SQLException {
+		List productList = productDAO.getproduct(idx);
 		
 		
 		return productList;
@@ -182,6 +186,14 @@ public class ProductServiceImpl implements ProductService {
 	public int getamount(String prcode) throws SQLException {
 		int count = productDAO.getamount(prcode);
 		return count;
+	}
+
+	@Override
+	public ArticleDTO getarticldetail(int bnIdx) throws SQLException {
+		
+		ArticleDTO artdto = productDAO.getarticldetail(bnIdx);
+		
+		return artdto;
 	}
 
 	

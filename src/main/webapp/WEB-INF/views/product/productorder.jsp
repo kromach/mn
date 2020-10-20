@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<script src="/resources/js/formCheck.js"></script>
 <div class="grid-Wrapper">
 	<div class="grid2">
 
@@ -19,7 +20,7 @@
 
 						<tr>
 							<th>구매자 이름</th>
-							<td><input type="text" value="${meminfo.name}"></td>
+							<td><input type="text" value="${meminfo.name}"class="sel short required" type="select-one" msg="대분류를"></td>
 						</tr>
 						<tr>
 							<th>받는사람 이름</th>

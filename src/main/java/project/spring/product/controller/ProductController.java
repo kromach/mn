@@ -3,6 +3,7 @@ package project.spring.product.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -92,31 +93,51 @@ public class ProductController {
 			count= productservice.getproductcount();
 			
 			if(count>0) {
-				productlist = productservice.getproduct();
+				productlist = productservice.getproduct(0);
 			}
 		}
 		
+		Collections.shuffle(productlist);
 		
 		model.addAttribute("productlist", productlist);
 		model.addAttribute("count", count);
 		return "product/productList.mn";
 	}
 	
+	@RequestMapping("/reload")
+	@ResponseBody
+	public List reload(@RequestParam(name="index") int index)throws SQLException {
+		
+		List productlist = productservice.getproduct(index + 1);
+		Collections.shuffle(productlist);
+		if(productlist.size() > 0) {
+			return productlist;
+		}else {
+			return null;
+		}
+	}
+	
 	
 	
 	@RequestMapping("productdetail")
-		public String productdetail	(HttpServletRequest request, Model model) throws SQLException {
+		public String productdetail	(HttpServletRequest request, Model model, HttpSession session) throws SQLException {
 		String prcode = request.getParameter("prcode");
-		List list = null;
+		String memId = (String)session.getAttribute("memId");
+		List articlelist = null;
 		
 		ProductVo info =productservice.getproductinfo(prcode);
 		
-//		int count = productservice.getarticlecount(prcode);
-//		if(count > 0) {
-//			list = productservice.getarticle(prcode);
-//			model.addAttribute("list", list);
-//		}
-//		
+		int count = productservice.getarticlecount(prcode);
+		System.out.println(count);
+		if(count > 0) {
+			articlelist = productservice.getarticle(prcode);
+			System.out.println("리스트 불러오기");
+			System.out.println(articlelist);
+			
+			model.addAttribute("articlelist", articlelist);
+		}
+		
+		model.addAttribute("memId", memId);
 		model.addAttribute("info", info);
 		model.addAttribute("prcode", prcode);
 		
@@ -372,6 +393,19 @@ public class ProductController {
 				
 				return "redirect:productdetail?prcode="+prcode;
 			}
+			
+	@RequestMapping("reviewdetail")
+	public String reviewdetail (HttpServletRequest request, Model model) throws SQLException{
+		String bnIdx_ = request.getParameter("bnIdx");
+		int bnIdx = Integer.parseInt(bnIdx_);
+		
+		ArticleDTO article = productservice.getarticldetail(bnIdx);
+			
+		
+		model.addAttribute("article",article);
+		model.addAttribute("bnIdx",bnIdx);
+		return "product/reviewdetail.mn";
+	}
 	
 	//////ajax 
 	
@@ -415,6 +449,17 @@ public class ProductController {
 		result = productservice.unlike(prCode,memId,insertId);
 		//unlike
 		return result;
+	}
+	
+	//리뷰 삭제
+	@RequestMapping(value = "/deleteRe")
+	@ResponseBody
+	public int deleteRe(
+		@RequestParam(name = "bnIdx") int bnIdx) {
+		
+		int result = productservice.deleteItem(bnIdx);
+		
+		return 0;
 	}
 	
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -81,14 +82,25 @@
 			<h3 class="pad-top10 pad-bottom20">상품 후기</h3>
 			<table class="detailTbl tbl-lg">
 				<tr>
-					<th>제목</th>
 					<th style="min-width:100px;">작성자</th>
-					<th style="min-width:130px;">글제목</th>
+					<th style="min-width:130px;">제목</th>
 					<th style="min-width:130px;">조회수</th>
 					<th style="min-width:130px;">작성일</th>
 				</tr>
-				
+				<c:forEach var="re" items="${articlelist}">
+					<tr>
+						<th style="min-width:100px;">${re.insertId}</th>
+						<th style="min-width:130px;"><a href="reviewdetail?bnIdx=${re.bnIdx}">${re.bnTitle}</a></th>
+						<th style="min-width:130px;">${re.readcount}</th>
+						<th style="min-width:130px;"><fmt:formatDate value="${re.insertDay}" pattern="yyyy.MM.dd"/>
+						</th>
+					</tr>
+				</c:forEach>
 			</table>
+			<div class="detail-item detail-width6" id="add">
+				<input id="addBtn" type="button" class="btn btn-md btn-grey" value="더보기" onclick="more()">
+				<input type ="hidden" value="0" id="moreVal">
+			</div>
 		</div>
 	</div>
 </div>
@@ -144,11 +156,13 @@
 							success : function(data_) {
 								console.log(data_);
 								alert("좋아요가 취소되었습니다.")
+								window.location.reload();
 							}
 						});
 					} else {
 						console.log(data);
 						alert("좋아요에 추가되셨습니다.")
+						window.location.reload();
 					}
 				}
 			});
@@ -156,4 +170,6 @@
 			alert("로그인후 이용 가능한 서비스 입니다");
 		}
 	}
+	
+
 </script>							
