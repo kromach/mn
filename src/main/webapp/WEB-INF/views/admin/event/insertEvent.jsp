@@ -164,45 +164,15 @@ function searchDk(){
 		url: context +'/event/drinkCodeSearch?input='+input,
 		type: "get",
 		success : function(data){
-			
+			console.log(data)
 			$('#option').empty();
 			$('#option').append('<option value="option">선택</option>');
 			
-			var dataLog;
-			var dataArr = new Array();
-			var forCheck = new Array();
-			
-			console.log(data);
-			// 데이터 중복 상관 없이 합치기
-			for ( var i in data) {
-					if (data[i].length > 0) {
-						for(var j in data[i]){
-							dataArr.push(data[i][j]);
-							forCheck.push(data[i][j].prName);
-						}
-					}
-			}
-			//중복이 제거된 DK_NAME
-			var filteredArray = forCheck.filter((item, index) => forCheck.indexOf(item) === index );
-			//filteredArray로 uniquerArr만들기
-			var uniqueVal ;
-			var uniqueKey ;
-			var uniqueArr = new Array();
-			for(var j=0;j<filteredArray.length;j++){
-				for (var i=0; i<dataArr.length; i++) {
-					if(filteredArray[j] == dataArr[i].prName){
-						uniqueVal = dataArr[i].prCode; 
-						uniqueKey = filteredArray[j];
-					}
+			for(var i in data){
+				if(data.length >0){
+					$('#option').append('<option value="'+data[i].prCode + '">'+data[i].prName + '</option>');
 				}
-				uniqueArr[uniqueKey] = uniqueVal;
 			}
-		   	//붙이기
-		   	for(var j in uniqueArr){
-		   		 $('#option').append('<option value="'+uniqueArr[j]+'">'
-						+j + '</option>'); 
-		   	}
-		   	
 		}
 	});
 }
