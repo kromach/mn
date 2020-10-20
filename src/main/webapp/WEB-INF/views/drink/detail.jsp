@@ -31,10 +31,9 @@
 					<dd class="clfix">${drinkInfo.dkFood} </dd>
 				</dl>
 				<div>
-					
 					<input type="hidden" id="drinkLikeYN" value="${drinkLikeInfo}" />
 					<input type="hidden" id="drinkLikeCount" value="${drinkInfo.dkLike}" />
-					<span id="like-btn"></span>
+					<span id="like-btn"></span><!-- 좋아요버튼 -->
 					<a class="btn btn-lg btn-yellow" onclick="">후기등록</a>
 					<%-- <c:if test="${sessionScope.userKind eq 'admin' }"> --%>
 					<a class="btn btn-lg btn-mint" href="modify?dkCode=${drinkInfo.dkCode}" >수정</a> <!-- 관리자만 노출 -->
