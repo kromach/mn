@@ -25,7 +25,7 @@
 					if (data[i].length > 0) {
 						for(var j in data[i]){
 							dataArr.push(data[i][j]);
-							forCheck.push(data[i][j].D K_NAME);
+							forCheck.push(data[i][j].DK_NAME);
 						}
 					}
 				}
