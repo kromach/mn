@@ -114,8 +114,6 @@ public class ProductVo {
 		this.prCity = prCity;
 	}
 
-
-
 	public int getPrAlcohol() {
 		return prAlcohol;
 	}

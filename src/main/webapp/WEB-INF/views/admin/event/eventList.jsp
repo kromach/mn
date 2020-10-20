@@ -99,8 +99,8 @@ $( function() {
 		
 			<table class="tableCss table">
 				<tr align="right">
-					<td colspan="5">
-						<button class="btn btn-md btn-blue"  onclick="window.location='/admin/event/insertEvent'">등록</button>
+					<td colspan="6">
+						<button class="btn btn-md btn-blue"  onclick="window.location='/admin/event/insertEvent?pageNum=${pageNum}'">등록</button>
 					</td>
 				</tr>
 				<tr>
@@ -109,6 +109,7 @@ $( function() {
 					<th>판매상품</th>
 					<th>기간</th>
 					<th>이벤트 상태</th>
+					<th>이벤트 참가자</th>
 				</tr>
 				<c:if test="${count == 0 || empty count }">
 					<tr>
@@ -123,7 +124,7 @@ $( function() {
 						<tr>
 							<td>${number}</td>
 								<c:set var="number" value="${number-1}" />
-							<td><a href="/admin/event/modifyEvent?eventCode=${eventList.eventCode }">${eventList.eventName}</a></td>
+							<td><a href="/admin/event/modifyEvent?eventCode=${eventList.eventCode }&pageNum=${pageNum}">${eventList.eventName}</a></td>
 							<td>${eventList.prName }</td>
 							<td>${eventList.evStart} ~ ${eventList.evEnd}</td>
 							<td>
@@ -131,6 +132,9 @@ $( function() {
 								<c:if test="${eventList.isOpen == 'Y'}"><a onclick="chOpen('${ eventList.eventCode}', '${number }')">활성</a></c:if>
 								<c:if test="${eventList.isOpen == 'N'}">비활성</c:if>
 								</p>
+							</td>
+							<td>
+								<a onclick="showJoinMember('${eventList.eventCode}')">참가인원보기</a>
 							</td>
 						</tr>
 					</c:forEach>
@@ -177,6 +181,13 @@ function chOpen(eventCode, number){
 		}
 	})
 	
+}
+
+function showJoinMember(eventCode){
+	console.log(eventCode);
+	var url="/admin/event/eventJoinList?eventCode=" + eventCode;
+	console.log(url);
+	window.open(url, "", "width=400,height=400,left=600");
 }
 </script>
 

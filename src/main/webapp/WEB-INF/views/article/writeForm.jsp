@@ -15,22 +15,40 @@
 			type : "get",
 			success : function(data) {
 				console.log(data);
-
 				$('#option').empty();
 				$('#option').append('<option value="option">선택</option>');
-
 				var dataLog;
+				var dataArr = new Array();
+				var forCheck = new Array();
+				//Data로 나온 list 중복상관없이 하나의 배열로 합치기
 				for ( var i in data) {
 					if (data[i].length > 0) {
-						dataLog = data[i];
+						for(var j in data[i]){
+							dataArr.push(data[i][j]);
+							forCheck.push(data[i][j].D K_NAME);
+						}
 					}
 				}
-				for ( var j in dataLog) {
-					console.log(dataLog[j].DK_NAME);
-					$('#option').append(
-							'<option value="'+dataLog[j].DK_CODE+'">'
-									+ dataLog[j].DK_NAME + '</option>');
+				//중복이 제거된 DK_NAME
+				var filteredArray = forCheck.filter((item, index) => forCheck.indexOf(item) === index );
+				//filteredArray로 uniquerArr만들기
+				var uniqueVal ;
+				var uniqueKey ;
+				var uniqueArr = new Array();
+				for(var j=0;j<filteredArray.length;j++){
+					for (var i=0; i<dataArr.length; i++) {
+						if(filteredArray[j] == dataArr[i].DK_NAME){
+							uniqueVal = dataArr[i].DK_CODE; 
+							uniqueKey = filteredArray[j];
+						}
+					}
+					uniqueArr[uniqueKey] = uniqueVal;
 				}
+			   	//붙이기
+			   	for(var j in uniqueArr){
+			   		 $('#option').append('<option value="'+uniqueArr[j]+'">'
+							+j + '</option>'); 
+			   	}
 			}
 		});
 	}
@@ -83,6 +101,13 @@
 						<th>술이름</th>
 						<td><input id="dkSch" name="dkSch" class="boardTitle_middle" />
 						<button type="button" class="btn btn-sm btn-grey" onclick="searchDk()">검색</button></td>
+					</tr>
+					<tr>
+						<th>술 선택</th>
+						<td colspan="2">
+							<select id="option" name="dkCode" class="required" msg="술을">
+								<option value="option">선택</option>
+							</select></td>
 					</tr>
 					<tr>
 						<td style="margin: 0; padding: 0;" colspan="2">

@@ -1,5 +1,6 @@
 package project.spring.article.service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,5 +30,9 @@ public interface ArticleService extends CommonInterface {
 	public int deleteReply(int coIdx, String session);
 	public List<ArticleDTO> searchPost(String selectOption, String search);
 	public List<ArticleDTO> searchPost();
+	
+	public int selectDkcodeArticleCount(String dkCode) throws SQLException;
+
+	public List<ArticleDTO> selectDkcodeArticleList(HashMap searchMap) throws SQLException;
 	
 }

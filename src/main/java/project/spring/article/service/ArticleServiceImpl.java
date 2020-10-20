@@ -1,5 +1,6 @@
 package project.spring.article.service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,7 @@ public class ArticleServiceImpl implements ArticleService{
 		System.out.println("cehck1");
 		List list = null;
 		list = articleDAOimpl.getDrinkSearch(input);
+		System.out.println("DrinkSearch===="+list);
 		return list ; 
 	}
 	
@@ -142,5 +144,15 @@ public class ArticleServiceImpl implements ArticleService{
 	@Override
 	public int backArticle(int num) {
 		return articleDAOimpl.backArticle(num);
+	}
+	
+	@Override
+	public int selectDkcodeArticleCount(String dkCode) throws SQLException {
+		return articleDAOimpl.selectDkcodeArticleCount(dkCode);
+	}
+	
+	@Override
+	public List<ArticleDTO> selectDkcodeArticleList(HashMap searchMap) throws SQLException {
+		return articleDAOimpl.selectDkcodeArticleList(searchMap);
 	}
 }

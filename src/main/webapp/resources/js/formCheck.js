@@ -7,6 +7,8 @@
 			fTyp = toUpperCase($(this).attr("type"));
 			fMsg = $(this).attr("msg");
 			fMal = $(this).attr("chkmail");
+			fNum = $(this).attr("chknum");
+			
 			if (fMsg != null) {
 				if (fVal == "" && (fTyp == "SELECT-ONE" || fTyp == "SELECT-MULTIPLE")) {
 					alert(fMsg + " 선택해 주세요");
@@ -14,7 +16,9 @@
 					errcnt++;
 					return false;
 				}
-				if(fVal == "" && (fTyp == "TEXT" || fTyp == "HIDDEN" || fTyp == "TEXTAREA" || fTyp == "PASSWORD" || fTyp == "NUMBER")) {
+
+				if(fVal == "" && (fTyp == "TEXT" || fTyp == "FILE" || fTyp == "NUMBER" || fTyp == "HIDDEN" || fTyp == "TEXTAREA" || fTyp == "PASSWORD")) {
+
 					alert(fMsg + " 입력해 주세요");
 					$(this).focus();
 					errcnt++;
@@ -33,6 +37,13 @@
 					return false;
 				}
 			}
+
+			if(fNum != null && fVal != "" && checkNum(fVal) == false) {
+				alert("숫자만 입력해주세요.");
+				$(this).focus();
+				errcnt++;
+				return false;
+			}			
 		});
 
 		if (errcnt > 0)
@@ -48,6 +59,14 @@
 			return true;
 		}
 		return false;
+	}
+	
+	// 숫자 유효성 체크
+	function  checkNum( str ) {
+		if ( isNaN( str ) ) {
+			return false;
+		}
+		return true;
 	}
 
 	// 배열 요소일 경우 checked 된것이 있는지 확인

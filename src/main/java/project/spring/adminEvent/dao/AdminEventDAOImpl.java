@@ -156,4 +156,10 @@ public class AdminEventDAOImpl implements AdminEventDAO {
 		
 	}
 
+	@Override
+	public List getEventMember(String eventCode) throws SQLException {
+		List list = sqlSession.selectList("adminEvent.getEventMember", eventCode);
+		return list;
+	}
+
 }
