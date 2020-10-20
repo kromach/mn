@@ -26,6 +26,7 @@
 		<typeAlias type="project.spring.article.vo.Editor_imageVO" alias="Editor_imageVO"/>
 		<typeAlias type="project.spring.article.vo.ArticleReplyDTO" alias="ArticleReplyDTO"/>
 		<typeAlias type="project.spring.event.vo.EventVO" alias="EventVO"/>
+		
 	</typeAliases> 
 	<mappers>
 		<mapper resource="project/spring/kakao/sql/testSql.xml" />

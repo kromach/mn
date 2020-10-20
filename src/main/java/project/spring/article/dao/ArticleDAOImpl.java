@@ -2,6 +2,7 @@ package project.spring.article.dao;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -61,15 +62,12 @@ public class ArticleDAOImpl implements ArticleDAO {
 		
 		if(obj instanceof HashMap) {
 			HashMap map = (HashMap)obj;
-			return sqlSession.delete("article.deleteArticle", map);
+			return sqlSession.update("article.deleteArticle", map);
 		}
 		return 0;
 	}
 	@Override
 	public List getDrinkSearch(String input) {
-		
-		System.out.println("check2");
-		System.out.println("DAO"+input);
 		//우선 카테고리 검사
 		List<HashMap<String, String>> list = sqlSession.selectList("article.getDrinkSearch",input);
 		if(list.size()!=0) {
@@ -81,9 +79,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 			System.out.println(listByCategory.toString());
 			return listByCategory;
 		}
-		System.out.println("input ================" + input);
 		//검색어가 카테고리가 아닐시에 술 이름으로 검색
 		ArrayList listByName = new ArrayList();
+		System.out.println("input ================" + listByName);
 		listByName.add(sqlSession.selectList("article.getDrinkSearchByName",input));
 		return listByName;
 	}
@@ -230,7 +228,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 		map.put("coIdx", coIdx);
 		map.put("insert_Id", session);
 		System.out.println(map);
-		return sqlSession.delete("article.deleteReply", map);
+		return sqlSession.update("article.deleteReply", map);
 	}
 	@Override
 	public List<ArticleDTO> searchPost(
@@ -254,5 +252,15 @@ public class ArticleDAOImpl implements ArticleDAO {
 	public int backArticle(int num) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("article.backArticle", num);
+	}
+
+	@Override
+	public int selectDkcodeArticleCount(String dkCode) throws SQLException {
+		return sqlSession.selectOne("article.selectDkcodeArticleCount", dkCode);
+	}
+	
+	@Override
+	public List<ArticleDTO> selectDkcodeArticleList(HashMap searchMap) throws SQLException {
+		return sqlSession.selectList("article.selectDkcodeArticleList", searchMap);
 	}
 }

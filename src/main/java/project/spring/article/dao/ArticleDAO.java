@@ -1,5 +1,6 @@
 package project.spring.article.dao;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,4 +33,8 @@ public interface ArticleDAO extends CommonInterface{
 			String selectOption, String search);
 	public List<ArticleDTO> searchPost();
 	public int backArticle(int num);
+	
+	public int selectDkcodeArticleCount(String dkCode) throws SQLException;
+
+	public List<ArticleDTO> selectDkcodeArticleList(HashMap searchMap) throws SQLException;
 }
