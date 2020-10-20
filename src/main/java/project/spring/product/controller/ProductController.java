@@ -171,9 +171,6 @@ public class ProductController {
 		String id = (String)session.getAttribute("memId");
 		
 		
-		
-		
-		
 		MemberDTO meminfo = memberservice.readItem();
 		ProductVo info =productservice.getproductinfo(prcode);
 		model.addAttribute("info", info);
@@ -198,16 +195,19 @@ public class ProductController {
 	
 	@RequestMapping("insertOrder")
 	public String insertOrderSs (Model model, OrderVo ordervo, HttpSession session) throws SQLException{
-		System.out.println(ordervo.getReceiverTel());
-		
+		String prcode =ordervo.getPrCode();
+		int buy = ordervo.getPrCount();
+		System.out.println("코드!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(prcode);
 		String[] receiverTels = ordervo.getReceiverTel().split(",");
 		String receiverTel = "";
 		for(String receiverTel_ : receiverTels) {
 			receiverTel += receiverTel_ ;
 		}
-		
 		//ordervo.setReceiverTel(receiverTel);
+		int count = productservice.getamount(prcode);
 		
+		if(count < buy)
 		productservice.insertorderinfo(ordervo);
 		
 		String id = (String)session.getAttribute("memId");

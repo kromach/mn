@@ -58,7 +58,7 @@
 						<dd class="clfix ">${info.prPrice*amount}원</dd>
 					</dl>
 				</div>
-				<input type="button" class="btn btn-lg btn-rouge" value="결제하기" onclick="insertOrder('${amount}','${info.prAmount}')">
+				<input type="button" class="btn btn-lg btn-rouge" value="결제하기" onclick="insertOrder()">
 			</div>
 		</form>
 	</div>
