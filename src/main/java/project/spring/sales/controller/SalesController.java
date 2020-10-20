@@ -175,11 +175,10 @@ public class SalesController {
 		dto.setPrCode(prcode);
 		String prCode = dto.getPrCode();
 		System.out.println("code 제대로 왔냐???" +dto.getPrCode());
-		System.out.println("현재 이미지 ? " + dto.getPrImg());
 		System.out.println("oldImd" + request.getParameter("oldImg"));
-		System.out.println("새 이미지" + request.getFile("primage"));
+		System.out.println("새 이미지" + request.getFile("primage").getOriginalFilename());
 		// 이미지 미변경시 
-		if(request.getFile("primage")==null) {
+		if(request.getFile("primage").getOriginalFilename().equals("null")|| request.getFile("primage").getOriginalFilename().equals("")) {
 			String oldImg = request.getParameter("oldImg");
 			dto.setPrImg(oldImg);
 		}else {
