@@ -122,6 +122,12 @@ public class AdminEventServiceImpl implements AdminEventService{
 		adminEventDAO.chOpen(eventCode);
 	}
 
+	@Override
+	public List getEventMember(String eventCode) throws SQLException {
+		List list = adminEventDAO.getEventMember(eventCode);
+		return list;
+	}
+
 
 	
 

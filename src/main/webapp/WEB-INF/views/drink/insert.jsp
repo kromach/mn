@@ -79,32 +79,32 @@
 					<tr>
 						<th>대표 이미지</th>
 						<td>
-							<input type="file" name="dkimage" class="required" />
+							<input type="file" name="dkimage" class="required" msg="이미지를" />
 						</td>
 					</tr>
 					<tr>
 						<th>양조장</th>
 						<td>
-							<input type="text" name="dkPlace" class="input-lg required" />
+							<input type="text" name="dkPlace" class="input-lg" />
 						</td>
 					</tr>
 					<tr>
 						<th>국가/도시</th>
 						<td>
-							<input type="text" name="dkCountry" class="input-sm required" placeholder="국가"/>
-							&nbsp;<input type="text" name="dkCity" class="input-sm required" placeholder="도시"/>
+							<input type="text" name="dkCountry" class="input-sm required" placeholder="국가" msg="국가를"/>
+							&nbsp;<input type="text" name="dkCity" class="input-sm required" placeholder="도시" msg="도시를"/>
 						</td>
 					</tr>
 					<tr>
 						<th>알콜 도수</th>
 						<td>
-							<input type="number" name="dkAlcohol" class="input-xs required" /> 도
+							<input type="number" name="dkAlcohol" class="input-xs required" chknum msg="알콜 도수를" /> 도
 						</td>
 					</tr>
 					<tr>
 						<th>어울리는 안주</th>
 						<td>
-							<input type="text" name="dkFood" class="input-lg required" />
+							<input type="text" name="dkFood" class="input-lg" />
 						</td>
 					</tr>
 					<tr>
@@ -116,18 +116,17 @@
 					<tr>
 						<th>태그</th>
 						<td>
-							<input type="text" name="dkTags" class="input-lg required" />
+							<input type="text" name="dkTags" class="input-lg" />
 							<br/>쉼표로 태그를 구분하여 입력해주세요 ex)마시는,녀석들,맥주,beer
 						</td>
 					</tr>
 					<tr>
 						<th>주류 정보</th>
 						<td>
-							<textarea name="dkContent" id="dkContent" type="textarea" class="required" style="width:98%;" ></textarea>
+							<textarea name="dkContent" id="dkContent" style="width:98%;" ></textarea>
 							<script type="text/javascript">CKEDITOR.replace('dkContent' , ckedit_config);</script>
 						</td>
-					</tr>
-					
+					</tr>					
 				</table>
 				<div class="text-center pad-top10">
 					<input type="button" class="btn btn-lg btn-blue" value="저장" onclick="insertDrink()" />
@@ -141,14 +140,14 @@
 	$(function() {
 		
 		/* 테스트 정보 */
-		$("#dkContent").val("BGF리테일 ‘CU’ 및 국내 장수 브랜드 ‘말표산업‘과 협업하여 탄생한 뉴트로 콘셉트의 흑맥주다. 에스프레소와 다크 초콜릿의 풍부한 맛과 함께 입안 가득 퍼지는 진한 밤의 풍미가 인상적이다.");
+		//$("#dkContent").val("BGF리테일 ‘CU’ 및 국내 장수 브랜드 ‘말표산업‘과 협업하여 탄생한 뉴트로 콘셉트의 흑맥주다. 에스프레소와 다크 초콜릿의 풍부한 맛과 함께 입안 가득 퍼지는 진한 밤의 풍미가 인상적이다.");
 		$("input[name='dkFood']").val("페퍼로니 피자, 바비큐, 팥 디저트 류와 잘 어울림");
 		$("input[name='dkName']").val("말표맥주");
 		$("input[name='dkPlace']").val("스퀴즈 브루어리");
 		$("input[name='dkCountry']").val("한국");
 		$("input[name='dkCity']").val("강원도");
-		$("input[name='dkAlcohol']").val("4.5");
-		$("input[name='dkTags']").val("말표, 흑맥주,말표맥주,MALPYO,CU,콜라보,에스프레소,다크초콜릿,밤");
+		//$("input[name='dkAlcohol']").val("4.5");
+		//$("input[name='dkTags']").val("말표, 흑맥주,말표맥주,MALPYO,CU,콜라보,에스프레소,다크초콜릿,밤");
 		
 		// select 형태 바꿔주는 JS 실행
 		$(".sel").selectric();
@@ -243,7 +242,15 @@
     function insertDrink(){
     	if (checkFormjquery()) {
     		
-    		$("form[name='dkForm']").submit();
+    		// 에디터 입력값 체크 
+    		var value = CKEDITOR.instances['dkContent'].getData();
+    		if(!value) {
+	    		alert("주류 정보를 입력해주세요.");    			
+	    		return false;
+    		}    		
+    		if (confirm("정보를 입력하시겠습니까?")) {
+	    		$("form[name='dkForm']").submit();
+			}
     	}
     }
     

@@ -46,104 +46,77 @@ public class AdminEventController {
 		private ArticleServiceImpl articleService = null;
 		
 		@RequestMapping("insertEvent")
-		public String eventListAd(Model model, Locale locale)throws SQLException{
+		public String eventListAd(HttpServletRequest request, Model model, Locale locale)throws SQLException{
 			
-			
-			return "admin/event/insertEvent.mn";
+			if(request.getParameter("pageNum") == null || request.getParameter("pageNum").equals("")) {
+				return "redirect:/admin/event/eventList";
+			}
+			else {
+				model.addAttribute("pageNum", request.getParameter("pageNum"));
+				return "admin/event/insertEvent.mn";
+			}
 		}
 		
 		// 이벤트 처리 페이지
 		@RequestMapping("insertEventPro")
-		public String insertEventAd(@ModelAttribute AdminEventVO vo, Model model, MultipartHttpServletRequest request, HttpServletResponse response)throws SQLException{
+		public String insertEventAd(@ModelAttribute AdminEventVO vo,  Model model, MultipartHttpServletRequest request, HttpServletResponse response)throws SQLException{
 			
-			
-			System.out.println("content 확인:"  + vo.getContent() );
-
-			vo.setEvStart(vo.getEvStart().replace("-", ""));
-			vo.setEvEnd(vo.getEvEnd().replace("-", ""));
-			
-			
-			// img 경로만 따로 꺼내기!
-			// 애러 방지
-			
-			/*
-			 * if(vo.getContent().contains("src=")) { String orgContent = vo.getContent();
-			 * int idx = orgContent.indexOf("src="); int lastidx =
-			 * orgContent.indexOf("style=");
-			 * 
-			 * System.out.println("idx : " + idx); System.out.println("last: " + lastidx);
-			 * 
-			 * 
-			 * String imgName = orgContent.substring((idx+4), lastidx-1);
-			 * 
-			 * System.out.println("imgName = " + imgName);
-			 * 
-			 * System.out.println(request.getAttribute("title"));
-			 * 
-			 * vo.setThumImg(imgName); }
-			 */
-			
-
+			if(request.getParameter("pageNum") == null || request.getParameter("pageNum").equals("")) {
+				return "redirect:/admin/event/eventList";
+			}else {
+				System.out.println("content 확인:"  + vo.getContent() );
+	
+				vo.setEvStart(vo.getEvStart().replace("-", ""));
+				vo.setEvEnd(vo.getEvEnd().replace("-", ""));
 						
-			
-			// 대표이미지 파일 세팅
-			
-			int size = 1024*1024*20;
-			MultipartFile mf = null;
-			String path = null;
-			
-			try {
-				mf = request.getFile("eventImg");
-				// 파일 이름 재 지정
-				String orgName = mf.getOriginalFilename();
-				String imgName = orgName.substring(0,orgName.lastIndexOf('.'));
+				// 대표이미지 파일 세팅
 				
-				String ext = orgName.substring(orgName.lastIndexOf('.'));
-				Long date = System.currentTimeMillis();
-				String newName = imgName + date + ext;
+				int size = 1024*1024*20;
+				MultipartFile mf = null;
+				String path = null;
 				
-				path = request.getRealPath("resources/img/event") +File.separator;;
-				System.out.println("path : " + path);
+				try {
+					mf = request.getFile("eventImg");
+					// 파일 이름 재 지정
+					String orgName = mf.getOriginalFilename();
+					String imgName = orgName.substring(0,orgName.lastIndexOf('.'));
+					
+					String ext = orgName.substring(orgName.lastIndexOf('.'));
+					Long date = System.currentTimeMillis();
+					String newName = imgName + date + ext;
+					
+					path = request.getRealPath("resources/img/event") +File.separator;;
+					System.out.println("path : " + path);
+					
+					// 디렉토리 없을 경우 생성'
+					
+					File file = new File(path);
+					
+					if(!file.exists()) { file.mkdir(); }
+					
+					File copyFile = new File(path + newName);
+					mf.transferTo(copyFile);
+					
+					// vo 에 넣어주기
+					vo.setThumImg("/resources/img/event/"+newName);
+					
+					System.out.println("img 경로 : " + vo.getThumImg());
+					
+					
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
 				
-				// 디렉토리 없을 경우 생성'
-				
-				File file = new File(path);
-				
-				if(!file.exists()) { file.mkdir(); }
-				
-				File copyFile = new File(path + newName);
-				mf.transferTo(copyFile);
-				
-				// vo 에 넣어주기
-				vo.setThumImg("/resources/img/event/"+newName);
-				
-				System.out.println("img 경로 : " + vo.getThumImg());
+				//나머지 세팅
+				vo.setInsertId((String)request.getSession().getAttribute("memId"));
 				
 				
-			}catch (Exception e) {
-				e.printStackTrace();
+				System.out.println("controller 확인");
+				int result = adminEventService.insertItem(vo);
+				model.addAttribute("pageNum", request.getParameter("pageNum"));
+	
+				return "redirect:/admin/event/eventList.mn";
 			}
-			
-			System.out.println("check---------------------------------------------------2222");
-
-			System.out.println(vo.getEvStart());
-			System.out.println("content : " + vo.getContent());
-			System.out.println("ed_idx :: " +  vo.getEd_idx());
-			System.out.println("stardDay:" +  vo.getEvStart());
-			System.out.println("endDay" + vo.getEvEnd());
-			System.out.println("evnetName : " + vo.getEventName());
-			System.out.println("productCod : " + vo.getProductCode());
-			System.out.println("content : " + vo.getContent());
-			System.out.println("thumImg : " + vo.getThumImg());
-			
-			//나머지 세팅
-			vo.setInsertId((String)request.getSession().getAttribute("memId"));
-			
-			
-			System.out.println("controller 확인");
-			int result = adminEventService.insertItem(vo);
-
-			return "redirect:/admin/event/eventList.mn";
 		}
 		
 		
@@ -190,14 +163,9 @@ public class AdminEventController {
 			}else {
 			
 				// 이벤트 글 가져오기
-				count = adminEventService.eventCount();
-				
-				
-				
-				
+				count = adminEventService.eventCount();			
+
 				pageVo = pager.pager(pageNum, count);
-				
-				
 				
 				if(count > 0) {
 					
@@ -207,11 +175,9 @@ public class AdminEventController {
 					String today = spd.format(date);
 					
 					adminEventService.checkDate(today);
-					
-					
+						
 					eventList = adminEventService.eventList(pageVo.getStartRow(), pageVo.getEndRow());
 
-					
 					number = count-(pageVo.getCurrPage()-1)*pageVo.getPageSize();
 				}
 			}
@@ -221,9 +187,6 @@ public class AdminEventController {
 			model.addAttribute("pageVO", pageVo);
 			model.addAttribute("number", number);
 
-			System.out.println("===========================");
-			System.out.println("number ;           " + number);
-			System.out.println("count :              " + count);
 
 			return "admin/event/eventList.mn";
 		}
@@ -240,6 +203,7 @@ public class AdminEventController {
 					System.out.println(list.get(i));
 				}
 			}
+			System.out.println("확인하기33");
 			return list;
 		}
 		
@@ -254,84 +218,97 @@ public class AdminEventController {
 		}
 
 		@RequestMapping("modifyEvent")
-		public String modifyEventAd(@RequestParam(value="eventCode", required = false) String eventCode, Model model)throws SQLException {
+		public String modifyEventAd(@RequestParam(value="eventCode", required = false) String eventCode, HttpServletRequest request, Model model)throws SQLException {
 			
-			AdminEventVO vo = adminEventService.eventInfo(eventCode);
-			model.addAttribute("vo",vo);
+			if(request.getParameter("pageNum") == null || request.getParameter("pageNum").equals("")) {
+				return "redirect:/admin/event/eventList";
+			}else {
 			
-			
+			if(eventCode == null) {
+				return "redirect:/admin/event/eventList";
+			}else {
+				AdminEventVO vo = adminEventService.eventInfo(eventCode);
+				model.addAttribute("vo",vo);
+			}
+			model.addAttribute("pageNum", request.getParameter("pageNum"));
 			
 			return "admin/event/modifyEvent.mn";
+			}
 		}
 		
 		@RequestMapping("modifyEvnetPro")
-		public String modifyProAd(AdminEventVO vo, MultipartHttpServletRequest request)throws SQLException{
+		public String modifyProAd(AdminEventVO vo, MultipartHttpServletRequest request, Model model)throws SQLException{
 			
-			System.out.println("check---------------------------------------------------3333");
-
-			System.out.println(vo.getEvStart());
-			System.out.println("content : " + vo.getContent());
-			System.out.println("ed_idx :: " +  vo.getEd_idx());
-			System.out.println("stardDay:" +  vo.getEvStart());
-			System.out.println("endDay" + vo.getEvEnd());
-			System.out.println("evnetName : " + vo.getEventName());
-			System.out.println("productCod : " + vo.getProductCode());
-			System.out.println("content : " + vo.getContent());
-			System.out.println("thumImg : " + vo.getThumImg());
-			System.out.println(request.getFile("eventImg").getOriginalFilename());
-			
-			if(!request.getFile("eventImg").getOriginalFilename().equals("null") && !request.getFile("eventImg").getOriginalFilename().equals("")) {
-				int size = 1024*1024*20;
-				MultipartFile mf = null;
-				String path = null;
-				
-				try {
-					mf = request.getFile("eventImg");
-			
-					// 파일 이름 재지정
-					String orgName = mf.getOriginalFilename();
-					String imgName = orgName.substring(0,orgName.lastIndexOf('.'));
-					
-					String ext = orgName.substring(orgName.lastIndexOf('.'));
-					Long date = System.currentTimeMillis();
-					String newName = imgName + date + ext;
-					
-					//파일 기본 경로
-					String root = request.getContextPath() + "/resources";
-					path = request.getRealPath("resources/img/event") +File.separator;
-					System.out.println("path : " + path);
-					 
-					
-					System.out.println("newName  :       " + newName);
-										
-					File File = new File(path);
-					
-					// 디렉토리 없을 경우 생성
-					if(!File.exists()) {
-						File.mkdir();
-					}
-					
-					File copyFile = new File(path + newName);
-					System.out.println("파일경로 : " + path + newName);
-					mf.transferTo(copyFile);
-					
-					// vo 에 넣어주기
-					vo.setThumImg("/resources/img/event/" + newName);
-					
-					System.out.println("img 경로 : " + vo.getThumImg());
-					
-				}catch (Exception e) {
-					e.printStackTrace();
-				}
+			if(request.getParameter("pageNum") == null || request.getParameter("pageNum").equals("")) {
+				return "redirect:/admin/event/eventList";
 			}else {
-				vo.setThumImg(request.getParameter("oldImg"));
-			}
-			vo.setInsertId((String)request.getSession().getAttribute("memId"));
-			adminEventService.updateItem(vo);
 			
-			return "redirect:/admin/event/eventList.mn";
+				if(!request.getFile("eventImg").getOriginalFilename().equals("null") && !request.getFile("eventImg").getOriginalFilename().equals("")) {
+					int size = 1024*1024*20;
+					MultipartFile mf = null;
+					String path = null;
+					
+					try {
+						mf = request.getFile("eventImg");
+				
+						// 파일 이름 재지정
+						String orgName = mf.getOriginalFilename();
+						String imgName = orgName.substring(0,orgName.lastIndexOf('.'));
+						
+						String ext = orgName.substring(orgName.lastIndexOf('.'));
+						Long date = System.currentTimeMillis();
+						String newName = imgName + date + ext;
+						
+						//파일 기본 경로
+						String root = request.getContextPath() + "/resources";
+						path = request.getRealPath("resources/img/event") +File.separator;
+						System.out.println("path : " + path);
+						 
+						
+						System.out.println("newName  :       " + newName);
+											
+						File File = new File(path);
+						
+						// 디렉토리 없을 경우 생성
+						if(!File.exists()) {
+							File.mkdir();
+						}
+						
+						File copyFile = new File(path + newName);
+						System.out.println("파일경로 : " + path + newName);
+						mf.transferTo(copyFile);
+						
+						// vo 에 넣어주기
+						vo.setThumImg("/resources/img/event/" + newName);
+						
+						System.out.println("img 경로 : " + vo.getThumImg());
+						
+					}catch (Exception e) {
+						e.printStackTrace();
+					}
+				}else {
+					vo.setThumImg(request.getParameter("oldImg"));
+				}
+				vo.setInsertId((String)request.getSession().getAttribute("memId"));
+				adminEventService.updateItem(vo);
+				model.addAttribute("pageNum", request.getParameter("pageNum"));
+				return "redirect:/admin/event/eventList.mn";
+			}
 		}
+	@RequestMapping("eventJoinList")
+	public String eventJoinListAd(@RequestParam String eventCode, Model model)throws SQLException {
 		
+		int i = 0;
+		System.out.println(eventCode + "헤헤");
+		List list =  adminEventService.getEventMember(eventCode);
+		if(list.size() != 0) {
+			i = list.size();
+		}
+		model.addAttribute("count", i);
+		model.addAttribute("list", list);
+		
+		return "admin/event/eventJoinList";
+	}
 
 		
 }

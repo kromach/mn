@@ -1,6 +1,7 @@
 package project.spring.member.controller;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -169,10 +170,24 @@ public class MemberController {
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request,Model model) {
 		String returnUrl = "redirect:/";
+		
+		// returnPage : 로그인 후 돌아갈 URL 경로
+		String returnPage = "";
+		if(request.getParameter("returnPage") != null && request.getParameter("returnPage").length() > 0 ) {
+			returnPage = request.getParameter("returnPage");
+			
+			try {
+				returnPage = java.net.URLEncoder.encode(returnPage, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		HttpSession session =  request.getSession();
 		if(session.getAttribute("memId")==null) {
 			request.setAttribute("restApikey", restApikey);
 			request.setAttribute("callback_URL", callback_URL);
+			model.addAttribute("returnPage", returnPage);
 			returnUrl = "/member/loginForm.mn";
 		}else{
 			System.out.println("로그인이 된 상태입니다.");
@@ -295,6 +310,15 @@ public class MemberController {
 		//-1 - id x pw x
 		//0 - id o pw x
 		//1 - id o pw o
+		
+		String returnPage = request.getParameter("returnPage");
+		
+		try {
+			returnPage = java.net.URLDecoder.decode(returnPage, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
 		int result = memberService.readItem(model);
 		MemberDTO setSessionDTO= null;
 		if(result ==1 ) {
@@ -308,6 +332,8 @@ public class MemberController {
 		}
 		
 		request.setAttribute("result", result);
+		request.setAttribute("returnPage", returnPage);
+		
 		return "/member/loginResult.mn";
 	}
 	
@@ -374,6 +400,7 @@ public class MemberController {
 	public String findPwForm() {
 		return "/member/findPwForm.mn";
 	}
+	
 	//id찾기 처리
 	@RequestMapping(value = "/findIdPro")
 	public String findIdPro(MemberDTO dto,Model model) {
@@ -392,6 +419,7 @@ public class MemberController {
 		
 		return "/member/findResult.mn";
 	}
+	
 	//pw찾기 처리
 	@RequestMapping(value = "/findPwPro")
 	public String findPwPro(MemberDTO dto,Model model) {

@@ -33,7 +33,7 @@
   			]]>
   		</select>
   		
-  		<select id="makeprCode" resultType="String">
+  		<select id="makeprCode" resultType="string">
   		
   			SELECT 'PR' || LPAD( (SELECT COUNT(PR_CODE) + 1 FROM PRODUCT_INFO), 5, '0') AS CODE FROM DUAL
   		</select>
@@ -43,12 +43,13 @@
 			]]>
   		</insert>
   		
-  		<select id="sessionIdCh" parameterType="String" resultType="String">
-  			SELECT USER_KIND FROM MEMBER_INFO mi WHERE ID =#{value}
-  		</select>
-  		
-  		<select id="productDetail" parameterType="String" resultType="productvo">
+  		<select id="getDatail" parameterType="string" resultType="productvo">
   			SELECT * FROM PRODUCT_INFO pi2 WHERE PR_CODE =#{value}
   		</select>
+  		
+  		<update id="updateProduct" parameterType="productvo">
+  			UPDATE PRODUCT_INFO SET PR_NAME =#{prName}, PR_IMG =#{prImg}, PR_SKIND =#{prSkind}, PR_COUNTRY = #{prCountry}, PR_ALCOHOL =#{prAlcohol}, PR_PLACE =#{prPlace}, PR_FOOD =#{prFood}, PR_CONTENT =#{prContent}, PR_PRICE =#{prPrice}, PR_AMOUNT =#{prAmount}, PR_USE =#{prUse}
+  			WHERE pr_code=#{prCode}
+  		</update>
   		
   </mapper>

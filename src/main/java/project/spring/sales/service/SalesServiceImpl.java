@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import project.spring.product.vo.ProductVo;
 import project.spring.sales.dao.SalesDAO;
 import project.spring.sales.vo.ProductInfoDTO;
 
@@ -83,7 +84,7 @@ public class SalesServiceImpl implements SalesService{
 	}
 
 	@Override
-	public String makeprCode(ProductInfoDTO productDTO) {
+	public String makeprCode(ProductVo productDTO) {
 		String prCode = salesDAO.makeprCode(productDTO);
 		return prCode;
 	}
@@ -126,22 +127,24 @@ public class SalesServiceImpl implements SalesService{
 	}
 
 	@Override
-	public int insertProduct(ProductInfoDTO productDTO) {
+	public int insertProduct(ProductVo productDTO) {
 		int count = 0;
-		count = salesDAO.intsertProduct(productDTO);
+		count = salesDAO.insertProduct(productDTO);
 		return count;
 	}
 
 	@Override
-	public String sessionIdCh(String memId) {
-		String kind = salesDAO.sessionIdCh(memId);
-		return kind;
+	public ProductVo getDatail(String prCode) {
+		System.out.println("왔냐??");
+		ProductVo dto = salesDAO.getDatail(prCode);
+		return dto;
 	}
 
 	@Override
-	public List productDetail(String prCode) {
-		List list = salesDAO.productDetail(prCode);
-		return list;
+	public int updateProduct(ProductVo dto) {
+		int count = 0;
+		count = salesDAO.updateProduct(dto);
+		return count;
 	}
 
 

@@ -114,10 +114,6 @@ public class ProductVo {
 		this.prCity = prCity;
 	}
 
-
-
-
-
 	public int getPrAlcohol() {
 		return prAlcohol;
 	}
@@ -231,9 +227,11 @@ public class ProductVo {
 	@Override
 	public String toString() {
 		return "ProductVo [prCode=" + prCode + ", prName=" + prName + ", prImg=" + prImg + ", prBkind=" + prBkind
-				+ ", prSkind=" + prSkind + ", prCountry=" + prCountry + ", prCity=" + prCity + ", prAlcohol="
-				+ prAlcohol + ", prPlace=" + prPlace + ", prFood=" + prFood + ", prContent=" + prContent + ", prPrice="
-				+ prPrice + ", prAmount=" + prAmount + ", prTotalcount=" + prTotalcount + ", prLike=" + prLike
-				+ ", prUse=" + prUse + ", insertId=" + insertId + ", insertDay=" + insertDay + "]";
+				+ ", prBkindValue=" + prBkindValue + ", prSkind=" + prSkind + ", prSkindValue=" + prSkindValue
+				+ ", prCountry=" + prCountry + ", prCity=" + prCity + ", prAlcohol=" + prAlcohol + ", prPlace="
+				+ prPlace + ", prFood=" + prFood + ", prContent=" + prContent + ", prPrice=" + prPrice + ", prAmount="
+				+ prAmount + ", prTotalcount=" + prTotalcount + ", prLike=" + prLike + ", prUse=" + prUse
+				+ ", insertId=" + insertId + ", insertDay=" + insertDay + "]";
 	}
+
 }

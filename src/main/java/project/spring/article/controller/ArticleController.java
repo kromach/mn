@@ -52,11 +52,11 @@ public class ArticleController {
 		
 		//Search >> thumbNail뽑아서 list return
 				@RequestMapping("/post/postSearch")
-				public String postSearch(
+				public String postSearch (
 						@RequestParam(required = false, name = "selectOption")String selectOption,
 						@RequestParam(required = false, name = "search")String search,
 						HttpServletRequest request
-						) {
+						) throws Exception{
 					
 					List<ArticleDTO> list = null;
 					if(search!=null&&!search.equals("")) {
@@ -103,19 +103,19 @@ public class ArticleController {
 		
 		////////////////////////////////////////////////
 		@RequestMapping
-		public String index(){
+		public String index() throws Exception{
 			return "forward:/article/articleSearch";
 		}
 		
 		@RequestMapping("/writeForm")
-		public String indexTestSs(){
+		public String indexTestSs() throws Exception{
 			return "article/writeForm.mn";
 		}	
 		
 		@RequestMapping("/drinkSearch")
 		@ResponseBody
-		public List drinkSearch(
-				@RequestParam(value = "input", required = false) String input) {
+		public List drinkSearch (
+				@RequestParam(value = "input", required = false) String input) throws SQLException {
 			System.out.println("drink Ajax search Input : "+input);
 			List list = null;
 			if(input !=null && !input.equals("")) {
@@ -130,6 +130,7 @@ public class ArticleController {
 			if(dto.getDkCode()!=null&& dto.getDkCode().equals("선택")) {
 				dto.setDkCode(null);
 			}
+			
 			dto.setKind("F");
 			System.out.println(dto);
 			//insert
@@ -154,7 +155,7 @@ public class ArticleController {
 		}
 		
 		@RequestMapping("/updatePro")
-		public String updateProSs(ArticleDTO dto) {
+		public String updateProSs(ArticleDTO dto) throws SQLException {
 			System.out.println(dto);
 			
 			///update작성0
@@ -165,7 +166,7 @@ public class ArticleController {
 		
 		
 		@RequestMapping("/delete")
-		public String deleteSs(@RequestParam(name = "bnIdx" , required = false) Integer bnIdx) {
+		public String deleteSs(@RequestParam(name = "bnIdx" , required = false) Integer bnIdx) throws SQLException{
 			HttpServletRequest req = 
 					((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 			String session = req.getSession().getAttribute("memId").toString();
@@ -188,7 +189,7 @@ public class ArticleController {
 				@RequestParam(required = false, name = "selectOption")String selectOption,
 				@RequestParam(required = false, name = "search")String search,
 				HttpServletRequest request
-				) {
+				)throws SQLException {
 			List<ArticleDTO> list = null;
 			if(search!=null&&!search.equals("")) {
 				list = articleService.searchArticle(selectOption,search);
@@ -235,7 +236,8 @@ public class ArticleController {
 		@RequestMapping(value = "/detail")
 		public String detail(
 				@RequestParam(required = false) String pageNum,
-				@RequestParam(name="idx",required = false) Integer idx,Model model) {
+				@RequestParam(name="idx",required = false) Integer idx,Model model) 
+						throws SQLException{
 			int idx_ = 0;
 			if(idx!=null) idx_ = idx;
 			//조회수 올리는 메서드
@@ -273,7 +275,7 @@ public class ArticleController {
 		@RequestMapping(value = "/replyReload")
 		@ResponseBody
 		public List replyReload(@RequestParam(name = "index") int index,
-								@RequestParam(name = "idx") int idx) {
+								@RequestParam(name = "idx") int idx) throws SQLException{
 			System.out.println(index+":"+idx);
 			//댓글
 			List reply = articleService.getReply(index-1,idx);
@@ -283,7 +285,7 @@ public class ArticleController {
 		@ResponseBody
 		public int deleteReply(
 			@RequestParam(name = "coIdx") int coIdx,
-			@RequestParam(name = "session") String session) { 
+			@RequestParam(name = "session") String session)throws SQLException { 
 			
 			int result = articleService.deleteReply(coIdx,session);
 			
@@ -292,7 +294,7 @@ public class ArticleController {
 		
 		@RequestMapping(value = "/more")
 		@ResponseBody
-		public List more(@RequestParam(name="num",required = false) Integer num) {
+		public List more(@RequestParam(name="num",required = false) Integer num) throws SQLException{
 			//밑에 게시글 뿌리는 메서드
 			List list = articleService.searchArticleByAdd(num);
 			System.out.println(list);
@@ -303,7 +305,7 @@ public class ArticleController {
 		public int likeSs(@RequestParam(name="num",required = false) Integer num,
 						@RequestParam(name="id",required = false) String memId,
 						@RequestParam(name="insertId",required = false) String insertId
-				) {
+				)throws SQLException {
 			
 			//기본값 -1
 			int result = -1;
@@ -316,7 +318,7 @@ public class ArticleController {
 		public int unlikeSs(@RequestParam(name="num",required = false) Integer num,
 				@RequestParam(name="nick",required = false) String memNickName,
 				@RequestParam(name="insertId",required = false) String insertId
-				) {
+				)throws SQLException {
 			
 			//기본값 -1
 			int result = -1;
@@ -329,7 +331,7 @@ public class ArticleController {
 		public int reportSs(@RequestParam(name="num",required = false) Integer num,
 				@RequestParam(name="insertId",required = false) String insertId,
 				@RequestParam(name="reportId",required = false) String reportId
-				) {
+				) throws SQLException{
 			int result = 0;
 			System.out.println(num+"|"+insertId+"|"+reportId);
 			result = articleService.report(num,insertId,reportId);
@@ -342,7 +344,7 @@ public class ArticleController {
 				@RequestParam(name="bnIdx",required = false) String bnIdx,
 				@RequestParam(name="session",required = false) String session,
 				@RequestParam(name="text",required = false) String text
-				){
+				)throws SQLException{
 			System.out.println("reply");
 			Map map = new HashMap();
 			map.put("bnIdx", bnIdx);
@@ -360,7 +362,7 @@ public class ArticleController {
 		@ResponseBody
 		public int moveSs(@RequestParam(name="num",required = false) Integer num,
 				@RequestParam(name="code",required = false) String code
-				) {
+				) throws SQLException{
 			int result = 0;
 			System.out.println("CODE===="+code);
 			
