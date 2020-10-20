@@ -84,31 +84,30 @@
 		</div>
 		<div class="detail-item detail-width4">
 			<h3 class="pad-top10 pad-bottom20">상품 후기</h3>
-				<table class="detailTbl tbl-lg" id="more2">
-					<tbody>
+			<table class="detailTbl tbl-lg" id="more2">
+				<tr>
+					<th style="min-width: 100px;">작성자</th>
+					<th style="min-width: 130px;">제목</th>
+					<th style="min-width: 130px;">조회수</th>
+					<th style="min-width: 130px;">작성일</th>
+				</tr>
+				<c:forEach var="re" items="${articlelist}">
 					<tr>
-						<th style="min-width: 100px;">작성자</th>
-						<th style="min-width: 130px;">제목</th>
-						<th style="min-width: 130px;">조회수</th>
-						<th style="min-width: 130px;">작성일</th>
+						<th style="min-width: 100px;">${re.insertId}</th>
+						<th style="min-width: 130px;"><a href="reviewdetail?bnIdx=${re.bnIdx}">${re.bnTitle}</a></th>
+						<th style="min-width: 130px;">${re.readcount}</th>
+						<th style="min-width: 130px;"><fmt:formatDate value="${re.insertDay}" pattern="yyyy.MM.dd" /></th>
 					</tr>
-					<c:forEach var="re" items="${articlelist}">
-						<tr>
-							<th style="min-width: 100px;">${re.insertId}</th>
-							<th style="min-width: 130px;"><a href="reviewdetail?bnIdx=${re.bnIdx}">${re.bnTitle}</a></th>
-							<th style="min-width: 130px;">${re.readcount}</th>
-							<th style="min-width: 130px;"><fmt:formatDate value="${re.insertDay}" pattern="yyyy.MM.dd" /></th>
-						</tr>
-					</c:forEach>
-					</tbody>
-				</table>
-			</div>
+				</c:forEach>
+			</table>
 		</div>
 		<div class="detail-item detail-width4" id="add">
-			<input id="addBtn" type="button" class="btn btn-sm btn-dark" value="더보기" onclick="more2('${info.prCode}')">
-			<input type="hidden" value="0" id="moreVal">
+			<input id="addBtn" type="button" class="btn btn-sm btn-dark"
+				value="더보기" onclick="more2('${info.prCode}')"> <input type="hidden"
+				value="0" id="moreVal">
 		</div>
 	</div>
+</div>
 <script>
 	$(function() {
 		var msnry = new Masonry('.grid2', {
@@ -184,6 +183,7 @@
 				url : context + '/more2?num=' + moreVal+ '&prcode='+prcode,
 				type : "post",
 				success : function(data) {
+					console.log(data);
 					var endlen = Object.keys(data).length;
 					if (endlen != 0) {
 						for(var i in data){
