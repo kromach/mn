@@ -25,37 +25,37 @@
   	
   	<select id="searchArticlebyNick" parameterType="hashmap" resultType="ArticleDTO">
   		<![CDATA[	
-  		SELECT * FROM BOARD_NORMAL bn ,MEMBER_INFO mi WHERE bn.INSERT_ID = mi.ID and mi.${selectOption} like '%'||#{search}||'%' and kind = 'F'
+  		SELECT * FROM BOARD_NORMAL bn ,MEMBER_INFO mi WHERE bn.INSERT_ID = mi.ID and IS_DELETE = 'N' and mi.${selectOption} like '%'||#{search}||'%' and kind = 'F'
   		]]>
   	</select>
   	
   	<select id="searchArticlebyOthers" parameterType="hashmap" resultType="ArticleDTO">
   		<![CDATA[	
-  		SELECT * FROM BOARD_NORMAL bn ,MEMBER_INFO mi WHERE bn.INSERT_ID = mi.ID and bn.${selectOption} like '%'||#{search}||'%' and kind = 'F'
+  		SELECT * FROM BOARD_NORMAL bn ,MEMBER_INFO mi WHERE bn.INSERT_ID = mi.ID and IS_DELETE = 'N' and bn.${selectOption} like '%'||#{search}||'%' and kind = 'F'
   		]]>
   	</select>
   	
   	<select id="searchAll" resultType="ArticleDTO">
   		<![CDATA[	
-  		select * from board_normal WHERE kind = 'F' ORDER BY INSERT_DAY DESC 
+  		select * from board_normal WHERE kind = 'F' and IS_DELETE = 'N' ORDER BY INSERT_DAY DESC 
   		]]> 
   	</select>
   	
   	<select id="searchPostbyNick" parameterType="hashmap" resultType="ArticleDTO">
   		<![CDATA[	
-  		SELECT * FROM BOARD_NORMAL bn ,MEMBER_INFO mi WHERE bn.INSERT_ID = mi.ID and mi.${selectOption} like '%'||#{search}||'%' and kind = 'C'
+  		SELECT * FROM BOARD_NORMAL bn ,MEMBER_INFO mi WHERE IS_DELETE = 'N' and bn.INSERT_ID = mi.ID and mi.${selectOption} like '%'||#{search}||'%' and kind = 'C'
   		]]>
   	</select>
   	
   	<select id="searchPostbyOthers" parameterType="hashmap" resultType="ArticleDTO">
   		<![CDATA[	
-  		SELECT * FROM BOARD_NORMAL bn ,MEMBER_INFO mi WHERE bn.INSERT_ID = mi.ID and bn.${selectOption} like '%'||#{search}||'%' and kind = 'C'
+  		SELECT * FROM BOARD_NORMAL bn ,MEMBER_INFO mi WHERE IS_DELETE = 'N' and bn.INSERT_ID = mi.ID and bn.${selectOption} like '%'||#{search}||'%' and kind = 'C'
   		]]>
   	</select>
   	
   	<select id="searchAllPost" resultType="ArticleDTO">
   		<![CDATA[	
-  		select * from board_normal WHERE kind = 'C' ORDER BY INSERT_DAY DESC 
+  		select * from board_normal WHERE IS_DELETE = 'N' and kind = 'C' ORDER BY INSERT_DAY DESC 
   		]]> 
   	</select>
   	
@@ -63,7 +63,7 @@
 	  	select bn.*,mi.NAME ,mi.NICKNAME,
 			(SELECT COUNT(T.ID) FROM MY_TITLE T WHERE T.ID = MI.ID) AS WRITER_TITLE_CNT, MY.TITLE_INDEX, TL.TITLE_NAME AS WRITER_TITLE_NAME from board_normal bn, MEMBER_INFO mi LEFT OUTER JOIN 
 			(SELECT TITLE_INDEX, ID, CHOOSE_TITLE FROM MY_TITLE) MY ON mi.ID = MY.ID AND MY.CHOOSE_TITLE = 'Y' LEFT OUTER JOIN
-		TITLE_LIST TL ON MY.TITLE_INDEX = TL.TITLE_IDX where bn.INSERT_ID = mi.ID AND BN_IDX = #{value}
+		TITLE_LIST TL ON MY.TITLE_INDEX = TL.TITLE_IDX where bn.IS_DELETE ='N' and bn.INSERT_ID = mi.ID AND BN_IDX = #{value}
   	</select>
   	
   	<select id="searchArticleByAdd" resultType="ArticleDTO" parameterType="int">
@@ -74,7 +74,7 @@
 				,(SELECT count(mt.CHOOSE_TITLE) FROM TITLE_LIST tl ,MY_TITLE mt WHERE tl.TITLE_IDX = mt.TI_IDX AND mt.ID = bn.INSERT_ID ) AS WRITER_TITLE_CNT
 				,(SELECT tl2.TITLE_NAME FROM TITLE_LIST tl2,MY_TITLE mt2 WHERE mt2.CHOOSE_TITLE = 'Y' AND tl2.TITLE_IDX = mt2.TITLE_INDEX AND mt2.id = bn.INSERT_ID )AS WRITER_TITLE_NAME
 			from BOARD_NORMAL bn ,MEMBER_INFO mi 
-			where BN .INSERT_ID =mi.ID AND bn.kind = 'F' ORDER BY INSERT_DAY DESC)a)
+			where bn.IS_DELETE ='N' and BN .INSERT_ID =mi.ID AND bn.kind = 'F' ORDER BY INSERT_DAY DESC)a)
 		WHERE rnum >= (5*#{value})+1 and rnum <= (5*(#{value}+1))
 	]]>
   	</select>
@@ -92,11 +92,11 @@
   	</select>
   	
   	<select id="getCountAllReply" resultType="int">
-  		SELECT count(*) FROM BOARD_COMMENT where bn_Idx = #{value}
+  		SELECT count(*) FROM BOARD_COMMENT where bn_Idx = #{value} AND IS_DELETE ='N'
   	</select>
   	
   	<select id="getAllReply" resultType="ArticleReplyDTO">
-  		select * from board_comment
+  		select * from board_comment where IS_DELETE ='N'
   	</select>
   	
   	<select id="getReply" parameterType="hashmap" resultType="ArticleReplyDTO">
@@ -106,7 +106,7 @@
 				(SELECT tl.TITLE_NAME FROM TITLE_LIST tl ,MY_TITLE mt WHERE mt.ID = bc.INSERT_ID AND mt.CHOOSE_TITLE ='Y' AND tl.TITLE_IDX = mt.TITLE_INDEX) AS WRITER_TITLE_NAME ,
 				(SELECT count(mt2.CHOOSE_TITLE )FROM MY_TITLE mt2 WHERE mt2.id = bc.INSERT_ID ) AS WRITER_TITLE_CNT
 			from BOARD_COMMENT bc,MEMBER_INFO mi 
-			WHERE bc.INSERT_ID =mi.ID AND bn_idx =#{bnIdx}
+			WHERE bc.INSERT_ID =mi.ID AND bn_idx =#{bnIdx} and bc.IS_DELETE ='N'
 		order by INSERT_DAY DESC ) aa ) a where r >= (10*#{index})+1 and r <= (10*(#{index}+1))
   	]]>
   	</select>
@@ -175,12 +175,14 @@
   		delete from board_like where bn_idx = #{num} and nick = #{memNickName} 
   	</delete>
   	
-  	<delete id="deleteReply">
-  		delete from BOARD_COMMENT where co_Idx = #{coIdx} and insert_Id=#{insert_Id}
-  	</delete>
   	
-  	<delete id="deleteArticle" parameterType="hashmap" >
-  		delete from BOARD_NORMAL where bn_Idx=#{bnIdx}
-  	</delete>
+  	<update id="deleteReply" parameterType="hashmap">
+  		<![CDATA[	
+  		UPDATE BOARD_COMMENT SET IS_DELETE = 'N' WHERE co_Idx = #{coIdx} and insert_Id=#{insert_Id} 
+  		]]>
+  	</update>
+  	<update id="deleteArticle" parameterType="hashmap" >
+  		UPDATE BOARD_NORMAL SET IS_DELETE = 'N' WHERE bn_Idx=#{bnIdx}
+  	</update>
   	
   </mapper>
