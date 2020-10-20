@@ -89,7 +89,7 @@
 					<tr>
 						<th>알콜 도수</th>
 						<td>
-							<input type="number" name="prAlcohol" class="input-xs required" msg="도수를"/> 도
+							<input type="text" name="prAlcohol_" class="input-xs required" msg="도수를"/> 도
 						</td>
 					</tr>
 					<tr>
@@ -101,14 +101,13 @@
 					<tr>
 						<th>가격</th>
 						<td>
-							<input type="number" name="prPrice" class="input-sm"/>  원	
+							<input type="text" name="prPrice_" class="input-sm required" msg="가격을"/>  원	
 						</td>
 					</tr>
 					<tr>
 						<th>수량</th>
 						<td>
-							<input type="number" name="prAmount" class="input-xs"/> 병
-							
+							<input type="text" name="prAmount_" class="input-xs required" msg="수량을"/> 병
 						</td>
 					</tr>
 					<tr>
