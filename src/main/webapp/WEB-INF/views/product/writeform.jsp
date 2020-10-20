@@ -27,7 +27,6 @@
 					}
 				}
 				for ( var j in dataLog) {
-					console.log(dataLog[j].DK_NAME);
 					$('#option').append(
 							'<option value="'+dataLog[j].DK_CODE+'">'
 									+ dataLog[j].DK_NAME + '</option>');
@@ -66,7 +65,7 @@
 	    		return false;
     		}    		
     		if (confirm("정보를 입력하시겠습니까?")) {
-	    		$("form[name='dkForm']").submit();
+	    		$("form[name='inputForm']").submit();
 			}
 		}
 	}
@@ -77,7 +76,7 @@
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
-				<form action="/product/writePro" method="post" id="frm" accept-charset="utf-8">
+				<form action="/product/writePro" method="post" id="frm" name="inputForm" accept-charset="utf-8">
 				<input type="hidden" name="prcode" value="${prcode}" />
 				<input type="hidden" name="prname" value="${prname}" />
 				<input type="hidden" name="kind" value="${kind}" />
