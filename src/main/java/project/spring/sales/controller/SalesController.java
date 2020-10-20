@@ -139,25 +139,27 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value = "/modifyForm")
-	public String modifyForm(@RequestParam(name="prcode") String prCode,HttpServletRequest request) {
+	public String modifyForm(@RequestParam(name="prcode") String prCode,HttpServletRequest request, Model model) {
 		
 		System.out.println("sales modifyForm controller");
-		System.out.println("prCodr" + prCode);
+		System.out.println("prCode" + prCode);
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
-		System.out.println(memId);
 
 		//prCode로 해당 detail 가져오기
 		// 해당 판매자가 맞는지 체크 PRCODE의 insert_id와 session값이 일치하지 않으면 main으로 리턴
 		ProductVo dto = salesService.getDatail(prCode);
 		System.out.println(dto.getInsertId()+" =====vs===== "+ memId);
-		System.out.println();
 		
 		if(!(dto.getInsertId().equals(memId))) {
 			return "redirect:/";
 		}
 		
-		return "/sales/modifyPro.mn";
+		List secondCategory = salesService.getCategory();
+		model.addAttribute("secondCategory", secondCategory);
+		model.addAttribute("detail", dto);
+		
+		return "/sales/modifyForm.mn";
 	}
 	
 }

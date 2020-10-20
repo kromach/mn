@@ -49,12 +49,11 @@
 		<div class="gutter-sizer"></div>
 		<div class="detail-item detail-width6">
 			<h3 class="text-left pad-y10">새 정보 등록</h3>
-			<form action="insertPro" name="prForm" method="post" enctype="multipart/form-data">
+			<form action="modifyForm" name="prForm" method="post" enctype="multipart/form-data">
 				<table class="tableCss tbl-lg text-left">
 					<tr>
 						<th>주류 종류</th>
 						<td>
-							<h2>전통주</h2>
 							<select id="prSkind" name="prSkind" class="sel short required" type="select-one" msg="소분류를" >
 								<c:forEach items="${secondCategory}" var="secondCategory">
 									<option value="${secondCategory.code}">${secondCategory.value}</option>
@@ -65,7 +64,7 @@
 					<tr>
 						<th>상품명</th>
 						<td>
-							<input type="text" name="prName" class="input-lg required" msg="주류명을" />
+							<input type="text" name="prName" class="input-lg required" msg="주류명을" value="${detail.prName}"/>
 						</td>
 					</tr>
 					<tr>
@@ -77,59 +76,67 @@
 					<tr>
 						<th>양조장</th>
 						<td>
-							<input type="text" name="prPlace" class="input-lg required" />
+							<input type="text" name="prPlace" class="input-lg required" value="${detail.prPlace}"/>
 						</td>
 					</tr>
 					<tr>
 						<th>국가/도시</th>
 						<td>
-							<input type="text" name="prCountry" class="input-sm required" placeholder="국가"/>
-							&nbsp;<input type="text" name="prCity" class="input-sm required" placeholder="도시"/>
+							<input type="text" name="prCountry" class="input-sm required" placeholder="국가" value="${detail.prCountry }"/>
+							&nbsp;<input type="text" name="prCity" class="input-sm required" placeholder="도시" ${detail.prCity}/>
 						</td>
 					</tr>
 					<tr>
 						<th>알콜 도수</th>
 						<td>
-							<input type="number" name="prAlcohol" class="input-xs required" /> 도
+							<input type="number" name="prAlcohol" class="input-xs required" value="${detail.prAlcohol }"/> 도
 						</td>
 					</tr>
 					<tr>
 						<th>어울리는 안주</th>
 						<td>
-							<textarea name="prFood" id="prFood" type="textarea" style="width:98%" ></textarea>
+							<input type="text" name="prFood" class="input-lg required" value="${detail.prFood }"/>
 						</td>
 					</tr>
 					<tr>
 						<th>가격</th>
 						<td>
-							<input type="number" name="prPrice" class="input-sm required"/>  원	
+							<input type="number" name="prPrice" class="input-sm required" value="${detail.prPrice}" />  원	
 						</td>
 					</tr>
 					<tr>
 						<th>수량</th>
 						<td>
-							<input type="number" name="prAmount" class="input-xs required" /> 병
+							<input type="number" name="prAmount" class="input-xs required" value="${detail.prAmount }"/> 병
 							
 						</td>
 					</tr>
 					<tr>
 						<th>판매 개시</th>
-						<td>
-							YES - <input type="radio" name="prUse" value="Y" checked="checked"/> / 
-							NO - <input type="radio" name="prUse" value="N"/>
-						</td>
+						<c:if test="${detail.prUse eq 'Y'}">
+							<td>
+								YES - <input type="radio" name="prUse" value="Y" checked="checked"/> / 
+								NO - <input type="radio" name="prUse" value="N"/>
+							</td>
+						</c:if>
+						<c:if test="${detail.prUse eq 'N'}">
+							<td>
+								YES - <input type="radio" name="prUse" value="Y" /> / 
+								NO - <input type="radio" name="prUse" value="N" checked="checked"/>
+							</td>
+						</c:if>
 					</tr>
 					<tr>
 						<th>주류 정보</th>
 						<td>
-							<textarea name="prContent" id="prContent" type="textarea" class="required" style="width:98%" ></textarea>
+							<textarea name="prContent" id="prContent" type="textarea" class="required" style="width:98%" >${detail.prContent}</textarea>
 							<script type="text/javascript">CKEDITOR.replace( 'prContent' , ckedit_config);</script>
 						</td>
 					</tr>
 					
 				</table>
 				<div class="text-center pad-top10">
-					<input type="button" class="btn btn-lg btn-blue" value="저장" onclick="insertProduct()" />
+					<input type="button" class="btn btn-lg btn-blue" value="저장" onclick="modifyProduct()" />
 					<input type="button" class="btn btn-lg btn-grey" value="취소" onclick="window.location='index'" />
 				</div>
 			</form>
@@ -162,7 +169,7 @@
 
 	});
 
-    function insertProduct(){
+    function modifyProduct(){
     	if (checkFormjquery()) {
     		
     		$("form[name='prForm']").submit();
