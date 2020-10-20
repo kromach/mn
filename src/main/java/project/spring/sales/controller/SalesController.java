@@ -120,10 +120,7 @@ public class SalesController {
 			// (3) 다른것들 insert
 			productDTO.setInsertId(session.getAttribute("memId").toString());
 			productDTO.setPrImg(imgPath);
-			productDTO.setPrAmount(Integer.parseInt(request.getParameter("prAmount_")));
-			productDTO.setPrPrice(Integer.parseInt(request.getParameter("prPrice_")));
-			productDTO.setPrAlcohol(Integer.parseInt(request.getParameter("prAlcohol_")));
-			
+						
 			System.out.println(productDTO);
 			int count = salesService.insertProduct(productDTO);
 			
