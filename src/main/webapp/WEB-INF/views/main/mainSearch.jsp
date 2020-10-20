@@ -17,7 +17,7 @@
 		<c:forEach var="mainVO" items="${main}">
 			<div class="grid-item">
 				<a href="${mainVO.aLinkUri}">
-					<img src="${mainVO.imgUri}" />
+					<img src="${mainVO.imgUri}"  onerror="this.src='/resources/img/noImage.jpg'"/>
 				</a>
 			</div>
 		</c:forEach>
@@ -39,7 +39,7 @@ $(function(){
 					window.location.pathname.indexOf("/", 2));
 		 var index = $('#index').val();
 		 var search = '<c:out value="${search}"/>';
-         if( scrollTop + windowHeight +100 > documentHeight ){
+         if( scrollTop + windowHeight +150 > documentHeight ){
         	 fetchList(context,index,search);
 			}
 		})
@@ -68,14 +68,14 @@ function fetchList(context,index,search){
 					gutter: '.gutter-sizer'
 				});
 				for(var i in data){
-					var el = '<div class="grid-item"><a href="'+data[i].aLinkUri+'"><img src="'+data[i].imgUri+'"/></a></div>';
+					var el = '<div class="grid-item"><a href="'+data[i].aLinkUri+'"><img src="'+data[i].imgUri+'" onerror="this.src=\'/resources/img/noImage.jpg\'" /></a></div>';
 					$grid.append( el ).masonry( 'appended', el ,true);
 				}
 				// 재훈 테스트
 				// masonry 재 실행 
 				// $grid.masonry();
-    			$grid.masonry( 'reloadItems' );
-    			$grid.masonry();
+	   			$grid.masonry( 'reloadItems' );
+	   			$grid.masonry();
 			}
 		}
 	});

@@ -31,8 +31,8 @@
 					<dd class="clfix">${info.prTotalcount} 병 </dd>
 				</dl>
 				<div>
-					<input type="button" value="후기등록"  class="btn btn-sm btn-dark" onclick="window.location.href='/product/writeform?kind=r&prcode=${info.prCode}&prname=${info.prName}'"/>
-					<button class="btn btn-lg btn-blue" onclick="like('${info.prCode}','${info.insertId }')">좋아요</button>
+					<input type="button" value="후기등록"  class="btn btn-sm btn-dark" onclick="window.location.href='/product/writeform?kind=R&prcode=${info.prCode}&prname=${info.prName}'"/>
+					<button class="btn btn-sm btn-dark" onclick="like('${info.prCode}','${info.insertId }')">좋아요</button>
 					(${info.prLike})
 				</div>
 			</div>
@@ -78,18 +78,16 @@
 			</form>
 		</div>
 		<div class="detail-item detail-width4">
-			<h3 class="pad-top10 pad-bottom20">연관 게시글 보기</h3>
+			<h3 class="pad-top10 pad-bottom20">상품 후기</h3>
 			<table class="detailTbl tbl-lg">
 				<tr>
 					<th>제목</th>
 					<th style="min-width:100px;">작성자</th>
+					<th style="min-width:130px;">글제목</th>
+					<th style="min-width:130px;">조회수</th>
 					<th style="min-width:130px;">작성일</th>
 				</tr>
-				<tr>
-					<td>이 술 맛있음요</td>
-					<td>김영성</td>
-					<td>2020-09-28</td>
-				</tr>
+				
 			</table>
 		</div>
 	</div>
@@ -159,4 +157,3 @@
 		}
 	}
 </script>							
-

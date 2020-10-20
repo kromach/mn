@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.spring.adminEvent.service.AdminEventServiceImpl;
 import project.spring.event.service.EventServiceImpl;
+import project.spring.event.vo.EventVO;
 
 @Controller
 @RequestMapping("/event/")
@@ -45,7 +47,6 @@ public class EventController {
 			adminEventService.checkDate(today);
 			
 			eventList = eventService.eventList(0);
-			System.out.println("들어가기 직전!");	
 		}
 		Collections.shuffle(eventList);
 
@@ -56,13 +57,21 @@ public class EventController {
 	}
 	
 	@RequestMapping("detail")
-	public String deatil(HttpServletRequest request, Model model) {
+	public String deatil(HttpServletRequest request, Model model)throws SQLException {
 		
 		String eventCode = request.getParameter("eventCode");
-		
-		model.addAttribute("eventCode", eventCode);
-		
-		
+		HttpSession session = request.getSession();
+		String memId = null;
+		int idx = 0;
+		if(session.getAttribute("memId") != null && !session.getAttribute("memId").equals("")) {
+			memId = (String)session.getAttribute("memId");
+			idx = eventService.checkJoinEvent(memId, eventCode);
+		}
+		System.out.println("idx : " + idx);
+		EventVO vo =  eventService.getEvent(eventCode);
+		model.addAttribute("vo", vo);
+		model.addAttribute("memId", memId);
+		model.addAttribute("idx", idx);
 		
 		return "event/detail.mn";
 	}
@@ -78,5 +87,18 @@ public class EventController {
 		}else {
 			return null;
 		}
+	}
+	
+	@RequestMapping("joinEvent")
+	@ResponseBody
+	public void joinEventSs(@RequestParam String eventCode, HttpServletRequest request)throws SQLException {
+		
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("memId");
+		System.out.println("eventCode :" + eventCode);
+		System.out.println("id : " + id);
+		
+		eventService.requestEvent(eventCode, id);
+		
 	}
 }

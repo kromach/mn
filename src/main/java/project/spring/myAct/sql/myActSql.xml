@@ -25,7 +25,7 @@
  		
  		<!-- 내가 좋아요한 글의 데이터를 가져옴 -->
  		<select id="myLikeArticle" parameterType="string" resultType="ArticleDTO">
- 			SELECT * FROM BOARD_NORMAL bn, MY_LIKE ml WHERE TO_CHAR( bn.BN_IDX )= ml.ML_VALUE AND ml.INSERT_ID=#{value}
+ 			SELECT * FROM BOARD_NORMAL bn, MY_LIKE ml WHERE TO_CHAR( bn.BN_IDX )= ml.ML_VALUE AND ml.INSERT_ID=#{value} ORDER BY BN_IDX desc
  		</select>
  		
  		<select id="getAllTitle" resultType="TitleListDTO">

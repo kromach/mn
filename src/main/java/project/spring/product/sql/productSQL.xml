@@ -237,5 +237,15 @@
 	<select id="likeReturn" parameterType="String" resultType="int">
 		select pr_like from product_info where pr_code = #{value}
   	</select>
-	
+  	<select id="getarticlecount" parameterType="String" resultType="int">
+		select count(*) from BOARD_NORMAL where dk_code = #{value}
+  	</select>
+  	<select id="getarticle" parameterType="String" resultType="ArticleDTO">
+		select * from BOARD_NORMAL where dk_code = #{value}
+  	</select>
+  	<select id="stock" parameterType="string" resultType="int">
+  		select pr_amount from product_info where pr_code =#{value}
+  	</select>
+  	
+  	
 </mapper>

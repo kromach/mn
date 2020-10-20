@@ -79,15 +79,6 @@ public class SalesDAOImpl implements SalesDAO{
 	}
 
 	@Override
-	public List productModify(String pageNum) {
-		ProductInfoDTO dto = new ProductInfoDTO();
-		
-		
-		List list = sqlSession.selectList("sales.salesModify", pageNum); 
-		return list;
-	}
-
-	@Override
 	public List getCategory() {
 		List list = sqlSession.selectList("sales.getCategory");
 		System.out.println("가져왔니?");
@@ -103,9 +94,30 @@ public class SalesDAOImpl implements SalesDAO{
 		System.out.println("prCode 생성 됐니? "+prCode);
 		productDTO.setPrCode(prCode);
 		
-		//sqlSession.insert("salses.insertProduct", productDTO);
-		
 		return prCode;
+	}
+
+	@Override
+	public int intsertProduct(ProductInfoDTO productDTO) {
+		int count = 0;
+		System.out.println("insertid : " +productDTO.getInsertId());
+		System.out.println("prlike : " +productDTO.getPrLike());
+		System.out.println("prCode : " + productDTO.getPrCode());
+		count = sqlSession.insert("sales.insertProduct", productDTO);
+		return count;
+	}
+
+	@Override
+	public String sessionIdCh(String memId) {
+		String kind = "";
+		kind = sqlSession.selectOne("sales.sessionIdCh", memId);
+		return kind;
+	}
+
+	@Override
+	public List productDetail(String prCode) {
+		List list = sqlSession.selectList("sales.productDetail", prCode);
+		return list;
 	}
 
 }

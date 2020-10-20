@@ -34,5 +34,11 @@ public interface DrinkDAO {
 
 	String modifyDrink(DrinkVO drinkVo) throws SQLException;
 
+	String selectDrinkLikeInfo(HashMap drinkLikeMap) throws SQLException;
+
+	String updateDrinkLikeInfo(HashMap drinkLikeMap) throws SQLException;
+
+	void updateDrinkLikeCount(HashMap drinkLikeMap) throws SQLException;
+
 
 }

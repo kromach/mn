@@ -1,10 +1,14 @@
 package project.spring.sales.service;
 
+import java.io.File;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import project.spring.sales.dao.SalesDAO;
 import project.spring.sales.vo.ProductInfoDTO;
@@ -73,14 +77,6 @@ public class SalesServiceImpl implements SalesService{
 	}
 
 	@Override
-	public List productModify(String pageNum) {
-		List list = null;
-		list = salesDAO.productModify(pageNum);
-				
-		return list;
-	}
-
-	@Override
 	public List getCategory() {
 		List list = salesDAO.getCategory();
 		return list;
@@ -91,5 +87,62 @@ public class SalesServiceImpl implements SalesService{
 		String prCode = salesDAO.makeprCode(productDTO);
 		return prCode;
 	}
+	
+
+	@Override
+	public String insertProductImg(MultipartHttpServletRequest request) {
+	 	
+		// 파일정보 꺼내기
+		MultipartFile mf = null;
+		String imgPath = null;
+
+		try {
+			mf = request.getFile("primage"); // null
+			// 이미지 이름 중복처리 
+			String orgName = mf.getOriginalFilename();
+			// 파일명은 주류 코드로 변경
+			String prCode = (String)request.getAttribute("prCode");
+			// 파일의 확장자만 추출
+			String ext = orgName.substring(orgName.lastIndexOf("."));
+			// System.out.println(ext);
+			String newName = prCode + ext;  // 주류코드 + 확장자
+			System.out.println(newName);
+			//파일 기본경로 _ 상세경로
+			String path = request.getRealPath("resources/img/product") + File.separator;
+	//						System.out.println("req :" + request.getRealPath("resources/img/upload"));
+			// System.out.println(path + newName);
+			File file = new File(path);
+			//디렉토리 존재하지 않을경우 디렉토리 생성
+			if(!file.exists()) {
+				file.mkdirs();
+			}
+			imgPath = path + newName;
+			File copyFile = new File(path + newName); // 새로운 이미지 경로로 업로드 한 파일 복사 생성
+			mf.transferTo(copyFile); // 지정된 경로로 파일 저장
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return imgPath;
+	}
+
+	@Override
+	public int insertProduct(ProductInfoDTO productDTO) {
+		int count = 0;
+		count = salesDAO.intsertProduct(productDTO);
+		return count;
+	}
+
+	@Override
+	public String sessionIdCh(String memId) {
+		String kind = salesDAO.sessionIdCh(memId);
+		return kind;
+	}
+
+	@Override
+	public List productDetail(String prCode) {
+		List list = salesDAO.productDetail(prCode);
+		return list;
+	}
+
 
 }

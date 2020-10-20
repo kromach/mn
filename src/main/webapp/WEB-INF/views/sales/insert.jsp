@@ -57,7 +57,7 @@
 							<h2>전통주</h2>
 							<select id="prSkind" name="prSkind" class="sel short required" type="select-one" msg="소분류를" >
 								<c:forEach items="${secondCategory}" var="secondCategory">
-									<option value="${secondCategory.value}">${secondCategory.value}</option>
+									<option value="${secondCategory.code}">${secondCategory.value}</option>
 								</c:forEach>
 							</select>
 						</td>
@@ -113,6 +113,13 @@
 						</td>
 					</tr>
 					<tr>
+						<th>판매 개시</th>
+						<td>
+							YES - <input type="radio" name="prUse" value="Y" checked="checked"/> / 
+							NO - <input type="radio" name="prUse" value="N"/>
+						</td>
+					</tr>
+					<tr>
 						<th>주류 정보</th>
 						<td>
 							<textarea name="prContent" id="prContent" type="textarea" class="required" style="width:98%" ></textarea>
@@ -122,7 +129,7 @@
 					
 				</table>
 				<div class="text-center pad-top10">
-					<input type="button" class="btn btn-lg btn-blue" value="저장" onclick="insertDrink()" />
+					<input type="button" class="btn btn-lg btn-blue" value="저장" onclick="insertProduct()" />
 					<input type="button" class="btn btn-lg btn-grey" value="취소" onclick="window.location='index'" />
 				</div>
 			</form>
@@ -154,28 +161,11 @@
 	    });
 
 	});
-    
-	// 소분류 값 가져오는 ajax
-    function getSmallCategory(bigCategory) {
-    	$.ajax({
-			type : "POST",
-    		url : "/drink/selectSmallCategory",
-			data : {bigCategory},  /*{bigCategory:bigCategory} 와 동일*/
-			success : function(data){
-				$("#dkSkind").empty().append("<option value=''>소분류 선택</option>");
-				addedSmallCategory(data);
-			},
-			error : function() {
-				alert("error");
-			}
-    	})
-    }
 
-
-    function insertDrink(){
+    function insertProduct(){
     	if (checkFormjquery()) {
     		
-    		$("form[name='dkForm']").submit();
+    		$("form[name='prForm']").submit();
     	}
     }
     

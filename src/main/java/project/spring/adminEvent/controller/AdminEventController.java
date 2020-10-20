@@ -46,7 +46,7 @@ public class AdminEventController {
 		private ArticleServiceImpl articleService = null;
 		
 		@RequestMapping("insertEvent")
-		public String eventList(Model model, Locale locale)throws SQLException{
+		public String eventListAd(Model model, Locale locale)throws SQLException{
 			
 			
 			return "admin/event/insertEvent.mn";
@@ -54,7 +54,7 @@ public class AdminEventController {
 		
 		// 이벤트 처리 페이지
 		@RequestMapping("insertEventPro")
-		public String insertEvent(@ModelAttribute AdminEventVO vo, Model model, MultipartHttpServletRequest request, HttpServletResponse response)throws SQLException{
+		public String insertEventAd(@ModelAttribute AdminEventVO vo, Model model, MultipartHttpServletRequest request, HttpServletResponse response)throws SQLException{
 			
 			
 			System.out.println("content 확인:"  + vo.getContent() );
@@ -149,7 +149,7 @@ public class AdminEventController {
 		
 		// eventList 보기 페이지
 		@RequestMapping("eventList")
-		public String eventView(String pageNum, Model model, HttpServletRequest request)throws SQLException{
+		public String eventViewAd(String pageNum, Model model, HttpServletRequest request)throws SQLException{
 			
 			if(pageNum == null) {
 				pageNum = "1";
@@ -246,7 +246,7 @@ public class AdminEventController {
 		// 이벤트 사용 여부 변경
 		@RequestMapping("chEventCode")
 		@ResponseBody
-		public void chEventCode(@RequestParam String eventCode)throws SQLException {
+		public void chEventCodeAd(@RequestParam String eventCode)throws SQLException {
 			System.out.println("eventCode!!!"+eventCode);
 			
 			adminEventService.chOpen(eventCode);
@@ -254,7 +254,7 @@ public class AdminEventController {
 		}
 
 		@RequestMapping("modifyEvent")
-		public String modifyEvent(@RequestParam(value="eventCode", required = false) String eventCode, Model model)throws SQLException {
+		public String modifyEventAd(@RequestParam(value="eventCode", required = false) String eventCode, Model model)throws SQLException {
 			
 			AdminEventVO vo = adminEventService.eventInfo(eventCode);
 			model.addAttribute("vo",vo);
@@ -265,7 +265,7 @@ public class AdminEventController {
 		}
 		
 		@RequestMapping("modifyEvnetPro")
-		public String modifyPro(AdminEventVO vo, MultipartHttpServletRequest request)throws SQLException{
+		public String modifyProAd(AdminEventVO vo, MultipartHttpServletRequest request)throws SQLException{
 			
 			System.out.println("check---------------------------------------------------3333");
 

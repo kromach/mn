@@ -1,11 +1,14 @@
 package project.spring.event.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import project.spring.event.vo.EventVO;
 
 @Repository
 public class EventDAOImpl implements EventDAO {
@@ -60,6 +63,30 @@ public class EventDAOImpl implements EventDAO {
 	public List eventList(int idx) throws SQLException {
 		List eventList = sqlSession.selectList("event.eventList", idx);
 		return eventList;
+	}
+
+	@Override
+	public EventVO getEvent(String eventCode) throws SQLException {
+		EventVO vo = sqlSession.selectOne("event.getEvent", eventCode);
+		return vo;
+	}
+
+	@Override
+	public void requestEvent(String eventCode, String id) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("eventCode", eventCode);
+		map.put("id", id);
+		sqlSession.insert("event.requestEvent", map);
+		
+	}
+
+	@Override
+	public int checkJoinEvent(String eventCode, String id) throws SQLException {
+		HashMap map = new HashMap();
+		map.put("eventCode", eventCode);
+		map.put("id", id);
+		int idx = sqlSession.selectOne("event.checkJoinEvent", map);
+		return idx;
 	}
 
 }

@@ -203,7 +203,7 @@ public class MainController {
 		/****************************************************************/
 		List<MainVO> main = new ArrayList();
 		//product에서 10개
-		List<ProductVo> product = service.getProductInitial(index+1);
+		List<ProductVo> product = service.getProductInitial(index+1,search);
 		for(ProductVo vo : product) {
 			String aLinkUri = "/product/productdetail?prcode="+vo.getPrCode();
 			MainVO mainVo = new MainVO();
@@ -212,7 +212,7 @@ public class MainController {
 			main.add(mainVo);
 		}
 		//drink에서 10개
-		List<DrinkVO> drink = service.getDrinkInitial(index+1);
+		List<DrinkVO> drink = service.getDrinkInitial(index+1,search);
 		for(DrinkVO vo : drink) {
 			MainVO mainVo = new MainVO();
 			String aLinkUri = "/drink/detail?dkCode="+vo.getDkCode();
@@ -221,7 +221,7 @@ public class MainController {
 			main.add(mainVo);
 		}
 		//event에서 10개
-		List<EventVO> event = service.getEventInitial(index+1);
+		List<EventVO> event = service.getEventInitial(index+1,search);
 		for(EventVO vo : event) {
 			MainVO mainVo = new MainVO();
 			String aLinkUri = "/event/detail?event="+vo.getEventCode();

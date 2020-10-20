@@ -25,7 +25,7 @@ public class AdminController {
 		private AdminServiceImpl adminService = null;
 
 		@RequestMapping("/memberList")
-		public String memberList(String pageNum, Model model)throws SQLException {
+		public String memberListAd(String pageNum, Model model)throws SQLException {
 			
 			
 				if(pageNum == null) {
@@ -85,7 +85,7 @@ public class AdminController {
 		}
 	
 		@RequestMapping("/drinkList")
-		public String drinkList(String pageNum, Model model)throws SQLException{
+		public String drinkListAd(String pageNum, Model model)throws SQLException{
 			
 			if(pageNum == null) {
 				pageNum = "1";
@@ -122,14 +122,14 @@ public class AdminController {
 		
 		@RequestMapping("exitUser")
 		@ResponseBody
-		public void exitUser(@RequestParam String memberId)throws SQLException{
+		public void exitUserAd(@RequestParam String memberId)throws SQLException{
 			System.out.println("유저 강퇴하기");
 			adminService.deleteItem(memberId);
 		}
 	
 		@RequestMapping("checkApprove")
 		@ResponseBody
-		public int checkApprove(@RequestParam String dkCode, @RequestParam String check)throws SQLException {
+		public int checkApproveAd(@RequestParam String dkCode, @RequestParam String check)throws SQLException {
 			
 			System.out.println("게시글 상태 변경");
 			System.out.println("dkCode : " + dkCode);

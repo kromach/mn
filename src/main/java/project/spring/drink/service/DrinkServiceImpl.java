@@ -192,5 +192,35 @@ public class DrinkServiceImpl implements DrinkService {
 
 		return drinkDAO.modifyDrink(drinkVo);
 	}
+	
+	@Override
+	public String selectDrinkLikeInfo(HashMap drinkLikeMap) throws SQLException {
+		
+		return  drinkDAO.selectDrinkLikeInfo(drinkLikeMap);
+	}
+
+	@Override
+	public String updateDrinkLikeInfo(HashMap drinkLikeMap) throws SQLException {
+		
+		// 현재 값 체크. Y 등록 / N 미등록
+		String drinkLikeYN = selectDrinkLikeInfo(drinkLikeMap);
+		
+		drinkLikeMap.put("likeYn", drinkLikeYN);
+				
+		// 2. 1에서 가져온 정보가 좋아요면 좋아요 취소 처리, 아니면 좋아요 처리
+		String drinkLikeInfo = drinkDAO.updateDrinkLikeInfo(drinkLikeMap);
+		System.out.println("좋아요 결과 : " + drinkLikeInfo);
+		
+		// 3. 주류 정보 좋아요 값 업데이트 (더하기, 빼기)
+		updateDrinkLikeCount(drinkLikeMap);
+		
+		return drinkLikeInfo;
+	}
+	
+	@Override
+	public void updateDrinkLikeCount(HashMap drinkLikeMap) throws SQLException {
+		
+		drinkDAO.updateDrinkLikeCount(drinkLikeMap);
+	}
 
 }
