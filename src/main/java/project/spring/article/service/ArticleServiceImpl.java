@@ -50,6 +50,7 @@ public class ArticleServiceImpl implements ArticleService{
 		System.out.println("cehck1");
 		List list = null;
 		list = articleDAOimpl.getDrinkSearch(input);
+		System.out.println("DrinkSearch===="+list);
 		return list ; 
 	}
 	
