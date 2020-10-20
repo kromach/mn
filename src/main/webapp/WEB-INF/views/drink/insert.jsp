@@ -79,7 +79,7 @@
 					<tr>
 						<th>대표 이미지</th>
 						<td>
-							<input type="file" name="dkimage" class="required" />
+							<input type="file" name="dkimage" class="required" msg="이미지를" />
 						</td>
 					</tr>
 					<tr>
