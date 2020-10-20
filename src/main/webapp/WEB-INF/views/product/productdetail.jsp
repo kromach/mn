@@ -171,7 +171,7 @@
 			alert("로그인후 이용 가능한 서비스 입니다");
 		}
 	}
-
+	// 더보기
 	function more2() {
 		var moreVal = Number($('#moreVal').val()) + 1;
 		$('#moreVal').val(moreVal);

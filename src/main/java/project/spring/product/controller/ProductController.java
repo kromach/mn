@@ -407,6 +407,8 @@ public class ProductController {
 		return "product/reviewdetail.mn";
 	}
 	
+	
+	
 	//////ajax 
 	
 	
