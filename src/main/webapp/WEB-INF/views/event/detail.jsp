@@ -36,6 +36,7 @@
 						<c:if test="${memId != null && idx == 0}">
 						<button class="btn btn-sm btn-dark" onclick="joinEvent('${vo.eventCode}')">이벤트 신청하기</button>
 						</c:if>
+						<button class="btn btn-sm btn-blue" onclick="window.location='/event/index'">목록으로</button>
 						<c:if test="${memId != null && idx != 0}">
 							<p>신청완료</p>
 						</c:if>

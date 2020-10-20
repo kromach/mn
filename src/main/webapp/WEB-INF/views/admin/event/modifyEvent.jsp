@@ -95,6 +95,7 @@ $( function() {
 		
 			<form action="modifyEvnetPro" method="post" id="frm" enctype="multipart/form-data">
 				<input type="hidden" name="eventCode" value="${vo.eventCode }">
+				<input type="hidden" name="pageNum" value="${pageNum }" />
 				<table class="tableCss table">
 					<tr>
 						<th>제목</th>
@@ -159,7 +160,7 @@ $( function() {
 				</table>
 				<div class="text-center pad-top10">
 					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="수정">
-					<input type="button" class="btn-md" value="취소" onclick="window.location='/admin/event/eventList'"/>
+					<input type="button" class="btn-md" value="취소" onclick="window.location='/admin/event/eventList?pageNum=${pageNum}'"/>
 				</div>
 			</form>
 		</div>
