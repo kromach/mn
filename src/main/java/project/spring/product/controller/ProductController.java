@@ -96,8 +96,7 @@ public class ProductController {
 				productlist = productservice.getproduct(0);
 			}
 		}
-		
-		Collections.shuffle(productlist);
+		if(productlist!=null)Collections.shuffle(productlist);
 		
 		model.addAttribute("productlist", productlist);
 		model.addAttribute("count", count);
