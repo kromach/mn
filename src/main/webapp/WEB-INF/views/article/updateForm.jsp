@@ -56,7 +56,7 @@
 	}
 	// ckeditor 설정 종료
 	//clickEvent부여 및 유효성 검사
-	function insert(){
+	function modify(){
 		if (checkFormjquery()) {
 			// 에디터 입력값 체크 
 			var value = CKEDITOR.instances['ckeditor'].getData();
@@ -76,12 +76,12 @@
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
-				<form action="/article/updatePro" method="post" id="frm" accept-charset="utf-8">
+				<form action="/article/updatePro" method="post" id="frm" accept-charset="utf-8" name="inputForm">
 				<table class="tableCss table">
 					<tr>
 						<th>제목</th>
 						<td><input type="text" name="bnTitle" id="bnTitle"
-							class="boardTitle_large" class="required" msg="제목을"
+							class="boardTitle_large required" msg="제목을"
 							placeholder="제목" value="${article.bnTitle }"></td>
 					</tr>
 					<tr>
@@ -106,7 +106,7 @@
 				</table>
 				</form>
 				<div class="text-center pad-top10">
-					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="전송">
+					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="전송" onclick="modify()">
 					<input type="button" class="btn btn-md btn-grey" value="취소" onclick="window.location='/article'" />
 				</div>
 			</div>
