@@ -130,7 +130,7 @@ public class ProductController {
 		int count = productservice.getarticlecount(prcode);
 		System.out.println(count);
 		if(count > 0) {
-			articlelist = productservice.getarticle(prcode);
+			articlelist = productservice.getarticle(prcode,0);
 			System.out.println("리스트 불러오기");
 			System.out.println(articlelist);
 			
@@ -409,6 +409,8 @@ public class ProductController {
 	
 	//////ajax 
 	
+	
+	
 	//더보기
 	@RequestMapping("more")
 	@ResponseBody
@@ -416,6 +418,18 @@ public class ProductController {
 		// 밑에 게시글 뿌리는 메서드
 		String id = (String)session.getAttribute("memId");
 		List list = productservice.myorderlist(id, num);
+		
+		
+		return list;
+	}
+	
+	//더보기
+	@RequestMapping("more2")
+	@ResponseBody
+	public List morere(@RequestParam(name="num",required = false) Integer num, HttpServletRequest request) throws SQLException {
+		// 밑에 게시글 뿌리는 메서드
+		String prcode = request.getParameter("prcode");
+		List list = productservice.getarticle(prcode,num);
 		
 		
 		return list;

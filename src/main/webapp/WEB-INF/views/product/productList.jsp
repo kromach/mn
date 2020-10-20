@@ -133,12 +133,13 @@
 						gutter: '.gutter-sizer'
 					});
 					for(var i in data){
-						var el = '<div class="grid-item"><a href="'+data[i].prCode+'"><img src="'+data[i].prImg+'"/></a></div>';
+						var el = '<div class="grid-item"><a href="productdetail?prcode='+data[i].prCode+'"><img src="'+data[i].prImg+'" onerror="this.src=\'/resources/img/noImage.jpg\'" /></a></div>';
 						$grid.append( el ).masonry( 'appended', el ,true);
 					}
 					// 재훈 테스트
 					// masonry 재 실행 
 					// $grid.masonry();
+					
 	    			$grid.masonry( 'reloadItems' );
 	    			$grid.masonry();
 				}

@@ -177,9 +177,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List getarticle(String prcode) throws SQLException {
+	public List getarticle(String prcode, int i) throws SQLException {
 		
-		return productDAO.getarticle(prcode);
+		return productDAO.getarticle(prcode,i);
 	}
 
 	@Override

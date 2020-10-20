@@ -231,9 +231,13 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List getarticle(String prcode) throws SQLException {
+	public List getarticle(String prcode,int i) throws SQLException {
 		
-		return sqlSession.selectList("product.getarticle",prcode);
+		HashMap map =new HashMap();
+		map.put("prcode", prcode);
+		map.put("i", i);
+		
+		return sqlSession.selectList("product.getarticle",map);
 	}
 
 	@Override
@@ -245,6 +249,7 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public ArticleDTO getarticldetail(int bnIdx) throws SQLException {
 
+		sqlSession.update("product.upreadcount",bnIdx);
 		ArticleDTO artdto =sqlSession.selectOne("product.review", bnIdx);
 				
 		return artdto;

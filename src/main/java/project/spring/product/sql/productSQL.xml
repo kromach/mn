@@ -261,8 +261,17 @@
 		select count(*) from BOARD_NORMAL where dk_code = #{value} and is_delete ='N'
   	</select>
   	
-  	<select id="getarticle" parameterType="String" resultType="ArticleDTO">
-		select * from BOARD_NORMAL where dk_code = #{value} and is_delete ='N'
+  	<select id="getarticle" parameterType="map" resultType="ArticleDTO">
+  		<![CDATA[
+		select a.* from
+			(select aa.*,rownum r from 
+				(select * from BOARD_NORMAL where dk_code = #{prcode} and is_delete ='N' ORDER BY INSERT_DAY DESC)
+				aa)
+				a where r >= (5*#{i})+1 and r <= 5*(#{i}+1)
+		]]>
+  	
+		
+		
   	</select>
   	
   	<select id="stock" parameterType="string" resultType="int">
@@ -276,5 +285,9 @@
   	<select id="review" parameterType="int" resultType="ArticleDTO">
   		select * from BOARD_NORMAL where bn_idx = #{value}
   	</select>
+  	
+  	<update id="upreadcount" parameterType="int">
+  		update BOARD_NORMAL set readcount = readcount+1 where bn_idx = #{value}
+  	</update>
   	
 </mapper>
