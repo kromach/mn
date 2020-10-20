@@ -163,6 +163,21 @@
 				</set>
   			WHERE DK_CODE = #{dkCode}
    		</update>
+   		
+   		<insert id="insertComment" parameterType="project.spring.drink.vo.CommentVO">
+			INSERT INTO DRINK_COMMENT VALUES
+			(
+				drink_comment_seq.nextval,
+				#{dkCode},
+				#{cmLike},
+				#{cmUnLike},
+				#{cmComment},
+				#{dkItem1}, #{dkItem2}, #{dkItem3}, #{dkItem4}, #{dkItem5},
+				#{memId},
+				sysdate,
+				'N'
+			)
+   		</insert>
    		  		
   		<!-- <select id="userCount" resultType="int">
   			select count(*) from test

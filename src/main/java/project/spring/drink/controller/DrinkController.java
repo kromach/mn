@@ -455,6 +455,58 @@ public class DrinkController {
 
 		return "drink/insertPro";
 	}
+
+	@RequestMapping("comment")
+	public String CommentInit(HttpServletRequest request, Model model) throws SQLException {
+		
+		String dkCode = (String)request.getParameter("dkCode");
+		
+		DrinkVO drinkInfo = drinkService.selectDrinkServiceInfo(dkCode);
+		List<String> ItemValuesList = drinkService.selectItemValuesList(drinkInfo.getDkBkind());
+
+		model.addAttribute("drinkInfo", drinkInfo);
+		model.addAttribute("elementList", ItemValuesList);
+		
+		return "drink/comment.mn";
+	}
+	
+	// 변경 처리
+	@RequestMapping("commentPro")
+	public String CommentProInit(CommentVO commentVo, HttpServletResponse response, Model model) throws SQLException, IOException {
+		
+		// (1) 한줄평 입력
+		String result = drinkService.insertComment(commentVo);
+		
+		// (2) 태그 정보 입력 & 업데이트
+		if (commentVo.getDkTags() != null && commentVo.getDkTags().length() > 0 ) {
+			HashMap tagInfo = new HashMap();
+			tagInfo.put("dkCode", commentVo.getDkCode());
+			tagInfo.put("dkTags", commentVo.getDkTags());
+			
+			drinkService.updateDrinkTag(tagInfo);
+		}
+		
+		//System.out.println(selectDrinkInfo.getDkBkindValue());
+		PrintWriter printWriter = null;
+		
+		// 인코딩
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");		
+
+		printWriter = response.getWriter();
+
+		// 업로드시 메시지 출력
+		printWriter.println("<script type='text/javascript'>"
+		     + "alert('"+ result +"')"
+		     +"</script>");
+		
+		printWriter.flush();
+		
+		model.addAttribute("dkCode", commentVo.getDkCode());
+		//request.setAttribute("dkCode", dkCode);
+
+		return "drink/detail";
+	}	
 	
 	// AJAX - 주류 정보 좋아요 / 좋아요 취소
 	@RequestMapping("like")
