@@ -50,7 +50,7 @@
 		<div class="detail-item detail-width6">
 			<h3 class="text-left pad-y10">정보 수정</h3>
 			<form action="modifyPro" name="prForm" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="prcode" value="${prCode}">
+			<input type="hidden" name="prcode" value="${detail.prCode}">
 				<table class="tableCss tbl-lg text-left">
 					<tr>
 						<th>주류 종류</th>
@@ -71,6 +71,7 @@
 					<tr>
 						<th>상품 이미지</th>
 						<td>
+							<input type="hidden" name="oldImg" value="${detail.prImg}">
 							<input type="file" name="primage" class="required" msg="이미지를"/>
 						</td>
 					</tr>
@@ -83,14 +84,14 @@
 					<tr>
 						<th>국가/도시</th>
 						<td>
-							<input type="text" name="prCountry" class="input-sm required" placeholder="국가" value="${detail.prCountry }"/>
-							&nbsp;<input type="text" name="prCity" class="input-sm required" placeholder="도시" ${detail.prCity}/>
+							<input type="text" name="prCountry" class="input-sm required" placeholder="국가" value="${detail.prCountry }" msg="국가를"/>
+							&nbsp;<input type="text" name="prCity" class="input-sm required" placeholder="도시" value="${detail.prCity}" msg="도시를"/>
 						</td>
 					</tr>
 					<tr>
 						<th>알콜 도수</th>
 						<td>
-							<input type="number" name="prAlcohol" class="input-xs required" value="${detail.prAlcohol }"/> 도
+							<input type="text" name="prAlcohol" class="input-xs required" value="${detail.prAlcohol }" msg="도수를"/> 도
 						</td>
 					</tr>
 					<tr>
@@ -102,13 +103,13 @@
 					<tr>
 						<th>가격</th>
 						<td>
-							<input type="number" name="prPrice" class="input-sm" value="${detail.prPrice}" />  원	
+							<input type="text" name="prPrice" class="input-sm required" value="${detail.prPrice}" msg="가격을"/>  원	
 						</td>													
 					</tr>
 					<tr>
 						<th>수량</th>
 						<td>
-							<input type="number" name="prAmount" class="input-xs required" value="${detail.prAmount }"/> 병
+							<input type="text" name="prAmount" class="input-xs required" value="${detail.prAmount }" msg="수량을"/> 병
 							
 						</td>
 					</tr>

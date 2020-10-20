@@ -120,6 +120,10 @@ public class SalesController {
 			// (3) 다른것들 insert
 			productDTO.setInsertId(session.getAttribute("memId").toString());
 			productDTO.setPrImg(imgPath);
+			productDTO.setPrAmount(Integer.parseInt(request.getParameter("prAmount_")));
+			productDTO.setPrPrice(Integer.parseInt(request.getParameter("prPrice_")));
+			productDTO.setPrAlcohol(Integer.parseInt(request.getParameter("prAlcohol_")));
+			
 			System.out.println(productDTO);
 			int count = salesService.insertProduct(productDTO);
 			
@@ -149,6 +153,7 @@ public class SalesController {
 		//prCode로 해당 detail 가져오기
 		// 해당 판매자가 맞는지 체크 PRCODE의 insert_id와 session값이 일치하지 않으면 main으로 리턴
 		ProductVo dto = salesService.getDatail(prCode);
+		System.out.println("alcohol =============" +dto.getPrAlcohol());
 		System.out.println(dto.getInsertId()+" =====vs===== "+ memId);
 		
 		if(!(dto.getInsertId().equals(memId))) {
@@ -165,26 +170,36 @@ public class SalesController {
 	@RequestMapping(value = "/modifyPro")
 	public String modifyProSs(ProductVo dto, MultipartHttpServletRequest request, HttpServletResponse response, Model model) throws IOException{
 		HttpSession session =  request.getSession();
-		System.out.println("code 제대로 왔냐????????????????" +dto.getPrCode()+"도수에 아무값도 안넣었을시"+dto.getPrAlcohol());
-		String prCode = dto.getPrCode();
 		
-		// (2) 저장된 코드값으로 이미지 처리
-		request.setAttribute("prCode", prCode);
-		String imgPath = salesService.insertProductImg(request);
-		System.out.println("이미지 경로 :" +imgPath);
-		String add = "\\resources\\";
-		String[] imgPath_ = imgPath.split("\\\\resources\\\\");
-		System.out.println(imgPath.length());
-		if(imgPath_.length==2) {
-			imgPath = add.concat(imgPath_[1]);
-		}
-		System.out.println("IMGPATH====="+imgPath);
+		String prcode = request.getParameter("prcode");
+		dto.setPrCode(prcode);
+		String prCode = dto.getPrCode();
+		System.out.println("code 제대로 왔냐???" +dto.getPrCode());
+		System.out.println("현재 이미지 ? " + dto.getPrImg());
+		// 이미지 미변경시 
+		if(dto.getPrImg()==null) {
+			String oldImg = request.getParameter("oldImg");
+			dto.setPrImg(oldImg);
+		}else {
+			// 이미지 변경시
 			
+			// (2) 저장된 코드값으로 이미지 처리
+			request.setAttribute("prCode", prCode);
+			String imgPath = salesService.insertProductImg(request);
+			System.out.println("이미지 경로 :" +imgPath);
+			String add = "\\resources\\";
+			String[] imgPath_ = imgPath.split("\\\\resources\\\\");
+			System.out.println(imgPath.length());
+			if(imgPath_.length==2) {
+				imgPath = add.concat(imgPath_[1]);
+			}
+			System.out.println("IMGPATH====="+imgPath);
+			dto.setPrImg(imgPath);
+		}
 		// 업로드 이미지명 집어넣기
 			
 		// (3) 다른것들 modify
 		dto.setInsertId(session.getAttribute("memId").toString());
-		dto.setPrImg(imgPath);
 		System.out.println(dto);
 		int count = salesService.updateProduct(dto);
 		System.out.println("수정되었음 : " +count);
