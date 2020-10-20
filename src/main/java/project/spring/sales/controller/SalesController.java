@@ -139,25 +139,80 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value = "/modifyForm")
-	public String modifyForm(@RequestParam(name="prcode") String prCode,HttpServletRequest request) {
+	public String modifyFormSs(@RequestParam(name="prcode") String prCode,HttpServletRequest request, Model model)throws IOException {
 		
 		System.out.println("sales modifyForm controller");
-		System.out.println("prCodr" + prCode);
+		System.out.println("prCode" + prCode);
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
-		System.out.println(memId);
 
 		//prCode로 해당 detail 가져오기
 		// 해당 판매자가 맞는지 체크 PRCODE의 insert_id와 session값이 일치하지 않으면 main으로 리턴
 		ProductVo dto = salesService.getDatail(prCode);
 		System.out.println(dto.getInsertId()+" =====vs===== "+ memId);
-		System.out.println();
 		
 		if(!(dto.getInsertId().equals(memId))) {
 			return "redirect:/";
 		}
 		
+		List secondCategory = salesService.getCategory();
+		model.addAttribute("secondCategory", secondCategory);
+		model.addAttribute("detail", dto);
+		
+		return "/sales/modifyForm.mn";
+	}
+
+	@RequestMapping(value = "/modifyPro")
+	public String modifyProSs(ProductInfoDTO productDTO, MultipartHttpServletRequest request, HttpServletResponse response, Model model) throws IOException{
+		HttpSession session =  request.getSession();
+		System.out.println("code 제대로 왔냐????????????????" +productDTO.getPrCode()+"도수에 아무값도 안넣었을시"+productDTO.getPrAlcohol());
+		
+		
+		
+		
+		
+		if(session.getAttribute("memId") != null) { // session id
+			productDTO.setInsertId((String)session.getAttribute("memId"));
+		}
+				
+			// (1) 상품 코드 생성
+			String prCode = salesService.makeprCode(productDTO);
+			
+			// (2) 저장된 코드값으로 이미지 처리
+			request.setAttribute("prCode", prCode);
+			String imgPath = salesService.insertProductImg(request);
+			System.out.println("이미지 경로 :" +imgPath);
+			String add = "\\resources\\";
+			String[] imgPath_ = imgPath.split("\\\\resources\\\\");
+			System.out.println(imgPath.length());
+			if(imgPath_.length==2) {
+				imgPath = add.concat(imgPath_[1]);
+			}
+			System.out.println("IMGPATH====="+imgPath);
+			
+			// 업로드 이미지명 집어넣기
+			
+			// (3) 다른것들 insert
+			productDTO.setInsertId(session.getAttribute("memId").toString());
+			productDTO.setPrImg(imgPath);
+			System.out.println(productDTO);
+			int count = salesService.insertProduct(productDTO);
+			
+			//System.out.println(selectDrinkInfo.getDkBkindValue());
+			PrintWriter printWriter = null;
+			// 인코딩
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("text/html;charset=utf-8");		
+			printWriter = response.getWriter();
+			// 업로드시 메시지 출력
+			printWriter.println("<script type='text/javascript'>"
+			     + "alert('주류 정보가 등록되었습니다. 관리자 확인 후에 사이트에 게재됩니다.')"
+			     +"</script>");
+			printWriter.flush();
+			model.addAttribute("prCode", prCode);
+		
 		return "/sales/modifyPro.mn";
 	}
+
 	
 }
