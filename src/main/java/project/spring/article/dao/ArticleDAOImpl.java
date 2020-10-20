@@ -2,6 +2,7 @@ package project.spring.article.dao;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -254,5 +255,15 @@ public class ArticleDAOImpl implements ArticleDAO {
 	public int backArticle(int num) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("article.backArticle", num);
+	}
+
+	@Override
+	public int selectDkcodeArticleCount(String dkCode) throws SQLException {
+		return sqlSession.selectOne("article.selectDkcodeArticleCount", dkCode);
+	}
+	
+	@Override
+	public List<ArticleDTO> selectDkcodeArticleList(HashMap searchMap) throws SQLException {
+		return sqlSession.selectList("article.selectDkcodeArticleList", searchMap);
 	}
 }

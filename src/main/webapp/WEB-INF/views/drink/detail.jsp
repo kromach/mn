@@ -53,6 +53,7 @@
 			<h3 class="pad-top10 pad-bottom20 text-left">상세정보</h3>
 			<div class="text-left">${drinkInfo.dkContent}</div>
 		</div>
+		<!-- 연관글 -->
 		<div class="detail-item detail-width6">
 			<h3 class="pad-top10 pad-bottom20 text-left">연관 게시글 보기</h3>
 			<table id="boardTbl" class="detailTbl tbl-lg">
@@ -62,16 +63,23 @@
 					<th style="min-width:130px;">작성일</th>
 				</tr>
 				<!-- 주류코드별 작성된 글 개수 체크 메서드 & 글 불러오는 메서드 추가 필요 -->
+				
+				<c:forEach var="article" items="${articleList}">
 				<tr>
-					<td>이 술 맛있음요</td>
-					<td>김영성</td>
-					<td>2020-09-28</td>
+					<td><a href="/article/detail?idx=${article.bnIdx}">${article.bnTitle}</a></td>
+					<td>
+						<span class="btn btn-blue btn-xs default">${article.writerTitleCnt}</span>
+						<span class="titleName">${article.writerTitleName}</span>
+						${article.nickname}
+					</td>
+					<td><fmt:formatDate value="${article.insertDay}" pattern="yyyy.MM.dd"/></td>
 				</tr>
+				</c:forEach>
 			</table>
 			<!-- pager -->
 			<div align="center" class="pageNums">
 				<!-- 게시글이 있을때만 보여주기 -->
-				<c:if test="${count>0}">
+				<c:if test="${articleCount > 0}">
 					<c:if test="${pageVO.startPage > pageVO.pageBlock}">
 						<a href="?dkCode=${drinkInfo.dkCode}&pageNum=${pageVO.startPage-pageVO.pageBlock}#boardTbl">&lt;</a>
 					</c:if>

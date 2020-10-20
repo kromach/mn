@@ -23,7 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import project.spring.article.service.ArticleService;
+import project.spring.article.vo.ArticleDTO;
 import project.spring.beans.JsonUtil;
+import project.spring.beans.PageVO;
+import project.spring.beans.Pager;
 import project.spring.drink.service.DrinkService;
 import project.spring.drink.vo.CommentVO;
 import project.spring.drink.vo.DrinkVO;
@@ -35,10 +39,12 @@ public class DrinkController {
 	private static final Logger logger = LoggerFactory.getLogger(DrinkController.class);
 	
 	private DrinkService drinkService;
+	private ArticleService articleService;
 	
 	@Autowired
-	public DrinkController(DrinkService drinkService) {
+	public DrinkController(DrinkService drinkService, ArticleService articleService) {
 		this.drinkService = drinkService;
+		this.articleService = articleService;
 	}
 
 	@RequestMapping("index")
@@ -167,6 +173,30 @@ public class DrinkController {
 			drinkLikeInfo = drinkService.selectDrinkLikeInfo(drinkLikeMap);
 		}
 		
+		// 관련 게시글 
+		
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null || pageNum.length() < 1) {
+			pageNum = "1";
+		}
+		
+		int page = Integer.parseInt(pageNum) - 1;
+		int articleCount = articleService.selectDkcodeArticleCount(dkCode);
+		List<ArticleDTO> articleList = null;
+		Pager pager = new Pager();
+		PageVO pageVO = null;
+		
+		if(articleCount > 0) {
+			HashMap searchMap = new HashMap();
+			
+			searchMap.put("dkCode", dkCode);
+			searchMap.put("rowNum", 10);
+			searchMap.put("page", page);
+			
+			articleList = articleService.selectDkcodeArticleList(searchMap);
+
+			pageVO = pager.pager(pageNum, articleCount);
+		}
 		//System.out.println(drinkLikeInfo);
 		
 		// request에 담긴 검색 결과 뽑아내기  
@@ -174,7 +204,7 @@ public class DrinkController {
 		String schDkSkind = null;
 		String[] schDkAlcohol = null;
 		String schDkCountry = null;
-				
+		
 		if ((String)request.getParameter("isSearch") != null && ((String)request.getParameter("isSearch")).length() > 0) {
 			schDkBkind = (String)request.getParameter("schDkBkind");
 			schDkSkind = (String)request.getParameter("schDkSkind");
@@ -201,6 +231,10 @@ public class DrinkController {
 		model.addAttribute("commentList", commentList);
 		model.addAttribute("tagCloudInfo", tagCloudInfo);
 		model.addAttribute("drinkLikeInfo", drinkLikeInfo);
+		model.addAttribute("articleList", articleList);
+		model.addAttribute("articleCount", articleCount);
+		model.addAttribute("pageVO", pageVO);
+		model.addAttribute("pageNum", pageNum);
 //		
 //		System.out.println(selectDrinkInfo.getDkName());
 //		System.out.println(selectDrinkInfo.getDkBkindValue());

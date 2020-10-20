@@ -175,14 +175,34 @@
   		delete from board_like where bn_idx = #{num} and nick = #{memNickName} 
   	</delete>
   	
-  	
   	<update id="deleteReply" parameterType="hashmap">
   		<![CDATA[	
-  		UPDATE BOARD_COMMENT SET IS_DELETE = 'N' WHERE co_Idx = #{coIdx} and insert_Id=#{insert_Id} 
+  		UPDATE BOARD_COMMENT SET IS_DELETE = 'Y' WHERE co_Idx = #{coIdx} and insert_Id=#{insert_Id} 
   		]]>
   	</update>
+  	
   	<update id="deleteArticle" parameterType="hashmap" >
-  		UPDATE BOARD_NORMAL SET IS_DELETE = 'N' WHERE bn_Idx=#{bnIdx}
+  		UPDATE BOARD_NORMAL SET IS_DELETE = 'Y' WHERE bn_Idx=#{bnIdx}
   	</update>
   	
+  	<!-- dkCode를 기준으로 게시글 개수 불러오기 -->
+  	<select id="selectDkcodeArticleCount" parameterType="string" resultType="int">
+  		SELECT count(*) FROM BOARD_NORMAL WHERE DK_CODE = #{value} AND IS_DELETE = 'N'
+  	</select>
+  	
+  	<!-- dkCode를 기준으로 게시글 목록 불러오기 -->
+  	<select id="selectDkcodeArticleList" parameterType="hashmap" resultType="ArticleDTO" >
+  		<![CDATA[
+		SELECT * FROM (
+			SELECT a.*, ROWNUM as rnum FROM ( 
+				SELECT  bn.BN_IDX, bn.BN_TITLE, bn.KIND, bn.DK_CODE, mi.NICKNAME
+						,(SELECT count(mt.CHOOSE_TITLE) FROM TITLE_LIST tl, MY_TITLE mt WHERE tl.TITLE_IDX = mt.TI_IDX AND mt.ID = bn.INSERT_ID ) AS WRITER_TITLE_CNT
+						,(SELECT tl2.TITLE_NAME FROM TITLE_LIST tl2, MY_TITLE mt2 WHERE mt2.CHOOSE_TITLE = 'Y' AND tl2.TITLE_IDX = mt2.TITLE_INDEX AND mt2.id = bn.INSERT_ID ) AS WRITER_TITLE_NAME
+				FROM BOARD_NORMAL bn INNER JOIN MEMBER_INFO mi ON bn.INSERT_ID = mi.ID 
+				WHERE bn.DK_CODE = #{dkCode} AND bn.IS_DELETE = 'N' ORDER BY INSERT_DAY DESC
+			) a
+		)
+		WHERE rnum >= (#{rowNum} * #{page})+1 and rnum <= (#{rowNum} * (#{page} + 1))
+		]]>
+	</select>
   </mapper>
