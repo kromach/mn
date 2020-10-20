@@ -50,7 +50,7 @@
 		<div class="detail-item detail-width6">
 			<h3 class="text-left pad-y10">주류 정보 등록</h3>
 			<form action="modifyPro" name="dkForm" method="post" enctype="multipart/form-data">
-				<input type="text" name="dkCode" value="${drinkInfo.dkCode}" />
+				<input type="hidden" name="dkCode" value="${drinkInfo.dkCode}" />
 				<input type="hidden" name="dkItem1" id="dkItem1" />
 				<input type="hidden" name="dkItem2" id="dkItem2" />
 				<input type="hidden" name="dkItem3" id="dkItem3" />

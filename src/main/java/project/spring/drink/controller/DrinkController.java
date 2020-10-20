@@ -435,7 +435,7 @@ public class DrinkController {
 		
 		//model.addAttribute("drinkLikeInfo", drinkLikeInfo);		
 		
-		String drinkLikeInfo =  drinkService.updateDrinkLikeInfo(drinkLikeMap);
+		String drinkLikeInfo = drinkService.updateDrinkLikeInfo(drinkLikeMap);
 		
 		return drinkLikeInfo;
 	}

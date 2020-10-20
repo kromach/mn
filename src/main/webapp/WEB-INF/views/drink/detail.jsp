@@ -31,9 +31,9 @@
 					<dd class="clfix">${drinkInfo.dkFood} </dd>
 				</dl>
 				<div>
-					
 					<input type="hidden" id="drinkLikeYN" value="${drinkLikeInfo}" />
-					<span id="like-btn"></span>
+					<input type="hidden" id="drinkLikeCount" value="${drinkInfo.dkLike}" />
+					<span id="like-btn"></span><!-- 좋아요버튼 -->
 					<a class="btn btn-lg btn-yellow" onclick="">후기등록</a>
 					<%-- <c:if test="${sessionScope.userKind eq 'admin' }"> --%>
 					<a class="btn btn-lg btn-mint" href="modify?dkCode=${drinkInfo.dkCode}" >수정</a> <!-- 관리자만 노출 -->
@@ -55,18 +55,36 @@
 		</div>
 		<div class="detail-item detail-width6">
 			<h3 class="pad-top10 pad-bottom20 text-left">연관 게시글 보기</h3>
-			<table class="detailTbl tbl-lg">
+			<table id="boardTbl" class="detailTbl tbl-lg">
 				<tr>
 					<th>제목</th>
 					<th style="min-width:100px;">작성자</th>
 					<th style="min-width:130px;">작성일</th>
 				</tr>
+				<!-- 주류코드별 작성된 글 개수 체크 메서드 & 글 불러오는 메서드 추가 필요 -->
 				<tr>
 					<td>이 술 맛있음요</td>
 					<td>김영성</td>
 					<td>2020-09-28</td>
 				</tr>
 			</table>
+			<!-- pager -->
+			<div align="center" class="pageNums">
+				<!-- 게시글이 있을때만 보여주기 -->
+				<c:if test="${count>0}">
+					<c:if test="${pageVO.startPage > pageVO.pageBlock}">
+						<a href="?dkCode=${drinkInfo.dkCode}&pageNum=${pageVO.startPage-pageVO.pageBlock}#boardTbl">&lt;</a>
+					</c:if>
+					
+					<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1"> 
+						<a href="?dkCode=${drinkInfo.dkCode}&pageNum=${i}#boardTbl" class="pageNums">&nbsp;${i}&nbsp;</a>
+					</c:forEach>
+					
+					<c:if test="${pageVO.endPage < pageVO.pageCount}">
+						<a href="?dkCode=${drinkInfo.dkCode}&pageNum=${pageVO.startPage+pageVO.pageBlock}#boardTbl">&gt;</a>
+					</c:if>
+				</c:if>
+			</div>
 		</div>
 		<div class="detail-item detail-width6">
 			<h3 class="pad-top10 pad-bottom20 text-left">후기 보기 (${commentStarInfo != null ? commentStarInfo.cmCount : '0'})</h3>
@@ -258,27 +276,32 @@
 	
 	function likeBtnToggle(){
 		console.log($('#drinkLikeYN').val());
-		var btn = "";
-
-		if($('#drinkLikeYN').val() == 'Y') {
-			btn = '<button class="btn btn-lg btn-gray" onclick="like(\'${drinkInfo.dkCode}\', \'N\')">좋아요 취소</button>'
-		} else {
-			btn = '<button class="btn btn-lg btn-blue" onclick="like(\'${drinkInfo.dkCode}\', \'Y\')">좋아요</button>'
+		var likeCount = $('#drinkLikeCount').val();
+		var btn = '<button class="btn btn-lg btn-blue" onclick="like()">[heart] '+ likeCount +'</button>';
+		var heart = '<i class="far fa-heart"></i>';
+		
+		if($('#drinkLikeYN').val() == 'Y') { // 좋아요 상태면
+			heart = '<i class="fas fa-heart c_orange"></i>';
 		}
 		
-		$("#like-btn").empty().html(btn);
+		$("#like-btn").empty().html(btn.replace('[heart]', heart));
 	}
 	
-	function like(dkCode, likeYn) {
+	function like() {
 		$.ajax({
-			url : 'like?dkCode='+dkCode+'&memId=${memId}',
-			type : "post",
+			url : 'like?dkCode=${drinkInfo.dkCode}&memId=${memId}',
+			type : "POST",
 			success : function(data) {
-				console.log(data);
+				//console.log(data);
 				// 1. input hedden 업데이트 
-				// 2. 버튼 새로고침
+				$("#drinkLikeYN").val(data);
+
+				// 2. 좋아요 개수 업데이트
+				var likeCount = $('#drinkLikeCount').val();
+				$("#drinkLikeCount").val((data == 'Y' ? Number(likeCount) + 1 : Number(likeCount) - 1));
 				
-				// 3. 좋아요 개수 업데이트
+				// 3. 버튼 새로고침
+				likeBtnToggle();
 			},
 			error : function() {
 				alert("error");

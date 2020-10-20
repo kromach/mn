@@ -217,6 +217,7 @@ public class DrinkServiceImpl implements DrinkService {
 		return drinkLikeInfo;
 	}
 	
+	@Override
 	public void updateDrinkLikeCount(HashMap drinkLikeMap) throws SQLException {
 		
 		drinkDAO.updateDrinkLikeCount(drinkLikeMap);
