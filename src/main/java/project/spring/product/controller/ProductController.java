@@ -428,9 +428,12 @@ public class ProductController {
 	//더보기
 	@RequestMapping("more2")
 	@ResponseBody
-	public List morere(@RequestParam(name="num",required = false) Integer num, HttpServletRequest request) throws SQLException {
+	public List morere(@RequestParam(name="num",required = false) Integer num,
+			@RequestParam(name="prcode",required = false) String prcode,
+			HttpServletRequest request) throws SQLException {
 		// 밑에 게시글 뿌리는 메서드
-		String prcode = request.getParameter("prcode");
+		System.out.println(prcode+":"+num);
+		
 		List list = productservice.getarticle(prcode,num);
 		
 		

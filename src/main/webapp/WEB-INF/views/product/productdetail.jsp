@@ -102,7 +102,7 @@
 			</table>
 		</div>
 		<div class="detail-item detail-width4">
-			<input id="addBtn" type="button" class="btn btn-sm btn-dark" value="더보기" onclick="more2()">
+			<input id="addBtn" type="button" class="btn btn-sm btn-dark" value="더보기" onclick="more2('${info.prCode}')">
 			<input type="hidden" value="0" id="moreVal">
 		</div>
 	</div>
@@ -172,16 +172,17 @@
 		}
 	}
 	// 더보기
-	function more2() {
+	function more2(prcode) {
 		var moreVal = Number($('#moreVal').val()) + 1;
 		$('#moreVal').val(moreVal);
 		var context = window.location.pathname.substring(0,window.location.pathname.indexOf("/", 2));
 			$.ajax({
-				url : context + '/more2?num=' + moreVal+ '&prcode='+prCode,
+				url : context + '/more2?num=' + moreVal+ '&prcode='+prcode,
 				type : "post",
 				success : function(data) {
 					console.log("Object.keys Length : ",
 							Object.keys(data).length);
+					console.log(data);
 					var endlen = Object.keys(data).length;
 					if (endlen != 0) {
 						for(var i in data){
