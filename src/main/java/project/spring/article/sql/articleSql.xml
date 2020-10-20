@@ -177,12 +177,12 @@
   	
   	<update id="deleteReply" parameterType="hashmap">
   		<![CDATA[	
-  		UPDATE BOARD_COMMENT SET IS_DELETE = 'N' WHERE co_Idx = #{coIdx} and insert_Id=#{insert_Id} 
+  		UPDATE BOARD_COMMENT SET IS_DELETE = 'Y' WHERE co_Idx = #{coIdx} and insert_Id=#{insert_Id} 
   		]]>
   	</update>
   	
   	<update id="deleteArticle" parameterType="hashmap" >
-  		UPDATE BOARD_NORMAL SET IS_DELETE = 'N' WHERE bn_Idx=#{bnIdx}
+  		UPDATE BOARD_NORMAL SET IS_DELETE = 'Y' WHERE bn_Idx=#{bnIdx}
   	</update>
   	
   	<!-- dkCode를 기준으로 게시글 개수 불러오기 -->
