@@ -203,6 +203,7 @@ public class AdminEventController {
 					System.out.println(list.get(i));
 				}
 			}
+			System.out.println("확인하기33");
 			return list;
 		}
 		
