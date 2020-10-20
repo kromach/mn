@@ -5,14 +5,10 @@
 	<c:if test="${empty returnPage}">
 		<c:url var="returnPath" value="/" />
 	</c:if>
-	
 	<c:if test="${!empty returnPage}">
 		<c:url var="returnPath" value="${returnPage}" />
 	</c:if>
-	
-	<div>${returnUrl}</div>
-	<div>${returnPath}</div>
-	
+		
 	<c:if test="${result==-2 }">
 		<script type="text/javascript">
 			alert("서비스 이용이 차단된 계정입니다.");
