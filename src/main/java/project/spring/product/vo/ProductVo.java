@@ -12,7 +12,7 @@ public class ProductVo {
 	private String prSkindValue;
 	private String prCountry;
 	private String prCity;
-	private String prAlcohol;
+	private int prAlcohol;
 	private String prPlace;
 	private String prFood;
 	private String prContent;
@@ -115,12 +115,15 @@ public class ProductVo {
 	}
 
 
-	public String getPrAlcohol() {
+
+
+
+	public int getPrAlcohol() {
 		return prAlcohol;
 	}
 
 
-	public void setPrAlcohol(String prAlcohol) {
+	public void setPrAlcohol(int prAlcohol) {
 		this.prAlcohol = prAlcohol;
 	}
 

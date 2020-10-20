@@ -2,12 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script src="/resources/js/formCheck.js"></script>
+<script src="/resources/js/jquery.selectric.js"></script>
 <div class="grid-Wrapper">
 	<div class="grid2">
 
 		<div class="detail-sizer"></div>
 		<div class="gutter-sizer"></div>
-		<form action="insertOrder">
+		<form action="insertOrder" name="orForm">
 			<input type="hidden" name="prCode" value="${info.prCode}"> <input
 				type="hidden" name="prName" value="${info.prName}"> <input
 				type="hidden" name="prPrice" value="${info.prPrice *amount}">
@@ -20,25 +21,25 @@
 
 						<tr>
 							<th>구매자 이름</th>
-							<td><input type="text" value="${meminfo.name}"class="sel short required" type="select-one" msg="대분류를"></td>
+							<td><input type="text" value="${meminfo.name}"class="sel short required" type="select-one" msg="구매자 이름을"></td>
 						</tr>
 						<tr>
 							<th>받는사람 이름</th>
-							<td><input type="text" name="receiverName"
+							<td><input type="text" name="receiverName" class="sel short required" type="select-one" msg="수신자 이름을"
 								value="${meminfo.name}"></td>
 						</tr>
 						<tr>
 							<th>받는사람 연락처</th>
-							<td><c:set var="tel" value="${meminfo.tel}" /> <c:set
+							<td><c:set var="tel" value="${meminfo.tel}"  /> <c:set
 									var="telArr" value="${fn:split(tel,',')}" /> <input type="text"
-								name="receiverTel" value="${telArr[0]}">- <input
-								type="text" name="receiverTel" value="${telArr[1]}">- <input
-								type="text" name="receiverTel" value="${telArr[2]}"></td>
+								name="receiverTel" value="${telArr[0]}" class="sel short required" msg="연락처를">- <input
+								type="text" name="receiverTel" value="${telArr[1]}" class="sel short required" msg="연락처를">- <input
+								type="text" name="receiverTel" value="${telArr[2]}" class="sel short required" msg="연락처를"></td>
 						</tr>
 						<tr>
 							<th>받는사람 주소</th>
 							<td><input type="text" name="receiverAddr"
-								value="${meminfo.address}"></td>
+								value="${meminfo.address}" class="input-lg required" msg="수령지를" ></td>
 						</tr>
 
 					</table>
@@ -51,12 +52,13 @@
 						<dt>상품명</dt>
 						<dd class="clfix">${info.prName}</dd>
 						<dt>수량</dt>
-						<dd class="clfix">${amount}개</dd>
+						<dd class="clfix required" >${amount}개</dd>
+						
 						<dt>가격</dt>
-						<dd class="clfix">${info.prPrice*amount}원</dd>
+						<dd class="clfix ">${info.prPrice*amount}원</dd>
 					</dl>
 				</div>
-				<input type="submit" class="btn btn-lg btn-rouge" value="결제하기">
+				<input type="button" class="btn btn-lg btn-rouge" value="결제하기" onclick="insertOrder('${amount}','${info.prAmount}')">
 			</div>
 		</form>
 	</div>
@@ -74,6 +76,21 @@
 			msnry.layout();
 		});
 	});
+	
+
+	function insertOrder(amount, prAmount) {
+		if (checkFormjquery()) {
+			if (amount > 0) {
+				if (amount < prAmount) {
+					$("form[name='orForm']").submit();
+				} else {
+					arler("재고가 부족합니다");
+				}
+			} else {
+				arler("구매 개수는 1개 이상입니다");
+			}
+		}
+	}
 </script>
 
 
