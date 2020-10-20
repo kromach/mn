@@ -14,8 +14,7 @@
 			</div>
 			<div class="grid-item grid-item--width6">
 					<form method="post" action="/member/findIdPro"
-						enctype="multipart/form-data" name="inputForm"
-						accept-charset="utf-8">
+						enctype="multipart/form-data" name="inputForm" accept-charset="utf-8">
 				<div class="loginWrapper">
 					<div class="loginLabel">
 					이름
