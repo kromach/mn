@@ -54,7 +54,6 @@
 					<tr>
 						<th>주류 종류</th>
 						<td>
-							<h2>전통주</h2>
 							<select id="prSkind" name="prSkind" class="sel short required" type="select-one" msg="소분류를" >
 								<c:forEach items="${secondCategory}" var="secondCategory">
 									<option value="${secondCategory.code}">${secondCategory.value}</option>

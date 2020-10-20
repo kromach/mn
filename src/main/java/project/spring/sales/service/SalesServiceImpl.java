@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import project.spring.product.vo.ProductVo;
 import project.spring.sales.dao.SalesDAO;
 import project.spring.sales.vo.ProductInfoDTO;
 
@@ -133,15 +134,10 @@ public class SalesServiceImpl implements SalesService{
 	}
 
 	@Override
-	public String sessionIdCh(String memId) {
-		String kind = salesDAO.sessionIdCh(memId);
-		return kind;
-	}
-
-	@Override
-	public List productDetail(String prCode) {
-		List list = salesDAO.productDetail(prCode);
-		return list;
+	public ProductVo getDatail(String prCode) {
+		System.out.println("왔냐????????????????????????????????????????????????????????????");
+		ProductVo dto = salesDAO.getDatail(prCode);
+		return dto;
 	}
 
 
