@@ -48,8 +48,8 @@
 		<div class="detail-sizer"></div>
 		<div class="gutter-sizer"></div>
 		<div class="detail-item detail-width6">
-			<h3 class="text-left pad-y10">새 정보 등록</h3>
-			<form action="modifyForm" name="prForm" method="post" enctype="multipart/form-data">
+			<h3 class="text-left pad-y10">정보 수정</h3>
+			<form action="modifyPro" name="prForm" method="post" enctype="multipart/form-data">
 				<table class="tableCss tbl-lg text-left">
 					<tr>
 						<th>주류 종류</th>
@@ -70,7 +70,7 @@
 					<tr>
 						<th>상품 이미지</th>
 						<td>
-							<input type="file" name="primage" class="required" />
+							<input type="file" name="primage" />
 						</td>
 					</tr>
 					<tr>
@@ -102,7 +102,7 @@
 						<th>가격</th>
 						<td>
 							<input type="number" name="prPrice" class="input-sm required" value="${detail.prPrice}" />  원	
-						</td>
+						</td>													
 					</tr>
 					<tr>
 						<th>수량</th>
@@ -170,9 +170,9 @@
 	});
 
     function modifyProduct(){
+    	console.log("modifyProductFormCheck");
     	if (checkFormjquery()) {
-    		
-    		$("form[name='prForm']").submit();
+    		$("form[name='prForm']").submit(); 
     	}
     }
     
