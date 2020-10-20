@@ -176,13 +176,15 @@ public class SalesController {
 		String prCode = dto.getPrCode();
 		System.out.println("code 제대로 왔냐???" +dto.getPrCode());
 		System.out.println("현재 이미지 ? " + dto.getPrImg());
+		System.out.println("oldImd" + request.getParameter("oldImg"));
+		System.out.println("새 이미지" + request.getFile("primage"));
 		// 이미지 미변경시 
-		if(dto.getPrImg()==null) {
+		if(request.getFile("primage")==null) {
 			String oldImg = request.getParameter("oldImg");
 			dto.setPrImg(oldImg);
 		}else {
 			// 이미지 변경시
-			
+			System.out.println("집에가?");
 			// (2) 저장된 코드값으로 이미지 처리
 			request.setAttribute("prCode", prCode);
 			String imgPath = salesService.insertProductImg(request);
