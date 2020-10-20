@@ -59,11 +59,11 @@
 			// 에디터 입력값 체크 
     		var value = CKEDITOR.instances['ckeditor'].getData();
     		if(!value) {
-	    		alert("주류 정보를 입력해주세요.");    			
+	    		alert("후기를 입력해주세요.");    			
 	    		return false;
     		}    		
-    		if (confirm("정보를 입력하시겠습니까?")) {
-	    		$("form[name='dkForm']").submit();
+    		if (confirm("후기를 입력하시겠습니까?")) {
+	    		$("form[name='inputForm']").submit();
 			}
 		}
 	}
@@ -74,7 +74,7 @@
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
-				<form action="/product/writePro" method="post" id="frm" accept-charset="utf-8">
+				<form action="/product/writePro" method="post" id="frm" accept-charset="utf-8" name="inputForm">
 				<input type="hidden" name="prcode" value="${prcode}" />
 				<input type="hidden" name="prname" value="${prname}" />
 				<input type="hidden" name="kind" value="${kind}" />
