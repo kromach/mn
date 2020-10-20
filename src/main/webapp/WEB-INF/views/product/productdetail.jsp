@@ -84,7 +84,7 @@
 		</div>
 		<div class="detail-item detail-width4">
 			<h3 class="pad-top10 pad-bottom20">상품 후기</h3>
-			<table class="detailTbl tbl-lg">
+			<table class="detailTbl tbl-lg" id="more2">
 				<tr>
 					<th style="min-width: 100px;">작성자</th>
 					<th style="min-width: 130px;">제목</th>
@@ -101,9 +101,10 @@
 				</c:forEach>
 			</table>
 		</div>
-		<div class="detail-item detail-width4">
-			<input id="addBtn" type="button" class="btn btn-sm btn-dark" value="더보기" onclick="more2('${info.prCode}')">
-			<input type="hidden" value="0" id="moreVal">
+		<div class="detail-item detail-width4" id="add">
+			<input id="addBtn" type="button" class="btn btn-sm btn-dark"
+				value="더보기" onclick="more2('${info.prCode}')"> <input type="hidden"
+				value="0" id="moreVal">
 		</div>
 	</div>
 </div>
@@ -173,24 +174,24 @@
 	}
 	// 더보기
 	function more2(prcode) {
+		window.resizeTo(1000,1000);
 		var moreVal = Number($('#moreVal').val()) + 1;
+		console.log(moreVal);
 		$('#moreVal').val(moreVal);
 		var context = window.location.pathname.substring(0,window.location.pathname.indexOf("/", 2));
 			$.ajax({
 				url : context + '/more2?num=' + moreVal+ '&prcode='+prcode,
 				type : "post",
 				success : function(data) {
-					console.log("Object.keys Length : ",
-							Object.keys(data).length);
 					console.log(data);
 					var endlen = Object.keys(data).length;
 					if (endlen != 0) {
 						for(var i in data){
-							$("#more2 > tbody:last").append('<tr><td>'+data[i].insertId
-												+'</td><td><a href="reviewdetail??bnIdx='+data[i].bnIdx+'">'+data[i].bnTitle
-												+'<a></td><td>'+data[i].recdcount
-												+'</td><td>'+data[i].insertDay
-												+'</td><tr/>'
+							$("#more2 > tbody:last").append('<tr><th>'+data[i].insertId
+												+'</th><th><a href="reviewdetail??bnIdx='+data[i].bnIdx+'">'+data[i].bnTitle
+												+'<a></th><th>'+data[i].readcount
+												+'</th><th>'+moment(new Date(data[i].insertDay)).format('YYYY.MM.DD') 
+												+'</th><tr/>'
 							);
 						}
 					} else if (endlen == 0) {
