@@ -59,11 +59,12 @@ function fetchList(context,index){
 				});
 				for(var i in data){
 					var el = '<div class="grid-item"><a href="'+data[i].eventCodei+'"><img src="'+data[i].thumImg+'"/></a></div>';
-					$grid.append( el ).masonry( 'appended', el ).masonry( 'reloadItems' );
+					$grid.append( el ).masonry( 'appended', el ,true);
 				}
 				// 재훈 테스트
 				// masonry 재 실행 
 				// $grid.masonry();
+    			$grid.masonry( 'reloadItems' );
     			$grid.masonry();
 			}
 		}
