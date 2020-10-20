@@ -64,50 +64,50 @@
 					<tr>
 						<th>상품명</th>
 						<td>
-							<input type="text" name="prName" class="input-lg required" msg="주류명을" />
+							<input type="text" name="prName" class="input-lg required" msg="상품명을" />
 						</td>
 					</tr>
 					<tr>
 						<th>상품 이미지</th>
 						<td>
-							<input type="file" name="primage" class="required" />
+							<input type="file" name="primage" class="required" msg="이미지를"/>
 						</td>
 					</tr>
 					<tr>
 						<th>양조장</th>
 						<td>
-							<input type="text" name="prPlace" class="input-lg required" />
+							<input type="text" name="prPlace" class="input-lg"/>
 						</td>
 					</tr>
 					<tr>
 						<th>국가/도시</th>
 						<td>
-							<input type="text" name="prCountry" class="input-sm required" placeholder="국가"/>
-							&nbsp;<input type="text" name="prCity" class="input-sm required" placeholder="도시"/>
+							<input type="text" name="prCountry" class="input-sm required" placeholder="국가" msg="국가를"/>
+							&nbsp;<input type="text" name="prCity" class="input-sm required" placeholder="도시" msg="도시를"/>
 						</td>
 					</tr>
 					<tr>
 						<th>알콜 도수</th>
 						<td>
-							<input type="number" name="prAlcohol" class="input-xs required" /> 도
+							<input type="number" name="prAlcohol" class="input-xs required" msg="도수를"/> 도
 						</td>
 					</tr>
 					<tr>
 						<th>어울리는 안주</th>
 						<td>
-							<textarea name="prFood" id="prFood" type="textarea" style="width:98%" ></textarea>
+							<input type="text" name="prFood" class="input-lg" />
 						</td>
 					</tr>
 					<tr>
 						<th>가격</th>
 						<td>
-							<input type="number" name="prPrice" class="input-sm required"/>  원	
+							<input type="number" name="prPrice" class="input-sm"/>  원	
 						</td>
 					</tr>
 					<tr>
 						<th>수량</th>
 						<td>
-							<input type="number" name="prAmount" class="input-xs required" /> 병
+							<input type="number" name="prAmount" class="input-xs"/> 병
 							
 						</td>
 					</tr>
@@ -119,7 +119,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th>주류 정보</th>
+						<th>상품 정보</th>
 						<td>
 							<textarea name="prContent" id="prContent" type="textarea" class="required" style="width:98%" ></textarea>
 							<script type="text/javascript">CKEDITOR.replace( 'prContent' , ckedit_config);</script>

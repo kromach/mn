@@ -15,9 +15,10 @@ public interface SalesService extends CommonInterface{
 	public List productorList(String memId, int startRow, int endRow);
 	public String userIdCh(String memId);
 	public List getCategory();
-	public String makeprCode(ProductInfoDTO productDTO);
+	public String makeprCode(ProductVo productDTO);
 	public String insertProductImg(MultipartHttpServletRequest request);
-	public int insertProduct(ProductInfoDTO productDTO);
+	public int insertProduct(ProductVo productDTO);
 	public ProductVo getDatail(String prCode);
+	public int updateProduct(ProductVo dto);
 
 }

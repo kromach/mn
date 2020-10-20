@@ -94,7 +94,7 @@ public class SalesController {
 	}
 	
 	@RequestMapping(value = "/insertPro")
-	public String insertProSs(ProductInfoDTO productDTO, MultipartHttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+	public String insertProSs(ProductVo productDTO, MultipartHttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 		HttpSession session =  request.getSession();
 		if(session.getAttribute("memId") != null) { // session id
 			productDTO.setInsertId((String)session.getAttribute("memId"));
@@ -131,7 +131,7 @@ public class SalesController {
 			printWriter = response.getWriter();
 			// 업로드시 메시지 출력
 			printWriter.println("<script type='text/javascript'>"
-			     + "alert('주류 정보가 등록되었습니다. 관리자 확인 후에 사이트에 게재됩니다.')"
+			     + "alert('상품 정보가 등록되었습니다.')"
 			     +"</script>");
 			printWriter.flush();
 			model.addAttribute("prCode", prCode);
@@ -163,50 +163,41 @@ public class SalesController {
 	}
 
 	@RequestMapping(value = "/modifyPro")
-	public String modifyProSs(ProductInfoDTO productDTO, MultipartHttpServletRequest request, HttpServletResponse response, Model model) throws IOException{
+	public String modifyProSs(ProductVo dto, MultipartHttpServletRequest request, HttpServletResponse response, Model model) throws IOException{
 		HttpSession session =  request.getSession();
-		System.out.println("code 제대로 왔냐????????????????" +productDTO.getPrCode()+"도수에 아무값도 안넣었을시"+productDTO.getPrAlcohol());
+		System.out.println("code 제대로 왔냐????????????????" +dto.getPrCode()+"도수에 아무값도 안넣었을시"+dto.getPrAlcohol());
+		String prCode = dto.getPrCode();
 		
-		
-		
-		
-		
-		if(session.getAttribute("memId") != null) { // session id
-			productDTO.setInsertId((String)session.getAttribute("memId"));
+		// (2) 저장된 코드값으로 이미지 처리
+		request.setAttribute("prCode", prCode);
+		String imgPath = salesService.insertProductImg(request);
+		System.out.println("이미지 경로 :" +imgPath);
+		String add = "\\resources\\";
+		String[] imgPath_ = imgPath.split("\\\\resources\\\\");
+		System.out.println(imgPath.length());
+		if(imgPath_.length==2) {
+			imgPath = add.concat(imgPath_[1]);
 		}
-				
-			// (1) 상품 코드 생성
-			String prCode = salesService.makeprCode(productDTO);
+		System.out.println("IMGPATH====="+imgPath);
 			
-			// (2) 저장된 코드값으로 이미지 처리
-			request.setAttribute("prCode", prCode);
-			String imgPath = salesService.insertProductImg(request);
-			System.out.println("이미지 경로 :" +imgPath);
-			String add = "\\resources\\";
-			String[] imgPath_ = imgPath.split("\\\\resources\\\\");
-			System.out.println(imgPath.length());
-			if(imgPath_.length==2) {
-				imgPath = add.concat(imgPath_[1]);
-			}
-			System.out.println("IMGPATH====="+imgPath);
+		// 업로드 이미지명 집어넣기
 			
-			// 업로드 이미지명 집어넣기
+		// (3) 다른것들 modify
+		dto.setInsertId(session.getAttribute("memId").toString());
+		dto.setPrImg(imgPath);
+		System.out.println(dto);
+		int count = salesService.updateProduct(dto);
+		System.out.println("수정되었음 : " +count);
 			
-			// (3) 다른것들 insert
-			productDTO.setInsertId(session.getAttribute("memId").toString());
-			productDTO.setPrImg(imgPath);
-			System.out.println(productDTO);
-			int count = salesService.insertProduct(productDTO);
-			
-			//System.out.println(selectDrinkInfo.getDkBkindValue());
-			PrintWriter printWriter = null;
-			// 인코딩
-			response.setCharacterEncoding("utf-8");
-			response.setContentType("text/html;charset=utf-8");		
-			printWriter = response.getWriter();
-			// 업로드시 메시지 출력
-			printWriter.println("<script type='text/javascript'>"
-			     + "alert('주류 정보가 등록되었습니다. 관리자 확인 후에 사이트에 게재됩니다.')"
+		//System.out.println(selectDrinkInfo.getDkBkindValue());
+		PrintWriter printWriter = null;
+		// 인코딩
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");		
+		printWriter = response.getWriter();
+		// 업로드시 메시지 출력
+		printWriter.println("<script type='text/javascript'>"
+			     + "alert('상품 정보가 수정되었습니다.')"
 			     +"</script>");
 			printWriter.flush();
 			model.addAttribute("prCode", prCode);

@@ -89,7 +89,7 @@ public class SalesDAOImpl implements SalesDAO{
 	}
 
 	@Override
-	public String makeprCode(ProductInfoDTO productDTO) {
+	public String makeprCode(ProductVo productDTO) {
 		String prCode = "";
 		prCode = sqlSession.selectOne("sales.makeprCode");
 		System.out.println("prCode 생성 됐니? "+prCode);
@@ -99,7 +99,7 @@ public class SalesDAOImpl implements SalesDAO{
 	}
 
 	@Override
-	public int intsertProduct(ProductInfoDTO productDTO) {
+	public int insertProduct(ProductVo productDTO) {
 		int count = 0;
 		System.out.println("insertid : " +productDTO.getInsertId());
 		System.out.println("prlike : " +productDTO.getPrLike());
@@ -112,6 +112,17 @@ public class SalesDAOImpl implements SalesDAO{
 	public ProductVo getDatail(String prCode) {
 		ProductVo dto = sqlSession.selectOne("sales.getDatail", prCode);
 		return dto;
+	}
+
+	@Override
+	public int updateProduct(ProductVo dto) {
+		int count = sqlSession.update("sales.updateProduct", dto);
+		System.out.println("id=============="+dto.getInsertId());
+		System.out.println("img=============="+dto.getPrImg());
+		System.out.println("code=============="+dto.getPrCode());
+		System.out.println("name=============="+dto.getPrName());
+		System.out.println("count :::::" +count);
+		return count;
 	}
 
 }
