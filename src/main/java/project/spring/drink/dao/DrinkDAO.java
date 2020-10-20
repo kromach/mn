@@ -40,5 +40,7 @@ public interface DrinkDAO {
 
 	void updateDrinkLikeCount(HashMap drinkLikeMap) throws SQLException;
 
+	String insertComment(CommentVO commentVo) throws SQLException;
+
 
 }
