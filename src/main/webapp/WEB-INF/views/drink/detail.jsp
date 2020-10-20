@@ -77,22 +77,30 @@
 				</c:forEach>
 			</table>
 			<!-- pager -->
-			<div align="center" class="pageNums">
+			<div class="page_wrap">
+			<div class="page_nation">
 				<!-- 게시글이 있을때만 보여주기 -->
 				<c:if test="${articleCount > 0}">
 					<c:if test="${pageVO.startPage > pageVO.pageBlock}">
-						<a href="?dkCode=${drinkInfo.dkCode}&pageNum=${pageVO.startPage-pageVO.pageBlock}#boardTbl">&lt;</a>
+						<a class="arrow prev" href="?dkCode=${drinkInfo.dkCode}&pageNum=${pageVO.startPage-pageVO.pageBlock}#boardTbl">&lt;</a>
 					</c:if>
 					
 					<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1"> 
-						<a href="?dkCode=${drinkInfo.dkCode}&pageNum=${i}#boardTbl" class="pageNums">&nbsp;${i}&nbsp;</a>
+						<c:if test="${i == pageNum}">
+							<a class="active">${i}</a>		
+						</c:if>
+						<c:if test="${i != pageNum}">
+							<a href="?dkCode=${drinkInfo.dkCode}&pageNum=${i}#boardTbl" class="pageNums">&nbsp;${i}&nbsp;</a>
+						</c:if>
 					</c:forEach>
 					
 					<c:if test="${pageVO.endPage < pageVO.pageCount}">
-						<a href="?dkCode=${drinkInfo.dkCode}&pageNum=${pageVO.startPage+pageVO.pageBlock}#boardTbl">&gt;</a>
+						<a class="arrow next" href="?dkCode=${drinkInfo.dkCode}&pageNum=${pageVO.startPage+pageVO.pageBlock}#boardTbl">&gt;</a>
 					</c:if>
 				</c:if>
 			</div>
+			</div>
+			
 		</div>
 		<div class="detail-item detail-width6">
 			<h3 class="pad-top10 pad-bottom20 text-left">후기 보기 (${commentStarInfo != null ? commentStarInfo.cmCount : '0'})</h3>
@@ -296,25 +304,29 @@
 	}
 	
 	function like() {
-		$.ajax({
-			url : 'like?dkCode=${drinkInfo.dkCode}&memId=${memId}',
-			type : "POST",
-			success : function(data) {
-				//console.log(data);
-				// 1. input hedden 업데이트 
-				$("#drinkLikeYN").val(data);
-
-				// 2. 좋아요 개수 업데이트
-				var likeCount = $('#drinkLikeCount').val();
-				$("#drinkLikeCount").val((data == 'Y' ? Number(likeCount) + 1 : Number(likeCount) - 1));
-				
-				// 3. 버튼 새로고침
-				likeBtnToggle();
-			},
-			error : function() {
-				alert("error");
-			}
-		});
+		if (!"${memId}") {
+			alert("로그인이 필요합니다.");
+		} else {
+			$.ajax({
+				url : 'like?dkCode=${drinkInfo.dkCode}&memId=${memId}',
+				type : "POST",
+				success : function(data) {
+					//console.log(data);
+					// 1. input hedden 업데이트 
+					$("#drinkLikeYN").val(data);
+	
+					// 2. 좋아요 개수 업데이트
+					var likeCount = $('#drinkLikeCount').val();
+					$("#drinkLikeCount").val((data == 'Y' ? Number(likeCount) + 1 : Number(likeCount) - 1));
+					
+					// 3. 버튼 새로고침
+					likeBtnToggle();
+				},
+				error : function() {
+					alert("error");
+				}
+			});
+		}
 	}
 </script>
 

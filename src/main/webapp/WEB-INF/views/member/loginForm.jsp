@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="/resources/js/formCheck.js"></script>
 <!DOCTYPE html>
 <html>
@@ -11,6 +12,7 @@
 				<form method="post" action="/member/loginPro" name="inputForm">
 				<div class="loginWrapper"> 
 						<button type="button" class="kakaoBtn" onclick='kakaoLogin()'>카카오로 로그인</button>
+					<input type="hidden" name="returnPage" value="${returnPage}"/>
 					<input class="loginInput required" type="text" name="id" msg="아이디를">
 					<input class="loginInput required" type="PASSWORD" name="pw" msg="비밀번호를">
 					<button type="button" class="greyBtn" onclick="insert()">로그인</button>
