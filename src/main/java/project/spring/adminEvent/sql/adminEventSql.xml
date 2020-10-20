@@ -106,12 +106,20 @@
   				</if>
   			</trim>
   	</select>
+  	
   	<update id="checkDate" parameterType="string">
   		<![CDATA[
   			update event set is_open='N' where ev_end <= #{value}
   		 ]]>
   	</update>
+  	
   	<update id="chOpen" parameterType="string">
   		update event set is_open='N' where event_code = #{value}
   	</update>
+  	
+  	<select id="getEventMember" parameterType="string" resultType="EventVO">
+		select em.EVENT_CODE, em.ID, ev.EVENT_NAME, em.JOIN_INSERT_DAY  FROM
+			 EVENT_MEMBER em INNER JOIN event ev ON em.EVENT_CODE = ev.EVENT_CODE  WHERE
+			  em.EVENT_CODE = #{value}
+  	</select>
   </mapper>

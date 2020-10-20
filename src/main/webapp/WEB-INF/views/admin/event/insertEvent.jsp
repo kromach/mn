@@ -87,6 +87,7 @@ $( function() {
 		<div class="gutter-sizer"></div>
 		<div class="grid-item grid-item--width6 ">
 			<form action="insertEventPro" method="post" id="frm" enctype="multipart/form-data">
+				<input type="hidden" name="pageNum" value="${pageNum }" />
 				<table class="tableCss table">
 					<tr>
 						<th>제목</th>
@@ -145,7 +146,7 @@ $( function() {
 				</table>
 				<div class="text-center pad-top10">
 					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="저장">
-					<input type="button" class="btn-md" value="취소" onclick="window.location='/admin/event/eventList'"/>
+					<input type="button" class="btn-md" value="취소" onclick="window.location='/admin/event/eventList?pageNum=${pageNum}'"/>
 				</div>
 			</form>
 		</div>

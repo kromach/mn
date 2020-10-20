@@ -46,9 +46,9 @@ public class AdminEventController {
 		private ArticleServiceImpl articleService = null;
 		
 		@RequestMapping("insertEvent")
-		public String eventListAd(Model model, Locale locale)throws SQLException{
+		public String eventListAd(@RequestParam String pageNum, Model model, Locale locale)throws SQLException{
 			
-			
+			model.addAttribute("pageNum", pageNum);
 			return "admin/event/insertEvent.mn";
 		}
 		
@@ -208,7 +208,7 @@ public class AdminEventController {
 		}
 
 		@RequestMapping("modifyEvent")
-		public String modifyEventAd(@RequestParam(value="eventCode", required = false) String eventCode, Model model)throws SQLException {
+		public String modifyEventAd(@RequestParam(value="eventCode", required = false) String eventCode, @RequestParam String pageNum, Model model)throws SQLException {
 			
 			if(eventCode == null) {
 				return "redirect:/admin/event/eventList";
@@ -216,13 +216,13 @@ public class AdminEventController {
 				AdminEventVO vo = adminEventService.eventInfo(eventCode);
 				model.addAttribute("vo",vo);
 			}
-			
+			model.addAttribute("pageNum", pageNum);
 			
 			return "admin/event/modifyEvent.mn";
 		}
 		
 		@RequestMapping("modifyEvnetPro")
-		public String modifyProAd(AdminEventVO vo, MultipartHttpServletRequest request)throws SQLException{
+		public String modifyProAd(@RequestParam String pageNum, AdminEventVO vo, MultipartHttpServletRequest request, Model model)throws SQLException{
 			
 			System.out.println("check---------------------------------------------------3333");
 
@@ -285,13 +285,22 @@ public class AdminEventController {
 			}
 			vo.setInsertId((String)request.getSession().getAttribute("memId"));
 			adminEventService.updateItem(vo);
-			
+			model.addAttribute("pageNum", pageNum);
 			return "redirect:/admin/event/eventList.mn";
 		}
 	@RequestMapping("eventJoinList")
-	public String eventJoinListAd() {
+	public String eventJoinListAd(@RequestParam String eventCode, Model model)throws SQLException {
 		
-		return "admin/event/eventJoinList.mn";
+		int i = 0;
+		System.out.println(eventCode + "헤헤");
+		List list =  adminEventService.getEventMember(eventCode);
+		if(list.size() != 0) {
+			i = list.size();
+		}
+		model.addAttribute("count", i);
+		model.addAttribute("list", list);
+		
+		return "admin/event/eventJoinList";
 	}
 
 		

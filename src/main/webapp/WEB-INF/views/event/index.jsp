@@ -8,7 +8,7 @@
 		<c:forEach var="eventList" items="${eventList}">
 			<div class="grid-item">
 				<a href="/event/detail?eventCode=${eventList.eventCode }">
-					<img src="${eventList.thumImg}" />
+					<img src="${eventList.thumImg}" onerror="this.src='/resources/img/noImage.jpg'"/>
 				</a>
 			</div>
 		</c:forEach>
