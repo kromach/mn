@@ -174,7 +174,6 @@ public class DrinkController {
 		}
 		
 		// 관련 게시글 
-		
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null || pageNum.length() < 1) {
 			pageNum = "1";
