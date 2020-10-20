@@ -102,8 +102,9 @@ public class SalesDAOImpl implements SalesDAO{
 	public int insertProduct(ProductVo productDTO) {
 		int count = 0;
 		System.out.println("insertid : " +productDTO.getInsertId());
-		System.out.println("prlike : " +productDTO.getPrLike());
-		System.out.println("prCode : " + productDTO.getPrCode());
+		System.out.println("prprice : " +productDTO.getPrPrice());
+		System.out.println("prAmount : " + productDTO.getPrAmount());
+
 		count = sqlSession.insert("sales.insertProduct", productDTO);
 		return count;
 	}

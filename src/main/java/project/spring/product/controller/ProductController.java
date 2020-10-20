@@ -407,6 +407,17 @@ public class ProductController {
 		return "product/reviewdetail.mn";
 	}
 	
+	@RequestMapping("deletereview")
+	public String deletereview(HttpServletRequest request) throws SQLException {
+		String prcode = request.getParameter("dkCoed");
+		String bnIdx_ = request.getParameter("bnIdx");
+		int bnIdx =Integer.parseInt(bnIdx_);
+		
+		int result = productservice.deleteItem(bnIdx);
+		
+		
+		return "redirect:productdetail?prcode="+prcode;
+	}
 	
 	
 	//////ajax 

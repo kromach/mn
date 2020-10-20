@@ -1,7 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!-- Header // -->
+
+<!-- 로그인 버튼 클릭시 붙일 리턴 경로 -->
+<c:set var="path" value="${requestScope['javax.servlet.forward.servlet_path']}" /> 
+<c:if test="${pageContext.request.queryString != null}">
+	<c:set var="query" value="%3F${pageContext.request.queryString}" /> 
+</c:if>
+<c:set var="queryStr" value="${fn:replace(fn:replace(query, '=', '%3D'), '&', '%26')}" /> 
+<%-- <c:url var="returnPage" value='${path}${queryStr}' />--%>
+
 <div id="header" class="header_color">
 	<div class="header_area clfix">
 		<div class="h_logo fl">
@@ -25,7 +35,7 @@
 				<li><a href="/member/logout" class="logout">LOGOUT</a></li>
 			</c:if>
 			<c:if test="${empty sessionScope.memId}">	
-				<li><a href="/member/login" class="logout">LOGIN</a></li>
+				<li><a href="/member/login?returnPage=${path}${queryStr}" class="logout">LOGIN</a></li>
 			</c:if>	
 			</ul>
 		</div>

@@ -37,8 +37,8 @@
 						<!--login은 실행후 검사 -->
 						<div>
 							<a class="btn btn-sm btn-dark" onclick="back()">뒤로가기</a>
-							<c:if test="${article.insertId eq sessionScope.memId}">
-								<input type="button" value="삭제" class="btn btn-sm btn-dark" onclick="deleteRe('${article.bnIdx}')" />
+							<c:if test="${(article.insertId eq sessionScope.memId) or sessionScope.memId eq 'admin' }">
+								<input type="button" value="삭제" class="btn btn-sm btn-dark" onclick="deleteRe('${article.bnIdx}','${article.dkCode}')" />
 							</c:if>
 						</div>												 
 						</td>
@@ -50,21 +50,13 @@
 	</div>
 </body>
 <script>
-function deleteRe(bnIdx){
-	var context = window.location.pathname.substring(0,
-			window.location.pathname.indexOf("/", 2));
+function deleteRe(bnIdx,dkCoed){
+	var uri = "deletereview?bnIdx="+bnIdx+"&dkCoed="+dkCoed;
 	var confirmMsg = confirm("정말 삭제하시겠습니까");
 	if(confirmMsg){
-		$.ajax({
-			url : context + '/deleteRe',
-			data : 'bnIdx='+bnIdx,
-			type : "post",
-			success : function(data) {
-				console.log(data);
+				
 				alert('해당 리뷰가 삭제되었습니다.');
-				window.location.product();
-			}
-		});
+				window.location=uri;
 	}
 }
 
