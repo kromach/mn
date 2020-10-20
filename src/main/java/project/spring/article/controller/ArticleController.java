@@ -130,6 +130,7 @@ public class ArticleController {
 			if(dto.getDkCode()!=null&& dto.getDkCode().equals("선택")) {
 				dto.setDkCode(null);
 			}
+			
 			dto.setKind("F");
 			System.out.println(dto);
 			//insert

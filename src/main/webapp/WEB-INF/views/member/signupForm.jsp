@@ -18,7 +18,7 @@
 						enctype="multipart/form-data" name="inputForm"
 						accept-charset="utf-8">
 				</c:if>
-				<c:if test="${status eq 'user' }">
+				<c:if test="${status eq 'user' || status eq 'admin' }">
 					<form method="post" action="/member/signupUserPro"
 						enctype="multipart/form-data" name="inputForm"
 						accept-charset="utf-8">

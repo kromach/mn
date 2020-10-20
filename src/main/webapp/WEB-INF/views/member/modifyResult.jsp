@@ -8,7 +8,10 @@
 		<div class="grid">
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
-			<div class="grid-item grid-item--width6">${sessionScope.memNickName }님의 회원정보가 수정되었습니다.</div>
+			<div class="grid-item grid-item--width6">
+			${sessionScope.memNickName }님의 회원정보가 수정되었습니다.
+			<button type = "button" class="btn btn-lg btn-mint" onclick="window.location.href='/'">메인으로</button>
+			</div>
 		</div>
 	</div>
 	</div>

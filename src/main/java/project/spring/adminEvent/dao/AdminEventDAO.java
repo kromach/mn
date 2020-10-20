@@ -20,4 +20,6 @@ public interface AdminEventDAO extends CommonInterface {
 	
 	public void chOpen(String eventCode)throws SQLException;
 	
+	public List getEventMember(String eventCode)throws SQLException;
+	
 }

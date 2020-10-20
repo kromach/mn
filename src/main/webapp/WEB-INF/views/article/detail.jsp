@@ -67,7 +67,7 @@
 						</td>
 						<td><fmt:formatDate value="${articleReplyDTO.insertDay}" pattern="yyyy.MM.dd"/>
 							<c:if test="${articleReplyDTO.insertId eq sessionScope.memId}">
-								<button onclick="deleteReply('${articleReplyDTO.coIdx}','${sessionScope.memId}')">글 삭제</button>
+								<button class="btn btn-sm btn-dark" onclick="deleteReply('${articleReplyDTO.coIdx}','${sessionScope.memId}')">글 삭제</button>
 							</c:if>
 						</td>
 					</tr>
@@ -281,7 +281,7 @@ function replyReload(index,idx,session){
 				
 				if(session == data[i].insertId){
 					$("<tr class='reply'><td colspan='2'>"+data[i].bnComment+"</td><td><span class='btn btn-blue btn-xs default'>"+data[i].writerTitleCnt+"</span><span class='titleName'>"+data[i].writerTitleName+"</span>"+data[i].nickname+"</td><td>"+
-							moment(new Date(data[i].insertDay)).format('YYYY.MM.DD')+"&nbsp;<button type='button' onclick=\"deleteReply("+"\'"+data[i].coIdx+"\',\'"+session+"\')\">글삭제</button></td></tr>").insertAfter('table tr:eq(5)');					
+							moment(new Date(data[i].insertDay)).format('YYYY.MM.DD')+"&nbsp;<button type='button' class='btn btn-sm btn-dark' onclick=\"deleteReply("+"\'"+data[i].coIdx+"\',\'"+session+"\')\">글삭제</button></td></tr>").insertAfter('table tr:eq(5)');					
 				}else{			
 					$("<tr class='reply'><td colspan='2'>"+data[i].bnComment+"</td><td><span class='btn btn-blue btn-xs default'>"+data[i].writerTitleCnt+"</span><span class='titleName'>"+data[i].writerTitleName+"</span>"+data[i].nickname+"</td><td>"+
 						moment(new Date(data[i].insertDay)).format('YYYY.MM.DD')+"</td></tr>").insertAfter('table tr:eq(5)');

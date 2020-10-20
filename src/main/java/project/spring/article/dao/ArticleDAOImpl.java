@@ -68,9 +68,6 @@ public class ArticleDAOImpl implements ArticleDAO {
 	}
 	@Override
 	public List getDrinkSearch(String input) {
-		
-		System.out.println("check2");
-		System.out.println("DAO"+input);
 		//우선 카테고리 검사
 		List<HashMap<String, String>> list = sqlSession.selectList("article.getDrinkSearch",input);
 		if(list.size()!=0) {
@@ -82,9 +79,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 			System.out.println(listByCategory.toString());
 			return listByCategory;
 		}
-		System.out.println("input ================" + input);
 		//검색어가 카테고리가 아닐시에 술 이름으로 검색
 		ArrayList listByName = new ArrayList();
+		System.out.println("input ================" + listByName);
 		listByName.add(sqlSession.selectList("article.getDrinkSearchByName",input));
 		return listByName;
 	}

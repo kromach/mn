@@ -64,7 +64,7 @@
 			<ul style="display: block;">
 				<li><a href="/admin/memberList"> 회원 관리 </a></li>
 				<li><a href="/admin/drinkList"> 술 정보 관리 </a></li>
-				<li><a href="/admin/event/eventList"> 이벤트 관리 </a></li>
+				<li><a href="/admin/event/eventList"> 이벤트 관리 </a></li>		
 			</ul>
 		</li>
 		</c:if>									

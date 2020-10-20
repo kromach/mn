@@ -11,6 +11,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import project.spring.article.vo.ArticleDTO;
 import project.spring.product.vo.OrderVo;
 import project.spring.product.vo.ProductVo;
 
@@ -61,6 +62,10 @@ public class ProductDAOImpl implements ProductDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	public int deleteItem(int bnIdx) {
+		
+		return sqlSession.update("product.deletereview", bnIdx);
+	}
 
 	@Override
 	public int insertItem(Object obj) {
@@ -94,8 +99,8 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List getproduct() throws SQLException {
-		List productlist = sqlSession.selectList("product.getproduct");
+	public List getproduct(int idx) throws SQLException {
+		List productlist = sqlSession.selectList("product.getproduct",idx);
 		
 		return productlist;
 	}
@@ -148,7 +153,7 @@ public class ProductDAOImpl implements ProductDAO {
 		HashMap hash=sqlSession.selectOne("product.sql");
 		
 		int i = ((BigDecimal)hash.get("NEXTVAL")).intValue(); 
-		String a =(hash.get("'O'||(SELECT TO_CHAR(SYSDATE,'YYYYMMDD') FROM DUAL)|| ORDER_INFO_SEQ")).toString();
+		String a =(hash.get("'O'||(SELECTTO_CHAR(SYSDATE,'YYYYMMDD')FROMDUAL)||ORDER_INFO_SEQ")).toString();
 		String c = a.substring(a.lastIndexOf("=")+1);
 		String b =c.substring(0,c.length()-1);
 		
@@ -226,15 +231,28 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List getarticle(String prcode) throws SQLException {
+	public List getarticle(String prcode,int i) throws SQLException {
 		
-		return sqlSession.selectList("product.getarticle",prcode);
+		HashMap map =new HashMap();
+		map.put("prcode", prcode);
+		map.put("i", i);
+		
+		return sqlSession.selectList("product.getarticle",map);
 	}
 
 	@Override
 	public int getamount(String prcode) throws SQLException {
 		int count = sqlSession.selectOne("product.stock",prcode);
 		return count;
+	}
+
+	@Override
+	public ArticleDTO getarticldetail(int bnIdx) throws SQLException {
+
+		sqlSession.update("product.upreadcount",bnIdx);
+		ArticleDTO artdto =sqlSession.selectOne("product.review", bnIdx);
+				
+		return artdto;
 	}
 
 

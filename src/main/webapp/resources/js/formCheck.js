@@ -16,7 +16,9 @@
 					errcnt++;
 					return false;
 				}
+
 				if(fVal == "" && (fTyp == "TEXT" || fTyp == "FILE" || fTyp == "NUMBER" || fTyp == "HIDDEN" || fTyp == "TEXTAREA" || fTyp == "PASSWORD")) {
+
 					alert(fMsg + " 입력해 주세요");
 					$(this).focus();
 					errcnt++;

@@ -400,6 +400,7 @@ public class MemberController {
 	public String findPwForm() {
 		return "/member/findPwForm.mn";
 	}
+	
 	//id찾기 처리
 	@RequestMapping(value = "/findIdPro")
 	public String findIdPro(MemberDTO dto,Model model) {
@@ -418,6 +419,7 @@ public class MemberController {
 		
 		return "/member/findResult.mn";
 	}
+	
 	//pw찾기 처리
 	@RequestMapping(value = "/findPwPro")
 	public String findPwPro(MemberDTO dto,Model model) {
