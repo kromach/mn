@@ -219,6 +219,25 @@ public class ProductDAOImpl implements ProductDAO {
 		return -1;
 	}
 
+	@Override
+	public int getarticlecount(String prcode) throws SQLException {
+		
+		return sqlSession.selectOne("product.getarticlecount",prcode);
+	}
+
+	@Override
+	public List getarticle(String prcode) throws SQLException {
+		
+		return sqlSession.selectList("product.getarticle",prcode);
+	}
+
+	@Override
+	public int getamount(String prcode) throws SQLException {
+		int count = sqlSession.selectOne("product.stock",prcode);
+		return count;
+	}
+
+
 
 
 }

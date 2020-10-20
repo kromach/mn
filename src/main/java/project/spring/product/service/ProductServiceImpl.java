@@ -167,6 +167,23 @@ public class ProductServiceImpl implements ProductService {
 		return unlike;
 	}
 
+	@Override
+	public int getarticlecount(String prcode) throws SQLException {
+		return productDAO.getarticlecount(prcode);
+	}
+
+	@Override
+	public List getarticle(String prcode) throws SQLException {
+		
+		return productDAO.getarticle(prcode);
+	}
+
+	@Override
+	public int getamount(String prcode) throws SQLException {
+		int count = productDAO.getamount(prcode);
+		return count;
+	}
+
 	
 
 
