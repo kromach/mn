@@ -59,19 +59,24 @@ public class EventController {
 	@RequestMapping("detail")
 	public String deatil(HttpServletRequest request, Model model)throws SQLException {
 		
-		String eventCode = request.getParameter("eventCode");
-		HttpSession session = request.getSession();
-		String memId = null;
-		int idx = 0;
-		if(session.getAttribute("memId") != null && !session.getAttribute("memId").equals("")) {
-			memId = (String)session.getAttribute("memId");
-			idx = eventService.checkJoinEvent(memId, eventCode);
+		if(request.getParameter("eventCode") == null) {
+			return "redirect:/event/eventList";
 		}
-		System.out.println("idx : " + idx);
-		EventVO vo =  eventService.getEvent(eventCode);
-		model.addAttribute("vo", vo);
-		model.addAttribute("memId", memId);
-		model.addAttribute("idx", idx);
+		else {
+			String eventCode = request.getParameter("eventCode");
+			HttpSession session = request.getSession();
+			String memId = null;
+			int idx = 0;
+			if(session.getAttribute("memId") != null && !session.getAttribute("memId").equals("")) {
+				memId = (String)session.getAttribute("memId");
+				idx = eventService.checkJoinEvent(memId, eventCode);
+			}
+			System.out.println("idx : " + idx);
+			EventVO vo =  eventService.getEvent(eventCode);
+			model.addAttribute("vo", vo);
+			model.addAttribute("memId", memId);
+			model.addAttribute("idx", idx);
+		}
 		
 		return "event/detail.mn";
 	}
