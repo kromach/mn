@@ -196,7 +196,7 @@ public class DrinkServiceImpl implements DrinkService {
 	@Override
 	public String selectDrinkLikeInfo(HashMap drinkLikeMap) throws SQLException {
 		
-		return  drinkDAO.selectDrinkLikeInfo(drinkLikeMap);
+		return drinkDAO.selectDrinkLikeInfo(drinkLikeMap);
 	}
 
 	@Override
@@ -221,6 +221,11 @@ public class DrinkServiceImpl implements DrinkService {
 	public void updateDrinkLikeCount(HashMap drinkLikeMap) throws SQLException {
 		
 		drinkDAO.updateDrinkLikeCount(drinkLikeMap);
+	}
+
+	@Override
+	public String insertComment(CommentVO commentVo) throws SQLException {
+		return drinkDAO.insertComment(commentVo);
 	}
 
 }

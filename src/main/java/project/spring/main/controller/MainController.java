@@ -181,12 +181,12 @@ public class MainController {
 					mainVo.setImgUri("/resources/img/upload/"+vo.getThumImg());
 					main.add(mainVo);
 				}
-			//shuffle
-			Collections.shuffle(main);	
 			
 			//return 갯수가 1보다 커야 리턴
 			System.out.println("reload Size========"+main.size());
 			if(main.size()>0) {
+				//shuffle
+				Collections.shuffle(main);	
 				return main;
 			}else {
 				return null;

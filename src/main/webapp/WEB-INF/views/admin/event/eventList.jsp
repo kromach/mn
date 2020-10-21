@@ -113,7 +113,7 @@ $( function() {
 				</tr>
 				<c:if test="${count == 0 || empty count }">
 					<tr>
-						<td colspan="5">
+						<td colspan="6">
 							등록된 이벤트가 없습니다.
 						</td>
 					</tr>

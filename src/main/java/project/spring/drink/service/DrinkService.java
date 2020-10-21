@@ -51,5 +51,7 @@ public interface DrinkService {
 	public String updateDrinkLikeInfo(HashMap drinkLikeMap) throws SQLException;
 
 	public void updateDrinkLikeCount(HashMap drinkLikeMap) throws SQLException;
+
+	public String insertComment(CommentVO commentVo) throws SQLException;
 	
 }

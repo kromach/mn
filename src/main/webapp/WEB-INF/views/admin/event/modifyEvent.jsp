@@ -6,10 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
-
-
 <title>insert Event</title>
+<script src="/resources/js/jquery.selectric.js"></script>
 <!-- 유효성검사 js -->
 <script src="/resources/js/formCheck.js"></script> 
 <!-- 에디터 js -->
@@ -93,7 +91,7 @@ $( function() {
 		<div class="gutter-sizer"></div>
 		<div class="grid-item grid-item--width6 ">
 		
-			<form action="modifyEvnetPro" method="post" id="frm" enctype="multipart/form-data">
+			<form action="modifyEvnetPro" method="post" id="frm" name="frm" enctype="multipart/form-data">
 				<input type="hidden" name="eventCode" value="${vo.eventCode }">
 				<input type="hidden" name="pageNum" value="${pageNum }" />
 				<table class="tableCss table">
@@ -111,7 +109,7 @@ $( function() {
 					<tr>
 						<th>술 선택</th>
 						<td colspan="2">
-							<select id="option" name="productCode" class="required" msg="술을">
+							<select id="option" type="select-one" name="productCode" class="sel short required" msg="술을">
 								<option value="${vo.productCode}" selected="selected" >${vo.prName }</option>
 							</select></td>
 					</tr>
@@ -153,8 +151,8 @@ $( function() {
 
 					<tr>
 						<td colspan="3" style="margin:0; padding:0">
-							<textarea name="content" id="ckeditor" type="textarea" class="required" msg="내용을"  rows="10" cols="100" style="width:100%; height:412px;">${vo.content }</textarea>
-							<script type="text/javascript">CKEDITOR.replace( 'ckeditor' , ckedit_config);</script>					
+							<textarea name="content" id="content" style="width:98%;" >${vo.content }</textarea>
+							<script type="text/javascript">CKEDITOR.replace('content' , ckedit_config);</script>
 						</td>
 					</tr>
 				</table>
@@ -181,7 +179,7 @@ function searchDk(){
 		success : function(data){
 			
 			$('#option').empty();
-			$('#option').append('<option value="option">선택</option>');
+			$("#option").append("<option value=>주류 선택</option>");
 			
 			
 			var index = Object.keys(data).length;
@@ -208,20 +206,19 @@ $(function() {
 	// 전송버튼 클릭이벤트 
 	// 에디터의 처리가 필요하므로 클릭 이벤트가 필요.
     $('#addBtn').click(function(){
-    	
-    	/*
-    	 checkFormjquery() form 유효성 검사 JS 
-    	 input 등의 class에 required 가 붙은 항목을 검사 후 입력 값이 없으면 msg의 값을 바탕으로
-    	 팝업을 보여주고 멈춤.
-    	*/
-    	if (checkFormjquery()) {  // 모든 입력 항목 처리에 문제 없을때 주석 해제하기
-    
-            // 해당 입력 폼의 id나 name 등으로 select 한 후에 submit() 실행
-            $content = CKEDITOR.instances.ckeditor.getData();
-    	
-            $('#frm').submit();
-    		
-    	}   						// 모든 입력 항목 처리에 문제 없을때 주석 해제하기
+		if (checkFormjquery()) {
+		    		
+		    		// 에디터 입력값 체크 
+		    		var value = CKEDITOR.instances['content'].getData();
+		    		if(!value) {
+			    		alert("이벤트 상세정보를 입력해주세요.");    			
+			    		return false;
+		    		}    		
+		    		if (confirm("정보를 수정하시겠습니까?")) {
+			    		$("form[name='frm']").submit();
+					}
+		    	}
+
     });
 });
 
