@@ -71,11 +71,7 @@ pageEncoding="UTF-8"%>
 						</tr>							
 					</c:forEach>								
 				</table>									
-				<!-- 더 보기 구현하기 -->									
-				<div>									
-					<button id="addBtn" onclick="moreList();">더보기</button>								
-				</div>									
-													
+				
 				<!-- pager -->									
 				<div align="center" class="pageNums">									
 						<!-- 게시글이 있을때만 보여주기 -->							

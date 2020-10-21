@@ -12,8 +12,8 @@
   		select a.*from(
   			select aa.*, rownum r from(
   				select * from member_Info 
-  				order by id DESC
-  			) aa order by id DESC
+  				order by REPORT_COUNT DESC, id ASC 
+  			) aa order BY REPORT_COUNT DESC,  id ASC 
   		) a where r >=#{start} and r <=#{end}
   	]]>
   	

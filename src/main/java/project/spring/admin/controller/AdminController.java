@@ -24,6 +24,7 @@ public class AdminController {
 		@Autowired
 		private AdminServiceImpl adminService = null;
 
+		
 		@RequestMapping("/memberList")
 		public String memberListAd(String pageNum, Model model)throws SQLException {
 			
@@ -37,15 +38,20 @@ public class AdminController {
 				int endRow = currPage * pageSize;
 				int number = 0;
 				
+				// 모든 멤버 들고오기
 				List <AdminVO>memberList = null;
+				// 카운트
 				int count = adminService.memberCount();
 				
 				if(count > 0) {
 					memberList = adminService.memberLIst(startRow, endRow);
+					
+					
 					System.out.println("가져오기 확인!!");
-					String newReportArr  = "";
+
 					int x = -1;
 					for(int i = 0; i < memberList.size(); i++) {
+						String newReportArr  = "";
 						if(memberList.get(i).getReportNumber() != null && memberList.get(i).getReportNumber().length() > 0) {
 							x = 0;
 							String rep = memberList.get(i).getReportNumber();
