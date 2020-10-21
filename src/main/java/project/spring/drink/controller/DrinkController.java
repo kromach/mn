@@ -362,6 +362,7 @@ public class DrinkController {
 			schDkCountry = (String)request.getParameter("schDkCountry");
 		}
 		
+		model.addAttribute("isSearch", request.getParameter("isSearch"));
 		model.addAttribute("schDkBkind", schDkBkind);
 		model.addAttribute("schDkSkind", schDkSkind);
 		model.addAttribute("schDkAlcohol", schDkAlcohol);
