@@ -76,8 +76,8 @@ public class SalesController {
 		model.addAttribute("number", new Integer(number));
 		model.addAttribute("pageNum", new Integer(pageNum));
 		model.addAttribute("count", new Integer(count));
-		model.addAttribute("salesList", salesList);
 		model.addAttribute("pageVO", pageVO);
+		model.addAttribute("salesList", salesList);
 		
 		
 		return "sales/index.mn";

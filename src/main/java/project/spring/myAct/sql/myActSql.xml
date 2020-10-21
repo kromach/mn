@@ -5,9 +5,12 @@
   <mapper namespace="myAct">
   
   		<!-- 내가 작성한 board_normal 테이블의 데이터를 전부 가져옴  -->
- 		<select id="selectAll" parameterType="string" resultType="ArticleDTO">
+ 		<select id="selectAll" parameterType="hashmap" resultType="ArticleDTO">
  		<![CDATA[
- 		select * from (select BN_IDX,BN_TITLE ,KIND ,DK_CODE ,READCOUNT ,HEART ,REPORT ,CONTENT ,INSERT_ID ,INSERT_DAY ,IS_DELETE ,rownum r FROM BOARD_NORMAL bn  WHERE insert_id=#{value} ORDER BY BN_IDX desc)
+ 		select * from 
+		(select BN_IDX,BN_TITLE ,KIND ,DK_CODE ,READCOUNT ,HEART ,REPORT ,CONTENT ,INSERT_ID ,INSERT_DAY ,IS_DELETE ,rownum r FROM
+		BOARD_NORMAL bn  WHERE insert_id=#{memId} ORDER BY BN_IDX DESC) where r >=#{start} and r <=#{end}
+
 		]]>
  		</select>
  		
@@ -18,16 +21,20 @@
 
  		<!-- 내가 좋아요한 글의 갯수 ML_KIND로 F,C인 것들의 갯수만 가져옴 -->
  		<select id="myLikeArticleCount" parameterType="string" resultType="int">
- 		<![CDATA[
  			select count(*) from my_like where insert_id=#{value} AND ML_KIND ='F' OR ML_KIND ='C'
- 		]]>
  		</select>
  		
  		<!-- 내가 좋아요한 글의 데이터를 가져옴 -->
- 		<select id="myLikeArticle" parameterType="string" resultType="ArticleDTO">
- 			SELECT * FROM BOARD_NORMAL bn, MY_LIKE ml WHERE TO_CHAR( bn.BN_IDX )= ml.ML_VALUE AND ml.INSERT_ID=#{value} ORDER BY BN_IDX desc
+ 		<select id="myLikeArticle" parameterType="hashmap" resultType="ArticleDTO">
+ 		<![CDATA[
+	 	 	SELECT a.* FROM
+			 	(SELECT bn.BN_IDX , bn.BN_TITLE , bn.KIND , bn.DK_CODE , bn.READCOUNT , bn.HEART , bn.REPORT , bn.CONTENT , bn.INSERT_ID , bn.INSERT_DAY , bn.IS_DELETE ,
+	 			ml.ML_IDX , ml.ML_KIND , ml.ML_VALUE , ml.INSERT_ID AS id , rownum r
+				FROM BOARD_NORMAL bn, MY_LIKE ml WHERE TO_CHAR( bn.BN_IDX )= ml.ML_VALUE AND ml.INSERT_ID=#{memId} ORDER BY bn.BN_IDX DESC) a
+				WHERE r >=#{start} and r <=#{end}
+		]]>
  		</select>
- 		
+  		
  		<select id="getAllTitle" resultType="TitleListDTO">
  			select * from title_list
  		</select>
