@@ -207,7 +207,9 @@ public class ProductController {
 		//ordervo.setReceiverTel(receiverTel);
 		int count = productservice.getamount(prcode);
 		
-		if(count < buy)
+		if(count < buy) {
+			
+		}
 		productservice.insertorderinfo(ordervo);
 		
 		String id = (String)session.getAttribute("memId");
