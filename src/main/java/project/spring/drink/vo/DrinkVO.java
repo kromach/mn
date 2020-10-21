@@ -40,6 +40,7 @@ public class DrinkVO {
 	private int dkItem5;
 	
 	private String dkTags;
+	private String isSearch;
 
 	public String getDkCode() {
 		return dkCode;
@@ -238,6 +239,12 @@ public class DrinkVO {
 		this.dkTags = dkTags;
 	}
 	
+	public String getIsSearch() {
+		return isSearch;
+	}
+	public void setIsSearch(String isSearch) {
+		this.isSearch = isSearch;
+	}
 	@Override
 	public String toString() {
 		return "DrinkVO [dkCode=" + dkCode + ", dkName=" + dkName + ", dkBkind=" + dkBkind + ", dkBkindValue="
