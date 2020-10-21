@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>insert Event</title>
 <script src="/resources/js/jquery.selectric.js"></script>
+<link rel="stylesheet" href="/resources/css/selectric.css">
+
 <!-- 유효성검사 js -->
 <script src="/resources/js/formCheck.js"></script> 
 <!-- 에디터 js -->
@@ -190,6 +192,7 @@ function searchDk(){
 			}
 		}
 	});
+	$(".sel").selectric("refresh");
 }
 
 
@@ -203,6 +206,9 @@ function searchDk(){
 </script>
 <script>
 $(function() {
+	
+	$(".sel").selectric();
+
 	// 전송버튼 클릭이벤트 
 	// 에디터의 처리가 필요하므로 클릭 이벤트가 필요.
     $('#addBtn').click(function(){
