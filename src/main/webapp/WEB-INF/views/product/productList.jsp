@@ -115,14 +115,14 @@
 	})
 
 	function fetchList(context,index){
-		//alert('index'+index);	
+		//alert('index'+index);
+	
 		if(isEnd == true){
 			return;
-		
 		}
 		$.ajax({
 			url : context + '/reload',
-			data : 'index='+index+'&prPrice=${prPrice}&prAlcohol=${prAlcohol}&name=${name}&Skind=${prSkind}&isSearch=${isSearch}',
+			data : 'index='+index+'&prPrice=${prPrice}&prAlcohol=${prAlcohol}&name=${name}&Skind=${skind}&isSearch=${isSearch}',
 			type : "post",
 			async: false,
 			success : function(data) {

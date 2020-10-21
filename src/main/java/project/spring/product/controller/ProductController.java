@@ -110,7 +110,10 @@ public class ProductController {
 		List productlist = null;
 		HashMap map = null;
 		int index=Integer.parseInt(request.getParameter("index"));
-		System.out.println(index+"번째 리롤!!!!!!!!!!!!!!!!!!!");
+		
+		System.out.println("===============SKIND============"+request.getParameter("Skind"));
+		
+		
 		if(request.getParameter("isSearch")!=null && request.getParameter("isSearch").equals("true")) {
 			map = new HashMap();
 			String isSearch = request.getParameter("isSearch");
@@ -153,7 +156,10 @@ public class ProductController {
 				model.addAttribute("name", name);
 			}
 			map.put("i", 1+index);
+			
+			System.out.println("MAP"+map);
 			productlist = productservice.getproduct(map);
+			System.out.println("========PRODUCTLIST"+productlist);
 				if(productlist!=null&& productlist.size() > 0) {
 					Collections.shuffle(productlist);
 					return productlist;
