@@ -2,6 +2,7 @@ package project.spring.admin.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import project.spring.beans.CommonInterface;
 
@@ -9,7 +10,11 @@ public interface AdminService extends CommonInterface{
 
 	public List memberLIst(int start, int end) throws SQLException;
 	
+	public List memberLIst(int start, int end, Map map) throws SQLException;
+	
 	public int memberCount() throws SQLException;
+	
+	public int memberCount(Map map)throws SQLException;
 	
 	public int drinkCount()throws SQLException;
 	

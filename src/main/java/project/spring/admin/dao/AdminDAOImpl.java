@@ -3,6 +3,7 @@
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,15 @@ public class AdminDAOImpl implements AdminDAO{
 		map.put("end", end);
 		
 		List list = sqlSession.selectList("admin.memberList", map);
+		return list;
+	}
+	
+	@Override
+	public List memberList(int start, int end, Map map) throws SQLException {
+		
+		map.put("start", start);
+		map.put("end", end);
+		List list = sqlSession.selectList("admin.schMemberList", map);
 		return list;
 	}
 
@@ -95,5 +105,13 @@ public class AdminDAOImpl implements AdminDAO{
 		int i = sqlSession.update("admin.approveDrink", map);
 		return i;
 	}
+
+	@Override
+	public int memberCount(Map map) throws SQLException {
+		int count = sqlSession.selectOne("admin.SchMemberCount", map);
+		return count;
+	}
+
+	
 
 }

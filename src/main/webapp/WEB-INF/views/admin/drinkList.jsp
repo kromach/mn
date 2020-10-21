@@ -87,8 +87,7 @@
 function checkApprove(dkCode, check){
 
 	alert("게시글 상태가 변경되었습니다.");
-	alert(dkCode);
-	alert(check);
+
 	
 
 	
@@ -97,7 +96,6 @@ function checkApprove(dkCode, check){
 		url: context + '/checkApprove?dkCode='+dkCode+'&'+'check='+check,
 		type:"get",
 		success : function(data){
-			alert("data : " + data);
 			if(data == 1){
 				alert("승인되었습니다");
 				$('#' + dkCode).empty();
