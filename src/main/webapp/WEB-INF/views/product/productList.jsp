@@ -14,8 +14,8 @@
 
 
 <div class="search-area">
-	<form action="productlist" name="schForm" id="schForm" method="get">
-		<input type="hidden" name="isSearch" value="true" />
+	<form action="productlist" name="schForm" id="schForm" method="get" >
+	<input type="hidden" name="isSearch" value="true" id="isSearch">
 		<div class="ssec pad-top15">
 			<p class="s_label fl">주류구분</p>
 			<select name="Skind" class="sel short">
@@ -31,22 +31,19 @@
 		</div>
 		<div class="ssec pad-top15">
 			<p class="s_label fl">검색어 </p>
-			<input type="text" name="name" class="input" value="${name}">
+			<input type="text" name="name" id="name" class="input" value="${name}">
 		</div>
 		<div class="clfix ssec pad-top15" style="pading:10px 0;">
 			<p class="s_label fl">알콜도수</p>
-		    <div class="fl" style="width:400px"><input type="text" class="js-range-slider" name="prAlcohol"/></div>
+		    <div class="fl" style="width:400px"><input type="text" class="js-range-slider" name="prAlcohol" id="prAlcohol"/></div>
 		</div>
 		<div class="clfix ssec pad-top15" style="pading:10px 0;">
 			<p class="s_label fl">금액</p>
-		    <div class="fl" style="width:400px"><input type="text" class="js-range-slider1" name="prPrice"/></div>
+		    <div class="fl" style="width:400px"><input type="text" class="js-range-slider1" name="prPrice" id="prPrice"/></div>
 		</div>
-		<div class="ssec pad-top15"><input type="submit" value="검색" class="btn btn-sm btn-blue" /></div>
+		<div class="ssec pad-top15"><input type="submit" value="검색" class="btn btn-sm btn-blue"  /></div>
 	</form>
 </div>
-
-
-
 <div class="grid-Wrapper">
 	<div class="grid">
 		<div class="grid-sizer"></div>
@@ -63,9 +60,9 @@
 			</div>
 		</c:forEach>
 		<input type="hidden" id="index" value="0">
+		
 	</div>
 </div>
-
 <script>
 	$(function() {
 		
@@ -104,6 +101,13 @@
 	         var context = window.location.pathname.substring(0,
 						window.location.pathname.indexOf("/", 2));
 			 var index = $('#index').val();
+			 if(isSearch != null){
+				 var prPrice = $('#prPrice').val();
+				 var prAlcohol = $('#prAlcohol').val();
+				 var skind = $('#skind').val();
+				 var name = $('#name').val();
+			 }
+			 
 	         if( scrollTop + windowHeight +100 > documentHeight ){
 	        	 fetchList(context,index);
 				}
@@ -111,12 +115,14 @@
 	})
 
 	function fetchList(context,index){
+		//alert('index'+index);	
 		if(isEnd == true){
 			return;
+		
 		}
 		$.ajax({
 			url : context + '/reload',
-			data : 'index='+index,
+			data : 'index='+index+'&prPrice=${prPrice}&prAlcohol=${prAlcohol}&name=${name}&Skind=${prSkind}&isSearch=${isSearch}',
 			type : "post",
 			async: false,
 			success : function(data) {

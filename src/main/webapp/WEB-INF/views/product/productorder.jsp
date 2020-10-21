@@ -79,7 +79,9 @@
 	
 	  function insertOrder(amount,prAmount){
 	    	if (checkFormjquery()) {
-	    		$("form[name='orForm']").submit();
+	    		if(confirm("구매를 하시겠습니까?")){
+	    			$("form[name='orForm']").submit();	
+	    		}
 	    	}
 	    }
 </script>
