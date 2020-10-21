@@ -22,13 +22,13 @@
 				
 				<dl class="clear">
 					<dt>양조장</dt>
-					<dd class="clfix">${drinkInfo.dkPlace}</dd>
+					<dd>${drinkInfo.dkPlace}</dd>
 					<dt>국가 / 지역</dt>
-					<dd class="clfix">${drinkInfo.dkCountry} > ${drinkInfo.dkCity} </dd>
+					<dd>${drinkInfo.dkCountry} > ${drinkInfo.dkCity} </dd>
 					<dt>도수</dt>
-					<dd class="clfix">${drinkInfo.dkAlcohol} %</dd>
+					<dd>${drinkInfo.dkAlcohol} %</dd>
 					<dt>어울리는 안주</dt>
-					<dd class="clfix">${drinkInfo.dkFood} </dd>
+					<dd>${drinkInfo.dkFood} </dd>
 				</dl>
 				<div>
 					<input type="hidden" id="drinkLikeYN" value="${drinkLikeInfo}" />
@@ -57,13 +57,22 @@
 		<div class="detail-item detail-width6">
 			<h3 class="pad-top10 pad-bottom20 text-left">연관 게시글 보기</h3>
 			<table id="boardTbl" class="detailTbl tbl-lg">
+				<colgroup>
+					<col width="*" />
+					<col width="20%" />
+					<col width="20%" />
+				</colgroup>
 				<tr>
 					<th>제목</th>
 					<th style="min-width:100px;">작성자</th>
 					<th style="min-width:130px;">작성일</th>
 				</tr>
 				<!-- 주류코드별 작성된 글 개수 체크 메서드 & 글 불러오는 메서드 추가 필요 -->
-				
+				<c:if test="${articleCount < 1}">
+				<tr>
+					<td colspan="3"><p class="text-center font-bold" style="font-size: 15px;padding: 5px 0;color: #069;"><i class="fas fa-comment-slash"></i>아직 작성된 게시글이 없습니다.</p></td>
+				</tr>
+				</c:if>
 				<c:forEach var="article" items="${articleList}">
 				<tr>
 					<td><a href="/article/detail?idx=${article.bnIdx}">${article.bnTitle}</a></td>
@@ -106,12 +115,12 @@
 			<h3 class="pad-top10 pad-bottom20 text-left">후기 보기 (${commentStarInfo != null ? commentStarInfo.cmCount : '0'})</h3>
 			<div class="commentDiv margin-bottom30" id="commentList" style="height:500px">
 				<c:if test="${empty commentList}">  
-					<div class="clfix pad-top10" style="border-top: 1px solid #333;">
+					<div class="clfix pad-top10" style="border-top: 2px solid #333;">
 						아직 등록된 후기가 없습니다.
 					</div>
 				</c:if>
 				<c:forEach items="${commentList}" var="comment">
-					<div class="clfix pad-top10" style="border-top: 1px solid #333;">
+					<div class="item-list clfix pad-top10">
 						<div class="nm_like">
 							<!-- 작성자, 좋아요, 싫어요 -->
 							<p class="likeArea">

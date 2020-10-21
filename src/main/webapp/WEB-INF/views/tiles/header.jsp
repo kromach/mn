@@ -14,6 +14,14 @@
 
 <div id="header" class="header_color">
 	<div class="header_area clfix">
+		<div class="main_search fl">
+			<div class="search_area">
+				<form action="/search">
+					<input type="text" class="mainFilter" name="search">
+					<button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
+				</form>
+			</div>
+		</div>
 		<div class="h_logo fl">
 			<h1 class="logo">
 				<a href="/">마시는 녀석들</a>
@@ -24,14 +32,10 @@
 				<span></span><span></span><span></span>
 			</div>
 		</div>
-		<form action="/search">
-			<input type="text" class = "mainFilter" name="search">
-			<button type="submit" style="background-color: white;">검색</button>
-		</form>
 		<div class="fr h_menu">
 			<ul>
-			<li><a href="/member/modify">${sessionScope.memNickName}</a></li>
 			<c:if test="${not empty sessionScope.memId}">
+				<li><a href="/member/modify">${sessionScope.memNickName}</a></li>
 				<li><a href="/member/logout" class="logout">LOGOUT</a></li>
 			</c:if>
 			<c:if test="${empty sessionScope.memId}">	
@@ -55,8 +59,19 @@
 		<span>&nbsp;그것이 약속이니까.&nbsp;</span>
 	</div>
 </div>
-<div class="margin-bottom20" style="height: 3px; width: 100%; background: #2f4050; border-top: #23303d; border-bottom: #475665;"></div>
+<div class="margin-bottom20" style="height: 2px; width: 100%; background: #2f4050; border-top: #23303d; border-bottom: #475665;"></div>
 <nav class="rightMenu" style="display: none;">
+	<div class="member-info">
+		
+		<c:if test="${not empty sessionScope.memId}">
+			<span class="member"><a href="/member/modify">${sessionScope.memNickName}</a></span>
+			<span><a href="/member/logout" class="logout">LOGOUT</a></span>
+		</c:if>
+		<c:if test="${empty sessionScope.memId}">	
+			<span class="member"><a href="/member/login?returnPage=${path}${queryStr}">로그인하여 주세요.</a></span>
+			<span><a href="/member/login?returnPage=${path}${queryStr}" class="logout">LOGIN</a></span>
+		</c:if>	
+	</div>
 	<ul>
 		<c:if test="${sessionScope.userKind eq 'admin' }">
 		<li class="sub-menu">
