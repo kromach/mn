@@ -5,7 +5,12 @@ pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 													
 <!DOCTYPE html>													
-<html>													
+<html>						
+
+<script src="/resources/js/formCheck.js"></script>
+<script src="/resources/js/jquery.selectric.js"></script>
+<link rel="stylesheet" href="/resources/css/selectric.css">
+							
 <head>													
 <meta charset="UTF-8">													
 <title>회원정보 관리</title>													
@@ -25,7 +30,7 @@ pageEncoding="UTF-8"%>
 				<table class="tableCss table">									
 					<tr>								
 						<th>아이디</th>							
-						<th>별명</th>							
+						<th>이름</th>							
 						<th>생년월일</th>							
 						<th>신고글</th>							
 						<th>신고회수</th>							
@@ -37,7 +42,7 @@ pageEncoding="UTF-8"%>
 					<c:forEach var="memberList" items="${memberList }">								
 						<tr>							
 							<td>${memberList.id}</td>						
-							<td>${memberList.nickname}</td>						
+							<td>${memberList.name}</td>						
 							<td>${memberList.birth}</td>						
 							<td>						
 								<c:if test="${fn:length(memberList.reportNumber) > 0}">					
@@ -90,11 +95,16 @@ pageEncoding="UTF-8"%>
 						</c:if>							
 				</div>									
 				<div>									
-					<form action="memberList" name="schMember" id="schMember">								
-					<div>								
-						<span>id : <input type="text" name=schMemVal /></span>							
-					</div>								
-					<div><input type="submit" value="검색" class="btn btn-sm btn-blue" /></div>								
+					<form action="memberList" name="schMember" id="schMember" method="post">	
+						<input type="hidden" name="schCheck" value="true"/>							
+						<div>								
+							<select name="schKey">
+								<option value="ID" selected="selected">아이디</option>
+								<option value="NAME">이름</option>
+							</select>
+							<input type="text" name="schVal" class="required" msg="검색어를" />										
+							<input type="button" value="검색" class="btn btn-sm btn-blue" onclick="searchMem()" />
+						</div>								
 					</form>								
 				</div>									
 			</div><!-- <div class="grid-item grid-item--width6 "> -->										
@@ -103,7 +113,7 @@ pageEncoding="UTF-8"%>
 													
 	<!-- 데이터 스크롤해서 붙이는 스크립트  -->												
 													
-	<script type="text/javascript">												
+<script type="text/javascript">												
 	$(window).scroll(												
 		function() {											
 			// A(B+C) : document 높이 (고정)										
@@ -133,16 +143,22 @@ function exitUser(memberId){
 			success : function(data){											
 				$('#' + memberId).empty();										
 				$('#' + memberId).append('<p>강퇴됨</p>');									
-														
-														
+													
 			}											
 		})			
-	}
-										
-													
-}													
+	}									
+}				
+
 </script>													
-													
+<script>
+
+function searchMem(){
+	console.log("hi");
+	if (checkFormjquery()) {
+		$("form[name='schMember']").submit();
+	}	
+}
+</script>										
 </body>													
 													
 													
