@@ -40,8 +40,8 @@
 				    </when>
 				</choose>
 			ORDER BY INSERT_DAY DESC
-			<![CDATA[	
-			) a )aa  WHERE  r >= (30*#{pageNum})+1 and r <= (30*(#{pageNum}+1))
+			<![CDATA[				   
+			) a )aa  WHERE  r >= (30*(#{pageNum}-1))+1 and r <= (30*(#{pageNum}))
 			]]>
   		</select>
     

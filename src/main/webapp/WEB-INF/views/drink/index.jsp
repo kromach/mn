@@ -198,6 +198,7 @@
 </script>
 
 <script type="text/javascript">
+let isEnd = false;
 	$(function(){
 		$(window).scroll(function() {
 			 let $window = $(this);
@@ -206,7 +207,7 @@
 	         let documentHeight = $(document).height();
 	         var context = window.location.pathname.substring(0,
 						window.location.pathname.indexOf("/", 2));
-	         var moreVal = $('#moreVal').val()+1;
+	         var moreVal = Number($('#moreVal').val())+1;
 	         if( scrollTop + windowHeight +150 > documentHeight ){
 	 			//호출 메서드
 	 			var schDkBkind = $('#schDkBkindSV').val();
@@ -216,22 +217,39 @@
 	 			var schDkCountry = $('#schDkCountrySV').val();
 	        	 
 	 			if(schDkBkind==''&&schDkSkind==''&&schDkVal==''&&schDkAlcohol==''&&schDkCountry==''){
+	 				if(isEnd == true){
+	 					//결과가 끝까지 전에 갔으면 리턴
+	 					return;
+	 				}else{
 	 				//검색이 아닐때 reload
-	 				$.ajax({
-						type : "POST",
-						url : "drinkList",
-						data : "schDkBkind="+schDkBkind +"&schDkSkind="+schDkSkind+"&schDkVal="+schDkVal +
-						"&schDkAlcohol="+schDkAlcohol+"&schDkCountry=="+schDkCountry+"&pageNum=" + moreVal,  
-						success : function(data) {
-							$('#moreVal').val(moreVal);
-							console.log(data);
-						},
-						error : function() {
-							alert("error");
-						}
-					})
+		 				$.ajax({
+							type : "POST",
+							url : "drinkList",
+							async: false,
+							data : "schDkBkind="+schDkBkind +"&schDkSkind="+schDkSkind+"&schDkVal="+schDkVal +
+							"&schDkAlcohol="+schDkAlcohol+"&schDkCountry=="+schDkCountry+"&pageNum=" + moreVal,  
+							success : function(data) {
+								$('#moreVal').val(moreVal);
+								if(data==""){
+									isEnd = true;
+									console.log('end');
+								}
+							},
+							error : function() {
+								alert("error");
+							}
+						})
+	 				}
 	 			}else{
 	 				//검색일때 reload
+	 				if(isEnd == true){
+	 					//결과가 끝까지 전에 갔으면 리턴
+	 					return;
+	 				}else{
+	 					
+	 					$('#moreVal').val(moreVal);
+	 				
+	 				}
 	 			}
 			}
 		})

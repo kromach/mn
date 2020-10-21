@@ -119,7 +119,7 @@ public class DrinkController {
 		model.addAttribute("schDkAlcohol", schDkAlcohol);
 		model.addAttribute("schDkCountry", schDkCountry);
 		*/
-
+		System.out.println("SCHMAP============="+schMap);
 		// 검색결과
 		List<DrinkVO> drinkList = drinkService.selectDrinkServiceList(schMap);
 		
