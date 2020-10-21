@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +53,7 @@
 							<tr>
 								<td>${myArticle.bnIdx}</td>
 								<td><a href="/article/detail?idx=${myArticle.bnIdx}">${myArticle.bnTitle}</a></td>
-								<td>${myArticle.insertDay}</td>
+								<td><fmt:formatDate value="${myArticle.insertDay}" pattern="yyyy.MM.dd"/></td>
 								<td>${myArticle.readcount}</td>
 								<td>${myArticle.heart}</td>
 							</tr>
@@ -102,7 +103,7 @@
 							$('#likeArticle_result > table').append('<tr>');
 							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].bnIdx+'</td>');
 							$('#likeArticle_result > table > tr:last').append('<td><a href="/article/detail?idx='+likeArticle[i].bnIdx+'">'+likeArticle[i].bnTitle+'</a></td>');
-							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].insertDay+'</td>');
+							$('#likeArticle_result > table > tr:last').append('<td>'+ moment(new Date(likeArticle[i].insertDay)).format('YYYY.MM.DD')+'</td>');
 							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].readcount+'</td>');
 							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].heart+'</td>');
 							$('#likeArticle_result > table').append('</tr>');
@@ -112,7 +113,6 @@
 			});
 		});
 	</script>
-		
 	<script>
 		$(document).ready(function(){
 			$("#likeDrink").click(function(){
@@ -275,6 +275,5 @@
 					}
 				});
 	</script>
-	
 </body>
 </html>
