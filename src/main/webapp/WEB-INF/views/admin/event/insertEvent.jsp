@@ -164,11 +164,11 @@ $( function() {
 function searchDk(){
 	var input = $('#dkSch').val();
 	var context = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+	console.log("hihi");
 	$.ajax({
 		url: context +'/event/drinkCodeSearch?input='+input,
 		type: "get",
 		success : function(data){
-			console.log(data)
 			$('#option').empty();
 			$("#option").append("<option value=>주류 선택</option>");
 
@@ -178,10 +178,8 @@ function searchDk(){
 				}
 			}
 		}
-		$(".sel").selectric("refresh");
 	});
-
-
+	$(".sel").selectric("refresh");
 }
 </script>
 
