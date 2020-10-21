@@ -143,13 +143,11 @@ public class DrinkController {
 		if(commentStarInfo != null) {
 			commentCount = String.valueOf(commentStarInfo.get("cmCount"));
 		}
-		
+
 		List<CommentVO> commentList = null;
-		if((Integer.parseInt(commentCount)) > 1) {
+		if((Integer.parseInt(commentCount)) > 0) {
 			commentList = drinkService.selectCommentServiceList(dkCode);
 		}
-		
-		//System.out.println(commentList);
 		
 		// 주류별 태그 정보
 		List<HashMap> tagCloudInfo = drinkService.selectTagCloudServiceInfo(dkCode);
@@ -364,6 +362,7 @@ public class DrinkController {
 			schDkCountry = (String)request.getParameter("schDkCountry");
 		}
 		
+		model.addAttribute("isSearch", request.getParameter("isSearch"));
 		model.addAttribute("schDkBkind", schDkBkind);
 		model.addAttribute("schDkSkind", schDkSkind);
 		model.addAttribute("schDkAlcohol", schDkAlcohol);
@@ -457,7 +456,7 @@ public class DrinkController {
 	}
 
 	@RequestMapping("comment")
-	public String CommentInit(HttpServletRequest request, Model model) throws SQLException {
+	public String CommentInitSs(HttpServletRequest request, Model model) throws SQLException {
 		
 		String dkCode = (String)request.getParameter("dkCode");
 		
@@ -472,7 +471,7 @@ public class DrinkController {
 	
 	// 변경 처리
 	@RequestMapping("commentPro")
-	public String CommentProInit(CommentVO commentVo, HttpServletResponse response, Model model) throws SQLException, IOException {
+	public String CommentProInitSs(CommentVO commentVo, HttpServletResponse response, Model model) throws SQLException, IOException {
 		
 		// (1) 한줄평 입력
 		String result = drinkService.insertComment(commentVo);
@@ -505,7 +504,7 @@ public class DrinkController {
 		model.addAttribute("dkCode", commentVo.getDkCode());
 		//request.setAttribute("dkCode", dkCode);
 
-		return "drink/detail";
+		return "redirect:/drink/detail";
 	}	
 	
 	// AJAX - 주류 정보 좋아요 / 좋아요 취소

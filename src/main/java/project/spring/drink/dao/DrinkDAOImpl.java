@@ -48,18 +48,15 @@ public class DrinkDAOImpl implements DrinkDAO {
 		return sqlSession.selectOne("drink.selectDrinkServiceInfo", dkCode);
 	}
 
-
-	@Override
-	public HashMap selectCommentStarServiceInfo(String dkCode) throws SQLException {
-		return sqlSession.selectOne("drink.selectCommentStarServiceInfo", dkCode);
-	}
-
-
 	@Override
 	public List<HashMap> selectTagCloudServiceInfo(String dkCode) throws SQLException {
 		return sqlSession.selectList("drink.selectTagCloudServiceInfo", dkCode);
 	}
 
+	@Override
+	public HashMap selectCommentStarServiceInfo(String dkCode) throws SQLException {
+		return sqlSession.selectOne("drink.selectCommentStarServiceInfo", dkCode);
+	}
 
 	@Override
 	public List<CommentVO> selectCommentServiceList(String dkCode) throws SQLException {
