@@ -80,7 +80,7 @@
   	</select>
   	
   	<select id="alreadyLike" parameterType="hashmap" resultType="int">
-  		select count(*) from board_like where nick = #{memNickName} and BN_IDX = #{num}
+  		select count(*) from board_like where nick = #{memId} and BN_IDX = #{num}
   	</select>
   	
   	<select id="isAlreadyReported" parameterType="string" resultType="string">
@@ -172,7 +172,7 @@
   	</update>
   	
   	<delete id="like_log_undo"> 
-  		delete from board_like where bn_idx = #{num} and nick = #{memNickName} 
+  		delete from board_like where bn_idx = #{num} and nick = #{memId} 
   	</delete>
   	
   	<update id="deleteReply" parameterType="hashmap">

@@ -95,8 +95,8 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 	@Override
 	public int unlike(Integer num,
-			String memNickName, String insertId) {
-		return articleDAOimpl.unlike(num,memNickName,insertId);
+			String memId, String insertId) {
+		return articleDAOimpl.unlike(num,memId,insertId);
 	}
 	@Override
 	public int report(Integer num,

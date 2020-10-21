@@ -316,13 +316,13 @@ public class ArticleController {
 		@RequestMapping(value = "/unlike")
 		@ResponseBody
 		public int unlikeSs(@RequestParam(name="num",required = false) Integer num,
-				@RequestParam(name="nick",required = false) String memNickName,
+				@RequestParam(name="id",required = false) String id,
 				@RequestParam(name="insertId",required = false) String insertId
 				)throws SQLException {
 			
 			//기본값 -1
 			int result = -1;
-			result = articleService.unlike(num,memNickName,insertId);
+			result = articleService.unlike(num,id,insertId);
 			//unlike
 			return result;
 		}
