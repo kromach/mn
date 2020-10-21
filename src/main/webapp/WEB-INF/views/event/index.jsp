@@ -5,6 +5,11 @@
 	<div class="grid">  
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
+		<c:if test="${count == 0 }">
+			<div class="grid-item6">
+				<h1>진행중인 이벤트가 없습니다</h1>
+			</div>
+		</c:if>
 		<c:forEach var="eventList" items="${eventList}">
 			<div class="grid-item">
 				<a href="/event/detail?eventCode=${eventList.eventCode }">
