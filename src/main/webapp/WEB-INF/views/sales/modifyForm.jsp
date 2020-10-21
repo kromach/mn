@@ -72,7 +72,8 @@
 						<th>상품 이미지</th>
 						<td>
 							<input type="hidden" name="oldImg" value="${detail.prImg}">
-							<input type="file" name="primage" class="required" msg="이미지를"/>${detail.prImg}
+							<img class="prImg" src="${detail.prImg}" alt="${detail.prName}" onerror="this.src='/resources/img/noImage.jpg'" />
+							<p class="pad-y10"><input type="file" name="primage" class="required" msg="이미지를"/>
 						</td>
 					</tr>
 					<tr>

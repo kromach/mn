@@ -158,6 +158,11 @@ public class SalesController {
 		}
 		
 		List secondCategory = salesService.getCategory();
+		
+		System.out.println("현재 Img 이름 : " +dto.getPrImg());
+		
+		
+		
 		model.addAttribute("secondCategory", secondCategory);
 		model.addAttribute("detail", dto);
 		
