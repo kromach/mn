@@ -72,7 +72,7 @@
 						<th>상품 이미지</th>
 						<td>
 							<input type="hidden" name="oldImg" value="${detail.prImg}">
-							<input type="file" name="primage" class="required" msg="이미지를"/>
+							<input type="file" name="primage" class="required" msg="이미지를"/>${detail.prImg}
 						</td>
 					</tr>
 					<tr>
@@ -131,7 +131,7 @@
 					<tr>
 						<th>주류 정보</th>
 						<td>
-							<textarea name="prContent" id="prContent" type="textarea" style="width:98%" >${detail.prContent}</textarea>
+							<textarea name="prContent" id="prContent" style="width:98%" >${detail.prContent}</textarea>
 							<script type="text/javascript">CKEDITOR.replace( 'prContent' , ckedit_config);</script>
 						</td>
 					</tr>
@@ -172,9 +172,17 @@
 	});
 
     function modifyProduct(){
-    	console.log("modifyProductFormCheck");
     	if (checkFormjquery()) {
-    		$("form[name='prForm']").submit(); 
+    		
+    		// 에디터 입력값 체크 
+    		var value = CKEDITOR.instances['prContent'].getData();
+    		if(!value) {
+	    		alert("상품 정보를 입력해주세요.");    			
+	    		return false;
+    		}    		
+    		if (confirm("정보를 입력하시겠습니까?")) {
+	    		$("form[name='prForm']").submit();
+			}
     	}
     }
     

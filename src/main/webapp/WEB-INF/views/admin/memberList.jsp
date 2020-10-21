@@ -2,6 +2,7 @@
 pageEncoding="UTF-8"%>													
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>													
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>													
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 													
 <!DOCTYPE html>													
 <html>													
@@ -53,7 +54,10 @@ pageEncoding="UTF-8"%>
 							<c:if test="${memberList.reportCount == 0 }">						
 							<td></td>						
 							</c:if>						
-							<td>${memberList.insertDate}</td>						
+							<td>
+								<fmt:formatDate value="${memberList.insertDate}" var="date" pattern="yyyy-MM-dd"  />
+								${date}
+							</td>						
 							<td>						
 							<p id="${memberList.id }">						
 								<c:if test="${memberList.isBan == 'N'}">					

@@ -16,10 +16,8 @@
 			type : "get",
 			success : function(data) {
 				console.log(data);
-
 				$('#option').empty();
 				$('#option').append('<option value="option">선택</option>');
-
 				var dataLog;
 				for ( var i in data) {
 					if (data[i].length > 0) {
@@ -41,7 +39,6 @@
 		var dialogName = ev.data.name;
 		var dialog = ev.data.definition.dialog;
 		var dialogDefinition = ev.data.definition;
-
 		if (dialogName == 'image') {
 			dialog.on('show', function (obj) {
 				this.selectPage('Upload'); //사진 추가 버튼 클릭시 업로드탭으로 시작
@@ -57,14 +54,19 @@
 	}
 	// ckeditor 설정 종료
 	//clickEvent부여 및 유효성 검사
-	$(function() {
-		$("#addBtn").click(function() {
-			checkFormjquery();
-			if (checkFormjquery()){
-				$("#frm").submit();
+	function insert(){
+		if (checkFormjquery()) {
+			// 에디터 입력값 체크 
+    		var value = CKEDITOR.instances['ckeditor'].getData();
+    		if(!value) {
+	    		alert("후기를 입력해주세요.");    			
+	    		return false;
+    		}    		
+    		if (confirm("후기를 입력하시겠습니까?")) {
+	    		$("form[name='inputForm']").submit();
 			}
-		});
-	});
+		}
+	}
 </script>
 
 	<div class="grid-Wrapper">
@@ -72,7 +74,7 @@
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
-				<form action="/product/writePro" method="post" id="frm" accept-charset="utf-8">
+				<form action="/product/writePro" method="post" id="frm" accept-charset="utf-8" name="inputForm">
 				<input type="hidden" name="prcode" value="${prcode}" />
 				<input type="hidden" name="prname" value="${prname}" />
 				<input type="hidden" name="kind" value="${kind}" />
@@ -80,8 +82,7 @@
 					<tr>
 						<th>제목</th>
 						<td><input type="text" name="bnTitle" id="bnTitle"
-							class="boardTitle_large" class="required" msg="제목을"
-							placeholder="제목"></td>
+							class="boardTitle_large required" msg="제목을" placeholder="제목"></td>
 					</tr>
 					<tr>
 						<th>술이름</th>
@@ -90,8 +91,8 @@
 				
 					<tr>
 						<td style="margin: 0; padding: 0;" colspan="2">
-						<textarea name="content" id="ckeditor" type="textarea" class="required"
-						msg="내용을" rows="10" cols="100" style="width: 100%; height: 600px;">
+						<textarea name="content" id="ckeditor" type="textarea" 
+						rows="10" cols="100" style="width: 100%; height: 600px;">
 						</textarea>
 						<script type="text/javascript">CKEDITOR.replace('ckeditor', ckedit_config); </script>
 						</td>
@@ -101,7 +102,7 @@
 				</table>
 				</form>
 				<div class="text-center pad-top10">
-					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="전송">
+					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="전송" onclick="insert()">
 					<input type="button" class="btn btn-md btn-grey" value="취소" onclick="window.location='/product/productdetail?prcode=${prcode}'" />
 				</div>
 			</div>

@@ -4,7 +4,7 @@
 
 <!-- css 확인하기 가운데로 안와요ㅜㅜㅜㅜ -->
 <div class="grid-Wrapper">
-	<div class="grid"> 
+	<div class="grid2"> 
 	
 		<div class="grid-sizer"></div> 
 		<div class="gutter-sizer"></div>
@@ -15,7 +15,7 @@
 				<img id="mainImg" src=" ${vo.thumImg}" alt=" ${vo.thumImg}">
 			</div>
 			
-			<div  class="detail-item detail-width4">
+			<div  class="detail-item detail-width2">
 				<div class="detail-info text-left">
 					<div class="navi margin-bottom5">
 						<a href="productlist">${vo.prBkindValue}</a> > <a href="productlist?isSearch=true&Skind=${vo.prSkind}">${vo.prSkindValue}</a>

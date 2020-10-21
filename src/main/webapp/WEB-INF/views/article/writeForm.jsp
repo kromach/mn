@@ -1,11 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script src="/resources/js/jquery.selectric.js"></script>
+<link rel="stylesheet" href="/resources/css/selectric.css">
 <!-- 유효성검사 js -->
 <script src="/resources/js/formCheck.js"></script> 
 <!-- 에디터 js -->
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="/resources/ckeditor/adapters/jquery.js"></script>
 <script charset="utf-8">
+	function insert(){
+		if (checkFormjquery()) {
+			// 에디터 입력값 체크 
+			var value = CKEDITOR.instances['ckeditor'].getData();
+			if(!value) {
+	    		alert("게시글을 입력해주세요.");    			
+	    		return false;
+			}    		
+			if (confirm("정보를 입력하시겠습니까?")) {
+	    		$("form[name='inputForm']").submit();
+			}
+		}
+	}
+
+
 	function searchDk() {
 		var input = $('#dkSch').val();
 		var context = window.location.pathname.substring(0,
@@ -25,7 +42,7 @@
 					if (data[i].length > 0) {
 						for(var j in data[i]){
 							dataArr.push(data[i][j]);
-							forCheck.push(data[i][j].D K_NAME);
+							forCheck.push(data[i][j].DK_NAME);
 						}
 					}
 				}
@@ -49,6 +66,7 @@
 			   		 $('#option').append('<option value="'+uniqueArr[j]+'">'
 							+j + '</option>'); 
 			   	}
+			   	$("#option").selectric("refresh");
 			}
 		});
 	}
@@ -73,15 +91,12 @@
 		toolbar : ''
 	}
 	// ckeditor 설정 종료
-	//clickEvent부여 및 유효성 검사
-	$(function() {
-		$("#addBtn").click(function() {
-			checkFormjquery();
-			if (checkFormjquery()){
-				$("#frm").submit();
-			}
-		});
+	
+	// select box 설정
+	$(function(){
+		$("#option").selectric();
 	});
+	
 </script>
 <body>
 	<div class="grid-Wrapper">
@@ -89,13 +104,12 @@
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
-				<form action="/article/writePro" method="post" id="frm" accept-charset="utf-8">
+				<form action="/article/writePro" method="post" id="frm" accept-charset="utf-8" name="inputForm">
 				<table class="tableCss table">
 					<tr>
 						<th>제목</th>
-						<td><input type="text" name="bnTitle" id="bnTitle"
-							class="boardTitle_large" class="required" msg="제목을"
-							placeholder="제목"></td>
+						<td><input type="text" name="bnTitle" id="bnTitle" class="boardTitle_large required" 
+						msg="제목을" placeholder="제목"></td>
 					</tr>
 					<tr>
 						<th>술이름</th>
@@ -121,7 +135,7 @@
 				</table>
 				</form>
 				<div class="text-center pad-top10">
-					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="전송">
+					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="전송" onclick="insert()">
 					<input type="button" class="btn btn-md btn-grey" value="취소" onclick="window.location='/article'" />
 				</div>
 			</div>

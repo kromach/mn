@@ -50,11 +50,6 @@
 		<div class="detail-item detail-width6">
 			<h3 class="text-left pad-y10">주류 정보 등록</h3>
 			<form action="insertPro" name="dkForm" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="dkItem1" id="dkItem1" />
-				<input type="hidden" name="dkItem2" id="dkItem2" />
-				<input type="hidden" name="dkItem3" id="dkItem3" />
-				<input type="hidden" name="dkItem4" id="dkItem4" />
-				<input type="hidden" name="dkItem5" id="dkItem5" />
 				<table class="tableCss tbl-lg text-left">
 					<tr>
 						<th>주류 종류</th>
@@ -109,8 +104,15 @@
 					</tr>
 					<tr>
 						<th>평가</th>
-						<td id="star_grade">
-							대분류를 선택하면 평가항목이 노출됩니다.	
+						<td>
+							<input type="hidden" name="dkItem1" id="dkItem1" class="required" msg="항목 점수를" />
+							<input type="hidden" name="dkItem2" id="dkItem2" class="required" msg="항목 점수를" />
+							<input type="hidden" name="dkItem3" id="dkItem3" class="required" msg="항목 점수를" />
+							<input type="hidden" name="dkItem4" id="dkItem4" class="required" msg="항목 점수를" />
+							<input type="hidden" name="dkItem5" id="dkItem5" class="required" msg="항목 점수를" />
+							<div id="star_grade">			
+								대분류를 선택하면 평가항목이 노출됩니다.	
+							</div>
 						</td>
 					</tr>
 					<tr>

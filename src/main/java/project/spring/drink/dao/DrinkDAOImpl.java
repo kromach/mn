@@ -131,6 +131,17 @@ public class DrinkDAOImpl implements DrinkDAO {
 		System.out.println("like 업데이트 개수 " + res );
 	}
 
+	@Override
+	public String insertComment(CommentVO commentVo) throws SQLException {
+		int res = sqlSession.insert("drink.insertComment", commentVo);
+		String result = "등록이 실패 하였습니다. 다시 시도해주세요.";
+		if(res == 1) {
+			result = "등록이 완료 되었습니다.";
+		}
+		
+		return result;
+	}
+
 	/*
 	@Override
 	public void insertAticle(BoardDTO dto) throws SQLException {

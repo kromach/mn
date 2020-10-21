@@ -96,8 +96,7 @@ public class ProductController {
 				productlist = productservice.getproduct(0);
 			}
 		}
-		
-		Collections.shuffle(productlist);
+		if(productlist!=null)Collections.shuffle(productlist);
 		
 		model.addAttribute("productlist", productlist);
 		model.addAttribute("count", count);
@@ -109,8 +108,8 @@ public class ProductController {
 	public List reload(@RequestParam(name="index") int index)throws SQLException {
 		
 		List productlist = productservice.getproduct(index + 1);
-		Collections.shuffle(productlist);
-		if(productlist.size() > 0) {
+		if(productlist!=null&& productlist.size() > 0) {
+			Collections.shuffle(productlist);
 			return productlist;
 		}else {
 			return null;

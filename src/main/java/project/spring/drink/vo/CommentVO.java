@@ -14,6 +14,7 @@ public class CommentVO {
 	private int item3;
 	private int item4;
 	private int item5;
+	private String dkTags;
 	private String insertId;
 	private String nickname;
 	private int writerTitleCnt;
@@ -80,6 +81,12 @@ public class CommentVO {
 	}
 	public void setItem5(int item5) {
 		this.item5 = item5;
+	}
+	public String getDkTags() {
+		return dkTags;
+	}
+	public void setDkTags(String dkTags) {
+		this.dkTags = dkTags;
 	}
 	public String getInsertId() {
 		return insertId;
