@@ -26,16 +26,16 @@
 			<div id="tmp" class="grid-item grid-item--width6">
 				<h1 class="text-left pad-y10">마이 페이지</h1>
 				<div class="linkBar">
-					<button class="btn btn-md btn-blue" onclick="window.location='/myAct'">내 글 보기</button>
+					<button class="btn btn-md btn-mint" onclick="window.location='/myAct'" id="myArticle">내 글 보기</button>
 				</div>
 				<div class="linkBar" id="likeArticle">
-					<button class="btn btn-md btn-blue">글 좋아요</button>
+					<button class="btn btn-md btn-blue" id="articleLike">글 좋아요</button>
 				</div>
 				<div class="linkBar" id="likeDrink">
-					<button class="btn btn-md btn-blue">술 좋아요</button>
+					<button class="btn btn-md btn-blue" id="drinkLike">술 좋아요</button>
 				</div>
 				<div class="linkBar" id="getAllTitle">
-					<button class="btn btn-md btn-blue">칭호</button>
+					<button class="btn btn-md btn-blue" id="myTitle">칭호</button>
 				</div>
 				<div id="index">
 					<table class="tableCss tbl-lg margin-bottom10" style="width: 100%;">
@@ -133,6 +133,11 @@
 						$('#likeArticle_result > table > tr').append('<th>추천</th>');
 						$('#likeArticle_result > table').append('</tr>');		
 						
+						$('#myArticle').attr('class','btn btn-md btn-blue');
+						$('#drinkLike').attr('class','btn btn-md btn-blue');
+						$('#myTitle').attr('class','btn btn-md btn-blue');
+						$('#articleLike').attr('class','btn btn-md btn-mint');
+						
 						for(var i in likeArticle){
 							console.log(likeArticle[i]);
 							$('#likeArticle_result > table').append('<tr>');
@@ -168,6 +173,11 @@
 						$('#likeArticle_result').empty();
 						$('#tmp').attr('class','grid-item grid-item--width6');	
 						
+						$('#myArticle').attr('class','btn btn-md btn-blue');
+						$('#drinkLike').attr('class','btn btn-md btn-mint');
+						$('#myTitle').attr('class','btn btn-md btn-blue');
+						$('#articleLike').attr('class','btn btn-md btn-blue');
+						
 						if(data.likeDrink == null && data.likeProduct == null){
 							$('#likeDrink_result').append('<h2> 좋아요한 게시글이 없습니다. </h2>');
 						}
@@ -188,6 +198,11 @@
 	<script>
 			$(document).ready(function(){
 			$("#getAllTitle").click(function(){
+				
+				$('#myArticle').attr('class','btn btn-md btn-blue');
+				$('#drinkLike').attr('class','btn btn-md btn-blue');
+				$('#myTitle').attr('class','btn btn-md btn-mint');
+				$('#articleLike').attr('class','btn btn-md btn-blue');
 				
 				$.ajax({
 					type:"POST",
