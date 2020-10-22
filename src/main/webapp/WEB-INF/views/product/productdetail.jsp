@@ -159,10 +159,10 @@
 				sel.selectedIndex--;
 			}
 		} else if (upDown == 'P') {
-			if (sel.selectedIndex < 11) {
+			if (sel.selectedIndex < 10) {
 				sel.selectedIndex++;
 			}else if(sel.selectedIndex == 10){
-				alert("지나친 음주는 건강에 해롭습니다");
+				alert("경고:지나친 음주는 간경화나 간암을 일으키며 운전이나 작업 중 사고 발생률을 높입니다");
 				sel.selectedIndex = 10;
 			}
 		}
