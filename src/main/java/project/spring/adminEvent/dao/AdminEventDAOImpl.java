@@ -91,6 +91,7 @@ public class AdminEventDAOImpl implements AdminEventDAO {
 		return count;
 	}
 	
+	@Override
 	public int eventCount(Map schMap)throws SQLException{
 		
 
@@ -112,6 +113,7 @@ public class AdminEventDAOImpl implements AdminEventDAO {
 		return eventList;
 	}
 	
+	@Override
 	public List eventList(int startRow, int endRow, Map schMap)throws SQLException{
 		
 		schMap.put("start", startRow);
