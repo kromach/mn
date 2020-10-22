@@ -58,11 +58,18 @@ $( function() {
 	<div class="grid">  
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
-		<div class="grid-item grid-item--width6 ">
-			<h1>이벤트 목록</h1>
+			<div class="detail-item detail-width6" >
+			<h1 class="text-left pad-y10">이벤트목록</h1>
 			<form action="eventList" method="get">
 				<input type="hidden" name="isSearch" value="true">
 				<table class="tableCss table">
+					<colgroup>
+						<col width="15%" />
+						<col width="*" />
+						<col width="10%" />
+						<col width="25%" />
+						<col width="10%" />
+					</colgroup>
 					<tr>
 						<th>이벤트명</th>
 						<td><input name="schEvName"></td>
@@ -98,6 +105,13 @@ $( function() {
 			</form>
 		
 			<table class="tableCss table">
+				<colgroup>
+					<col width="15%" />
+					<col width="*" />
+					<col width="10%" />
+					<col width="25%" />
+					<col width="10%" />
+				</colgroup>
 				<tr align="right">
 					<td colspan="6">
 						<button class="btn btn-md btn-blue"  onclick="window.location='/admin/event/insertEvent?pageNum=${pageNum}'">등록</button>
@@ -142,21 +156,28 @@ $( function() {
 			</table>
 			
 			<!-- pager -->
-				<div align="center" class="pageNums">
+				<div class="page_wrap">
+				<div class="page_nation">
 						<!-- 게시글이 있을때만 보여주기 -->
 						<c:if test="${count>0}">
 							<!-------------------------------------------------------------------------->
 							<c:if test="${pageVO.startPage > pageVO.pageBlock}">
-								<a href="/admin/event/eventList?pageNum=${pageVO.startPage-pageVO.pageBlock}">&lt;</a>
+								<a class="arrow next" href="/admin/event/eventList?pageNum=${pageVO.startPage-pageVO.pageBlock}">&lt;</a>
 							</c:if>
-							<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1"> 
-										<a href="/admin/event/eventList?pageNum=${i}" class="pageNums">&nbsp;${i}&nbsp;</a>
+							<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1">
+								<c:if test="${i == pageNum}">
+									<a class="active">${i}</a>		
+								</c:if>			
+								<c:if test="${i != pageNum}">			
+									<a href="/admin/event/eventList?pageNum=${i}" class="pageNums">&nbsp;${i}&nbsp;</a>			
+								</c:if>		
 							</c:forEach>
 							<c:if test="${pageVO.endPage < pageVO.pageCount}">
-								<a href="/admin/event/eventList?pageNum=${pageVO.startPage+pageVO.pageBlock}">&gt;</a>
+								<a class="arrow next" href="/admin/event/eventList?pageNum=${pageVO.startPage+pageVO.pageBlock}">&gt;</a>
 							</c:if>
 							<!-------------------------------------------------------------------------->
 						</c:if>
+				</div>
 				</div>
 		</div> <!-- grid-item--width6  -->
 	</div><!-- grid -->
