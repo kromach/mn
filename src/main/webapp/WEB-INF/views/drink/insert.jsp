@@ -146,7 +146,7 @@
 		//$("input[name='dkFood']").val("페퍼로니 피자, 바비큐, 팥 디저트 류와 잘 어울림");
 		//$("input[name='dkName']").val("말표맥주");
 		//$("input[name='dkPlace']").val("스퀴즈 브루어리");
-		$("input[name='dkCountry']").val("한국");
+		//$("input[name='dkCountry']").val("한국");
 		//$("input[name='dkCity']").val("강원도");
 		//$("input[name='dkAlcohol']").val("4.5");
 		//$("input[name='dkTags']").val("말표, 흑맥주,말표맥주,MALPYO,CU,콜라보,에스프레소,다크초콜릿,밤");

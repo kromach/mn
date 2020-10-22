@@ -281,8 +281,8 @@ public class ProductController {
 		model.addAttribute("myordercount",myordercount);
 		model.addAttribute("myorderlist",myorderlist);
 		
-		
-		return "product/myorderlist.mn";
+//		return "product/myorderlist.mn";
+		return "redirect:/product/myorderlist";
 	}
 	
 	@RequestMapping("modifyorder")
