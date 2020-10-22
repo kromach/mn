@@ -170,35 +170,41 @@
 	</select>
 	
 	<select id="schgetproduct" parameterType="map" resultType="productvo">
-		select * from product_info
-			<trim prefix="where" prefixOverrides="and">
-				<if test="skind !=null">
-					AND pr_skind = #{skind}
-				</if> 
-				<if test="name !=null">
-					AND pr_name like '%' || #{name} || '%'
-				</if> 
-				<if test="strprice != null">
-  					<![CDATA[
-  						AND pr_price >= #{strprice} 
-  					 ]]>
-  				</if>
-  				<if test="endprice != null">
-					<![CDATA[
-  						AND pr_price <= #{endprice} 
-  					 ]]>  				
-  				</if>
-  				<if test="stral != null">
-  					<![CDATA[
-  						AND pr_alcohol >= #{stral} 
-  					 ]]>
-  				</if>
-  				<if test="endal != null">
-					<![CDATA[
-  						AND pr_alcohol <= #{endal} 
-  					 ]]>  				
-  				</if>
-			</trim>
+  		select * from(
+	  			select a.*, rownum as rnum from(
+					select * from product_info
+						<trim prefix="where" prefixOverrides="and">
+							<if test="skind !=null">
+								AND pr_skind = #{skind}
+							</if> 
+							<if test="name !=null">
+								AND pr_name like '%' || #{name} || '%'
+							</if> 
+							<if test="strprice != null">
+			  					<![CDATA[
+			  						AND pr_price >= #{strprice} 
+			  					 ]]>
+			  				</if>
+			  				<if test="endprice != null">
+								<![CDATA[
+			  						AND pr_price <= #{endprice} 
+			  					 ]]>  				
+			  				</if>
+			  				<if test="stral != null">
+			  					<![CDATA[
+			  						AND pr_alcohol >= #{stral} 
+			  					 ]]>
+			  				</if>
+			  				<if test="endal != null">
+								<![CDATA[
+			  						AND pr_alcohol <= #{endal} 
+			  					 ]]>  				
+			  				</if>
+						</trim>
+						 and pr_use ='Y') a 
+			 <![CDATA[
+	  			) where rnum >= (10*#{i})+1 and rnum <= (10*(#{i}+1))	
+	  			]]>
 	</select>
 	
 	<select id="updateorder" parameterType="ordervo" resultType="int">

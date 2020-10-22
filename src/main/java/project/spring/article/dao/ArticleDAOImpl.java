@@ -15,6 +15,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -150,11 +151,11 @@ public class ArticleDAOImpl implements ArticleDAO {
 		return -1;
 	}
 	@Override
-	public int unlike(Integer num,
-			String memNickName, String insertId) {
+	public int unlike(Integer num,String memId,String insertId) {
 		HashMap map = new HashMap();
-		map.put("memNickName", memNickName);
+		map.put("memId", memId);
 		map.put("num",num);
+		System.out.println("UNLIKE DATA"+map);
 		int count = sqlSession.selectOne("article.alreadyLike",map);
 		System.out.println("alreadyCountUnLike"+count);
 		if(count == 1) {

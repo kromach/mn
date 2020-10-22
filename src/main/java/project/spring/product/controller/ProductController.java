@@ -84,7 +84,8 @@ public class ProductController {
 				map.put("name", name);
 				model.addAttribute("name", name);
 			}
-			count = productservice.getproductcount(map);	
+			count = productservice.getproductcount(map);
+			map.put("i", 0);
 			if(count>0) {
 				productlist = productservice.getproduct(map);
 			}
@@ -97,7 +98,7 @@ public class ProductController {
 			}
 		}
 		if(productlist!=null)Collections.shuffle(productlist);
-		
+		model.addAttribute("isSearch", request.getParameter("isSearch"));
 		model.addAttribute("productlist", productlist);
 		model.addAttribute("count", count);
 		return "product/productList.mn";
@@ -105,14 +106,76 @@ public class ProductController {
 	
 	@RequestMapping("/reload")
 	@ResponseBody
-	public List reload(@RequestParam(name="index") int index)throws SQLException {
+	public List reload(HttpServletRequest request, Model model)throws SQLException {
+		List productlist = null;
+		HashMap map = null;
+		int index=Integer.parseInt(request.getParameter("index"));
 		
-		List productlist = productservice.getproduct(index + 1);
-		if(productlist!=null&& productlist.size() > 0) {
-			Collections.shuffle(productlist);
-			return productlist;
-		}else {
-			return null;
+		System.out.println("===============SKIND============"+request.getParameter("Skind"));
+		
+		
+		if(request.getParameter("isSearch")!=null && request.getParameter("isSearch").equals("true")) {
+			map = new HashMap();
+			String isSearch = request.getParameter("isSearch");
+			System.out.println(isSearch);
+			System.out.println(index+"번째 검색 리롤!!!!!!!!!!!!!!!!!!!");
+			if(request.getParameter("prPrice")!=null) {
+				String prPrice = request.getParameter("prPrice");
+				String price[] = prPrice.split(";");
+				int strprice =Integer.parseInt(price[0]);
+				int endprice =Integer.parseInt(price[1]);
+				System.out.println(strprice);
+				System.out.println(endprice);
+				map.put("strprice", strprice);
+				map.put("endprice", endprice);
+				model.addAttribute("prPrice", prPrice);
+			}
+			if(request.getParameter("prAlcohol")!=null) {
+				String prAlcohol = request.getParameter("prAlcohol");	
+				String alcohol[] = prAlcohol.split(";");
+				int stral =Integer.parseInt(alcohol[0]);
+				int endal =Integer.parseInt(alcohol[1]);
+				System.out.println(stral);
+				System.out.println(endal);
+				map.put("stral", stral);
+				map.put("endal", endal);
+				model.addAttribute("prAlcohol", prAlcohol);
+			}
+				
+			if(request.getParameter("Skind")!= null && !request.getParameter("Skind").equals("소분류 선택") && request.getParameter("Skind").length() >0) {
+				String skind = request.getParameter("Skind");
+				System.out.println("skind :"+skind);
+				map.put("skind", skind);
+				model.addAttribute("skind", skind);
+			}
+			
+			if(request.getParameter("name")!= null && !request.getParameter("name").equals("")) {
+				String name = request.getParameter("name");
+				System.out.println(name);
+				map.put("name", name);
+				model.addAttribute("name", name);
+			}
+			map.put("i", 1+index);
+			
+			System.out.println("MAP"+map);
+			productlist = productservice.getproduct(map);
+			System.out.println("========PRODUCTLIST"+productlist);
+				if(productlist!=null&& productlist.size() > 0) {
+					Collections.shuffle(productlist);
+					return productlist;
+				}else {
+					return null;
+				}
+		}
+		
+		else {
+		productlist = productservice.getproduct(index + 1);
+			if(productlist!=null&& productlist.size() > 0) {
+				Collections.shuffle(productlist);
+				return productlist;
+			}else {
+				return null;
+			}
 		}
 	}
 	
@@ -145,19 +208,17 @@ public class ProductController {
 	
 	@RequestMapping("myorderlist")
 	public String myorderlistSs (Model model, HttpSession session) throws SQLException {
+	
+	// 세션 불러와서 세션아이디로 주문 목록 불러오기 	
 	List myorderlist = null;
 	int myordercount = 0;
-	
-	
 	String id = (String)session.getAttribute("memId");
 	myordercount = productservice.myordercount(id);
-	
 	if(myordercount>0) {
 		myorderlist = productservice.myorderlist(id,0);
 	}
 	model.addAttribute("myordercount",myordercount);
 	model.addAttribute("myorderlist",myorderlist);
-	
 	
 	return "product/myorderlist.mn";
 	}
@@ -206,7 +267,9 @@ public class ProductController {
 		//ordervo.setReceiverTel(receiverTel);
 		int count = productservice.getamount(prcode);
 		
-		if(count < buy)
+		if(count < buy) {
+			return "redirect:productdetail?prcode="+prcode;
+		}
 		productservice.insertorderinfo(ordervo);
 		
 		String id = (String)session.getAttribute("memId");
@@ -365,7 +428,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("writeform")
-	public String writerform (HttpServletRequest request, Model model) throws SQLException{
+	public String writerformSs (HttpServletRequest request, Model model) throws SQLException{
 		String kind = request.getParameter("kind");
 		String prcode = request.getParameter("prcode");
 		String prname = request.getParameter("prname");
@@ -379,7 +442,7 @@ public class ProductController {
 	
 	//insertTag
 			@RequestMapping("writePro")
-			public String writePro(ArticleDTO dto, HttpServletRequest request)  throws IOException, FileUploadException {
+			public String writeProSs(ArticleDTO dto, HttpServletRequest request)  throws IOException, FileUploadException {
 				String kind = request.getParameter("kind");
 				String prcode = request.getParameter("prcode");
 				String prname = request.getParameter("prname");
@@ -394,7 +457,7 @@ public class ProductController {
 			}
 			
 	@RequestMapping("reviewdetail")
-	public String reviewdetail (HttpServletRequest request, Model model) throws SQLException{
+	public String reviewdetailSs (HttpServletRequest request, Model model) throws SQLException{
 		String bnIdx_ = request.getParameter("bnIdx");
 		int bnIdx = Integer.parseInt(bnIdx_);
 		
@@ -407,7 +470,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("deletereview")
-	public String deletereview(HttpServletRequest request) throws SQLException {
+	public String deletereviewSs (HttpServletRequest request) throws SQLException {
 		String prcode = request.getParameter("dkCoed");
 		String bnIdx_ = request.getParameter("bnIdx");
 		int bnIdx =Integer.parseInt(bnIdx_);

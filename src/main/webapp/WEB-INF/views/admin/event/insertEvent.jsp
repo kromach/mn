@@ -7,15 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <title>insert Event</title>
-<script src="/resources/js/jquery.selectric.js"></script>
 <script src="/resources/js/formCheck.js"></script>
 <script src="/resources/js/jquery.selectric.js"></script>
+<link rel="stylesheet" href="/resources/css/selectric.css">
+
 
 <!-- 에디터 js -->
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="/resources/ckeditor/adapters/jquery.js"></script>
 <script type="text/javascript">
-
+	
 	// ckeditor 설정
 	CKEDITOR.on('dialogDefinition', function (ev) {
 		
@@ -45,6 +46,7 @@
 
 <script>
 $( function() {
+	
     var dateFormat = "mm/dd/yy",
       from = $( "#from" )
         .datepicker({
@@ -108,7 +110,8 @@ $( function() {
 						<td colspan="2">
 							<select id="option" type="select-one" name="productCode" class="sel short required" msg="술을">
 								<option value="option">선택</option>
-							</select></td>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<th>
@@ -161,11 +164,11 @@ $( function() {
 function searchDk(){
 	var input = $('#dkSch').val();
 	var context = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
+	console.log("hihi");
 	$.ajax({
 		url: context +'/event/drinkCodeSearch?input='+input,
 		type: "get",
 		success : function(data){
-			console.log(data)
 			$('#option').empty();
 			$("#option").append("<option value=>주류 선택</option>");
 
@@ -176,14 +179,16 @@ function searchDk(){
 			}
 		}
 	});
-
-
+	$(".sel").selectric("refresh");
 }
 </script>
 
 
 <script>
 $(function() {
+	
+	$(".sel").selectric();
+
 	// 전송버튼 클릭이벤트 
 	// 에디터의 처리가 필요하므로 클릭 이벤트가 필요.
     $('#addBtn').click(function(){

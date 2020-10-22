@@ -15,7 +15,7 @@
   		</select>
   		<select id="getEventInitial" resultType="EventVO" parameterType="int">
   			<![CDATA[
-  			SELECT * FROM (select a.*,ROWNUM AS rnum from (SELECT * FROM  event order by INSERT_DAY DESC ) a) WHERE rnum >= (10*#{value})+1 and rnum <= (10*(#{value}+1))	
+  			SELECT * FROM (select a.*,ROWNUM AS rnum from (SELECT * FROM  event order by INSERT_DAY DESC ) a) WHERE rnum >= (10*#{value})+1 and rnum <= (10*(#{value}+1)) AND IS_OPEN ='Y'	
   			]]>
   		</select>
   		<select id="getProductInitialbySearch" resultType="productvo" parameterType="hashmap">
@@ -30,7 +30,7 @@
   		</select>
   		<select id="getEventInitialbySearch" resultType="EventVO" parameterType="hashmap">
   			<![CDATA[
-  			SELECT * FROM (select a.*,ROWNUM AS rnum from (SELECT * FROM  event order by INSERT_DAY DESC ) a) WHERE rnum >= (10*#{index})+1 and rnum <= (10*(#{index}+1))AND EVENT_NAME LIKE '%' || #{search} || '%'
+  			SELECT * FROM (select a.*,ROWNUM AS rnum from (SELECT * FROM  event order by INSERT_DAY DESC ) a) WHERE rnum >= (10*#{index})+1 and rnum <= (10*(#{index}+1))AND EVENT_NAME LIKE '%' || #{search} || '%' AND IS_OPEN ='Y'
   			]]>
   		</select>
   		

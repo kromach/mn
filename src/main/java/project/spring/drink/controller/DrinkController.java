@@ -69,14 +69,14 @@ public class DrinkController {
 		String schDkAlcoholMax = null;
 		String schDkCountry = null;
 		int pageNum = 1;
-				
+		
 		if ((String)request.getParameter("isSearch") != null && ((String)request.getParameter("isSearch")).length() > 0) {
+			//검색시에 attr셋팅(Ajax Reload위해 필요함)
 			schDkBkind = (String)request.getParameter("schDkBkind");
 			schDkSkind = (String)request.getParameter("schDkSkind");
 			schDkVal = (String)request.getParameter("schDkVal");
 			System.out.println(request.getParameter("schDkAlcohol"));
 			schDkAlcohol = request.getParameter("schDkAlcohol").split(";");
-			
 			schDkAlcoholMin = schDkAlcohol[0];
 			schDkAlcoholMax = schDkAlcohol[1];
 			schDkCountry = (String)request.getParameter("schDkCountry");
@@ -119,10 +119,10 @@ public class DrinkController {
 		model.addAttribute("schDkAlcohol", schDkAlcohol);
 		model.addAttribute("schDkCountry", schDkCountry);
 		*/
-		
+		System.out.println("SCHMAP============="+schMap);
 		// 검색결과
 		List<DrinkVO> drinkList = drinkService.selectDrinkServiceList(schMap);
-
+		
 		response.setCharacterEncoding("utf-8");
 		response.getWriter().write(JsonUtil.ListToJson(drinkList));
 	}
@@ -361,8 +361,6 @@ public class DrinkController {
 			schDkAlcohol = request.getParameterValues("schDkAlcohol");
 			schDkCountry = (String)request.getParameter("schDkCountry");
 		}
-		
-		model.addAttribute("isSearch", request.getParameter("isSearch"));
 		model.addAttribute("schDkBkind", schDkBkind);
 		model.addAttribute("schDkSkind", schDkSkind);
 		model.addAttribute("schDkAlcohol", schDkAlcohol);

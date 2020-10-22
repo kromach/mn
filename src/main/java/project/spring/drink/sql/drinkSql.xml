@@ -3,8 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="drink">
-  
   		<select id="selectDrinkServiceList" parameterType="hashMap" resultType="project.spring.drink.vo.DrinkVO">
+  			SELECT aa.* FROM (SELECT a.* ,rownum r FROM (
 			SELECT DK_CODE, DK_NAME, DK_BKIND, DK_SKIND, DK_IMG, DK_ALCOHOL, DK_COUNTRY, DK_CITY, DK_PLACE, DK_LIKE, DK_APPROVE, INSERT_ID
 			FROM DRINK_INFO 
 			WHERE 
@@ -28,7 +28,6 @@
 				<if test="schDkAlcoholMin != null">
 					AND DK_ALCOHOL BETWEEN #{schDkAlcoholMin} AND #{schDkAlcoholMax}
 				</if>
-				
 				<choose>
 				    <when test='schDkCountry == "K"'>
 				      AND DK_COUNTRY = '한국'
@@ -38,6 +37,9 @@
 				    </when>
 				</choose>
 			ORDER BY INSERT_DAY DESC
+			<![CDATA[				   
+			) a )aa  WHERE  r >= (30*(#{pageNum}-1))+1 and r <= (30*(#{pageNum}))
+			]]>
   		</select>
     
 		<select id="selectBigCategoryList" resultType="camelmap">

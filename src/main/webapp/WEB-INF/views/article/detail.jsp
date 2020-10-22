@@ -164,13 +164,16 @@ var context = window.location.pathname.substring(0,
 		window.location.pathname.indexOf("/", 2));
 var session = '<c:out value="${memId}"/>';
 	if(session!=''){
+	console.log(session);
 	$.ajax({
-		url : context + '/like?num='+bnIdx+'&id=${memId}&insertId='+insertId,
+		url : context + '/like?num='+bnIdx+'&id='+session+'&insertId='+insertId,
 		type : "post",
 		success : function(data) {
+			console.log(data);
 			if(data == -1){
+				console.log("cancleSession"+session);
 				$.ajax({
-					url : context + '/unlike?num='+bnIdx+'&nick=${memNickName}&insertId='+insertId,
+					url : context + '/unlike?num='+bnIdx+'&id='+session+'&insertId='+insertId,
 					type : "post",
 					success : function(data_) {
 						console.log(data_);

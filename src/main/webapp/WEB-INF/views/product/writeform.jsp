@@ -7,32 +7,7 @@
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="/resources/ckeditor/adapters/jquery.js"></script>
 <script charset="utf-8">
-	function searchDk() {
-		var input = $('#dkSch').val();
-		var context = window.location.pathname.substring(0,
-				window.location.pathname.indexOf("/", 2));
-		$.ajax({
-			url : context + '/drinkSearch?input=' + input,
-			type : "get",
-			success : function(data) {
-				console.log(data);
-				$('#option').empty();
-				$('#option').append('<option value="option">선택</option>');
-				var dataLog;
-				for ( var i in data) {
-					if (data[i].length > 0) {
-						dataLog = data[i];
-					}
-				}
-				for ( var j in dataLog) {
-					console.log(dataLog[j].DK_NAME);
-					$('#option').append(
-							'<option value="'+dataLog[j].DK_CODE+'">'
-									+ dataLog[j].DK_NAME + '</option>');
-				}
-			}
-		});
-	}
+
 	// ckeditor 설정
 	CKEDITOR.on('dialogDefinition', function (ev) {
 		

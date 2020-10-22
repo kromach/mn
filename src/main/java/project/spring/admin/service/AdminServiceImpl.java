@@ -2,6 +2,7 @@ package project.spring.admin.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,13 @@ public class AdminServiceImpl implements AdminService{
 		List list =	 adminDAO.memberList(start, end);
 
 		
+		return list;
+	}
+	
+	// 검색 멤버
+	@Override
+	public List memberLIst(int start, int end, Map map) throws SQLException {
+		List list = adminDAO.memberList(start, end, map);
 		return list;
 	}
 
@@ -87,6 +95,14 @@ public class AdminServiceImpl implements AdminService{
 		int i = adminDAO.approveDrink(dkCode, check);
 		return i;
 	}
+
+	@Override
+	public int memberCount(Map map) throws SQLException {
+		int count = adminDAO.memberCount(map);
+		return count;
+	}
+
+
 
 
 	
