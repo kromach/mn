@@ -1,7 +1,8 @@
 window.socket = null;
 function connect(){
-	var ws = new WebSocket("ws://localhost:8080/replyEcho");
-//	var ws = new WebSocket("ws://192.168.0.55:8080/replyEcho");
+//	var ws = new WebSocket("ws://localhost:8080/replyEcho");
+	var ws = new WebSocket("ws://192.168.0.2:8080/replyEcho");
+//  시연체크
 	socket = ws;
 	socket.onopen = function (event) {
 		console.log('Info: connection opened.');
