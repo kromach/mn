@@ -110,6 +110,14 @@ public class DrinkController {
 		schMap.put("memKind", memKind);
 		schMap.put("pageNum", pageNum);
 		
+		//더보기인 경우
+		if ((String) request
+				.getParameter("more") != null
+				&& ((String) request
+						.getParameter("more"))
+								.equals("more")) {
+			schMap.put("pageNum", Integer.parseInt(request.getParameter("pageNum")));
+		}
 		//model.addAttribute("schMap", schMap);
 		//검색 정보
 		/*

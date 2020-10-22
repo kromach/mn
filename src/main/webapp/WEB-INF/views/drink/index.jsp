@@ -103,6 +103,11 @@
 		console.log($('#schDkAlcoholSV').val());
 		console.log($('#schDkCountrySV').val());
 		console.log('======셋팅된값 보기======');
+		//검색누르면 스크롤값 초기화
+		isEnd = false;
+		$('#moreVal').val('1');
+		var test = $('#moreVal').val();
+		console.log(isEnd+':'+test);
 	});
 	
 	var $grid = $('.grid').masonry({
@@ -122,7 +127,6 @@
 			url : "drinkList",
 			data : frm + "&pageNum=" + pageNum,  /*{bigCategory:bigCategory} 와 동일*/
 			success : function(data) {
-				console.log(data);
 				if(pageNum == 1) { 
 					$(document).find(".grid-item").each(function() { 
 						$grid.masonry('remove', this).masonry('layout');
@@ -207,53 +211,76 @@ let isEnd = false;
 	         let documentHeight = $(document).height();
 	         var context = window.location.pathname.substring(0,
 						window.location.pathname.indexOf("/", 2));
-	       
+	         var index = $('#moreVal').val();
 	         if( scrollTop + windowHeight +150 > documentHeight ){
-	 			//호출 메서드
-	 			var schDkBkind = $('#schDkBkindSV').val();
-	 			var schDkSkind = $('#schDkSkindSV').val();
-	 			var schDkVal = $('#schDkValSV').val();
-	 			var schDkAlcohol = $('#schDkAlcoholSV').val();
-	 			var schDkCountry = $('#schDkCountrySV').val();
- 			    var moreVal = Number($('#moreVal').val())+1; 
-	 			if(schDkBkind==''&&schDkSkind==''&&schDkVal==''&&schDkAlcohol==''&&schDkCountry==''){
-	 				if(isEnd == true){
-	 					//결과가 끝까지 전에 갔으면 리턴
-	 					return;
-	 				}else{
-	 				//검색이 아닐때 reload
-		 				$.ajax({
-							type : "POST",
-							url : "drinkList",
-							async: false,
-							data : "schDkBkind="+schDkBkind +"&schDkSkind="+schDkSkind+"&schDkVal="+schDkVal +
-							"&schDkAlcohol="+schDkAlcohol+"&schDkCountry=="+schDkCountry+"&pageNum=" + moreVal,  
-							success : function(data) {
-								$('#moreVal').val(moreVal);
-								if(data==""){
-									isEnd = true;
-									console.log('end');
-								}
-							},
-							error : function() {
-								alert("error");
-							}
-						})
-	 				}
-	 			}else{
-	 				//검색일때 reload
-	 				if(isEnd == true){
-	 					//결과가 끝까지 전에 갔으면 리턴
-	 					return;
-	 				}else{
-	 					
-	 					$('#moreVal').val(moreVal);
-	 				
-	 				}
-	 			}
+	        	fetchList(context,index);
 			}
 		})
 	})
+	function fetchList(context,index){
+			if(isEnd == true){
+				return;
+			}
+			var schDkBkind= $('#schDkBkindSV').val();
+			var schDkSkind= $('#schDkSkindSV').val();
+			var schDkVal= $('#schDkValSV').val();
+			var schDkAlcohol= $('#schDkAlcoholSV').val();
+			var schDkCountry= $('#schDkCountrySV').val();
+			if(schDkBkind==''&&schDkSkind==''&&schDkVal==''&&schDkAlcohol==''&&schDkCountry==''){
+ 				$.ajax({
+					type : "POST",
+					url : "drinkList",
+					async: false,
+					data : "schDkBkind="+schDkBkind +"&schDkSkind="+schDkSkind+"&schDkVal="+schDkVal +
+					"&schDkAlcohol="+schDkAlcohol+"&schDkCountry=="+schDkCountry+"&pageNum=" + index+"&more=more",  
+					success : function(data) {
+						if(data.length==2){
+							isEnd = true;
+							console.log('end');
+						}else{
+							console.log(data+typeof(data)+isEnd);
+							$('#moreVal').val(Number(index)+1);
+							var $grid = $('.grid').masonry({
+								itemSelector : '.grid-item',
+								columnWidth : '.grid-sizer',
+								percentPosition : true,
+								gutter: '.gutter-sizer'
+							});
+						}
+					},
+					error : function() {
+						alert("error");
+					}
+				})
+			}else{
+				console.log("검색일경우");
+				$.ajax({
+					type : "POST",
+					url : "drinkList",
+					async: false,
+					data : "schDkBkind="+schDkBkind +"&schDkSkind="+schDkSkind+"&schDkVal="+schDkVal +
+					"&schDkAlcohol="+schDkAlcohol+"&schDkCountry=="+schDkCountry+"&pageNum=" + index+"&more=more",  
+					success : function(data) {
+						if(data.length==2){
+							isEnd = true;
+							console.log('end');
+						}else{
+							console.log(data+typeof(data)+isEnd);
+							$('#moreVal').val(Number(index)+1);
+							var $grid = $('.grid').masonry({
+								itemSelector : '.grid-item',
+								columnWidth : '.grid-sizer',
+								percentPosition : true,
+								gutter: '.gutter-sizer'
+							});
+						}
+					},
+					error : function() {
+						alert("error");
+					}
+				})
+			}
+	     }
 </script>
 
 <!-- 
