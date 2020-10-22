@@ -13,7 +13,7 @@
 			<div class="grid-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="detail-item detail-width6">
-				<h2 class="pad-top10 pad-bottom10">${memId}${articleDTO.bnTitle}</h2>
+				<h2 class="pad-top10 pad-bottom10">${articleDTO.bnTitle}</h2>
 				<table class="detailTbl tbl-lg" style="margin: auto;text-align: center;">
 					<tr>
 						<td>작성자</td>
