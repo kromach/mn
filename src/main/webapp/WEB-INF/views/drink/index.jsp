@@ -207,7 +207,7 @@ let isEnd = false;
 	         let documentHeight = $(document).height();
 	         var context = window.location.pathname.substring(0,
 						window.location.pathname.indexOf("/", 2));
-	         var moreVal = Number($('#moreVal').val())+1;
+	       
 	         if( scrollTop + windowHeight +150 > documentHeight ){
 	 			//호출 메서드
 	 			var schDkBkind = $('#schDkBkindSV').val();
@@ -215,7 +215,7 @@ let isEnd = false;
 	 			var schDkVal = $('#schDkValSV').val();
 	 			var schDkAlcohol = $('#schDkAlcoholSV').val();
 	 			var schDkCountry = $('#schDkCountrySV').val();
-	        	 
+ 			    var moreVal = Number($('#moreVal').val())+1; 
 	 			if(schDkBkind==''&&schDkSkind==''&&schDkVal==''&&schDkAlcohol==''&&schDkCountry==''){
 	 				if(isEnd == true){
 	 					//결과가 끝까지 전에 갔으면 리턴
