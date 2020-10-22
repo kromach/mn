@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script src="/resources/js/formCheck.js"></script>
 <c:set var="dis" value=""></c:set>
@@ -19,8 +20,8 @@
 		<form action="modifyorder">
 			<input type="hidden" name="orcode" value="${orderinfo.orCode}">
 			<div class="grid-item grid-item--width6">
-				<h3 class="text-left pad-y10">주문 정보</h3>
-				<table class="tableCss tbl-lg margin-bottom10">
+				<h1 class="text-left pad-y10">주문 정보</h1>
+				<table class="tableCss tbl-lg cell-h20 margin-bottom10">
 					<colgroup>
 						<col width="15%" />
 						<col width="*" />
@@ -31,16 +32,18 @@
 					</tr>
 					<tr>
 						<th>수량</th>
-						<td>${orderinfo.prCount}</td>
+						<td>${orderinfo.prCount} 개</td>
 					</tr>
 					<tr>
 						<th>가격</th>
-						<td>${orderinfo.prPrice}</td>
+						<td>
+							<fmt:formatNumber value="${orderinfo.prPrice}" type="currency" currencySymbol="\\" />
+						</td>
 					</tr>
 				</table>
 
 				<h3 class="text-left pad-y10">배송지 정보</h3>
-				<table class="tableCss tbl-lg margin-bottom10">
+				<table class="tableCss tbl-lg cell-h20 margin-bottom10">
 					<colgroup>
 						<col width="15%" />
 						<col width="*" />
@@ -67,8 +70,8 @@
 					</tr>
 				</table>
 				
-				<h3 class="text-left pad-y10">배달 상태</h3>
-				<table class="tableCss tbl-lg margin-bottom10">
+				<h3 class="text-left pad-y10">배송 상태</h3>
+				<table class="tableCss tbl-lg cell-h20 margin-bottom10">
 					<colgroup>
 						<col width="15%" />
 						<col width="*" />

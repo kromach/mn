@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
-<script src="/resources/js/jqcloud.js"></script>
-<link rel="stylesheet" href="/resources/js/jqcloud.css">
 <!-- css 확인하기 가운데로 안와요ㅜㅜㅜㅜ -->
-
 <div class="grid-Wrapper">
 	<div class="grid2"> 
 	
 		<div class="detail-sizer"></div> 
 		<div class="gutter-sizer"></div>
+		<div class="detail-item detail-width6">
+			<h1 class="text-left pad-y10">이벤트 보기</h1>
+		</div>
 		<div class="detail-item detail-width2 detail-img-div">
 			<img id="mainImg" src=" ${vo.thumImg}" alt=" ${vo.thumImg}">
 		</div>

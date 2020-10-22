@@ -1,28 +1,27 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <div class="grid-Wrapper">
 	<div class="grid">  
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
+		<div class="grid-item--width6">
+			<h1 class="text-left pad-y10">이벤트 목록</h1>
+		</div>
 		<c:if test="${count == 0 }">
-			<div class="grid-item6">
-				<h1>진행중인 이벤트가 없습니다</h1>
+			<div class="grid-item--width6">
+				<p class="text-center font-bold" style="font-size: 18px; padding: 150px 0;color: #069;"><i class="fas fa-exclamation-triangle"></i> 진행 중인 이벤트가 없습니다.</p>
 			</div>
 		</c:if>
-		<c:forEach var="eventList" items="${eventList}">
+ 		<c:forEach var="eventList" items="${eventList}">
 			<div class="grid-item">
 				<a href="/event/detail?eventCode=${eventList.eventCode }">
 					<img src="${eventList.thumImg}" onerror="this.src='/resources/img/noImage.jpg'"/>
 				</a>
 			</div>
 		</c:forEach>
-		<input type="hidden" id="index" value="0">
+ 		<input type="hidden" id="index" value="0">
 	</div>
 </div>
-<!-- <div class="chat">
-	<a href="/chat"><img src="/resources/img/main/chat.png" ></a>
-</div> -->
 <script type="text/javascript">
 let isEnd = false;
 $(function(){

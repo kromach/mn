@@ -15,7 +15,7 @@
 <div id="header" class="header_color">
 	<div class="header_area clfix">
 		<div class="main_search fl">
-			<div class="search_area">
+			<div class="input_area">
 				<form action="/search">
 					<input type="text" class="mainFilter" name="search">
 					<button type="submit" class="search_icon"><i class="fas fa-search"></i></button>

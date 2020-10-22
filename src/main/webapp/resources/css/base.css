@@ -184,7 +184,7 @@ h6{font-size:16px;font-weight:600;color:#333}
 .h_logo .logo a{width:200px; margin:0 auto;}
 
 .main_search{position: absolute; width: 100%; text-align: center;}
-.main_search .search_area{position: relative; width: 25%; margin: 12px auto;}
+.main_search .input_area{position: relative; width: 25%; margin: 12px auto;}
 .main_search .mainFilter{width: 100%; padding: 10px 25px; border-radius: 25px; border: 1px solid #999; font-size: 16px;}
 .main_search .mainFilter:focus {outline:none;}
 
@@ -348,9 +348,25 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .icon:hover{color: var(--main-hover-color)}
 
 
-/* alcohol db index */
+/* 검색창 영역 */
 .search-area {width:80%; padding-bottom:20px; margin:0 auto;}
-.search-area .input {height: 30px; border: 1px solid #d2d2d2;}
+.search-area .searchPanel{position:relative; width:100%; max-width:550px; background:#fbfbff; padding:12px 23px 14px 23px; border:1px solid #ddd; box-sizing:border-box; float: left; margin-bottom:20px}
+.search-area .searchPanel h3{ font-size:18px; font-weight:800; color:#444; text-align:center; padding-bottom:15px}
+.search-area .searchPanel .ssec{ position:relative; margin-top:3px; text-align: left;}
+.search-area .searchPanel .ssec .s_label{ padding-bottom:5px; font-weight:700; font-size:13px; line-height: 33px; color:#333; width:70px;}
+.search-area .searchPanel .ssec .m_select{ display:inline-block; border-radius:2px; height:33px; width:160px; position:relative; font-size:13px; border:1px solid #ccc; color:#2f4050; padding:0 0 0 4px; margin-bottom:8px; box-sizing:border-box}
+.search-area .searchPanel .ssec select:disabled{ color: graytext;}
+.search-area .searchPanel .ssec .m_select option{ padding:2px 4px 2px 6px}
+.search-area .searchPanel .ssec .m_text{border-radius:2px; height:34px; padding:0 0 0 8px; font-size:13px; line-height:34px; border:1px solid #ccc; color:#2f4050;  margin-bottom:5px; box-sizing:border-box}
+.search-area .searchPanel .ssec .radio{height:33px}
+.search-area .searchPanel .ssec .input {height: 30px; border: 1px solid #d2d2d2; width:85%}
+.search-area .searchPanel .ssec input:focus{outline:none}
+.search-area .searchPanel .ssec .s_slider {width:98%; max-width:400px;}
+.search-area .searchPanel .ssec .searchBtn{margin-top:15px}
+
+.promotion_section{width:48%; height:272px; overflow:hidden; position:relative; padding-left: 20px; text-align: right;}
+
+
 
 /* 주류정보 상세페이지 텍스트 정보 */
 
@@ -475,13 +491,20 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 	.center-text {font-size: 25px; line-height: 38px; top: 10px;}
 }
 @media only screen and (max-width: 500px) {
-	.h_logo .logo a{width:130px; font-size: 18px;}
-	#menu-wrapper {margin:3px 3px 0 0;}
-	.h_menu {padding-right: 10px; width: 160px;}
-	.h_menu li{padding-right: 5px;}
-	.main_search .search_area{width: 35%;}
-	nav.rightMenu {right:3px}
 	
+	/* 헤더영역 */
+	.h_logo .logo a{width:130px; font-size: 18px;}
+	.h_menu {padding-right: 10px; width: 160px;} 
+	.h_menu li{padding-right: 5px;} 
+	#menu-wrapper {margin:3px 3px 0 0;}
+	.main_search .search_area{width: 35%;} /* 헤더 검색 */
+	
+	nav.rightMenu {right:3px} /* 햄버거 메뉴 */
+	
+	.search-area .searchPanel .ssec .selectric-short {width:98%}
+	.search-area .searchPanel .ssec .input {width:98%}
+	.search-area .searchPanel .ssec .s_slider {width:98%}
+	.search-area .searchPanel .ssec .s_slider {width:98%}
 	.grid { width:90% ;}
 	.grid2 { width:90% ;}
 	.search-area{width:90% ;}
@@ -518,21 +541,8 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 */
 
 
-/* 검색창 영역 */
-.searchPanel{position:relative; width:50%; background:#ffffffb8; padding:12px 23px 14px 23px; border-top:2px solid #444; border-right:1px solid #ddd; border-left:1px solid #ddd; border-bottom:1px solid #ddd; box-sizing:border-box; float: left; }
-.searchPanel h3{ font-size:18px; font-weight:800; color:#444; text-align:center; padding-bottom:15px}
-.searchPanel select{ display:inline-block}
-.ssec{ position:relative; margin-top:3px; text-align: left;}
-.ssec .s_label{ padding-bottom:5px; font-weight:700; font-size:13px; line-height: 33px; color:#333; width:70px;}
-.ssec .m_select{ display:inline-block; border-radius:2px; height:33px; width:160px; position:relative; font-size:13px; border:1px solid #ccc; color:#2f4050; padding:0 0 0 4px; margin-bottom:8px; box-sizing:border-box}
-.ssec select:disabled{ color: graytext;}
-.ssec .m_select option{ padding:2px 4px 2px 6px}
-.ssec .m_text{border-radius:2px; height:34px; padding:0 0 0 8px; font-size:13px; line-height:34px; border:1px solid #ccc; color:#2f4050;  margin-bottom:5px; box-sizing:border-box}
-.ssec .radio{height:33px}
-.ssec input:focus{ outline:none}
-.ssec .searchBtn{ margin-top:15px}
 
-.promotion_section{width:48%; height:272px; overflow:hidden; position:relative; padding-left: 20px; text-align: right;}
+
 
 /* 인기도시 */
 .city-order{width:100%; background:#fff; overflow:hidden; margin:10px 0; border:1px solid #ddd; box-sizing:border-box}
@@ -625,7 +635,7 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .tableCss td .input-xs{width:10%; min-width: 80px;}
 .tableCss td .input-sm{width:30%; min-width: 100px;}
 .tableCss td .input-md{width:50%}
-.tableCss td .input-lg{width:98%}
+.tableCss td .input-lg{width:98%; max-width:650px}
 .tableCss td input{vertical-align: middle;}
 
 .detailTbl{border-collapse:collapse; border-spacing:0; border-top:2px solid #333;}
@@ -634,6 +644,8 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .detailTbl th{color:#333;vertical-align:middle; border-bottom:1px solid #ccc;}
 .detailTbl td{color:#555;vertical-align:middle; border-bottom:1px solid #ccc; text-align: center;}
 .detailTbl tr:last-child td{border-bottom:1px solid #ccc;}
+
+.cell-h20 th, .cell-h20 td {height: 20px;}
 
 .re_title { padding: 10px; font-weight:bold; border-bottom:1px dotted #ccc; cursor:pointer;} 
 .detailReview {border-top:2px solid #333;}
