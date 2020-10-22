@@ -1,18 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!-- <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
-<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
- -->
-
 <!--Plugin CSS file with desired skin-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>  
 <!--Plugin JavaScript file-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
-
 <script src="/resources/js/jquery.selectric.js"></script>
 <link rel="stylesheet" href="/resources/css/selectric.css">
 <div class="search-area">
+	<h1 class="text-left pad-y10">주류 저장소</h1>
+	<div class="searchPanel">
 	<form name="schForm" id="schForm">
 		<input type="hidden" name="isSearch" value="true"/>
 		<!-- 더보기 카운트  -->
@@ -41,7 +37,7 @@
 		</div>
 		<div class="clfix ssec pad-top15" style="pading:10px 0;">
 			<p class="s_label fl">알콜도수</p>
-		    <div class="fl" style="width:400px"><input type="text" class="js-range-slider" name="schDkAlcohol" value="${schDkAlcohol}" id="schDkAlcohol"/></div>
+		    <div class="fl s_slider"><input type="text" class="js-range-slider" name="schDkAlcohol" value="${schDkAlcohol}" id="schDkAlcohol"/></div>
 		</div>
 		<div class="ssec pad-top15">
 			<p class="s_label fl">국가 선택</p>
@@ -53,14 +49,15 @@
 		</div>
 		<div class="ssec pad-top15"><input type="button" id="searchBtn" value="검색" class="btn btn-sm btn-blue" /></div>
 	</form>
+	</div>
 </div>
 <div class="grid-Wrapper">
 	<div class="grid"> 
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
-		
 	</div>
 </div>
+
 <script>
 	$(function() {
 		
@@ -83,6 +80,7 @@
 	    	postfix: "도"
 	    });
 	});
+	
 	var frm;
 	
 	$("#searchBtn").click(function() {
@@ -117,6 +115,7 @@
 	});
 	
 	$grid.masonry();
+	
 	// list 가져오기
 	function getDrinkList(pageNum) {
 		//console.log(frm);
@@ -199,7 +198,8 @@
 </script>
 
 <script type="text/javascript">
-let isEnd = false;
+	let isEnd = false;
+	
 	$(function(){
 		$(window).scroll(function() {
 			 let $window = $(this);
@@ -213,62 +213,38 @@ let isEnd = false;
 	        	fetchList(context,index);
 			}
 		})
-	})
+	});
+	
 	function fetchList(context,index){
 			var schDkBkind= $('#schDkBkindSV').val();
 			var schDkSkind= $('#schDkSkindSV').val();
 			var schDkVal= $('#schDkValSV').val();
 			var schDkAlcohol= $('#schDkAlcoholSV').val();
 			var schDkCountry= $('#schDkCountrySV').val();
-			if(schDkBkind==''&&schDkSkind==''&&schDkVal==''&&schDkAlcohol==''&&schDkCountry==''){
-				if(isEnd == true){
-					return;
-				}
- 				$.ajax({
-					type : "POST",
-					url : "drinkList",
-					async: false,
-					data : "schDkBkind="+schDkBkind +"&schDkSkind="+schDkSkind+"&schDkVal="+schDkVal +
-					"&schDkAlcohol="+schDkAlcohol+"&schDkCountry=="+schDkCountry+"&pageNum=" + index+"&more=more",  
-					success : function(data) {
-						if(data.length==2){
-							isEnd = true;
-							console.log('end');
-						}else{
-							console.log(data+typeof(data)+isEnd);
-							$('#moreVal').val(Number(index)+1);
-							drinkGridView(data);
-						}
-					},
-					error : function() {
-						alert("error");
-					}
-				})
-			}else{
-				if(isEnd == true){
-					return;
-				}
-				console.log("검색일경우");
-				$.ajax({
-					type : "POST",
-					url : "drinkList",
-					async: false,
-					data : "schDkBkind="+schDkBkind +"&schDkSkind="+schDkSkind+"&schDkVal="+schDkVal +
-					"&schDkAlcohol="+schDkAlcohol+"&schDkCountry=="+schDkCountry+"&pageNum=" + index+"&more=more",  
-					success : function(data) {
-						if(data.length==2){
-							isEnd = true;
-							console.log('end');
-						}else{
-							console.log(data+typeof(data)+isEnd);
-							$('#moreVal').val(Number(index)+1);
-							drinkGridView(data);
-						}
-					},
-					error : function() {
-						alert("error");
-					}
-				})
+			
+			if(isEnd == true){
+				return;
 			}
+			
+			$.ajax({
+				type : "POST",
+				url : "drinkList",
+				async: false,
+				data : "schDkBkind="+schDkBkind +"&schDkSkind="+schDkSkind+"&schDkVal="+schDkVal +
+				"&schDkAlcohol="+schDkAlcohol+"&schDkCountry="+schDkCountry+"&pageNum=" + index+"&more=more",  
+				success : function(data) {
+					if(data.length==2){
+						isEnd = true;
+						console.log('end');
+					}else{
+						console.log(data+typeof(data)+isEnd);
+						$('#moreVal').val(Number(index)+1);
+						drinkGridView(data);
+					}
+				},
+				error : function() {
+					alert("error");
+				}
+			});
 	     }
 </script>

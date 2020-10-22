@@ -54,7 +54,7 @@
 		</div>
 		<div class="detail-item detail-width6">
 			<h3 class="pad-top10 pad-bottom20 text-left">상세정보</h3>
-			<div class="text-left">${drinkInfo.dkContent}</div>
+			<div class="text-left" style="font-size:15px;">${drinkInfo.dkContent}</div>
 		</div>
 		<!-- 연관글 -->
 		<div class="detail-item detail-width6">
@@ -73,7 +73,7 @@
 				<!-- 주류코드별 작성된 글 개수 체크 메서드 & 글 불러오는 메서드 추가 필요 -->
 				<c:if test="${articleCount < 1}">
 				<tr>
-					<td colspan="3"><p class="text-center font-bold" style="font-size: 15px;padding: 5px 0;color: #069;"><i class="fas fa-comment-slash"></i>아직 작성된 게시글이 없습니다.</p></td>
+					<td colspan="3"><p class="text-center font-bold" style="font-size: 15px;padding: 5px 0;color: #069;"><i class="fas fa-microphone-slash"></i> 작성된 게시글이 없습니다.</p></td>
 				</tr>
 				</c:if>
 				<c:forEach var="article" items="${articleList}">
@@ -119,7 +119,7 @@
 			<div class="commentDiv margin-bottom30" id="commentList" style="height:500px">
 				<c:if test="${empty commentList}">  
 					<div class="clfix pad-top10" style="border-top: 2px solid #333;">
-						아직 등록된 후기가 없습니다.
+						<p class="text-center font-bold" style="font-size: 15px;padding: 5px 0;color: #069;"><i class="fas fa-comment-slash"></i> 등록 된 후기가 없습니다.</p>
 					</div>
 				</c:if>
 				<table id="boardTbl" class="detailTbl tbl-lg">
