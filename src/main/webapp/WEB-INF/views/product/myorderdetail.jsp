@@ -79,7 +79,7 @@
 				</table>
 				<c:if test="${!dis.equals('disabled')}">
 					<input type="button" class="btn btn-lg btn-blue" value="주문 취소" 
-					onclick="window.location.href='/product/deleteorder?orcode=${orderinfo.orCode}'">
+					onclick="window.location.href='/product/deleteorder?orcode=${orderinfo.orCode}">
 					<input type="button" class="btn btn-lg btn-blue" value="수정하기" onclick="modifyOrder()">
 					
 				</c:if>
@@ -91,25 +91,34 @@
 </div>
 
 <script>
-	$(function() {
-		var msnry = new Masonry('.grid2', {
-			itemSelector : '.detail-item',
-			columnWidth : '.detail-sizer',
-			percentPosition : true,
-			gutter : '.gutter-sizer'
-		});
-		imagesLoaded('.grid2').on('progress', function() {
-			msnry.layout();
-		});
+$(function() {
+	var msnry = new Masonry('.grid2', {
+		itemSelector : '.detail-item',
+		columnWidth : '.detail-sizer',
+		percentPosition : true,
+		gutter : '.gutter-sizer'
 	});
+	imagesLoaded('.grid2').on('progress', function() {
+		msnry.layout();
+	});
+});
 	
-	  function modifyOrder(){
-	    	if (checkFormjquery()) {
-	    		if(confirm("수정하시겠습니까?")){
-	    			$("form[name='modifyForm']").submit();	
-	    		}
-	    	}
-	    }
+ function modifyOrder(){
+   	if (checkFormjquery()) {
+   		if(confirm("수정하시겠습니까?")){
+   			$("form[name='modifyForm']").submit();	
+   		}
+   	}
+   }
+ 
+ function cancelOrder(){
+	   	if (checkFormjquery()) {
+	   		if(confirm("취소하시겠습니까?")){
+	   			
+	   		}
+	   	}
+	   }
+	
 </script>
 
 
