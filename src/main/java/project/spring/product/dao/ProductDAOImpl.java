@@ -128,13 +128,11 @@ public class ProductDAOImpl implements ProductDAO {
 		System.out.println(myordercount);
 		return myordercount;
 	}
-
 	@Override
 	public List myorderlist(String id ,int i) throws SQLException {
 		HashMap map =new HashMap();
 		map.put("id", id);
 		map.put("i", i);
-		
 		List myorderlist =sqlSession.selectList("product.myorderlist",map);
 		return myorderlist;
 	}

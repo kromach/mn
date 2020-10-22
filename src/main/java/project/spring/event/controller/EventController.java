@@ -47,8 +47,11 @@ public class EventController {
 			adminEventService.checkDate(today);
 			
 			eventList = eventService.eventList(0);
+			Collections.shuffle(eventList);
+
+		}else {
+			count = 0;
 		}
-		Collections.shuffle(eventList);
 
 		model.addAttribute("eventList", eventList);
 		model.addAttribute("count", count);

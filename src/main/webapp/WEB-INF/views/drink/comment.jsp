@@ -2,11 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="/resources/js/formCheck.js"></script>
 <style>
-     #star_grade a{
+    #star_grade a, #like_div a{
         text-decoration: none;
         color: gray;
     }
-    #star_grade a.on{
+    #star_grade a.on, #like_div a.on{
         color: red;
     }
 </style>
@@ -18,39 +18,43 @@
 		<div class="detail-item detail-width6">
 			<h3 class="text-left pad-y10">주류 후기 등록</h3>
 			<form action="commentPro" name="cmForm" method="post">
-			
+				<input type="hidden" name="dkCode" value="${drinkInfo.dkCode}"/>
+				<input type="hidden" name="insertId" value="${memId}"/>
 				<div>
 					<h3>${drinkInfo.dkName}</h3>
-					<div>
-						<input type="hidden" name="like" id="like" class="required" msg="좋아요/싫어요를" />
-						<a class='cmLike' id="like" value='like'><i class="far fa-smile"></i></a>
-						<a class='cmLike' id="unlike" value='unlike'><i class="far fa-frown"></i></a>
+					<div id="like_div" style="font-size:20px">
+						<input type="hidden" name="cmLike" id="cmLike" class="like_input required" msg="좋아요/싫어요를" />
+						<input type="hidden" name="cmUnLlike" id="cmUnLlike" class="like_input required" msg="좋아요/싫어요를" />
+						<a value='cmLike'><i class="far fa-smile"></i></a>
+						<a value='cmUnLlike'><i class="far fa-frown"></i></a>
 					</div>
 					<hr />
 					<div>
 						<label>한줄평
-						<textarea name="cmComment" id="cmComment" style="width:98%; height:60px"></textarea></label>
+						<textarea name="cmComment" id="cmComment" type="textarea" class="required" msg="한줄평을" style="width:98%; height:60px"></textarea></label>
 					</div>
 					<hr />
 					<div>
-						<input type="hidden" name="dkItem1" id="dkItem1" class="required" msg="항목 점수를" />
-						<input type="hidden" name="dkItem2" id="dkItem2" class="required" msg="항목 점수를" />
-						<input type="hidden" name="dkItem3" id="dkItem3" class="required" msg="항목 점수를" />
-						<input type="hidden" name="dkItem4" id="dkItem4" class="required" msg="항목 점수를" />
-						<input type="hidden" name="dkItem5" id="dkItem5" class="required" msg="항목 점수를" />
+						<input type="hidden" name="item1" id="dkItem1" />
+						<input type="hidden" name="item2" id="dkItem2" />
+						<input type="hidden" name="item3" id="dkItem3" />
+						<input type="hidden" name="item4" id="dkItem4" />
+						<input type="hidden" name="item5" id="dkItem5" />
 						<div id="star_grade">
-						    <p>
-						    	<span class="item-val">쓴맛</span>
-						    	<a class="item1" index="1" value="1"><i class="fas fa-star" aria-hidden="true"></i></a>
-						    	<a class="item1" index="1" value="2"><i class="fas fa-star" aria-hidden="true"></i></a>
-						    	<a class="item1" index="1" value="3"><i class="fas fa-star" aria-hidden="true"></i></a>
-						    	<a class="item1" index="1" value="4"><i class="fas fa-star" aria-hidden="true"></i></a>
-						    	<a class="item1" index="1" value="5"><i class="fas fa-star" aria-hidden="true"></i></a>
-						    </p>
+							<c:forEach var="item" items="${elementList}" varStatus="status">
+								<p>
+									<span class="item-val">${item}</span>
+									<c:forEach var="i" begin="1" end="5">
+								    	<a class="item${status.count}" index="${status.count}" value="${i}"><i class="fas fa-star"></i></a>
+							    	</c:forEach>
+							    </p>
+							</c:forEach>
+<!-- 
 						    <p><span class="item-val">단맛</span><a class="item2" index="2" value="1"><i class="fas fa-star" aria-hidden="true"></i></a><a class="item2" index="2" value="2"><i class="fas fa-star" aria-hidden="true"></i></a><a class="item2" index="2" value="3"><i class="fas fa-star" aria-hidden="true"></i></a><a class="item2" index="2" value="4"><i class="fas fa-star" aria-hidden="true"></i></a><a class="item2" index="2" value="5"><i class="fas fa-star" aria-hidden="true"></i></a></p>
 						    <p><span class="item-val">바디감</span><a class="item3" index="3" value="1"><i class="fas fa-star" aria-hidden="true"></i></a><a class="item3" index="3" value="2"><i class="fas fa-star" aria-hidden="true"></i></a><a class="item3" index="3" value="3"><i class="fas fa-star" aria-hidden="true"></i></a><a class="item3" index="3" value="4"><i class="fas fa-star" aria-hidden="true"></i></a><a class="item3" index="3" value="5"><i class="fas fa-star" aria-hidden="true"></i></a></p>
 						    <p><span class="item-val">탄산</span><a class="item4" index="4" value="1"><i class="fas fa-star" aria-hidden="true"></i></a><a class="item4" index="4" value="2"><i class="fas fa-star" aria-hidden="true"></i></a><a class="item4" index="4" value="3"><i class="fas fa-star" aria-hidden="true"></i></a><a class="item4" index="4" value="4"><i class="fas fa-star" aria-hidden="true"></i></a><a class="item4" index="4" value="5"><i class="fas fa-star" aria-hidden="true"></i></a></p>
 						    <p><span class="item-val">후르티</span><a class="item5" index="5" value="1"><i class="fas fa-star" aria-hidden="true"></i></a><a class="item5" index="5" value="2"><i class="fas fa-star" aria-hidden="true"></i></a><a class="item5" index="5" value="3"><i class="fas fa-star" aria-hidden="true"></i></a><a class="item5" index="5" value="4"><i class="fas fa-star" aria-hidden="true"></i></a><a class="item5" index="5" value="5"><i class="fas fa-star" aria-hidden="true"></i></a></p>
+						     -->
 						</div>
 					</div>
 					<hr />
@@ -88,6 +92,19 @@
 		});
 		
 	});
+
+	// 좋아요 / 싫어요 토글
+    $('#like_div a').click(function() {
+    	//console.log("a");
+    	$(this).parent().children("a").removeClass("on");  /* 좋아요 아이콘 on 클래스 전부 제거 */ 
+    	$(this).addClass("on"); /* 클릭한 아이콘에 on 클래스 추가 */
+    	$('.like_input').val("0");
+    	
+    	var value = $(this).attr("value");
+    	//console.log("i : " + index + "v : " + value);
+    	$("#"+value).val(1);
+    });
+	
 
 	// 평점 별점 조절 
     $('#star_grade a').click(function() {

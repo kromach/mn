@@ -45,6 +45,7 @@
 		</div>
 		<form action="productorder" name="count">
 			<input type="hidden" name="prcode" value="${info.prCode}">
+			<input type="hidden" id="prcount" name="prcount" value="${info.prAmount}">
 			<div class="detail-item detail-width2">
 				<div class="detail-info text-left">
 					<h3 class="pad-top10 pad-bottom20">구매하기</h3>
@@ -129,17 +130,22 @@
 	function countNum() {
 	    var buy = 0;
 	    var amount = $("#amount").val();
-	    
+	    var remain = $("#prcount").val();
 		//alert("매수" + amount);
+		//alert("남은수량"+remain)
 		buy = amount;
 		
 		if (buy == 0) {
 			alert("최소 구매수량은 1개입니다.");
 			return false;
 		}else{
-			$("form[name='count']").submit();
+			if(buy > remain){
+				alert("재고가 부족합니다.");
+				return false;
+			}else{
+				$("form[name='count']").submit();
+			}
 		}
-	    
 	}
 
 	function SetAmount(upDown) {

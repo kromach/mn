@@ -147,6 +147,7 @@ $( function() {
 						<td>
 							<input type="hidden" name="oldImg" value="${vo.thumImg}" >
 							<input type="file" name="eventImg"  />
+							<br/><br/>
 							<img src="${vo.thumImg}">
 						</td>
 					</tr>

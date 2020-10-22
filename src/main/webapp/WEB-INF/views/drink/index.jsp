@@ -15,6 +15,14 @@
 <div class="search-area">
 	<form name="schForm" id="schForm">
 		<input type="hidden" name="isSearch" value="true"/>
+		<!-- 더보기 카운트  -->
+		<input type="hidden" name="moreVal" value="1" id="moreVal" />
+		<!-- 검색값 대분류,소분류,검색어,알콜도,국가-->
+		<input type="hidden" value="" id="schDkBkindSV"/> 
+		<input type="hidden" value="" id="schDkSkindSV"/>
+		<input type="hidden" value="" id="schDkValSV"/>
+		<input type="hidden" value="" id="schDkAlcoholSV"/>
+		<input type="hidden" value="" id="schDkCountrySV"/>
 		<div class="ssec pad-top15">
 			<p class="s_label fl">주류 구분</p>
 			<select id="schDkBkind" name="schDkBkind" class="sel short" value="${schDkBkind}" >
@@ -29,11 +37,11 @@
 		</div>
 		<div class="ssec pad-top15">
 			<p class="s_label fl">검색어</p>
-			<input type="text" name="schDkVal" class="input" value="${schDkVal}" />
+			<input type="text" name="schDkVal" class="input" value="${schDkVal}" id="schDkVal"/>
 		</div>
 		<div class="clfix ssec pad-top15" style="pading:10px 0;">
 			<p class="s_label fl">알콜도수</p>
-		    <div class="fl" style="width:400px"><input type="text" class="js-range-slider" name="schDkAlcohol" value="${schDkAlcohol}" /></div>
+		    <div class="fl" style="width:400px"><input type="text" class="js-range-slider" name="schDkAlcohol" value="${schDkAlcohol}" id="schDkAlcohol"/></div>
 		</div>
 		<div class="ssec pad-top15">
 			<p class="s_label fl">국가 선택</p>
@@ -55,6 +63,8 @@
 </div>
 <script>
 	$(function() {
+		
+		getDrinkList(1);
 			
 		// select 형태 바꿔주는 JS 실행
 		$(".sel").selectric();
@@ -79,10 +89,20 @@
 	$("#searchBtn").click(function() {
 		//var frm = JSON.stringify($("#schForm").serializeObject());
 		frm = $("#schForm").serialize();
-		
 		//console.log(frm)
-		
 		getDrinkList(1);
+		$('#schDkBkindSV').val($('#schDkBkind').val());
+		$('#schDkSkindSV').val($('#schDkSkind').val());
+		$('#schDkValSV').val($('#schDkVal').val());
+		$('#schDkAlcoholSV').val($('#schDkAlcohol').val());
+		$('#schDkCountrySV').val($("input[name='schDkCountry']:checked").val());
+		console.log('=====값셋팅=====');
+		console.log($('#schDkBkindSV').val());
+		console.log($('#schDkSkindSV').val());
+		console.log($('#schDkValSV').val());
+		console.log($('#schDkAlcoholSV').val());
+		console.log($('#schDkCountrySV').val());
+		console.log('======셋팅된값 보기======');
 	});
 	
 	var $grid = $('.grid').masonry({
@@ -102,9 +122,8 @@
 			url : "drinkList",
 			data : frm + "&pageNum=" + pageNum,  /*{bigCategory:bigCategory} 와 동일*/
 			success : function(data) {
-
+				console.log(data);
 				if(pageNum == 1) { 
-					
 					$(document).find(".grid-item").each(function() { 
 						$grid.masonry('remove', this).masonry('layout');
 					});
@@ -177,5 +196,65 @@
 	}
 
 </script>
+
+<script type="text/javascript">
+let isEnd = false;
+	$(function(){
+		$(window).scroll(function() {
+			 let $window = $(this);
+	         let scrollTop = $window.scrollTop();
+	         let windowHeight = $window.height();
+	         let documentHeight = $(document).height();
+	         var context = window.location.pathname.substring(0,
+						window.location.pathname.indexOf("/", 2));
+	         var moreVal = Number($('#moreVal').val())+1;
+	         if( scrollTop + windowHeight +150 > documentHeight ){
+	 			//호출 메서드
+	 			var schDkBkind = $('#schDkBkindSV').val();
+	 			var schDkSkind = $('#schDkSkindSV').val();
+	 			var schDkVal = $('#schDkValSV').val();
+	 			var schDkAlcohol = $('#schDkAlcoholSV').val();
+	 			var schDkCountry = $('#schDkCountrySV').val();
+	        	 
+	 			if(schDkBkind==''&&schDkSkind==''&&schDkVal==''&&schDkAlcohol==''&&schDkCountry==''){
+	 				if(isEnd == true){
+	 					//결과가 끝까지 전에 갔으면 리턴
+	 					return;
+	 				}else{
+	 				//검색이 아닐때 reload
+		 				$.ajax({
+							type : "POST",
+							url : "drinkList",
+							async: false,
+							data : "schDkBkind="+schDkBkind +"&schDkSkind="+schDkSkind+"&schDkVal="+schDkVal +
+							"&schDkAlcohol="+schDkAlcohol+"&schDkCountry=="+schDkCountry+"&pageNum=" + moreVal,  
+							success : function(data) {
+								$('#moreVal').val(moreVal);
+								if(data==""){
+									isEnd = true;
+									console.log('end');
+								}
+							},
+							error : function() {
+								alert("error");
+							}
+						})
+	 				}
+	 			}else{
+	 				//검색일때 reload
+	 				if(isEnd == true){
+	 					//결과가 끝까지 전에 갔으면 리턴
+	 					return;
+	 				}else{
+	 					
+	 					$('#moreVal').val(moreVal);
+	 				
+	 				}
+	 			}
+			}
+		})
+	})
+</script>
+
 <!-- 
 <script src="/resources/js/imageLoad.js"></script> -->

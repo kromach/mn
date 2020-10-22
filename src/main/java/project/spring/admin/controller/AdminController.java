@@ -3,7 +3,11 @@ package project.spring.admin.controller;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.digester.SetRootRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +28,10 @@ public class AdminController {
 		@Autowired
 		private AdminServiceImpl adminService = null;
 
+		
 		@RequestMapping("/memberList")
-		public String memberListAd(String pageNum, Model model)throws SQLException {
+		public String memberListAd(@RequestParam(value = "pageNum", required = false) String pageNum, Model model, HttpServletRequest request)throws SQLException {
+				
 			
 			
 				if(pageNum == null) {
@@ -37,38 +43,88 @@ public class AdminController {
 				int endRow = currPage * pageSize;
 				int number = 0;
 				
+				// 모든 멤버 들고오기
 				List <AdminVO>memberList = null;
-				int count = adminService.memberCount();
+				// 카운트
+				int count = 0;
 				
-				if(count > 0) {
-					memberList = adminService.memberLIst(startRow, endRow);
-					System.out.println("가져오기 확인!!");
-					String newReportArr  = "";
-					int x = -1;
-					for(int i = 0; i < memberList.size(); i++) {
-						if(memberList.get(i).getReportNumber() != null && memberList.get(i).getReportNumber().length() > 0) {
-							x = 0;
-							String rep = memberList.get(i).getReportNumber();
-							String [] report = rep.split(",");
-							for(int j = 0; j < report.length; j++) {
-								System.out.println(report[j]);
-								int index = report[j].indexOf("F");
-								String chReport = report[j].substring(0, index);
-								System.out.println(chReport);
-								newReportArr += chReport + ",";
-								System.out.println("newre" + newReportArr);
-								
+				if(request.getParameter("schCheck") != null && request.getParameter("schCheck").equals("true")) {
+					System.out.println("컨트롤러 진입 체크");
+					
+					String schKey = request.getParameter("schKey");
+					String schMemVal = request.getParameter("schVal");
+					
+					Map map = new HashedMap();
+					map.put("schKey", schKey);
+					map.put("schValue", schMemVal);
+					
+					count = adminService.memberCount(map);
+					if(count >0) {
+						memberList = adminService.memberLIst(startRow, endRow, map);
+						
+						int x = -1;
+						for(int i = 0; i < memberList.size(); i++) {
+							String newReportArr  = "";
+							if(memberList.get(i).getReportNumber() != null && memberList.get(i).getReportNumber().length() > 0) {
+								x = 0; 
+								String rep = memberList.get(i).getReportNumber();
+								String [] report = rep.split(",");
+								for(int j = 0; j < report.length; j++) {
+									System.out.println(report[j]);
+									int index = report[j].indexOf("F");
+									String chReport = report[j].substring(0, index);
+									System.out.println(chReport);
+									newReportArr += chReport + ",";
+									System.out.println("newre" + newReportArr);
+									
+								}
+							}else {
+								x = -1;
 							}
-						}else {
-							x = -1;
+							if(x != -1) {
+								memberList.get(i).setReportNumber(newReportArr);
+								System.out.println(memberList.get(i).getReportNumber());
+								}
 						}
-						if(x != -1) {
-							memberList.get(i).setReportNumber(newReportArr);
-							System.out.println(memberList.get(i).getReportNumber());
-							}
 					}
 					
+					
+					System.out.println("how many count?" + count);
+				}else {
+				
+				count = adminService.memberCount();
+					if(count > 0) {
+						memberList = adminService.memberLIst(startRow, endRow);
+						
+							
+						int x = -1;
+						for(int i = 0; i < memberList.size(); i++) {
+							String newReportArr  = "";
+							if(memberList.get(i).getReportNumber() != null && memberList.get(i).getReportNumber().length() > 0) {
+								x = 0; 
+								String rep = memberList.get(i).getReportNumber();
+								String [] report = rep.split(",");
+								for(int j = 0; j < report.length; j++) {
+									System.out.println(report[j]);
+									int index = report[j].indexOf("F");
+									String chReport = report[j].substring(0, index);
+									System.out.println(chReport);
+									newReportArr += chReport + ",";
+									System.out.println("newre" + newReportArr);
+									
+								}
+							}else {
+								x = -1;
+							}
+							if(x != -1) {
+								memberList.get(i).setReportNumber(newReportArr);
+								System.out.println(memberList.get(i).getReportNumber());
+								}
+						}
+						
+					}
 				}
+				
 				number = count - (currPage - 1) * pageSize;
 			
 				Pager pager = new Pager();

@@ -7,17 +7,33 @@
   		select count(*) from Member_Info
   	</select>
   	
+  	<select id="SchMemberCount" parameterType="hashmap" resultType="int">
+  		select count(*) from Member_Info where ${schKey} LIKE '%'||#{schValue}||'%'
+  	</select>
+  	
   	<select id="memberList" parameterType="hashmap" resultType="AdminVO">
   	<![CDATA[
   		select a.*from(
   			select aa.*, rownum r from(
   				select * from member_Info 
-  				order by id DESC
-  			) aa order by id DESC
+  				order by REPORT_COUNT DESC, id ASC 
+  			) aa order BY REPORT_COUNT DESC,  id ASC 
   		) a where r >=#{start} and r <=#{end}
   	]]>
   	
   	</select>
+  	
+  	<select id="schMemberList" parameterType="hashmap" resultType="AdminVO">
+  		<![CDATA[
+  		select a.*from(
+  			select aa.*, rownum r from(
+  				select * from member_Info 
+  				order by REPORT_COUNT DESC, id ASC 
+  			) aa order BY REPORT_COUNT DESC,  id ASC 
+  		) a where r >=#{start} and r <=#{end} and ${schKey} LIKE '%'||#{schValue}||'%'
+  	]]>
+  	</select>
+  	
   	<update id="deleteMember" parameterType="string">
   		update member_info set is_ban ='Y' where id = #{value}
   	</update>
