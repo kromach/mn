@@ -91,11 +91,13 @@
 		frm = $("#schForm").serialize();
 		//console.log(frm)
 		getDrinkList(1);
+		
 		$('#schDkBkindSV').val($('#schDkBkind').val());
 		$('#schDkSkindSV').val($('#schDkSkind').val());
 		$('#schDkValSV').val($('#schDkVal').val());
 		$('#schDkAlcoholSV').val($('#schDkAlcohol').val());
 		$('#schDkCountrySV').val($("input[name='schDkCountry']:checked").val());
+		
 		console.log('=====값셋팅=====');
 		console.log($('#schDkBkindSV').val());
 		console.log($('#schDkSkindSV').val());
@@ -106,8 +108,6 @@
 		//검색누르면 스크롤값 초기화
 		isEnd = false;
 		$('#moreVal').val('2');
-		var test = $('#moreVal').val();
-		console.log(isEnd+':'+test);
 	});
 	
 	var $grid = $('.grid').masonry({
