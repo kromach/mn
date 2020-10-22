@@ -114,15 +114,17 @@ pageEncoding="UTF-8"%>
 					<form action="memberList" name="schMember" id="schMember" method="post">	
 						<input type="hidden" name="schCheck" value="true"/>							
 						<div class="ssec pad-top15">								
-							<select name="schKey">
-								<option value="ID" selected="selected">아이디</option>
+							<select name="schKey" class="sel short">
+								<option value="ID" >아이디</option>
 								<option value="NAME">이름</option>
 							</select>
-							<input type="text" name="schVal" class="required" msg="검색어를" />										
-							<input type="button" value="검색" class="btn btn-lg btn-grey" onclick="searchMem()" />
+							<input type="text" name="schVal" class="input required" msg="검색어를" />										
+							<input type="submit" value="검색" class="btn btn-lg btn-grey" style="width:100px" onclick="searchMem()" />
 						</div>								
 					</form>								
-				</div>									
+				</div>
+				
+													
 			</div><!-- <div class="grid-item grid-item--width6 "> -->										
 	</div>	<!-- grid -->											
 </div> <!-- grid-Wrapper -->													
@@ -167,6 +169,11 @@ function exitUser(memberId){
 
 </script>													
 <script>
+$(function() {
+	
+	// select 형태 바꿔주는 JS 실행
+	$(".sel").selectric();
+});
 
 function searchMem(){
 	console.log("hi");
