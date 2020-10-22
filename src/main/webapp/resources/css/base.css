@@ -501,9 +501,8 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 	
 	nav.rightMenu {right:3px} /* 햄버거 메뉴 */
 	
-	.search-area .searchPanel .ssec .selectric-short {width:98%}
+	.search-area .searchPanel .ssec .selectric-short {width:98%; margin-bottom: 3px;}
 	.search-area .searchPanel .ssec .input {width:98%}
-	.search-area .searchPanel .ssec .s_slider {width:98%}
 	.search-area .searchPanel .ssec .s_slider {width:98%}
 	.grid { width:90% ;}
 	.grid2 { width:90% ;}
