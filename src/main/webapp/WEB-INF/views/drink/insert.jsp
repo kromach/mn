@@ -143,11 +143,11 @@
 		
 		/* 테스트 정보 */
 		//$("#dkContent").val("BGF리테일 ‘CU’ 및 국내 장수 브랜드 ‘말표산업‘과 협업하여 탄생한 뉴트로 콘셉트의 흑맥주다. 에스프레소와 다크 초콜릿의 풍부한 맛과 함께 입안 가득 퍼지는 진한 밤의 풍미가 인상적이다.");
-		$("input[name='dkFood']").val("페퍼로니 피자, 바비큐, 팥 디저트 류와 잘 어울림");
-		$("input[name='dkName']").val("말표맥주");
-		$("input[name='dkPlace']").val("스퀴즈 브루어리");
+		//$("input[name='dkFood']").val("페퍼로니 피자, 바비큐, 팥 디저트 류와 잘 어울림");
+		//$("input[name='dkName']").val("말표맥주");
+		//$("input[name='dkPlace']").val("스퀴즈 브루어리");
 		$("input[name='dkCountry']").val("한국");
-		$("input[name='dkCity']").val("강원도");
+		//$("input[name='dkCity']").val("강원도");
 		//$("input[name='dkAlcohol']").val("4.5");
 		//$("input[name='dkTags']").val("말표, 흑맥주,말표맥주,MALPYO,CU,콜라보,에스프레소,다크초콜릿,밤");
 		

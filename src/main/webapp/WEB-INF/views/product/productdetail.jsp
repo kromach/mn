@@ -67,6 +67,7 @@
 									<option value="8">8</option>									
 									<option value="9">9</option>									
 									<option value="10">10</option>									
+									<option value="11">11</option>									
 								</select>										
 								<i class="fas fa-plus-square btnPlus" onclick="SetAmount('P');"></i>										
 							</span>											
@@ -139,7 +140,7 @@
 			alert("최소 구매수량은 1개입니다.");
 			return false;
 		}else{
-			if(buy > remain){
+			if(Number(buy) > Number(remain)){
 				alert("재고가 부족합니다.");
 				return false;
 			}else{
@@ -159,8 +160,13 @@
 				sel.selectedIndex--;
 			}
 		} else if (upDown == 'P') {
-			if (sel.selectedIndex < 10) {
+			if (sel.selectedIndex < 11) {
 				sel.selectedIndex++;
+				if(sel.selectedIndex == 11){
+					alert("경고:지나친 음주는 간경화나 간암을 일으키며")
+					return false;
+				}
+				
 			}
 		}
 		document.getElementById("totalprice").innerHTML = Number(price)
