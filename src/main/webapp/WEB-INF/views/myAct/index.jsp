@@ -14,39 +14,44 @@
 	border: 0;
 	float: left;
 	text-align: center;
+	margin-bottom: 20px;
 }
 </style>
 
 <body>
 	<div class="grid-Wrapper">
 		<div class="grid">
-			<br/><br/>
-			<h1 align="center">마이 페이지</h1>
-			<br/><br/><br/><br/>
-			<div class="linkBar">
-				<button class="btn btn-md btn-blue" onclick="window.location='/myAct'">내 글 보기</button>
-			</div>
-			<div class="linkBar" id="likeArticle">
-				<button class="btn btn-md btn-blue">글 좋아요</button>
-			</div>
-			<div class="linkBar" id="likeDrink">
-				<button class="btn btn-md btn-blue">술 좋아요</button>
-			</div>
-			<div class="linkBar" id="getAllTitle">
-				<button class="btn btn-md btn-blue">칭호</button>
-			</div>
-			<br/>
-			<br/>
 			<div class="grid-sizer"></div>
+			<div class="gutter-sizer"></div>
 			<div id="tmp" class="grid-item grid-item--width6">
+				<h1 class="text-left pad-y10">마이 페이지</h1>
+				<div class="linkBar">
+					<button class="btn btn-md btn-blue" onclick="window.location='/myAct'">내 글 보기</button>
+				</div>
+				<div class="linkBar" id="likeArticle">
+					<button class="btn btn-md btn-blue">글 좋아요</button>
+				</div>
+				<div class="linkBar" id="likeDrink">
+					<button class="btn btn-md btn-blue">술 좋아요</button>
+				</div>
+				<div class="linkBar" id="getAllTitle">
+					<button class="btn btn-md btn-blue">칭호</button>
+				</div>
 				<div id="index">
-					<table class="tableCss" style="width: 100%;">
+					<table class="tableCss tbl-lg margin-bottom10" style="width: 100%;">
+						<colgroup>
+							<col width="15%" />
+							<col width="*" />
+							<col width="10%" />
+							<col width="25%" />
+							<col width="10%" />
+						</colgroup>
 						<tr>
-							<td>번호</td>
-							<td>제목</td>
-							<td>작성일</td>
-							<td>조회</td>
-							<td>추천</td>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성일</th>
+							<th>조회</th>
+							<th>추천</th>
 						</tr>
 						<c:forEach var="myArticle" items="${myArticle}">
 							<tr>
@@ -109,15 +114,16 @@
 						$('#likeDrink_result').empty();
 						$('#title_result').empty();
 						$('#likeArticle_result').empty();
+						
 						$('#tmp').attr('class','grid-item grid-item--width6');	
 						
-						$('#likeArticle_result').append('<table class="tableCss" style="width: 100%;">');
+						$('#likeArticle_result').append('<table class="tableCss tbl-lg margin-bottom10" style="width: 100%;">');
 						$('#likeArticle_result > table').append('<tr>');
-						$('#likeArticle_result > table > tr').append('<td>번호</td>');
-						$('#likeArticle_result > table > tr').append('<td>제목</td>');
-						$('#likeArticle_result > table > tr').append('<td>작성일</td>');
-						$('#likeArticle_result > table > tr').append('<td>조회</td>');
-						$('#likeArticle_result > table > tr').append('<td>추천</td>');
+						$('#likeArticle_result > table > tr').append('<th>번호</th>');
+						$('#likeArticle_result > table > tr').append('<th>제목</th>');
+						$('#likeArticle_result > table > tr').append('<th>작성일</th>');
+						$('#likeArticle_result > table > tr').append('<th>조회</th>');
+						$('#likeArticle_result > table > tr').append('<th>추천</th>');
 						$('#likeArticle_result > table').append('</tr>');		
 						
 						for(var i in likeArticle){
@@ -153,7 +159,7 @@
 						$('#likeDrink_result').empty();
 						$('#title_result').empty();
 						$('#likeArticle_result').empty();
-						$('#tmp').attr('class','grid-item');
+						$('#tmp').attr('class','grid-item grid-item--width6');	
 						
 						if(data.likeDrink == null && data.likeProduct == null){
 							$('#likeDrink_result').append('<h2> 좋아요한 게시글이 없습니다. </h2>');
