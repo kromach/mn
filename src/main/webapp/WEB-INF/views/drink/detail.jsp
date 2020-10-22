@@ -10,6 +10,9 @@
 	
 		<div class="detail-sizer"></div>
 		<div class="gutter-sizer"></div>
+		<div class="detail-item detail-width6">
+			<h1 class="text-left pad-y10">주류 정보</h1>
+		</div>
 		<div class="detail-item detail-width2 detail-img-div" >
 			<img id="mainImg" src="${drinkInfo.dkImg}" alt="${drinkInfo.dkName}" />
 		</div>

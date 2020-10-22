@@ -1,48 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-
-<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-
 <!--Plugin CSS file with desired skin-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>  
 <!--Plugin JavaScript file-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
-
 <script src="/resources/js/jquery.selectric.js"></script>
 <link rel="stylesheet" href="/resources/css/selectric.css">
-
-
 <div class="search-area">
-	<form action="productlist" name="schForm" id="schForm" method="get" >
-	<input type="hidden" name="isSearch" value="true" id="isSearch">
-		<div class="ssec pad-top15">
-			<p class="s_label fl">주류구분</p>
-			<select name="Skind" class="sel short">
-				<option selected="selected">소분류 선택</option>
-				<option value="S006">탁주</option>
-				<option value="S007">청주</option>
-				<option value="S008">약주</option>
-				<option value="S009">증류주</option>
-				<option value="S010">리큐르</option>
-				<option value="S011">기타</option>
-				<option value="S012">과실주</option>
-			</select>
-		</div>
-		<div class="ssec pad-top15">
-			<p class="s_label fl">검색어 </p>
-			<input type="text" name="name" id="name" class="input" value="${name}">
-		</div>
-		<div class="clfix ssec pad-top15" style="pading:10px 0;">
-			<p class="s_label fl">알콜도수</p>
-		    <div class="fl" style="width:400px"><input type="text" class="js-range-slider" name="prAlcohol" id="prAlcohol"/></div>
-		</div>
-		<div class="clfix ssec pad-top15" style="pading:10px 0;">
-			<p class="s_label fl">금액</p>
-		    <div class="fl" style="width:400px"><input type="text" class="js-range-slider1" name="prPrice" id="prPrice"/></div>
-		</div>
-		<div class="ssec pad-top15"><input type="submit" value="검색" class="btn btn-sm btn-blue"  /></div>
-	</form>
+	<h1 class="text-left pad-y10">우주마켓</h1>
+	<div class="searchPanel">
+		<form action="productlist" name="schForm" id="schForm" method="get" >
+		<input type="hidden" name="isSearch" value="true" id="isSearch">
+			<div class="ssec pad-top15">
+				<p class="s_label fl">주류구분</p>
+				<select name="Skind" class="sel short">
+					<option selected="selected">소분류 선택</option>
+					<option value="S006">탁주</option>
+					<option value="S007">청주</option>
+					<option value="S008">약주</option>
+					<option value="S009">증류주</option>
+					<option value="S010">리큐르</option>
+					<option value="S011">기타</option>
+					<option value="S012">과실주</option>
+				</select>
+			</div>
+			<div class="ssec pad-top15">
+				<p class="s_label fl">검색어 </p>
+				<input type="text" name="name" id="name" class="input" value="${name}">
+			</div>
+			<div class="clfix ssec pad-top15" style="pading:10px 0;">
+				<p class="s_label fl">알콜도수</p>
+			    <div class="fl s_slider"><input type="text" class="js-range-slider" name="prAlcohol" id="prAlcohol"/></div>
+			</div>
+			<div class="clfix ssec pad-top15" style="pading:10px 0;">
+				<p class="s_label fl">금액</p>
+			    <div class="fl s_slider"><input type="text" class="js-range-slider1" name="prPrice" id="prPrice"/></div>
+			</div>
+			<div class="ssec pad-top15 text-center"><input type="submit" value="검색" class="btn btn-lg btn-blue" style="width:100px" /></div>
+		</form>
+	</div>
 </div>
 <div class="grid-Wrapper">
 	<div class="grid">
@@ -69,7 +65,6 @@
 		// select 형태 바꿔주는 JS 실행
 		$(".sel").selectric();
 		
-	
 	    $(".js-range-slider").ionRangeSlider({
 	    	type: "double",
 	    	min : 0,
@@ -86,8 +81,6 @@
 	    	postfix: "원"
 	    });
 	});   
-	
-	
 </script>
 
 <script type="text/javascript">
@@ -155,7 +148,6 @@
 </script>
 
 <script src="/resources/js/imageLoad.js"></script>
-	<!-- 데이터 스크롤해서 붙이는 스크립트  -->
 
 	
 
