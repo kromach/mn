@@ -16,7 +16,7 @@
 	<form name="schForm" id="schForm">
 		<input type="hidden" name="isSearch" value="true"/>
 		<!-- 더보기 카운트  -->
-		<input type="hidden" name="moreVal" value="1" id="moreVal" />
+		<input type="hidden" name="moreVal" value="2" id="moreVal" />
 		<!-- 검색값 대분류,소분류,검색어,알콜도,국가-->
 		<input type="hidden" value="" id="schDkBkindSV"/> 
 		<input type="hidden" value="" id="schDkSkindSV"/>
@@ -218,15 +218,15 @@ let isEnd = false;
 		})
 	})
 	function fetchList(context,index){
-			if(isEnd == true){
-				return;
-			}
 			var schDkBkind= $('#schDkBkindSV').val();
 			var schDkSkind= $('#schDkSkindSV').val();
 			var schDkVal= $('#schDkValSV').val();
 			var schDkAlcohol= $('#schDkAlcoholSV').val();
 			var schDkCountry= $('#schDkCountrySV').val();
 			if(schDkBkind==''&&schDkSkind==''&&schDkVal==''&&schDkAlcohol==''&&schDkCountry==''){
+				if(isEnd == true){
+					return;
+				}
  				$.ajax({
 					type : "POST",
 					url : "drinkList",
@@ -253,6 +253,9 @@ let isEnd = false;
 					}
 				})
 			}else{
+				if(isEnd == true){
+					return;
+				}
 				console.log("검색일경우");
 				$.ajax({
 					type : "POST",
