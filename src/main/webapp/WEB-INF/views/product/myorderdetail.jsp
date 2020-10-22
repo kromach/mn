@@ -2,12 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>사용자 구매 목록 상세</title>
-</head>
+<script src="/resources/js/formCheck.js"></script>
+<script src="/resources/js/jquery.selectric.js"></script>
 
 <c:set var="dis" value=""></c:set>
 <c:set var="del" value=""></c:set>
@@ -22,7 +18,7 @@
 	<div class="grid">
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
-		<form action="modifyorder">
+		<form action="modifyorder" method="post" name="modifyForm">
 			<input type="hidden" name="orcode" value="${orderinfo.orCode}">
 			<div class="grid-item grid-item--width3">
 				<h3>주문 정보</h3>
@@ -45,22 +41,22 @@
 				<table class="tableCss">
 					<tr>
 						<th>수령자명</th>
-						<td align="left"><input type="text"
-							value="${orderinfo.receiverName}" name="receiverName" ${dis} /></td>
+						<td align="left">
+						<input type="text"value=" ${orderinfo.receiverName}" name="receiverName" class="sel short required" type="select-one" msg="구매자 이름을"  ${dis} /></td>
+							
 					</tr>
 					<tr>
 						<th>수령자 연락처</th>
-						<td align="left"><c:set var="tel"
-								value="${orderinfo.receiverTel}" /> <c:set var="telArr"
-								value="${fn:split(tel,',')}" /> <input type="text"
-							name="receiverTel" value="${telArr[0]}" ${dis}>- <input
-							type="text" name="receiverTel" value="${telArr[1]}" ${dis}>-
-							<input type="text" name="receiverTel" value="${telArr[2]}" ${dis}></td>
+						<td align="left">
+						<c:set var="tel" value="${orderinfo.receiverTel}" /><c:set var="telArr" value="${fn:split(tel,',')}" />
+							<input type="text" name="receiverTel" value="${telArr[0]}" ${dis} class="sel short required" msg="연락처를">-
+							<input type="text" name="receiverTel" value="${telArr[1]}" ${dis} class="sel short required" msg="연락처를">-
+							<input type="text" name="receiverTel" value="${telArr[2]}" ${dis} class="sel short required" msg="연락처를"></td>
 					</tr>
 					<tr>
 						<th>수령지</th>
 						<td align="left"><input type="text"
-							value="${orderinfo.receiverAddr}" name="receiverAddr" ${dis} /></td>
+							value="${orderinfo.receiverAddr}" name="receiverAddr" ${dis} class="input-lg required" msg="수령지를" /></td>
 
 					</tr>
 				</table>
@@ -84,7 +80,7 @@
 				<c:if test="${!dis.equals('disabled')}">
 					<input type="button" class="btn btn-lg btn-blue" value="주문 취소" 
 					onclick="window.location.href='/product/deleteorder?orcode=${orderinfo.orCode}'">
-					<input type="submit" class="btn btn-lg btn-blue" value="수정하기">
+					<input type="button" class="btn btn-lg btn-blue" value="수정하기" onclick="modifyOrder()">
 					
 				</c:if>
 					<input type="button" class="btn btn-lg btn-blue" value="구매목록" 
@@ -93,4 +89,27 @@
 		</form>
 	</div>
 </div>
-</html>
+
+<script>
+	$(function() {
+		var msnry = new Masonry('.grid2', {
+			itemSelector : '.detail-item',
+			columnWidth : '.detail-sizer',
+			percentPosition : true,
+			gutter : '.gutter-sizer'
+		});
+		imagesLoaded('.grid2').on('progress', function() {
+			msnry.layout();
+		});
+	});
+	
+	  function modifyOrder(){
+	    	if (checkFormjquery()) {
+	    		if(confirm("수정하시겠습니까?")){
+	    			$("form[name='modifyForm']").submit();	
+	    		}
+	    	}
+	    }
+</script>
+
+

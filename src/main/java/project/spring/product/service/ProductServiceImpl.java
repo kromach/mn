@@ -31,8 +31,8 @@ public class ProductServiceImpl implements ProductService {
 		return 0;
 	}
 	public int updateItem(OrderVo ordervo) {
-		
-		return 0;
+		int res =productDAO.updateItem(ordervo);
+		return res;
 	}
 	
 	public int updateItem(String orCode) {
