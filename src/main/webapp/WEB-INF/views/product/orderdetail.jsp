@@ -13,19 +13,19 @@
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
 		<div class="grid-item grid-item--width6">
-			<table class="tableCss table">
+			<table class="tableCss tbl-lg margin-bottom10">
 				<tr>
-					<td>주문번호</td>
-					<td>상품명</td>
-					<td>수량</td>
-					<td>가격</td>
-					<td>수령인</td>
-					<td>수령인 전화번호</td>
-					<td>배송지</td>
+					<th>주문번호</th>
+					<th>상품명</th>
+					<th>수량</th>
+					<th>가격</th>
+					<th>수령인</th>
+					<th>수령인 전화번호</th>
+					<th>배송지</th>
 					<c:if test="${del.equals('delivery')}">
 						<td>송장번호</td>
 					</c:if>
-					<td>주문상태</td>
+					<th>주문상태</th>
 				</tr>
 				<tr>
 					<td>${orderinfo.orCode}</td>
@@ -44,7 +44,7 @@
 						<form action="orderdetail" name="chor">
 							<input type="hidden" name="orCode" value="${orderinfo.orCode}">
 							<input type="hidden" name="ischang" value="true" />
-							<select name="orstatus">
+							<select name="orstatus" class="sel short required">
 								<option value="1"
 									<c:if test="${orderinfo.orStatus==1}">selected</c:if>>접수</option>
 								<option value="2"
@@ -58,7 +58,7 @@
 								<option value="6"
 									<c:if test="${orderinfo.orStatus==6}">selected</c:if>>주문취소</option>
 							</select>
-							<input type="button" value="적용" onclick="test()" >
+							<input type="button" value="적용" class="btn btn-xs btn-grey" onclick="test()" >
 						</form>
 					</td>
 				</tr>
@@ -92,4 +92,29 @@
 			$("form[name='chor']").submit();
 		}
 	}
+	
+	$(function() {
+		
+
+		// select 형태 바꿔주는 JS 실행
+		$(".sel").selectric();
+		
+		// masonry 실행
+		var msnry = new Masonry('.grid2', {
+			itemSelector : '.detail-item',
+			columnWidth : '.detail-sizer',
+			percentPosition : true,
+			gutter: '.gutter-sizer'
+		});
+		imagesLoaded('.grid2').on('progress', function() {
+			msnry.layout();
+		});
+		
+		// 대분류의 값이 바뀌었을 경우 소분류 값과 항목명 가져오는 ajax 실행
+	    $('#dkBkind').change(function() {
+	    	getSmallCategory(this.value);
+	    	getItemValues(this.value);
+	    });
+
+	});
 </script>
