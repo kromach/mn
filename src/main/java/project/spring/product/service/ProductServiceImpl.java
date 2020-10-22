@@ -196,6 +196,11 @@ public class ProductServiceImpl implements ProductService {
 		return artdto;
 	}
 
+	@Override
+	public String selectProductLikeInfo(HashMap productLikeMap) throws SQLException {
+		return productDAO.selectProductLikeInfo(productLikeMap);
+	}
+
 	
 
 

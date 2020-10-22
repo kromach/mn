@@ -296,4 +296,9 @@
   		update BOARD_NORMAL set readcount = readcount+1 where bn_idx = #{value}
   	</update>
   	
+  	<select id="selectProductLikeInfo" parameterType="hashmap" resultType="String">
+		SELECT CASE COUNT(ML_IDX) WHEN 0 THEN 'N' ELSE 'Y' END AS likeYn 
+		FROM MY_LIKE 
+		WHERE ML_KIND = 'PR' AND ML_VALUE = #{prCode} AND INSERT_ID = #{memId}
+	</select>
 </mapper>

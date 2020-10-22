@@ -4,11 +4,11 @@
 	<div class="grid">  
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
-		<div class="grid-item--width6">
+		<div class="grid-item grid-item--width6">
 			<h1 class="text-left pad-y10">이벤트 목록</h1>
 		</div>
 		<c:if test="${count == 0 }">
-			<div class="grid-item--width6">
+			<div class="grid-item grid-item--width6">
 				<p class="text-center font-bold" style="font-size: 18px; padding: 150px 0;color: #069;"><i class="fas fa-exclamation-triangle"></i> 진행 중인 이벤트가 없습니다.</p>
 			</div>
 		</c:if>

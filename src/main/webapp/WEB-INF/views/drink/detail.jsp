@@ -29,7 +29,7 @@
 					<dt>국가 / 지역</dt>
 					<dd>${drinkInfo.dkCountry} > ${drinkInfo.dkCity} </dd>
 					<dt>도수</dt>
-					<dd>${drinkInfo.dkAlcohol} %</dd>
+					<dd>${drinkInfo.dkAlcohol} 도</dd>
 					<dt>어울리는 안주</dt>
 					<dd>${drinkInfo.dkFood} </dd>
 				</dl>
@@ -43,6 +43,8 @@
 					<%-- </c:if> --%>
 				</div>
 			</div>
+		</div>
+		<div class="detail-item detail-width6">
 		</div>
 		<div class="detail-item detail-width3">
 			<!-- 레이더 차트 -->

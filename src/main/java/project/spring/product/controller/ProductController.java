@@ -179,48 +179,66 @@ public class ProductController {
 		}
 	}
 	
-	
-	
 	@RequestMapping("productdetail")
-		public String productdetail	(HttpServletRequest request, Model model, HttpSession session) throws SQLException {
+	public String productdetail	(HttpServletRequest request, Model model, HttpSession session) throws SQLException {
+		
 		String prcode = request.getParameter("prcode");
 		String memId = (String)session.getAttribute("memId");
+		
 		List articlelist = null;
 		
-		ProductVo info =productservice.getproductinfo(prcode);
+		// 상품 정보
+		ProductVo info = productservice.getproductinfo(prcode);
 		
+		// 상품별 작성된 구매후기 개수
 		int count = productservice.getarticlecount(prcode);
-		System.out.println(count);
+		//System.out.println(count);
+		
 		if(count > 0) {
+			// 구매후기 게시글 가져오기
 			articlelist = productservice.getarticle(prcode,0);
-			System.out.println("리스트 불러오기");
-			System.out.println(articlelist);
+			//System.out.println("리스트 불러오기");
+			//System.out.println(articlelist);
 			
 			model.addAttribute("articlelist", articlelist);
 		}
 		
+		// 아이디의 현재 좋아요 여부 가져오기 
+		String productLikeInfo = null;
+		if(session.getAttribute("memId") != null) { // session id
+
+			HashMap productLikeMap = new HashMap();
+			
+			productLikeMap.put("prCode", prcode);
+			productLikeMap.put("memId", memId);
+			
+			productLikeInfo = productservice.selectProductLikeInfo(productLikeMap);
+		}
+		System.out.println(productLikeInfo);
+		
+		model.addAttribute("prcode", prcode);
 		model.addAttribute("memId", memId);
 		model.addAttribute("info", info);
-		model.addAttribute("prcode", prcode);
+		model.addAttribute("productLikeInfo", productLikeInfo);
 		
 		return "product/productdetail.mn";
 	}
 	
 	@RequestMapping("myorderlist")
 	public String myorderlistSs (Model model, HttpSession session) throws SQLException {
-	
-	// 세션 불러와서 세션아이디로 주문 목록 불러오기 	
-	List myorderlist = null;
-	int myordercount = 0;
-	String id = (String)session.getAttribute("memId");
-	myordercount = productservice.myordercount(id);
-	if(myordercount>0) {
-		myorderlist = productservice.myorderlist(id,0);
-	}
-	model.addAttribute("myordercount",myordercount);
-	model.addAttribute("myorderlist",myorderlist);
-	
-	return "product/myorderlist.mn";
+		
+		// 세션 불러와서 세션아이디로 주문 목록 불러오기 	
+		List myorderlist = null;
+		int myordercount = 0;
+		String id = (String)session.getAttribute("memId");
+		myordercount = productservice.myordercount(id);
+		if(myordercount>0) {
+			myorderlist = productservice.myorderlist(id,0);
+		}
+		model.addAttribute("myordercount",myordercount);
+		model.addAttribute("myorderlist",myorderlist);
+		
+		return "product/myorderlist.mn";
 	}
 	
 	@RequestMapping("productorder")
