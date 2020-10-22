@@ -40,7 +40,7 @@
 				<div id="index">
 					<table class="tableCss tbl-lg margin-bottom10" style="width: 100%;">
 						<colgroup>
-							<col width="15%" />
+							<col width="10%" />
 							<col width="*" />
 							<col width="10%" />
 							<col width="10%" />
@@ -119,6 +119,13 @@
 						
 						$('#likeArticle_result').append('<table class="tableCss tbl-lg margin-bottom10" style="width: 100%;">');
 						$('#likeArticle_result > table').append('<tr>');
+						$('#likeArticle_result > table').append('<colgroup></colgroup>');
+						$('#likeArticle_result > table > colgroup').append('<col width="10%" />');
+						$('#likeArticle_result > table > colgroup').append('<col width="*" />');
+						$('#likeArticle_result > table > colgroup').append('<col width="10%" />');
+						$('#likeArticle_result > table > colgroup').append('<col width="10%" />');
+						$('#likeArticle_result > table > colgroup').append('<col width="10%" />');
+						
 						$('#likeArticle_result > table > tr').append('<th>번호</th>');
 						$('#likeArticle_result > table > tr').append('<th>제목</th>');
 						$('#likeArticle_result > table > tr').append('<th>작성일</th>');
