@@ -77,7 +77,7 @@
 				<tr>
 					<td><a href="/article/detail?idx=${article.bnIdx}">${article.bnTitle}</a></td>
 					<td>
-						<span class="btn btn-blue btn-xs default">${article.writerTitleCnt}</span>
+						<span class="btn btn-twitter btn-xs default">${article.writerTitleCnt}</span>
 						<span class="titleName">${article.writerTitleName}</span>
 						${article.nickname}
 					</td>
@@ -119,35 +119,79 @@
 						아직 등록된 후기가 없습니다.
 					</div>
 				</c:if>
-				<c:forEach items="${commentList}" var="comment">
-					<div class="item-list clfix pad-top10">
-						<div class="nm_like">
-							<!-- 작성자, 좋아요, 싫어요 -->
-							<p class="likeArea">
-								<c:if test="${comment.cmLike == 1}"><i class="far fa-smile"></i></c:if>
-								<c:if test="${comment.cmUnLike == 1}"><i class="far fa-frown"></i></c:if>
-							</p>
-							<p><span class="btn btn-blue btn-xs default">${comment.writerTitleCnt}</span><span class="titleName">${comment.writerTitleName}</span> <span class="nickname">${comment.nickname}</span></p>
+				<table id="boardTbl" class="detailTbl tbl-lg">
+					<colgroup>
+						<col width="20%" />
+						<col width="*" />
+						<col width="15%" />
+					</colgroup>
+					<c:forEach items="${commentList}" var="comment">
+					<tr>
+						<td>
+							<div class="nm_like">
+								<!-- 작성자, 좋아요, 싫어요 -->
+								<p class="likeArea">
+									<c:if test="${comment.cmLike == 1}"><i class="far fa-smile"></i></c:if>
+									<c:if test="${comment.cmUnLike == 1}"><i class="far fa-frown"></i></c:if>
+								</p>
+								<p><span class="btn btn-twitter btn-xs default">${comment.writerTitleCnt}</span><span class="titleName">${comment.writerTitleName}</span> <span class="nickname">${comment.nickname}</span></p>
+							</div>
+						</td>
+						<td>
+							<div class="report">
+								<!-- 별점, 한줄평 -->
+								<c:if test="${!empty comment.item1 and comment.item1 > 0}">
+									<div class="star">
+										${drinkInfo.item1Val} : <i class="fas fa-star"></i>${comment.item1} 
+										${drinkInfo.item2Val} : <i class="fas fa-star"></i>${comment.item2} 
+										${drinkInfo.item3Val} : <i class="fas fa-star"></i>${comment.item3} 
+										${drinkInfo.item4Val} : <i class="fas fa-star"></i>${comment.item4} 
+										${drinkInfo.item5Val} : <i class="fas fa-star"></i>${comment.item5} 
+									</div>
+								</c:if>
+								<div>${comment.cmComment}</div>
+							</div>
+						</td>
+						<td>
+							<div class="commentDay">
+								<fmt:formatDate value="${comment.insertDay}" pattern="yyyy-MM-dd"/><br />
+								<fmt:formatDate value="${comment.insertDay}" type="time" dateStyle="medium" />
+							</div>					
+						</td>
+					</tr>
+					</c:forEach>
+					<%-- 
+					<c:forEach items="${commentList}" var="comment">
+						<div class="item-list clfix pad-top10">
+							<div class="nm_like">
+								<!-- 작성자, 좋아요, 싫어요 -->
+								<p class="likeArea">
+									<c:if test="${comment.cmLike == 1}"><i class="far fa-smile"></i></c:if>
+									<c:if test="${comment.cmUnLike == 1}"><i class="far fa-frown"></i></c:if>
+								</p>
+								<p><span class="btn btn-blue btn-xs default">${comment.writerTitleCnt}</span><span class="titleName">${comment.writerTitleName}</span> <span class="nickname">${comment.nickname}</span></p>
+							</div>
+							<div class="report">
+								<!-- 별점, 한줄평 -->
+								<c:if test="${!empty comment.item1 and comment.item1 > 0}">
+									<div class="star">
+										${drinkInfo.item1Val} : <i class="fas fa-star"></i>${comment.item1} 
+										${drinkInfo.item2Val} : <i class="fas fa-star"></i>${comment.item2} 
+										${drinkInfo.item3Val} : <i class="fas fa-star"></i>${comment.item3} 
+										${drinkInfo.item4Val} : <i class="fas fa-star"></i>${comment.item4} 
+										${drinkInfo.item5Val} : <i class="fas fa-star"></i>${comment.item5} 
+									</div>
+								</c:if>
+								<div>${comment.cmComment}</div>
+							</div>
+							<div class="commentDay">
+								<fmt:formatDate value="${comment.insertDay}" pattern="yyyy-MM-dd"/><br />
+								<fmt:formatDate value="${comment.insertDay}" type="time" dateStyle="medium" />
+							</div>
 						</div>
-						<div class="report">
-							<!-- 별점, 한줄평 -->
-							<c:if test="${!empty comment.item1 and comment.item1 > 0}">
-								<div class="star">
-									${drinkInfo.item1Val} : <i class="fas fa-star"></i>${comment.item1} 
-									${drinkInfo.item2Val} : <i class="fas fa-star"></i>${comment.item2} 
-									${drinkInfo.item3Val} : <i class="fas fa-star"></i>${comment.item3} 
-									${drinkInfo.item4Val} : <i class="fas fa-star"></i>${comment.item4} 
-									${drinkInfo.item5Val} : <i class="fas fa-star"></i>${comment.item5} 
-								</div>
-							</c:if>
-							<div>${comment.cmComment}</div>
-						</div>
-						<div class="commentDay">
-							<fmt:formatDate value="${comment.insertDay}" pattern="yyyy-MM-dd"/><br />
-							<fmt:formatDate value="${comment.insertDay}" type="time" dateStyle="medium" />
-						</div>
-					</div>
-				</c:forEach>
+					</c:forEach>
+					 --%>
+				</table>
 			</div>
 		</div>
 	</div>
