@@ -41,10 +41,10 @@
 						<td>${orderinfo.deliveryNum}</td>
 					</c:if>
 					<td>
-						<form action="orderdetail">
+						<form action="orderdetail" name="chor">
 							<input type="hidden" name="orCode" value="${orderinfo.orCode}">
-							<input type="hidden" name="ischang" value="true" /> <select
-								name="orstatus">
+							<input type="hidden" name="ischang" value="true" />
+							<select name="orstatus">
 								<option value="1"
 									<c:if test="${orderinfo.orStatus==1}">selected</c:if>>접수</option>
 								<option value="2"
@@ -57,7 +57,8 @@
 									<c:if test="${orderinfo.orStatus==5}">selected</c:if>>취소완료</option>
 								<option value="6"
 									<c:if test="${orderinfo.orStatus==6}">selected</c:if>>주문취소</option>
-							</select> <input type="submit" value="적용" />
+							</select>
+							<input type="button" value="적용" onclick="test()" >
 						</form>
 					</td>
 				</tr>
@@ -86,5 +87,9 @@
 
 
 <script>
-
+	function test(){
+		if (confirm("상태값을 변경 하시겠습니까?")) {
+			$("form[name='chor']").submit();
+		}
+	}
 </script>

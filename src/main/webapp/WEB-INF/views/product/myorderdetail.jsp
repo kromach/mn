@@ -126,13 +126,15 @@ function modifyOrder(){
    	}
 }
  
-function cancelOrder(){
-	if (checkFormjquery()) {
-  		if(confirm("취소하시겠습니까?")){
-  			location.href='/product/deleteorder?orcode=${orderinfo.orCode}';
-  		}
-  	}
-}
+
+ function cancelOrder(){
+	   	if (checkFormjquery()) {
+	   		if(confirm("주문 취소 하시겠습니까?")){
+	   			window.location.href='/product/deleteorder?orcode=${orderinfo.orCode}'
+	   		}
+	   	}
+	   }
+
 	
 </script>
 
