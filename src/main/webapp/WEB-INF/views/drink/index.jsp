@@ -105,7 +105,7 @@
 		console.log('======셋팅된값 보기======');
 		//검색누르면 스크롤값 초기화
 		isEnd = false;
-		$('#moreVal').val('1');
+		$('#moreVal').val('2');
 		var test = $('#moreVal').val();
 		console.log(isEnd+':'+test);
 	});
