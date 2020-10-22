@@ -66,8 +66,7 @@
 									<option value="7">7</option>									
 									<option value="8">8</option>									
 									<option value="9">9</option>									
-									<option value="10">10</option>	
-																	
+									<option value="10">10</option>									
 								</select>										
 								<i class="fas fa-plus-square btnPlus" onclick="SetAmount('P');"></i>										
 							</span>											
@@ -140,7 +139,7 @@
 			alert("최소 구매수량은 1개입니다.");
 			return false;
 		}else{
-			if(buy > remain){
+			if(Number(buy) > Number(remain)){
 				alert("재고가 부족합니다.");
 				return false;
 			}else{
@@ -160,15 +159,13 @@
 				sel.selectedIndex--;
 			}
 		} else if (upDown == 'P') {
-			if (sel.selectedIndex < 10) {
+			if (sel.selectedIndex < 11) {
 				sel.selectedIndex++;
 			}else if(sel.selectedIndex == 10){
 				alert("지나친 음주는 건강에 해롭습니다");
 				sel.selectedIndex = 10;
 			}
 		}
-		
-		
 		document.getElementById("totalprice").innerHTML = Number(price)
 				* sel.selectedIndex;
 	}
