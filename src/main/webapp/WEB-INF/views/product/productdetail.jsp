@@ -39,7 +39,7 @@
 			</div>
 		</div>
 		
-		<div class="detail-item detail-width4">
+		<div class="detail-item detail-width4" >
 			<h3 class="pad-top10 pad-bottom20">상세정보</h3>
 			${info.prContent}
 		</div>
