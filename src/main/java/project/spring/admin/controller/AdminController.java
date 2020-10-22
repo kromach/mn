@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import project.spring.admin.service.AdminService;
 import project.spring.admin.service.AdminServiceImpl;
 import project.spring.admin.vo.AdminVO;
 import project.spring.beans.PageVO;
@@ -26,7 +27,7 @@ import project.spring.beans.Pager;
 public class AdminController {
 
 		@Autowired
-		private AdminServiceImpl adminService = null;
+		private AdminService adminService = null;
 
 		
 		@RequestMapping("/memberList")

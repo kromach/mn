@@ -7,13 +7,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import project.spring.admin.dao.AdminDAO;
 import project.spring.admin.dao.AdminDAOImpl;
 
 @Service
 public class AdminServiceImpl implements AdminService{
 
 	@Autowired
-	private AdminDAOImpl adminDAO = null;
+	private AdminDAO adminDAO = null;
 	
 	@Override
 	public int insertItem() {
