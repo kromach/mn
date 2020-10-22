@@ -62,6 +62,8 @@ public class MainDAOImple implements MainDAO{
 		Map map = new HashMap();
 		map.put("index", index);
 		map.put("search", search);
+		List<String> kategoris = sqlSession.selectList("main.getKategoryBySearch",search);
+		map.put("kategoris",kategoris);
 		List<ProductVo> list = sqlSession.selectList("main.getProductInitialbySearch",map);
 		return list;
 	}
@@ -71,6 +73,8 @@ public class MainDAOImple implements MainDAO{
 		Map map = new HashMap();
 		map.put("index", index);
 		map.put("search", search);
+		List<String> kategoris = sqlSession.selectList("main.getKategoryBySearch",search);
+		map.put("kategoris",kategoris);
 		List<DrinkVO> list = sqlSession.selectList("main.getDrinkInitialbySearch",map);
 		return list;
 	}
@@ -80,6 +84,8 @@ public class MainDAOImple implements MainDAO{
 		Map map = new HashMap();
 		map.put("index", index);
 		map.put("search", search);
+		List<String> kategoris = sqlSession.selectList("main.getKategoryBySearch",search);
+		map.put("kategoris",kategoris);
 		List<EventVO> list = sqlSession.selectList("main.getEventInitialbySearch",map);
 		return list;
 	}
