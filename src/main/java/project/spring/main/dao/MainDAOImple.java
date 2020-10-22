@@ -78,6 +78,7 @@ public class MainDAOImple implements MainDAO{
 		List<DrinkVO> list = sqlSession.selectList("main.getDrinkInitialbySearch",map);
 		return list;
 	}
+	
 	@Override
 	public List<EventVO> getEventInitial(
 			int index, String search) {
