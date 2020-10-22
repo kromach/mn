@@ -117,7 +117,9 @@ pageEncoding="UTF-8"%>
 						<input type="text" name="schVal" class="required" msg="검색어를" />										
 						<input type="button" value="검색" class="btn btn-lg btn-grey" onclick="searchMem()" />
 					</form>								
-				</div>									
+				</div>
+				
+													
 			</div><!-- <div class="grid-item grid-item--width6 "> -->										
 	</div>	<!-- grid -->											
 </div> <!-- grid-Wrapper -->													
@@ -162,6 +164,11 @@ function exitUser(memberId){
 
 </script>													
 <script>
+$(function() {
+	
+	// select 형태 바꿔주는 JS 실행
+	$(".sel").selectric();
+});
 
 function searchMem(){
 	console.log("hi");
