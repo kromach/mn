@@ -26,8 +26,16 @@ pageEncoding="UTF-8"%>
 	<div class="grid">												
 		<div class="grid-sizer"></div>											
 		<div class="gutter-sizer"></div>											
-			<div class="grid-item grid-item--width6 ">										
-				<table class="tableCss table">									
+			<div class="detail-item detail-width6">
+			<h1 class="text-left pad-y10">회원정보목록</h1>										
+				<table class="tableCss tbl-lg margin-bottom10">
+					<colgroup>
+						<col width="15%" />
+						<col width="*" />
+						<col width="10%" />
+						<col width="25%" />
+						<col width="10%" />
+					</colgroup>									
 					<tr>								
 						<th>아이디</th>							
 						<th>이름</th>							
@@ -77,33 +85,41 @@ pageEncoding="UTF-8"%>
 					</c:forEach>								
 				</table>									
 				
-				<!-- pager -->									
-				<div align="center" class="pageNums">									
+				<!-- pager -->		
+				<div class="page_wrap">
+				<div class="page_nation">							
 						<!-- 게시글이 있을때만 보여주기 -->							
 						<c:if test="${count>0}">							
 							<!-------------------------------------------------------------------------->						
 							<c:if test="${pageVO.startPage > pageVO.pageBlock}">						
-								<a href="/admin/memberList?pageNum=${pageVO.startPage-pageVO.pageBlock}">&lt;</a>					
+								<a class="arrow prev" href="/admin/memberList?pageNum=${pageVO.startPage-pageVO.pageBlock}">&lt;</a>					
 							</c:if>						
-							<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1">						
-										<a href="/admin/memberList?pageNum=${i}" class="pageNums">&nbsp;${i}&nbsp;</a>			
+							<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1">
+								<c:if test="${i == pageNum}">
+									<a class="active">${i}</a>		
+								</c:if>			
+								<c:if test="${i != pageNum}">			
+									<a href="/admin/memberList?pageNum=${i}" class="pageNums">&nbsp;${i}&nbsp;</a>			
+								</c:if>		
 							</c:forEach>						
 							<c:if test="${pageVO.endPage < pageVO.pageCount}">						
-								<a href="/admin/memberList?pageNum=${pageVO.startPage+pageVO.pageBlock}">&gt;</a>					
+								<a class="arrow next" href="/admin/memberList?pageNum=${pageVO.startPage+pageVO.pageBlock}">&gt;</a>					
 							</c:if>						
 							<!-------------------------------------------------------------------------->						
-						</c:if>							
-				</div>									
-				<div>									
+						</c:if>	
+					</div>
+					</div>						
+													
+				<div class="searchPanel">									
 					<form action="memberList" name="schMember" id="schMember" method="post">	
 						<input type="hidden" name="schCheck" value="true"/>							
-						<div>								
+						<div class="ssec pad-top15">								
 							<select name="schKey">
 								<option value="ID" selected="selected">아이디</option>
 								<option value="NAME">이름</option>
 							</select>
 							<input type="text" name="schVal" class="required" msg="검색어를" />										
-							<input type="button" value="검색" class="btn btn-sm btn-blue" onclick="searchMem()" />
+							<input type="button" value="검색" class="btn btn-lg btn-grey" onclick="searchMem()" />
 						</div>								
 					</form>								
 				</div>									
