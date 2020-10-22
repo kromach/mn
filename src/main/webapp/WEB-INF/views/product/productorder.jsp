@@ -8,7 +8,7 @@
 
 		<div class="detail-sizer"></div>
 		<div class="gutter-sizer"></div>
-		<form action="insertOrder" name="orForm">
+		<form action="insertOrder" name="orForm" method="post">
 			<input type="hidden" name="prCode" value="${info.prCode}"> <input
 				type="hidden" name="prName" value="${info.prName}"> <input
 				type="hidden" name="prPrice" value="${info.prPrice *amount}">

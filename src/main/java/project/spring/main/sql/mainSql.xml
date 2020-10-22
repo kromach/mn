@@ -19,19 +19,48 @@
   			]]>
   		</select>
   		<select id="getProductInitialbySearch" resultType="productvo" parameterType="hashmap">
-  			<![CDATA[	
-  			SELECT * FROM (select a.*,ROWNUM AS rnum from (SELECT * FROM  PRODUCT_INFO order by INSERT_DAY DESC ) a) WHERE rnum >= (10*#{index})+1 and rnum <= (10*(#{index}+1)) AND pr_name LIKE '%' || #{search} || '%'
+  			SELECT * FROM 
+  			(select a.*,ROWNUM AS rnum from
+  			(SELECT * FROM  PRODUCT_INFO where 
+  			pr_name LIKE '%' || #{search} || '%' 
+ 			<foreach collection="kategoris" item="item" open="OR" separator="OR">
+			PR_BKIND LIKE '%' ||#{item}||'%' 
+			</foreach>
+			<foreach collection="kategoris" item="item" open="OR" separator="OR">
+			PR_SKIND LIKE '%' ||#{item}||'%' 
+			</foreach>
+			<![CDATA[	
+  			order by INSERT_DAY DESC ) a)
+  			WHERE rnum >= (10*#{index})+1 and rnum <= (10*(#{index}+1))
   			]]>
   		</select>
   		<select id="getDrinkInitialbySearch" resultType="DrinkVO" parameterType="hashmap">
+  			SELECT * FROM
+  			(select a.*,ROWNUM AS rnum from
+  			(SELECT * FROM  DRINK_INFO where
+  			dk_name LIKE '%' || #{search} || '%'
+  			<foreach collection="kategoris" item="item" open="OR" separator="OR">
+			DK_BKIND LIKE '%' ||#{item}||'%' 
+			</foreach>
+			<foreach collection="kategoris" item="item" open="OR" separator="OR">
+			DK_SKIND LIKE '%' ||#{item}||'%' 
+			</foreach>
   			<![CDATA[	
-  			SELECT * FROM (select a.*,ROWNUM AS rnum from (SELECT * FROM  DRINK_INFO order by INSERT_DAY DESC ) a) WHERE rnum >= (10*#{index})+1 and rnum <= (10*(#{index}+1)) AND dk_name LIKE '%' || #{search} || '%'
+  			order by INSERT_DAY DESC ) a)
+  			WHERE rnum >= (10*#{index})+1 and rnum <= (10*(#{index}+1))
   			]]>
   		</select>
   		<select id="getEventInitialbySearch" resultType="EventVO" parameterType="hashmap">
   			<![CDATA[
-  			SELECT * FROM (select a.*,ROWNUM AS rnum from (SELECT * FROM  event order by INSERT_DAY DESC ) a) WHERE rnum >= (10*#{index})+1 and rnum <= (10*(#{index}+1))AND EVENT_NAME LIKE '%' || #{search} || '%' AND IS_OPEN ='Y'
+  			SELECT * FROM
+  			(select a.*,ROWNUM AS rnum from
+  			(SELECT * FROM  event order by INSERT_DAY DESC ) a)
+  			WHERE rnum >= (10*#{index})+1 and rnum <= (10*(#{index}+1))
+  			AND EVENT_NAME LIKE '%' || #{search} || '%' 
+  			AND IS_OPEN ='Y'
   			]]>
   		</select>
-  		
+  		<select id="getKategoryBySearch" parameterType="string" resultType="string">
+  			SELECT code FROM DRINK_CATEGORY  WHERE VALUE LIKE '%' || #{value} || '%'
+  		</select>
   </mapper>

@@ -289,6 +289,7 @@ public class ProductController {
 	public String modifyorderSs (Model model, OrderVo ordervo, HttpSession session, HttpServletRequest request) throws SQLException{
 		String orCode =request.getParameter("orcode");
 		System.out.println(orCode);
+		System.out.println("수정!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		
 		
 		ordervo.setOrCode(orCode);

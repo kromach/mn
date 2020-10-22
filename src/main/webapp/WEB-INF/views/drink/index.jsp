@@ -83,7 +83,6 @@
 	    	postfix: "도"
 	    });
 	});
-
 	var frm;
 	
 	$("#searchBtn").click(function() {
@@ -118,7 +117,6 @@
 	});
 	
 	$grid.masonry();
-
 	// list 가져오기
 	function getDrinkList(pageNum) {
 		//console.log(frm);
@@ -148,7 +146,7 @@
     function drinkGridView(data){
 		
     	var json = JSON.parse(data);
-
+		
     	json.forEach(function(item, index) {
     		
     		var el = '<div class="grid-item"><a href="detail?dkCode='+item.dkCode+'"><img src="'+ item.dkImg +'" /></a></div>';
@@ -198,7 +196,6 @@
 		console.log(url)
 		location.href = url;
 	}
-
 </script>
 
 <script type="text/javascript">
@@ -240,18 +237,7 @@ let isEnd = false;
 						}else{
 							console.log(data+typeof(data)+isEnd);
 							$('#moreVal').val(Number(index)+1);
-							var $grid = $('.grid').masonry({
-								itemSelector : '.grid-item',
-								columnWidth : '.grid-sizer',
-								percentPosition : true,
-								gutter: '.gutter-sizer'
-							});
-							for(var i in data){
-								var el = '<div class="grid-item"><a href="detail?='+data[i].DK_CODE+'"><img src="'+data[i].DK_IMG+'" onerror="this.src=\'/resources/img/noImage.jpg\'" /></a></div>';
-								$grid.append( el ).masonry( 'appended', el ,true);
-							}
-							$grid.masonry( 'reloadItems' );
-				   			$grid.masonry();
+							drinkGridView(data);
 						}
 					},
 					error : function() {
@@ -276,18 +262,7 @@ let isEnd = false;
 						}else{
 							console.log(data+typeof(data)+isEnd);
 							$('#moreVal').val(Number(index)+1);
-							var $grid = $('.grid').masonry({
-								itemSelector : '.grid-item',
-								columnWidth : '.grid-sizer',
-								percentPosition : true,
-								gutter: '.gutter-sizer'
-							});
-							for(var i in data){
-								var el = '<div class="grid-item"><a href="detail?='+data[i].DK_CODE+'"><img src="'+data[i].DK_IMG+'" onerror="this.src=\'/resources/img/noImage.jpg\'" /></a></div>';
-								$grid.append( el ).masonry( 'appended', el ,true);
-							}
-							$grid.masonry( 'reloadItems' );
-				   			$grid.masonry();
+							drinkGridView(data);
 						}
 					},
 					error : function() {
@@ -297,6 +272,3 @@ let isEnd = false;
 			}
 	     }
 </script>
-
-<!-- 
-<script src="/resources/js/imageLoad.js"></script> -->

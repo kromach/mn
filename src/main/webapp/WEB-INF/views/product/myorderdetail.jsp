@@ -17,7 +17,7 @@
 	<div class="grid">
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
-		<form action="modifyorder">
+		<form action="modifyorder" method="post" name="modifyForm">
 			<input type="hidden" name="orcode" value="${orderinfo.orCode}">
 			<div class="grid-item grid-item--width6">
 				<h1 class="text-left pad-y10">주문 정보</h1>
@@ -51,6 +51,8 @@
 					<tr>
 						<th>수령자명</th>
 						<td align="left"><input type="text" class="input-xs required" msg="수령자명을" value="${orderinfo.receiverName}" name="receiverName" ${dis} /></td>
+						<td align="left">
+						<input type="text"value=" ${orderinfo.receiverName}" name="receiverName" class="sel short required" type="select-one" msg="구매자 이름을"  ${dis} /></td>
 					</tr>
 					<tr>
 						<th>수령자 연락처</th>
@@ -91,11 +93,10 @@
 					</tr>
 					</c:if>
 				</table>
-				
 				<div>
 					<c:if test="${!dis.equals('disabled')}">
-					<input type="button" class="btn btn-lg btn-rouge" value="주문취소" onclick="location.href='/product/deleteorder?orcode=${orderinfo.orCode}'">
-					<input type="submit" class="btn btn-lg btn-blue" value="수정하기">	
+					<input type="button" class="btn btn-lg btn-rouge" value="주문취소" onclick="cancelOrder()'">
+					<input type="button" class="btn btn-lg btn-blue" value="수정하기" onclick="modifyOrder()">	
 					</c:if>
 					<input type="button" class="btn btn-lg btn-grey" value="구매목록" onclick="location.href='/product/myorderlist'">
 				</div>
@@ -103,4 +104,36 @@
 		</form>
 	</div>
 </div>
-</html>
+
+<script>
+$(function() {
+	var msnry = new Masonry('.grid2', {
+		itemSelector : '.detail-item',
+		columnWidth : '.detail-sizer',
+		percentPosition : true,
+		gutter : '.gutter-sizer'
+	});
+	imagesLoaded('.grid2').on('progress', function() {
+		msnry.layout();
+	});
+});
+	
+function modifyOrder(){
+	if (checkFormjquery()) {
+   		if(confirm("수정하시겠습니까?")){
+   			$("form[name='modifyForm']").submit();	
+   		}
+   	}
+}
+ 
+function cancelOrder(){
+	if (checkFormjquery()) {
+  		if(confirm("취소하시겠습니까?")){
+  			location.href='/product/deleteorder?orcode=${orderinfo.orCode}';
+  		}
+  	}
+}
+	
+</script>
+
+
