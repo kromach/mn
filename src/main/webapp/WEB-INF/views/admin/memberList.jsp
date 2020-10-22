@@ -6,11 +6,8 @@ pageEncoding="UTF-8"%>
 													
 <!DOCTYPE html>													
 <html>						
-
 <script src="/resources/js/formCheck.js"></script>
-<script src="/resources/js/jquery.selectric.js"></script>
-<link rel="stylesheet" href="/resources/css/selectric.css">
-							
+						
 <head>													
 <meta charset="UTF-8">													
 <title>회원정보 관리</title>													
@@ -173,9 +170,6 @@ function searchMem(){
 	}	
 }
 
-$(function(){
-	$("#selectricMember").selectric();
-});
 </script>										
 </body>													
 													
