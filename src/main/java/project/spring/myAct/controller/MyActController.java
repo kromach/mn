@@ -60,8 +60,13 @@ public class MyActController {
 			pageVO = pager.pager(pageNum, count);
 			myArticle = myActService.getMyArticle(memId, pageVO.getStartRow(), pageVO.getEndRow());
 			System.out.println("myArticle" + myArticle.toString());
+			number = count - (pageVO.getCurrPage() -1) * pageVO.getPageSize();
+			
+			for(int i =0 ; i<myArticle.size();i++) {
+				System.out.println("======================================++");
+				myArticle.get(i).toString();
+			}
 		}
-		number = count - (pageVO.getCurrPage() -1) * pageVO.getPageSize();
 		
 		model.addAttribute("myArticle", myArticle);
 		model.addAttribute("count", new Integer(count));
@@ -69,10 +74,7 @@ public class MyActController {
 		model.addAttribute("pageNum", new Integer(pageNum));
 		model.addAttribute("pageVO", pageVO);
 		
-		for(int i =0 ; i<myArticle.size();i++) {
-			System.out.println("======================================++");
-			myArticle.get(i).toString();
-		}
+		
 		return "/myAct/index.mn";
 	}
 	
