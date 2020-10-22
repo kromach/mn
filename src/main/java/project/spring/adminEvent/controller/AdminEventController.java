@@ -133,7 +133,7 @@ public class AdminEventController {
 			
 			int count = 1;
 			
-			List eventList = null;
+			List<AdminEventVO> eventList = null;
 			
 			Pager pager = new Pager();
 			
@@ -179,6 +179,10 @@ public class AdminEventController {
 					eventList = adminEventService.eventList(pageVo.getStartRow(), pageVo.getEndRow());
 
 					number = count-(pageVo.getCurrPage()-1)*pageVo.getPageSize();
+					
+					for(int i = 0; i < eventList.size(); i++) {
+						System.out.println("이벤트 확인" + eventList.get(i).getEventName());
+					}
 				}
 			}
 			model.addAttribute("pageNum", pageNum);
