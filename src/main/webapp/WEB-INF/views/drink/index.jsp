@@ -246,6 +246,12 @@ let isEnd = false;
 								percentPosition : true,
 								gutter: '.gutter-sizer'
 							});
+							for(var i in data){
+								var el = '<div class="grid-item"><a href="detail?='+data[i].DK_CODE+'"><img src="'+data[i].DK_IMG+'" onerror="this.src=\'/resources/img/noImage.jpg\'" /></a></div>';
+								$grid.append( el ).masonry( 'appended', el ,true);
+							}
+							$grid.masonry( 'reloadItems' );
+				   			$grid.masonry();
 						}
 					},
 					error : function() {
@@ -276,6 +282,12 @@ let isEnd = false;
 								percentPosition : true,
 								gutter: '.gutter-sizer'
 							});
+							for(var i in data){
+								var el = '<div class="grid-item"><a href="detail?='+data[i].DK_CODE+'"><img src="'+data[i].DK_IMG+'" onerror="this.src=\'/resources/img/noImage.jpg\'" /></a></div>';
+								$grid.append( el ).masonry( 'appended', el ,true);
+							}
+							$grid.masonry( 'reloadItems' );
+				   			$grid.masonry();
 						}
 					},
 					error : function() {
