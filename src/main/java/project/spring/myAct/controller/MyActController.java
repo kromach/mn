@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import project.spring.article.vo.ArticleDTO;
+import project.spring.beans.PageVO;
+import project.spring.beans.Pager;
 import project.spring.myAct.service.MyActService;
 import project.spring.myAct.vo.TitleListDTO;
 
@@ -31,22 +33,93 @@ public class MyActController {
 	@RequestMapping
 	public String indexSs(HttpServletRequest request, Model model) {
 		System.out.println("MyActIndex Controller");
-		int count = 0;				
+		String pageNum;
+		if(request.getParameter("pageNum") != null) {
+			pageNum = request.getParameter("pageNum");
+		}else{
+			pageNum = "1";
+		}
+				
+		int count = 0;
+		
+		Pager pager = new Pager();
+		PageVO pageVO = null;
+		int number = 0;			
 		
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
-		List<ArticleDTO> myArticle = null;
+		
+		//myArticle = myActService.getMyArticle(memId);
+		//System.out.println("size======"+myArticle.size());	
+		
 		count = myActService.myArticleCount(memId);
 		System.out.println("count : " + count);
 		
-		myArticle = myActService.getMyArticle(memId);
-		System.out.println("size======"+myArticle.size());		
-		model.addAttribute("count", new Integer(count));
+		List<ArticleDTO> myArticle = null;
+		if(count > 0) {
+			pageVO = pager.pager(pageNum, count);
+			myArticle = myActService.getMyArticle(memId, pageVO.getStartRow(), pageVO.getEndRow());
+			System.out.println("myArticle" + myArticle.toString());
+		}
+		number = count - (pageVO.getCurrPage() -1) * pageVO.getPageSize();
+		
 		model.addAttribute("myArticle", myArticle);
+		model.addAttribute("count", new Integer(count));
+		model.addAttribute("number", new Integer(number));
+		model.addAttribute("pageNum", new Integer(pageNum));
+		model.addAttribute("pageVO", pageVO);
+		
 		for(int i =0 ; i<myArticle.size();i++) {
 			System.out.println("======================================++");
 			myArticle.get(i).toString();
 		}
+		return "/myAct/index.mn";
+	}
+	
+	@RequestMapping(value = "/index")
+	public String index2(HttpServletRequest request, Model model) {
+		
+		String pageNum;
+		if(request.getParameter("pageNum") != null) {
+			pageNum = request.getParameter("pageNum");
+		}else{
+			pageNum = "1";
+		}
+				
+		int count = 0;
+		
+		Pager pager = new Pager();
+		PageVO pageVO = null;
+		int number = 0;			
+		
+		HttpSession session = request.getSession();
+		String memId = (String)session.getAttribute("memId");
+		
+		//myArticle = myActService.getMyArticle(memId);
+		//System.out.println("size======"+myArticle.size());	
+		
+		count = myActService.myArticleCount(memId);
+		System.out.println("count : " + count);
+		
+		List<ArticleDTO> myArticle = null;
+		if(count > 0) {
+			pageVO = pager.pager(pageNum, count);
+			myArticle = myActService.getMyArticle(memId, pageVO.getStartRow(), pageVO.getEndRow());
+			System.out.println("myArticle" + myArticle.toString());
+		}
+		number = count - (pageVO.getCurrPage() -1) * pageVO.getPageSize();
+		
+		model.addAttribute("myArticle", myArticle);
+		model.addAttribute("count", new Integer(count));
+		model.addAttribute("number", new Integer(number));
+		model.addAttribute("pageNum", new Integer(pageNum));
+		model.addAttribute("pageVO", pageVO);
+		
+		for(int i =0 ; i<myArticle.size();i++) {
+			System.out.println("======================================++");
+			myArticle.get(i).toString();
+		}
+		
 		return "/myAct/index.mn";
 	}
 	
@@ -64,22 +137,46 @@ public class MyActController {
 	
 	@RequestMapping(value = "/likeArticle")
 	@ResponseBody
-	public List likeArticleSs(String id, HttpServletRequest request, Model model) {
+	public Map likeArticleSs(String id, HttpServletRequest request) {
 		System.out.println("MyActLikeArticle Controller");
 		System.out.println("id : "+id);
+		
+		String pageNum;
+		if(request.getParameter("pageNum") != null) {
+			pageNum = request.getParameter("pageNum");
+		}else{
+			pageNum = "1";
+		}
+				
+		Pager pager = new Pager();
+		PageVO pageVO = null;
+		int number = 0;			
 		int count = 0;			
 		
 		HttpSession session = request.getSession();
 		String memId = (String)session.getAttribute("memId");
 		List<ArticleDTO> likeArticle =null;
 		
-		likeArticle = myActService.myLikeArticle(memId);
+		
 		count = myActService.likeArticleCount(memId);
 		System.out.println("count : " + count);
-		System.out.println(likeArticle.toString());
 		
+		if(count > 0) {
+			pageVO = pager.pager(pageNum, count);
+			likeArticle = myActService.myLikeArticle(memId, pageVO.getStartRow(), pageVO.getEndRow());
+			System.out.println("likeArticle" + likeArticle.toString());
+		}
+		System.out.println(count);
+		number = count - (pageVO.getCurrPage() -1) * pageVO.getPageSize();
 		
-		return likeArticle;
+		Map map = new HashMap();
+		map.put("likeArticle", likeArticle);
+		map.put("pageVO", pageVO);
+		map.put("count", new Integer(count));
+		map.put("pageNum", new Integer(pageNum));
+		map.put("number", new Integer(number));
+		
+		return map;
 	}
 	 
 	@RequestMapping(value = "/likeDrink")

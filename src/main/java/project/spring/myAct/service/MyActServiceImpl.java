@@ -60,8 +60,8 @@ public class MyActServiceImpl implements MyActService{
 	}
 	
 	@Override
-	public List getMyArticle(String memId) {
-		List articleList = myActDAO.getMyArticles(memId);
+	public List getMyArticle(String memId, int start, int end) {
+		List articleList = myActDAO.getMyArticles(memId, start, end);
 		return articleList;
 	}
 
@@ -72,9 +72,8 @@ public class MyActServiceImpl implements MyActService{
 	}
 
 	@Override
-	public List myLikeArticle(String memId) {
-		List articleList = myActDAO.myLikeArticle(memId);
-		
+	public List myLikeArticle(String memId, int start, int end) {
+		List articleList = myActDAO.myLikeArticle(memId, start, end);
 		return articleList;
 	}
 	

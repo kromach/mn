@@ -46,7 +46,6 @@
 							<td>제목</td>
 							<td>작성일</td>
 							<td>조회</td>
-							
 							<td>추천</td>
 						</tr>
 						<c:forEach var="myArticle" items="${myArticle}">
@@ -59,6 +58,23 @@
 							</tr>
 						</c:forEach>
 					</table>
+					<!-- pager -->
+					<div align="center" class="pageNums">
+						<!-- 게시글이 있을때만 보여주기 -->
+					<c:if test="${count>0}">
+					<!-------------------------------------------------------------------------->
+						<c:if test="${pageVO.startPage > pageVO.pageBlock}">
+							<a href="/myAct/index?pageNum=${pageVO.startPage-pageVO.pageBlock}">&lt;</a>
+						</c:if>
+						<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1"> 
+									<a href="/myAct/index?pageNum=${i}" class="pageNums">&nbsp;${i}&nbsp;</a>
+						</c:forEach>
+						<c:if test="${pageVO.endPage < pageVO.pageCount}">
+							<a href="/myAct/index?pageNum=${pageVO.startPage+pageVO.pageBlock}">&gt;</a>
+						</c:if>
+						<!-------------------------------------------------------------------------->
+					</c:if>
+				</div>
 				</div>
 				<div id="likeArticle_result">
 					
@@ -82,7 +98,13 @@
 					url:"/myAct/likeArticle",
 					data:{id:$("#memId").val()},
 					success:function(data){
-						var likeArticle = data;
+						var likeArticle = data.likeArticle;
+						var count = data.count;
+						var pageNum = data.pageNum;
+						var number = data.number;
+						var pageVO = data.pageVO;
+						console.log(count);
+						console.log("pageVO :" + pageVO.startPage);
 						$('#index').empty();
 						$('#likeDrink_result').empty();
 						$('#title_result').empty();
@@ -108,6 +130,9 @@
 							$('#likeArticle_result > table > tr:last').append('<td>'+likeArticle[i].heart+'</td>');
 							$('#likeArticle_result > table').append('</tr>');
 						}
+						
+						
+						
 					}
 				});
 			});
@@ -131,12 +156,12 @@
 						$('#tmp').attr('class','grid-item');
 						
 						if(data.likeDrink == null && data.likeProduct == null){
-							console.log('뭐가 뭔지 모르겠다');
 							$('#likeDrink_result').append('<h2> 좋아요한 게시글이 없습니다. </h2>');
 						}
 						for(var i in likeProduct){
 							console.log(likeProduct[i]);
 							console.log(likeDrink[i]);
+							$('#likeDrink_result').append('<div>');
 							$('#likeDrink_result').append('<a href="/product/productdetail?prcode='+likeProduct[i].prCode+'"><img src="'+likeProduct[i].prImg+'" /></a>');
 							$('#likeDrink_result').append('</div>'); 		
 						}
@@ -204,31 +229,6 @@
 							str = str + '</tr>';	
 							
 							$('#title_result > table').append(str);
-							/*
-							$('#title_result > table').append('<tr>');
-							  
-							for(var j in updateTitle){
-								if(getAllTitle[i].titleName == updateTitle[j]){
-									//console.log(getAllTitle[i].titleName+'가 획득한 칭호이다.');
-									getTitleIndex =i;
-								} 
-							}
-							 
-							//console.log(getTitleIndex);
-							//if(i==getTitleIndex){
-								$('#title_result > table > tr:last').append('<td style="'+myTitle+'">'+getAllTitle[i].titleName+'</td>');
-								$('#title_result > table > tr:last').append('<td>'+getAllTitle[i].titleDetail+'</td>');
-								$('#title_result > table > tr:last').append('<td><button class="btn-md choosenBtn display-none">OTL</button></td>');
-							//}
-							
-							else{
-								$('#title_result > table > tr:last').append('<td>'+getAllTitle[i].titleName+'</td>');
-								$('#title_result > table > tr:last').append('<td>'+getAllTitle[i].titleDetail+'</td>');
-								$('#title_result > table > tr:last').append('<td><button class="btn-md choosenBtn" onclick="choosen('+getAllTitle[i].titleIdx+')">OTL</button></td>');
-							}
-							
-							$('#title_result > table').append('</tr>');
-							*/
 						}
 					}
 				});
@@ -258,10 +258,47 @@
 	}
 	</script>
 	
+	<script type="text/javascript">
+	function fetchList(context,index){
+		if(isEnd == true){
+			return;
+		}
+		$.ajax({
+			url : context + '/reload',
+			data : 'index='+index,
+			type : "post",
+			async: false,
+			success : function(data) {
+				if(data==""){
+					isEnd = true;
+					console.log('end');
+				}else{
+					console.log(data);
+					$('#index').val(Number(index)+1);
+					var $grid = $('.grid').masonry({
+						itemSelector : '.grid-item',
+						columnWidth : '.grid-sizer',
+						percentPosition : true,
+						gutter: '.gutter-sizer'
+					});
+					for(var i in data){
+						var el = '<div class="grid-item"><a href="'+data[i].aLinkUri+'"><img src="'+data[i].imgUri+'" onerror="this.src=\'/resources/img/noImage.jpg\'" /></a></div>';
+						$grid.append( el ).masonry( 'appended', el ,true);
+					}
+					// 재훈 테스트
+					// masonry 재 실행 
+					$grid.masonry( 'reloadItems' );
+		   			$grid.masonry();
+				}
+			}
+		});
+	}
+	</script>
+	
 	<script src="/resources/js/imageLoad.js"></script>
 	<!-- 데이터 스크롤해서 붙이는 스크립트  -->
 	<script type="text/javascript">
-		$(window).scroll(
+		$(window).s croll(
 				function() {
 					// A(B+C) : document 높이 (고정)
 					console.log($(document).height());
@@ -275,5 +312,6 @@
 					}
 				});
 	</script>
+	
 </body>
 </html>

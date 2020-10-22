@@ -65,9 +65,13 @@ public class MyActDAOImpl implements MyActDAO{
 	}
 	
 	@Override
-	public List getMyArticles(String memId) {
+	public List getMyArticles(String memId, int start, int end) {
 	
-		List list = sqlSession.selectList("myAct.selectAll", memId);
+		HashMap map = new HashMap();
+		map.put("memId", memId);
+		map.put("start", start);
+		map.put("end", end);
+		List list = sqlSession.selectList("myAct.selectAll", map);
 		
 		return list;
 	}
@@ -75,19 +79,25 @@ public class MyActDAOImpl implements MyActDAO{
 	@Override
 	public int myLikeArticleCount(String memId) {
 		int count = 0 ; 
-		sqlSession.selectOne("myAct.myLikeArticleCount", memId);
+		count = sqlSession.selectOne("myAct.myLikeArticleCount", memId);
+		System.out.println("=============="+count);
 		return count;
 	}
 
 	@Override
-	public List myLikeArticle(String memId) {
-		List list = sqlSession.selectList("myAct.myLikeArticle", memId);
+	public List myLikeArticle(String memId, int start, int end) {
+		HashMap map = new HashMap();
+		map.put("memId", memId);
+		map.put("start", start);
+		map.put("end", end);
+		List list = sqlSession.selectList("myAct.myLikeArticle", map);
 		System.out.println(list.toString());
 		return list;
 	}
 
 	@Override
 	public List getMyTitle(String memId) {
+
 		List list = sqlSession.selectList("myAct.getMyTitle", memId);
 		return list;
 	}
