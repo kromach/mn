@@ -14,10 +14,11 @@
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
 		<div class="grid-item grid-item--width3">
+		<h1 class="text-left pad-y10">구매내역</h1>
 			<form action="/product/orderlist" name="schMember" id="schMember">
 				<input type="hidden" name="isSearch" value="true">
 				<div>
-					<table class="tableCss">
+					<table class="tableCss tbl-lg margin-bottom10" >
 						<tr>
 							<th>상품명</th>
 							<td align="left"><input type="text" name="prName" /></td>
@@ -51,20 +52,20 @@
 						</tr>
 					</table>
 				</div>
-				<div><input type="submit" value="검색" class="btn btn-sm btn-blue" /></div>
+				<div><input type="submit" value="검색" class="btn btn-lg btn-mint" /></div>
 			</form>
 		</div>
 
 		
 			<div class="grid-item grid-item--width6">
-				<table class="tableCss table">
+				<table class="tableCss tbl-lg margin-bottom20" >
 						<tr>
-							<td>주문번호</td>
-							<td>상품명</td>
-							<td>수량</td>
-							<td>주문자아이디/수령자명</td>
-							<td>주문일자</td>
-							<td>주문상태</td>
+							<th>주문번호</th>
+							<th>상품명</th>
+							<th>수량</th>
+							<th>주문자아이디 / 수령자명</th>
+							<th>주문일자</th>
+							<th>주문상태</th>
 						</tr>
 						<c:if test="${ordercount==0}">
 							<h1>주문받은 상품이 없습니다</h1>
@@ -75,12 +76,13 @@
 									<td><a href="orderdetail?orCode=${order.orCode}">${order.orCode}</a></td>
 									<td><a href="orderdetail?orCode=${order.orCode}">${order.prName}</a></td>
 									<td>${order.prCount}</td>
-									<td>${order.userId}/${order.receiverName}</td>
+									<td>${order.userId} / ${order.receiverName}</td>
 									<td><fmt:formatDate value="${order.insertDay}" pattern="yyyy.MM.dd"/></td>
 									<td>${order.orStatusValue}</td>
 								</tr>
 						</c:forEach>
 				</table>
+				<br/><br/>
 				<!-- pager -->
 				<div align="center" class="pageNums">
 							<c:if test="${pageVO.startPage > pageVO.pageBlock}">
