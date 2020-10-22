@@ -79,7 +79,7 @@
 				</table>
 				<c:if test="${!dis.equals('disabled')}">
 					<input type="button" class="btn btn-lg btn-blue" value="주문 취소" 
-					onclick="window.location.href='/product/deleteorder?orcode=${orderinfo.orCode}">
+					onclick="cancelOrder()">
 					<input type="button" class="btn btn-lg btn-blue" value="수정하기" onclick="modifyOrder()">
 					
 				</c:if>
@@ -113,8 +113,8 @@ $(function() {
  
  function cancelOrder(){
 	   	if (checkFormjquery()) {
-	   		if(confirm("취소하시겠습니까?")){
-	   			
+	   		if(confirm("주문 취소 하시겠습니까?")){
+	   			window.location.href='/product/deleteorder?orcode=${orderinfo.orCode}'
 	   		}
 	   	}
 	   }
