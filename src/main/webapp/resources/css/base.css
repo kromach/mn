@@ -359,7 +359,7 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .search-area .searchPanel .ssec .m_select option{ padding:2px 4px 2px 6px}
 .search-area .searchPanel .ssec .m_text{border-radius:2px; height:34px; padding:0 0 0 8px; font-size:13px; line-height:34px; border:1px solid #ccc; color:#2f4050;  margin-bottom:5px; box-sizing:border-box}
 .search-area .searchPanel .ssec .radio{height:33px}
-.search-area .searchPanel .ssec .input {height: 30px; border: 1px solid #d2d2d2; width:85%}
+.search-area .searchPanel .ssec .input {height: 30px; border: 1px solid #d2d2d2; width:80%; padding-left: 15px; font-size:14px;}
 .search-area .searchPanel .ssec input:focus{outline:none}
 .search-area .searchPanel .ssec .s_slider {width:98%; max-width:400px;}
 .search-area .searchPanel .ssec .searchBtn{margin-top:15px}

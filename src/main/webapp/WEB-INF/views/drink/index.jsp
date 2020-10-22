@@ -55,9 +55,9 @@
 	<div class="grid"> 
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
-		
 	</div>
 </div>
+
 <script>
 	$(function() {
 		
@@ -80,6 +80,7 @@
 	    	postfix: "도"
 	    });
 	});
+	
 	var frm;
 	
 	$("#searchBtn").click(function() {
@@ -114,6 +115,7 @@
 	});
 	
 	$grid.masonry();
+	
 	// list 가져오기
 	function getDrinkList(pageNum) {
 		//console.log(frm);
@@ -196,7 +198,8 @@
 </script>
 
 <script type="text/javascript">
-let isEnd = false;
+	let isEnd = false;
+	
 	$(function(){
 		$(window).scroll(function() {
 			 let $window = $(this);
@@ -210,62 +213,38 @@ let isEnd = false;
 	        	fetchList(context,index);
 			}
 		})
-	})
+	});
+	
 	function fetchList(context,index){
 			var schDkBkind= $('#schDkBkindSV').val();
 			var schDkSkind= $('#schDkSkindSV').val();
 			var schDkVal= $('#schDkValSV').val();
 			var schDkAlcohol= $('#schDkAlcoholSV').val();
 			var schDkCountry= $('#schDkCountrySV').val();
-			if(schDkBkind==''&&schDkSkind==''&&schDkVal==''&&schDkAlcohol==''&&schDkCountry==''){
-				if(isEnd == true){
-					return;
-				}
- 				$.ajax({
-					type : "POST",
-					url : "drinkList",
-					async: false,
-					data : "schDkBkind="+schDkBkind +"&schDkSkind="+schDkSkind+"&schDkVal="+schDkVal +
-					"&schDkAlcohol="+schDkAlcohol+"&schDkCountry=="+schDkCountry+"&pageNum=" + index+"&more=more",  
-					success : function(data) {
-						if(data.length==2){
-							isEnd = true;
-							console.log('end');
-						}else{
-							console.log(data+typeof(data)+isEnd);
-							$('#moreVal').val(Number(index)+1);
-							drinkGridView(data);
-						}
-					},
-					error : function() {
-						alert("error");
-					}
-				})
-			}else{
-				if(isEnd == true){
-					return;
-				}
-				console.log("검색일경우");
-				$.ajax({
-					type : "POST",
-					url : "drinkList",
-					async: false,
-					data : "schDkBkind="+schDkBkind +"&schDkSkind="+schDkSkind+"&schDkVal="+schDkVal +
-					"&schDkAlcohol="+schDkAlcohol+"&schDkCountry=="+schDkCountry+"&pageNum=" + index+"&more=more",  
-					success : function(data) {
-						if(data.length==2){
-							isEnd = true;
-							console.log('end');
-						}else{
-							console.log(data+typeof(data)+isEnd);
-							$('#moreVal').val(Number(index)+1);
-							drinkGridView(data);
-						}
-					},
-					error : function() {
-						alert("error");
-					}
-				})
+			
+			if(isEnd == true){
+				return;
 			}
+			
+			$.ajax({
+				type : "POST",
+				url : "drinkList",
+				async: false,
+				data : "schDkBkind="+schDkBkind +"&schDkSkind="+schDkSkind+"&schDkVal="+schDkVal +
+				"&schDkAlcohol="+schDkAlcohol+"&schDkCountry="+schDkCountry+"&pageNum=" + index+"&more=more",  
+				success : function(data) {
+					if(data.length==2){
+						isEnd = true;
+						console.log('end');
+					}else{
+						console.log(data+typeof(data)+isEnd);
+						$('#moreVal').val(Number(index)+1);
+						drinkGridView(data);
+					}
+				},
+				error : function() {
+					alert("error");
+				}
+			});
 	     }
 </script>
