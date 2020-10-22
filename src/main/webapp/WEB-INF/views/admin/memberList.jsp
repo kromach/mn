@@ -112,15 +112,13 @@ pageEncoding="UTF-8"%>
 													
 				<div class="searchPanel">									
 					<form action="memberList" name="schMember" id="schMember" method="post">	
-						<input type="hidden" name="schCheck" value="true"/>							
-						<div class="ssec pad-top15">								
-							<select name="schKey">
-								<option value="ID" selected="selected">아이디</option>
-								<option value="NAME">이름</option>
-							</select>
-							<input type="text" name="schVal" class="required" msg="검색어를" />										
-							<input type="button" value="검색" class="btn btn-lg btn-grey" onclick="searchMem()" />
-						</div>								
+					<input type="hidden" name="schCheck" value="true"/>							
+						<select name="schKey" id="selectricMember">
+							<option value="ID" selected="selected">아이디</option>
+							<option value="NAME">이름</option>
+						</select>
+						<input type="text" name="schVal" class="required" msg="검색어를" />										
+						<input type="button" value="검색" class="btn btn-lg btn-grey" onclick="searchMem()" />
 					</form>								
 				</div>									
 			</div><!-- <div class="grid-item grid-item--width6 "> -->										
@@ -174,6 +172,10 @@ function searchMem(){
 		$("form[name='schMember']").submit();
 	}	
 }
+
+$(function(){
+	$("#selectricMember").selectric();
+});
 </script>										
 </body>													
 													
