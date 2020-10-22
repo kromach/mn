@@ -2,13 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>사용자 구매 목록 상세</title>
-</head>
-
+<script src="/resources/js/formCheck.js"></script>
 <c:set var="dis" value=""></c:set>
 <c:set var="del" value=""></c:set>
 <c:if test="${orderinfo.orStatus > 2}">
@@ -24,9 +18,13 @@
 		<div class="gutter-sizer"></div>
 		<form action="modifyorder">
 			<input type="hidden" name="orcode" value="${orderinfo.orCode}">
-			<div class="grid-item grid-item--width3">
-				<h3>주문 정보</h3>
-				<table class="tableCss">
+			<div class="grid-item grid-item--width6">
+				<h3 class="text-left pad-y10">주문 정보</h3>
+				<table class="tableCss tbl-lg margin-bottom10">
+					<colgroup>
+						<col width="15%" />
+						<col width="*" />
+					</colgroup>
 					<tr>
 						<th>상품명</th>
 						<td><a href="productdetail?prcode=${orderinfo.prCode}">${orderinfo.prName}</a></td>
@@ -41,31 +39,40 @@
 					</tr>
 				</table>
 
-				<h3>주소 정보</h3>
-				<table class="tableCss">
+				<h3 class="text-left pad-y10">배송지 정보</h3>
+				<table class="tableCss tbl-lg margin-bottom10">
+					<colgroup>
+						<col width="15%" />
+						<col width="*" />
+					</colgroup>
 					<tr>
 						<th>수령자명</th>
-						<td align="left"><input type="text"
-							value="${orderinfo.receiverName}" name="receiverName" ${dis} /></td>
+						<td align="left"><input type="text" class="input-xs required" msg="수령자명을" value="${orderinfo.receiverName}" name="receiverName" ${dis} /></td>
 					</tr>
 					<tr>
 						<th>수령자 연락처</th>
-						<td align="left"><c:set var="tel"
-								value="${orderinfo.receiverTel}" /> <c:set var="telArr"
-								value="${fn:split(tel,',')}" /> <input type="text"
-							name="receiverTel" value="${telArr[0]}" ${dis}>- <input
-							type="text" name="receiverTel" value="${telArr[1]}" ${dis}>-
-							<input type="text" name="receiverTel" value="${telArr[2]}" ${dis}></td>
+						<td align="left">
+							<c:set var="tel" value="${orderinfo.receiverTel}" /> 
+							<c:set var="telArr" value="${fn:split(tel,',')}" /> 
+							<input type="text" class="input-xs required" msg="전화번호를" name="receiverTel" value="${telArr[0]}" ${dis}> - 
+							<input type="text" class="input-xs required" msg="전화번호를" name="receiverTel" value="${telArr[1]}" ${dis}> -
+							<input type="text" class="input-xs required" msg="전화번호를" name="receiverTel" value="${telArr[2]}" ${dis}>
+						</td>
 					</tr>
 					<tr>
-						<th>수령지</th>
-						<td align="left"><input type="text"
-							value="${orderinfo.receiverAddr}" name="receiverAddr" ${dis} /></td>
-
+						<th>수령지 주소</th>
+						<td align="left">
+							<input type="text" value="${orderinfo.receiverAddr}" class="input-lg required" msg="수령지 주소를" name="receiverAddr" ${dis} />
+						</td>
 					</tr>
 				</table>
-				<h3>배송 정보</h3>
-				<table class="tableCss">
+				
+				<h3 class="text-left pad-y10">배달 상태</h3>
+				<table class="tableCss tbl-lg margin-bottom10">
+					<colgroup>
+						<col width="15%" />
+						<col width="*" />
+					</colgroup>
 					<tr>
 						<th>배송 현황</th>
 						<td>${orderinfo.orStatusValue}</td>
@@ -81,14 +88,14 @@
 					</tr>
 					</c:if>
 				</table>
-				<c:if test="${!dis.equals('disabled')}">
-					<input type="button" class="btn btn-lg btn-blue" value="주문 취소" 
-					onclick="window.location.href='/product/deleteorder?orcode=${orderinfo.orCode}'">
-					<input type="submit" class="btn btn-lg btn-blue" value="수정하기">
-					
-				</c:if>
-					<input type="button" class="btn btn-lg btn-blue" value="구매목록" 
-					onclick="window.location.href='/product/myorderlist'">
+				
+				<div>
+					<c:if test="${!dis.equals('disabled')}">
+					<input type="button" class="btn btn-lg btn-rouge" value="주문취소" onclick="location.href='/product/deleteorder?orcode=${orderinfo.orCode}'">
+					<input type="submit" class="btn btn-lg btn-blue" value="수정하기">	
+					</c:if>
+					<input type="button" class="btn btn-lg btn-grey" value="구매목록" onclick="location.href='/product/myorderlist'">
+				</div>
 			</div>
 		</form>
 	</div>

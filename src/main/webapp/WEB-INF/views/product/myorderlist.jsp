@@ -8,7 +8,7 @@
 			<div class="gutter-sizer"></div>
 				<div class="detail-item detail-width6" >
 					<h3 class="text-left pad-y10">구매내역</h3>
-					<table class="tableCss tbl-lg" id="more">
+					<table class="tableCss tbl-lg margin-bottom10" id="more">
 						<colgroup>
 							<col width="15%" />
 							<col width="*" />
@@ -47,7 +47,7 @@
 			
 			<c:if test="${myordercount > 0}">
 				<div class="detail-item detail-width6" id="add">
-					<input id="addBtn" type="button" class="btn btn-md btn-grey" value="더보기" onclick="more()">
+					<input id="addBtn" type="button" class="btn btn-md btn-mint" value="더보기" onclick="more()">
 					<input type ="hidden" value="0" id="moreVal">
 				</div>
 			</c:if>

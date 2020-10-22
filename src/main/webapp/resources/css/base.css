@@ -613,7 +613,7 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .tableCss th,
 .tableCss td{padding:7px;border:0;line-height:120%;border-bottom:1px solid #cccccc;border-right:1px solid #cccccc;}
 .tableCss th{color:#333;vertical-align:middle; text-align:center;}
-.tableCss td{color:#555;vertical-align:middle;}
+.tableCss td{color:#555;vertical-align:middle; background-color: #fbfbff}
 .tableCss td.left{text-align: left;}
 .tableCss td table {border-collapse:collapse;}
 .tableCss td a{color:#069;text-decoration:none}
@@ -622,7 +622,7 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .tableCss td a:focus{color:#ff6600;text-decoration:underline}
 .tableCss th{background:#e9f0f0;white-space:nowrap;text-align:center}
 .tableCss td label{padding-right: 5px;}
-.tableCss td .input-xs{width:10%; min-width: 20px;}
+.tableCss td .input-xs{width:10%; min-width: 80px;}
 .tableCss td .input-sm{width:30%; min-width: 100px;}
 .tableCss td .input-md{width:50%}
 .tableCss td .input-lg{width:98%}
