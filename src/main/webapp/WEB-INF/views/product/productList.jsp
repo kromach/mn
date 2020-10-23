@@ -51,7 +51,7 @@
 		</c:if>
 		<c:forEach var="pr" items="${productlist}">
 			<div class="grid-item">
-				<a href="productdetail?prcode=${pr.prCode}"><img
+				<a href="productdetail?prcode=${pr.prCode}" target="_blank"><img
 					src="${pr.prImg}" /></a>
 			</div>
 		</c:forEach>
@@ -132,7 +132,7 @@
 						gutter: '.gutter-sizer'
 					});
 					for(var i in data){
-						var el = '<div class="grid-item"><a href="productdetail?prcode='+data[i].prCode+'"><img src="'+data[i].prImg+'" onerror="this.src=\'/resources/img/noImage.jpg\'" /></a></div>';
+						var el = '<div class="grid-item"><a href="productdetail?prcode='+data[i].prCode+'" target="_blank"><img src="'+data[i].prImg+'" onerror="this.src=\'/resources/img/noImage.jpg\'" /></a></div>';
 						$grid.append( el ).masonry( 'appended', el,true );
 
 					}

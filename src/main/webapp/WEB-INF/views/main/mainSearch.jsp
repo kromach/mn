@@ -16,7 +16,7 @@
 		<div class="gutter-sizer"></div>
 		<c:forEach var="mainVO" items="${main}">
 			<div class="grid-item">
-				<a href="${mainVO.aLinkUri}">
+				<a href="${mainVO.aLinkUri}" target="_blank"> 
 					<img src="${mainVO.imgUri}"  onerror="this.src='/resources/img/noImage.jpg'"/>
 				</a>
 			</div>
@@ -68,7 +68,7 @@ function fetchList(context,index,search){
 					gutter: '.gutter-sizer'
 				});
 				for(var i in data){
-					var el = '<div class="grid-item"><a href="'+data[i].aLinkUri+'"><img src="'+data[i].imgUri+'" onerror="this.src=\'/resources/img/noImage.jpg\'" /></a></div>';
+					var el = '<div class="grid-item"><a href="'+data[i].aLinkUri+'" target="_blank"><img src="'+data[i].imgUri+'" onerror="this.src=\'/resources/img/noImage.jpg\'" /></a></div>';
 					$grid.append( el ).masonry( 'appended', el,true );
 					
 				}
