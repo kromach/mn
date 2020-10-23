@@ -14,13 +14,16 @@
 	font-size: 12px;
 }
 </style>
+<script src="/resources/js/jquery.selectric.js"></script>
+<link rel="stylesheet" href="/resources/css/selectric.css">
+
 <div class="grid-Wrapper">
 	<div class="grid">  
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
-			<div class="grid-item grid-item--width6">
+			<div class="grid-item grid-item--width6" style="overflow: visible">
 				<form action="/article/articleSearch" name="articleSearch" id="articleSearch">
-					<select id="selectOption" name="selectOption" class="selectOption">
+					<select id="selectOption" name="selectOption" class="selectOption sel short text-left">
 						<option value="NICKNAME">작성자</option>
 						<option value="CONTENT">내용</option>
 						<option value="BN_TITLE">제목</option>
@@ -68,5 +71,11 @@
 			</c:if>
 	</div>
 </div>
+
+<script>
+	$(function() {
+		// select 형태 바꿔주는 JS 실행
+		$(".sel").selectric();
+	});
+</script>
 <script src="/resources/js/imageLoad.js"></script>
-</html>
