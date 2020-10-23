@@ -20,13 +20,25 @@ $(document).ready(function(){
 	//default 메세지 출력
 	connect();
 	getLog();
+	sendMsg();
+	sendMsgByEnter();
+});
+function sendMsg(){
 	$('#btnSend').on('click', function(evt) {
 		evt.preventDefault();
 		if (socket.readyState !== 1) return;
 		let msg = $('input#msg').val();
 		socket.send(msg);
+		$(".chatWrapper").animate({ scrollTop: $(document).height() }, 300);
 	});
-});
+}
+function sendMsgByEnter(){
+	$(".search input[type=text]").keypress(function(e) { 
+	    if (e.keyCode == 13){
+	    	sendMsg();
+	    }    
+	});
+}
 </script>
 <body>
 	<div class="totChatDIV">
@@ -49,7 +61,7 @@ $(document).ready(function(){
 		</div>
 		<div id="msgWrapper">
 			<div>
-				<input type="text"  id="msg" value="1212" />
+				<input type="text"  id="msg" />
 				<input type="button" class="btn btn-sm btn-grey" id="btnSend" value="전송" />
 			</div>
 		</div>
