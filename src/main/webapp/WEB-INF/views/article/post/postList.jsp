@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<script src="/resources/js/jquery.selectric.js"></script>
 <link rel="stylesheet" href="/resources/css/selectric.css">
 <script src="/resources/js/jquery.selectric.js"></script>
 <style>
@@ -21,7 +20,7 @@
 	<div class="grid">  
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
-			<div class="grid-item grid-item--width6">
+			<div class="grid-item grid-item--width6" style="overflow: visible">
 				<form action="/article/post/postSearch" name="articleSearch" id="articleSearch">
 					<select id="selectOption" name="selectOption" class="selectOption sel short text-left">
 						<option value="NICKNAME">작성자</option>
