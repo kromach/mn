@@ -30,10 +30,11 @@ function sendMsg(){
 		let msg = $('input#msg').val();
 		socket.send(msg);
 		$(".chatWrapper").animate({ scrollTop: $(document).height() }, 300);
+		$(".msg").val();
 	});
 }
 function sendMsgByEnter(){
-	$(".search input[type=text]").keypress(function(e) { 
+	$(".msg input[type=text]").keypress(function(e) { 
 	    if (e.keyCode == 13){
 	    	sendMsg();
 	    }    
