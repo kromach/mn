@@ -148,7 +148,7 @@
 		
     	json.forEach(function(item, index) {
     		
-    		var el = '<div class="grid-item"><a href="detail?dkCode='+item.dkCode+'"><img src="'+ item.dkImg +'" /></a></div>';
+    		var el = '<div class="grid-item"><a href="detail?dkCode='+item.dkCode+'" target="_blank"><img src="'+ item.dkImg +'" /></a></div>';
  			
     		// 그리드 추가, 아이템 배치 
     		$grid.append( el ).masonry('appended', el).masonry('reloadItems');	
