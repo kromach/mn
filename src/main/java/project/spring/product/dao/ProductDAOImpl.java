@@ -253,7 +253,8 @@ public class ProductDAOImpl implements ProductDAO {
 		return artdto;
 	}
 
-
-
-
+	@Override
+	public String selectProductLikeInfo(HashMap productLikeMap) throws SQLException {
+		return sqlSession.selectOne("product.selectProductLikeInfo", productLikeMap);
+	}
 }

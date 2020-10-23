@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import project.spring.adminEvent.service.AdminEventService;
 import project.spring.adminEvent.service.AdminEventServiceImpl;
+import project.spring.event.service.EventService;
 import project.spring.event.service.EventServiceImpl;
 import project.spring.event.vo.EventVO;
 
@@ -26,9 +28,9 @@ import project.spring.event.vo.EventVO;
 public class EventController {
 
 	@Autowired
-	private AdminEventServiceImpl adminEventService = null;
+	private AdminEventService adminEventService = null;
 	@Autowired
-	private EventServiceImpl eventService = null;
+	private EventService eventService = null;
 	
 	@RequestMapping("index")
 	public String eventIndex(Model model)throws SQLException{
@@ -72,7 +74,7 @@ public class EventController {
 			int idx = 0;
 			if(session.getAttribute("memId") != null && !session.getAttribute("memId").equals("")) {
 				memId = (String)session.getAttribute("memId");
-				idx = eventService.checkJoinEvent(memId, eventCode);
+				idx = eventService.checkJoinEvent(eventCode, memId);
 			}
 			System.out.println("idx : " + idx);
 			EventVO vo =  eventService.getEvent(eventCode);

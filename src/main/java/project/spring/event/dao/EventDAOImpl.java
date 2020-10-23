@@ -84,8 +84,11 @@ public class EventDAOImpl implements EventDAO {
 	public int checkJoinEvent(String eventCode, String id) throws SQLException {
 		HashMap map = new HashMap();
 		map.put("eventCode", eventCode);
+		System.out.println("eventCode" + eventCode);
+		System.out.println("id : " + id);
 		map.put("id", id);
 		int idx = sqlSession.selectOne("event.checkJoinEvent", map);
+		System.out.println("디에이오 idx : " + idx );
 		return idx;
 	}
 

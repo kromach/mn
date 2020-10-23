@@ -6,11 +6,8 @@ pageEncoding="UTF-8"%>
 													
 <!DOCTYPE html>													
 <html>						
-
 <script src="/resources/js/formCheck.js"></script>
-<script src="/resources/js/jquery.selectric.js"></script>
-<link rel="stylesheet" href="/resources/css/selectric.css">
-							
+						
 <head>													
 <meta charset="UTF-8">													
 <title>회원정보 관리</title>													
@@ -112,15 +109,13 @@ pageEncoding="UTF-8"%>
 													
 				<div class="searchPanel">									
 					<form action="memberList" name="schMember" id="schMember" method="post">	
-						<input type="hidden" name="schCheck" value="true"/>							
-						<div class="ssec pad-top15">								
-							<select name="schKey" class="sel short">
-								<option value="ID" >아이디</option>
-								<option value="NAME">이름</option>
-							</select>
-							<input type="text" name="schVal" class="input required" msg="검색어를" />										
-							<input type="submit" value="검색" class="btn btn-lg btn-grey" style="width:100px" onclick="searchMem()" />
-						</div>								
+					<input type="hidden" name="schCheck" value="true"/>							
+						<select name="schKey" id="selectricMember">
+							<option value="ID" selected="selected">아이디</option>
+							<option value="NAME">이름</option>
+						</select>
+						<input type="text" name="schVal" class="required" msg="검색어를" />										
+						<input type="button" value="검색" class="btn btn-lg btn-grey" onclick="searchMem()" />
 					</form>								
 				</div>
 				
@@ -180,6 +175,7 @@ function searchMem(){
 		$("form[name='schMember']").submit();
 	}	
 }
+
 </script>										
 </body>													
 													

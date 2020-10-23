@@ -32,6 +32,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import project.spring.adminEvent.service.AdminEventService;
 import project.spring.adminEvent.service.AdminEventServiceImpl;
 import project.spring.adminEvent.vo.AdminEventVO;
+import project.spring.article.service.ArticleService;
 import project.spring.article.service.ArticleServiceImpl;
 import project.spring.beans.PageVO;
 import project.spring.beans.Pager;
@@ -40,10 +41,10 @@ import project.spring.beans.Pager;
 @RequestMapping("/admin/event/")
 public class AdminEventController {
 		@Autowired
-		private AdminEventServiceImpl adminEventService = null;
+		private AdminEventService adminEventService = null;
 		
 		@Autowired
-		private ArticleServiceImpl articleService = null;
+		private ArticleService articleService = null;
 		
 		@RequestMapping("insertEvent")
 		public String eventListAd(HttpServletRequest request, Model model, Locale locale)throws SQLException{
@@ -61,9 +62,12 @@ public class AdminEventController {
 		@RequestMapping("insertEventPro")
 		public String insertEventAd(@ModelAttribute AdminEventVO vo,  Model model, MultipartHttpServletRequest request, HttpServletResponse response)throws SQLException{
 			
+			System.out.println("ㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇㅎㅇ");
+			
 			if(request.getParameter("pageNum") == null || request.getParameter("pageNum").equals("")) {
 				return "redirect:/admin/event/eventList";
 			}else {
+				System.out.println("이벤트 프로 확인");
 				System.out.println("content 확인:"  + vo.getContent() );
 	
 				vo.setEvStart(vo.getEvStart().replace("-", ""));
@@ -114,7 +118,7 @@ public class AdminEventController {
 				System.out.println("controller 확인");
 				int result = adminEventService.insertItem(vo);
 				model.addAttribute("pageNum", request.getParameter("pageNum"));
-	
+				System.out.println("serivece 진입?");
 				return "redirect:/admin/event/eventList.mn";
 			}
 		}

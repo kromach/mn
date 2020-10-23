@@ -29,7 +29,7 @@
   			select aa.*, rownum r from(
   				select * from member_Info 
   				order by IS_BAN ASC, REPORT_COUNT DESC, id ASC  
-  			) aa order BY IS_BAN ASC, REPORT_COUNT DESC,  id ASC, is  
+  			) aa order BY IS_BAN ASC, REPORT_COUNT DESC,  id ASC
   		) a where r >=#{start} and r <=#{end} and ${schKey} LIKE '%'||#{schValue}||'%'
   	]]>
   	</select>

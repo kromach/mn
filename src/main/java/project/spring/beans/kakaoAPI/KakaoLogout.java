@@ -24,7 +24,9 @@ public class KakaoLogout {
 	
 	private static String restApiKey_static = "ccd42c0f6ac58e519759c5baf3c7ceb4";
 	private static String adminkey_static = "e454a8dba20ab15cacKakaoLogoutc22a";
-	private static String callback_URL_static = "http://localhost:8080/mvc/authResult";
+	//시연체크
+	private static String callback_URL_static = "http://192.168.0.2:8080/mvc/authResult";
+	//private static String callback_URL_static = "http://localhost:8080/mvc/authResult";
 	
 	public static  JsonNode doLogout(String token) {
 		final String RequestUrl = "https://kapi.kakao.com/v1/user/logout";

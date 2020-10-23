@@ -245,7 +245,6 @@ function replyCancle(bnIdx){
 	$('textarea#content_textArea').val('');
 }
 function move(bnIdx,code){
-	alert(code);
 	var session = '<c:out value="${memId}"/>';
 	var context = window.location.pathname.substring(0,
 			window.location.pathname.indexOf("/", 2));
@@ -313,7 +312,6 @@ function deleteReply(coIdx,session){
 function more(){
 	var moreVal = Number($('#moreVal').val())+1;
 	$('#moreVal').val(moreVal);
-	alert(moreVal);
 	var context = window.location.pathname.substring(0,
 			window.location.pathname.indexOf("/", 2));
 	$.ajax({

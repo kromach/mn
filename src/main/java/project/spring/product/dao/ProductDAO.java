@@ -46,6 +46,7 @@ public interface ProductDAO extends CommonInterface {
 	public int getamount(String prcode) throws SQLException;
 	// 리뷰 상세
 	public ArticleDTO getarticldetail(int bnIdx) throws SQLException;
-	
+	// ID 좋아요 여부 확인
+	public String selectProductLikeInfo(HashMap productLikeMap) throws SQLException;
 
 }

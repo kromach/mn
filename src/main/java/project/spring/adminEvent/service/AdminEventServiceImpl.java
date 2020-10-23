@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import project.spring.adminEvent.dao.AdminEventDAO;
 import project.spring.adminEvent.dao.AdminEventDAOImpl;
 import project.spring.adminEvent.vo.AdminEventVO;
 
@@ -15,7 +16,7 @@ import project.spring.adminEvent.vo.AdminEventVO;
 public class AdminEventServiceImpl implements AdminEventService{
 
 	@Autowired
-	private AdminEventDAOImpl adminEventDAO = null;
+	private AdminEventDAO adminEventDAO = null;
 	
 	@Override
 	public int insertItem() {
@@ -23,7 +24,7 @@ public class AdminEventServiceImpl implements AdminEventService{
 		return 0;
 	}
 	
-	public int insertItem(AdminEventVO vo) {
+	public int insertItem(AdminEventVO vo)throws SQLException {
 		
 		System.out.println("service 진입 확인");
 		int result = adminEventDAO.insertItem(vo);
@@ -70,6 +71,7 @@ public class AdminEventServiceImpl implements AdminEventService{
 		return count;
 	}
 	
+	@Override
 	public int eventCount(Map schMap)throws SQLException{
 		
 		int count = adminEventDAO.eventCount(schMap);
@@ -84,6 +86,7 @@ public class AdminEventServiceImpl implements AdminEventService{
 		return eventList;
 	}
 	
+	@Override
 	public List eventList(int start, int end, Map schMap)throws SQLException{
 		List eventList = adminEventDAO.eventList(start, end, schMap);
 		
