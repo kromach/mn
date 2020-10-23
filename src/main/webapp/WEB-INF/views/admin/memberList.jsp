@@ -176,7 +176,6 @@ $(function() {
 });
 
 function searchMem(){
-	console.log("hi");
 	if (checkFormjquery()) {
 		$("form[name='schMember']").submit();
 	}	
