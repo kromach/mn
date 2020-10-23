@@ -33,12 +33,12 @@
 				</dl>
 				<div id="joinEvent">
 					<c:if test="${memId != null && idx == 0}">
-						<button class="btn btn-sm btn-dark" onclick="joinEvent('${vo.eventCode}')">이벤트 신청하기</button>
+						<button class="btn btn-lg btn-yellow"" onclick="joinEvent('${vo.eventCode}')">이벤트 신청하기</button>
 					</c:if>
-						<button class="btn btn-sm btn-blue" onclick="window.location='/event/index'">목록으로</button>
 					<c:if test="${memId != null && idx != 0}">
-						<p>신청완료</p>
+						<button class="btn btn-lg btn-grey">신청완료</button>
 					</c:if>
+						<button class="btn btn-lg btn-mint" onclick="window.location='/event/index'">목록으로</button>
 					<c:if test="${memId == null }">
 						<p></p>
 					</c:if>
@@ -47,8 +47,8 @@
 		</div>
 
 		<div class="detail-item detail-width6">
-			<h3 class="pad-top10 pad-bottom20">상세정보</h3>
-			${vo.content}
+			<h3 class="pad-top10 pad-bottom20 text-left">상세정보</h3>
+			<div class="text-left" style="font-size:15px;">${vo.content}</div>
 		</div>
 	</div>
 </div>
