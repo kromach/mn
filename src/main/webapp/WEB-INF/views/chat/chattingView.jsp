@@ -34,7 +34,6 @@ function sendMsg(){
 }
 function sendMsgByEnter(){
     if (event.keyCode == 13){
-    	evt.preventDefault();
 		if (socket.readyState !== 1) return;
 		let msg = $('input#msg').val();
 		socket.send(msg);
