@@ -74,6 +74,11 @@
 .totChatDIV>.msgWrapper {
 	background-color: black;
 }
+.totChatDIV{
+	border: 1px solid;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
 
 #msg {
 	width: 100%;
@@ -95,10 +100,12 @@
 }
 
 #msgWrapper {
-	position: fixed;
-	width: 250px;
-	bottom: 11px;
-	overflow: hidden;
+	position: relative;
+    width: 248px;
+    left: -1px;
+    overflow: hidden;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
 }
 </style>
 <script>

@@ -30,11 +30,11 @@ function sendMsg(){
 		let msg = $('input#msg').val();
 		socket.send(msg);
 		$(".chatWrapper").animate({ scrollTop: $(document).height() }, 300);
-		$(".msg").val();
+		$("#msg").val('');
 	});
 }
 function sendMsgByEnter(){
-	$(".msg input[type=text]").keypress(function(e) { 
+	$("#msg input[type=text]").keypress(function(e) { 
 	    if (e.keyCode == 13){
 	    	sendMsg();
 	    }    
@@ -62,7 +62,7 @@ function sendMsgByEnter(){
 		</div>
 		<div id="msgWrapper">
 			<div>
-				<input type="text"  id="msg" />
+				<input type="text"  id="msg" style="border-radius: 0px;"/>
 				<input type="button" class="btn btn-sm btn-grey" id="btnSend" value="전송" />
 			</div>
 		</div>
