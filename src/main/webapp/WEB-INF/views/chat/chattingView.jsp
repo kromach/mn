@@ -21,7 +21,6 @@ $(document).ready(function(){
 	connect();
 	getLog();
 	sendMsg();
-	sendMsgByEnter();
 });
 function sendMsg(){
 	$('#btnSend').on('click', function(evt) {
@@ -34,11 +33,14 @@ function sendMsg(){
 	});
 }
 function sendMsgByEnter(){
-	$("#msg input[type=text]").keypress(function(e) { 
-	    if (e.keyCode == 13){
-	    	sendMsg();
-	    }    
-	});
+    if (event.keyCode == 13){
+    	evt.preventDefault();
+		if (socket.readyState !== 1) return;
+		let msg = $('input#msg').val();
+		socket.send(msg);
+		$(".chatWrapper").animate({ scrollTop: $(document).height() }, 300);
+		$("#msg").val('');
+    }    
 }
 </script>
 <body>
@@ -62,8 +64,8 @@ function sendMsgByEnter(){
 		</div>
 		<div id="msgWrapper">
 			<div>
-				<input type="text"  id="msg" style="border-radius: 0px;"/>
-				<input type="button" class="btn btn-sm btn-grey" id="btnSend" value="전송" />
+				<input type="text"  id="msg" onkeydown ="sendMsgByEnter()"/>
+				<input type="button" class="btn btn-sm btn-grey"  style="border-radius: 0px;" id="btnSend" value="전송" />
 			</div>
 		</div>
 	</div>
