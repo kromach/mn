@@ -74,8 +74,6 @@
 			</c:if>
 	</div>
 </div>
-<<<<<<< HEAD
-
 <script>
 	$(function() {
 		// select 형태 바꿔주는 JS 실행
@@ -83,13 +81,3 @@
 	});
 </script>
 <script src="/resources/js/imageLoad.js"></script>
-=======
-<script src="/resources/js/imageLoad.js"></script>
-<script>
-	$(function() {
-		// select 형태 바꿔주는 JS 실행
-		$(".sel").selectric();
-	});
-</script>		
-</html>
->>>>>>> refs/heads/product

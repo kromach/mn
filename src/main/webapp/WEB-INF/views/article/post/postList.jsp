@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="/resources/js/jquery.selectric.js"></script>
+<link rel="stylesheet" href="/resources/css/selectric.css">
+<script src="/resources/js/jquery.selectric.js"></script>
 <style>
 .search{
     width: 250px;
@@ -20,7 +23,7 @@
 		<div class="gutter-sizer"></div>
 			<div class="grid-item grid-item--width6">
 				<form action="/article/post/postSearch" name="articleSearch" id="articleSearch">
-					<select id="selectOption" name="selectOption" class="selectOption">
+					<select id="selectOption" name="selectOption" class="selectOption sel short text-left">
 						<option value="NICKNAME">작성자</option>
 						<option value="CONTENT">내용</option>
 						<option value="BN_TITLE">제목</option>
@@ -65,5 +68,11 @@
 			</c:if>
 	</div>
 </div>
+<script>
+	$(function() {
+		// select 형태 바꿔주는 JS 실행
+		$(".sel").selectric();
+	});
+</script>
 <script src="/resources/js/imageLoad.js"></script>
 </html>
