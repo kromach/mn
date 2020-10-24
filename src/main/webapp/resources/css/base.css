@@ -541,68 +541,17 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 */
 
 
+/* 아이디 & 패스워드 찾기 */
+.mem-find {max-width:450px; width:100%; margin:0 auto;}
+.mem-find .searchPanel{position:relative; width:350px; background:#fbfbff; margin:0 auto; padding:14px 20px; border:1px solid #ddd; box-sizing:border-box;}
+.mem-find .searchPanel .ssec{ position:relative; margin-top:3px; text-align: left;}
+.mem-find .searchPanel .ssec .s_label{font-weight:700; font-size:13px; line-height: 25px; color:#333; width: 100%;}
+.mem-find .searchPanel .ssec .input {height: 30px; border: 1px solid #d2d2d2; padding:0 15px; font-size:14px;}
+.mem-find .searchPanel .ssec input:focus{outline:none}
+.mem-find .searchPanel .ssec .search-text{color:#4b33ca;}
+.mem-find .searchPanel .ssec .input-line {line-height:30px;font-size: 30px;}
+.mem-find .searchPanel .ssec .searchBtn{margin:15px 0; width: 304px;}
 
-
-
-/* 인기도시 */
-.city-order{width:100%; background:#fff; overflow:hidden; margin:10px 0; border:1px solid #ddd; box-sizing:border-box}
-.city-order .menu-title{font-weight:bolder;}
-.city-order li{float:left; padding:10px 8px 8px 10px; font-size:13px; color:#000}
-.city-order a{ color:#000; cursor:pointer;}
-.city-order a:hover{ color:#d91c84; font-weight:bolder;}
-
-/* 상품 리스트 */
-.pr_result{ width: 100%; border:1px solid #c5c5c5; box-sizing: border-box; overflow: hidden; margin:10px 0; padding:10px 0; background: #fff;}
-.pr_result:after{overflow:hidden;clear:both;content:''}
-.pr_result .result_thumb{float:left;width:200px;margin-right:20px; padding: 10px 0 10px 15px}
-.pr_result .result_thumb .photo{ width:200px; height:141px; display:block; overflow:hidden;}
-.pr_result .result_thumb .photo .smImg{overflow:hidden; width:200px;}
-.pr_result .result_con{width:395px; padding: 20px 0 0 20px}
-.pr_result .result_con h4{ color: #06f; font-weight: 800; font-size: 20px; padding-bottom: 14px}
-.pr_result .result_con dl{overflow:hidden;clear:both;width:100%;padding-bottom:5px;font-size:13px;color:#666;line-height:19px}
-.pr_result .result_con dt{float:left;width:87px; color: #333}
-.pr_result .result_con dd{float:left;width:308px; color: #333}
-.pr_result .result_right{ width: 300px; height:120px; padding: 30px 20px 10px 15px; border-left:1px solid #ddd}
-.pr_result .result_right li{ padding-bottom:7px; font-size:13px; }
-.pr_result .result_right .r_decide{ padding:10px 0 10px 0}
-
-/* 상품 리스트 블럭보기 */
-.pr_resultBlock{ width: 32%; border:1px solid #c5c5c5; border-radius:5px; box-sizing: border-box; overflow: hidden; margin:10px 22px 10px 0; background: #fff; float: left;}
-.pr_resultBlock ~ .last {margin-right:0px;}
-.pr_resultBlock:after{overflow:hidden;clear:both;content:''}
-.pr_resultBlock .result_thumb .photo{ width:350px; height:210px; display:block; overflow:hidden;}
-.pr_resultBlock .result_thumb .photo .smImg{overflow:hidden; width:100%;}
-.pr_resultBlock .result_con{width:91%; padding: 15px}
-.pr_resultBlock .result_con h4{ color: #06f; font-weight: 800; font-size: 20px; padding-bottom: 14px}
-.pr_resultBlock .result_con dl{overflow:hidden;clear:both;width:100%;padding-bottom:5px;font-size:13px;color:#666;line-height:19px; height:95px}
-.pr_resultBlock .result_con dt{float:left;width:87px; color: #333}
-.pr_resultBlock .result_con dd{float:left;width:205px; color: #333}
-/* 상세페이지 상세정보, 티켓선택 */
-.productMenu {
-    width: 580px;
-    height: 48px;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    _background: #fff;
-    
-}
-.menufixed { position:fixed; top:0; z-index:200;}
-
-.productMenu .tabWrap{ width: 100%; overflow: hidden; padding-bottom:1px; border-bottom: 1px solid #ddd;}
-.productMenu .tabWrap li{ width: 14.2741%; float: left; text-align: center;}
-.productMenu .tabWrap li a{ display: block; padding: 15px 0; line-height: 16px; font-size: 14px; box-sizing: border-box}
-.productMenu .tabWrap li a.tab-on{ color: #d91c84; font-size: 15px; border-bottom: 2px solid #d91c84; font-weight: 800; box-sizing: border-box}
-.productMenu .tabWrap li:hover {color: #d91c84!important;}
-.productMenu .tabWrap li a:hover {color: #d91c84!important;}
-
-.leftDiv {width:53%; float: left;}
-.leftDiv .productInfo {padding: 20px;}
-.leftDiv .productInfo .infoDiv {border-bottom:1px solid #c5c5c5; margin-bottom: 10px;}
-.leftDiv .productInfo .infoDiv:last-child {border-bottom:0px solid #c5c5c5; padding-bottom: 10px;}
-.leftDiv .productInfo .infoDiv div{font-size:14px; line-height: 18px;}
-.rightDiv {width:43%; float: right; padding: 15px; margin-top: 48px; border:1px solid #c5c5c5; }
 
 /* 상세페이지 티켓 목록 */
 .tbl_ticket,.tbl_ticket th,.tbl_ticket td{border:0}
@@ -682,19 +631,19 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 	border:1px solid #ccc;
 }
 .page_nation .pprev {
-	background:#f8f8f8 url('../img/page_pprev.png') no-repeat center center;
+	background:#f8f8f8 url('/resouces/img/page/page_pprev.png') no-repeat center center;
 	margin-left:0;
 }
 .page_nation .prev {
-	background:#f8f8f8 url('../img/page_prev.png') no-repeat center center;
+	background:#f8f8f8 url('/resouces/img/page/page_prev.png') no-repeat center center;
 	margin-right:7px;
 }
 .page_nation .next {
-	background:#f8f8f8 url('../img/page_next.png') no-repeat center center;
+	background:#f8f8f8 url('/resouces/img/page/page_next.png') no-repeat center center;
 	margin-left:7px;
 }
 .page_nation .nnext {
-	background:#f8f8f8 url('../img/page_nnext.png') no-repeat center center;
+	background:#f8f8f8 url('/resouces/img/page/page_nnext.png') no-repeat center center;
 	margin-right:0;
 }
 .page_nation a.active {

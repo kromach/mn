@@ -11,25 +11,41 @@
 			<div class="grid-item grid-item--width6">
 				<c:if test="${result eq 'id'}">
 					<c:if test="${not empty memberDTO.id}">
-						<h2>${memberDTO.name }님의 ID는 ${memberDTO.id }입니다.</h2>
-						<button type = "button" class="btn btn-lg btn-mint" onclick="window.location.href='/'">메인으로</button>
+						<div class="mem-find margin-top20">
+							<div class="searchPanel" style="width:450px;">
+								<div class="ssec pad-top15 text-center">
+									<h3>${memberDTO.name}님의 ID는 <span class="search-text">${memberDTO.id}</span>입니다.</h3>
+								</div>
+								<div class="ssec pad-top15 text-center">
+									<a href="/member/login" class="searchBtn btn btn-lg btn-blue">로그인 하러가기</a>
+								</div>
+							</div>
+						</div>
 					</c:if>
 					<c:if test="${empty memberDTO.id}">
 						<script type="text/javascript">
-							alert('해당 정보로 아이디가 존재하지 않습니다.');
-							window.location.href ='/';
+							alert('검색 된 회원정보가 없습니다.');
+							history.go(-1);
 						</script>
 					</c:if>
 				</c:if>
 				<c:if test="${result eq 'pw'}">
 					<c:if test="${not empty memberDTO.pw}">
-						<h2>${memberDTO.name }님의 PW는 ${memberDTO.pw }입니다.</h2>
-						<button type = "button" class="btn btn-lg btn-mint" onclick="window.location.href='/'">메인으로</button>
+						<div class="mem-find margin-top20">
+							<div class="searchPanel" style="width:450px;">
+								<div class="ssec pad-top15 text-center">
+									<h3>${memberDTO.name}님의 비밀번호는 <span class="search-text">${memberDTO.pw}</span>입니다.</h3>
+								</div>
+								<div class="ssec pad-top15 text-center">
+									<a href="/member/login" class="searchBtn btn btn-lg btn-blue">로그인 하러가기</a>
+								</div>
+							</div>
+						</div>
 					</c:if>
 					<c:if test="${empty memberDTO.pw}">
 						<script type="text/javascript">
-							alert('해당 정보로 비밀번호가 존재하지 않습니다.');
-							window.location.href ='/';
+							alert('검색 된 회원정보가 없습니다.');
+							history.go(-1);
 						</script>
 					</c:if>
 				</c:if>
