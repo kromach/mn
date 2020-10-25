@@ -38,11 +38,7 @@
 				<c:forEach var="articleDTO" items="${list}">
 					<c:if test="${not empty articleDTO.thumbNail}">
 						<div class="grid-item">
-<<<<<<< HEAD
-							<a href="/article/detail?idx=${articleDTO.bnIdx }" target="_blank"><img src="${articleDTO.thumbNail}" /></a>
-=======
-							<a href="/article/detail?idx=${articleDTO.bnIdx }"><img src="${articleDTO.thumbNail}" onerror="this.src='/resources/img/noImage.jpg'" /></a>
->>>>>>> refs/heads/jaehoon
+							<a href="/article/detail?idx=${articleDTO.bnIdx }" target="_blank"><img src="${articleDTO.thumbNail}" onerror="this.src='/resources/img/noImage.jpg'" /></a>
 							<a href="/article/detail?idx=${articleDTO.bnIdx }"><figcaption>${articleDTO.bnTitle}</figcaption></a>
 						</div>
 					</c:if>
