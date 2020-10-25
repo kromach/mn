@@ -74,21 +74,6 @@
 							</span>
 						</div>
 						
-						<c:set var="address" value="${fn:split(memberDTO.address,',')}"/> 
-						<c:set var="addressLen" value = "${fn:length(address)}"/>
-						<c:set var="addressfrist" value="${address[0]}"/>
-						<c:set var="addresssecond" value="${address[addressLen-1]}"/>
-						<c:set var="addrName" value = ""/>
-						<c:if test="${status eq 'salse'}">
-							<c:set var="addrName" value = "사업장 " />
-						</c:if>
-							
-						<div class="ssec pad-top15">
-							<p class="s_label fl">${addrName}주소 <button type="button" class="btn btn-sm btn-dark margin-bottom5" id="find_address">주소찾기</button></p>
-							<input type="text" name="address" class="input margin-bottom5" value="${addressfrist}" style="width:273px">
-							<input type="text" name="address" class="input" value="${addresssecond}" style="width:273px">
-						</div>		
-						
 						<c:if test="${status eq 'salse'}">
 						<div class="ssec pad-top15">
 							<p class="s_label fl">사업자 번호</p>
@@ -99,6 +84,21 @@
 							<input type="file" name="file" class="input" style="width:273px">
 						</div>		
 						</c:if>
+						
+						<c:set var="address" value="${fn:split(memberDTO.address,',')}"/> 
+						<c:set var="addressLen" value = "${fn:length(address)}"/>
+						<c:set var="addressfrist" value="${address[0]}"/>
+						<c:set var="addresssecond" value="${address[addressLen-1]}"/>
+						<c:set var="addrName" value = ""/>
+						<c:if test="${status eq 'salse'}">
+							<c:set var="addrName" value = "사업장 " />
+						</c:if>
+							
+						<div class="ssec pad-top15">
+							<p class="s_label fl">${addrName}주소 (Optional) <button type="button" class="btn btn-sm btn-dark margin-bottom5" id="find_address">주소찾기</button></p>
+							<input type="text" name="address" class="input margin-bottom5" value="${addressfrist}" style="width:273px">
+							<input type="text" name="address" class="input" value="${addresssecond}" style="width:273px">
+						</div>		
 						
 						<div class="ssec pad-top15">
 							<input type="button" class="searchBtn btn btn-lg btn-blue" onclick="insert()" value="회원정보 수정">
