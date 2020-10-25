@@ -163,6 +163,7 @@ h6{font-size:16px;font-weight:600;color:#333}
 :root {
 	--main-color:#312E41;
 	--main-hover-color:#1e1c2a;
+	--background-color:#fbfbff;
 }
 
 /* Header */
@@ -350,7 +351,7 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 
 /* 검색창 영역 */
 .search-area {width:80%; padding-bottom:20px; margin:0 auto;}
-.search-area .searchPanel{position:relative; width:100%; max-width:550px; background:#fbfbff; padding:12px 23px 14px 23px; border:1px solid #ddd; box-sizing:border-box; float: left; margin-bottom:20px}
+.search-area .searchPanel{position:relative; width:100%; max-width:550px; background:var(--background-color); padding:12px 23px 14px 23px; border:1px solid #ddd; box-sizing:border-box; float: left; margin-bottom:20px}
 .search-area .searchPanel h3{ font-size:18px; font-weight:800; color:#444; text-align:center; padding-bottom:15px}
 .search-area .searchPanel .ssec{ position:relative; margin-top:3px; text-align: left;}
 .search-area .searchPanel .ssec .s_label{ padding-bottom:5px; font-weight:700; font-size:13px; line-height: 33px; color:#333; width:70px;}
@@ -387,25 +388,22 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 
 .chart-container {width: 100%; height: 100%; min-height: 450px;}
 
+/* 게시판 */
+.writer-info {width: 70%; min-width: 370px; padding-bottom: 5px;}
+.read-info {width: 27%; min-width:170px; padding-bottom: 5px;}
+.read-info span {padding: 0 5px; font-size:14px; font-weight:700}
+.article-content {width:98%; margin:20px auto; text-align: left;}
+.article-content img {max-width:100%;}
+.report-area {line-height: 65px;width: 200px; height: 65px; border: 1px solid #ccc;background-color: var(--background-color);margin: 20px auto;border-radius: 5px;}
 
-/* 
-변경 전 css
-.commentDiv {font-size:14px;}
-.commentDiv .nm_like {float: left; width: 20%;}
-.commentDiv .nm_like .likeArea {font-size: 35px; color: var(--main-color)}
-.commentDiv .nm_like .titleName {font-weight: 700; color: var(--main-color) }
-.commentDiv .nm_like .nickname {font-size: 14px;}
-.commentDiv .report {float: left; max-width: 70%; text-align: left; font-size:16px;}
-.commentDiv .report .star {margin-bottom: 8px;}
-.commentDiv .report .star i{color:#fe5016}
-.commentDiv .commentDay {float: left; width: 10%; min-width:93px;} 
-*/
+.titleName {font-weight: 700; color: var(--main-color) }
+.nickname {font-size: 14px;}
+
+.replyTbl .delReplyBtn{width: 25px; height: 25px; padding: 2px; font-size: 12px;}
 
 .commentDiv {font-size:14px;}
 /* .commentDiv .nm_like {float: left; width: 20%;} */
 .commentDiv .nm_like .likeArea {font-size: 35px; color: var(--main-color)}
-.commentDiv .nm_like .titleName {font-weight: 700; color: var(--main-color) }
-.commentDiv .nm_like .nickname {font-size: 14px;}
 .commentDiv .report {text-align: left; font-size:16px;}
 .commentDiv .report .star {margin-bottom: 10px;}
 .commentDiv .report .star i{color:#fe5016}
@@ -541,7 +539,7 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 
 /* 아이디 & 패스워드 찾기 */
 .mem-find {max-width:450px; width:100%; margin:0 auto;}
-.mem-find .searchPanel{position:relative; width:350px; background:#fbfbff; margin:0 auto; padding:14px 20px; border:1px solid #ddd; box-sizing:border-box;}
+.mem-find .searchPanel{position:relative; width:350px; background:var(--background-color); margin:0 auto; padding:14px 20px; border:1px solid #ddd; box-sizing:border-box;}
 .mem-find .searchPanel .ssec{ position:relative; margin-top:3px; text-align: left;}
 .mem-find .searchPanel .ssec .s_label{font-weight:700; font-size:13px; line-height: 25px; color:#333; width: 100%;}
 .mem-find .searchPanel .ssec .input {height: 30px; border: 1px solid #d2d2d2; padding:0 15px; font-size:14px;}
@@ -551,7 +549,7 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .mem-find .searchPanel .ssec .searchBtn{margin:15px 0; width: 304px;}
 
 /* 가입 info page */
-.infoBox {width:70%; height:400px; vertical-align: middle; border:1px solid var(--main-color); background-color: #fbfbff; margin:0 auto 100px auto;}
+.infoBox {width:70%; height:400px; vertical-align: middle; border:1px solid var(--main-color); background-color: var(--background-color); margin:0 auto 100px auto;}
 .infoBox h1 {margin:30px 0;}
 .infoBox ul {height:130px; padding-top:20px; margin-bottom:15px;}
 .infoBox li {padding:5px; font-size:15px; list-style-type : disc; margin-left:33px; text-align: left;}
@@ -576,7 +574,7 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .tableCss th,
 .tableCss td{padding:7px;border:0;line-height:120%;border-bottom:1px solid #cccccc;border-right:1px solid #cccccc;}
 .tableCss th{color:#333;vertical-align:middle; text-align:center;}
-.tableCss td{color:#555;vertical-align:middle; background-color: #fbfbff}
+.tableCss td{color:#555;vertical-align:middle; background-color: var(--background-color)}
 .tableCss td.left{text-align: left;}
 .tableCss td table {border-collapse:collapse;}
 .tableCss td a{color:#069;text-decoration:none}

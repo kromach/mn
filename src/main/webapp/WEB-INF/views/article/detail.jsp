@@ -9,31 +9,88 @@
 </style>
 <body>
 	<div class="grid-Wrapper">
-		<div class="grid">
-			<div class="grid-sizer"></div>
+		<div class="grid2">
+			<div class="detail-sizer"></div>
 			<div class="gutter-sizer"></div>
 			<div class="detail-item detail-width6">
-				<h2 class="pad-top10 pad-bottom10">${articleDTO.bnTitle}</h2>
-				<table class="detailTbl tbl-lg" style="margin: auto;text-align: center;">
+				<h2 class="pad-y10 text-left">${articleDTO.bnTitle}</h2>
+				<div class="clfix">
+					<div class="fl text-left writer-info">
+						<span style="font-size:15px">
+						<span class="btn btn-twitter btn-xs default" style="height:15px">${articleDTO.writerTitleCnt}</span>
+							<span class="titleName">${articleDTO.writerTitleName}</span>
+							${articleDTO.nickname}
+						</span>
+						<span style="padding: 0 10px;">|</span>
+						<fmt:formatDate value="${articleDTO.insertDay}" pattern="yyyy.MM.dd HH:mm:SS"/>
+					</div>
+					
+					<div class="fr text-right read-info">
+						<span>조회수 ${articleDTO.readcount}</span> <span >|</span> <span>좋아요 ${articleDTO.heart}</span>
+					</div>
+				</div>
+				<div style="width:100%; border-top:2px solid black;">
+					<div class="article-content">
+						${articleDTO.content}
+					</div>
+					<div class="report-area">
+						<button class="btn btn-lg btn-blue" onclick="like('${articleDTO.bnIdx}','${articleDTO.insertId }')">좋아요</button>
+						<a class="btn btn-lg btn-red" onclick="report('${articleDTO.bnIdx}','${articleDTO.insertId }','${memId}')">신고</a>
+					</div>		
+				</div>
+				<h3 class="pad-y10 text-left">댓글</h3>
+				<c:if test="${count <= 0}">
+					<div class="pad-top10" style="border-top: 2px solid #333;">
+						<p class="text-center font-bold" style="font-size: 15px;padding: 5px 0;color: #069;"><i class="fas fa-comment-slash"></i> 등록 된 댓글이 없습니다.</p>
+					</div>
+				</c:if>
+				<c:if test="${count > 0}">
+				<table id="boardTbl" class="detailTbl tbl-lg replyTbl">
+					<colgroup>
+						<col width="24%" />
+						<col width="*" />
+						<col width="16%" />
+					</colgroup>
+					<c:forEach var="articleReplyDTO" items="${reply}">
 					<tr>
-						<td>작성자</td>
-						<td>작성일</td>
-						<td>조회수</td>
-						<td>좋아요</td>
-					</tr>	
-					<tr> 
-						<td>
-						<span class="btn btn-blue btn-xs default">${articleDTO.writerTitleCnt}</span>
-						<span class="titleName">${articleDTO.writerTitleName}</span>
-						${articleDTO.nickname}
+						<td class="text-left">
+							<span class="btn btn-twitter btn-xs default">${articleReplyDTO.writerTitleCnt}</span>
+							<span class="titleName">${articleReplyDTO.writerTitleName}</span>
+							${articleReplyDTO.nickname}
 						</td>
-						<td><fmt:formatDate value="${articleDTO.insertDay}" pattern="yyyy.MM.dd"/></td>
-						<td>${articleDTO.readcount}</td>
-						<td>${articleDTO.heart}</td>
+						<td class="text-left">${articleReplyDTO.bnComment}</td>
+						<td>
+							<div class="fl">
+								<fmt:formatDate value="${articleReplyDTO.insertDay}" pattern="yyyy-MM-dd"/><br />
+								<fmt:formatDate value="${articleReplyDTO.insertDay}" type="time" dateStyle="medium" />
+							</div>
+							<c:if test="${articleReplyDTO.insertId eq sessionScope.memId}">
+								<button class="btn btn-rouge delReplyBtn" onclick="deleteReply('${articleReplyDTO.coIdx}','${memId}')">X</button>
+							</c:if>
+						</td>
 					</tr>
+					</c:forEach>
+				</table>
+				
 					<tr>
-						<td colspan="4" style="min-height: 400px;" id="contentBlock">${articleDTO.content }</td>
+						<td colspan="4">
+						<c:if test="${pageVO.startPage > pageVO.pageBlock}">
+							<a onclick="replyReload()" <%-- href="/Spring/board/list.git?pageNum=${pageVO.startPage-pageVO.pageBlock}" --%>>&lt;</a>
+						</c:if>
+						<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1">
+							<a onclick="replyReload('${i}','${articleDTO.bnIdx}','${sessionScope.memId}')" class="pageNums" id="pageSel${i}">&nbsp;${i}&nbsp;</a>
+						</c:forEach>
+						<c:if test="${pageVO.endPage < pageVO.pageCount}">
+							<a onclick="replyReload()" <%-- href="/Spring/board/list.git?pageNum=${pageVO.startPage+pageVO.pageBlock}" --%>>&gt;</a>
+						</c:if>
+						</td>
 					</tr>
+				
+				
+				</c:if>
+				
+				
+				<table class="detailTbl tbl-lg" style="margin: auto;text-align: center;">
 					<tr>
 						<td colspan="4" style="height: 100px; border-bottom: 1px solid;">
 						<!--login은 실행후 검사 -->
@@ -73,19 +130,6 @@
 					</tr>
 					</c:forEach>
 					</c:if>
-					<tr>
-						<td colspan="4">
-						<c:if test="${pageVO.startPage > pageVO.pageBlock}">
-							<a onclick="replyReload()" <%-- href="/Spring/board/list.git?pageNum=${pageVO.startPage-pageVO.pageBlock}" --%>>&lt;</a>
-						</c:if>
-						<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1">
-							<a onclick="replyReload('${i}','${articleDTO.bnIdx}','${sessionScope.memId}')" class="pageNums" id="pageSel${i}">&nbsp;${i}&nbsp;</a>
-						</c:forEach>
-						<c:if test="${pageVO.endPage < pageVO.pageCount}">
-							<a onclick="replyReload()" <%-- href="/Spring/board/list.git?pageNum=${pageVO.startPage+pageVO.pageBlock}" --%>>&gt;</a>
-						</c:if>
-						</td>
-					</tr>
 					<tr>
 						<td colspan="4" style="height: 100px; border-bottom: 1px solid;">
 						<textarea name="content" type="textarea" class="required" msg="내용을" placeholder="댓글을 입력해주세요" 
@@ -130,7 +174,7 @@
 							<td><a href="/article/detail?idx=${articleDTO.bnIdx}">${articleDTO.bnTitle}</a></td>
 							<td>
 								<a href="/article/detail?idx=${articleDTO.bnIdx}">
-									<span class="btn btn-blue btn-xs default">${articleDTO.writerTitleCnt}</span>
+									<span class="btn btn-twitter btn-xs default">${articleDTO.writerTitleCnt}</span>
 									<span class="titleName">${articleDTO.writerTitleName}</span>
 									${articleDTO.nickname}
 									</td>
@@ -152,6 +196,27 @@
 	</div>
 </body>
 <script>
+$(function() {
+	
+	var msnry = new Masonry('.grid2', {
+		itemSelector : '.detail-item',
+		columnWidth : '.detail-sizer',
+		percentPosition : true,
+		gutter: '.gutter-sizer'
+	});
+	imagesLoaded('.grid2').on('progress', function() {
+		msnry.layout();
+	});
+	
+});
+
+$("img").each(function(){
+	$(this).on("error", function () {
+	    $(this).attr("src", "/resources/img/broken.png");
+	    $(this).css({"width": "350px", "height": "276px"});
+	});
+});
+
 function deleteArticle(){
 	var confirmdelete = confirm('정말 삭제하시겠습니까?');
 	if(confirmdelete){
@@ -340,4 +405,3 @@ function more(){
 	});
 }
 </script>
-</html>
