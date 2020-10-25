@@ -45,7 +45,7 @@
 	<beans:bean id="callback_URL" class="java.lang.String">
 		<!--시연체크 KAKAO developers Redirect URI체크  -->
 		<!-- <beans:constructor-arg value="http://localhost:8080/member/authResult" /> --> 
-		<beans:constructor-arg value="http://192.168.0.103:8080/member/authResult" />
+		<beans:constructor-arg value="http://192.168.0.69:8080/member/authResult" />
 	</beans:bean>
 	
 	<beans:bean id="fileDown" class="project.spring.beans.fileDownLoad.DownloadView" /><!--filedown_Logic  -->
