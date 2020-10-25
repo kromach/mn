@@ -34,11 +34,11 @@
 						</div>
 						<div class="ssec pad-top15">
 							<p class="s_label fl">비밀번호</p>
-							<input type="password" name="pw" msg="비밀번호를" class="input required" style="width:273px">
+							<input type="password" name="pw" msg="비밀번호를" class="input required" style="width:273px"  id="pw">
 						</div>
 						<div class="ssec pad-top15">
 							<p class="s_label fl">비밀번호 확인</p>
-							<input type="password" name="pwCh" msg="비밀번호 확인을" class="input required" style="width:273px">
+							<input type="password" name="pwCh" msg="비밀번호 확인을" class="input required" style="width:273px"  id="pwCh">
 						</div>
 						<div class="ssec pad-top15">
 							<p class="s_label fl">닉네임</p>
@@ -74,10 +74,10 @@
 							</span>
 						</div>
 						
-						<c:if test="${status eq 'salse'}">
+						<c:if test="${status eq 'sales'}">
 						<div class="ssec pad-top15">
 							<p class="s_label fl">사업자 번호</p>
-							<input type="file" name="licenseNum" class="input required" value="${memberDTO.licenseNum}" msg="사업자 번호를" style="width:273px">
+							<input type="text" name="licenseNum" class="input required" value="${memberDTO.licenseNum}" msg="사업자 번호를" style="width:273px">
 						</div>		
 						<div class="ssec pad-top15">
 							<p class="s_label fl">사업자 등록증</p>
@@ -90,13 +90,13 @@
 						<c:set var="addressfrist" value="${address[0]}"/>
 						<c:set var="addresssecond" value="${address[addressLen-1]}"/>
 						<c:set var="addrName" value = ""/>
-						<c:if test="${status eq 'salse'}">
+						<c:if test="${status eq 'sales'}">
 							<c:set var="addrName" value = "사업장 " />
 						</c:if>
 							
 						<div class="ssec pad-top15">
 							<p class="s_label fl">${addrName}주소 (Optional) <button type="button" class="btn btn-sm btn-dark margin-bottom5" id="find_address">주소찾기</button></p>
-							<input type="text" name="address" class="input margin-bottom5" value="${addressfrist}" style="width:273px">
+							<input type="text" name="address" class="input margin-bottom5" value="${addressfrist}" style="width:273px" id="address">
 							<input type="text" name="address" class="input" value="${addresssecond}" style="width:273px">
 						</div>		
 						
@@ -114,10 +114,14 @@
 	<script src="/resources/js/imageLoad.js"></script>
 	<script type="text/javascript">
 		function insert(){
-			console.log($("form[name='inputForm']"));
-			if (checkFormjquery()) {
-				console.log("inInsert");
+			if(!$('#idCheck').text() == ''){
+				alert("중복되는 아이디는 사용할 수 없습니다");
+			}else if(!$('#nickCheck').text() == ''){
+				alert("중복되는 닉네임은 중복될수 없습니다");
+			}else if($('#pw').val()!=$('#pwCh').val()){
+				alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+			}else if (checkFormjquery()) {
 				$("form[name='inputForm']").submit();
-			}
+			} 
 		}
 	</script>
