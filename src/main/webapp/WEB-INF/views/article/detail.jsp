@@ -318,12 +318,13 @@ function more(){
 		url : context + '/more?num='+moreVal,
 		type : "post",
 		success : function(data) {
+			console.log(data);
 			var endlen = Object.keys(data).length;
 			if(endlen != 0){			
 				for(var i in data){
 					var writerTitle = data[i].writerTitleName;
 					if(writerTitle == null )writerTitle = '';
-					$("#more > tbody:last").append('<tr><td>'+data[i].bnTitle
+					$("#more > tbody:last").append('<tr><td><a href="/article/detail?idx='+data[i].bnIdx+'">'+data[i].bnTitle
 										+'</td><td><span class="btn btn-blue btn-xs default">'+data[i].writerTitleCnt+'</span>'
 										+'<span class="titleName">&nbsp;'+writerTitle+'</span>'
 										+ data[i].nickname
