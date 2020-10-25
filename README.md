@@ -11,8 +11,8 @@
 [log4j]  
 
 ## 개발완료 시연 주요 화면
-<img src ="https://user-images.githubusercontent.com/64457004/97107609-ce690400-170b-11eb-9181-0a5550a51c32.png" width="600px" style="margin-bottom:15px"/><br>
-<img src ="https://user-images.githubusercontent.com/64457004/97107610-d032c780-170b-11eb-93fd-a9d3b5317a47.png" width="600px" style="margin-bottom:15px"/><br>
+<img src ="https://user-images.githubusercontent.com/64457004/97107609-ce690400-170b-11eb-9181-0a5550a51c32.png" width="600px" style="margin-bottom:15px"/><br>   
+<img src ="https://user-images.githubusercontent.com/64457004/97107610-d032c780-170b-11eb-93fd-a9d3b5317a47.png" width="600px" style="margin-bottom:15px"/><br>   
 <img src ="https://user-images.githubusercontent.com/64457004/97107611-d0cb5e00-170b-11eb-9a60-f3e89191a963.png" width="600px" style="margin-bottom:15px"/><br>   
 <img src ="https://user-images.githubusercontent.com/64457004/97107612-d163f480-170b-11eb-902d-2a990af8cf33.png" width="600px" style="margin-bottom:15px"/><br>   
 <img src ="https://user-images.githubusercontent.com/64457004/97107613-d163f480-170b-11eb-898a-b5ae9a4903eb.png" width="600px" style="margin-bottom:15px"/><br>   
