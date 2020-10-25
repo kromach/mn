@@ -95,7 +95,7 @@
 	display:inline-block;
 	padding: 50px 0;
 }
-.loginWrapper >.kakaoBtn{
+.kakaoBtn{
 	width:250px;
 	margin-bottom: 30px;
 	color: black;
@@ -106,7 +106,7 @@
 	background-color: #fae100;
 	font-weight: bold;
 }
-.kakaoBtn .kakao-icon {background: url(/resources/img/member/icon_kakao.png) no-repeat #fae100;width: 26px;height: 26px;display: inline-block;vertical-align: -7px;padding-right: 5px;}
+.kakaoBtn .kakao-icon, .btn-kakao .kakao-icon {background: url(/resources/img/member/icon_kakao.png) no-repeat #fae100;width: 26px;height: 26px;display: inline-block;vertical-align: -7px;padding-right: 5px;}
 
 .loginWrapper >.greyBtn{
 	width:250px;
@@ -263,7 +263,7 @@ SOCIAL BUTTON STYLES
 ********************/
 
 /*KAKAO*/
-.btn.btn-kakao{background-color: #ffe812; background-color: #ffe812;}
+.btn.btn-kakao{background-color: #fae100; border-color: #fae100; color:black!important}
 .btn.btn-kakao:active{top: 3px; outline: none;}
 /*FACEBOOK*/
 .btn.btn-facebook{background-color: #2479b6; border-color: #2479b6;}

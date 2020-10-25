@@ -60,7 +60,7 @@
 							<span class="input-line">
 								<input type="text" name="birth" class="input required" value="${birthfrist}" ${birthReadOnly} onkeydown="return onlyNumber(event)" chknum msg="생년월일 6자리를" style="width:160px" maxlength="6">
 								-
-								<input type="text" name="birth" class="input required" value="${birthsecond}" onkeydown="return onlyNumber(event)" chknum msg="주민등록 뒷번호 1자리를" style="width:52px" maxlength="1">
+								<input type="text" name="birth" class="input required" value="${birthsecond}" ${birthReadOnly} onkeydown="return onlyNumber(event)" chknum msg="주민등록 뒷번호 1자리를" style="width:52px" maxlength="1">
 							</span>
 						</div>
 						<div class="ssec pad-top15">

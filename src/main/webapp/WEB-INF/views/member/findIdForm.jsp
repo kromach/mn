@@ -49,16 +49,5 @@
 			$("form[name='inputForm']").submit();
 		}
 	}
-	
-	function onlyNumber(event){  // 141230-최재훈 기존 온리넘버의 기능한계로 신규 넘버 체크 추가
-		event = event || window.event;
-		var keyID = (event.which) ? event.which : event.keyCode;
-		if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 || keyID == 35 || keyID == 36 || keyID == 16 || keyID == 9 ) 
-			/* 48~57:일반 숫자키 코드, 96~105:숫자키패드 숫자키 코드,  8=Backspace, 46=Delete, 37=왼쪽 화살표, 39=오른쪽 화살표, 35=home, 36=end, 16=shift, 9 = Tab*/
-			return;
-		else
-			return false;
-	}
-
 	</script>
 	<script src="/resources/js/imageLoad.js"></script>
