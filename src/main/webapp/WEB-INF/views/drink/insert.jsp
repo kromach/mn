@@ -130,7 +130,7 @@
 						</td>
 					</tr>					
 				</table>
-				<div class="text-center pad-top10">
+				<div class="text-center pad-top10 pad-bottom20">
 					<input type="button" class="btn btn-lg btn-blue" value="저장" onclick="insertDrink()" />
 					<input type="button" class="btn btn-lg btn-grey" value="취소" onclick="window.location='index'" />
 				</div>

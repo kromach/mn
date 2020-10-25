@@ -320,7 +320,7 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .selectric-shorter1{min-width:96px;}
 .selectric-shorter1 .label{margin-left:10px;}
 .selectric-short{width:138px;}
-.selectric-middle{width:238px;}
+.selectric-middle{width:238px; max-width:100%}
 .selectric-long{width:100%;}
 .selectric-thick .label{height:44px;line-height:44px;}
 .selectric-thick .button{height:44px;}
@@ -461,7 +461,7 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 	.center-text {font-size: 25px; line-height: 50px; top: 10px;}
 }
 @media only screen and (min-width: 800px) and (max-width: 1439px) {
-	.grid-sizer, .grid-item { width: 24%; }
+	.grid-sizer, .grid-item { width: 24.4%; }
 	.grid-item--width2 { width: 48%; }
 	.grid-item--width3 { width: 72%; } 
 	.grid-item--width4 { width: 96%; }
@@ -586,7 +586,7 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .tableCss td .input-xs{width:10%; min-width: 80px;}
 .tableCss td .input-sm{width:30%; min-width: 100px;}
 .tableCss td .input-md{width:50%}
-.tableCss td .input-lg{width:98%; max-width:650px}
+.tableCss td .input-lg{width:95%; max-width:650px}
 .tableCss td input{vertical-align: middle;}
 
 .detailTbl{border-collapse:collapse; border-spacing:0; border-top:2px solid #333;}
