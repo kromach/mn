@@ -7,7 +7,6 @@
 	display: inline-block;
 }
 </style>
-<body>
 	<div class="grid-Wrapper">
 		<div class="grid2">
 			<div class="detail-sizer"></div>
@@ -35,150 +34,129 @@
 					</div>
 					<div class="report-area">
 						<button class="btn btn-lg btn-blue" onclick="like('${articleDTO.bnIdx}','${articleDTO.insertId }')">좋아요</button>
-						<a class="btn btn-lg btn-red" onclick="report('${articleDTO.bnIdx}','${articleDTO.insertId }','${memId}')">신고</a>
+						<a class="btn btn-lg btn-orange" onclick="report('${articleDTO.bnIdx}','${articleDTO.insertId }','${memId}')">신고</a>
 					</div>		
 				</div>
-				<h3 class="pad-y10 text-left">댓글</h3>
-				<c:if test="${count <= 0}">
-					<div class="pad-top10" style="border-top: 2px solid #333;">
-						<p class="text-center font-bold" style="font-size: 15px;padding: 5px 0;color: #069;"><i class="fas fa-comment-slash"></i> 등록 된 댓글이 없습니다.</p>
-					</div>
-				</c:if>
-				<c:if test="${count > 0}">
-				<table id="boardTbl" class="detailTbl tbl-lg replyTbl">
-					<colgroup>
-						<col width="24%" />
-						<col width="*" />
-						<col width="16%" />
-					</colgroup>
-					<c:forEach var="articleReplyDTO" items="${reply}">
-					<tr>
-						<td class="text-left">
-							<span class="btn btn-twitter btn-xs default">${articleReplyDTO.writerTitleCnt}</span>
-							<span class="titleName">${articleReplyDTO.writerTitleName}</span>
-							${articleReplyDTO.nickname}
-						</td>
-						<td class="text-left">${articleReplyDTO.bnComment}</td>
-						<td>
-							<div class="fl">
-								<fmt:formatDate value="${articleReplyDTO.insertDay}" pattern="yyyy-MM-dd"/><br />
-								<fmt:formatDate value="${articleReplyDTO.insertDay}" type="time" dateStyle="medium" />
-							</div>
-							<c:if test="${articleReplyDTO.insertId eq sessionScope.memId}">
-								<button class="btn btn-rouge delReplyBtn" onclick="deleteReply('${articleReplyDTO.coIdx}','${memId}')">X</button>
-							</c:if>
-						</td>
-					</tr>
-					</c:forEach>
-				</table>
-				
-					<tr>
-						<td colspan="4">
-						<c:if test="${pageVO.startPage > pageVO.pageBlock}">
-							<a onclick="replyReload()" <%-- href="/Spring/board/list.git?pageNum=${pageVO.startPage-pageVO.pageBlock}" --%>>&lt;</a>
-						</c:if>
-						<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1">
-							<a onclick="replyReload('${i}','${articleDTO.bnIdx}','${sessionScope.memId}')" class="pageNums" id="pageSel${i}">&nbsp;${i}&nbsp;</a>
-						</c:forEach>
-						<c:if test="${pageVO.endPage < pageVO.pageCount}">
-							<a onclick="replyReload()" <%-- href="/Spring/board/list.git?pageNum=${pageVO.startPage+pageVO.pageBlock}" --%>>&gt;</a>
-						</c:if>
-						</td>
-					</tr>
-				
-				
-				</c:if>
-				
-				
-				<table class="detailTbl tbl-lg" style="margin: auto;text-align: center;">
-					<tr>
-						<td colspan="4" style="height: 100px; border-bottom: 1px solid;">
-						<!--login은 실행후 검사 -->
-						<div>
-							<button class="btn btn-lg btn-blue" onclick="like('${articleDTO.bnIdx}','${articleDTO.insertId }')">좋아요</button>
-							<a class="btn btn-lg btn-blue" onclick="report('${articleDTO.bnIdx}','${articleDTO.insertId }','${memId}')">신고</a>
-						</div>												 
-						</td>
-					</tr>
-					
-					<tr>
-						<td colspan="4" style="height: 50px;" id="replyArea">
-						<h3 class="pad-top10">댓글</h3>
-						</td>
-					<tr>
-						<!-- 게시글이 있을때만 보여주기 -->
-					<c:if test="${count<=0}">
-						<tr>
-							<td colspan="4" style="height: 50px;">등록된 댓글이 존재하지 않습니다.</td>
-						</tr>
+				<div class="text-right pad-top10 pad-bottom20" style="border-top: 1px solid #aaa;">
+					<c:if test="${articleDTO.kind eq 'C' && memId eq 'admin'}">
+						<input id="addBtn" type="button" class="btn btn-md btn-orange" value="되돌리기" onclick="move('${articleDTO.bnIdx}','back')">
 					</c:if>
-					<c:if test="${count>0}">
-					<c:forEach var="articleReplyDTO" items="${reply}">
-					<tr class="reply">
-						<td colspan="2">${articleReplyDTO.bnComment}</td>
-						<!--칭호필요-->
-						<td>
-						<span class="btn btn-blue btn-xs default">${articleReplyDTO.writerTitleCnt}</span>
-						<span class="titleName">${articleReplyDTO.writerTitleName}</span>
-						${articleReplyDTO.nickname}
-						</td>
-						<td><fmt:formatDate value="${articleReplyDTO.insertDay}" pattern="yyyy.MM.dd"/>
-							<c:if test="${articleReplyDTO.insertId eq sessionScope.memId}">
-								<button class="btn btn-sm btn-dark" onclick="deleteReply('${articleReplyDTO.coIdx}','${sessionScope.memId}')">글 삭제</button>
-							</c:if>
-						</td>
-					</tr>
-					</c:forEach>
-					</c:if>
-					<tr>
-						<td colspan="4" style="height: 100px; border-bottom: 1px solid;">
-						<textarea name="content" type="textarea" class="required" msg="내용을" placeholder="댓글을 입력해주세요" 
-					    id="content_textArea" style="width: 90%; display: block; border: 1px solid; height: 109px; margin:auto; resize: none;" ></textarea>
-						<div style="margin-top: 5px">
-							<input id="addBtn" type="button" class="btn btn-md btn-yellow" value="등록" onclick="reply('${articleDTO.bnIdx}')">
-							<input id="addBtn" type="button" class="btn btn-md btn-blue" value="취소" onclick="replyCancle()">
-						</div>
-						</td>
-					<tr>
-				</table>
-			</div>
-			<div class="detail-item detail-width6">
-				<div class="text-center pad-top10 pad-bottom20">
-					<c:if test="${articleDTO.kind eq 'C' }">
-						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="되돌리기" onclick="move('${articleDTO.bnIdx}','back')">
-					</c:if>
-					<c:if test="${articleDTO.kind eq 'F' }">
-						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="글이동" onclick="move('${articleDTO.bnIdx}','move')">
+					<c:if test="${articleDTO.kind eq 'F' && memId eq 'admin' }">
+						<input id="addBtn" type="button" class="btn btn-md btn-orange" value="글이동" onclick="move('${articleDTO.bnIdx}','move')">
 					</c:if>
 					<c:if test="${memId eq articleDTO.insertId}">
 						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="수정" onclick="window.location.href='/article/update?bnIdx=${articleDTO.bnIdx}'">
 					</c:if>
 					<c:if test="${memId eq 'admin' || memId eq articleDTO.insertId }">
-						<input id="addBtn" type="button" class="btn btn-md btn-blue" value="삭제" onclick="deleteArticle()">
+						<input id="addBtn" type="button" class="btn btn-md btn-red" value="삭제" onclick="deleteArticle()">
 					</c:if>	
-					<input type="button" class="btn btn-md btn-grey" value="목록으로" onclick="window.location='/article'" />
+					<input type="button" class="btn btn-md btn-grey" value="목록" onclick="window.location='/article'" />
+				</div>
+				<h3 class="pad-y10 text-left">댓글 (${count})</h3>
+				<c:if test="${count <= 0}">
+					<div class="pad-top10" style="border-top: 2px solid #333;">
+						<p class="text-center font-bold" style="font-size: 15px;padding: 5px 0 15px 0;color: #069;"><i class="fas fa-comment-slash"></i> 등록 된 댓글이 없습니다.</p>
+					</div>
+				</c:if>
+				<c:if test="${count > 0}">
+					<table id="boardTbl" class="detailTbl tbl-lg replyTbl">
+						<colgroup>
+							<col width="20%" />
+							<col width="*" />
+							<col width="16%" />
+						</colgroup>
+						<c:forEach var="articleReplyDTO" items="${reply}">
+						<tr class="reply">
+							<td class="text-left">
+								<span class="btn btn-twitter btn-xs default">${articleReplyDTO.writerTitleCnt}</span>
+								<span class="titleName">${articleReplyDTO.writerTitleName}</span>
+								${articleReplyDTO.nickname}
+							</td>
+							<td class="text-left">${articleReplyDTO.bnComment}</td>
+							<td>
+								<div class="fl">
+									<fmt:formatDate value="${articleReplyDTO.insertDay}" pattern="yyyy-MM-dd"/><br />
+									<fmt:formatDate value="${articleReplyDTO.insertDay}" type="time" dateStyle="medium" />
+								</div>
+								<c:if test="${articleReplyDTO.insertId eq sessionScope.memId}">
+									<button class="btn btn-rouge delReplyBtn" onclick="deleteReply('${articleReplyDTO.coIdx}','${memId}')">X</button>
+								</c:if>
+							</td>
+						</tr>
+						</c:forEach>
+					</table>
+					<!-- pager -->
+					<div class="page_wrap">
+					<div class="page_nation">
+	
+						<c:if test="${pageVO.startPage > pageVO.pageBlock}">
+							<a class="arrow prev" onclick="replyReload('${pageVO.startPage-pageVO.pageBlock}')">&lt;</a>
+						</c:if>
+						
+						<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1"> 
+							<c:if test="${i != pageNum}">
+								<a onclick="replyReload('${i}')" class="pageNums" id="pageSel${i}">&nbsp;${i}&nbsp;</a>
+							</c:if>
+						</c:forEach>
+						
+						<c:if test="${pageVO.endPage < pageVO.pageCount}">
+							<a class="arrow next" onclick="replyReload('${pageVO.startPage+pageVO.pageBlock}')" href="?dkCode=${drinkInfo.dkCode}&pageNum=${pageVO.startPage+pageVO.pageBlock}#boardTbl">&gt;</a>
+						</c:if>
+					</div>
+					</div>
+					<%-- 
+						<tr>
+							<td colspan="4">
+							<c:if test="${pageVO.startPage > pageVO.pageBlock}">
+								<a onclick="replyReload()" href="/Spring/board/list.git?pageNum=${pageVO.startPage-pageVO.pageBlock}">&lt;</a>
+							</c:if>
+							<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1">
+								<a onclick="replyReload('${i}','${articleDTO.bnIdx}','${sessionScope.memId}')" class="pageNums" id="pageSel${i}">&nbsp;${i}&nbsp;</a>
+							</c:forEach>
+							<c:if test="${pageVO.endPage < pageVO.pageCount}">
+								<a onclick="replyReload()" href="/Spring/board/list.git?pageNum=${pageVO.startPage+pageVO.pageBlock}">&gt;</a>
+							</c:if>
+							</td>
+						</tr>
+					 --%>
+				</c:if>
+				<div>
+					<textarea name="content" type="textarea" class="required" msg="내용을" placeholder="댓글을 입력해주세요" 
+				    id="content_textArea" style="width: 90%; border: 1px solid; height: 80px; margin:auto; resize: none; padding: 5px;" ></textarea>
+					<div class="margin-top5 margin-bottom15">
+						<input id="addBtn" type="button" class="btn btn-md btn-mint" value="등록" onclick="reply('${articleDTO.bnIdx}')">
+						<input id="addBtn" type="button" class="btn btn-md btn-grey" value="취소" onclick="replyCancle()">
+					</div>
 				</div>
 			</div>
+
 			<div class="detail-item detail-width6">
 				<table class="detailTbl tbl-lg" id="more">
+					<colgroup>
+						<col width="*" />
+						<col width="20%" />
+						<col width="10%" />
+						<col width="8%" />
+						<col width="8%" />
+					</colgroup>
 					<tbody>
 					<tr>
-						<td>제목</td>
-						<td>작성자</td>
-						<td>작성일</td>
-						<td>조회수</td>
-						<td>좋아요</td>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+						<th>조회수</th>
+						<th>좋아요</th>
 					</tr>
 					<c:forEach var="articleDTO" items="${list}">
 						<tr >
-							<td><a href="/article/detail?idx=${articleDTO.bnIdx}">${articleDTO.bnTitle}</a></td>
+							<td class="text-left"><a href="/article/detail?idx=${articleDTO.bnIdx}">${articleDTO.bnTitle}</a></td>
 							<td>
-								<a href="/article/detail?idx=${articleDTO.bnIdx}">
+								<%-- <a href="/article/detail?idx=${articleDTO.bnIdx}"> --%>
 									<span class="btn btn-twitter btn-xs default">${articleDTO.writerTitleCnt}</span>
 									<span class="titleName">${articleDTO.writerTitleName}</span>
 									${articleDTO.nickname}
 									</td>
-								</a>
+								<!-- </a> -->
 							</td>
 							<td><a href="/article/detail?idx=${articleDTO.bnIdx}"><fmt:formatDate value="${articleDTO.insertDay}" pattern="yyyy.MM.dd"/></a></td>
 							<td><a href="/article/detail?idx=${articleDTO.bnIdx}">${articleDTO.readcount}</a></td>
@@ -187,14 +165,13 @@
 					</c:forEach>
 					</tbody>
 				</table>
+				<div id="add" class="margin-y20">
+					<input id="addBtn" type="button" class="btn btn-md btn-mint" value="더보기" onclick="more()">
+					<input type ="hidden" value="0" id="moreVal">
+				</div>
 			</div>
 		</div>
-		<div class="detail-item detail-width6" id="add">
-			<input id="addBtn" type="button" class="btn btn-md btn-grey" value="더보기" onclick="more()">
-			<input type ="hidden" value="0" id="moreVal">
-		</div>
 	</div>
-</body>
 <script>
 $(function() {
 	
@@ -210,6 +187,7 @@ $(function() {
 	
 });
 
+// 이미지 못 불러올 시 오류 처리 
 $("img").each(function(){
 	$(this).on("error", function () {
 	    $(this).attr("src", "/resources/img/broken.png");
@@ -225,29 +203,31 @@ function deleteArticle(){
 }
 
 function like(bnIdx,insertId){
-var context = window.location.pathname.substring(0,
-		window.location.pathname.indexOf("/", 2));
-var session = '<c:out value="${memId}"/>';
+	
+	var context = window.location.pathname.substring(0,
+			window.location.pathname.indexOf("/", 2));
+	var session = '<c:out value="${memId}"/>';
+	
 	if(session!=''){
-	console.log(session);
-	$.ajax({
-		url : context + '/like?num='+bnIdx+'&id='+session+'&insertId='+insertId,
-		type : "post",
-		success : function(data) {
-			console.log(data);
-			if(data == -1){
-				console.log("cancleSession"+session);
-				$.ajax({
-					url : context + '/unlike?num='+bnIdx+'&id='+session+'&insertId='+insertId,
-					type : "post",
-					success : function(data_) {
-						console.log(data_);
-						alert("좋아요가 취소되었습니다.")	
-					}
-				});
-			}else{
+		console.log(session);
+		$.ajax({
+			url : context + '/like?num='+bnIdx+'&id='+session+'&insertId='+insertId,
+			type : "post",
+			success : function(data) {
 				console.log(data);
-				alert("좋아요에 추가되셨습니다.")
+				if(data == -1){
+					console.log("cancleSession"+session);
+					$.ajax({
+						url : context + '/unlike?num='+bnIdx+'&id='+session+'&insertId='+insertId,
+						type : "post",
+						success : function(data_) {
+							console.log(data_);
+							alert("좋아요가 취소되었습니다.")	
+						}
+					});
+				}else{
+					console.log(data);
+					alert("좋아한 글로 등록되었습니다.")
 				}
 			}
 		});
@@ -256,6 +236,7 @@ var session = '<c:out value="${memId}"/>';
 		alert("로그인후 이용 가능한 서비스 입니다");
 	}
 }
+
 function report(bnIdx,insertId,reportId){
 	var context = window.location.pathname.substring(0,
 			window.location.pathname.indexOf("/", 2));
@@ -266,7 +247,7 @@ function report(bnIdx,insertId,reportId){
 			type : "post",
 			success : function(data) {
 				if(data==1){
-					alert("신고가 완료 되었습니다");
+					alert("신고 되었습니다");
 				}else if(data == -1){
 					alert("이미 신고하신 글입니다.");
 				}
@@ -305,21 +286,23 @@ function reply(bnIdx){
 	}
 	$('textarea#content_textArea').val('');
 }
+
 function replyCancle(bnIdx){
 	var session = '<c:out value="${memId}"/>';
 	$('textarea#content_textArea').val('');
 }
+
 function move(bnIdx,code){
 	var session = '<c:out value="${memId}"/>';
 	var context = window.location.pathname.substring(0,
 			window.location.pathname.indexOf("/", 2));
-	if(session!=''&&session=='admin'){
+	if(session != '' && session == 'admin') {
 		$.ajax({
 			url : context + '/move?num='+bnIdx+'&code='+code,
 			type : "post",
 			success : function(data) {
 				console.log(data);
-				if(data==1){
+				if(data==1) {
 					alert("게시글이 읽을거리 글로 이동되었습니다.");
 				}
 			}
@@ -330,6 +313,49 @@ function move(bnIdx,code){
 		alert("관리자만 사용 가능한 메뉴 입니다.");
 	}
 }
+
+function replyReload(pageNum){
+
+	var articleIdx = "${articleDTO.bnIdx}";
+	var memId = "${memId}";
+
+	$.ajax({
+		url : '/article/replyReload',
+		data : 'index='+pageNum+'&idx='+articleIdx,
+		type : "post",
+		success : function(data) {
+			
+			//console.log(data);
+			$('.reply').remove();
+			var len = Object.keys(data).length;
+			var replyStr = "";
+			
+			for(var i = 0; i < len; i++){
+				replyStr = replyStr + '<tr class="reply">';
+				replyStr = replyStr + '		<td class="text-left">';
+				replyStr = replyStr + '			<span class="btn btn-twitter btn-xs default">'+data[i].writerTitleCnt+'</span>';
+				replyStr = replyStr + '			<span class="titleName">'+ (data[i].writerTitleName ? data[i].writerTitleName : '') +'</span>';
+				replyStr = replyStr + '			'+data[i].nickname;
+				replyStr = replyStr + '		</td>';
+				replyStr = replyStr + '		<td class="text-left">'+data[i].bnComment+'</td>';
+				replyStr = replyStr + '		<td>';
+				replyStr = replyStr + '			<div class="fl">';
+				replyStr = replyStr + 				moment(new Date(data[i].insertDay)).format('YYYY.MM.DD') + '<br />';
+				replyStr = replyStr +				moment(new Date(data[i].insertDay)).format('a h:mm:ss');
+				replyStr = replyStr + '			</div>';
+				if(memId == data[i].insertId) { // 삭제버튼 표시
+				replyStr = replyStr + '			<button class="btn btn-rouge delReplyBtn" onclick="deleteReply(\''+ data[i].coIdx +'\',\'${memId}\')">X</button>';
+				}
+				replyStr = replyStr + '		</td>';
+				replyStr = replyStr + '</tr>';
+			}
+			
+			$(".replyTbl").append(replyStr);
+		}
+	});
+}
+
+/* 
 function replyReload(index,idx,session){
 	console.log("댓글 인덱스"+index);
 	console.log("글번호 "+idx);
@@ -357,6 +383,7 @@ function replyReload(index,idx,session){
 		}
 	});
 }
+*/
 function deleteReply(coIdx,session){
 	var context = window.location.pathname.substring(0,
 			window.location.pathname.indexOf("/", 2));
@@ -388,8 +415,8 @@ function more(){
 				for(var i in data){
 					var writerTitle = data[i].writerTitleName;
 					if(writerTitle == null )writerTitle = '';
-					$("#more > tbody:last").append('<tr><td>'+data[i].bnTitle
-										+'</td><td><span class="btn btn-blue btn-xs default">'+data[i].writerTitleCnt+'</span>'
+					$("#more > tbody:last").append('<tr><td class="text-left">'+data[i].bnTitle
+										+'</td><td><span class="btn btn-twitter btn-xs default">'+data[i].writerTitleCnt+'</span>'
 										+'<span class="titleName">&nbsp;'+writerTitle+'</span>'
 										+ data[i].nickname
 										+'</td><td>'+moment(new Date(data[i].insertDay)).format('YYYY.MM.DD') 
