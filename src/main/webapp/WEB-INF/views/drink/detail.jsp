@@ -215,7 +215,9 @@
 		imagesLoaded('.grid2').on('progress', function() {
 			msnry.layout();
 		});
-
+		
+		
+		/* 평가 그래프 */
 	    var labelArr = ["${drinkInfo.item1Val}", "${drinkInfo.item2Val}", "${drinkInfo.item3Val}", "${drinkInfo.item4Val}", "${drinkInfo.item5Val}"];
     	
 	    var myConfig = {
@@ -235,17 +237,11 @@
 	        	tooltip: {
 	        		text: "%t: %v"
 	        	}
-	    
 	      	},
 		   	scaleV: { // 세로축 값 표시 
 		    	//visible: false
 		   		values: "0:5:1" // 최소값, 최대값, 증가값
-/* 				   		guide: { //Guides (both lines and background colors)
-		        	'line-color': "#607D8B",
-		        	'line-width':1,
-		        	'line-style': "dotted",
-		    	}
-*/				    },
+			},
 		    scaleK: { // 꼭지점별 범주
 		    	labels: labelArr, //Scale Labels
 				item: { // To style your scale labels.
@@ -295,34 +291,13 @@
 			width: 'auto'
 	    });
 		
+	    /* 태그클라우드 */
 	    var words = [];
 	    
     	<c:forEach items="${tagCloudInfo}" var="tagInfo" varStatus="status" >
     		words.push({text: "${tagInfo.tagValue}", weight: "${tagInfo.tagCount}"});
 	    </c:forEach>
-/* 
-	  	  {text: "페일에일", weight: 13},
-	  	  {text: "에일", weight: 10.5},
-	  	  {text: "한국", weight: 9.4},
-	  	  {text: "Sit", weight: 8},
-	  	  {text: "Amet", weight: 6.2},
-	  	  {text: "Consectetur", weight: 5},
-	  	  {text: "밥", weight: 5},
-	  	  {text: "맥주", weight: 11},
-	  	  {text: "비아", weight: 9},
-	  	  {text: "ビア", weight: 9},
-	  	  {text: "달달", weight: 1},
-	  	  {text: "플레이그라운드", weight: 5},
-	  	  {text: "스칼라 벨지안 블론드 에일", weight: 3},
-	  	  {text: "스칼라", weight: 9},
-	  	  {text: "경기도", weight: 9},
-	  	  {text: "고양시", weight: 1},
-	  	  {text: "국산맥주", weight: 5},
-	  	  {text: "피자", weight: 3},
-	  	  {text: "치킨", weight: 5},
-	  	  {text: "부드러운", weight: 3},
-	  	  {text: "벨지안 효모", weight: 7} */
-	  	//];
+
 
 		//태그 클라우드 폰트 사이즈 조절 
 	  	var fromSize = 0.12;

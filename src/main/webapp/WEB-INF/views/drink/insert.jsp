@@ -48,7 +48,7 @@
 		<div class="detail-sizer"></div>
 		<div class="gutter-sizer"></div>
 		<div class="detail-item detail-width6">
-			<h3 class="text-left pad-y10">주류 정보 등록</h3>
+			<h1 class="text-left pad-y10">주류 정보 등록</h1>
 			<form action="insertPro" name="dkForm" method="post" enctype="multipart/form-data">
 				<table class="tableCss tbl-lg text-left">
 					<tr>
