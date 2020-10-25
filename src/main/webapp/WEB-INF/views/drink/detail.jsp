@@ -14,7 +14,7 @@
 			<h1 class="text-left pad-y10">주류 정보</h1>
 		</div>
 		<div class="detail-item detail-width2 detail-img-div" >
-			<img id="mainImg" src="${drinkInfo.dkImg}" alt="${drinkInfo.dkName}" />
+			<img id="mainImg" src="${drinkInfo.dkImg}" alt="${drinkInfo.dkName}" onerror="this.src='/resources/img/noImage.jpg'"/>
 		</div>
 		<div class="detail-item detail-width4 detail-info-div">
 			<div class="detail-info text-left">

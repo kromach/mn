@@ -120,14 +120,14 @@
 	font-weight: bold;
 }
 .loginWrapper > .loginInput{
-	width: 239px;
+	width: 229px;
 	margin-bottom: 7px;
 	font-size: 14px;
 	position: relative;
 	_border-radius: 4px;
 	height: 30px;
 	border: 1px solid #d2d2d2;
-	padding: 5px;
+	padding: 5px 10px;
 }
 
 .loginWrapper a{

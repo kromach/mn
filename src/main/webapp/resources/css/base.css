@@ -427,11 +427,9 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 .grid-item figcaption {
 	border: 1.3px solid rgba(0, 0, 0, 0.2);
 	padding: 10px;
-	margin-top: 4px; 
 	font-size: 14px;
 	font-weight: bold;
 	cursor: pointer;
-	opacity: 0.5;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 }
