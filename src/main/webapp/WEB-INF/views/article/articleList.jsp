@@ -18,8 +18,8 @@
 	<div class="grid">  
 		<div class="grid-sizer"></div>
 		<div class="gutter-sizer"></div>
-
 			<div class="grid-item grid-item--width6" style="overflow: visible">
+				<input type="hidden" value="0" id="index">
 				<form action="/article/articleSearch" name="articleSearch" id="articleSearch">
 					<select id="selectOption" name="selectOption" class="selectOption sel short text-left">
 						<option value="NICKNAME">작성자</option>
