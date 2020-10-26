@@ -38,7 +38,7 @@ $(document).ready(function() {
 				type: "get",
 				success : function(data){
 					if(data){
-						$("#id_label").html('<div  style="color: red;font-size: 11px; margin-bottom: 5px;">이미 사용중이거나 탈퇴한 아이디 입니다.</div>');
+						$("#id_label").html('<div  style="color: red;font-size: 11px; margin-bottom: 5px;" id="idCheck">이미 사용중이거나 탈퇴한 아이디 입니다.</div>');
 					}else{
 						$("#id_label").empty();
 					}
@@ -52,7 +52,7 @@ $(document).ready(function() {
 				type: "get",
 				success : function(data){
 					if(data){
-						$("#nickName_label").html('<div  style="color: red;font-size: 11px; margin-bottom: 5px;">이미 사용중이거나 탈퇴한 닉네임 입니다.</div>');
+						$("#nickName_label").html('<div  style="color: red;font-size: 11px; margin-bottom: 5px;" id="nickCheck">이미 사용중이거나 탈퇴한 닉네임 입니다.</div>');
 					}else{
 						$("#nickName_label").empty();
 					}

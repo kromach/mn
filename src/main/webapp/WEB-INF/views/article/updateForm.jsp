@@ -99,42 +99,50 @@
 </script>
 <body>
 	<div class="grid-Wrapper">
-		<div class="grid">
-			<div class="grid-sizer"></div>
+		<div class="grid2">
+			<div class="detail-sizer"></div>
 			<div class="gutter-sizer"></div>
-			<div class="grid-item grid-item--width6">
+			<div class="detail-item detail-width6">
+				<h1 class="text-left pad-y10">글 수정</h1>
 				<form action="/article/updatePro" method="post" id="frm" accept-charset="utf-8" name="inputForm">
-				<table class="tableCss table">
-					<tr>
-						<th>제목</th>
-						<td><input type="text" name="bnTitle" id="bnTitle"
-							class="boardTitle_large required" msg="제목을"
-							placeholder="제목" value="${article.bnTitle }"></td>
-					</tr>
-					<tr>
-						<th>술 검색</th>
-						<td><input id="dkSch" name="dkSch" class="boardTitle_middle" />
-						<button type="button" class="btn btn-sm btn-grey" onclick="searchDk()">검색</button></td>
-					</tr>
-					<tr>
-						<th>술 선택</th>
-						<td><select id="option" name="dkCode">
-								<option >선택</option>
-						</select></td>
-					</tr>
-					<tr>
-						<td style="margin: 0; padding: 0;" colspan="2">
-						<textarea name="content" id="ckeditor" type="textarea" class="required" 
-						rows="10" cols="100" style="width: 100%; height: 600px;">${article.content}</textarea>
-						<script type="text/javascript">CKEDITOR.replace('ckeditor', ckedit_config); </script>
-						</td>
-					</tr>
-						<input type="hidden" value="${article.bnIdx }" name="bnIdx" />
-				</table>
+					<input type="hidden" value="${article.bnIdx }" name="bnIdx" />
+					<table class="tableCss">
+						<colgroup>
+							<col width="172px" />
+							<col width="*" />
+						</colgroup>					
+						<tr>
+							<th>제목</th>
+							<td class="text-left">
+								<input type="text" name="bnTitle" id="bnTitle" class="input-lg required" msg="제목을" value="${article.bnTitle }" style="height: 28px; padding-left: 10px;">
+							</td>
+						</tr>
+						<tr>
+							<th>관련 주류 검색 (Optional)</th>
+							<td class="text-left">
+								<input id="dkSch" name="dkSch" style="height: 28px; padding-left: 10px; width:72%; max-width: 597px;" />
+								<button type="button" class="btn btn-sm btn-mint" onclick="searchDk()">검색</button>
+							</td>
+						</tr>
+						<tr>
+							<th>주류 선택 (Optional)</th>
+							<td class="text-left">
+								<select id="option" name="dkCode" class="sel middle">
+									<option value="option">선택</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<textarea name="content" id="ckeditor" class="required" style="width: 100%; height: 600px;">${article.content}</textarea>
+								<script type="text/javascript">CKEDITOR.replace('ckeditor', ckedit_config); </script>
+							</td>
+						</tr>
+					</table>					
 				</form>
 				<div class="text-center pad-top10">
-					<input id="addBtn" type="button" class="btn btn-md btn-blue" value="전송" onclick="modify()">
-					<input type="button" class="btn btn-md btn-grey" value="취소" onclick="window.location='/article'" />
+					<input id="addBtn" type="button" class="btn btn-lg btn-blue" value="수정" onclick="modify()">
+					<input type="button" class="btn btn-lg btn-grey" value="취소" onclick="window.location='/article'" />
 				</div>
 			</div>
 		</div>

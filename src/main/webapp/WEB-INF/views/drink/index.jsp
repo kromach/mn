@@ -6,9 +6,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
 <script src="/resources/js/jquery.selectric.js"></script>
 <link rel="stylesheet" href="/resources/css/selectric.css">
-<div class="search-area">
+<div class="search-area clfix pad-bottom5">
 	<h1 class="text-left pad-y10">주류 저장소</h1>
-	<div class="searchPanel">
+	<div class="searchPanel" >
 	<form name="schForm" id="schForm">
 		<input type="hidden" name="isSearch" value="true"/>
 		<!-- 더보기 카운트  -->
@@ -47,9 +47,12 @@
 				<label><input type="radio" name="schDkCountry" class="radio" value="O" <c:if test="${schDkCountry == 'O'}"> checked </c:if> /> 해외</label>
 			</p>
 		</div>
-		<div class="ssec pad-top15"><input type="button" id="searchBtn" value="검색" class="btn btn-sm btn-blue" /></div>
+		<div class="ssec pad-top15 text-center"><input type="button" id="searchBtn" value="검색" class="btn btn-lg btn-blue" style="width:100px" /></div>
 	</form>
 	</div>
+</div>
+<div class="search-area text-right pad-bottom5">
+	<a href="/drink/insert" class="btn btn-lg btn-mint">신규 등록</a>
 </div>
 <div class="grid-Wrapper">
 	<div class="grid"> 
@@ -148,7 +151,7 @@
 		
     	json.forEach(function(item, index) {
     		
-    		var el = '<div class="grid-item"><a href="detail?dkCode='+item.dkCode+'" target="_blank"><img src="'+ item.dkImg +'" /></a></div>';
+    		var el = '<div class="grid-item"><a href="detail?dkCode='+item.dkCode+'" target="_blank"><img src="'+ item.dkImg +'" onerror="this.src=\'/resources/img/noImage.jpg\'" /></a></div>';
  			
     		// 그리드 추가, 아이템 배치 
     		$grid.append( el ).masonry('appended', el).masonry('reloadItems');	
