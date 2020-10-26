@@ -40,7 +40,6 @@ public class ProductDAOImpl implements ProductDAO {
 		}else {
 			
 			 res = sqlSession.update("product.updateorder", ordervo);
-			System.out.println("일반 구매 정보 저장!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		}
 		
 		return res;

@@ -42,24 +42,31 @@
 						</c:forEach>
 					</table>
 		<br/>
-		<a href="/sales/insert">상품등록</a>
+		<a class="btn btn-lg btn-yellow" href="/sales/insert">상품등록</a>
 		<br/><br/><br/>
 		<!-- pager -->
-				<div align="center" class="pageNums">
+				<div class="page_wrap">
+				<div class="page_nation">
 						<!-- 게시글이 있을때만 보여주기 -->
 						<c:if test="${count>0}">
 							<!-------------------------------------------------------------------------->
 							<c:if test="${pageVO.startPage > pageVO.pageBlock}">
-								<a href="/sales/index?pageNum=${pageVO.startPage-pageVO.pageBlock}">&lt;</a>
+								<a class="arrow prev" href="/sales/index?pageNum=${pageVO.startPage-pageVO.pageBlock}">&lt;</a>
 							</c:if>
-							<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1"> 
-										<a href="/sales/index?pageNum=${i}" class="pageNums">&nbsp;${i}&nbsp;</a>
+							<c:forEach var="i" begin="${pageVO.startPage}" end="${pageVO.endPage}" step="1">
+								<c:if test="${i == pageNum}">
+									<a class="active">${i}</a>		
+								</c:if>			
+								<c:if test="${i != pageNum}">			
+									<a href="/sales/index?pageNum=${i}" class="pageNums">&nbsp;${i}&nbsp;</a>			
+								</c:if>		
 							</c:forEach>
 							<c:if test="${pageVO.endPage < pageVO.pageCount}">
-								<a href="/sales/index?pageNum=${pageVO.startPage+pageVO.pageBlock}">&gt;</a>
+								<a class="arrow next" href="/sales/index?pageNum=${pageVO.startPage+pageVO.pageBlock}">&gt;</a>
 							</c:if>
 							<!-------------------------------------------------------------------------->
 						</c:if>
+				</div>
 				</div>
 	</div>
 </div>

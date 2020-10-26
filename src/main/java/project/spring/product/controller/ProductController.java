@@ -353,16 +353,13 @@ public class ProductController {
 	public String orderlistSs (HttpSession session, Model model , String pageNum, HttpServletRequest request) throws SQLException {
 		String id = (String)session.getAttribute("memId");
 		List orderlist = null;
-		
 		int ordercount = 0;
 		if(pageNum ==null)pageNum = "1";
 		Pager pager = new Pager();
 		PageVO pageVO = null;
 		HashMap map =new HashMap();
 		map.put("id", id);
-		
 		if(request.getParameter("isSearch") !=null && request.getParameter("isSearch").equals("true")) {
-			
 			if(request.getParameter("prName")!= null &&request.getParameter("prName").length() != 0 ) {
 				String prName = request.getParameter("prName");
 				map.put("prName", prName);
@@ -374,8 +371,7 @@ public class ProductController {
 			if(request.getParameter("orStatus")!= null &&request.getParameter("orStatus").length() != 0 ) {
 				String arr[] = request.getParameterValues("orStatus");
 				 int[] nums = Arrays.stream(arr).mapToInt(Integer::parseInt).toArray();
-				for(int orStatus : nums) {
-				}
+				
 				map.put("nums", nums);
 			}	
 			if(request.getParameter("orStart")!= null &&request.getParameter("orStart").length() != 0 ) {
