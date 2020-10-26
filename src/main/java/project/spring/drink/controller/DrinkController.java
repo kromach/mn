@@ -249,7 +249,7 @@ public class DrinkController {
 	
 	// 입력 페이지
 	@RequestMapping("insert")
-	public String InsertInit(HttpServletRequest request, Model model) throws SQLException {
+	public String InsertInitSs(HttpServletRequest request, Model model) throws SQLException {
 		
 		List<HashMap> bigCategoryList = drinkService.selectBigCategoryList();
 		
@@ -265,7 +265,7 @@ public class DrinkController {
 	
 	// 입력 처리
 	@RequestMapping("insertPro")
-	public String InsertProInit(DrinkVO drinkVo, MultipartHttpServletRequest request, HttpServletResponse response, Model model) throws SQLException, IOException {
+	public String InsertProInitSs(DrinkVO drinkVo, MultipartHttpServletRequest request, HttpServletResponse response, Model model) throws SQLException, IOException {
 		
 		// 인증 글 여부 
 		drinkVo.setDkApprove(0);
@@ -349,7 +349,7 @@ public class DrinkController {
 	}	
 	
 	@RequestMapping("modify")
-	public String modifyInit(HttpServletRequest request, Model model) throws SQLException {
+	public String modifyInitSs(HttpServletRequest request, Model model) throws SQLException {
 		
 		String dkCode = (String)request.getParameter("dkCode");
 		//System.out.println(dkCode);
@@ -383,7 +383,7 @@ public class DrinkController {
 	
 	// 변경 처리
 	@RequestMapping("modifyPro")
-	public String ModifyProInit(DrinkVO drinkVo, MultipartHttpServletRequest request, HttpServletResponse response, Model model) throws SQLException, IOException {
+	public String ModifyProInitSs(DrinkVO drinkVo, MultipartHttpServletRequest request, HttpServletResponse response, Model model) throws SQLException, IOException {
 		
 		HttpSession session =  request.getSession();
 		if(session.getAttribute("memId") != null) { // session id

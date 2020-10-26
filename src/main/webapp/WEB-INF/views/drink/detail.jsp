@@ -60,7 +60,7 @@
 		</div>
 		<!-- 연관글 -->
 		<div class="detail-item detail-width6">
-			<h3 class="pad-top10 pad-bottom20 text-left">연관 게시글 보기</h3>
+			<h3 class="pad-y10 text-left">연관 게시글 보기</h3>
 			<table id="boardTbl" class="detailTbl tbl-lg">
 				<colgroup>
 					<col width="*" />
@@ -117,7 +117,10 @@
 			
 		</div>
 		<div class="detail-item detail-width6">
-			<h3 class="pad-top10 pad-bottom20 text-left">후기 보기 (${commentStarInfo != null ? commentStarInfo.cmCount : '0'})</h3>
+			<div class="clfix">
+			<h3 class="pad-y10 text-left fl" style="width:70%">후기 보기 (${commentStarInfo != null ? commentStarInfo.cmCount : '0'})</h3>
+			<a class="btn btn-lg btn-yellow fr text-right" style="margin-top:4px" href="comment?dkCode=${drinkInfo.dkCode}">후기등록</a>
+			</div>
 			<div class="commentDiv margin-bottom30" id="commentList" style="height:500px">
 				<c:if test="${empty commentList}">  
 					<div class="clfix pad-top10" style="border-top: 2px solid #333;">
