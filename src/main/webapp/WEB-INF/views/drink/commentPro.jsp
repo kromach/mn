@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script>
-	location.href="/drink/detail";
-</script>
+
+<META http-equiv=refresh content="0;url=/drink/detail?dkCode=${dkCode }">
+
+
+
