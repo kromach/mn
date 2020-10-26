@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>  
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html>
-<html>
-<head>
 	<link rel="icon" type="image/png"  href="resources/images/svnicon.png"/> <!-- favicon fix -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- jQuery, bootstrap CDN -->
@@ -12,7 +9,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 	<!-- SocketJS CDN -->
 	<script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
-</head>
+
 <!--chat setting-->
 <script type="text/javascript">
 $(document).ready(function(){
@@ -21,12 +18,18 @@ $(document).ready(function(){
 	connect();
 	getLog();
 	sendMsg();
+ 	$('textarea').keypress(function(event) { // enter로 전송
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            $('#btnSend').click();
+        }
+    });	
 });
 function sendMsg(){
 	$('#btnSend').on('click', function(evt) {
 		evt.preventDefault();
 		if (socket.readyState !== 1) return;
-		let msg = $('input#msg').val();
+		let msg = $('#msg').val();
 		socket.send(msg);
 		$(".chatWrapper").animate({ scrollTop: $(document).height() }, 300);
 		$("#msg").val('');
@@ -42,31 +45,31 @@ function sendMsgByEnter(){
     }    
 }
 </script>
-<body>
-	<div class="totChatDIV">
-		<div class="memberWrapper" style="border-bottom: 1px solid black ;">
-			<div class="member">
-				&nbsp;채팅 참여자 리스트
-				<div class="detail_member"></div>
-			</div>
-		</div>
-		<div class="countWrapper" style="border-bottom: 1px solid black ;">
-			<div class="count">
-				&nbsp;인원
-				<div class="detail_count" id="detail_count"></div>
-			</div>
-		</div>
-		<div class="chatWrapper">
-			<div class="well" id="chatdata">
-				<!-- User Session Info Hidden -->
-			</div>
-		</div>
-		<div id="msgWrapper">
-			<div>
-				<input type="text"  id="msg" onkeydown ="sendMsgByEnter()"/>
-				<input type="button" class="btn btn-sm btn-grey"  style="border-radius: 0px;" id="btnSend" value="전송" />
-			</div>
+<div class="totChatDIV">
+	<div class="memberWrapper" style="border-bottom: 1px solid black ;">
+		<div class="member">
+			<p style="font-size:14px; color:#069; padding-bottom: 3px;">채팅 참여자 (<span class="detail_count" id="detail_count"></span>)</p>
+			<div class="detail_member"></div>
 		</div>
 	</div>
-</body>
-</html>
+	<!-- 
+	<div class="countWrapper" style="border-bottom: 1px solid black ;">
+		<div class="count">
+			&nbsp;인원
+			
+		</div>
+	</div>
+	 -->
+	<div class="chatWrapper">
+		<div class="well" id="chatdata">
+			<!-- User Session Info Hidden -->
+		</div>
+	</div>
+	<div id="msgWrapper">
+		<div>
+			<!-- <input type="text"  id="msg" value="1212" /> -->
+			<textarea name="msg" id="msg" style="width:99%; height: 52px; padding: 0 3px; resize:none; onKeydown="javascript:if(event.keyCode == 13) #btnSend.click();"></textarea>
+			<input type="button" class="btn btn-sm btn-blue" id="btnSend" value="전송" />
+		</div>
+	</div>
+</div>

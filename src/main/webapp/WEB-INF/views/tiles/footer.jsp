@@ -3,7 +3,11 @@
 <!-- SocketJS CDN -->
 <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
 <script src="/resources/js/chat.js"></script>
+
+<!-- 채팅방 영역 -->
 <div id="totChatArea"></div>
+
+<!-- 채팅, Top 아이콘 -->
 <div class="fixIcon">
 	<input type="hidden" value="0" id="isLoad">
 	<c:if test="${not empty sessionScope.memId}">
@@ -23,15 +27,15 @@
 	right: 80px;
 	bottom: 11px;
 	background-color: white;
-	width: 250px;
-	height: 350px;
-	z-index: 20;
+	width: 300px;
+	height: 450px;
+	z-index: 15;
 	border-radius: 10px;
 }
 
 .totChatDIV>.memberWrapper {
 	border-bottom: 1px solid black;
-	height:50px;
+	height:80px;
 	overflow: auto;
 	overflow-x: hidden;
 }
@@ -42,6 +46,9 @@
 	font-weight: bold;
 	padding-left: 8px;
 }
+
+.totChatDIV > .memberWrapper .detailM {padding-bottom: 2px;}
+
 
 .totChatDIV>.countWrapper {
 	border-bottom: 1px solid black;
@@ -59,17 +66,21 @@
 
 .totChatDIV>.chatWrapper {
 	border-bottom: 1px solid black;
-	height: 200px;
-	overflow: auto;
-	overflow-x: hidden;
+	height: 280px;
+	padding: 5px 0;
+	overflow-y: auto;
+	_overflow-x: hidden;
 }
-.totChatDIV>.chatWrapper>.well {
-	text-overflow: clip;
-	display: inline-block;
-	font-size: 12px;
+
+.totChatDIV > .chatWrapper > .well {
+	_text-overflow: clip;
+	_display: inline-block;
 	font-weight: bold;
 	padding-left: 8px;
+	word-break:break-all;
 }
+.totChatDIV > .chatWrapper > .well div {padding-bottom: 3px;}
+.totChatDIV > .chatWrapper > #chatdata {}
 
 .totChatDIV>.msgWrapper {
 	background-color: black;
@@ -79,6 +90,8 @@
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
+
+#chatdata .status {color:#069;}
 
 #msg {
 	width: 100%;
@@ -101,7 +114,7 @@
 
 #msgWrapper {
 	position: relative;
-    width: 248px;
+    width: 298px;
     left: -1px;
     overflow: hidden;
     border-right: 1px solid black;
