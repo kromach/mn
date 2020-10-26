@@ -229,6 +229,7 @@
 						$('#tmp').attr('class','grid-item grid-item--width6');						
 						
 						$('#title_result').append('<table class="tableCss" style="width: 100%;">');
+						$('#title_result > table').append('<tr style="height:39px"><th>칭호 이름</th><th>획득 방법</th><th>칭호 선택</th>');
 						
 						var getTitleIndex;
 						
@@ -238,28 +239,31 @@
 							// 선택한 칭호인지 - chooseTitle이 Y 면 선택한 칭호
 							var myTitle = "";
 							var chooseTitle = "";
-							var value ="";
+							var value = "";
+							var btnColor = "";
 							console.log(getAllTitle[i].chooseTitle);
 							
 							if(getAllTitle[i].chooseTitle) {
 								myTitle = "color:red";
 								if(getAllTitle[i].chooseTitle == "Y") {
-									value ="선택 완료";
+									value = "선택 완료";
+									btnColor = "btn-dark";
 									//alert(getAllTitle[i].titleName);
 								}else{
 									value ="칭호 선택";
+									btnColor = "btn-twitter";
 								}
 							} 
 							
 							//console.log(myTitle, chooseTitle)
 							
-							var str = '<tr>';
+							var str = '<tr style="height:39px">';
 							str = str + '<td style="'+myTitle+'">'+getAllTitle[i].titleName+'</td>';
 							str = str + '<td>'+getAllTitle[i].titleDetail+'</td>';
 							if (myTitle) {
-							str = str + '<td><button class="btn btn-sm btn-red chooseTitle '+chooseTitle+' btn'+getAllTitle[i].titleIdx+' " onclick="choosen('+getAllTitle[i].titleIdx+')">'+value+'</button></td>';
+							str = str + '<td><button class="btn btn-sm '+ btnColor +' chooseTitle '+chooseTitle+' btn'+getAllTitle[i].titleIdx+' " onclick="choosen('+getAllTitle[i].titleIdx+')">'+value+'</button></td>';
 							}else{
-							str = str + '<td></td>';
+							str = str + '<td>미취득</td>';
 							}
 							str = str + '</tr>';	
 							
@@ -284,9 +288,9 @@
 				success : function(data){
 					
 					// 감춰져 있는 이전 칭호의 버튼 표시하기
-					$("#title_result").find(".chooseTitle").text('칭호 선택');
+					$("#title_result").find(".chooseTitle").text('칭호 선택').removeClass('btn-dark').addClass('btn-twitter');
 					// 현재 변경한 칭호의 버튼 바꾸기
-					$('.btn' + titleIdx).text('선택 완료');
+					$('.btn' + titleIdx).text('선택 완료').addClass('btn-dark').removeClass('btn-twitter');
 				}
 			})
 		}
@@ -333,7 +337,7 @@
 	<script src="/resources/js/imageLoad.js"></script>
 	<!-- 데이터 스크롤해서 붙이는 스크립트  -->
 	<script type="text/javascript">
-		$(window).s croll(
+		$(window).scroll(
 				function() {
 					// A(B+C) : document 높이 (고정)
 					console.log($(document).height());

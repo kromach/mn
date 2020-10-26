@@ -93,17 +93,21 @@
 	width:250px;
 	text-align: center;
 	display:inline-block;
+	padding: 50px 0;
 }
-.loginWrapper >.kakaoBtn{
+.kakaoBtn{
 	width:250px;
-	margin-bottom: 5px;
+	margin-bottom: 30px;
 	color: black;
 	font-size: 14px;
 	position: relative;
 	border-radius: 4px;
 	min-height: 44px;
-	background-color: #ffe812;
+	background-color: #fae100;
+	font-weight: bold;
 }
+.kakaoBtn .kakao-icon, .btn-kakao .kakao-icon {background: url(/resources/img/member/icon_kakao.png) no-repeat #fae100;width: 26px;height: 26px;display: inline-block;vertical-align: -7px;padding-right: 5px;}
+
 .loginWrapper >.greyBtn{
 	width:250px;
 	margin-bottom: 5px;
@@ -116,13 +120,34 @@
 	font-weight: bold;
 }
 .loginWrapper > .loginInput{
-	width:250px;
-	margin-bottom: 5px;
+	width: 229px;
+	margin-bottom: 7px;
 	font-size: 14px;
 	position: relative;
-	border-radius: 4px;
+	_border-radius: 4px;
 	height: 30px;
+	border: 1px solid #d2d2d2;
+	padding: 5px 10px;
 }
+
+.loginWrapper a{
+    padding: 0 15px;
+    width: 85px;
+    display: inline-block;
+    font-size:13px;
+    margin-top:5px;
+    color:#111;
+}
+
+.loginWrapper a:first-child {
+    border-right: 1px solid #ccc;
+}
+
+.loginWrapper a:hover{
+	text-decoration: underline;
+	
+}
+
 .loginWrapper > .birthWrapper{
 	width:250px;
 	margin-bottom: 5px;
@@ -238,7 +263,7 @@ SOCIAL BUTTON STYLES
 ********************/
 
 /*KAKAO*/
-.btn.btn-kakao{background-color: #ffe812; background-color: #ffe812;}
+.btn.btn-kakao{background-color: #fae100; border-color: #fae100; color:black!important}
 .btn.btn-kakao:active{top: 3px; outline: none;}
 /*FACEBOOK*/
 .btn.btn-facebook{background-color: #2479b6; border-color: #2479b6;}

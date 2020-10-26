@@ -4,12 +4,7 @@
 <script src="/resources/js/jquery.selectric.js"></script>
 <style>
 .search{
-    width: 250px;
-    margin-bottom: 5px;
-    font-size: 14px;
-    position: relative;
-    border-radius: 4px;
-    height: 22px;
+    width: 250px; margin-bottom: 5px; position: relative; height: 30px; border: 1px solid #d2d2d2; padding-left: 15px; font-size:14px;}
 }
 .selectOption{
 	height: 25px;
@@ -31,10 +26,10 @@
 						<option value="CONTENT">내용</option>
 						<option value="BN_TITLE">제목</option>
 					</select>
-					검색어 : <input type="text" name="search" class="search"/>
-					<input type="submit" value="검색" class="btn btn-sm btn-blue" />
+					<input type="text" name="search" class="search"/>
+					<input type="submit" value="검색" class="btn btn-md btn-mint" style="margin: 0 5px 0 2px;"/>
 					<c:if test="${not empty sessionScope.memId }">
-					<input type="button" value="글쓰기" class="btn btn-sm btn-dark" onclick="window.location.href='/article/writeForm'"/>
+					<input type="button" value="글쓰기" class="btn btn-md btn-dark" onclick="window.location.href='/article/writeForm'"/>
 					</c:if>
 				</form>
 			</div>
@@ -43,7 +38,7 @@
 				<c:forEach var="articleDTO" items="${list}">
 					<c:if test="${not empty articleDTO.thumbNail}">
 						<div class="grid-item">
-							<a href="/article/detail?idx=${articleDTO.bnIdx }" target="_blank"><img src="${articleDTO.thumbNail}" /></a>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }" target="_blank"><img src="${articleDTO.thumbNail}" onerror="this.src='/resources/img/noImage.jpg'" /></a>
 							<a href="/article/detail?idx=${articleDTO.bnIdx }"><figcaption>${articleDTO.bnTitle}</figcaption></a>
 						</div>
 					</c:if>
@@ -60,7 +55,7 @@
 				<c:forEach var="articleDTO" items="${list}">
 					<c:if test="${not empty articleDTO.thumbNail}">
 						<div class="grid-item">
-							<a href="/article/detail?idx=${articleDTO.bnIdx }" target="_blank"><img src="${articleDTO.thumbNail}"/></a>
+							<a href="/article/detail?idx=${articleDTO.bnIdx }" target="_blank"><img src="${articleDTO.thumbNail}" onerror="this.src='/resources/img/noImage.jpg'" /></a>
 							<a href="/article/detail?idx=${articleDTO.bnIdx }"><figcaption>${articleDTO.bnTitle}</figcaption></a>
 						</div>
 					</c:if>
