@@ -412,6 +412,17 @@ nav.rightMenu .company-info p:nth-child(1) {font-weight:bolder}
 /* 주류 정보 입력 & 수정 */
 .dkImg{max-width:400px;}
 
+/* 주류 한줄평 등록 */
+#star_grade .item-val{width: 70px; display: inline-block; font-weight: 700; color: #069; padding: 5px 0;}
+#star_grade a, #like_div a{
+    text-decoration: none;
+    color: #9f9f9f;
+}
+#star_grade a {padding-right: 5px;}
+#star_grade a.on, #like_div a.on{
+    color: red;
+}
+
 /*반응형웹(검색영역)*/
 .grid-Wrapper{width:100% ; text-align: center; }
 .grid { width:80% ; display: inline-block;}
