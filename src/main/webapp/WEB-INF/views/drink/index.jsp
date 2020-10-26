@@ -51,9 +51,11 @@
 	</form>
 	</div>
 </div>
+<c:if test="${not empty sessionScope.memId}">
 <div class="search-area text-right pad-bottom5">
 	<a href="/drink/insert" class="btn btn-lg btn-mint">신규 등록</a>
 </div>
+</c:if>
 <div class="grid-Wrapper">
 	<div class="grid"> 
 		<div class="grid-sizer"></div>
