@@ -14,7 +14,7 @@
 		</c:if>
  		<c:forEach var="eventList" items="${eventList}">
 			<div class="grid-item">
-				<a href="/event/detail?eventCode=${eventList.eventCode }">
+				<a href="/event/detail?eventCode=${eventList.eventCode }" target="_blank">
 					<img src="${eventList.thumImg}" onerror="this.src='/resources/img/noImage.jpg'"/>
 				</a>
 			</div>

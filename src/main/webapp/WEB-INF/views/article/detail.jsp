@@ -410,6 +410,7 @@ function more(){
 		url : context + '/more?num='+moreVal,
 		type : "post",
 		success : function(data) {
+			console.log(data);
 			var endlen = Object.keys(data).length;
 			if(endlen != 0){			
 				for(var i in data){

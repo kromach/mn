@@ -17,24 +17,34 @@ $(document).ready(function(){
 	//default 메세지 출력
 	connect();
 	getLog();
-	$('#btnSend').on('click', function(evt) {
-		evt.preventDefault();
-		if (socket.readyState !== 1) return;
-		let msg = $('#msg').val();
-		socket.send(msg);
-		$('#msg').val('');
-	});
-	
-    $('textarea').keypress(function(event) { // enter로 전송
+	sendMsg();
+ 	$('textarea').keypress(function(event) { // enter로 전송
         if (event.keyCode == 13) {
             event.preventDefault();
             $('#btnSend').click();
         }
     });	
-	
 });
+function sendMsg(){
+	$('#btnSend').on('click', function(evt) {
+		evt.preventDefault();
+		if (socket.readyState !== 1) return;
+		let msg = $('#msg').val();
+		socket.send(msg);
+		$(".chatWrapper").animate({ scrollTop: $(document).height() }, 300);
+		$("#msg").val('');
+	});
+}
+function sendMsgByEnter(){
+    if (event.keyCode == 13){
+		if (socket.readyState !== 1) return;
+		let msg = $('input#msg').val();
+		socket.send(msg);
+		$(".chatWrapper").animate({ scrollTop: $(document).height() }, 300);
+		$("#msg").val('');
+    }    
+}
 </script>
-
 <div class="totChatDIV">
 	<div class="memberWrapper" style="border-bottom: 1px solid black ;">
 		<div class="member">
@@ -58,7 +68,7 @@ $(document).ready(function(){
 	<div id="msgWrapper">
 		<div>
 			<!-- <input type="text"  id="msg" value="1212" /> -->
-			<textarea name="msg" id="msg" style="width:99%; height: 52px; padding: 0 3px; resize:none" _onKeydown="javascript:if(event.keyCode == 13) #btnSend.click();"></textarea>
+			<textarea name="msg" id="msg" style="width:99%; height: 52px; padding: 0 3px; resize:none; onKeydown="javascript:if(event.keyCode == 13) #btnSend.click();"></textarea>
 			<input type="button" class="btn btn-sm btn-blue" id="btnSend" value="전송" />
 		</div>
 	</div>

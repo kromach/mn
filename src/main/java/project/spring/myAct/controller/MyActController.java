@@ -216,14 +216,9 @@ public class MyActController {
 		Map<String,List> map = new HashMap();
 		
 		//모든 Title 뿌려주고
-		//getAllTitle = myActService.getAllTitle();
 		getAllTitle = myActService.getMyTitle(memId); // 모든 타이틀 + 획득한 칭호 + 선택한 칭호
 		// 그중 내가 획득한 칭호는 색을 바꿔줌
 		updateTitle = myActService.updateTitle(memId);
-		
-		// SELECT * FROM MY_TITLE mt , TITLE_LIST tl WHERE mt.TITLE_INDEX = tl.TITLE_IDX AND mt.ID='admin';
-		//사용하지 않음
-		//myTitle = myActService.getMyTitle(memId);
 		
 		map.put("allTitle",getAllTitle);
 		map.put("updateTitle", updateTitle);

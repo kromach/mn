@@ -510,7 +510,7 @@ public class DrinkController {
 		model.addAttribute("dkCode", commentVo.getDkCode());
 		//request.setAttribute("dkCode", dkCode);
 
-		return "redirect:/drink/detail";
+		return "/drink/commentPro";
 	}	
 	
 	// AJAX - 주류 정보 좋아요 / 좋아요 취소

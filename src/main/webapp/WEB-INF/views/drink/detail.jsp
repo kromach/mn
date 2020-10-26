@@ -38,9 +38,9 @@
 					<input type="hidden" id="drinkLikeCount" value="${drinkInfo.dkLike}" />
 					<span id="like-btn"></span><!-- 좋아요버튼 -->
 					<a class="btn btn-lg btn-yellow" href="comment?dkCode=${drinkInfo.dkCode}">후기등록</a>
-					<%-- <c:if test="${sessionScope.userKind eq 'admin' }"> --%>
+					<c:if test="${sessionScope.userKind eq 'admin' }">
 					<a class="btn btn-lg btn-mint" href="modify?dkCode=${drinkInfo.dkCode}" >수정</a> <!-- 관리자만 노출 -->
-					<%-- </c:if> --%>
+					 </c:if>
 				</div>
 			</div>
 		</div>

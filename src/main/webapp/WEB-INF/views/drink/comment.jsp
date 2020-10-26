@@ -35,11 +35,11 @@
 					</div>
 					<hr />
 					<div>
-						<input type="hidden" name="item1" id="dkItem1" />
-						<input type="hidden" name="item2" id="dkItem2" />
-						<input type="hidden" name="item3" id="dkItem3" />
-						<input type="hidden" name="item4" id="dkItem4" />
-						<input type="hidden" name="item5" id="dkItem5" />
+						<input type="hidden" name="item1" id="dkItem1" value="0" />
+						<input type="hidden" name="item2" id="dkItem2" value="0"/>
+						<input type="hidden" name="item3" id="dkItem3" value="0"/>
+						<input type="hidden" name="item4" id="dkItem4" value="0"/>
+						<input type="hidden" name="item5" id="dkItem5" value="0"/>
 						<div id="star_grade">
 							<c:forEach var="item" items="${elementList}" varStatus="status">
 								<p>

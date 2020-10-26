@@ -69,7 +69,6 @@ public class ArticleController {
 							String str = dto.getContent();
 							String[] str_ = str.split("src=\"");
 							for(int i=0;i<str_.length;i++) {
-								System.out.println(str_[i]+"|"+str_[i].contains("src=\""));
 								if(str_[i].contains("/resources")) {
 									imgThum = str_[i].split("\"")[0];
 									dto.setThumbNail(imgThum);

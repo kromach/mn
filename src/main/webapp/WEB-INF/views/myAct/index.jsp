@@ -192,7 +192,7 @@
 							console.log(likeProduct[i]);
 							console.log(likeDrink[i]);
 							$('#likeDrink_result').append('<div>');
-							$('#likeDrink_result').append('<a href="/product/productdetail?prcode='+likeProduct[i].prCode+'"><img src="'+likeProduct[i].prImg+'" /></a>');
+							$('#likeDrink_result').append('<a href="/product/productdetail?prcode='+likeProduct[i].prCode+'" target="_blank"><img src="'+likeProduct[i].prImg+'" /></a>');
 							$('#likeDrink_result').append('</div>'); 		
 						}
 					}
