@@ -113,10 +113,12 @@
 }
 
 #msgWrapper {
-	position: fixed;
-	width: 300px;
-	bottom: 11px;
-	overflow: hidden;
+	position: relative;
+    width: 298px;
+    left: -1px;
+    overflow: hidden;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
 }
 </style>
 <script>

@@ -18,6 +18,12 @@ $(document).ready(function(){
 	connect();
 	getLog();
 	sendMsg();
+ 	$('textarea').keypress(function(event) { // enter로 전송
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            $('#btnSend').click();
+        }
+    });	
 });
 function sendMsg(){
 	$('#btnSend').on('click', function(evt) {
@@ -62,7 +68,7 @@ function sendMsgByEnter(){
 	<div id="msgWrapper">
 		<div>
 			<!-- <input type="text"  id="msg" value="1212" /> -->
-			<textarea name="msg" id="msg" style="width:99%; height: 52px; padding: 0 3px; resize:none" _onKeydown="javascript:if(event.keyCode == 13) #btnSend.click();"></textarea>
+			<textarea name="msg" id="msg" style="width:99%; height: 52px; padding: 0 3px; resize:none; onKeydown="javascript:if(event.keyCode == 13) #btnSend.click();"></textarea>
 			<input type="button" class="btn btn-sm btn-blue" id="btnSend" value="전송" />
 		</div>
 	</div>
