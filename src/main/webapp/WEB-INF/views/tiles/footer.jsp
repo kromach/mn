@@ -113,19 +113,10 @@
 }
 
 #msgWrapper {
-<<<<<<< HEAD
-	position: relative;
-    width: 248px;
-    left: -1px;
-    overflow: hidden;
-    border-right: 1px solid black;
-    border-left: 1px solid black;
-=======
 	position: fixed;
 	width: 300px;
 	bottom: 11px;
 	overflow: hidden;
->>>>>>> refs/heads/jaehoon
 }
 </style>
 <script>
